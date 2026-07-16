@@ -1,0 +1,9 @@
+[package]
+name = "namumark-ir"
+description = "나무마크 렌더링 IR 타입과 백엔드 계약"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+namumark-ast = { path = "../namumark-ast" }

@@ -1,0 +1,8 @@
+[package]
+name = "namumark-ast"
+description = "나무마크 의미 모델 타입"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]

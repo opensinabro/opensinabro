@@ -1,6 +1,14 @@
 [workspace]
 resolver = "2"
-members = ["crates/namumark"]
+members = [
+    "crates/namumark-ast",
+    "crates/namumark-backend-namuwiki",
+    "crates/namumark-ir",
+    "crates/namumark-parser",
+    "crates/namumark-render",
+    "crates/namumark-syntax",
+    "crates/namumark-text",
+]
 
 [workspace.package]
 version = "0.1.0"

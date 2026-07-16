@@ -1,0 +1,10 @@
+[package]
+name = "namumark-syntax"
+description = "나무마크 완전무손실 구문 트리 (red-green)"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+namumark-text = { path = "../namumark-text" }
+rowan = "0.16.1"
