@@ -7,7 +7,11 @@
 `Dimension`(Pixels/Percentage/Custom)·`ColorValue`(Named/Rgb)로 특화되어 있다.
 나무위키 동등 마크업 백엔드(`NamuwikiMarkup`, `namuwiki_markup()`)는 IR 타입마다
 대응하는 마크업 래퍼(BlockMarkup, InlineMarkup, ...)가 `std::fmt::Display`를 구현하는
-합성 구조이며, 이스케이프도 무할당 Display 어댑터로 수행된다. IR 노드는 자기완결적이다
+합성 구조이며, 태그 방출은 스택 전용 스트리밍 태그 라이터(`tag::Tag`)를 거친다 —
+속성값 이스케이프 자동 적용, 여닫이 짝 구조적 보장, 힙 할당 없음. 유일한 예외는
+형제 블록에 걸치는 헤딩 콘텐츠 래퍼로 문서 래퍼가 수동 관리한다. 자원 회귀는
+`allocation_probe` 테스트가 게이트한다(할당 횟수 기준선 + peak 상한 3×출력).
+이스케이프도 무할당 Display 어댑터로 수행된다. IR 노드는 자기완결적이다
 (각주 라벨 내장, FootnoteSection·TableOfContents가 내용 소유). `#!html` sanitizer와 표 듀얼 색상의 다크 값 적용은 후속 과제
 (sanitizer 도입 전까지 이스케이프된 코드 박스로 방출, 안전 우선).
 
