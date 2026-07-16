@@ -1,0 +1,8 @@
+[package]
+name = "namumark"
+description = "나무마크(namumark) 문서를 AST로 변환하는 파서"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]

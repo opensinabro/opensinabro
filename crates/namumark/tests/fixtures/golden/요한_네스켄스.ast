@@ -1,0 +1,169 @@
+# 요한_네스켄스.namu — 13368 bytes
+# residue: [[=0 ]]=0 {{{=0 }}}=0 '''=0 ||=0 [*=0 #!=0
+Paragraph: Category("1951년 출생") Category("네덜란드의 축구선수") Category("미드필더") Category("수비수") Category("네덜란드의 축구감독") Category("AFC 아약스/은퇴, 이적") Category("FC 바르셀로나/은퇴, 이적") Category("FC 흐로닝언/은퇴, 이적") Category("뉴욕 코스모스/은퇴, 이적") Category("네덜란드의 FIFA 월드컵 참가 선수") Category("1974 FIFA 월드컵 서독 참가 선수") Category("1978 FIFA 월드컵 아르헨티나 참가 선수") Category("UEFA 유로 1976 참가 선수") Category("NEC 네이메헌/역대 감독")
+Table:
+  Row:
+    Cell span=1x1 align=Center attrs=[Table/align=center Table/width=100% Table/bordercolor=#ff6600 Table/bgcolor=#ffffff,#191919]:
+      WikiStyle style=Some("margin: -5px -10px; padding: 7px 10px; background-image: linear-gradient(to right, #FF8533 5%, #FF6600 15%, #FF6600 85%, #FF8533 95%);") dark_style=None:
+        Paragraph: Colored(#000,#e5e5e5 | Bold(" 요한 네스켄스의 수상 이력 ") " ") " "
+  Row:
+    Cell span=1x1 align=Center:
+      Folding summary="▼":
+        Table:
+          Row:
+            Cell span=4x1 align=Center attrs=[Table/align=center Table/width=100% Table/bordercolor=#e5e5e5 Table/bgcolor=#ffffff,#191919 Cell/height=40]:
+              Paragraph: Colored(#333333,#cccccc | Bold("둘러보기 틀 모음"))
+          Row:
+            Cell span=4x1 align=Center attrs=[Cell/bgcolor=#f0f0f0,#191919]:
+              Paragraph: Colored(#333333,#cccccc | Bold("개인 수상"))
+          Row:
+            Cell span=1x1 align=Center attrs=[Cell/width=25%]:
+              Paragraph: Image("실버슈.png" height=55) Macro(br)
+              WikiStyle style=Some("display: inline; padding: 3px 3px; border-radius: 2px; background: #131A3C; font-size: 0.9em;") dark_style=None:
+                Paragraph: Colored(#ffffff | Bold("FIFA 월드컵 실버슈 1974") Footnote(| "Andrzej Szarmach와 함께 득점 공동 2위. 골든슈, 실버슈, 브론즈슈는 1982년부터 증정했으므로 비공식 수상."))
+            Cell span=1x1 align=Right attrs=[Cell/width=25%]:
+            Cell span=1x1 align=Right attrs=[Cell/width=25%]:
+            Cell span=1x1 align=Right attrs=[Cell/width=25%]:
+          Row:
+            Cell span=4x1 align=Center attrs=[Cell/bgcolor=#f0f0f0,#191919]:
+              Paragraph: Colored(#333333,#cccccc | Bold("베스트팀"))
+          Row:
+            Cell span=1x1 align=Center:
+              Paragraph: Link("틀:1974 FIFA 월드컵 서독 베스트11" | Image("1974 FIFA World Cup Official Logo.png" height=50)) Macro(br)
+              WikiStyle style=Some("display: inline; padding: 3px 3px; border-radius: 2px; background: #19610B; font-size: 0.9em;") dark_style=None:
+                Paragraph: Link("틀:1974 FIFA 월드컵 서독 베스트11" | Colored(#ffffff | Bold("1974 FIFA 월드컵")))
+            Cell span=1x1 align=Right:
+            Cell span=1x1 align=Right:
+            Cell span=1x1 align=Right:
+Table:
+  Row:
+    Cell span=3x1 align=Center attrs=[Table/align=right Table/width=400 Table/bordercolor=#aaaaaa Table/bgcolor=#ffffff,#191919]:
+      WikiStyle style=Some("margin: -5px -10px; padding: 7px 10px; background-image: linear-gradient(to bottom, rgba(50%, 50%, 50%, 30%) 0%, transparent);") dark_style=None:
+        Paragraph: Sized(+1 | Colored(#000000,#e5e5e5 | Bold(" 네덜란드의 축구감독 ")))
+  Row:
+    Cell span=3x1 align=Center:
+      WikiStyle style=Some("margin: -5px -10px;") dark_style=None:
+        Paragraph: Image("external/www.storiedicalcio.altervista.org/neeskens-johann-01.jpg" width=100%)
+  Row:
+    Cell span=2x1 align=Center attrs=[Cell/height=40 Column/bgcolor=#eeeeee,#191919]:
+      Paragraph: Colored(#000000,#e5e5e5 | Bold(" 이름 ") " ")
+    Cell span=1x1 align=Center:
+      Paragraph: Sized(+1 | Bold("요한 네이스컨스")) Macro(br) Bold("Johan Neeskens")
+  Row:
+    Cell span=2x1 align=Center attrs=[Cell/height=40]:
+      Paragraph: Colored(#000000,#e5e5e5 | Bold(" 본명 ") " ")
+    Cell span=1x1 align=Left:
+      Paragraph: "요하네스 야코뷔스 네이스컨스" Macro(br) "Johannes Jacobus Neeskens"
+  Row:
+    Cell span=2x1 align=Center attrs=[Cell/height=40]:
+      Paragraph: Colored(#000000,#e5e5e5 | Bold(" 출생 ") " ")
+    Cell span=1x1 align=Left:
+      Paragraph: Link("1951년") " " Link("9월 15일") " (" Macro(age "1951-09-15") "세)/ " Macro(br) Link("네덜란드") " 노르트홀란트주 헤임스테더"
+  Row:
+    Cell span=2x1 align=Center attrs=[Cell/height=40]:
+      Paragraph: Colored(#000000,#e5e5e5 | Bold(" 국적 ") " ")
+    Cell span=1x1 align=Left:
+      Paragraph: Link("네덜란드") " " Link("네덜란드" | Image("네덜란드 국기.svg" width=28))
+  Row:
+    Cell span=2x1 align=Center attrs=[Cell/height=40]:
+      Paragraph: Colored(#000000,#e5e5e5 | Bold(" 신체 ") " ")
+    Cell span=1x1 align=Left:
+      Paragraph: Link("키(신체)" | "키") " 178cm"
+  Row:
+    Cell span=2x1 align=Center attrs=[Cell/height=40]:
+      Paragraph: Colored(#000000,#e5e5e5 | Bold(" 직업 ") " ")
+    Cell span=1x1 align=Left:
+      Paragraph: Link("축구선수") "(" Link("미드필더") "-" Link("풀백(축구)" | "풀백") "/ " Sup("은퇴") ")" Macro(br) Link("코치(스포츠)" | "축구감독")
+  Row:
+    Cell span=1x2 align=Center attrs=[Cell/width=15% Cell/height=40]:
+      Paragraph: Colored(#000000,#e5e5e5 | Bold(" 소속 ") " ")
+    Cell span=1x1 align=Center attrs=[Cell/width=15% Cell/height=40 Column/bgcolor=#eeeeee,#191919]:
+      Paragraph: Colored(#000000,#e5e5e5 | Bold(" 선수 ") " ")
+    Cell span=1x1 align=Left attrs=[Cell/width=70%]:
+      Paragraph: "RC 헤임스테더(1968~1970)" Macro(br) Link("AFC 아약스") "(1970~1974)" Macro(br) " " Bold(Link("FC 바르셀로나")) "(1974~1979)" Macro(br) Link("뉴욕 코스모스") "(1979 ~1984)" Macro(br) Link("FC 흐로닝언") " (1984 ~1985)" Macro(br) "포트 로더데일 선(1985)" Macro(br) "캔자스시티 코메츠(1985~1986 / " Sup("실내축구") ")" Macro(br) "뢰벤브라우(1986~1987)" Macro(br) "FC 바(1987~1990)" Macro(br) "FC 추크 94(1990~1991)"
+  Row:
+    Cell span=1x1 align=Center attrs=[Cell/height=40]:
+      Paragraph: Colored(#000000,#e5e5e5 | Bold(" 감독 ") " ")
+    Cell span=1x1 align=Left:
+      Paragraph: "FC 추크 94(1991~1993)" Macro(br) "FC 슈톼파 1895 (1993~1995)" Macro(br) "징언(1995 ~1996)" Macro(br) Link("네덜란드 축구 국가대표팀" | "네덜란드 대표팀") "(1995~2000 / " Sup("수석코치") ")" Macro(br) Link("NEC 네이메헌") "(2000~2004)" Macro(br) Link("호주 축구 국가대표팀" | "호주 대표팀") "(2005~2006 / " Sup("수석코치") ")" Macro(br) Link("FC 바르셀로나") "(2006~2008 / " Sup("수석코치") ")" Macro(br) Link("네덜란드 축구 국가대표팀" | "네덜란드 대표팀 B") "(2008~2009)" Macro(br) Link("갈라타사라이 SK") "(2009~2010 / " Sup("수석코치") ")" Macro(br) "마멜로디 선다운스 FC(2011~2012)"
+  Row:
+    Cell span=2x1 align=Center attrs=[Cell/height=40]:
+      Paragraph: Colored(#000000,#e5e5e5 | Bold(" 국가대표 ") " ")
+    Cell span=1x1 align=Left:
+      Paragraph: "49경기 17골" Sup("(" Link("네덜란드 축구 국가대표팀" | "네덜란드") " / 1970~1981)")
+Paragraph: Macro(목차) <br> Macro(clearfix)
+Heading level=2 folded=false: "개요"
+Quote:
+  Paragraph: "\"네스켄스의 활약은 미드필드에 2명의 선수가 있는 것 같았다.\""
+  HorizontalRule
+  Paragraph: "- " Link("스야크 스바르트")
+Paragraph: Link("네덜란드") "의 " Link("축구선수") " 출신 " Link("코치(스포츠)" | "감독") ". " Link("2011년") "부터 " Link("2012년") "까지 마멜로디 선다운스 FC 감독을 맡았다."
+Paragraph: "선수 시절 포지션은 미드필더. " Link("1970년대") " " Link("네덜란드 축구 국가대표팀") "의 중추. 커리어를 보면 알 수 있듯이 " Link("리누스 미헬스") " 감독의 애제자였다. 당대 최고의 박스 투 박스 형 미드필더였으며 지칠 줄 모르는 체력으로 국가대표팀과 클럽 모두에서 " Link("요한 크루이프") "를 뒷받침하는 역할을 했다. 공격 가담 시 재능도 뛰어나 득점 역시 잘 올리는 편이었다."
+Heading level=2 folded=false: "선수 경력"
+Heading level=3 folded=false: "클럽"
+Paragraph: "고향의 RHC 헴스테데에서 축구를 시작했으며 " Link("1970년") " " Link("리누스 미헬스") " 감독의 눈에 띄어 " Link("AFC 아약스") "로 이적했다. 아약스 이적 첫 시즌까지만 해도 네스켄스는 풀백이 주 포지션이었다. 아약스 이적 첫 시즌 " Link("파나시나이코스") "와의 유러피언 컵 결승전에 선발 출장하며 팀의 첫 유러피언 컵 우승에 공헌한 네스켄스는 이후 중앙 미드필더로 보직을 완전히 바꿨다."
+Paragraph: "풀백 출신이었던 그는 지칠 줄 모르는 체력을 앞세워 에이스 " Link("요한 크루이프") "를 보좌했고, 유수의 득점을 뽑아냈다. 크루이프, 카이저, 수르비어 등의 동료들과 함께 네스켄스는 유러피언 컵 3연패를 경험했고, " Link("1974 FIFA 월드컵 서독" | "1974년 서독 월드컵") "이 끝난 이후 은사인 미헬스가 이끄는 " Link("FC 바르셀로나") "에 입단했다."
+Paragraph: "바르셀로나에서 그는 역시나 크루이프의 보좌관 역할을 수행했고 " Link("요한 크루이프") "를 이은 'Johan Segon'이라는 별명을 받기도 했다. 당시 " Link("라리가" | "프리메라리가") "의 지배자는 " Link("레알 마드리드 CF" | "레알 마드리드") "였고 네스켄스는 맹활약했음에도 불구하고 많은 우승 트로피를 얻지 못했다. 그러나 1975-1976 시즌 32경기 12골을 득점, 이때만큼은 크루이프보다 훌륭한 퍼포먼스를 보여주며 1975-1976 시즌부터 시상한 라리가 올해의 외국인 선수상의 첫번째 수상자가 된다. 1977-1978 시즌에서는 " Link("에스타디오 산티아고 베르나베우") "에서 열린 " Link("코파 델 레이") " 결승전에서 라스팔마스를 격파하고 " Link("코파 델 레이") " 우승을 차지하였고 1978-1979 시즌에는 " Link("포르투나 뒤셀도르프") "를 연장 접전끝에 4:3으로 격파하고 " Link("UEFA 컵 위너스컵") "도 들어올렸다. 그후 꽤나 이른 나이에 " Link("메이저리그 사커" | "MLS") "의 " Link("뉴욕 코스모스") "로 이적했고, 5년간의 뉴욕 생활을 끝낸 네스켄스는 30대의 노장이 되어있었고, 자국의 " Link("FC 흐로닝언") "에 입단해 잠깐 활약한 뒤 다시 미국의 포트 로더데일 선에 입단했다. 이후 인도어 사커 리그 소속의 캔자스시티 코메츠에서 활약한 네스켄스는 여러 팀을 떠돌았고 1991년 40세의 나이에 스위스의 FC 주크에서 현역 생활을 마감했다."
+Heading level=3 folded=false: Link("네덜란드 축구 국가대표팀" | "국가대표")
+Paragraph: Link("1970년") "에 국가대표에 데뷔한 " Link("1974 FIFA 월드컵 서독" | "1974년 서독 월드컵") "에서 네스켄스는 주전 미드필더로서 " Link("요한 크루이프") "를 서포트하는 역할을 했는데,  " Link("불가리아 축구 국가대표팀" | "불가리아") "와의 경기에서 2개의 " Link("페널티 킥") "을 성공시키며 4:1 승리에 일조했고, " Link("우루과이 축구 국가대표팀" | "우루과이") "를 격파하고, " Link("스웨덴 축구 국가대표팀" | "스웨덴") "과 무승부를 거두며 2차 리그에 진출한다. " Link("독일 축구 국가대표팀/사라진 팀" #s-2 | "동독") ", " Link("아르헨티나 축구 국가대표팀" | "아르헨티나") ", " Link("브라질 축구 국가대표팀" | "브라질") "과 같은 조가 된 네덜란드는 " Link("토탈 풋볼") "의 위력을 보여주며 아르헨티나를 4:0으로 격파했고, 네스켄스는 동독과 브라질 전에서 1골 씩 기록하며 2:0 승리를 이끌었다. " <br> Macro(youtube "A74BrxU4Kq4") <br> "결승 상대는 " Link("프란츠 베켄바워") " - " Link("게르트 뮐러") " - " Link("제프 마이어") "가 이끄는 " Link("독일 축구 국가대표팀" | "서독") "이었고 결승전에서는 크루이프가 드리블 돌파로 얻어낸 " Link("페널티 킥") "을 성공시키며 네덜란드는 1:0으로 앞서간다." Footnote(| "1분 30초로 아직까지도 " Link("FIFA 월드컵") " 결승전 최단 시간 득점자로 남아있다.") " 그러나 서독도 " Link("파울 브라이트너") "가 " Link("페널티 킥") "으로 응수하며 동점골을 넣었고, 하필이면 크루이프가 " Link("베르티 포크츠") "에게 아예 지워졌으며, " Link("게르트 뮐러") "에게 결승골을 허용 2:1로 역전패당하며 준우승에 그치고만다. 그러나 네스켄스는 " Link("1974 FIFA 월드컵 서독") " 올스팀에 선정되었다.  "
+Paragraph: Link("1978 FIFA 월드컵 아르헨티나" | "1978년 아르헨티나 월드컵") "에서도 핵심 미드필더로 활약했으며, 비록 크루이프가 가족 납치 사건때문에 불참했지만, " Link("롭 렌센브링크") "가 크루이프의 공백을 메우며 맹활약, 네덜란드는 1차 리그를 가뿐하게 통과했으며, 2차 리그에서는 4년 전 결승전에서 패배를 안겨주었던 서독을 제치고 1위로 통과하여 결승전에 진출한다. 결승 상대는 " Link("마리오 켐페스") " - " Link("다니엘 파사레야") " - " Link("우발도 피욜") "이 버티는 홈팀 " Link("아르헨티나 축구 국가대표팀" | "아르헨티나") "였고, 1:1 동점으로 연정전까지 가나 결국 1:3으로 패배, 2회 연속으로 준우승에 그치고만다. 이후 1981년 국가대표에서 은퇴했다. "
+Heading level=3 folded=false: "플레이 스타일"
+Paragraph: Bold("박스 투 박스 미드필더의 시초")
+Paragraph: "네스켄스는 크루이프를 보좌할만한 완고한 수비력과 활동량을 보였다. 드리블 실력도 나쁘지 않은 편이었고, 안전한 패스를 연결, 그리고 뛰어난 킥 능력으로 " Link("페널티 킥") "을 전담하는 등 많은 득점을 올렸다."
+Heading level=2 folded=false: "감독 경력"
+Paragraph: "은퇴 이후 작은 클럽들의 감독을 맡다가 " Link("1995년") " 당시 네덜란드 대표팀의 감독이었던 " Link("거스 히딩크") "의 요청을 수락하면서 " Link("프랑크 레이카르트") ", " Link("로날드 쿠만") "과 함께 수석코치로 활동했다. " Link("UEFA 유로 2000") "이 끝난 이후 네스켄스는 NEC 네메이헌의 감독으로 부임하며 독립했다."
+Paragraph: "첫 시즌 네메이헌을 20여년만에 유럽 대항전으로 이끈 것을 좋았으나 다음 시즌 부진한 성적으로 인해 경질당했고 " Link("2005년") " " Link("거스 히딩크" | "히딩크") "의 부름을 받아 " Link("호주 축구 국가대표팀") "의 수석코치로 부임했다. " Link("2006 FIFA 월드컵 독일" | "2006년 월드컵") "이 끝난 이후 같은 수석 코치 출신인 " Link("프랑크 레이카르트") "가 이끄는 " Link("FC 바르셀로나") "의 수석 코치로 부임했다."
+Paragraph: "바르셀로나 시절 자유를 보장해주는 레이카르트 감독과 같이 팀의 기강이 무너지는 데 일조했다는 비판과 함께 2008년 " Link("펩 과르디올라") "의 부임으로 인해 팀을 떠났고 2009년 레이카르트와 갈라타사라이에서 재결합했다. 2011년부터 남아공의 클럽인 마멜로디 선다운스의 감독직을 수행했으나 성과를 내지 못했고 2012년 이후 현재까지 무직상태이다."
+Heading level=2 folded=false: "기록"
+Heading level=3 folded=false: "대회 기록"
+List kind=Unordered:
+  Item:
+    Paragraph: Link("AFC 아약스") " (1970~1974)"
+    List kind=Unordered:
+      Item:
+        Paragraph: Link("에레디비시") ": 1971-72, 1972-73"
+      Item:
+        Paragraph: Link("KNVB 베이커") ": 1970-71, 1971-72"
+      Item:
+        Paragraph: Link("유러피언컵") ": 1970-71, 1971-72, 1972-73"
+      Item:
+        Paragraph: Link("인터컨티넨탈컵") ": 1972"
+      Item:
+        Paragraph: Link("UEFA 슈퍼컵") ": 1972, 1973"
+List kind=Unordered:
+  Item:
+    Paragraph: Link("FC 바르셀로나") " (1974~1979)"
+    List kind=Unordered:
+      Item:
+        Paragraph: Link("코파 델 레이") ": 1977-78"
+      Item:
+        Paragraph: Link("UEFA 컵 위너스컵") ": 1978-79"
+List kind=Unordered:
+  Item:
+    Paragraph: Link("네덜란드 축구 국가대표팀")
+    List kind=Unordered:
+      Item:
+        Paragraph: Link("FIFA 월드컵") " 준우승: 1974, 1978"
+      Item:
+        Paragraph: Link("UEFA 유러피언 챔피언십") " 3위: 1976"
+Heading level=3 folded=false: "개인 수상"
+List kind=Unordered:
+  Item:
+    Paragraph: "FIFA 월드컵 실버 부츠: 1974"
+  Item:
+    Paragraph: "FIFA 월드컵 올스타 팀: 1974"
+  Item:
+    Paragraph: Link("발롱도르 드림팀") " 3군: 2020"
+  Item:
+    Paragraph: Link("IOC") " 올해의 축구 선수: 1971-72"
+  Item:
+    Paragraph: "돈 발롱 어워드: 1975-76"
+  Item:
+    Paragraph: Link("FIFA 100") ": 2004"
+Heading level=2 folded=false: "여담"
+List kind=Unordered:
+  Item:
+    Paragraph: "돈 발롱 어워드에서 라리가 올해의 외국인 상 부문 최초 수상자이다."
+  Item:
+    Paragraph: "어릴 때 " Link("야구") "를 하기도 했다. 축구를 8살 때 시작했는데 9살부터는 야구도 함께 배웠고 유소년 대표팀에 오를 정도였지만 16살 때 축구에 전념하기로 하면서 그만뒀다. 네덜란드는 유럽 치고는 야구의 인지도도 있는 편이라 매우 특이한 이력은 아니다. 함께 70년대 네덜란드 축구의 전성기를 이끌었던 " Link("요한 크루이프") "도 어릴 때 야구를 배웠다."
+Paragraph: Macro(각주)
