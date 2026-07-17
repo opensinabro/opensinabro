@@ -1,0 +1,24 @@
+근거: 미확인 | 원문: 1줄 | 의미론: 21줄 | 렌더링: 1줄 | 마커가 한글에 바로 붙음
+앞'''굵게'''뒤
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Text(
+                    "앞",
+                ),
+                Bold(
+                    [
+                        Text(
+                            "굵게",
+                        ),
+                    ],
+                ),
+                Text(
+                    "뒤",
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph">앞<strong>굵게</strong>뒤</div>

@@ -2,110 +2,96 @@
 # residue: [[=0 ]]=0 {{{=0 }}}=0 '''=0 ||=0 [*=0 #!=0
 Table:
   Row:
-    Cell span=2x1 align=Center attrs=[Table/align=right Table/width=350 Table/bordercolor=#999 Cell/bgcolor=#999]:
+    Cell span=2x1 align=Some(Center) attrs=[Table/align=right Table/width=350 Table/bordercolor=#999 Cell/bgcolor=#999]:
       Paragraph: Bold(Colored(#fff | Sized(+1 | "정암사") Macro(br) "淨巖寺"))
   Row:
-    Cell span=2x1 align=Left:
+    Cell span=2x1 align=None:
       Paragraph: Macro(include "틀:지도, 장소=정선군 정암사, 너비=100%, 높이=200px")
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ccc Cell/width=40%]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ccc Cell/width=40%]:
       Paragraph: Bold(Colored(#000 | "종류"))
-    Cell span=1x1 align=Center attrs=[Cell/width=60%]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/width=60%]:
       Paragraph: Link("종교" | "종교시설") " / " Link("관광지")
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ccc]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ccc]:
       Paragraph: Bold(Colored(#000 | "주소"))
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "강원도 정선군 고한읍 함백산로 1410"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ccc]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ccc]:
       Paragraph: Bold(Colored(#000 | "개장"))
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "연중무휴"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ccc]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ccc]:
       Paragraph: Bold(Colored(#000 | "소유주"))
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "정암사 (사유지)"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ccc]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ccc]:
       Paragraph: Bold(Colored(#000 | "연락처"))
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "033-591-2469"
   Row:
-    Cell span=2x1 align=Center:
+    Cell span=2x1 align=Some(Center):
       Paragraph: Link("http://www.jungamsa.com/" | "정암사 공식 사이트")
-Paragraph: Macro(목차)
+Paragraph: <br> Macro(목차) <br>
 Heading level=2 folded=false: "개요"
-Paragraph: Sized(+1 | "淨巖寺") ". 정암사는 " Link("강원도") " " Link("정선군") " 고한읍 함백산에 있는 " Link("절(불교)" | "절") "이다. 함백산은 " Link("태백산") "의 북쪽 자락에 위치하여 정선군과 " Link("태백시") "의 경계를 이룬다. "
-Paragraph: "정암사는 " Link("대한불교 조계종") " 제4교구 본사인 " Link("월정사") "의 말사이며, 한반도의 5대 적멸보궁 가운데 하나가 자리하고 있기도 하다." Footnote(| "정암사 적멸보궁 외의 나머지 적멸보궁은 " Link("통도사") ", " Link("상원사") ", 인제 봉정암, 영월 법흥사에 있다.") " "
+Paragraph: Sized(+1 | "淨巖寺") ". 정암사는 " Link("강원도") " " Link("정선군") " 고한읍 함백산에 있는 " Link("절(불교)" | "절") "이다. 함백산은 " Link("태백산") "의 북쪽 자락에 위치하여 정선군과 " Link("태백시") "의 경계를 이룬다. " <br> <br> "정암사는 " Link("대한불교 조계종") " 제4교구 본사인 " Link("월정사") "의 말사이며, 한반도의 5대 적멸보궁 가운데 하나가 자리하고 있기도 하다." Footnote(| "정암사 적멸보궁 외의 나머지 적멸보궁은 " Link("통도사") ", " Link("상원사") ", 인제 봉정암, 영월 법흥사에 있다.") " " <br>
 Heading level=2 folded=false: "역사"
-Paragraph: "신라의 고승인 " Link("자장(신라)" | "자장") "(慈藏)이 636년(" Link("선덕여왕") " 5년)에 " Link("당나라" | "당(唐)나라") "에 들어가 " Link("산시성") " 운제사에서 21일 동안 치성을 올려 " Link("문수보살") "을 친히 뵙고, 석가모니의 신령스런 보물인 " Link("사리(불교)" #s-1.3 | "진신사리") ", 가사, 염주 등을 얻어 귀국한 후 전국 각지 5곳에 이를 나누어 모셨다. 그 중 한 곳이 이 절이었다고 한다."
-Paragraph: "하지만 이 창건설화 외에는 정암사에 대해 전해지는 자료는 딱히 없다." Footnote(| "출처 : " Link("https://terms.naver.com/entry.nhn?docId=547412&cid=46648&categoryId=46648" | "한국민족문화대백과 - 정암사")) " 정암사의 상징인 국보 수마노탑이 고려시대의 " Link("모전석탑") "이므로 늦어도 신라 후기~고려시대에는 완전히 사찰의 원형을 갖추었을 것이다."
+Paragraph: "신라의 고승인 " Link("자장(신라)" | "자장") "(慈藏)이 636년(" Link("선덕여왕") " 5년)에 " Link("당나라" | "당(唐)나라") "에 들어가 " Link("산시성") " 운제사에서 21일 동안 치성을 올려 " Link("문수보살") "을 친히 뵙고, 석가모니의 신령스런 보물인 " Link("사리(불교)" #s-1.3 | "진신사리") ", 가사, 염주 등을 얻어 귀국한 후 전국 각지 5곳에 이를 나누어 모셨다. 그 중 한 곳이 이 절이었다고 한다." <br> <br> "하지만 이 창건설화 외에는 정암사에 대해 전해지는 자료는 딱히 없다." Footnote(| "출처 : " Link("https://terms.naver.com/entry.nhn?docId=547412&cid=46648&categoryId=46648" | "한국민족문화대백과 - 정암사")) " 정암사의 상징인 국보 수마노탑이 고려시대의 " Link("모전석탑") "이므로 늦어도 신라 후기~고려시대에는 완전히 사찰의 원형을 갖추었을 것이다." <br>
 Heading level=2 folded=false: "가람 및 중요 문화재"
-Paragraph: "정암사는 일반적인 산사와는 달리 부처의 진신사리를 모시고 있는 곳이니만큼 일반적인 가람배치와는 약간 다르다. " Link("대웅전") "이 중심이 되는 다른 절과는 달리 적멸보궁을 그 중심으로 하고 있다. 하지만 적멸보궁이 절의 정중앙에 있는 것은 아니다. 일주문을 통해 절로 들어가면 관음전, 육화정사, 요사채, 범종루, 삼성각, 자장각 등의 건물들이 옹기종기 모여있는데 이를 지나 작은 개울 하나를 건넌 곳에 푸른 기와 지붕의 적멸보궁이 있다. 적멸보궁 뒷편의 작은 산길을 따라 올라가면 산중턱에 수마노탑이 있는데, 평지에 세운 것이 아니라 산비탈 절벽 위에 돌로 쌓은 축대 위에 있다."
-Paragraph: "경내의 중요 문화재로는 " Link("대한민국의 국보" | "국보") "로 지정된 수마노탑 외에 강원도 문화재자료 제32호로 지정된 정암사적멸보궁이 있다. 또한 절 옆의 작은 개울은 " Link("열목어") "의 서식지인데, 여기는 한반도 내에서 열목어가 자연 서식하는 남한지(남방 한계 지역) 중 한 곳으로서 " Link("대한민국의 천연기념물" | "천연기념물") " 제73호 정선 정암사 열목어 서식지로 지정되어 있다."
+Paragraph: "정암사는 일반적인 산사와는 달리 부처의 진신사리를 모시고 있는 곳이니만큼 일반적인 가람배치와는 약간 다르다. " Link("대웅전") "이 중심이 되는 다른 절과는 달리 적멸보궁을 그 중심으로 하고 있다. 하지만 적멸보궁이 절의 정중앙에 있는 것은 아니다. 일주문을 통해 절로 들어가면 관음전, 육화정사, 요사채, 범종루, 삼성각, 자장각 등의 건물들이 옹기종기 모여있는데 이를 지나 작은 개울 하나를 건넌 곳에 푸른 기와 지붕의 적멸보궁이 있다. 적멸보궁 뒷편의 작은 산길을 따라 올라가면 산중턱에 수마노탑이 있는데, 평지에 세운 것이 아니라 산비탈 절벽 위에 돌로 쌓은 축대 위에 있다." <br> <br> "경내의 중요 문화재로는 " Link("대한민국의 국보" | "국보") "로 지정된 수마노탑 외에 강원도 문화재자료 제32호로 지정된 정암사적멸보궁이 있다. 또한 절 옆의 작은 개울은 " Link("열목어") "의 서식지인데, 여기는 한반도 내에서 열목어가 자연 서식하는 남한지(남방 한계 지역) 중 한 곳으로서 " Link("대한민국의 천연기념물" | "천연기념물") " 제73호 정선 정암사 열목어 서식지로 지정되어 있다." <br>
 Heading level=3 folded=false: "정선 정암사 수마노탑"
-Paragraph: Macro(include "틀:대한민국의 국보 331~360호")
+Paragraph: Macro(include "틀:대한민국의 국보 331~360호") <br>
 Table:
   Row:
-    Cell span=2x1 align=Center attrs=[Table/align=right Table/width=360 Table/bgcolor=#315288 Table/bordercolor=#315288 Cell/bgcolor=#fff]:
+    Cell span=2x1 align=Some(Center) attrs=[Table/align=right Table/width=360 Table/bgcolor=#315288 Table/bordercolor=#315288 Cell/bgcolor=#fff]:
       Paragraph: Image("정부상징.svg" width=28) " " Bold(Link("대한민국의 국보" | Colored(#f39100 | "대한민국 국보 제332호")))
   Row:
-    Cell span=2x1 align=Center:
+    Cell span=2x1 align=Some(Center):
       Paragraph: Colored(#fff | Sized(+1 | Bold("정선 정암사 수마노탑")) Macro(br) Sized(-1 | "旌善 淨岩寺 水瑪瑙塔"))
   Row:
-    Cell span=2x1 align=Left:
-      WikiStyle style=Some("margin: -10px") dark_style=None:
-        Paragraph: "; margin-top: -5px; margin-bottom: 16px\"" <br> Macro(include "틀:지도, 장소=강원도 정선군 함백산로 1410 (고한읍 정암사), 너비=100%, 높이=100%")
+    Cell span=2x1 align=None:
+      Paragraph: WikiStyle(style=Some("margin: -10px") dark=None | Paragraph: "; margin-top: -5px; margin-bottom: 16px\"" <br> Macro(include "틀:지도, 장소=강원도 정선군 함백산로 1410 (고한읍 정암사), 너비=100%, 높이=100%"))
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/width=80]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/width=80]:
       Paragraph: Bold(Colored(#fff | "소재지"))
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#fff]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#fff]:
       Paragraph: Link("강원도") " " Link("정선군") " 함백산로 1410 (고한읍, 정암사)"
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold(Colored(#fff | "분류"))
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#fff]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#fff]:
       Paragraph: "유적건조물 / 종교신앙 / 불교 / 탑"
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold(Colored(#fff | "수량/면적"))
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#fff]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#fff]:
       Paragraph: "1기"
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold(Colored(#fff | "지정연도"))
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#fff]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#fff]:
       Paragraph: "2020년 6월 25일"
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold(Colored(#fff | "제작시기"))
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#fff]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#fff]:
       Paragraph: Link("고려시대")
-Paragraph: Image("external/s2.postimg.org/1000268468.jpg" width=550)
-Paragraph: "석가모니의 신령스런 보물인 사리, 가사, 염주 등은 " Link("대한민국의 국보" | "국보") " 제332호인 수마노탑에 봉안되어 있다고 하여, 이에 따라 법당에는 따로 불상을 모시지 않고 있다. 수마노탑은 " Link("경주시") " " Link("분황사") " 석탑과 같은 " Link("모전석탑") " 양식으로, 중국으로부터 들여온 마노석이라는 " Link("암석" | "돌") "로 만들었는데 " Link("서해") "라는 " Bold("물") "을 건너 온 돌이라고 하여 수(水)마노탑이 되었다. 보통 고대 불탑들이 'n층 석탑'이런 식으로 불리는 데 비해 '수마노탑'이라는 탑의 당대 정식 이름이 기록으로 지금까지 남아있는 사례는 " Link("불국사") "의 " Link("석가탑") ", " Link("다보탑") " 정도로 상당히 드물다는 점에서도 상당히 희소성이 있다."
-Paragraph: "정선 정암사 수마노탑은 1964년에 " Link("대한민국의 보물" | "보물") " 제410호로 지정되었다가, 2020년 국보 제332호로 승격 지정되었다."
-Paragraph: Link("유홍준") "의 " Link("나의 문화유산답사기") " 2권에 소개되어 있다."
+Paragraph: <br> Image("external/s2.postimg.org/1000268468.jpg" width=550) <br> <br> "석가모니의 신령스런 보물인 사리, 가사, 염주 등은 " Link("대한민국의 국보" | "국보") " 제332호인 수마노탑에 봉안되어 있다고 하여, 이에 따라 법당에는 따로 불상을 모시지 않고 있다. 수마노탑은 " Link("경주시") " " Link("분황사") " 석탑과 같은 " Link("모전석탑") " 양식으로, 중국으로부터 들여온 마노석이라는 " Link("암석" | "돌") "로 만들었는데 " Link("서해") "라는 " Bold("물") "을 건너 온 돌이라고 하여 수(水)마노탑이 되었다. 보통 고대 불탑들이 'n층 석탑'이런 식으로 불리는 데 비해 '수마노탑'이라는 탑의 당대 정식 이름이 기록으로 지금까지 남아있는 사례는 " Link("불국사") "의 " Link("석가탑") ", " Link("다보탑") " 정도로 상당히 드물다는 점에서도 상당히 희소성이 있다." <br> <br> "정선 정암사 수마노탑은 1964년에 " Link("대한민국의 보물" | "보물") " 제410호로 지정되었다가, 2020년 국보 제332호로 승격 지정되었다." <br> <br> Link("유홍준") "의 " Link("나의 문화유산답사기") " 2권에 소개되어 있다." <br>
 Heading level=4 folded=false: "국보 제332호"
 List kind=Unordered:
   Item:
     Paragraph: Link("http://www.heritage.go.kr/heri/cul/culSelectDetail.do?VdkVgwKey=11,03320000,32&pageNo=1_1_1_0" | "문화재청 홈페이지 : 정선 정암사 수마노탑 (旌善 淨岩寺 水瑪瑙塔)")
+Paragraph: 
 Quote:
-  Paragraph: "「정선 정암사 수마노탑」이 있는 정암사는 「삼국유사」가 전하는 바에 따르면 신라 자장율사(慈藏律師)가 당나라 오대산에서 문수보살로부터 석가모니의 몸에서 나온 진신사리(眞身舍利)를 받아 귀국한 후, 643년(선덕여왕 12년)에 창건하였다고 전해지는 사찰임. 정암사에는 수마노탑을 바라보는 자리에 적멸보궁이 자리 잡고 있으며, 이는 통도사, 오대산 중대, 법흥사, 봉정암의 적멸보궁과 더불어 우리나라 5대 적멸보궁으로서의 위상을 가지고 있음."
-  Paragraph: "수마노탑이라는 명칭은 불교에서 금·은과 함께 7보석 중의 하나인 마노(瑪瑙)와 관련이 있으며, 자장율사가 진신사리를 가지고 귀국할 때 서해 용왕이 자장의 도력에 감화하여 준 마노석으로 탑을 쌓았고, 물길을 따라 가져왔다 해서 물 ‘水’ 자를 앞에 붙여 ‘수마노탑(水瑪瑙塔)’이라 불렀다는 설화가 전함."
-  Paragraph: "수마노탑은 총 길이가 9m에 달하며, 화강암 기단 위에 세워진 1층 탑신에 감실(龕室)을 상징하는 문비가 있고, 그 위로 정교하게 다듬은 모전(模塼)석재를 포개어 쌓았고 옥개석 위 낙수면과 아래 층급받침의 단 수를 층별로 일정하게 더해 쌓았음. 이처럼 수마노탑은 국보 제30호인 경주 분황사 모전석탑 등 신라시대 이래 모전석탑에서 시작된 조형적인 안정감과 입체감 그리고 균형미를 잘 보여주고 있어 늦어도 고려 시대 이전에 축조된 것을 알 수 있음."
-  Paragraph: "1972년 수마노탑 해체 당시에 함께 나온 탑지석(탑의 건립 이유, 수리 기록 등을 적은 돌로 탑 안에 넣어 둠)은 조성역사, 조탑기술 등을 연구하는 데 매우 귀중한 자료를 제공하고 있으며, 경주 불국사 삼층석탑(석가탑, 국보 제21호)·다보탑(국보 제20호)을 포함해 탑의 이름이 지금까지 전해지고 있는 희소한 탑임."
-  Paragraph: "우리나라는 2,000여기에 가까운 석탑이 건립되었으나 탑의 중수과정을 알 수 있는 사례는 불국사 삼층석탑(국보 제21호)과 포항 법광사지 삼층석탑 등 그 예가 매우 희귀함. 수마노탑은 1972년 보수과정에서 출토된 5매의 탑지석과 적멸보궁 옆에 중수비 1기가 전하고 있어 모전석탑의 특성상 여러 차례 중수가 이루어졌음을 알 수 있으며, 보수시기와 범위, 공사기간, 참여인원 및 참여사찰 등에 대한 세부적인 기록이 남겨져 있는데, 이러한 자료가 전하는 사례는 수마노탑이 유일함."
-  Paragraph: "정암사와 수마노탑은 현존 적멸보궁 가운데 설악산 봉정암과 함께 석탑을 이용해 보궁을 형성한 사례로 주목됨. 특히, 석재를 벽돌 형태로 가공해 축조한 모전석탑 형식과 정암사 가람 전체를 조망할 수 있는 장소에 건립한 것은 고려시대 유행한 비보사탑 개념 속에서 건립이 이루어졌음을 보여줌으로써, 시대 변화에 따라 다양한 목적으로 수마노탑이 인식되었음을 알 수 있어, 한국 석탑 발전사에 있어 주목되는 석탑임."
-  Paragraph: "수마노탑은 기단에서 상륜부까지 완전한 모습을 갖추고 있는 모전석탑으로, 석회암 지대라는 지역 특성을 반영하여 고회암(苦灰巖)으로 제작되었고, 쇠퇴한 산천의 기운을 북돋운다는 ‘산천비보(山川裨補) 사상’과 사리신앙을 배경으로 높은 암벽 위에 조성된 특수한 석탑임. 특히, 탑지석을 비롯한 자료에서 수리기록과 연혁을 알 수 있고, 모전석탑으로 조성된 진신사리 봉안탑으로는 우리나라에서 유일하다는 점에서 국가지정문화재(국보)로 역사·예술·학술 가치가 충분함."
+  Paragraph: "「정선 정암사 수마노탑」이 있는 정암사는 「삼국유사」가 전하는 바에 따르면 신라 자장율사(慈藏律師)가 당나라 오대산에서 문수보살로부터 석가모니의 몸에서 나온 진신사리(眞身舍利)를 받아 귀국한 후, 643년(선덕여왕 12년)에 창건하였다고 전해지는 사찰임. 정암사에는 수마노탑을 바라보는 자리에 적멸보궁이 자리 잡고 있으며, 이는 통도사, 오대산 중대, 법흥사, 봉정암의 적멸보궁과 더불어 우리나라 5대 적멸보궁으로서의 위상을 가지고 있음." <br> <br> "수마노탑이라는 명칭은 불교에서 금·은과 함께 7보석 중의 하나인 마노(瑪瑙)와 관련이 있으며, 자장율사가 진신사리를 가지고 귀국할 때 서해 용왕이 자장의 도력에 감화하여 준 마노석으로 탑을 쌓았고, 물길을 따라 가져왔다 해서 물 ‘水’ 자를 앞에 붙여 ‘수마노탑(水瑪瑙塔)’이라 불렀다는 설화가 전함." <br> <br> "수마노탑은 총 길이가 9m에 달하며, 화강암 기단 위에 세워진 1층 탑신에 감실(龕室)을 상징하는 문비가 있고, 그 위로 정교하게 다듬은 모전(模塼)석재를 포개어 쌓았고 옥개석 위 낙수면과 아래 층급받침의 단 수를 층별로 일정하게 더해 쌓았음. 이처럼 수마노탑은 국보 제30호인 경주 분황사 모전석탑 등 신라시대 이래 모전석탑에서 시작된 조형적인 안정감과 입체감 그리고 균형미를 잘 보여주고 있어 늦어도 고려 시대 이전에 축조된 것을 알 수 있음." <br> <br> "1972년 수마노탑 해체 당시에 함께 나온 탑지석(탑의 건립 이유, 수리 기록 등을 적은 돌로 탑 안에 넣어 둠)은 조성역사, 조탑기술 등을 연구하는 데 매우 귀중한 자료를 제공하고 있으며, 경주 불국사 삼층석탑(석가탑, 국보 제21호)·다보탑(국보 제20호)을 포함해 탑의 이름이 지금까지 전해지고 있는 희소한 탑임." <br> <br> "우리나라는 2,000여기에 가까운 석탑이 건립되었으나 탑의 중수과정을 알 수 있는 사례는 불국사 삼층석탑(국보 제21호)과 포항 법광사지 삼층석탑 등 그 예가 매우 희귀함. 수마노탑은 1972년 보수과정에서 출토된 5매의 탑지석과 적멸보궁 옆에 중수비 1기가 전하고 있어 모전석탑의 특성상 여러 차례 중수가 이루어졌음을 알 수 있으며, 보수시기와 범위, 공사기간, 참여인원 및 참여사찰 등에 대한 세부적인 기록이 남겨져 있는데, 이러한 자료가 전하는 사례는 수마노탑이 유일함." <br> <br> "정암사와 수마노탑은 현존 적멸보궁 가운데 설악산 봉정암과 함께 석탑을 이용해 보궁을 형성한 사례로 주목됨. 특히, 석재를 벽돌 형태로 가공해 축조한 모전석탑 형식과 정암사 가람 전체를 조망할 수 있는 장소에 건립한 것은 고려시대 유행한 비보사탑 개념 속에서 건립이 이루어졌음을 보여줌으로써, 시대 변화에 따라 다양한 목적으로 수마노탑이 인식되었음을 알 수 있어, 한국 석탑 발전사에 있어 주목되는 석탑임." <br> <br> "수마노탑은 기단에서 상륜부까지 완전한 모습을 갖추고 있는 모전석탑으로, 석회암 지대라는 지역 특성을 반영하여 고회암(苦灰巖)으로 제작되었고, 쇠퇴한 산천의 기운을 북돋운다는 ‘산천비보(山川裨補) 사상’과 사리신앙을 배경으로 높은 암벽 위에 조성된 특수한 석탑임. 특히, 탑지석을 비롯한 자료에서 수리기록과 연혁을 알 수 있고, 모전석탑으로 조성된 진신사리 봉안탑으로는 우리나라에서 유일하다는 점에서 국가지정문화재(국보)로 역사·예술·학술 가치가 충분함."
 HorizontalRule
 List kind=Unordered:
   Item:
     Paragraph: Link("http://www.heritage.go.kr/heri/cul/culSelectDetail.do?VdkVgwKey=12,04100000,32&pageNo=1_1_1_0" | "문화재청 홈페이지 : 정선 정암사 수마노탑 (旌善 淨岩寺 水瑪瑙塔)") "(보물 제410호일 때의 과거 설명)"
+Paragraph: 
 Quote:
-  Paragraph: "정암사 적멸보궁 뒤의 산비탈에 세워진 7층의 모전석탑이다. 모전석탑이란 전탑을 모방한 탑으로, 돌을 벽돌 모양으로 깎아 쌓아올린 탑을 말한다."
-  Paragraph: "화강암으로 6단의 기단(基壇)을 쌓고 탑신부를 받치기 위해 2단의 받침을 두었다. 탑신(塔身)은 회녹색을 띤 석회암으로 쌓았는데, 표면을 정교하게 잘 정돈하여 벽돌을 사용한 것처럼 보인다. 1층 몸돌의 남쪽면에는 감실(龕室:불상을 모시는 방)을 마련했으며, 1장의 돌을 세워 문을 만들고 그 가운데에는 철로 만든 문고리를 달았다. 지붕돌은 추녀 너비가 짧고 추녀끝에서 살짝 들려있으며, 풍경이 달려 있다. 지붕돌 밑면의 받침수는 1층이 7단이고, 1단씩 줄어들어 7층은 1단이며, 지붕돌 윗면도 1층이 9단, 1단씩 줄어들어 7층은 3단으로 되어있다. 꼭대기의 머리장식으로는 청동으로 만든 장식을 올렸다."
-  Paragraph: "돌벽돌의 일반적인 크기로 보아 그리 거대한 편은 아니지만 형태가 세련되고 수법 또한 정교한 탑이다. 탑 앞에 돌이 하나 있는데, 여기에 새겨진 연꽃무늬, 안상(眼象) 등은 모두 고려시대의 특징을 나타내고 있다."
-  Paragraph: "이 석탑은 파손이 심해서 1972년 해체·복원되었는데, 이 과정에서 탑을 세운 이유를 담은 탑지석(塔誌石) 5개와 금·은·동으로 만들어진 사리구가 발견되어 조선 후기에 이르기까지 여러 차례 보수되었음을 알 수 있다. 현재의 모습이 언제부터 전해진 것인지에 관해서는 여러 설이 있어서 확실하지 않지만, 정암사에 있는 여러 유물과 비교해 볼 때 고려시대에 처음 만들어졌을 것으로 짐작해 볼 수 있다."
+  Paragraph: "정암사 적멸보궁 뒤의 산비탈에 세워진 7층의 모전석탑이다. 모전석탑이란 전탑을 모방한 탑으로, 돌을 벽돌 모양으로 깎아 쌓아올린 탑을 말한다." <br> <br> "화강암으로 6단의 기단(基壇)을 쌓고 탑신부를 받치기 위해 2단의 받침을 두었다. 탑신(塔身)은 회녹색을 띤 석회암으로 쌓았는데, 표면을 정교하게 잘 정돈하여 벽돌을 사용한 것처럼 보인다. 1층 몸돌의 남쪽면에는 감실(龕室:불상을 모시는 방)을 마련했으며, 1장의 돌을 세워 문을 만들고 그 가운데에는 철로 만든 문고리를 달았다. 지붕돌은 추녀 너비가 짧고 추녀끝에서 살짝 들려있으며, 풍경이 달려 있다. 지붕돌 밑면의 받침수는 1층이 7단이고, 1단씩 줄어들어 7층은 1단이며, 지붕돌 윗면도 1층이 9단, 1단씩 줄어들어 7층은 3단으로 되어있다. 꼭대기의 머리장식으로는 청동으로 만든 장식을 올렸다." <br> <br> "돌벽돌의 일반적인 크기로 보아 그리 거대한 편은 아니지만 형태가 세련되고 수법 또한 정교한 탑이다. 탑 앞에 돌이 하나 있는데, 여기에 새겨진 연꽃무늬, 안상(眼象) 등은 모두 고려시대의 특징을 나타내고 있다." <br> <br> "이 석탑은 파손이 심해서 1972년 해체·복원되었는데, 이 과정에서 탑을 세운 이유를 담은 탑지석(塔誌石) 5개와 금·은·동으로 만들어진 사리구가 발견되어 조선 후기에 이르기까지 여러 차례 보수되었음을 알 수 있다. 현재의 모습이 언제부터 전해진 것인지에 관해서는 여러 설이 있어서 확실하지 않지만, 정암사에 있는 여러 유물과 비교해 볼 때 고려시대에 처음 만들어졌을 것으로 짐작해 볼 수 있다."
 Paragraph: Category("대한불교조계종 말사") Category("대한불교조계종 제4교구") Category("대한민국의 국보")

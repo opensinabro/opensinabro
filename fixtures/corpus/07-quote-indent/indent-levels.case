@@ -1,0 +1,33 @@
+근거: 도움말서술 | 원문: 2줄 | 의미론: 26줄 | 렌더링: 4줄 | 도움말: 단계가 다르면 서로 다른 문단
+ 한 단계
+  두 단계
+Document {
+    blocks: [
+        Indent(
+            [
+                Paragraph(
+                    [
+                        Text(
+                            "한 단계",
+                        ),
+                    ],
+                ),
+                Indent(
+                    [
+                        Paragraph(
+                            [
+                                Text(
+                                    "두 단계",
+                                ),
+                            ],
+                        ),
+                    ],
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-indent"><div class="wiki-paragraph">한 단계</div>
+<div class="wiki-indent"><div class="wiki-paragraph">두 단계</div>
+</div>
+</div>

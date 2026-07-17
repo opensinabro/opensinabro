@@ -1,0 +1,19 @@
+근거: 도움말서술 | 원문: 1줄 | 의미론: 15줄 | 렌더링: 2줄 | 들여쓰기
+ 들여쓴 문단
+Document {
+    blocks: [
+        Indent(
+            [
+                Paragraph(
+                    [
+                        Text(
+                            "들여쓴 문단",
+                        ),
+                    ],
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-indent"><div class="wiki-paragraph">들여쓴 문단</div>
+</div>

@@ -1,0 +1,22 @@
+근거: 도움말서술 | 원문: 1줄 | 의미론: 19줄 | 렌더링: 1줄 | 도움말: 색상 코드 대소문자 무관
+{{{#FF0000 대문자}}}
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Colored(
+                    ColoredText {
+                        color: "#FF0000",
+                        dark_color: None,
+                        content: [
+                            Text(
+                                "대문자",
+                            ),
+                        ],
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><span style="color:#ff0000" data-dark-style="color:#ff0000;">대문자</span></div>

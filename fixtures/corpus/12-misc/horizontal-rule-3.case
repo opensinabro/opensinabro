@@ -1,0 +1,14 @@
+근거: 도움말예제 | 원문: 1줄 | 의미론: 11줄 | 렌더링: 1줄 | 도움말: 3개는 수평줄이 아님
+---
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Text(
+                    "---",
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph">---</div>

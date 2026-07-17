@@ -1,0 +1,20 @@
+근거: 미확인 | 원문: 1줄 | 의미론: 17줄 | 렌더링: 1줄 | sanitizer — 미닫힘 태그를 닫음
+{{{#!html <b>안 닫음}}}
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Html(
+                    Template(
+                        [
+                            Text(
+                                "<b>안 닫음",
+                            ),
+                        ],
+                    ),
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><b>안 닫음</b></div>

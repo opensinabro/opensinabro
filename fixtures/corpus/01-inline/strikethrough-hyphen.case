@@ -1,0 +1,18 @@
+근거: 도움말예제 | 원문: 1줄 | 의미론: 15줄 | 렌더링: 1줄 | 하이픈 취소선
+--취소선 2--
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Strikethrough(
+                    [
+                        Text(
+                            "취소선 2",
+                        ),
+                    ],
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><del>취소선 2</del></div>

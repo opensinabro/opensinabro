@@ -1,0 +1,47 @@
+근거: 미확인 | 원문: 3줄 | 의미론: 37줄 | 렌더링: 6줄 | 문단 번호 매김(s-1, s-1.1)
+== 하나 ==
+=== 하나의 하나 ===
+== 둘 ==
+Document {
+    blocks: [
+        Heading(
+            Heading {
+                level: 2,
+                folded: false,
+                content: [
+                    Text(
+                        "하나",
+                    ),
+                ],
+            },
+        ),
+        Heading(
+            Heading {
+                level: 3,
+                folded: false,
+                content: [
+                    Text(
+                        "하나의 하나",
+                    ),
+                ],
+            },
+        ),
+        Heading(
+            Heading {
+                level: 2,
+                folded: false,
+                content: [
+                    Text(
+                        "둘",
+                    ),
+                ],
+            },
+        ),
+    ],
+}
+<h2 class="wiki-heading"><a id="s-1" href="#toc">1.</a> <span id="하나">하나</span></h2>
+<div class="wiki-heading-content"></div>
+<h3 class="wiki-heading"><a id="s-1.1" href="#toc">1.1.</a> <span id="하나의 하나">하나의 하나</span></h3>
+<div class="wiki-heading-content"></div>
+<h2 class="wiki-heading"><a id="s-2" href="#toc">2.</a> <span id="둘">둘</span></h2>
+<div class="wiki-heading-content"></div>

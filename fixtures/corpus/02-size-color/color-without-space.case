@@ -1,0 +1,14 @@
+근거: 미확인 | 원문: 1줄 | 의미론: 11줄 | 렌더링: 1줄 | 색상 뒤 공백 없음 — 색상이 아니라 리터럴
+{{{#212529}}}
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Literal(
+                    "#212529",
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><code>#212529</code></div>

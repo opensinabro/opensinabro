@@ -1,0 +1,25 @@
+근거: 도움말예제 | 원문: 1줄 | 의미론: 22줄 | 렌더링: 1줄 | 니코니코
+[nicovideo(sm8628149)]
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Macro(
+                    Macro {
+                        name: "nicovideo",
+                        argument: Some(
+                            Template(
+                                [
+                                    Text(
+                                        "sm8628149",
+                                    ),
+                                ],
+                            ),
+                        ),
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><iframe class="wiki-media" src="//embed.nicovideo.jp/watch/sm8628149" width="640" height="360" frameborder="0" allowfullscreen loading="lazy"></iframe></div>

@@ -1,23 +1,28 @@
-use crate::grammar::{
-    Region, block, emit_joined_range_as, emit_line_newline, emit_line_prefix, inline,
-};
+use crate::grammar::{Region, block, emit_joined_range_as, emit_line_newline, emit_line_prefix};
 use crate::kind::SyntaxKind;
 use crate::parser::Parser;
 use namumark_text as text;
 use std::ops::Range;
 
 /// 여러 줄에 걸쳐 정확히 균형 잡힌 `{{{ ... }}}` 그룹(joined 범위)을 블록 노드로 방출한다.
+/// `closed`가 거짓이면 `}}}`가 없는 그룹이다 — 어디서도 안 닫히는 `{{{`는 남은 범위를
+/// 통째로 머금는다(렌더확정: 원문이 어긋난 표 셀에서 the seed의 `#!folding`이 그렇게 한다).
 pub(crate) fn parse_brace_group(
     parser: &mut Parser<'_>,
     region: &Region,
     joined_range: Range<usize>,
+    closed: bool,
 ) {
     let group_joined = joined_range.start;
     let group_global = region.to_global(group_joined);
     let group = region.joined[joined_range.clone()].to_string();
     let header_end_relative = group.find('\n').unwrap_or(group.len());
     let header = group[3..header_end_relative].to_string();
-    let closing_joined = joined_range.end - 3;
+    let closing_joined = if closed {
+        joined_range.end - 3
+    } else {
+        joined_range.end
+    };
     let (header_line, header_column) = region.locate(group_joined);
 
     // 헤더 내 상대 오프셋 → 전역/joined 오프셋
@@ -60,6 +65,23 @@ pub(crate) fn parse_brace_group(
             closing_joined,
             header_global(header.len()),
         );
+    } else if let Some(rest) = text::strip_directive(&header, "#!if") {
+        // 헤더 나머지가 조건식이다. 해석은 렌더 단계(resolve)가 한다.
+        kind = SyntaxKind::Conditional;
+        let expression_offset = if rest.is_empty() {
+            header.len()
+        } else {
+            subslice_offset(&header, rest)
+        };
+        parser.emit_token(SyntaxKind::Marker, header_global(expression_offset));
+        if !rest.is_empty() {
+            let expression = parser.start_node();
+            parser.emit_token(SyntaxKind::Text, header_global(header.len()));
+            expression.complete(parser, SyntaxKind::ConditionExpression);
+        }
+        emit_line_newline(parser, region, header_line);
+        let content_start = region.joined_start(header_line + 1);
+        parse_content_blocks(parser, region, content_start..closing_joined, None);
     } else if let Some(rest) = text::strip_directive(&header, "#!folding") {
         kind = SyntaxKind::Folding;
         let summary = rest.trim();
@@ -69,11 +91,13 @@ pub(crate) fn parse_brace_group(
             subslice_offset(&header, summary)
         };
         parser.emit_token(SyntaxKind::Marker, header_global(summary_offset));
+        // 접기 문구에는 위키 문법이 적용되지 않는다 — 글자 그대로다(렌더확정: the seed는
+        // 문구에 쓴 서식 마커를 풀지 않고 그대로 보여 준다).
         if !summary.is_empty() {
             let summary_node = parser.start_node();
-            inline::parse_inline_range(
-                parser,
-                header_global(summary_offset)..header_global(summary_offset + summary.len()),
+            parser.emit_token(
+                SyntaxKind::Text,
+                header_global(summary_offset + summary.len()),
             );
             summary_node.complete(parser, SyntaxKind::FoldingSummary);
         }
@@ -115,8 +139,10 @@ pub(crate) fn parse_brace_group(
             closing_joined,
             header_global(header.len()),
         );
-    } else if let Some((_, _, rest)) = text::parse_color_marker(&header) {
+    } else if text::parse_color_specification(&header).is_some() {
         kind = SyntaxKind::ColoredBlock;
+        // 헤더에 공백이 있으면 그 뒤는 내용의 첫 조각이다(`{{{#red 빨강\n…`).
+        let rest = header.split_once(' ').map_or("", |(_, rest)| rest);
         let leftover_offset = header.len() - rest.len();
         parse_marked_container(
             parser,
@@ -141,8 +167,10 @@ pub(crate) fn parse_brace_group(
     }
 
     // 닫는 `}}}`
-    let closing_global = region.to_global(closing_joined);
-    parser.emit_token(SyntaxKind::Marker, closing_global + 3);
+    if closed {
+        let closing_global = region.to_global(closing_joined);
+        parser.emit_token(SyntaxKind::Marker, closing_global + 3);
+    }
     node.complete(parser, kind);
 }
 
@@ -194,7 +222,8 @@ fn parse_content_blocks(
         }
         sub = Region::new(parser.source(), lines);
     }
-    block::parse_region_blocks(parser, &sub, false);
+    let sub = sub.reclaim_prefixes(parser.source());
+    block::parse_region_blocks(parser, &sub, block::RegionContext::Fresh);
 }
 
 fn subslice_offset(outer: &str, inner: &str) -> usize {

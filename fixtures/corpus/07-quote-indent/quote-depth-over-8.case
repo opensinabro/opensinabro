@@ -1,0 +1,59 @@
+근거: 도움말서술 | 원문: 1줄 | 의미론: 47줄 | 렌더링: 10줄 | 도움말: 최대 8단계까지만 적용
+>>>>>>>>>아홉 단계
+Document {
+    blocks: [
+        Quote(
+            [
+                Quote(
+                    [
+                        Quote(
+                            [
+                                Quote(
+                                    [
+                                        Quote(
+                                            [
+                                                Quote(
+                                                    [
+                                                        Quote(
+                                                            [
+                                                                Quote(
+                                                                    [
+                                                                        Quote(
+                                                                            [
+                                                                                Paragraph(
+                                                                                    [
+                                                                                        Text(
+                                                                                            "아홉 단계",
+                                                                                        ),
+                                                                                    ],
+                                                                                ),
+                                                                            ],
+                                                                        ),
+                                                                    ],
+                                                                ),
+                                                            ],
+                                                        ),
+                                                    ],
+                                                ),
+                                            ],
+                                        ),
+                                    ],
+                                ),
+                            ],
+                        ),
+                    ],
+                ),
+            ],
+        ),
+    ],
+}
+<blockquote class="wiki-quote"><blockquote class="wiki-quote"><blockquote class="wiki-quote"><blockquote class="wiki-quote"><blockquote class="wiki-quote"><blockquote class="wiki-quote"><blockquote class="wiki-quote"><blockquote class="wiki-quote"><blockquote class="wiki-quote"><div class="wiki-paragraph">아홉 단계</div>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>

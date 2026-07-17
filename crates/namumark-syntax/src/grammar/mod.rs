@@ -16,7 +16,7 @@ use std::ops::Range;
 pub(crate) fn document(parser: &mut Parser<'_>) {
     let marker = parser.start_node();
     let region = Region::from_source(parser.source());
-    block::parse_region_blocks(parser, &region, false);
+    block::parse_region_blocks(parser, &region, block::RegionContext::Fresh);
     // 방어: 연료 소진 등으로 남은 원문이 있으면 통째로 방출해 무손실을 지킨다.
     let end = parser.source().len();
     if parser.position() < end {
@@ -201,6 +201,28 @@ impl Region {
                 newline,
             });
         }
+        Region::new(source, lines)
+    }
+
+    /// prefix로 옮겨 두었던 줄머리 바이트를 내용으로 되돌린 하위 영역.
+    ///
+    /// `{{{` 그룹의 내용은 바깥 들여쓰기가 먹은 줄머리 공백까지 제 것이다 — the seed는
+    /// 그룹의 내용 범위를 원문에서 그대로 다시 읽기 때문이다(렌더확정: 들여쓴 표의 셀
+    /// 안에서 열린 접기 안의 ` * 항목`이 `<ul class='wiki-list'>`가 된다).
+    pub(crate) fn reclaim_prefixes(&self, source: &str) -> Region {
+        let lines = self
+            .lines
+            .iter()
+            .map(|line| Line {
+                prefix: Vec::new(),
+                content: line
+                    .prefix
+                    .first()
+                    .map_or(line.content.start, |(_, range)| range.start)
+                    ..line.content.end,
+                newline: line.newline.clone(),
+            })
+            .collect();
         Region::new(source, lines)
     }
 }

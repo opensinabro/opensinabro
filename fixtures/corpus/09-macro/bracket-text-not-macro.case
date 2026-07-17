@@ -1,0 +1,26 @@
+근거: 미확인 | 원문: 1줄 | 의미론: 23줄 | 렌더링: 1줄 | 매크로처럼 보이는 평범한 대괄호 텍스트
+[V] [Chorus]
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Macro(
+                    Macro {
+                        name: "V",
+                        argument: None,
+                    },
+                ),
+                Text(
+                    " ",
+                ),
+                Macro(
+                    Macro {
+                        name: "Chorus",
+                        argument: None,
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph">[V] [Chorus]</div>

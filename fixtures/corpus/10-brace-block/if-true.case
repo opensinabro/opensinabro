@@ -1,0 +1,26 @@
+근거: 미확인 | 원문: 2줄 | 의미론: 22줄 | 렌더링: 1줄 | 조건이 참이면 내용이 보임
+{{{#!if 1
+보임}}}
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Conditional(
+                    Conditional {
+                        expression: "1",
+                        blocks: [
+                            Paragraph(
+                                [
+                                    Text(
+                                        "보임",
+                                    ),
+                                ],
+                            ),
+                        ],
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph">보임</div>

@@ -1,0 +1,14 @@
+근거: 미확인 | 원문: 1줄 | 의미론: 11줄 | 렌더링: 1줄 | 인자 괄호가 닫히지 않음
+[age(2000-01-01
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Text(
+                    "[age(2000-01-01",
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph">[age(2000-01-01</div>

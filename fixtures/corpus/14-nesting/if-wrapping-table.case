@@ -1,0 +1,51 @@
+근거: 미확인 | 원문: 3줄 | 의미론: 44줄 | 렌더링: 3줄 | #!if 안의 표 — 이쪽은 Blocks로 보존됨(색상 그룹과 동작이 다름)
+{{{#!if 1
+|| 표 ||
+}}}
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Conditional(
+                    Conditional {
+                        expression: "1",
+                        blocks: [
+                            Table(
+                                Table {
+                                    caption: None,
+                                    rows: [
+                                        TableRow {
+                                            cells: [
+                                                TableCell {
+                                                    column_span: None,
+                                                    row_span: None,
+                                                    horizontal_alignment: Some(
+                                                        Center,
+                                                    ),
+                                                    vertical_alignment: None,
+                                                    attributes: [],
+                                                    blocks: [
+                                                        Paragraph(
+                                                            [
+                                                                Text(
+                                                                    "표",
+                                                                ),
+                                                            ],
+                                                        ),
+                                                    ],
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                            ),
+                        ],
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><div class="wiki-table-wrap"><table class="wiki-table"><tbody><tr class="wiki-table-tr"><td style="text-align: center;"><div class="wiki-paragraph">표</div>
+</td></tr></tbody></table></div>
+</div>

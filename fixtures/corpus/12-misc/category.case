@@ -1,0 +1,16 @@
+근거: 도움말서술 | 원문: 1줄 | 의미론: 13줄 | 렌더링: 1줄 | 분류
+[[분류:알파위키]]
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Category(
+                    Category {
+                        name: "알파위키",
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-categories">분류: <a href="/w/%EB%B6%84%EB%A5%98%3A%EC%95%8C%ED%8C%8C%EC%9C%84%ED%82%A4">알파위키</a></div>

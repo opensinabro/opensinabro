@@ -1,0 +1,27 @@
+근거: 도움말예제 | 원문: 1줄 | 의미론: 23줄 | 렌더링: 2줄 | 대문자 로마 숫자
+ I. 리스트 1
+Document {
+    blocks: [
+        List(
+            List {
+                kind: UpperRoman,
+                items: [
+                    ListItem {
+                        start_number: None,
+                        blocks: [
+                            Paragraph(
+                                [
+                                    Text(
+                                        "리스트 1",
+                                    ),
+                                ],
+                            ),
+                        ],
+                    },
+                ],
+            },
+        ),
+    ],
+}
+<ol class="wiki-list wiki-list-upper-roman" start="1"><li><div class="wiki-paragraph">리스트 1</div>
+</li></ol>

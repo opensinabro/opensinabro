@@ -1,0 +1,20 @@
+근거: 도움말서술 | 원문: 1줄 | 의미론: 17줄 | 렌더링: 1줄 | #!html
+{{{#!html <span style="background-color: #999">서술할 내용</span>}}}
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Html(
+                    Template(
+                        [
+                            Text(
+                                "<span style=\"background-color: #999\">서술할 내용</span>",
+                            ),
+                        ],
+                    ),
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><span style="background-color: #999">서술할 내용</span></div>

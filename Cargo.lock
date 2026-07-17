@@ -33,6 +33,7 @@ name = "namumark-ir"
 version = "0.1.0"
 dependencies = [
  "namumark-ast",
+ "namumark-text",
 ]
 
 [[package]]
@@ -65,6 +66,16 @@ dependencies = [
 [[package]]
 name = "namumark-text"
 version = "0.1.0"
+
+[[package]]
+name = "parity"
+version = "0.1.0"
+dependencies = [
+ "namumark-ast",
+ "namumark-backend-namuwiki",
+ "namumark-parser",
+ "namumark-render",
+]
 
 [[package]]
 name = "rowan"

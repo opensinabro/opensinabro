@@ -1,0 +1,25 @@
+근거: 도움말예제 | 원문: 1줄 | 의미론: 22줄 | 렌더링: 1줄 | 앵커 삽입
+[anchor(아무개)]
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Macro(
+                    Macro {
+                        name: "anchor",
+                        argument: Some(
+                            Template(
+                                [
+                                    Text(
+                                        "아무개",
+                                    ),
+                                ],
+                            ),
+                        ),
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><a id="아무개"></a></div>

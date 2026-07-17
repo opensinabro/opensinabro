@@ -1,0 +1,28 @@
+근거: 도움말예제 | 원문: 1줄 | 의미론: 25줄 | 렌더링: 1줄 | 삽입한 앵커로 링크
+[[#아무개]]
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Link(
+                    Link {
+                        target: Template(
+                            [],
+                        ),
+                        anchor: Some(
+                            Template(
+                                [
+                                    Text(
+                                        "아무개",
+                                    ),
+                                ],
+                            ),
+                        ),
+                        display: None,
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><a class="wiki-link-internal" href="#%EC%95%84%EB%AC%B4%EA%B0%9C" title="">#아무개</a></div>

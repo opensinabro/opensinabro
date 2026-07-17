@@ -1,0 +1,14 @@
+근거: 미확인 | 원문: 1줄 | 의미론: 11줄 | 렌더링: 1줄 | 닫는 파이프 없는 표 행
+|| 하나 || 둘
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Text(
+                    "|| 하나 || 둘",
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph">|| 하나 || 둘</div>

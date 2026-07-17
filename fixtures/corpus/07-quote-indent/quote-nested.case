@@ -1,0 +1,47 @@
+근거: 도움말예제 | 원문: 3줄 | 의미론: 37줄 | 렌더링: 6줄 | 중첩 인용문
+>인용문1
+>>인용문2
+>>>인용문3
+Document {
+    blocks: [
+        Quote(
+            [
+                Paragraph(
+                    [
+                        Text(
+                            "인용문1",
+                        ),
+                    ],
+                ),
+                Quote(
+                    [
+                        Paragraph(
+                            [
+                                Text(
+                                    "인용문2",
+                                ),
+                            ],
+                        ),
+                        Quote(
+                            [
+                                Paragraph(
+                                    [
+                                        Text(
+                                            "인용문3",
+                                        ),
+                                    ],
+                                ),
+                            ],
+                        ),
+                    ],
+                ),
+            ],
+        ),
+    ],
+}
+<blockquote class="wiki-quote"><div class="wiki-paragraph">인용문1</div>
+<blockquote class="wiki-quote"><div class="wiki-paragraph">인용문2</div>
+<blockquote class="wiki-quote"><div class="wiki-paragraph">인용문3</div>
+</blockquote>
+</blockquote>
+</blockquote>

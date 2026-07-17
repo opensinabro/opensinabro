@@ -1,0 +1,19 @@
+근거: 도움말예제 | 원문: 1줄 | 의미론: 15줄 | 렌더링: 2줄 | 3단계 문단
+=== 문단 3 ===
+Document {
+    blocks: [
+        Heading(
+            Heading {
+                level: 3,
+                folded: false,
+                content: [
+                    Text(
+                        "문단 3",
+                    ),
+                ],
+            },
+        ),
+    ],
+}
+<h3 class="wiki-heading"><a id="s-1" href="#toc">1.</a> <span id="문단 3">문단 3</span></h3>
+<div class="wiki-heading-content"></div>

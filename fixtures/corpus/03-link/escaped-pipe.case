@@ -1,0 +1,24 @@
+근거: 미확인 | 원문: 1줄 | 의미론: 21줄 | 렌더링: 1줄 | \| 는 구분자가 아니라 글자
+[[문서\|표시]]
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Link(
+                    Link {
+                        target: Template(
+                            [
+                                Text(
+                                    "문서|표시",
+                                ),
+                            ],
+                        ),
+                        anchor: None,
+                        display: None,
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><a class="wiki-link-internal not-exist" href="/w/%EB%AC%B8%EC%84%9C%7C%ED%91%9C%EC%8B%9C" rel="nofollow" title="문서|표시">문서|표시</a></div>

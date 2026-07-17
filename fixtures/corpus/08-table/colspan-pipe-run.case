@@ -1,0 +1,60 @@
+근거: 도움말예제 | 원문: 1줄 | 의미론: 55줄 | 렌더링: 3줄 | 파이프 런으로 가로 합치기
+|||| 두칸 |||| 짜리 ||
+Document {
+    blocks: [
+        Table(
+            Table {
+                caption: None,
+                rows: [
+                    TableRow {
+                        cells: [
+                            TableCell {
+                                column_span: Some(
+                                    2,
+                                ),
+                                row_span: None,
+                                horizontal_alignment: Some(
+                                    Center,
+                                ),
+                                vertical_alignment: None,
+                                attributes: [],
+                                blocks: [
+                                    Paragraph(
+                                        [
+                                            Text(
+                                                "두칸",
+                                            ),
+                                        ],
+                                    ),
+                                ],
+                            },
+                            TableCell {
+                                column_span: Some(
+                                    2,
+                                ),
+                                row_span: None,
+                                horizontal_alignment: Some(
+                                    Center,
+                                ),
+                                vertical_alignment: None,
+                                attributes: [],
+                                blocks: [
+                                    Paragraph(
+                                        [
+                                            Text(
+                                                "짜리",
+                                            ),
+                                        ],
+                                    ),
+                                ],
+                            },
+                        ],
+                    },
+                ],
+            },
+        ),
+    ],
+}
+<div class="wiki-table-wrap"><table class="wiki-table"><tbody><tr class="wiki-table-tr"><td colspan="2" style="text-align: center;"><div class="wiki-paragraph">두칸</div>
+</td><td colspan="2" style="text-align: center;"><div class="wiki-paragraph">짜리</div>
+</td></tr></tbody></table></div>

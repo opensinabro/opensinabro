@@ -1,0 +1,19 @@
+근거: 도움말예제 | 원문: 1줄 | 의미론: 15줄 | 렌더링: 2줄 | 도움말: 1단계는 일반적으로 금지
+= 문단 1 =
+Document {
+    blocks: [
+        Heading(
+            Heading {
+                level: 1,
+                folded: false,
+                content: [
+                    Text(
+                        "문단 1",
+                    ),
+                ],
+            },
+        ),
+    ],
+}
+<h1 class="wiki-heading"><a id="s-1" href="#toc">1.</a> <span id="문단 1">문단 1</span></h1>
+<div class="wiki-heading-content"></div>

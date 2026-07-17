@@ -1,0 +1,22 @@
+근거: 도움말예제 | 원문: 1줄 | 의미론: 19줄 | 렌더링: 1줄 | CSS 색상명
+{{{#red 텍스트}}}
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Colored(
+                    ColoredText {
+                        color: "red",
+                        dark_color: None,
+                        content: [
+                            Text(
+                                "텍스트",
+                            ),
+                        ],
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><span style="color:red" data-dark-style="color:red;">텍스트</span></div>

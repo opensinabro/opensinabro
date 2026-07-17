@@ -1,0 +1,19 @@
+근거: 도움말서술 | 원문: 1줄 | 의미론: 15줄 | 렌더링: 2줄 | 도움말: 부등호와 별표를 붙이면 미출력
+>* 붙임
+Document {
+    blocks: [
+        Quote(
+            [
+                Paragraph(
+                    [
+                        Text(
+                            "* 붙임",
+                        ),
+                    ],
+                ),
+            ],
+        ),
+    ],
+}
+<blockquote class="wiki-quote"><div class="wiki-paragraph">* 붙임</div>
+</blockquote>

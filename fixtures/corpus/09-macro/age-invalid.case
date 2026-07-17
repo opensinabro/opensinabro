@@ -1,0 +1,25 @@
+근거: 도움말서술 | 원문: 1줄 | 의미론: 22줄 | 렌더링: 1줄 | 도움말: 유효하지 않은 날짜는 invalid date
+[age(2000-13-01)]
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Macro(
+                    Macro {
+                        name: "age",
+                        argument: Some(
+                            Template(
+                                [
+                                    Text(
+                                        "2000-13-01",
+                                    ),
+                                ],
+                            ),
+                        ),
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph">[age(2000-13-01)]</div>

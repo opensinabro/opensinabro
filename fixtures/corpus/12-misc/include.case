@@ -1,0 +1,25 @@
+근거: 도움말예제 | 원문: 1줄 | 의미론: 22줄 | 렌더링: 1줄 | 틀 호출
+[include(틀:다른 뜻 설명, 설명=이것은 설명입니다.)]
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Macro(
+                    Macro {
+                        name: "include",
+                        argument: Some(
+                            Template(
+                                [
+                                    Text(
+                                        "틀:다른 뜻 설명, 설명=이것은 설명입니다.",
+                                    ),
+                                ],
+                            ),
+                        ),
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph">다른 뜻: 이것은 설명입니다.</div>

@@ -3,1048 +3,863 @@
 Paragraph: Macro(include "틀:역대 KBO 한국시리즈 목록")
 Table:
   Row:
-    Cell span=5x1 align=Center attrs=[Table/align=center Table/width=100% Table/bordercolor=#151b54 Cell/bgcolor=#ffffff,#191919]:
+    Cell span=5x1 align=Some(Center) attrs=[Table/align=center Table/width=100% Table/bordercolor=#151b54 Cell/bgcolor=#ffffff,#191919]:
       Paragraph: Image("external/41.media.tumblr.com/tumblr_o4a4woaUar1sqk8veo6_r1_400.png" width=200) Macro(br) " " Bold(Colored(#151b54,#abb1ea | "역대") " " Link("KBO 한국시리즈" | Colored(#151b54,#abb1ea | "KBO 한국시리즈")))
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/width=30%]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/width=30%]:
       Paragraph: Link("1992년 한국시리즈" | "1992년") " " Macro(br) " " Link("롯데 자이언츠")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Sized(+1 | "←")
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#191919 Cell/width=30%]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#191919 Cell/width=30%]:
       Paragraph: Bold("1993년") " " Macro(br) " " Bold(Link("해태 타이거즈"))
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Sized(+1 | "→")
-    Cell span=1x1 align=Center attrs=[Cell/width=30%]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/width=30%]:
       Paragraph: Link("1994년 한국시리즈" | "1994년") " " Macro(br) " " Link("LG 트윈스")
+Paragraph: 
 Table:
   Row:
-    Cell span=2x1 align=Center attrs=[Table/align=center Table/bordercolor=#f01e23 Table/bgcolor=#ffffff,#191919]:
-      WikiStyle style=Some("margin: -5px -10px") dark_style=None:
-        Paragraph: Image("attachment/93VVV.jpg" width=100%)
+    Cell span=2x1 align=Some(Center) attrs=[Table/align=center Table/bordercolor=#f01e23 Table/bgcolor=#ffffff,#191919]:
+      Paragraph: WikiStyle(style=Some("margin: -5px -10px") dark=None | Paragraph: Image("attachment/93VVV.jpg" width=100%))
   Row:
-    Cell span=2x1 align=Center:
+    Cell span=2x1 align=Some(Center):
       Paragraph: Image("Ii0lZeU.png" width=150)
   Row:
-    Cell span=2x1 align=Center attrs=[Cell/bgcolor=#000000]:
+    Cell span=2x1 align=Some(Center) attrs=[Cell/bgcolor=#000000]:
       Paragraph: Bold(Colored(#ff0000 | "1993년 한국시리즈 우승팀"))
   Row:
-    Cell span=2x1 align=Center attrs=[Cell/bgcolor=#f01e23]:
+    Cell span=2x1 align=Some(Center) attrs=[Cell/bgcolor=#f01e23]:
       Paragraph: Link("해태 타이거즈" | Bold(Colored(#ffffff | "해태 타이거즈")))
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold(Colored(#f01e23 | "MVP"))
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Link("이종범" | Bold(Colored(#f01e23 | "이종범")))
+Paragraph: 
 Quote:
   Paragraph: Bold("이종범에게 갑니다. 이종범 잡아서 1루에 깊숙하게 아웃~! 해태 타이거즈! 한국시리즈 우승, 일곱 번째 우승입니다!")
   HorizontalRule
   Paragraph: "1993년 한국시리즈 7차전 당시 " Link("KBS") " 정도영 캐스터"
-Paragraph: Macro(목차)
-Paragraph: Macro(youtube "sfU9LAlGsdM")
+Paragraph: <br> Macro(목차) <br> <br> Macro(youtube "sfU9LAlGsdM") <br>
 Heading level=2 folded=false: "개요"
 Table:
   Row:
-    Cell span=2x1 align=Center attrs=[Table/width=100% Table/bordercolor=#edd36c Cell/bgcolor=#00143f,#0b1966]:
+    Cell span=2x1 align=Some(Center) attrs=[Table/width=100% Table/bordercolor=#edd36c Cell/bgcolor=#00143f,#0b1966]:
       Paragraph: Sized(+2 | Colored(#edd36c | Bold("1993")) " " Colored(#edd36c | Bold("프로야구")) " " Colored(#ffffff | Bold("한국시리즈")))
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/width=500 Cell/height=150 Cell/bgcolor=#007FFF]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/width=500 Cell/height=150 Cell/bgcolor=#007FFF]:
       Paragraph: Image("samsung_lions_logo_1989.png" width=140)
-    Cell span=1x1 align=Center attrs=[Cell/width=500 Cell/height=150 Cell/bgcolor=#f01e23]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/width=500 Cell/height=150 Cell/bgcolor=#f01e23]:
       Paragraph: Image("1411__haitai_tigers_cap-1982.png" width=110)
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/width=500 Cell/bgcolor=#007FFF]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/width=500 Cell/bgcolor=#007FFF]:
       Paragraph: Link("삼성 라이온즈" | Colored(#ffffff | Sized(+1 | Bold("삼성 라이온즈"))))
-    Cell span=1x1 align=Center attrs=[Cell/width=500 Cell/bgcolor=#f01e23]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/width=500 Cell/bgcolor=#f01e23]:
       Paragraph: Link("해태 타이거즈" | Colored(#000000 | Sized(+1 | Bold("해태 타이거즈"))))
-Paragraph: "1993시즌은 " Link("KBO 리그") "에서 중요한 년도로 기억이 되었는데 그 이유는 " Link("선동열") ", " Link("최동원") ", " Link("김시진") ", " Link("이만수") ", " Link("김성한") ", " Link("장효조") " 등이 이끌던 80년대 스타들의 시대가 끝나고 " Link("이종범") ", " Link("양준혁") ", " Link("구대성") ", " Link("이상훈(좌완투수)" | "이상훈") ", " Link("이대진") ", " Link("박충식") " 등 1990년대 프로야구를 이끌어나간 신예 스타들이 데뷔한 시기였기 때문이다. 특히 1990년대 초까지 명문구단이었던 " Link("해태 타이거즈") "와 " Link("삼성 라이온즈") "에서는 기존의 스타들을 대체할 새로운 신인들이 대거 등장하였고, 공교롭게도 이 두 구단이 " Link("한국시리즈") "에서 자웅을 겨루게 되었다. "
-Paragraph: "해태가 구단 역대 최고 성적인 81승 3무 42패(승률 .655)를 기록했지만 그해 패넌트레이스에서 삼성에게만은 유독 7승 11패로 약했다. 그래서 코시는 재미있는 승부가 예측되었다."
-Paragraph: "특히 1993년 한국시리즈는 3차전 " Link("박충식") "의 15이닝 역투와 더불어 7차전까지 가는 접전으로 많은 야구팬들의 기억에 남게 되었다. 덕분에 " Link("2009년 한국시리즈" | "2009년") " 이전 " Link("해태 타이거즈") " 시절 유일하게 7차전까지 가게 만든 팀이 이 해의 삼성 라이온즈였다. "
-Paragraph: "삼성으로서는 많이 아까웠던 시리즈. " Link("2002년 한국시리즈" | "2002년의 코시 첫 우승") " 이전 가장 우승에 근접했던 시리즈 중 하나였으나," Footnote(| "다른 하나는 1984년 롯데와의 한국시리즈") " 해태에게 또다시 패하고 6번째 준우승에 그쳤다. 그리고 이 해를 마지막으로 삼성의 1차 전성기가 끝나고, 80년대를 이끌었던 주축 멤버들의 노쇠화와 맞물려 " Link("556" | "3년동안 가을야구 진출에 실패하는 암흑기") "를 맞이하게 되었다. 이후 삼성이 한국시리즈에 다시 진출한 건 " Link("2001년 한국시리즈" | "그로부터 8년이나 지난 뒤") "였다."
-Paragraph: "특히 우수한 신인이 쏟아져 나왔던 이 해에 " Link("신인왕") " 경쟁이 매우 치열하였고 결국 삼성의 " Link("양준혁") "이 해태 " Link("이종범") "과의 경쟁 끝에 우수한 타격 성적으로 " Link("신인왕") " 타이틀을 획득했다. 이종범은 대신 한국시리즈에서의 맹활약으로 팀의 우승에 기여했고 한국시리즈 MVP를 차지했다."
-Paragraph: "당시 양팀의 감독이 과거 " Link("한일은행 야구단" | "한 팀") "에서 한 때 동료 선수이자 감독과 선수 사이의 관계를 지냈던 때가 있다." Footnote(| Link("김응용") "이 " Link("한일은행 야구단") "에서 선수 말년 시절을 보낼 때 " Link("대구상원고등학교 야구부" | "대구상고") "를 막 졸업한 " Link("우용득") "이 막내로 들어왔고 약 2년여간 최고참 선수와 막내 선수로 한솥밥을 먹었다. 그리고 1973년 " Link("김응용") "이 감독으로 승진하자 감독과 선수 관계로 지냈다.")
+Paragraph: "1993시즌은 " Link("KBO 리그") "에서 중요한 년도로 기억이 되었는데 그 이유는 " Link("선동열") ", " Link("최동원") ", " Link("김시진") ", " Link("이만수") ", " Link("김성한") ", " Link("장효조") " 등이 이끌던 80년대 스타들의 시대가 끝나고 " Link("이종범") ", " Link("양준혁") ", " Link("구대성") ", " Link("이상훈(좌완투수)" | "이상훈") ", " Link("이대진") ", " Link("박충식") " 등 1990년대 프로야구를 이끌어나간 신예 스타들이 데뷔한 시기였기 때문이다. 특히 1990년대 초까지 명문구단이었던 " Link("해태 타이거즈") "와 " Link("삼성 라이온즈") "에서는 기존의 스타들을 대체할 새로운 신인들이 대거 등장하였고, 공교롭게도 이 두 구단이 " Link("한국시리즈") "에서 자웅을 겨루게 되었다. " <br> <br> "해태가 구단 역대 최고 성적인 81승 3무 42패(승률 .655)를 기록했지만 그해 패넌트레이스에서 삼성에게만은 유독 7승 11패로 약했다. 그래서 코시는 재미있는 승부가 예측되었다." <br> <br> "특히 1993년 한국시리즈는 3차전 " Link("박충식") "의 15이닝 역투와 더불어 7차전까지 가는 접전으로 많은 야구팬들의 기억에 남게 되었다. 덕분에 " Link("2009년 한국시리즈" | "2009년") " 이전 " Link("해태 타이거즈") " 시절 유일하게 7차전까지 가게 만든 팀이 이 해의 삼성 라이온즈였다. " <br> <br> "삼성으로서는 많이 아까웠던 시리즈. " Link("2002년 한국시리즈" | "2002년의 코시 첫 우승") " 이전 가장 우승에 근접했던 시리즈 중 하나였으나," Footnote(| "다른 하나는 1984년 롯데와의 한국시리즈") " 해태에게 또다시 패하고 6번째 준우승에 그쳤다. 그리고 이 해를 마지막으로 삼성의 1차 전성기가 끝나고, 80년대를 이끌었던 주축 멤버들의 노쇠화와 맞물려 " Link("556" | "3년동안 가을야구 진출에 실패하는 암흑기") "를 맞이하게 되었다. 이후 삼성이 한국시리즈에 다시 진출한 건 " Link("2001년 한국시리즈" | "그로부터 8년이나 지난 뒤") "였다." <br> <br> "특히 우수한 신인이 쏟아져 나왔던 이 해에 " Link("신인왕") " 경쟁이 매우 치열하였고 결국 삼성의 " Link("양준혁") "이 해태 " Link("이종범") "과의 경쟁 끝에 우수한 타격 성적으로 " Link("신인왕") " 타이틀을 획득했다. 이종범은 대신 한국시리즈에서의 맹활약으로 팀의 우승에 기여했고 한국시리즈 MVP를 차지했다." <br> <br> "당시 양팀의 감독이 과거 " Link("한일은행 야구단" | "한 팀") "에서 한 때 동료 선수이자 감독과 선수 사이의 관계를 지냈던 때가 있다." Footnote(| Link("김응용") "이 " Link("한일은행 야구단") "에서 선수 말년 시절을 보낼 때 " Link("대구상원고등학교 야구부" | "대구상고") "를 막 졸업한 " Link("우용득") "이 막내로 들어왔고 약 2년여간 최고참 선수와 막내 선수로 한솥밥을 먹었다. 그리고 1973년 " Link("김응용") "이 감독으로 승진하자 감독과 선수 관계로 지냈다.") <br>
 Heading level=2 folded=false: "시리즈 전 분위기"
 List kind=Unordered:
   Item:
     Paragraph: "해태 타이거즈"
-Paragraph: "93시즌 " Link("해태 타이거즈") "는 91년의 포스를 완전히 되찾은 막강 구단이 되어 돌아왔다. " Link("선동열") "의 성공적 재활과 마무리 투수로서 맹활약이 가장 큰 요소 중 하나였다. 17승을 올린 " Link("조계현") "의 활약과 신인 " Link("이대진") "의 화려한 데뷔, 여타 투수들의 활약으로 투수진은 지금까지도 깨지지 않는 10승 투수 6명의 금자탑을 세웠다. 타선의 힘은 주전들의 노쇠화로 약해졌지만, 신인 이종범과 3루수로 전향한 홍현우가 92년에 비해서는 부족하지만 어느정도 맹활약하면서 어느 정도 부족함을 메워주었다. 그러면서 1993년도 " Link("해태타이거즈") "는 당시 구단 역대 최다인 81승을 거두면서 2위인 삼성과의 게임 차를 7게임차로 벌렸고, 정규시즌 1위로 무난하게 " Link("한국시리즈") "로 직행할 수 있었다. 재미있는 사실은 그 해 삼성이 단독 선두로 오른 적이 개막 2연전을 제외하면 딱 한번인데, 그때가 4월 20~21일 대구에서 해태를 2번 연속 꺾고 이루어졌다. 그런데 다음날 해태는 삼성에게 설욕하며 삼성과 7승 4패로 공동선두를 이루었고," Footnote(| "그 경기가 " Link("이호성") "이 연장에서 홈런을 치며 " Link("오봉옥") "의 무패 행진을 깬 날이다. 오봉옥은 92년 13승 무패를 거두며 " Link("김성근") "의 황태자로 등극한 상태였다.") " 그 이후 여세를 몰아 OB, 태평양, LG를 상대로 8연승을 달리며(잠실에서만 5연승) 한번도 다른 팀에게 추격을 허용하지 않았다." Footnote(| "태평양을 상대론 무려 17승 1패로 압살했다.")
-Paragraph: "구체적으로 전력을 살펴보면 투수진에서는 92년도 부상으로 인해 공백기에 있었던 " Link("선동열") "이 돌아와 마무리 투수로 나와서 10승 3패 31세이브에 당시 규정 이닝이던 126이닝을 채우며 평균자책점 " Bold("0.78") "을 기록했다. " Link("조계현") "이 17승으로 다승왕을 차지하면서 새로운 선발진 에이스로 부상했다. 마당쇠 " Link("송유석") "이 선발과 불펜을 가리지 않고 등판하여 11승을 기록했고, 신인 " Link("이대진") "이 데뷔하여 특유의 강속구를 앞세워 10승을 채웠으며, " Link("이강철") ", " Link("김정수(1962)" | "김정수") "도 10승을 달성하여 이 해 10승 투수가 6명이 배출되는 등 해태 투수진은 최고의 한 해를 보냈다. 10승 투수 6명 배출은 지금까지 한국프로야구에서 깨지지 않는 기록으로 남아 있다. 그 전해인 92년 10승 투수 5명(이강철, 김정수, 조계현, 신동수, 문희수)을 기록한 것에서 한층 더 진일보한 것. 흠좀무한 건 당시 팀 방어율이 2.92였음에도 불구하고 1위가 아닌 2위라는 것이다. 1위는 2.89를 기록한 OB다." Footnote(| "당시 마무리투수 김경원이 129이닝으로 규정이닝을 채우며 선동열에 이어 " Bold("1.11") "로 방어율 2위를 기록했다.") " 3위는 2.95를 기록한 삼성이다. 명불허전 역대급 투고타저의 해였다."
-Paragraph: "타선의 힘은 그 전 해인 92년보다 많이 하락했다. 당시 팀타율이 .251로 4위에 그쳤다. 1위는 .271의 삼성. 팀 홈런도 95개로 2위에 그쳤으며 1위 삼성과는 무려 38개 차이였다(삼성은 당시 133개). " Link("이순철") ", " Link("장채근") ", " Link("한대화") ", " Link("김성한" #s-1) "이 약속이나 한 듯 집단 노쇠화에 걸리며 그들 4명이 자그마치 그 전해에 쳤던 홈런보다 45홈런을 까먹었는데 그게 93년 95홈런, 92년 138홈런 -43을 그대로 차지했던 것이다. 부진했던 자리를 " Bold(Link("이종범")) "이란 걸출한 신인이 등장하여 1993시즌의 해태를 아니, 그 이후의 타이거즈를 책임지게 되었다. 3할타자나 20홈런타자가 부재했을 만큼 91, 92시즌에 비해 타격이 빈약했지만 어차피 93시즌이 손에 꼽는 투고타저시대였고," Footnote(| Link("쌍방울") "과 " Link("태평양") "은 그 짧은 중앙 110m짜리 홈구장을 쓰는 팀이었지만 팀홈런은 46개, 35개로 빈약하기 그지없는 공격력을 보였다.") Footnote(| "해태의 공격력이 가장 강했던 시즌은 1992년이었다. 단일팀 최초로 700득점을 돌파했던 시즌, 93시즌은 팀득점이 전해에 비해 188점이나 줄었다. 그러나 93시즌이 워낙 투고타저, 득점력 자체가 삼성에 이어 2위였다.") " 91시즌 이후 2년만에 한국시리즈에 진출한 해태는 이번에 7번째 우승을 노리는 해였다."
+Paragraph: "93시즌 " Link("해태 타이거즈") "는 91년의 포스를 완전히 되찾은 막강 구단이 되어 돌아왔다. " Link("선동열") "의 성공적 재활과 마무리 투수로서 맹활약이 가장 큰 요소 중 하나였다. 17승을 올린 " Link("조계현") "의 활약과 신인 " Link("이대진") "의 화려한 데뷔, 여타 투수들의 활약으로 투수진은 지금까지도 깨지지 않는 10승 투수 6명의 금자탑을 세웠다. 타선의 힘은 주전들의 노쇠화로 약해졌지만, 신인 이종범과 3루수로 전향한 홍현우가 92년에 비해서는 부족하지만 어느정도 맹활약하면서 어느 정도 부족함을 메워주었다. 그러면서 1993년도 " Link("해태타이거즈") "는 당시 구단 역대 최다인 81승을 거두면서 2위인 삼성과의 게임 차를 7게임차로 벌렸고, 정규시즌 1위로 무난하게 " Link("한국시리즈") "로 직행할 수 있었다. 재미있는 사실은 그 해 삼성이 단독 선두로 오른 적이 개막 2연전을 제외하면 딱 한번인데, 그때가 4월 20~21일 대구에서 해태를 2번 연속 꺾고 이루어졌다. 그런데 다음날 해태는 삼성에게 설욕하며 삼성과 7승 4패로 공동선두를 이루었고," Footnote(| "그 경기가 " Link("이호성") "이 연장에서 홈런을 치며 " Link("오봉옥") "의 무패 행진을 깬 날이다. 오봉옥은 92년 13승 무패를 거두며 " Link("김성근") "의 황태자로 등극한 상태였다.") " 그 이후 여세를 몰아 OB, 태평양, LG를 상대로 8연승을 달리며(잠실에서만 5연승) 한번도 다른 팀에게 추격을 허용하지 않았다." Footnote(| "태평양을 상대론 무려 17승 1패로 압살했다.") <br> <br> "구체적으로 전력을 살펴보면 투수진에서는 92년도 부상으로 인해 공백기에 있었던 " Link("선동열") "이 돌아와 마무리 투수로 나와서 10승 3패 31세이브에 당시 규정 이닝이던 126이닝을 채우며 평균자책점 " Bold("0.78") "을 기록했다. " Link("조계현") "이 17승으로 다승왕을 차지하면서 새로운 선발진 에이스로 부상했다. 마당쇠 " Link("송유석") "이 선발과 불펜을 가리지 않고 등판하여 11승을 기록했고, 신인 " Link("이대진") "이 데뷔하여 특유의 강속구를 앞세워 10승을 채웠으며, " Link("이강철") ", " Link("김정수(1962)" | "김정수") "도 10승을 달성하여 이 해 10승 투수가 6명이 배출되는 등 해태 투수진은 최고의 한 해를 보냈다. 10승 투수 6명 배출은 지금까지 한국프로야구에서 깨지지 않는 기록으로 남아 있다. 그 전해인 92년 10승 투수 5명(이강철, 김정수, 조계현, 신동수, 문희수)을 기록한 것에서 한층 더 진일보한 것. 흠좀무한 건 당시 팀 방어율이 2.92였음에도 불구하고 1위가 아닌 2위라는 것이다. 1위는 2.89를 기록한 OB다." Footnote(| "당시 마무리투수 김경원이 129이닝으로 규정이닝을 채우며 선동열에 이어 " Bold("1.11") "로 방어율 2위를 기록했다.") " 3위는 2.95를 기록한 삼성이다. 명불허전 역대급 투고타저의 해였다." <br> <br> "타선의 힘은 그 전 해인 92년보다 많이 하락했다. 당시 팀타율이 .251로 4위에 그쳤다. 1위는 .271의 삼성. 팀 홈런도 95개로 2위에 그쳤으며 1위 삼성과는 무려 38개 차이였다(삼성은 당시 133개). " Link("이순철") ", " Link("장채근") ", " Link("한대화") ", " Link("김성한" #s-1) "이 약속이나 한 듯 집단 노쇠화에 걸리며 그들 4명이 자그마치 그 전해에 쳤던 홈런보다 45홈런을 까먹었는데 그게 93년 95홈런, 92년 138홈런 -43을 그대로 차지했던 것이다. 부진했던 자리를 " Bold(Link("이종범")) "이란 걸출한 신인이 등장하여 1993시즌의 해태를 아니, 그 이후의 타이거즈를 책임지게 되었다. 3할타자나 20홈런타자가 부재했을 만큼 91, 92시즌에 비해 타격이 빈약했지만 어차피 93시즌이 손에 꼽는 투고타저시대였고," Footnote(| Link("쌍방울") "과 " Link("태평양") "은 그 짧은 중앙 110m짜리 홈구장을 쓰는 팀이었지만 팀홈런은 46개, 35개로 빈약하기 그지없는 공격력을 보였다.") Footnote(| "해태의 공격력이 가장 강했던 시즌은 1992년이었다. 단일팀 최초로 700득점을 돌파했던 시즌, 93시즌은 팀득점이 전해에 비해 188점이나 줄었다. 그러나 93시즌이 워낙 투고타저, 득점력 자체가 삼성에 이어 2위였다.") " 91시즌 이후 2년만에 한국시리즈에 진출한 해태는 이번에 7번째 우승을 노리는 해였다." <br>
 List kind=Unordered:
   Item:
     Paragraph: "삼성 라이온즈"
-Paragraph: "1993시즌은 삼성 라이온즈에게도 중요한 시즌이 되었다. 일단 기존의 " Link("이만수") ", " Link("장효조") ", " Link("허규옥") ", " Link("김시진") " 등의 팀 초창기 스타들이 사라지고" Footnote(| "장효조와 김시진은 롯데에서 92년 은퇴. 허규옥은 92년 삼성에서 은퇴. 유일하게 이만수가 삼성에 살아남았었다. 그러나 노쇠화 등으로 포수 수비가 불가능한지라, 지명타자, 대타로밖에 못 나왔다. 여담으로 7차전 마지막 타자가 대타로 나와 유격수 땅볼로 물러난 이만수.") " 80년대 중후반 데뷔한 " Link("류중일") ", " Link("성준(야구선수)" | "성준") ", " Link("김성래") ", " Link("이종두") " 등 2세대와 그 이후 데뷔한 " Link("강기웅") ", " Link("동봉철") ", " Link("김상엽") ", " Link("김태한") " 등의 신예, 그리고 신인 " Link("양준혁") "과 " Link("박충식") "이 이끈 한해였다. 무엇보다 무릎 부상을 등에 업고 홈런왕과 시즌 MVP를 차지한 " Link("김성래") "의 투혼과 " Link("박충식") "의 한국시리즈 3차전 15회 역투 등…. 특히나 삼성은 1986시즌 이후로 " Link("1986년 한국시리즈" | "두") " " Link("1987년 한국시리즈" | "번") "이나 해태에게 가로막혀 준우승에 머물렀기 때문에 이번의 막강한 전력으로 6번째 한국시리즈 진출에서 우승을 노리고 있었다. 과연 매번 준우승에 머무른 삼성 라이온즈가 '한국시리즈 징크스'를 깰 수 있는지도 큰 관심거리였다. "
-Paragraph: "무엇보다 타선이 정규시즌 해태 투수진한테 유독 강했다. 삼성은 해태를 상대로 105득점을 올리며 쌍방울(108득점)에 이어 2번째로 많은 득점을 올렸다. 말이 105득점이지 투고타저가 심한 그해 특성상 그해 해태의 실점은 420실점이었다. 즉 실점 중 1/4이 삼성을 상대로 내준 것이며, 말 그대로 2팀한테 내줄 실점을 삼성 한팀에게만 내준 셈이다. 게다가 그해 8월 7일 대구에서 삼성은 해태를 상대로 9개의 홈런을 쳐내며" Footnote(| "이것은 " Link("삼성 라이온즈/1997년/5월/4일" | "97년 삼성이 LG를 27:5로 이길 때") " 9홈런을 치며 타이를 기록했으며, 00년의 현대가 4월5일 대전 개막전에서 한화를 상대로 10홈런을 쳐내며 깨고 만다.") " 15:2로 해태를 떡실신 시켰다. 그해에 해태를 상대로 32개의 홈런을 쳐냈다. 이것은 당시 시즌 특정 팀 상대 최다 홈런 기록이었다. 체감이 안되는가? 해태가 그해 피홈런수가 76개였다. 그중 " Bold("원정경기 피홈런이 36개였는데 22개가 대구에서 허용한 것이었다.") " 삼성을 한국시리즈에서 홈런포로 찍어누르던 해태 팬들의 입장에서는 격세지감. (나머지? 전주 6개 청주 3개" Footnote(| "그해 빙그레는 태풍으로 대전구장의 조명탑이 휘어지는 사고를 당해서 6월부터 8월 중순까지 청주에서만 홈경기를 치뤘다. 즉 해태 vs 빙그레 빙그레홈의 9경기중 6경기가 청주에서 열렸다.") " 잠실 3개 사직 2개 인천에서는 한개도 허용하지 않았다."
-Paragraph: "앞의 내용은 차치하더라도 삼성은 투고타저 속에서도 유독 133팀 홈런으로 홀로 불방망이를 과시했다." Footnote(| "이 해 삼성의 팀 타격 성적이 이상하리만치 97년도의 해태와 닮았다. 133홈런으로 같고, 득점도 이해 삼성은 615점, 97해태는 616점. 20홈런 이상 타자인 " Link("김성래") ", " Link("양준혁") "과 " Link("이종범") ", " Link("홍현우") " 둘이 타선을 이끌었다는 것도. 다만 리그 성향은 97년 쪽이 훨씬 타자 친화적이였다.") Footnote(| "93년도 삼성의 타선은 wRC+(조정 득점 기여도)를 통해 역대 팀들과 비교하면 스탯티즈 기준으로 87년도 삼성에 이은 2위에 해당하는 강타선이였다. 다만 득점만을 놓고 비교하면 투고타저의 영향으로 평범했다. 사실 그럴 수 밖에 없는 것이 역대 리그 OPS를 비교해 보면 0.668으로 역대 최하위에 해당하는 압도적인 투고타저였다.") " " Link("프로야구 매니저") "나 " Link("마구마구") "에서도 화려한 전력으로 구현되었다. 프야메에서는 10코 3명, 마구마구에서는 무려 8레어의 팀으로.. 패넌트레이스의 승률을 떠나 개인의 성적은 정말 좋았던 팀이다. "
+Paragraph: "1993시즌은 삼성 라이온즈에게도 중요한 시즌이 되었다. 일단 기존의 " Link("이만수") ", " Link("장효조") ", " Link("허규옥") ", " Link("김시진") " 등의 팀 초창기 스타들이 사라지고" Footnote(| "장효조와 김시진은 롯데에서 92년 은퇴. 허규옥은 92년 삼성에서 은퇴. 유일하게 이만수가 삼성에 살아남았었다. 그러나 노쇠화 등으로 포수 수비가 불가능한지라, 지명타자, 대타로밖에 못 나왔다. 여담으로 7차전 마지막 타자가 대타로 나와 유격수 땅볼로 물러난 이만수.") " 80년대 중후반 데뷔한 " Link("류중일") ", " Link("성준(야구선수)" | "성준") ", " Link("김성래") ", " Link("이종두") " 등 2세대와 그 이후 데뷔한 " Link("강기웅") ", " Link("동봉철") ", " Link("김상엽") ", " Link("김태한") " 등의 신예, 그리고 신인 " Link("양준혁") "과 " Link("박충식") "이 이끈 한해였다. 무엇보다 무릎 부상을 등에 업고 홈런왕과 시즌 MVP를 차지한 " Link("김성래") "의 투혼과 " Link("박충식") "의 한국시리즈 3차전 15회 역투 등…. 특히나 삼성은 1986시즌 이후로 " Link("1986년 한국시리즈" | "두") " " Link("1987년 한국시리즈" | "번") "이나 해태에게 가로막혀 준우승에 머물렀기 때문에 이번의 막강한 전력으로 6번째 한국시리즈 진출에서 우승을 노리고 있었다. 과연 매번 준우승에 머무른 삼성 라이온즈가 '한국시리즈 징크스'를 깰 수 있는지도 큰 관심거리였다. " <br> <br> "무엇보다 타선이 정규시즌 해태 투수진한테 유독 강했다. 삼성은 해태를 상대로 105득점을 올리며 쌍방울(108득점)에 이어 2번째로 많은 득점을 올렸다. 말이 105득점이지 투고타저가 심한 그해 특성상 그해 해태의 실점은 420실점이었다. 즉 실점 중 1/4이 삼성을 상대로 내준 것이며, 말 그대로 2팀한테 내줄 실점을 삼성 한팀에게만 내준 셈이다. 게다가 그해 8월 7일 대구에서 삼성은 해태를 상대로 9개의 홈런을 쳐내며" Footnote(| "이것은 " Link("삼성 라이온즈/1997년/5월/4일" | "97년 삼성이 LG를 27:5로 이길 때") " 9홈런을 치며 타이를 기록했으며, 00년의 현대가 4월5일 대전 개막전에서 한화를 상대로 10홈런을 쳐내며 깨고 만다.") " 15:2로 해태를 떡실신 시켰다. 그해에 해태를 상대로 32개의 홈런을 쳐냈다. 이것은 당시 시즌 특정 팀 상대 최다 홈런 기록이었다. 체감이 안되는가? 해태가 그해 피홈런수가 76개였다. 그중 " Bold("원정경기 피홈런이 36개였는데 22개가 대구에서 허용한 것이었다.") " 삼성을 한국시리즈에서 홈런포로 찍어누르던 해태 팬들의 입장에서는 격세지감. (나머지? 전주 6개 청주 3개" Footnote(| "그해 빙그레는 태풍으로 대전구장의 조명탑이 휘어지는 사고를 당해서 6월부터 8월 중순까지 청주에서만 홈경기를 치뤘다. 즉 해태 vs 빙그레 빙그레홈의 9경기중 6경기가 청주에서 열렸다.") " 잠실 3개 사직 2개 인천에서는 한개도 허용하지 않았다." <br> <br> "앞의 내용은 차치하더라도 삼성은 투고타저 속에서도 유독 133팀 홈런으로 홀로 불방망이를 과시했다." Footnote(| "이 해 삼성의 팀 타격 성적이 이상하리만치 97년도의 해태와 닮았다. 133홈런으로 같고, 득점도 이해 삼성은 615점, 97해태는 616점. 20홈런 이상 타자인 " Link("김성래") ", " Link("양준혁") "과 " Link("이종범") ", " Link("홍현우") " 둘이 타선을 이끌었다는 것도. 다만 리그 성향은 97년 쪽이 훨씬 타자 친화적이였다.") Footnote(| "93년도 삼성의 타선은 wRC+(조정 득점 기여도)를 통해 역대 팀들과 비교하면 스탯티즈 기준으로 87년도 삼성에 이은 2위에 해당하는 강타선이였다. 다만 득점만을 놓고 비교하면 투고타저의 영향으로 평범했다. 사실 그럴 수 밖에 없는 것이 역대 리그 OPS를 비교해 보면 0.668으로 역대 최하위에 해당하는 압도적인 투고타저였다.") " " Link("프로야구 매니저") "나 " Link("마구마구") "에서도 화려한 전력으로 구현되었다. 프야메에서는 10코 3명, 마구마구에서는 무려 8레어의 팀으로.. 패넌트레이스의 승률을 떠나 개인의 성적은 정말 좋았던 팀이다. " <br>
 Heading level=2 folded=false: "출전 선수 명단"
 Heading level=3 folded=false: Link("해태 타이거즈")
 Table:
   Row:
-    Cell span=3x1 align=Center attrs=[Table/width=80% Cell/bgcolor=#f01e23]:
+    Cell span=3x1 align=Some(Center) attrs=[Table/width=80% Cell/bgcolor=#f01e23]:
       Paragraph: Bold(Colored(#000000 | "해태 타이거즈 1993년 한국시리즈 엔트리"))
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/width=10% Column/bgcolor=#000000]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/width=10% Column { columns: 1 }/bgcolor=#000000]:
       Paragraph: Bold(Colored(#f01e23 | "감독"))
-    Cell span=1x1 align=Center attrs=[Cell/width=10%]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/width=10%]:
       Paragraph: "1명"
-    Cell span=1x1 align=Center attrs=[Cell/width=80%]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/width=80%]:
       Paragraph: Link("김응용")
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/width=10%]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/width=10%]:
       Paragraph: Bold(Colored(#f01e23 | "코치"))
-    Cell span=1x1 align=Center attrs=[Cell/width=10%]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/width=10%]:
       Paragraph: "5명"
-    Cell span=1x1 align=Center attrs=[Cell/width=80%]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/width=80%]:
       Paragraph: Link("유남호") ", " Link("김봉연") ", " Link("서정환") ", " Link("차영화") ", " Link("이상윤(야구선수)" | "이상윤")
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/width=10%]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/width=10%]:
       Paragraph: Bold(Colored(#f01e23 | "투수"))
-    Cell span=1x1 align=Center attrs=[Cell/width=10%]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/width=10%]:
       Paragraph: "9명"
-    Cell span=1x1 align=Center attrs=[Cell/width=80%]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/width=80%]:
       Paragraph: Link("선동열") ", " Link("김정수(1962)" | "김정수") ", " Link("문희수") ", " Link("조계현") ", " Link("이강철") ", " Link("신동수(1966)" | "신동수") ", " Link("송유석") ", " Link("이대진") ", " Link("강태원")
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/width=10%]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/width=10%]:
       Paragraph: Bold(Colored(#f01e23 | "포수"))
-    Cell span=1x1 align=Center attrs=[Cell/width=10%]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/width=10%]:
       Paragraph: "2명"
-    Cell span=1x1 align=Center attrs=[Cell/width=80%]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/width=80%]:
       Paragraph: Link("장채근") ", " Link("정회열")
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/width=10%]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/width=10%]:
       Paragraph: Bold(Colored(#f01e23 | "내야수"))
-    Cell span=1x1 align=Center attrs=[Cell/width=10%]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/width=10%]:
       Paragraph: "9명"
-    Cell span=1x1 align=Center attrs=[Cell/width=80%]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/width=80%]:
       Paragraph: Link("김성한") ", " Link("한대화") ", " Link("박철우(야구)" | "박철우") ", " Link("윤재호(야구선수)" | "윤재호") ", " Link("홍현우") ", " Link("이종범") ", 김병조, " Link("이경복") ", " Link("이건열")
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold(Colored(#f01e23 | "외야수"))
-    Cell span=1x1 align=Center attrs=[Cell/width=10%]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/width=10%]:
       Paragraph: "5명"
-    Cell span=1x1 align=Center attrs=[Cell/width=80%]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/width=80%]:
       Paragraph: Link("이순철") ", " Link("이호성") ", " Link("정성룡(야구선수)" | "정성룡") ", 김훈, 이용석"
+Paragraph: 
 Heading level=3 folded=false: Link("삼성 라이온즈")
 Table:
   Row:
-    Cell span=3x1 align=Center attrs=[Table/width=80% Cell/bgcolor=#007fff]:
+    Cell span=3x1 align=Some(Center) attrs=[Table/width=80% Cell/bgcolor=#007fff]:
       Paragraph: Bold(Colored(#ffffff | "삼성 라이온즈 1993년 한국시리즈 엔트리"))
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/width=10% Column/bgcolor=#fecd00]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/width=10% Column { columns: 1 }/bgcolor=#fecd00]:
       Paragraph: Bold(Colored(#007fff | "감독"))
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "1명"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Link("우용득")
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/width=10%]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/width=10%]:
       Paragraph: Bold(Colored(#007fff | "코치"))
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "5명"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Link("조창수") ", " Link("배대웅") ", " Link("권영호(야구선수)" | "권영호") ", " Link("박승호(야구)" | "박승호") ", " Link("양일환")
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/width=10%]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/width=10%]:
       Paragraph: Bold(Colored(#007fff | "투수"))
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "8명"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Link("성준(야구선수)" | "성준") ", " Link("류명선") ", " Link("이태일") ", " Link("김태한") ", " Link("오봉옥") ", " Link("김상엽") ", " Link("박충식") ", " Link("이상훈(우완투수)" | "이상훈")
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/width=10%]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/width=10%]:
       Paragraph: Bold(Colored(#007fff | "포수"))
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "3명"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Link("이만수") ", " Link("김성현(1963)" | "김성현") ", " Link("박선일")
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/width=10%]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/width=10%]:
       Paragraph: Bold(Colored(#007fff | "내야수"))
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "7명"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Link("김성래") ", " Link("김용국(야구)" | "김용국") ", " Link("류중일") ", " Link("강기웅") ", " Link("양준혁") ", " Link("김태룡(1968)" | "김태룡") ", " Link("정경훈" #s-1)
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/width=10%]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/width=10%]:
       Paragraph: Bold(Colored(#007fff | "외야수"))
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "7명"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Link("이종두") ", 강태윤, 윤용하, " Link("동봉철") ", 한기철, " Link("정영규") ", 박인구"
+Paragraph: 
 Heading level=2 folded=false: "경기 진행"
 Heading level=3 folded=false: "1차전"
 Table:
   Row:
-    Cell span=15x1 align=Center attrs=[Cell/bgcolor=#f01e23]:
+    Cell span=15x1 align=Some(Center) attrs=[Cell/bgcolor=#f01e23]:
       Paragraph: Colored(#000000 | Bold("한국시리즈 1차전, 10.18(월), 18:00, " Link("무등 야구장" | Colored(#000000 | "무등 야구장"))))
   Row:
-    Cell span=1x1 align=Center attrs=[Row/bgcolor=#ffffff,#191919]:
+    Cell span=1x1 align=Some(Center) attrs=[Row/bgcolor=#ffffff,#191919]:
       Paragraph: Bold("팀")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("선발")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("1")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("2")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("3")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("4")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("5")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("6")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("7")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("8")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("9")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("R")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("H")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("E")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("B")
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#007fff Cell/color=#373a3c]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#007fff Cell/color=#373a3c]:
       Paragraph: Bold(Link("삼성 라이온즈" | Colored(#ffffff | "삼성")))
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Link("김상엽")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "1"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center attrs=[Column/bgcolor=#dcdcdc,#222222]:
+    Cell span=1x1 align=Some(Center) attrs=[Column { columns: 1 }/bgcolor=#dcdcdc,#222222]:
       Paragraph: Bold("1")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "-"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#f01e23]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#f01e23]:
       Paragraph: Bold(Link("해태 타이거즈" | Colored(#000000 | "해태")))
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Link("조계현")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "4"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "1"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "-"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("5")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "-"
   Row:
-    Cell span=15x1 align=Center attrs=[Cell/bgcolor=#dcdcdc]:
+    Cell span=15x1 align=Some(Center) attrs=[Cell/bgcolor=#dcdcdc]:
       Paragraph: Bold("중계방송사: " Link("KBS1" | Image("KBS 1 logo[1].png" width=45)) " | 캐스터: 정도영 | 해설: 하일성")
-Paragraph: "승리 투수: 조계현, 패전투수: 류명선, 세이브 투수: 선동열" <br> "홈런: 해태 - 한대화(8회 1점)"
-Paragraph: "다승왕 \"팔색조\" " Link("조계현") "(17승)과 탈삼진왕 \"만딩고\" " Link("김상엽") "(170개)의 선발 대결. 삼성은 2회초 김성현의 좌중간 적시타로 1점을 선제했다. 김상엽은 5회까지 단 1안타에 6탈삼진을 기록하며 그때까지는 무사히 선발 임무를 수행했다. 그러나 일단 제구 난조에 빠지면 걷잡을 수 없이 무너지는 김상엽의 약점대로 6회말 연속 볼넷으로 무사 1, 2루가 되면서 이종범 타석에서 또다시 볼카운트 2볼로 몰리자 우용득 감독은 류명선으로 마운드를 교체했다. 류명선은 사인 미스로 보내기 번트에 실패한 이종범을 유격수 앞 병살타로 잡으면서 급한 불을 꺼 일단은 성공적인 투수 교체로 나타났다. 그러나 7회말 투아웃까지 잘 잡아낸 류명선은 연속 볼넷으로 1, 2루를 채워놓은 뒤 이순철에게 우전 안타를 허용했고 " Link("이종두") "가 홈 송구를 서두르다 볼을 뒤로 빠뜨리는 실책을 저질러 2 대 1로 역전당하고 만다. 이 틈에 3루에 안착한 " Link("이순철") "은 정회열의 좌전 적시타로 3점째를 올렸고 뒤이은 1, 2루 찬스에서 이종범이 " Link("그라운드 룰 더블" | "원바운드로 펜스를 넘어가는 1타점 2루타") "를 터뜨려 승리를 확인했다. 이후 '전가의 보도' 선동열을 마무리로 투입, 삼성에게 추격할 생각을 단념케 한 해태는 8회말 한대화가 승리감에 도취된 홈팬들에게 좌중월 솔로 홈런의 시원함을 선사했다. 해태의 5 대 1 승리로 끝났다. 그리고 삼성은 " Bold("한국시리즈 12연패") "에 빠졌다." Footnote(| "삼성의 KS 12연패는 무려 86년부터 시작되었다. " Link("1986년 한국시리즈" | "86년 KS") " 3차전~5차전 3연패, 그리고 " Link("1987년 한국시리즈" | "87년") "과 " Link("1990년 한국시리즈" | "90년") "에는 모두 " Bold(Link("스윕" | "4연패")) "를 당했고, 93년 KS 1차전도 패하면서 그런 불명예 기록이 탄생하고 만 것이다.")
+Paragraph: <br> "승리 투수: 조계현, 패전투수: 류명선, 세이브 투수: 선동열" <br> "홈런: 해태 - 한대화(8회 1점)" <br> <br> "다승왕 \"팔색조\" " Link("조계현") "(17승)과 탈삼진왕 \"만딩고\" " Link("김상엽") "(170개)의 선발 대결. 삼성은 2회초 김성현의 좌중간 적시타로 1점을 선제했다. 김상엽은 5회까지 단 1안타에 6탈삼진을 기록하며 그때까지는 무사히 선발 임무를 수행했다. 그러나 일단 제구 난조에 빠지면 걷잡을 수 없이 무너지는 김상엽의 약점대로 6회말 연속 볼넷으로 무사 1, 2루가 되면서 이종범 타석에서 또다시 볼카운트 2볼로 몰리자 우용득 감독은 류명선으로 마운드를 교체했다. 류명선은 사인 미스로 보내기 번트에 실패한 이종범을 유격수 앞 병살타로 잡으면서 급한 불을 꺼 일단은 성공적인 투수 교체로 나타났다. 그러나 7회말 투아웃까지 잘 잡아낸 류명선은 연속 볼넷으로 1, 2루를 채워놓은 뒤 이순철에게 우전 안타를 허용했고 " Link("이종두") "가 홈 송구를 서두르다 볼을 뒤로 빠뜨리는 실책을 저질러 2 대 1로 역전당하고 만다. 이 틈에 3루에 안착한 " Link("이순철") "은 정회열의 좌전 적시타로 3점째를 올렸고 뒤이은 1, 2루 찬스에서 이종범이 " Link("그라운드 룰 더블" | "원바운드로 펜스를 넘어가는 1타점 2루타") "를 터뜨려 승리를 확인했다. 이후 '전가의 보도' 선동열을 마무리로 투입, 삼성에게 추격할 생각을 단념케 한 해태는 8회말 한대화가 승리감에 도취된 홈팬들에게 좌중월 솔로 홈런의 시원함을 선사했다. 해태의 5 대 1 승리로 끝났다. 그리고 삼성은 " Bold("한국시리즈 12연패") "에 빠졌다." Footnote(| "삼성의 KS 12연패는 무려 86년부터 시작되었다. " Link("1986년 한국시리즈" | "86년 KS") " 3차전~5차전 3연패, 그리고 " Link("1987년 한국시리즈" | "87년") "과 " Link("1990년 한국시리즈" | "90년") "에는 모두 " Bold(Link("스윕" | "4연패")) "를 당했고, 93년 KS 1차전도 패하면서 그런 불명예 기록이 탄생하고 만 것이다.") <br>
 Heading level=3 folded=false: "2차전"
 Table:
   Row:
-    Cell span=15x1 align=Center attrs=[Cell/bgcolor=#007fff]:
+    Cell span=15x1 align=Some(Center) attrs=[Cell/bgcolor=#007fff]:
       Paragraph: Colored(#ffffff | Bold("한국시리즈 2차전, 10.19(화), 18:00, " Link("무등 야구장" | Colored(#ffffff | "무등 야구장"))))
   Row:
-    Cell span=1x1 align=Center attrs=[Row/bgcolor=#ffffff,#191919]:
+    Cell span=1x1 align=Some(Center) attrs=[Row/bgcolor=#ffffff,#191919]:
       Paragraph: Bold("팀")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("선발")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("1")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("2")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("3")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("4")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("5")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("6")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("7")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("8")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("9")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("R")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("H")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("E")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("B")
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#007fff Cell/color=#373a3c]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#007fff Cell/color=#373a3c]:
       Paragraph: Bold(Link("삼성 라이온즈" | Colored(#ffffff | "삼성")))
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Link("김태한")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "3"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "3"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center attrs=[Column/bgcolor=#dcdcdc,#222222]:
+    Cell span=1x1 align=Some(Center) attrs=[Column { columns: 1 }/bgcolor=#dcdcdc,#222222]:
       Paragraph: Bold("6")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "-"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#f01e23]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#f01e23]:
       Paragraph: Bold(Link("해태 타이거즈" | Colored(#000000 | "해태")))
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Link("김정수(1962)" | "김정수")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("0")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "-"
-Paragraph: "승리 투수: 김태한, 패전 투수: 김정수" <br> "홈런: 삼성 - 김성래(7회 2점)"
-Paragraph: Macro(youtube "LYXRm6Bh2KY") <br> "중계 방송사는 MBC TV.(캐스터: 고창근 / 해설: 김소식)"
-Paragraph: "선발로 해태는 한국시리즈의 베테랑 김정수를, 삼성은 2년생 김태한을 각각 기용했다. 김태한은 안타 7개를 맞았지만 연속 안타를 피해가며 완봉승을 따냈다. 반면 김정수-이강철(4회)로 마운드를 교체한 해태는 고비마다 결정타를 얻어맞고 6 대 0으로 승부가 판가름났다. 삼성은 4회초 2사후 연속 안타로 김정수를 쫓아내고 릴리프 이강철로부터 사구를 얻어 만루를 만들었다. 곧이어 터진 " Link("류중일") "의 2루수 키를 살짝 넘어가는 바가지 안타로 3점을 뽑았다. 삼성은 7회초 홈런왕 김성래가 2점 홈런을 터뜨리고 이종두 이만수가 연속 2루타를 터뜨려 3점을 보탬으로써 6 대 0으로 승부를 갈랐다. 86년(3차전)부터 이어진 " Bold("한국시리즈 12연패") "를 끊은 귀중한 승리였다."
-Paragraph: "이날 삼성 선발인 " Link("김태한") "의 완봉승은 한국시리즈 사상 첫 좌완 완봉승이었는데 두 번째 좌완 완봉승은 무려 24년 후 " Link("양현종") "에 의해 나오게 된다. "
+Paragraph: <br> "승리 투수: 김태한, 패전 투수: 김정수" <br> "홈런: 삼성 - 김성래(7회 2점)" <br> <br> Macro(youtube "LYXRm6Bh2KY") <br> "중계 방송사는 MBC TV.(캐스터: 고창근 / 해설: 김소식)" <br> <br> "선발로 해태는 한국시리즈의 베테랑 김정수를, 삼성은 2년생 김태한을 각각 기용했다. 김태한은 안타 7개를 맞았지만 연속 안타를 피해가며 완봉승을 따냈다. 반면 김정수-이강철(4회)로 마운드를 교체한 해태는 고비마다 결정타를 얻어맞고 6 대 0으로 승부가 판가름났다. 삼성은 4회초 2사후 연속 안타로 김정수를 쫓아내고 릴리프 이강철로부터 사구를 얻어 만루를 만들었다. 곧이어 터진 " Link("류중일") "의 2루수 키를 살짝 넘어가는 바가지 안타로 3점을 뽑았다. 삼성은 7회초 홈런왕 김성래가 2점 홈런을 터뜨리고 이종두 이만수가 연속 2루타를 터뜨려 3점을 보탬으로써 6 대 0으로 승부를 갈랐다. 86년(3차전)부터 이어진 " Bold("한국시리즈 12연패") "를 끊은 귀중한 승리였다." <br> <br> "이날 삼성 선발인 " Link("김태한") "의 완봉승은 한국시리즈 사상 첫 좌완 완봉승이었는데 두 번째 좌완 완봉승은 무려 24년 후 " Link("양현종") "에 의해 나오게 된다. " <br>
 Table:
   Row:
-    Cell span=1x1 align=Center attrs=[Table/align=center Table/width=100%]:
+    Cell span=1x1 align=Some(Center) attrs=[Table/align=center Table/width=100%]:
       Paragraph: Bold(Sized(+1 | "역대 KBO 한국시리즈 완봉 달성자 명단"))
   Row:
-    Cell span=1x1 align=Center:
-      Folding summary="[ 펼치기 · 접기 ]":
-        Table:
-          Row:
-            Cell span=1x1 align=Center attrs=[Cell/width=5%]:
-              Paragraph: Bold("순서")
-            Cell span=1x1 align=Center attrs=[Cell/width=10%]:
-              Paragraph: Bold("달성자")
-            Cell span=1x1 align=Center attrs=[Cell/width=10%]:
-              Paragraph: Bold("소속팀")
-            Cell span=1x1 align=Center attrs=[Cell/width=10%]:
-              Paragraph: Bold("달성 일자")
-            Cell span=1x1 align=Center attrs=[Cell/width=10%]:
-              Paragraph: Bold("달성 경기")
-            Cell span=1x1 align=Center attrs=[Cell/width=10%]:
-              Paragraph: Bold("상대팀")
-            Cell span=1x1 align=Center attrs=[Cell/width=10%]:
-              Paragraph: Bold("비고")
-          Row:
-            Cell span=1x1 align=Center attrs=[Cell/bgcolor=#dcdcdc,#222222]:
-              Paragraph: "1"
-            Cell span=1x1 align=Center:
-              Paragraph: Link("최동원")
-            Cell span=1x1 align=Center:
-              Paragraph: Link("롯데 자이언츠")
-            Cell span=1x1 align=Center:
-              Paragraph: "1984년 9월 30일"
-            Cell span=1x1 align=Center:
-              Paragraph: Link("1984년 한국시리즈" #s-5.1 | "한국시리즈 1차전")
-            Cell span=1x1 align=Center:
-              Paragraph: Link("삼성 라이온즈")
-            Cell span=1x1 align=Center:
-              Paragraph: "역대 최초"
-          Row:
-            Cell span=1x1 align=Center attrs=[Cell/bgcolor=#dcdcdc,#222222]:
-              Paragraph: "2"
-            Cell span=1x1 align=Center:
-              Paragraph: Link("문희수")
-            Cell span=1x1 align=Center:
-              Paragraph: Link("해태 타이거즈")
-            Cell span=1x1 align=Center:
-              Paragraph: "1988년 10월 22일"
-            Cell span=1x1 align=Center:
-              Paragraph: Link("1988년 한국시리즈" #s-4.3 | "한국시리즈 3차전")
-            Cell span=1x1 align=Center:
-              Paragraph: Link("빙그레 이글스")
-            Cell span=1x1 align=Right:
-          Row:
-            Cell span=1x1 align=Center attrs=[Cell/bgcolor=#dcdcdc,#222222]:
-              Paragraph: "3"
-            Cell span=1x1 align=Center:
-              Paragraph: Link("김태한")
-            Cell span=1x1 align=Center:
-              Paragraph: Link("삼성 라이온즈")
-            Cell span=1x1 align=Center:
-              Paragraph: "1993년 10월 19일"
-            Cell span=1x1 align=Center:
-              Paragraph: Link("1993년 한국시리즈" #s-5.2 | "한국시리즈 2차전")
-            Cell span=1x1 align=Center:
-              Paragraph: Link("해태 타이거즈")
-            Cell span=1x1 align=Center:
-              Paragraph: "좌완 최초"
-          Row:
-            Cell span=1x1 align=Center attrs=[Cell/bgcolor=#dcdcdc,#222222]:
-              Paragraph: "4"
-            Cell span=1x1 align=Center:
-              Paragraph: Link("정삼흠")
-            Cell span=1x1 align=Center:
-              Paragraph: Link("LG 트윈스")
-            Cell span=1x1 align=Center:
-              Paragraph: "1994년 10월 19일"
-            Cell span=1x1 align=Center:
-              Paragraph: Link("1994년 한국시리즈" #s-4.2 | "한국시리즈 2차전")
-            Cell span=1x1 align=Center:
-              Paragraph: Link("태평양 돌핀스")
-            Cell span=1x1 align=Right:
-          Row:
-            Cell span=1x1 align=Center attrs=[Cell/bgcolor=#dcdcdc,#222222]:
-              Paragraph: "5"
-            Cell span=1x1 align=Center:
-              Paragraph: Link("이강철")
-            Cell span=1x1 align=Center:
-              Paragraph: Link("해태 타이거즈")
-            Cell span=1x1 align=Center:
-              Paragraph: "1996년 10월 19일"
-            Cell span=1x1 align=Center:
-              Paragraph: Link("1996년 한국시리즈" #s-3.3 | "한국시리즈 3차전")
-            Cell span=1x1 align=Center:
-              Paragraph: Link("현대 유니콘스")
-            Cell span=1x1 align=Right:
-          Row:
-            Cell span=1x1 align=Center attrs=[Cell/bgcolor=#dcdcdc,#222222]:
-              Paragraph: "6"
-            Cell span=1x1 align=Center:
-              Paragraph: Link("정명원")
-            Cell span=1x1 align=Center:
-              Paragraph: Link("현대 유니콘스")
-            Cell span=1x1 align=Center:
-              Paragraph: "1996년 10월 20일"
-            Cell span=1x1 align=Center:
-              Paragraph: Link("1996년 한국시리즈" #s-3.4 | "한국시리즈 4차전")
-            Cell span=1x1 align=Center:
-              Paragraph: Link("해태 타이거즈")
-            Cell span=1x1 align=Center:
-              Paragraph: Link("노히트 노런")
-          Row:
-            Cell span=1x1 align=Center attrs=[Cell/bgcolor=#dcdcdc,#222222]:
-              Paragraph: "7"
-            Cell span=1x1 align=Center:
-              Paragraph: Link("정민태")
-            Cell span=1x1 align=Center:
-              Paragraph: Link("현대 유니콘스")
-            Cell span=1x1 align=Center:
-              Paragraph: "2003년 10월 25일"
-            Cell span=1x1 align=Center:
-              Paragraph: Link("2003년 한국시리즈" #s-3.7 | "한국시리즈 7차전")
-            Cell span=1x1 align=Center:
-              Paragraph: Link("SK 와이번스")
-            Cell span=1x1 align=Right:
-          Row:
-            Cell span=1x1 align=Center attrs=[Cell/bgcolor=#dcdcdc,#222222]:
-              Paragraph: "8"
-            Cell span=1x1 align=Center:
-              Paragraph: Link("다니엘 리오스")
-            Cell span=1x1 align=Center:
-              Paragraph: Link("두산 베어스")
-            Cell span=1x1 align=Center:
-              Paragraph: "2007년 10월 22일"
-            Cell span=1x1 align=Center:
-              Paragraph: Link("2007년 한국시리즈" #s-3.1 | "한국시리즈 1차전")
-            Cell span=1x1 align=Center:
-              Paragraph: Link("SK 와이번스")
-            Cell span=1x1 align=Center:
-              Paragraph: "최소 투구수(99구)"
-          Row:
-            Cell span=1x1 align=Center attrs=[Cell/bgcolor=#dcdcdc,#222222]:
-              Paragraph: "9"
-            Cell span=1x1 align=Center:
-              Paragraph: Link("아킬리노 로페즈")
-            Cell span=1x1 align=Center:
-              Paragraph: Link("KIA 타이거즈")
-            Cell span=1x1 align=Center:
-              Paragraph: "2009년 10월 22일"
-            Cell span=1x1 align=Center:
-              Paragraph: Link("2009년 한국시리즈" #s-3.5 | "한국시리즈 5차전")
-            Cell span=1x1 align=Center:
-              Paragraph: Link("SK 와이번스")
-            Cell span=1x1 align=Right:
-          Row:
-            Cell span=1x1 align=Center attrs=[Cell/bgcolor=#dcdcdc,#222222]:
-              Paragraph: "10"
-            Cell span=1x1 align=Center:
-              Paragraph: Link("양현종")
-            Cell span=1x1 align=Center:
-              Paragraph: Link("KIA 타이거즈")
-            Cell span=1x1 align=Center:
-              Paragraph: "2017년 10월 26일"
-            Cell span=1x1 align=Center:
-              Paragraph: Link("2017년 한국시리즈" #s-7.2.3 | "한국시리즈 2차전")
-            Cell span=1x1 align=Center:
-              Paragraph: Link("두산 베어스")
-            Cell span=1x1 align=Center:
-              Paragraph: "최다 탈삼진(11K)"
+    Cell span=1x1 align=Some(Center):
+      Paragraph: Folding([ 펼치기 · 접기 ] | Table:   Row:     Cell span=1x1 align=Some(Center) attrs=[Cell/width=5%]:       Paragraph: Bold("순서")     Cell span=1x1 align=Some(Center) attrs=[Cell/width=10%]:       Paragraph: Bold("달성자")     Cell span=1x1 align=Some(Center) attrs=[Cell/width=10%]:       Paragraph: Bold("소속팀")     Cell span=1x1 align=Some(Center) attrs=[Cell/width=10%]:       Paragraph: Bold("달성 일자")     Cell span=1x1 align=Some(Center) attrs=[Cell/width=10%]:       Paragraph: Bold("달성 경기")     Cell span=1x1 align=Some(Center) attrs=[Cell/width=10%]:       Paragraph: Bold("상대팀")     Cell span=1x1 align=Some(Center) attrs=[Cell/width=10%]:       Paragraph: Bold("비고")   Row:     Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#dcdcdc,#222222]:       Paragraph: "1"     Cell span=1x1 align=Some(Center):       Paragraph: Link("최동원")     Cell span=1x1 align=Some(Center):       Paragraph: Link("롯데 자이언츠")     Cell span=1x1 align=Some(Center):       Paragraph: "1984년 9월 30일"     Cell span=1x1 align=Some(Center):       Paragraph: Link("1984년 한국시리즈" #s-5.1 | "한국시리즈 1차전")     Cell span=1x1 align=Some(Center):       Paragraph: Link("삼성 라이온즈")     Cell span=1x1 align=Some(Center):       Paragraph: "역대 최초"   Row:     Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#dcdcdc,#222222]:       Paragraph: "2"     Cell span=1x1 align=Some(Center):       Paragraph: Link("문희수")     Cell span=1x1 align=Some(Center):       Paragraph: Link("해태 타이거즈")     Cell span=1x1 align=Some(Center):       Paragraph: "1988년 10월 22일"     Cell span=1x1 align=Some(Center):       Paragraph: Link("1988년 한국시리즈" #s-4.3 | "한국시리즈 3차전")     Cell span=1x1 align=Some(Center):       Paragraph: Link("빙그레 이글스")     Cell span=1x1 align=Some(Right):   Row:     Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#dcdcdc,#222222]:       Paragraph: "3"     Cell span=1x1 align=Some(Center):       Paragraph: Link("김태한")     Cell span=1x1 align=Some(Center):       Paragraph: Link("삼성 라이온즈")     Cell span=1x1 align=Some(Center):       Paragraph: "1993년 10월 19일"     Cell span=1x1 align=Some(Center):       Paragraph: Link("1993년 한국시리즈" #s-5.2 | "한국시리즈 2차전")     Cell span=1x1 align=Some(Center):       Paragraph: Link("해태 타이거즈")     Cell span=1x1 align=Some(Center):       Paragraph: "좌완 최초"   Row:     Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#dcdcdc,#222222]:       Paragraph: "4"     Cell span=1x1 align=Some(Center):       Paragraph: Link("정삼흠")     Cell span=1x1 align=Some(Center):       Paragraph: Link("LG 트윈스")     Cell span=1x1 align=Some(Center):       Paragraph: "1994년 10월 19일"     Cell span=1x1 align=Some(Center):       Paragraph: Link("1994년 한국시리즈" #s-4.2 | "한국시리즈 2차전")     Cell span=1x1 align=Some(Center):       Paragraph: Link("태평양 돌핀스")     Cell span=1x1 align=Some(Right):   Row:     Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#dcdcdc,#222222]:       Paragraph: "5"     Cell span=1x1 align=Some(Center):       Paragraph: Link("이강철")     Cell span=1x1 align=Some(Center):       Paragraph: Link("해태 타이거즈")     Cell span=1x1 align=Some(Center):       Paragraph: "1996년 10월 19일"     Cell span=1x1 align=Some(Center):       Paragraph: Link("1996년 한국시리즈" #s-3.3 | "한국시리즈 3차전")     Cell span=1x1 align=Some(Center):       Paragraph: Link("현대 유니콘스")     Cell span=1x1 align=Some(Right):   Row:     Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#dcdcdc,#222222]:       Paragraph: "6"     Cell span=1x1 align=Some(Center):       Paragraph: Link("정명원")     Cell span=1x1 align=Some(Center):       Paragraph: Link("현대 유니콘스")     Cell span=1x1 align=Some(Center):       Paragraph: "1996년 10월 20일"     Cell span=1x1 align=Some(Center):       Paragraph: Link("1996년 한국시리즈" #s-3.4 | "한국시리즈 4차전")     Cell span=1x1 align=Some(Center):       Paragraph: Link("해태 타이거즈")     Cell span=1x1 align=Some(Center):       Paragraph: Link("노히트 노런")   Row:     Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#dcdcdc,#222222]:       Paragraph: "7"     Cell span=1x1 align=Some(Center):       Paragraph: Link("정민태")     Cell span=1x1 align=Some(Center):       Paragraph: Link("현대 유니콘스")     Cell span=1x1 align=Some(Center):       Paragraph: "2003년 10월 25일"     Cell span=1x1 align=Some(Center):       Paragraph: Link("2003년 한국시리즈" #s-3.7 | "한국시리즈 7차전")     Cell span=1x1 align=Some(Center):       Paragraph: Link("SK 와이번스")     Cell span=1x1 align=Some(Right):   Row:     Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#dcdcdc,#222222]:       Paragraph: "8"     Cell span=1x1 align=Some(Center):       Paragraph: Link("다니엘 리오스")     Cell span=1x1 align=Some(Center):       Paragraph: Link("두산 베어스")     Cell span=1x1 align=Some(Center):       Paragraph: "2007년 10월 22일"     Cell span=1x1 align=Some(Center):       Paragraph: Link("2007년 한국시리즈" #s-3.1 | "한국시리즈 1차전")     Cell span=1x1 align=Some(Center):       Paragraph: Link("SK 와이번스")     Cell span=1x1 align=Some(Center):       Paragraph: "최소 투구수(99구)"   Row:     Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#dcdcdc,#222222]:       Paragraph: "9"     Cell span=1x1 align=Some(Center):       Paragraph: Link("아킬리노 로페즈")     Cell span=1x1 align=Some(Center):       Paragraph: Link("KIA 타이거즈")     Cell span=1x1 align=Some(Center):       Paragraph: "2009년 10월 22일"     Cell span=1x1 align=Some(Center):       Paragraph: Link("2009년 한국시리즈" #s-3.5 | "한국시리즈 5차전")     Cell span=1x1 align=Some(Center):       Paragraph: Link("SK 와이번스")     Cell span=1x1 align=Some(Right):   Row:     Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#dcdcdc,#222222]:       Paragraph: "10"     Cell span=1x1 align=Some(Center):       Paragraph: Link("양현종")     Cell span=1x1 align=Some(Center):       Paragraph: Link("KIA 타이거즈")     Cell span=1x1 align=Some(Center):       Paragraph: "2017년 10월 26일"     Cell span=1x1 align=Some(Center):       Paragraph: Link("2017년 한국시리즈" #s-7.2.3 | "한국시리즈 2차전")     Cell span=1x1 align=Some(Center):       Paragraph: Link("두산 베어스")     Cell span=1x1 align=Some(Center):       Paragraph: "최다 탈삼진(11K)")
+Paragraph: " "
 Heading level=3 folded=false: "3차전"
 Table:
   Row:
-    Cell span=21x1 align=Center attrs=[Cell/bgcolor=#ffffff,#191919]:
+    Cell span=21x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#191919]:
       Paragraph: Colored(#000000,#e5e5e5 | Bold("한국시리즈 3차전, 10.21(목), 18:00, " Link("대구시민운동장 야구장" | Colored(#000000,#e5e5e5 | "대구시민운동장 야구장"))))
   Row:
-    Cell span=1x1 align=Center attrs=[Row/bgcolor=#ffffff,#191919]:
+    Cell span=1x1 align=Some(Center) attrs=[Row/bgcolor=#ffffff,#191919]:
       Paragraph: Bold("팀")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("선발")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("1")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("2")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("3")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("4")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("5")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("6")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("7")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("8")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("9")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("10")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("11")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("12")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("13")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("14")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("15")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("R")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("H")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("E")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("B")
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#f01e23]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#f01e23]:
       Paragraph: Bold(Link("해태 타이거즈" | Colored(#000000 | "해태")))
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Link("문희수")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "1"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "1"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center attrs=[Column/bgcolor=#dcdcdc,#222222]:
+    Cell span=1x1 align=Some(Center) attrs=[Column { columns: 1 }/bgcolor=#dcdcdc,#222222]:
       Paragraph: Bold("2")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "7"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#007fff Cell/color=#373a3c]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#007fff Cell/color=#373a3c]:
       Paragraph: Bold(Link("삼성 라이온즈" | Colored(#ffffff | "삼성")))
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Link("박충식")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "1"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "1"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("2")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "6"
   Row:
-    Cell span=27x1 align=Center attrs=[Cell/bgcolor=#dcdcdc]:
+    Cell span=27x1 align=Some(Center) attrs=[Cell/bgcolor=#dcdcdc]:
       Paragraph: Bold("중계방송사: " Link("KBS1" | Image("KBS 1 logo[1].png" width=45)) Footnote(| "9시에 예정되어 있는 KBS 뉴스 9를 이 경기를 마치고 내보냈다.") " | 캐스터: 정도영 | 해설: 하일성") " " Macro(br) " " Bold(Link("SBS" | Image("SBS_CI_1991_-_1994[1].png" width=35)) " | 캐스터: 유협 | 해설: 김동엽") " "
-Paragraph: "홈런:  해태 – 홍현우(6회 1점)"
-Paragraph: Link("https://youtu.be/qNbWIps-cHw" | "3차전 하이라이트 영상 보기") Footnote(| Link("MBC SPORTS+") "의 향후 편집본 하이라이트이다.")
-Paragraph: "팀간 1승 1패로 맞선 3차전. 해태의 선발은 1988년 한국시리즈 MVP였던 " Link("문희수") Footnote(| "문희수는 한국시리즈 MVP를 수상했던 1988년을 비롯해서 1989년, 1991년 한국시리즈에서도 해태의 3차전 전담 선발투수로 나왔다.") "를, 한편 삼성은 입단 첫 해 14승을 거두며 에이스로 급부상한 루키 " Link("박충식") "을 내세워 한치의 양보 없는 명투수전을 펼친다. 2회말 2사 2루에서 삼성이 김성현의 좌전 적시타로 선제 득점을 올리자 해태는 3회초 1사 2, 3루에서 이종범이 3루쪽 내야 땅볼로 반격했다. 삼성이 3회말 2사 1, 2루의 기회를 잡자 김응용 감독은 즉시 선동열을 투입, 불을 껐다."
-Paragraph: "해태는 6회초 홍현우가 솔로 홈런을 터뜨려 역전에 성공했다. 그러나 삼성은 6회말 2사 2루에서 " Link("이종두") "가 좌중간 2루타를 때려 다시 동점을 만들었다. 이후 끝없는 0의 행진. 박충식은 낙차 큰 싱커와 제구력을 자랑하며 해태 타자들을 차례로 내야 땅볼로 처리하였고, 선동열 역시 최고 151km의 강속구와 슬라이더를 꽂으면서 응수했다. 그러다 7.1이닝 동안 101구를 던지며 1실점을 하고 먼저 내려간 건 선동열. 대구 관중들은 환호했으나, 뒤이어 11회에 등판한 송유석이 특유의 묵직한 직구로 5이닝을 무실점으로 틀어막으며 결국 경기는 무승부로 마무리되었다. 오후 6시1분에 시작된 경기는 4시간 30분이 지난 10시 31분에 종료됐으나 연장 15회 2 대 2 무승부로 막을 내렸다. " Link("1982년 한국시리즈" | "1982년") " OB:삼성 1차전, " Link("1983년 한국시리즈" | "1983년") " 해태:MBC의 4차전에 이은 한국시리즈 3번째 연장 15회 무승부였다."
-Paragraph: "박충식은 15회까지 던지며 " Link("문희수") " - " Link("선동열") " - " Link("송유석") "이 이어 던진 " Link("해태 타이거즈") "를 상대로 무려 " Bold("181구") "를 던지며 완투했다. 한국시리즈 역대 최고의 투수전 명승부 중 하나로 꼽히는 경기."
-Paragraph: "이날의 무승부가 누구에게 이득이었는가에 대해서는 평가가 엇갈린다. 외견상으로는 에이스 선동열을 포함해서 3명을 투입한 해태보다는, 박충식 혼자서 연장 15회를 소화한 삼성이 투수 소모를 줄여서 나은 결과를 낸 것처럼 여겨질 수 있었다." Footnote(| "이러한 평가는 본 문서의 시작부분 영상에도 나오는, 3차전 중계방송 종료 직후의 해설에서도 나온다.") " 만약 이후의 시리즈 진행이 삼성의 우위로 흘러갔다면, 그러한 평가가 충분히 가능했을 것이다. 그러나 삼성은 다음날 4차전을 이겨 2승을 먼저 올렸지만, 잠실로 옮겨 치른 5~6차전을 연거푸 내주어 역전당했고, 급기야 벼랑끝에서 치른 7차전에 다시 박충식을 선발 투입했으나 이번에는 해태 타선에 쉽게 공략당하면서 우승을 내주는 결과로 이어지고 말았다."
+Paragraph: " " <br> "홈런:  해태 – 홍현우(6회 1점)" <br> <br> Link("https://youtu.be/qNbWIps-cHw" | "3차전 하이라이트 영상 보기") Footnote(| Link("MBC SPORTS+") "의 향후 편집본 하이라이트이다.") <br> <br> "팀간 1승 1패로 맞선 3차전. 해태의 선발은 1988년 한국시리즈 MVP였던 " Link("문희수") Footnote(| "문희수는 한국시리즈 MVP를 수상했던 1988년을 비롯해서 1989년, 1991년 한국시리즈에서도 해태의 3차전 전담 선발투수로 나왔다.") "를, 한편 삼성은 입단 첫 해 14승을 거두며 에이스로 급부상한 루키 " Link("박충식") "을 내세워 한치의 양보 없는 명투수전을 펼친다. 2회말 2사 2루에서 삼성이 김성현의 좌전 적시타로 선제 득점을 올리자 해태는 3회초 1사 2, 3루에서 이종범이 3루쪽 내야 땅볼로 반격했다. 삼성이 3회말 2사 1, 2루의 기회를 잡자 김응용 감독은 즉시 선동열을 투입, 불을 껐다." <br> <br> "해태는 6회초 홍현우가 솔로 홈런을 터뜨려 역전에 성공했다. 그러나 삼성은 6회말 2사 2루에서 " Link("이종두") "가 좌중간 2루타를 때려 다시 동점을 만들었다. 이후 끝없는 0의 행진. 박충식은 낙차 큰 싱커와 제구력을 자랑하며 해태 타자들을 차례로 내야 땅볼로 처리하였고, 선동열 역시 최고 151km의 강속구와 슬라이더를 꽂으면서 응수했다. 그러다 7.1이닝 동안 101구를 던지며 1실점을 하고 먼저 내려간 건 선동열. 대구 관중들은 환호했으나, 뒤이어 11회에 등판한 송유석이 특유의 묵직한 직구로 5이닝을 무실점으로 틀어막으며 결국 경기는 무승부로 마무리되었다. 오후 6시1분에 시작된 경기는 4시간 30분이 지난 10시 31분에 종료됐으나 연장 15회 2 대 2 무승부로 막을 내렸다. " Link("1982년 한국시리즈" | "1982년") " OB:삼성 1차전, " Link("1983년 한국시리즈" | "1983년") " 해태:MBC의 4차전에 이은 한국시리즈 3번째 연장 15회 무승부였다." <br> <br> "박충식은 15회까지 던지며 " Link("문희수") " - " Link("선동열") " - " Link("송유석") "이 이어 던진 " Link("해태 타이거즈") "를 상대로 무려 " Bold("181구") "를 던지며 완투했다. 한국시리즈 역대 최고의 투수전 명승부 중 하나로 꼽히는 경기." <br> <br> "이날의 무승부가 누구에게 이득이었는가에 대해서는 평가가 엇갈린다. 외견상으로는 에이스 선동열을 포함해서 3명을 투입한 해태보다는, 박충식 혼자서 연장 15회를 소화한 삼성이 투수 소모를 줄여서 나은 결과를 낸 것처럼 여겨질 수 있었다." Footnote(| "이러한 평가는 본 문서의 시작부분 영상에도 나오는, 3차전 중계방송 종료 직후의 해설에서도 나온다.") " 만약 이후의 시리즈 진행이 삼성의 우위로 흘러갔다면, 그러한 평가가 충분히 가능했을 것이다. 그러나 삼성은 다음날 4차전을 이겨 2승을 먼저 올렸지만, 잠실로 옮겨 치른 5~6차전을 연거푸 내주어 역전당했고, 급기야 벼랑끝에서 치른 7차전에 다시 박충식을 선발 투입했으나 이번에는 해태 타선에 쉽게 공략당하면서 우승을 내주는 결과로 이어지고 말았다."
 Heading level=3 folded=false: "4차전"
 Table:
   Row:
-    Cell span=15x1 align=Center attrs=[Cell/bgcolor=#007fff]:
+    Cell span=15x1 align=Some(Center) attrs=[Cell/bgcolor=#007fff]:
       Paragraph: Colored(#ffffff | Bold("한국시리즈 4차전, 10.22(금), 18:00, " Link("대구시민운동장 야구장" | Colored(#ffffff | "대구시민운동장 야구장"))))
   Row:
-    Cell span=1x1 align=Center attrs=[Row/bgcolor=#ffffff,#191919]:
+    Cell span=1x1 align=Some(Center) attrs=[Row/bgcolor=#ffffff,#191919]:
       Paragraph: Bold("팀")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("선발")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("1")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("2")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("3")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("4")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("5")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("6")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("7")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("8")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("9")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("R")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("H")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("E")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("B")
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#f01e23]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#f01e23]:
       Paragraph: Bold(Link("해태 타이거즈" | Colored(#000000 | "해태")))
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Link("이대진")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "2"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center attrs=[Column/bgcolor=#dcdcdc,#222222]:
+    Cell span=1x1 align=Some(Center) attrs=[Column { columns: 1 }/bgcolor=#dcdcdc,#222222]:
       Paragraph: Bold("2")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "-"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#007fff Cell/color=#373a3c]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#007fff Cell/color=#373a3c]:
       Paragraph: Bold(Link("삼성 라이온즈" | Colored(#ffffff | "삼성")))
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Link("김상엽")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "4"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "4"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "-"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("8")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "-"
-Paragraph: "승리 투수: 김상엽, 패전 투수: 이대진, 세이브 투수: 김태한" <br> "홈런: 없음"
-Paragraph: "중계 방송사는 MBC TV."
-Paragraph: "해태는 4회초 김성한의 우중간 2루타, 이호성의 중전 적시타, 이종범의 우중간 2루타로 2점을 먼저 뽑았다. 이번 시리즈 들어 첫 선취 득점. 그러나 삼성은 4회말 곧바로 무사 1, 3루의 찬스를 잡아 김성래의 우익수 희생플라이, 양준혁의 중전 적시타로 동점을 만들고 계속된 2사 2, 3루에서 김성현이 2타점 좌중간 2루타를 터뜨려 4 대 2로 역전에 성공했다. 그리고 삼성은 5회부터 마운드를 넘겨받은 이강철을 8회말 2사사구를 끼워 집중 4안타로 공략, 4점을 더 보태 8 대 2 완승을 거두었다."
-Paragraph: "삼성의 2승 1무 1패 리드. 타이거즈가 11회의 한국시리즈를 치르는 동안 4차전까지의 전적에서 상대팀에게 열세를 기록한 유일한 경우였다."
+Paragraph: <br> "승리 투수: 김상엽, 패전 투수: 이대진, 세이브 투수: 김태한" <br> "홈런: 없음" <br> <br> "중계 방송사는 MBC TV." <br> <br> "해태는 4회초 김성한의 우중간 2루타, 이호성의 중전 적시타, 이종범의 우중간 2루타로 2점을 먼저 뽑았다. 이번 시리즈 들어 첫 선취 득점. 그러나 삼성은 4회말 곧바로 무사 1, 3루의 찬스를 잡아 김성래의 우익수 희생플라이, 양준혁의 중전 적시타로 동점을 만들고 계속된 2사 2, 3루에서 김성현이 2타점 좌중간 2루타를 터뜨려 4 대 2로 역전에 성공했다. 그리고 삼성은 5회부터 마운드를 넘겨받은 이강철을 8회말 2사사구를 끼워 집중 4안타로 공략, 4점을 더 보태 8 대 2 완승을 거두었다." <br> <br> "삼성의 2승 1무 1패 리드. 타이거즈가 11회의 한국시리즈를 치르는 동안 4차전까지의 전적에서 상대팀에게 열세를 기록한 유일한 경우였다."
+Paragraph: " "
 Heading level=3 folded=false: "5차전"
 Table:
   Row:
-    Cell span=15x1 align=Center attrs=[Cell/bgcolor=#f01e23]:
+    Cell span=15x1 align=Some(Center) attrs=[Cell/bgcolor=#f01e23]:
       Paragraph: Colored(#000000 | Bold("한국시리즈 5차전, 10.24(일), 14:00, " Link("서울종합운동장 야구장" | Colored(#000000 | "서울종합운동장 야구장"))))
   Row:
-    Cell span=1x1 align=Center attrs=[Row/bgcolor=#ffffff,#191919]:
+    Cell span=1x1 align=Some(Center) attrs=[Row/bgcolor=#ffffff,#191919]:
       Paragraph: Bold("팀")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("선발")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("1")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("2")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("3")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("4")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("5")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("6")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("7")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("8")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("9")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("R")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("H")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("E")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("B")
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#007fff Cell/color=#373a3c]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#007fff Cell/color=#373a3c]:
       Paragraph: Bold(Link("삼성 라이온즈" | Colored(#ffffff | "삼성")))
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Link("성준(야구선수)" | "성준")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "2"
-    Cell span=1x1 align=Center attrs=[Column/bgcolor=#dcdcdc,#222222]:
+    Cell span=1x1 align=Some(Center) attrs=[Column { columns: 1 }/bgcolor=#dcdcdc,#222222]:
       Paragraph: Bold("2")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "-"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#f01e23]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#f01e23]:
       Paragraph: Bold(Link("해태 타이거즈" | Colored(#000000 | "해태")))
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Link("조계현")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "1"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "1"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "2"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "-"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("4")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "-"
   Row:
-    Cell span=15x1 align=Center attrs=[Cell/bgcolor=#dcdcdc]:
+    Cell span=15x1 align=Some(Center) attrs=[Cell/bgcolor=#dcdcdc]:
       Paragraph: Bold("중계방송사: " Link("KBS1" | Image("KBS 1 logo[1].png" width=45)) " | 캐스터: 정도영 | 해설: 하일성") " " Macro(br) " " Bold(Link("SBS" | Image("SBS_CI_1991_-_1994[1].png" width=35)) " | 캐스터: 유협 | 해설: 김동엽") " "
-Paragraph: "승리 투수: 조계현, 패전 투수: 성준" <br> "홈런: 삼성 – 이만수(9회 2점)  해태 – 장채근(4회 2점)"
-Paragraph: "팀 분위기의 반전을 노린 해태는 1차전 승리 투수였던 조계현을 마운드에 올려 5차전을 갖게 된다. 이에 맞선 삼성은 성준을 기용했다. 페넌트레이스에서 한 번도 해태와 맞붙지 않은 점을 감안한 투수 기용이었지만, 주축 투수인 박충식, 김상엽, 김태한을 모두 소모한 상황에서 어쩔 수 없는 선택이었다. "
-Paragraph: "1회말 이순철의 도루를 곁들여 만든 2사 1, 2루에서 김성한의 우전 적시타로 1점을 선제한 해태는 3회말 좌전 안타로 나간 이종범이 2루, 3루를 거푸 훔친 뒤 홍현우가 2루수 뒤로 넘어가는 짧은 플라이를 때렸을 때 과감하게 홈으로 파고들어 2점째를 올렸다. 살얼음판을 걷는 듯 불안한 리드를 지키던 해태는 4회말 공격 2사 1루 상황에서 장채근이 박철우의 대타로 타석에 들어서 큼지막한 투런 홈런을 잠실벌에 쏘아 올리며 팀 승리를 이끌어 낸다. 해태 조계현은 완봉승에 원아웃을 남겨둔 9회초 2사후 이만수에게 2점 홈런을 내줘 완투승에 그쳤지만 4 대 2의 승리는 끝까지 움켜쥐고 있었다."
-Paragraph: "양팀 2승 1무 2패 동률."
+Paragraph: <br> "승리 투수: 조계현, 패전 투수: 성준" <br> "홈런: 삼성 – 이만수(9회 2점)  해태 – 장채근(4회 2점)" <br> <br> "팀 분위기의 반전을 노린 해태는 1차전 승리 투수였던 조계현을 마운드에 올려 5차전을 갖게 된다. 이에 맞선 삼성은 성준을 기용했다. 페넌트레이스에서 한 번도 해태와 맞붙지 않은 점을 감안한 투수 기용이었지만, 주축 투수인 박충식, 김상엽, 김태한을 모두 소모한 상황에서 어쩔 수 없는 선택이었다. " <br> <br> "1회말 이순철의 도루를 곁들여 만든 2사 1, 2루에서 김성한의 우전 적시타로 1점을 선제한 해태는 3회말 좌전 안타로 나간 이종범이 2루, 3루를 거푸 훔친 뒤 홍현우가 2루수 뒤로 넘어가는 짧은 플라이를 때렸을 때 과감하게 홈으로 파고들어 2점째를 올렸다. 살얼음판을 걷는 듯 불안한 리드를 지키던 해태는 4회말 공격 2사 1루 상황에서 장채근이 박철우의 대타로 타석에 들어서 큼지막한 투런 홈런을 잠실벌에 쏘아 올리며 팀 승리를 이끌어 낸다. 해태 조계현은 완봉승에 원아웃을 남겨둔 9회초 2사후 이만수에게 2점 홈런을 내줘 완투승에 그쳤지만 4 대 2의 승리는 끝까지 움켜쥐고 있었다." <br> <br> "양팀 2승 1무 2패 동률."
+Paragraph: " "
 Heading level=3 folded=false: "6차전"
 Table:
   Row:
-    Cell span=15x1 align=Center attrs=[Cell/bgcolor=#f01e23]:
+    Cell span=15x1 align=Some(Center) attrs=[Cell/bgcolor=#f01e23]:
       Paragraph: Colored(#000000 | Bold("한국시리즈 6차전, 10.25(월), 18:00, " Link("서울종합운동장 야구장" | Colored(#000000 | "서울종합운동장 야구장"))))
   Row:
-    Cell span=1x1 align=Center attrs=[Row/bgcolor=#ffffff,#191919]:
+    Cell span=1x1 align=Some(Center) attrs=[Row/bgcolor=#ffffff,#191919]:
       Paragraph: Bold("팀")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("선발")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("1")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("2")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("3")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("4")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("5")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("6")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("7")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("8")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("9")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("R")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("H")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("E")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("B")
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#f01e23]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#f01e23]:
       Paragraph: Bold(Link("해태 타이거즈" | Colored(#000000 | "해태")))
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Link("문희수")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "1"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "1"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "2"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center attrs=[Column/bgcolor=#dcdcdc,#222222]:
+    Cell span=1x1 align=Some(Center) attrs=[Column { columns: 1 }/bgcolor=#dcdcdc,#222222]:
       Paragraph: Bold("4")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "-"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#007fff Cell/color=#373a3c]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#007fff Cell/color=#373a3c]:
       Paragraph: Bold(Link("삼성 라이온즈" | Colored(#ffffff | "삼성")))
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Link("김태한")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "1"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "1"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("2")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "-"
-Paragraph: Macro(youtube "Mrzjn742dJY") <br> "승리 투수: 선동열, 패전 투수: 류명선" <br> "홈런: 해태 – 김성한(8회 2점)"
-Paragraph: "중계 방송사는 MBC TV."
-Paragraph: "종반으로 치달을 때까지도 깨지지 않던 2:2의 균형은 8회초 김성한의 한 방으로 기울어졌다. 이순철이 1사후 류명선으로부터 볼넷을 골라 나가자 김성한은 볼카운트 0-1에서 몸쪽 직구를 힘껏 끌어당겨 왼쪽 담장을 넘겼다. 김성한으로서는 한국시리즈 개인 통산 최다 홈런(4호)으로 올라서는 순간이었다. 6회초 이호성의 좌익선상 2루타로 2 대 2 동점을 만든 직후부터 마운드를 인계받은 선동열은 6회말 선두 김성래, 후속 이종두에게 연속 안타를 맞아 무사1, 2루의 핀치에 몰렸으나 양준혁을 좌익수 플라이로 처리하고 이만수와 한기철을 연속 삼진으로 잡아 무실점으로 막아 승리의 기틀을 다졌다. 이 경기에서 김성한은 역대 한국시리즈 최고령 홈런(35세 5개월 7일)을 기록한다."
-Paragraph: "그리고 이 경기는 한국 야구 중계 역사상 최고 시청률인 32.1%를 기록했다."
+Paragraph: Macro(youtube "Mrzjn742dJY") <br> "승리 투수: 선동열, 패전 투수: 류명선" <br> "홈런: 해태 – 김성한(8회 2점)" <br> <br> "중계 방송사는 MBC TV." <br> <br> "종반으로 치달을 때까지도 깨지지 않던 2:2의 균형은 8회초 김성한의 한 방으로 기울어졌다. 이순철이 1사후 류명선으로부터 볼넷을 골라 나가자 김성한은 볼카운트 0-1에서 몸쪽 직구를 힘껏 끌어당겨 왼쪽 담장을 넘겼다. 김성한으로서는 한국시리즈 개인 통산 최다 홈런(4호)으로 올라서는 순간이었다. 6회초 이호성의 좌익선상 2루타로 2 대 2 동점을 만든 직후부터 마운드를 인계받은 선동열은 6회말 선두 김성래, 후속 이종두에게 연속 안타를 맞아 무사1, 2루의 핀치에 몰렸으나 양준혁을 좌익수 플라이로 처리하고 이만수와 한기철을 연속 삼진으로 잡아 무실점으로 막아 승리의 기틀을 다졌다. 이 경기에서 김성한은 역대 한국시리즈 최고령 홈런(35세 5개월 7일)을 기록한다."
+Paragraph: " " <br> "그리고 이 경기는 한국 야구 중계 역사상 최고 시청률인 32.1%를 기록했다." <br>
 Heading level=3 folded=false: "7차전"
 Table:
   Row:
-    Cell span=15x1 align=Center attrs=[Cell/bgcolor=#f01e23]:
+    Cell span=15x1 align=Some(Center) attrs=[Cell/bgcolor=#f01e23]:
       Paragraph: Colored(#000000 | Bold("한국시리즈 7차전, 10.26(화), 18:00, " Link("서울종합운동장 야구장" | Colored(#000000 | "서울종합운동장 야구장"))))
   Row:
-    Cell span=1x1 align=Center attrs=[Row/bgcolor=#ffffff,#191919]:
+    Cell span=1x1 align=Some(Center) attrs=[Row/bgcolor=#ffffff,#191919]:
       Paragraph: Bold("팀")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("선발")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("1")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("2")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("3")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("4")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("5")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("6")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("7")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("8")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("9")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("R")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("H")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("E")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("B")
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#007fff Cell/color=#373a3c]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#007fff Cell/color=#373a3c]:
       Paragraph: Bold(Link("삼성 라이온즈" | Colored(#ffffff | "삼성")))
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Link("박충식")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "1"
-    Cell span=1x1 align=Center attrs=[Column/bgcolor=#dcdcdc,#222222]:
+    Cell span=1x1 align=Some(Center) attrs=[Column { columns: 1 }/bgcolor=#dcdcdc,#222222]:
       Paragraph: Bold("1")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "6"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#f01e23]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#f01e23]:
       Paragraph: Bold(Link("해태 타이거즈" | Colored(#000000 | "해태")))
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Link("이강철")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "1"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "1"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "1"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "1"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "0"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "-"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("4")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "9"
   Row:
-    Cell span=15x1 align=Center attrs=[Cell/bgcolor=#dcdcdc]:
+    Cell span=15x1 align=Some(Center) attrs=[Cell/bgcolor=#dcdcdc]:
       Paragraph: Bold("중계방송사: " Link("KBS1" | Image("KBS 1 logo[1].png" width=45)) " | 캐스터: 정도영 | 해설: 하일성") " " Macro(br) " " Bold(Link("SBS" | Image("SBS_CI_1991_-_1994[1].png" width=35)) " | 캐스터: 유협 | 해설: 김동엽") " "
-Paragraph: Macro(youtube "cCUA1Y4vPuU") <br> "승리 투수: 선동열, 패전 투수: 박충식" <br> "홈런: 없음"
-Paragraph: "벼랑끝에 몰린 삼성은 3차전 15회 완투의 투혼을 보여주었던 박충식을 다시 선발로 기용했다. 그러나 3차전에서의 외로운 역투로 구위가 떨어지고, 이미 해태 타자들의 눈에 익숙해진 상태였던 박충식의 투구는 손쉽게 공략당했다."
-Paragraph: "이날 해태 승리의 주역은 누가 뭐래도 신인 이종범이었다.1회말 우전 안타로 나간 이종범은 삼성의 허약한 포수 어깨를 비웃기라도 하듯" Footnote(| "80년대 최고의 포수였던 " Link("이만수") "는 이 해 노쇠화로 포수 대신 지명타자나 대타로 주로 출장했다. 이 해 삼성의 포수는 대부분 공격형 포수 " Link("김성현(1963)" | "김성현") "과 수비형 포수 " Link("박선일") "이 번갈아가며 맡았다. " Link("박선일") "은 플레이오프에서 부상당하며 한국시리즈 출장이 불가능했고, 김성현은 93년 2할 7푼의 타율에 11홈런 45타점으로 포수로서 좋은 타격을 과시했으나 당시 도루 저지가 약점으로 꼽혔던 선수였다. 김성현도 방송에서 자신의 포수 능력이 많이 떨어져 있던 시기였고, 이종범이 이 시리즈에서 허점을 잘 파고들었다고 이야기한 바 있다.") " 망설임 없이 2루를 훔쳐 홍현우의 좌전 적시타로 득점할 수 있는 교두보를 확보했다. 스코어는 1 대 0. 3회말 두 번째 타석에서도 빠른 발을 살려 유격수 쪽 내야 안타를 만든 이종범은 다시 2루를 훔쳤다. 이 시리즈의 7호 도루. 한국시리즈 최다 도루 타이 기록이었다. 이것은 득점과 무관했으나 4회말 2사 1, 2루의 기회가 주어지자 좌익선상 안타를 날려 2 대 0을 만들었다. 5회말 이호성의 우중간 적시타로 3 대 0으로 앞서자 김응룡 감독은 6회초 무사 1, 2루의 위기에 몰린 송유석을 선동열로 구원하고, 6회말 이순철의 좌전 적시타로 4점째를 보태어 경기의 흐름은 완전히 해태에게 기울어졌다."
-Paragraph: "삼성은 9회초 우월 2루타로 나간 이종두를 강태윤이 우전 적시타로 불러들였으나 이미 2사 후여서 영패를 면하는 의미에 지나지 않았다. 마지막 타자인 " Link("이만수") "가 유격수 땅볼로 그쳤고, 이종범이 1루수 " Link("김성한") "에게 송구해서 아웃카운트를 잡은 후 두손을 치켜들고 포수 " Link("정회열") "을 보면서 환호하는 선동열의 모습은 그야말로 " Link("전설은 아니고 레전드급" | "신화를 완성하는 장면이었다.") " 올드 해태팬들에겐 잊을 수 없는 장면 중 하나다. "
+Paragraph: Macro(youtube "cCUA1Y4vPuU") <br> "승리 투수: 선동열, 패전 투수: 박충식" <br> "홈런: 없음" <br> <br> "벼랑끝에 몰린 삼성은 3차전 15회 완투의 투혼을 보여주었던 박충식을 다시 선발로 기용했다. 그러나 3차전에서의 외로운 역투로 구위가 떨어지고, 이미 해태 타자들의 눈에 익숙해진 상태였던 박충식의 투구는 손쉽게 공략당했다." <br> <br> "이날 해태 승리의 주역은 누가 뭐래도 신인 이종범이었다.1회말 우전 안타로 나간 이종범은 삼성의 허약한 포수 어깨를 비웃기라도 하듯" Footnote(| "80년대 최고의 포수였던 " Link("이만수") "는 이 해 노쇠화로 포수 대신 지명타자나 대타로 주로 출장했다. 이 해 삼성의 포수는 대부분 공격형 포수 " Link("김성현(1963)" | "김성현") "과 수비형 포수 " Link("박선일") "이 번갈아가며 맡았다. " Link("박선일") "은 플레이오프에서 부상당하며 한국시리즈 출장이 불가능했고, 김성현은 93년 2할 7푼의 타율에 11홈런 45타점으로 포수로서 좋은 타격을 과시했으나 당시 도루 저지가 약점으로 꼽혔던 선수였다. 김성현도 방송에서 자신의 포수 능력이 많이 떨어져 있던 시기였고, 이종범이 이 시리즈에서 허점을 잘 파고들었다고 이야기한 바 있다.") " 망설임 없이 2루를 훔쳐 홍현우의 좌전 적시타로 득점할 수 있는 교두보를 확보했다. 스코어는 1 대 0. 3회말 두 번째 타석에서도 빠른 발을 살려 유격수 쪽 내야 안타를 만든 이종범은 다시 2루를 훔쳤다. 이 시리즈의 7호 도루. 한국시리즈 최다 도루 타이 기록이었다. 이것은 득점과 무관했으나 4회말 2사 1, 2루의 기회가 주어지자 좌익선상 안타를 날려 2 대 0을 만들었다. 5회말 이호성의 우중간 적시타로 3 대 0으로 앞서자 김응룡 감독은 6회초 무사 1, 2루의 위기에 몰린 송유석을 선동열로 구원하고, 6회말 이순철의 좌전 적시타로 4점째를 보태어 경기의 흐름은 완전히 해태에게 기울어졌다." <br> <br> "삼성은 9회초 우월 2루타로 나간 이종두를 강태윤이 우전 적시타로 불러들였으나 이미 2사 후여서 영패를 면하는 의미에 지나지 않았다. 마지막 타자인 " Link("이만수") "가 유격수 땅볼로 그쳤고, 이종범이 1루수 " Link("김성한") "에게 송구해서 아웃카운트를 잡은 후 두손을 치켜들고 포수 " Link("정회열") "을 보면서 환호하는 선동열의 모습은 그야말로 " Link("전설은 아니고 레전드급" | "신화를 완성하는 장면이었다.") " 올드 해태팬들에겐 잊을 수 없는 장면 중 하나다. " <br>
 Heading level=2 folded=false: "기타"
 List kind=Unordered:
   Item:
@@ -1055,6 +870,7 @@ List kind=Unordered:
     Paragraph: "유일하게 " Link("김응용") ", " Link("선동열") ", " Link("이종범") " 셋이 다 같이 우승을 경험했던 시리즈이다. 제일 최근인 " Link("2017년 한국시리즈") " 우승 시에는 이 3명이 아예 없었고, 이 시리즈와 2017년을 제외한 나머지 9번의 시리즈에는 최소 1명씩은 자리에 있었다."
   Item:
     Paragraph: "시리즈 막바지인 6, 7차전에서 해태 선수들은 유니폼 어깨에 검정 리본을 달고 출전했는데, 시리즈 기간 중에 타계한 외야수 이호성의 아버지를 추모하는 의미였다."
+Paragraph: 
 Heading level=2 folded=false: "관련 문서"
 List kind=Unordered:
   Item:
@@ -1066,5 +882,4 @@ List kind=Unordered:
   Item:
     Paragraph: Link("2020년 한국시리즈") Footnote(| "3차전 무승부를 제외하면 스코어가 똑같다. 우승은 NC 다이노스.")
 Heading level=2 folded=false: "둘러보기"
-Paragraph: Macro(include "틀:한국프로야구 역대 포스트시즌 목록")
-Paragraph: Category("KBO 한국시리즈") Category("해태 타이거즈") Category("삼성 라이온즈")
+Paragraph: Macro(include "틀:한국프로야구 역대 포스트시즌 목록") <br> <br> Category("KBO 한국시리즈") Category("해태 타이거즈") Category("삼성 라이온즈")

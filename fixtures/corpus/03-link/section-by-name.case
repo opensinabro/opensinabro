@@ -1,0 +1,28 @@
+근거: 도움말예제 | 원문: 1줄 | 의미론: 25줄 | 렌더링: 1줄 | 현재 문서 문단명 링크
+[[#개요]]
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Link(
+                    Link {
+                        target: Template(
+                            [],
+                        ),
+                        anchor: Some(
+                            Template(
+                                [
+                                    Text(
+                                        "개요",
+                                    ),
+                                ],
+                            ),
+                        ),
+                        display: None,
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><a class="wiki-link-internal" href="#%EA%B0%9C%EC%9A%94" title="">#개요</a></div>

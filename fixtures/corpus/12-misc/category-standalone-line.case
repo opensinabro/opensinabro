@@ -1,0 +1,22 @@
+근거: 미확인 | 원문: 2줄 | 의미론: 17줄 | 렌더링: 2줄 | 분류만 있는 줄은 개행까지 소멸하는지
+[[분류:알파위키]]
+본문
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Category(
+                    Category {
+                        name: "알파위키",
+                    },
+                ),
+                LineBreak,
+                Text(
+                    "본문",
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph">본문</div>
+<div class="wiki-categories">분류: <a href="/w/%EB%B6%84%EB%A5%98%3A%EC%95%8C%ED%8C%8C%EC%9C%84%ED%82%A4">알파위키</a></div>

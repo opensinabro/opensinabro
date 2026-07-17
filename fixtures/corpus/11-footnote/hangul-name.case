@@ -1,0 +1,32 @@
+근거: 도움말예제 | 원문: 2줄 | 의미론: 27줄 | 렌더링: 2줄 | 한글 각주 이름
+[*예시 텍스트 3]
+[각주]
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Footnote(
+                    Footnote {
+                        name: Some(
+                            "예시",
+                        ),
+                        content: [
+                            Text(
+                                "텍스트 3",
+                            ),
+                        ],
+                    },
+                ),
+                LineBreak,
+                Macro(
+                    Macro {
+                        name: "각주",
+                        argument: None,
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><a class="wiki-fn-content" title="텍스트 3" href="#fn-%ec%98%88%ec%8b%9c"><span id="rfn-1"></span>[예시]</a><br><div class="wiki-macro-footnote"><span class="footnote-list"><span id="fn-예시"></span><a href="#rfn-1">[예시]</a> 텍스트 3</span></div>
+</div>

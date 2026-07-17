@@ -24,7 +24,12 @@ pub(crate) fn parse_inline_range(parser: &mut Parser<'_>, range: Range<usize>) {
         }
         let source = parser.source();
         let rest = &source[position..range.end];
-        let consumed = if rest.starts_with('\\') {
+        let consumed = if rest.starts_with('\n') {
+            // 인라인 범위가 여러 줄에 걸칠 수 있다 — 각주나 `{{{` 그룹이 줄을 넘는다.
+            parser.emit_token(SyntaxKind::Text, position);
+            parser.emit_token(SyntaxKind::Newline, position + 1);
+            1
+        } else if rest.starts_with('\\') {
             consume_escape(parser, position, range.end)
         } else if rest.starts_with("{{{") {
             consume_literal(parser, position, range.end)
@@ -32,6 +37,8 @@ pub(crate) fn parse_inline_range(parser: &mut Parser<'_>, range: Range<usize>) {
             consume_link(parser, position, range.end)
         } else if rest.starts_with("[*") {
             consume_footnote(parser, position, range.end)
+        } else if rest.starts_with('@') {
+            consume_variable(parser, position, range.end)
         } else if rest.starts_with('[') {
             consume_macro(parser, position, range.end)
         } else {
@@ -75,6 +82,19 @@ fn consume_literal(parser: &mut Parser<'_>, position: usize, end: usize) -> usiz
         parser.emit_token(SyntaxKind::Text, content_range.end);
         parser.emit_token(SyntaxKind::Marker, position + consumed);
         marker.complete(parser, SyntaxKind::InlineHtml);
+    } else if let Some(rest) = text::strip_directive(content, "#!wiki") {
+        // 링크 표시부처럼 인라인 문맥에서 열린 `#!wiki`. 헤더 잔여와 뒷줄이 모두 내용이라
+        // 문단 하나로 묶는다 — lower가 블록을 찾기 때문이다.
+        let (_, _, leftover) = text::parse_wiki_style_attributes(rest);
+        // 잔여는 양쪽이 다듬긴 조각이라 길이로 자리를 되짚으면 글자 가운데를 밟는다.
+        let content_start =
+            content_range.start + (leftover.as_ptr() as usize - content.as_ptr() as usize);
+        parser.emit_token(SyntaxKind::Marker, content_start);
+        let paragraph = parser.start_node();
+        parse_inline_range(parser, content_start..content_range.end);
+        paragraph.complete(parser, SyntaxKind::Paragraph);
+        parser.emit_token(SyntaxKind::Marker, position + consumed);
+        marker.complete(parser, SyntaxKind::WikiStyle);
     } else if let Some((_, inner)) = text::parse_size_marker(content) {
         let inner_start = content_range.end - inner.len();
         parser.emit_token(SyntaxKind::Marker, inner_start);
@@ -106,10 +126,7 @@ fn consume_link(parser: &mut Parser<'_>, position: usize, end: usize) -> usize {
         return 0;
     }
     let consumed = close + 2;
-    let (target, display) = match body.split_once('|') {
-        Some((target, display)) => (target, Some(display)),
-        None => (body, None),
-    };
+    let (target, display) = text::split_link_body(body);
     let kind = if text::strip_link_prefix(target, &["파일:", "file:"]).is_some() {
         SyntaxKind::Image
     } else if text::strip_link_prefix(target, &["분류:", "category:"]).is_some() {
@@ -160,6 +177,18 @@ fn consume_footnote(parser: &mut Parser<'_>, position: usize, end: usize) -> usi
     }
     marker.complete(parser, SyntaxKind::Footnote);
     consumed
+}
+
+/// `@이름@` / `@이름=기본값@`. 값은 렌더 단계에서 정해진다.
+fn consume_variable(parser: &mut Parser<'_>, position: usize, end: usize) -> usize {
+    let Some(shape) = text::variable_shape(&parser.source()[position..end]) else {
+        return 0;
+    };
+    parser.emit_token(SyntaxKind::Text, position);
+    let node = parser.start_node();
+    parser.emit_token(SyntaxKind::Marker, position + shape.length);
+    node.complete(parser, SyntaxKind::TemplateVariable);
+    shape.length
 }
 
 fn consume_macro(parser: &mut Parser<'_>, position: usize, end: usize) -> usize {

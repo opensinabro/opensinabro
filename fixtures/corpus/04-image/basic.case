@@ -1,0 +1,23 @@
+근거: 도움말예제 | 원문: 1줄 | 의미론: 20줄 | 렌더링: 1줄 | 이미지 삽입
+[[파일:example.png]]
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Image(
+                    Image {
+                        file_name: Template(
+                            [
+                                Text(
+                                    "example.png",
+                                ),
+                            ],
+                        ),
+                        options: [],
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><span class="wiki-image-align-normal" style=""><span class="wiki-image-wrapper" style="width: 100%;"><img width="100%" src="/file/example.png" alt="파일:example.png"></span></span></div>

@@ -1,0 +1,38 @@
+근거: 도움말예제 | 원문: 1줄 | 의미론: 35줄 | 렌더링: 1줄 | 타 문서 문단 링크
+[[알파위키#s-6|해당 문단 참고]]
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Link(
+                    Link {
+                        target: Template(
+                            [
+                                Text(
+                                    "알파위키",
+                                ),
+                            ],
+                        ),
+                        anchor: Some(
+                            Template(
+                                [
+                                    Text(
+                                        "s-6",
+                                    ),
+                                ],
+                            ),
+                        ),
+                        display: Some(
+                            [
+                                Text(
+                                    "해당 문단 참고",
+                                ),
+                            ],
+                        ),
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><a class="wiki-link-internal" href="/w/%EC%95%8C%ED%8C%8C%EC%9C%84%ED%82%A4#s-6" title="알파위키">해당 문단 참고</a></div>

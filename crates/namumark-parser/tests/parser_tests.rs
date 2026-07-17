@@ -118,10 +118,10 @@ fn code_block_with_language() {
     let document = parse("{{{#!syntax rust\nfn main() {}\n}}}");
     assert_eq!(
         document.blocks,
-        vec![Block::CodeBlock(CodeBlock {
+        vec![paragraph(vec![Inline::CodeBlock(CodeBlock {
             language: Some("rust".to_string()),
             source: "fn main() {}".to_string(),
-        })]
+        })])]
     );
 }
 
@@ -130,10 +130,10 @@ fn plain_multiline_literal_block() {
     let document = parse("{{{\n여러 줄\n그대로\n}}}");
     assert_eq!(
         document.blocks,
-        vec![Block::CodeBlock(CodeBlock {
+        vec![paragraph(vec![Inline::CodeBlock(CodeBlock {
             language: None,
             source: "여러 줄\n그대로".to_string(),
-        })]
+        })])]
     );
 }
 
@@ -145,19 +145,19 @@ fn links() {
         vec![paragraph(vec![
             Inline::Link(Link {
                 anchor: None,
-                target: "대문".to_string(),
+                target: "대문".into(),
                 display: None,
             }),
             text(" "),
             Inline::Link(Link {
                 anchor: None,
-                target: "대문".to_string(),
+                target: "대문".into(),
                 display: Some(vec![text("첫 화면")]),
             }),
             text(" "),
             Inline::Link(Link {
                 anchor: None,
-                target: "https://example.com".to_string(),
+                target: "https://example.com".into(),
                 display: Some(vec![text("예시")]),
             }),
         ])]
@@ -199,7 +199,7 @@ fn footnote_containing_link() {
                 content: vec![
                     Inline::Link(Link {
                         anchor: None,
-                        target: "문서".to_string(),
+                        target: "문서".into(),
                         display: None,
                     }),
                     text(" 참고"),
@@ -222,7 +222,7 @@ fn macros() {
             text(" "),
             Inline::Macro(Macro {
                 name: "age".to_string(),
-                argument: Some("2000-01-01".to_string()),
+                argument: Some("2000-01-01".into()),
             }),
             text(" "),
             Inline::Macro(Macro {
@@ -235,7 +235,7 @@ fn macros() {
 
 #[test]
 fn nested_quote() {
-    let document = parse("> 인용\n>> 중첩");
+    let document = parse(">인용\n>>중첩");
     assert_eq!(
         document.blocks,
         vec![Block::Quote(vec![
@@ -251,7 +251,7 @@ fn horizontal_rule_comment_redirect() {
     assert_eq!(
         document.blocks,
         vec![
-            Block::Redirect("대문".to_string()),
+            Block::Redirect("대문".into()),
             Block::Comment(" 주석".to_string()),
             Block::HorizontalRule,
         ]
@@ -321,15 +321,42 @@ fn indented_paragraph() {
     );
 }
 
+// 빈 줄은 문단을 나누지 않고 줄바꿈 둘이 된다 — 나무위키의 문단은 헤딩 사이 구역이다.
 #[test]
-fn paragraph_line_break_and_separation() {
+fn blank_line_is_two_line_breaks_within_one_paragraph() {
     let document = parse("첫 줄\n둘째 줄\n\n새 문단");
     assert_eq!(
         document.blocks,
-        vec![
-            paragraph(vec![text("첫 줄"), Inline::LineBreak, text("둘째 줄")]),
-            paragraph(vec![text("새 문단")]),
-        ]
+        vec![paragraph(vec![
+            text("첫 줄"),
+            Inline::LineBreak,
+            text("둘째 줄"),
+            Inline::LineBreak,
+            Inline::LineBreak,
+            text("새 문단"),
+        ])]
+    );
+}
+
+// 블록 뒤 빈 줄의 개행은 뒤따르는 문단의 첫 줄바꿈이 된다
+// (the seed: `</ul>` 뒤 빈 줄 → `<div class='wiki-paragraph'><br>…`).
+#[test]
+fn blank_line_after_block_leads_next_paragraph() {
+    let document = parse(" * 항목\n\n문단");
+    assert_eq!(
+        document.blocks.last(),
+        Some(&paragraph(vec![Inline::LineBreak, text("문단")]))
+    );
+}
+
+// 문단 끝 빈 줄의 개행 하나는 문단 안에 남는다
+// (the seed: `내용.\n\n== 다음 ==` → `<div class='wiki-paragraph'>내용.<br></div>`).
+#[test]
+fn blank_line_before_heading_keeps_one_line_break() {
+    let document = parse("내용.\n\n== 다음 ==");
+    assert_eq!(
+        document.blocks.first(),
+        Some(&paragraph(vec![text("내용."), Inline::LineBreak]))
     );
 }
 
@@ -343,15 +370,15 @@ fn unclosed_markup_is_plain_text() {
 }
 
 use namumark_ast::{
-    Category, ColoredText, Folding, HorizontalAlignment, Image, ImageOption, SizedBlock, SizedText,
-    Table, TableAttribute, TableAttributeScope, TableCell, TableRow, VerticalAlignment, WikiStyle,
+    Category, ColoredText, Folding, HorizontalAlignment, Image, ImageOption, SizedText, Table,
+    TableAttribute, TableAttributeScope, TableCell, TableRow, VerticalAlignment, WikiStyle,
 };
 
 fn simple_cell(content: &str, alignment: HorizontalAlignment) -> TableCell {
     TableCell {
-        column_span: 1,
-        row_span: 1,
-        horizontal_alignment: alignment,
+        column_span: None,
+        row_span: None,
+        horizontal_alignment: Some(alignment),
         vertical_alignment: None,
         attributes: vec![],
         blocks: vec![paragraph(vec![text(content)])],
@@ -421,7 +448,7 @@ fn table_automatic_column_span() {
     let Block::Table(table) = &document.blocks[0] else {
         panic!("expected table");
     };
-    assert_eq!(table.rows[0].cells[0].column_span, 2);
+    assert_eq!(table.rows[0].cells[0].column_span, Some(2));
 }
 
 #[test]
@@ -431,9 +458,9 @@ fn table_cell_options() {
         panic!("expected table");
     };
     let cell = &table.rows[0].cells[0];
-    assert_eq!(cell.column_span, 3);
-    assert_eq!(cell.row_span, 2);
-    assert_eq!(cell.horizontal_alignment, HorizontalAlignment::Center);
+    assert_eq!(cell.column_span, Some(3));
+    assert_eq!(cell.row_span, Some(2));
+    assert_eq!(cell.horizontal_alignment, Some(HorizontalAlignment::Center));
     assert_eq!(cell.vertical_alignment, Some(VerticalAlignment::Top));
     assert_eq!(
         cell.attributes,
@@ -441,12 +468,12 @@ fn table_cell_options() {
             TableAttribute {
                 scope: TableAttributeScope::Cell,
                 name: "bgcolor".to_string(),
-                value: Some("#eee".to_string()),
+                value: Some("#eee".into()),
             },
             TableAttribute {
                 scope: TableAttributeScope::Table,
                 name: "align".to_string(),
-                value: Some("center".to_string()),
+                value: Some("center".into()),
             },
         ]
     );
@@ -465,10 +492,10 @@ fn table_bare_color_option() {
         vec![TableAttribute {
             scope: TableAttributeScope::Cell,
             name: "bgcolor".to_string(),
-            value: Some("#ddd".to_string()),
+            value: Some("#ddd".into()),
         }]
     );
-    assert_eq!(cell.horizontal_alignment, HorizontalAlignment::Center);
+    assert_eq!(cell.horizontal_alignment, Some(HorizontalAlignment::Center));
 }
 
 #[test]
@@ -478,7 +505,7 @@ fn table_multiline_cell() {
         panic!("expected table");
     };
     let cell = &table.rows[0].cells[0];
-    assert_eq!(cell.horizontal_alignment, HorizontalAlignment::Center);
+    assert_eq!(cell.horizontal_alignment, Some(HorizontalAlignment::Center));
     assert_eq!(
         cell.blocks,
         vec![paragraph(vec![
@@ -495,11 +522,11 @@ fn wiki_style_block() {
         parse("{{{#!wiki style=\"margin: 10px\" dark-style='color: white'\n'''내용'''\n}}}");
     assert_eq!(
         document.blocks,
-        vec![Block::WikiStyle(WikiStyle {
-            style: Some("margin: 10px".to_string()),
-            dark_style: Some("color: white".to_string()),
+        vec![paragraph(vec![Inline::WikiStyle(WikiStyle {
+            style: Some("margin: 10px".into()),
+            dark_style: Some("color: white".into()),
             blocks: vec![paragraph(vec![Inline::Bold(vec![text("내용")])])],
-        })]
+        })])]
     );
 }
 
@@ -508,10 +535,10 @@ fn folding_block() {
     let document = parse("{{{#!folding 펼치기\n숨은 내용\n}}}");
     assert_eq!(
         document.blocks,
-        vec![Block::Folding(Folding {
-            summary: vec![text("펼치기")],
+        vec![paragraph(vec![Inline::Folding(Folding {
+            summary: "펼치기".into(),
             blocks: vec![paragraph(vec![text("숨은 내용")])],
-        })]
+        })])]
     );
 }
 
@@ -520,7 +547,7 @@ fn html_block() {
     let document = parse("{{{#!html\n<b>굵게</b>\n}}}");
     assert_eq!(
         document.blocks,
-        vec![Block::Html("<b>굵게</b>".to_string())]
+        vec![paragraph(vec![Inline::Html("<b>굵게</b>".into())])]
     );
 }
 
@@ -578,37 +605,42 @@ fn multiline_sized_block() {
     let document = parse("{{{+1\n첫 줄\n둘째 줄\n}}}");
     assert_eq!(
         document.blocks,
-        vec![Block::Sized(SizedBlock {
+        vec![paragraph(vec![Inline::Sized(SizedText {
             level: 1,
-            blocks: vec![paragraph(vec![
-                text("첫 줄"),
-                Inline::LineBreak,
-                text("둘째 줄"),
-            ])],
-        })]
+            content: vec![text("첫 줄"), Inline::LineBreak, text("둘째 줄")],
+        })])]
     );
 }
 
+// 색상·크기는 서식일 뿐이라 안쪽 내용을 인라인으로 편다.
+// 그 안에 표를 넣는 형태는 나무위키 렌더에서도 나타나지 않는다.
 #[test]
-fn multiline_colored_block_wrapping_table() {
-    let document = parse("{{{#red\n|| A ||\n}}}");
-    let Block::Colored(colored) = &document.blocks[0] else {
-        panic!("expected colored block");
-    };
-    assert_eq!(colored.color, "red");
-    assert!(matches!(colored.blocks[0], Block::Table(_)));
+fn multiline_colored_block_flattens_to_inline() {
+    let document = parse("{{{#red\n빨강\n}}}");
+    assert_eq!(
+        document.blocks,
+        vec![paragraph(vec![Inline::Colored(ColoredText {
+            color: "red".to_string(),
+            dark_color: None,
+            content: vec![text("빨강")],
+        })])]
+    );
 }
 
+// 나무위키에서 `{{{` 그룹은 인라인 요소다 — 문단 중간에서 열려도 문단을 쪼개지 않는다.
 #[test]
 fn brace_group_opened_in_paragraph_middle() {
     let document = parse("앞 텍스트 {{{#!wiki\n|| A ||\n}}} 뒤 텍스트");
-    assert_eq!(document.blocks.len(), 3);
-    assert_eq!(document.blocks[0], paragraph(vec![text("앞 텍스트 ")]));
-    let Block::WikiStyle(wiki_style) = &document.blocks[1] else {
-        panic!("expected wiki style block");
+    assert_eq!(document.blocks.len(), 1, "{:?}", document.blocks);
+    let Block::Paragraph(inlines) = &document.blocks[0] else {
+        panic!("문단이어야 한다");
+    };
+    assert_eq!(inlines[0], text("앞 텍스트 "));
+    let Inline::WikiStyle(wiki_style) = &inlines[1] else {
+        panic!("wiki 그룹이어야 한다: {inlines:?}");
     };
     assert!(matches!(wiki_style.blocks[0], Block::Table(_)));
-    assert_eq!(document.blocks[2], paragraph(vec![text(" 뒤 텍스트")]));
+    assert_eq!(inlines[2], text(" 뒤 텍스트"));
 }
 
 #[test]
@@ -617,13 +649,13 @@ fn nested_link_in_display() {
     assert_eq!(
         document.blocks,
         vec![paragraph(vec![Inline::Link(Link {
-            target: "문서".to_string(),
+            target: "문서".into(),
             anchor: None,
             display: Some(vec![Inline::Image(Image {
-                file_name: "아이콘.png".to_string(),
+                file_name: "아이콘.png".into(),
                 options: vec![ImageOption {
                     name: "width".to_string(),
-                    value: Some("20".to_string()),
+                    value: Some("20".into()),
                 }],
             })]),
         })])]
@@ -637,21 +669,21 @@ fn image_link_with_options() {
         document.blocks,
         vec![paragraph(vec![
             Inline::Image(Image {
-                file_name: "예시.png".to_string(),
+                file_name: "예시.png".into(),
                 options: vec![
                     ImageOption {
                         name: "width".to_string(),
-                        value: Some("100%".to_string()),
+                        value: Some("100%".into()),
                     },
                     ImageOption {
                         name: "align".to_string(),
-                        value: Some("center".to_string()),
+                        value: Some("center".into()),
                     },
                 ],
             }),
             text(" "),
             Inline::Image(Image {
-                file_name: "x.png".to_string(),
+                file_name: "x.png".into(),
                 options: vec![],
             }),
         ])]
@@ -675,8 +707,8 @@ fn link_anchor_is_split() {
     assert_eq!(
         document.blocks,
         vec![paragraph(vec![Inline::Link(Link {
-            target: "1993년 한국시리즈".to_string(),
-            anchor: Some("s-5.2".to_string()),
+            target: "1993년 한국시리즈".into(),
+            anchor: Some("s-5.2".into()),
             display: Some(vec![text("5차전")]),
         })])]
     );
@@ -688,7 +720,7 @@ fn external_url_keeps_fragment() {
     assert_eq!(
         document.blocks,
         vec![paragraph(vec![Inline::Link(Link {
-            target: "https://example.com/a#frag".to_string(),
+            target: "https://example.com/a#frag".into(),
             anchor: None,
             display: None,
         })])]
@@ -701,7 +733,7 @@ fn colon_escaped_file_link_is_plain_link() {
     assert_eq!(
         document.blocks,
         vec![paragraph(vec![Inline::Link(Link {
-            target: "파일:포스터.jpg".to_string(),
+            target: "파일:포스터.jpg".into(),
             anchor: None,
             display: None,
         })])]
@@ -738,20 +770,78 @@ fn list_marker_without_space() {
     );
 }
 
+// 순서 리스트 마커는 항상 `1.` 리터럴이라 `2.`는 마커가 아니다. 마커가 아닌 줄은
+// 앞 항목의 문단이 이어지는 것이다.
 #[test]
 fn literal_number_is_not_list_marker() {
     let document = parse(" 1. 하나\n 2. 둘");
     assert_eq!(
         document.blocks,
-        vec![
-            Block::List(List {
-                kind: ListKind::Decimal,
-                items: vec![ListItem {
-                    start_number: None,
-                    blocks: vec![paragraph(vec![text("하나")])],
-                }],
-            }),
-            Block::Indent(vec![paragraph(vec![text("2. 둘")])]),
-        ]
+        vec![Block::List(List {
+            kind: ListKind::Decimal,
+            items: vec![ListItem {
+                start_number: None,
+                blocks: vec![paragraph(vec![
+                    text("하나"),
+                    Inline::LineBreak,
+                    text("2. 둘"),
+                ])],
+            }],
+        })]
     );
+}
+
+// 색상 표기 뒤에 내용을 가르는 공백이 없으면 색상이 아니다.
+// 렌더확정: the seed는 `{{{#212529}}}`를 `<code>#212529</code>`로 낸다.
+#[test]
+fn color_group_without_separator_is_a_literal() {
+    let document = parse("{{{#212529}}}");
+    assert_eq!(
+        document.blocks,
+        vec![paragraph(vec![Inline::Literal("#212529".to_string())])]
+    );
+}
+
+// 인용 마커는 `>` 하나뿐이다. 뒤따르는 공백은 마커가 아니라 들여쓰기 한 단계다
+// (렌더확정: `> 내용`은 `<blockquote><div class='wiki-indent'>…`, `>내용`은 들여쓰기가 없다).
+#[test]
+fn space_after_quote_marker_is_an_indent() {
+    assert_eq!(
+        parse(">인용문").blocks,
+        vec![Block::Quote(vec![paragraph(vec![text("인용문")])])]
+    );
+    assert_eq!(
+        parse("> 인용문").blocks,
+        vec![Block::Quote(vec![Block::Indent(vec![paragraph(vec![
+            text("인용문")
+        ])])])]
+    );
+}
+
+// 주석 줄은 개행까지 통째로 사라진다 — 문단을 끊지도, 줄바꿈을 남기지도 않는다
+// (렌더확정: the seed는 `가나다라\n## 주석\n마바사아`를 `가나다라<br>마바사아`로 낸다).
+#[test]
+fn comment_line_leaves_no_line_break() {
+    assert_eq!(
+        parse("가나다라\n## 주석\n마바사아").blocks,
+        vec![paragraph(vec![
+            text("가나다라"),
+            Inline::LineBreak,
+            text("마바사아"),
+        ])]
+    );
+}
+
+// 접기 문구에는 위키 문법이 적용되지 않는다 — 글자 그대로다
+// (렌더확정: the seed는 `{{{#!folding '''[ 펼치기 ]'''`의 `'''`를 풀지 않고 보여 준다).
+#[test]
+fn folding_summary_is_plain_text() {
+    let document = parse("{{{#!folding '''[ 펼치기 ]'''\n내용\n}}}");
+    let [Block::Paragraph(inlines)] = document.blocks.as_slice() else {
+        panic!("문단이어야 한다: {:?}", document.blocks);
+    };
+    let [Inline::Folding(folding)] = inlines.as_slice() else {
+        panic!("접기여야 한다: {inlines:?}");
+    };
+    assert_eq!(folding.summary.to_string(), "'''[ 펼치기 ]'''");
 }

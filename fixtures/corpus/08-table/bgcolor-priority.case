@@ -1,0 +1,92 @@
+근거: 도움말서술 | 원문: 1줄 | 의미론: 88줄 | 렌더링: 2줄 | 도움말: bgcolor > colbgcolor > rowbgcolor > tablebgcolor 우선순위
+||<tablebgcolor=#111111><rowbgcolor=#222222><colbgcolor=#333333><bgcolor=#444444> 우선순위 ||
+Document {
+    blocks: [
+        Table(
+            Table {
+                caption: None,
+                rows: [
+                    TableRow {
+                        cells: [
+                            TableCell {
+                                column_span: None,
+                                row_span: None,
+                                horizontal_alignment: Some(
+                                    Center,
+                                ),
+                                vertical_alignment: None,
+                                attributes: [
+                                    TableAttribute {
+                                        scope: Table,
+                                        name: "bgcolor",
+                                        value: Some(
+                                            Template(
+                                                [
+                                                    Text(
+                                                        "#111111",
+                                                    ),
+                                                ],
+                                            ),
+                                        ),
+                                    },
+                                    TableAttribute {
+                                        scope: Row,
+                                        name: "bgcolor",
+                                        value: Some(
+                                            Template(
+                                                [
+                                                    Text(
+                                                        "#222222",
+                                                    ),
+                                                ],
+                                            ),
+                                        ),
+                                    },
+                                    TableAttribute {
+                                        scope: Column {
+                                            columns: 1,
+                                        },
+                                        name: "bgcolor",
+                                        value: Some(
+                                            Template(
+                                                [
+                                                    Text(
+                                                        "#333333",
+                                                    ),
+                                                ],
+                                            ),
+                                        ),
+                                    },
+                                    TableAttribute {
+                                        scope: Cell,
+                                        name: "bgcolor",
+                                        value: Some(
+                                            Template(
+                                                [
+                                                    Text(
+                                                        "#444444",
+                                                    ),
+                                                ],
+                                            ),
+                                        ),
+                                    },
+                                ],
+                                blocks: [
+                                    Paragraph(
+                                        [
+                                            Text(
+                                                "우선순위",
+                                            ),
+                                        ],
+                                    ),
+                                ],
+                            },
+                        ],
+                    },
+                ],
+            },
+        ),
+    ],
+}
+<div class="wiki-table-wrap"><table class="wiki-table" style=" background-color: #111111;"><tbody><tr class="wiki-table-tr" style=" background-color: #222222;"><td style="text-align: center; background-color: #444444;"><div class="wiki-paragraph">우선순위</div>
+</td></tr></tbody></table></div>

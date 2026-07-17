@@ -1,0 +1,15 @@
+근거: 미확인 | 원문: 1줄 | 의미론: 11줄 | 렌더링: 2줄 | 내용 없는 인용문
+>
+Document {
+    blocks: [
+        Quote(
+            [
+                Paragraph(
+                    [],
+                ),
+            ],
+        ),
+    ],
+}
+<blockquote class="wiki-quote"><div class="wiki-paragraph"></div>
+</blockquote>

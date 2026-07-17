@@ -1,0 +1,41 @@
+근거: 도움말예제 | 원문: 2줄 | 의미론: 35줄 | 렌더링: 3줄 | 번호 리스트
+ 1. 리스트 1
+ 1. 리스트 2
+Document {
+    blocks: [
+        List(
+            List {
+                kind: Decimal,
+                items: [
+                    ListItem {
+                        start_number: None,
+                        blocks: [
+                            Paragraph(
+                                [
+                                    Text(
+                                        "리스트 1",
+                                    ),
+                                ],
+                            ),
+                        ],
+                    },
+                    ListItem {
+                        start_number: None,
+                        blocks: [
+                            Paragraph(
+                                [
+                                    Text(
+                                        "리스트 2",
+                                    ),
+                                ],
+                            ),
+                        ],
+                    },
+                ],
+            },
+        ),
+    ],
+}
+<ol class="wiki-list wiki-list" start="1"><li><div class="wiki-paragraph">리스트 1</div>
+</li><li><div class="wiki-paragraph">리스트 2</div>
+</li></ol>

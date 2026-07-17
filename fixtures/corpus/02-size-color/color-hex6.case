@@ -1,0 +1,22 @@
+근거: 도움말예제 | 원문: 1줄 | 의미론: 19줄 | 렌더링: 1줄 | 6자리 헥스 색상
+{{{#ff0000 텍스트}}}
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Colored(
+                    ColoredText {
+                        color: "#ff0000",
+                        dark_color: None,
+                        content: [
+                            Text(
+                                "텍스트",
+                            ),
+                        ],
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><span style="color:#ff0000" data-dark-style="color:#ff0000;">텍스트</span></div>

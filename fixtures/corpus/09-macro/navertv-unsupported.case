@@ -1,0 +1,25 @@
+근거: 도움말예제 | 원문: 1줄 | 의미론: 22줄 | 렌더링: 1줄 | 도움말: 지원. 우리는 미해결 매크로로 원문 노출
+[navertv(1369799)]
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Macro(
+                    Macro {
+                        name: "navertv",
+                        argument: Some(
+                            Template(
+                                [
+                                    Text(
+                                        "1369799",
+                                    ),
+                                ],
+                            ),
+                        ),
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph">[navertv(1369799)]</div>

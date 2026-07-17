@@ -1,0 +1,68 @@
+근거: 미확인 | 원문: 1줄 | 의미론: 65줄 | 렌더링: 1줄 | 한 줄에 모든 서식 — 서로 간섭하지 않는지
+'''굵게''' ''기울임'' ~~취소~~ __밑줄__ ^^위^^ ,,아래,,
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Bold(
+                    [
+                        Text(
+                            "굵게",
+                        ),
+                    ],
+                ),
+                Text(
+                    " ",
+                ),
+                Italic(
+                    [
+                        Text(
+                            "기울임",
+                        ),
+                    ],
+                ),
+                Text(
+                    " ",
+                ),
+                Strikethrough(
+                    [
+                        Text(
+                            "취소",
+                        ),
+                    ],
+                ),
+                Text(
+                    " ",
+                ),
+                Underline(
+                    [
+                        Text(
+                            "밑줄",
+                        ),
+                    ],
+                ),
+                Text(
+                    " ",
+                ),
+                Superscript(
+                    [
+                        Text(
+                            "위",
+                        ),
+                    ],
+                ),
+                Text(
+                    " ",
+                ),
+                Subscript(
+                    [
+                        Text(
+                            "아래",
+                        ),
+                    ],
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><strong>굵게</strong> <em>기울임</em> <del>취소</del> <u>밑줄</u> <sup>위</sup> <sub>아래</sub></div>

@@ -8,6 +8,7 @@
 //! resolve만 외부 세계([`WikiContext`])를 보고 layout은 순수 함수다.
 //! 산출물([`namumark_ir::RenderTree`])은 백엔드 크레이트가 소비한다.
 
+mod condition;
 mod context;
 mod layout;
 mod resolve;

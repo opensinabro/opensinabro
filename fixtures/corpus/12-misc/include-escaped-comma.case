@@ -1,0 +1,25 @@
+근거: 도움말서술 | 원문: 1줄 | 의미론: 22줄 | 렌더링: 1줄 | 도움말: 값의 쉼표는 \, 로
+[include(틀:설명, 설명=하나\,둘)]
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Macro(
+                    Macro {
+                        name: "include",
+                        argument: Some(
+                            Template(
+                                [
+                                    Text(
+                                        "틀:설명, 설명=하나\\,둘",
+                                    ),
+                                ],
+                            ),
+                        ),
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph">하나\</div>

@@ -1,0 +1,14 @@
+근거: 미확인 | 원문: 1줄 | 의미론: 11줄 | 렌더링: 1줄 | 크기 단계가 범위(±5) 밖
+{{{+6 범위밖}}}
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Literal(
+                    "+6 범위밖",
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><code>+6 범위밖</code></div>

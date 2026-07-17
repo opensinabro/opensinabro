@@ -1,0 +1,40 @@
+근거: 미확인 | 원문: 1줄 | 의미론: 37줄 | 렌더링: 1줄 | 링크 안의 링크 표기
+[[문서|[[안쪽]]]]
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Link(
+                    Link {
+                        target: Template(
+                            [
+                                Text(
+                                    "문서",
+                                ),
+                            ],
+                        ),
+                        anchor: None,
+                        display: Some(
+                            [
+                                Link(
+                                    Link {
+                                        target: Template(
+                                            [
+                                                Text(
+                                                    "안쪽",
+                                                ),
+                                            ],
+                                        ),
+                                        anchor: None,
+                                        display: None,
+                                    },
+                                ),
+                            ],
+                        ),
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><a class="wiki-link-internal" href="/w/%EB%AC%B8%EC%84%9C" title="문서"><a class="wiki-link-internal not-exist" href="/w/%EC%95%88%EC%AA%BD" rel="nofollow" title="안쪽">안쪽</a></a></div>

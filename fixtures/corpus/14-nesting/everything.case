@@ -1,0 +1,187 @@
+근거: 미확인 | 원문: 8줄 | 의미론: 167줄 | 렌더링: 11줄 | 복합 — 여러 문법이 한 문서에
+[목차]
+== 개요 ==
+'''굵게''' [[링크]] [* 각주]
+||<tablealign=center><bgcolor=#eee> 표 ||
+{{{#!wiki style="margin: 4px"
+ * 리스트
+}}}
+[각주]
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Macro(
+                    Macro {
+                        name: "목차",
+                        argument: None,
+                    },
+                ),
+            ],
+        ),
+        Heading(
+            Heading {
+                level: 2,
+                folded: false,
+                content: [
+                    Text(
+                        "개요",
+                    ),
+                ],
+            },
+        ),
+        Paragraph(
+            [
+                Bold(
+                    [
+                        Text(
+                            "굵게",
+                        ),
+                    ],
+                ),
+                Text(
+                    " ",
+                ),
+                Link(
+                    Link {
+                        target: Template(
+                            [
+                                Text(
+                                    "링크",
+                                ),
+                            ],
+                        ),
+                        anchor: None,
+                        display: None,
+                    },
+                ),
+                Text(
+                    " ",
+                ),
+                Footnote(
+                    Footnote {
+                        name: None,
+                        content: [
+                            Text(
+                                "각주",
+                            ),
+                        ],
+                    },
+                ),
+            ],
+        ),
+        Table(
+            Table {
+                caption: None,
+                rows: [
+                    TableRow {
+                        cells: [
+                            TableCell {
+                                column_span: None,
+                                row_span: None,
+                                horizontal_alignment: Some(
+                                    Center,
+                                ),
+                                vertical_alignment: None,
+                                attributes: [
+                                    TableAttribute {
+                                        scope: Table,
+                                        name: "align",
+                                        value: Some(
+                                            Template(
+                                                [
+                                                    Text(
+                                                        "center",
+                                                    ),
+                                                ],
+                                            ),
+                                        ),
+                                    },
+                                    TableAttribute {
+                                        scope: Cell,
+                                        name: "bgcolor",
+                                        value: Some(
+                                            Template(
+                                                [
+                                                    Text(
+                                                        "#eee",
+                                                    ),
+                                                ],
+                                            ),
+                                        ),
+                                    },
+                                ],
+                                blocks: [
+                                    Paragraph(
+                                        [
+                                            Text(
+                                                "표",
+                                            ),
+                                        ],
+                                    ),
+                                ],
+                            },
+                        ],
+                    },
+                ],
+            },
+        ),
+        Paragraph(
+            [
+                WikiStyle(
+                    WikiStyle {
+                        style: Some(
+                            Template(
+                                [
+                                    Text(
+                                        "margin: 4px",
+                                    ),
+                                ],
+                            ),
+                        ),
+                        dark_style: None,
+                        blocks: [
+                            List(
+                                List {
+                                    kind: Unordered,
+                                    items: [
+                                        ListItem {
+                                            start_number: None,
+                                            blocks: [
+                                                Paragraph(
+                                                    [
+                                                        Text(
+                                                            "리스트",
+                                                        ),
+                                                    ],
+                                                ),
+                                            ],
+                                        },
+                                    ],
+                                },
+                            ),
+                        ],
+                    },
+                ),
+                LineBreak,
+                Macro(
+                    Macro {
+                        name: "각주",
+                        argument: None,
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><div class="wiki-macro-toc" id="toc"><details open><summary></summary><div class="toc-indent"><span class="toc-item"><a href="#s-1">1</a>. 개요</span></div></details></div>
+</div>
+<h2 class="wiki-heading"><a id="s-1" href="#toc">1.</a> <span id="개요">개요</span></h2>
+<div class="wiki-heading-content"><div class="wiki-paragraph"><strong>굵게</strong> <a class="wiki-link-internal" href="/w/%EB%A7%81%ED%81%AC" title="링크">링크</a> <a class="wiki-fn-content" title="각주" href="#fn-1"><span id="rfn-1"></span>[1]</a></div>
+<div class="wiki-table-wrap table-center"><table class="wiki-table"><tbody><tr class="wiki-table-tr"><td style="text-align: center; background-color: #eeeeee;"><div class="wiki-paragraph">표</div>
+</td></tr></tbody></table></div>
+<div class="wiki-paragraph"><div style="margin: 4px"><ul class="wiki-list"><li><div class="wiki-paragraph">리스트</div>
+</li></ul>
+</div><br><div class="wiki-macro-footnote"><span class="footnote-list"><span id="fn-1"></span><a href="#rfn-1">[1]</a> 각주</span></div>
+</div>
+</div>

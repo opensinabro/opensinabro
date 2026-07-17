@@ -1,0 +1,46 @@
+근거: 미확인 | 원문: 3줄 | 의미론: 36줄 | 렌더링: 6줄 | 접힌 문단이 목차에 오르는지
+[목차]
+==# 접힌 문단 #==
+=== 하위 ===
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Macro(
+                    Macro {
+                        name: "목차",
+                        argument: None,
+                    },
+                ),
+            ],
+        ),
+        Heading(
+            Heading {
+                level: 2,
+                folded: true,
+                content: [
+                    Text(
+                        "접힌 문단",
+                    ),
+                ],
+            },
+        ),
+        Heading(
+            Heading {
+                level: 3,
+                folded: false,
+                content: [
+                    Text(
+                        "하위",
+                    ),
+                ],
+            },
+        ),
+    ],
+}
+<div class="wiki-paragraph"><div class="wiki-macro-toc" id="toc"><details open><summary></summary><div class="toc-indent"><span class="toc-item"><a href="#s-1">1</a>. 접힌 문단</span><div class="toc-indent"><span class="toc-item"><a href="#s-1.1">1.1</a>. 하위</span></div></div></details></div>
+</div>
+<h2 class="wiki-heading wiki-heading-folded"><a id="s-1" href="#toc">1.</a> <span id="접힌 문단">접힌 문단</span></h2>
+<div class="wiki-heading-content"></div>
+<h3 class="wiki-heading"><a id="s-1.1" href="#toc">1.1.</a> <span id="하위">하위</span></h3>
+<div class="wiki-heading-content"></div>

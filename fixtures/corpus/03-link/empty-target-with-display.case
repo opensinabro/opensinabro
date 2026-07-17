@@ -1,0 +1,26 @@
+근거: 도움말서술 | 원문: 1줄 | 의미론: 23줄 | 렌더링: 1줄 | 도움말: 문서부가 비면 현재 문서로 링크되고 표시는 볼드
+[[|출력글자]]
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Link(
+                    Link {
+                        target: Template(
+                            [],
+                        ),
+                        anchor: None,
+                        display: Some(
+                            [
+                                Text(
+                                    "출력글자",
+                                ),
+                            ],
+                        ),
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><a class="wiki-self-link" href="" title="">출력글자</a></div>

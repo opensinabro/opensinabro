@@ -41,6 +41,8 @@ pub enum SyntaxKind {
     HtmlBlock,
     ColoredBlock,
     SizedBlock,
+    Conditional,
+    ConditionExpression,
     Comment,
     Redirect,
 
@@ -60,6 +62,8 @@ pub enum SyntaxKind {
     Category,
     Footnote,
     MacroCall,
+    /// `@이름@` / `@이름=기본값@` — 틀 인자
+    TemplateVariable,
 
     // ---- 내부용 ----
     /// 버려진 노드 표시. sink가 건너뛰므로 트리에 나타나지 않는다.

@@ -1,0 +1,14 @@
+근거: 미확인 | 원문: 1줄 | 의미론: 11줄 | 렌더링: 1줄 | 닫히지 않은 행
+|| 안 닫음
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Text(
+                    "|| 안 닫음",
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph">|| 안 닫음</div>

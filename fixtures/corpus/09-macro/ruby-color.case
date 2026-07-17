@@ -1,0 +1,25 @@
+근거: 도움말예제 | 원문: 1줄 | 의미론: 22줄 | 렌더링: 1줄 | 도움말: color는 윗첨자에만 적용
+[ruby(글자,ruby=루비,color=red)]
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Macro(
+                    Macro {
+                        name: "ruby",
+                        argument: Some(
+                            Template(
+                                [
+                                    Text(
+                                        "글자,ruby=루비,color=red",
+                                    ),
+                                ],
+                            ),
+                        ),
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><ruby>글자<rp>(</rp><rt><span style="color:red">루비</span></rt><rp>)</rp></ruby></div>

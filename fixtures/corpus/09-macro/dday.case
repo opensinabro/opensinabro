@@ -1,0 +1,25 @@
+근거: 도움말서술 | 원문: 1줄 | 의미론: 22줄 | 렌더링: 1줄 | 디데이
+[dday(2000-01-01)]
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Macro(
+                    Macro {
+                        name: "dday",
+                        argument: Some(
+                            Template(
+                                [
+                                    Text(
+                                        "2000-01-01",
+                                    ),
+                                ],
+                            ),
+                        ),
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph">D+9694</div>

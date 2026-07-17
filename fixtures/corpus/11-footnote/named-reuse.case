@@ -1,0 +1,43 @@
+근거: 도움말예제 | 원문: 2줄 | 의미론: 38줄 | 렌더링: 2줄 | 이름 각주 재사용
+[*A 텍스트 2] [*A]
+[각주]
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Footnote(
+                    Footnote {
+                        name: Some(
+                            "A",
+                        ),
+                        content: [
+                            Text(
+                                "텍스트 2",
+                            ),
+                        ],
+                    },
+                ),
+                Text(
+                    " ",
+                ),
+                Footnote(
+                    Footnote {
+                        name: Some(
+                            "A",
+                        ),
+                        content: [],
+                    },
+                ),
+                LineBreak,
+                Macro(
+                    Macro {
+                        name: "각주",
+                        argument: None,
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><a class="wiki-fn-content" title="텍스트 2" href="#fn-A"><span id="rfn-1"></span>[A]</a> <a class="wiki-fn-content" title="텍스트 2" href="#fn-A"><span id="rfn-2"></span>[A]</a><br><div class="wiki-macro-footnote"><span class="footnote-list"><span id="fn-A"></span>[A] <a href="#rfn-1"><sup>1.1</sup></a> <a href="#rfn-2"><sup>1.2</sup></a> 텍스트 2</span></div>
+</div>

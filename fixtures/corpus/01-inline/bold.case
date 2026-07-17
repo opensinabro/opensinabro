@@ -1,0 +1,18 @@
+근거: 도움말예제 | 원문: 1줄 | 의미론: 15줄 | 렌더링: 1줄 | 굵게
+'''굵게'''
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Bold(
+                    [
+                        Text(
+                            "굵게",
+                        ),
+                    ],
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><strong>굵게</strong></div>

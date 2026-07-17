@@ -1,0 +1,19 @@
+근거: 미확인 | 원문: 3줄 | 의미론: 14줄 | 렌더링: 1줄 | 지시자 없는 여러 줄 중괄호
+{{{
+코드 '''그대로'''
+}}}
+Document {
+    blocks: [
+        Paragraph(
+            [
+                CodeBlock(
+                    CodeBlock {
+                        language: None,
+                        source: "코드 '''그대로'''",
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><pre><code>코드 '''그대로'''</code></pre></div>

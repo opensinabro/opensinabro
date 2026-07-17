@@ -1,0 +1,30 @@
+근거: 도움말예제 | 원문: 1줄 | 의미론: 27줄 | 렌더링: 1줄 | 외부 링크 표시명
+[[https://www.google.com/|구글]]
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Link(
+                    Link {
+                        target: Template(
+                            [
+                                Text(
+                                    "https://www.google.com/",
+                                ),
+                            ],
+                        ),
+                        anchor: None,
+                        display: Some(
+                            [
+                                Text(
+                                    "구글",
+                                ),
+                            ],
+                        ),
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><a class="wiki-link-external" href="https://www.google.com/" target="_blank" rel="nofollow noopener ugc" title="https://www.google.com/">구글</a></div>

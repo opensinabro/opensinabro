@@ -1,0 +1,28 @@
+근거: 도움말예제 | 원문: 1줄 | 의미론: 25줄 | 렌더링: 1줄 | 굵게+기울임 중첩
+''' ''굵게 기울임'' '''
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Bold(
+                    [
+                        Text(
+                            " ",
+                        ),
+                        Italic(
+                            [
+                                Text(
+                                    "굵게 기울임",
+                                ),
+                            ],
+                        ),
+                        Text(
+                            " ",
+                        ),
+                    ],
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><strong> <em>굵게 기울임</em> </strong></div>

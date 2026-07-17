@@ -1,0 +1,47 @@
+근거: 미확인 | 원문: 3줄 | 의미론: 40줄 | 렌더링: 3줄 | 접기 안의 리스트
+{{{#!folding 요약
+ * 접힌 리스트
+}}}
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Folding(
+                    Folding {
+                        summary: Template(
+                            [
+                                Text(
+                                    "요약",
+                                ),
+                            ],
+                        ),
+                        blocks: [
+                            List(
+                                List {
+                                    kind: Unordered,
+                                    items: [
+                                        ListItem {
+                                            start_number: None,
+                                            blocks: [
+                                                Paragraph(
+                                                    [
+                                                        Text(
+                                                            "접힌 리스트",
+                                                        ),
+                                                    ],
+                                                ),
+                                            ],
+                                        },
+                                    ],
+                                },
+                            ),
+                        ],
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><details class="wiki-folding"><summary>요약</summary><div><ul class="wiki-list"><li><div class="wiki-paragraph">접힌 리스트</div>
+</li></ul>
+</div></details></div>

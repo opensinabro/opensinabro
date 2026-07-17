@@ -5,6 +5,8 @@
 //! ([`ListMarkerKind`], [`CellOption`] 등)로 표현하고, 의미 모델로의 매핑은
 //! 소비 크레이트가 담당한다.
 
+use std::ops::Range;
+
 pub fn find_matching_braces(text: &str) -> Option<usize> {
     let bytes = text.as_bytes();
     let mut depth = 0usize;
@@ -43,12 +45,16 @@ pub fn find_matching_bracket(text: &str) -> Option<usize> {
     None
 }
 
+/// `[[…]]`의 닫는 자리. `\[`·`\]`는 글자라 짝으로 세지 않는다
+/// (렌더확정: `[[[\X\]]]`를 the seed는 제목이 `[X]`인 문서로 보낸다).
 pub fn find_matching_double_bracket(text: &str) -> Option<usize> {
     let bytes = text.as_bytes();
     let mut depth = 0usize;
     let mut index = 0;
     while index < bytes.len() {
-        if bytes[index..].starts_with(b"[[") {
+        if bytes[index] == b'\\' {
+            index += 2;
+        } else if bytes[index..].starts_with(b"[[") {
             depth += 1;
             index += 2;
         } else if bytes[index..].starts_with(b"]]") {
@@ -62,6 +68,39 @@ pub fn find_matching_double_bracket(text: &str) -> Option<usize> {
         }
     }
     None
+}
+
+/// 이 줄 끝에서 `{{{` 그룹이 열린 채 남는가 — 남으면 다음 줄까지 이어진다.
+///
+/// 닫히지 않는 `{{{`는 그룹이 아니라 글자다. 나무위키는 `{` 하나를 글자로 흘리고
+/// 다음 자리에서 다시 여는데(렌더확정: `{{{{{{-5 {{{-5 -10단계}}}}}}` →
+/// `{` + 리터럴 `{{-5 {{{-5 -10단계}}}`), 이 복구까지 마친 뒤에도 짝을 못 찾은
+/// 그룹이 있어야 비로소 열린 것이다.
+pub fn has_open_group(text: &str) -> bool {
+    let bytes = text.as_bytes();
+    let mut index = 0;
+    // 짝을 못 찾아 글자로 흘려보낸 `{{{`의 자리. 바로 뒤(한두 칸 안)에서 그룹이 열리면
+    // 그 브레이스들이 거기에 쓰인 것이므로 취소된다.
+    let mut unmatched: Option<usize> = None;
+    while index < bytes.len() {
+        if !bytes[index..].starts_with(b"{{{") {
+            index += 1;
+            continue;
+        }
+        match find_matching_braces(&text[index..]) {
+            Some(close) => {
+                if unmatched.is_some_and(|start| index - start <= 2) {
+                    unmatched = None;
+                }
+                index += close + 3;
+            }
+            None => {
+                unmatched = unmatched.or(Some(index));
+                index += 1;
+            }
+        }
+    }
+    unmatched.is_some()
 }
 
 pub fn brace_delta(line: &str) -> i32 {
@@ -102,14 +141,23 @@ pub fn parse_size_marker(content: &str) -> Option<(i8, &str)> {
     rest.strip_prefix(' ').map(|rest| (level, rest))
 }
 
+/// 한 줄 색상 그룹 `{{{#색상 내용}}}`의 내용부를 가른다.
+///
+/// 색상 표기 뒤에는 내용을 가르는 공백이 있어야 한다. `{{{#212529}}}`처럼 없으면
+/// 색상이 아니라 그냥 리터럴이다(렌더확정: the seed는 `<code>#212529</code>`로 낸다).
 pub fn parse_color_marker(content: &str) -> Option<(String, Option<String>, &str)> {
-    if !content.starts_with('#') {
+    let (specification, rest) = content.split_once(' ')?;
+    let (color, dark_color) = parse_color_specification(specification)?;
+    Some((color, dark_color, rest))
+}
+
+/// 여러 줄 색상 그룹의 헤더 `{{{#색상`에서 색상만 읽는다. 내용은 다음 줄부터라
+/// 개행이 구분자이고, 헤더에 공백이 있으면 그 뒤는 내용의 첫 조각이다.
+pub fn parse_color_specification(header: &str) -> Option<(String, Option<String>)> {
+    if !header.starts_with('#') {
         return None;
     }
-    let (specification, rest) = match content.split_once(' ') {
-        Some((specification, rest)) => (specification, rest),
-        None => (content, ""),
-    };
+    let specification = header.split(' ').next()?;
     let (first, second) = match specification.split_once(',') {
         Some((first, second)) => (first, Some(second)),
         None => (specification, None),
@@ -119,7 +167,167 @@ pub fn parse_color_marker(content: &str) -> Option<(String, Option<String>, &str
         Some(second) => Some(parse_color(second)?),
         None => None,
     };
-    Some((color, dark_color, rest))
+    Some((color, dark_color))
+}
+
+/// CSS가 정의한 색상 이름. the seed는 이 목록에 있는 이름만 색상으로 받는다
+/// (렌더확정: `{{{#redirect 목적지 문서}}}`는 색상이 아니라 리터럴이다).
+const CSS_COLOR_NAMES: [&str; 148] = [
+    "aliceblue",
+    "antiquewhite",
+    "aqua",
+    "aquamarine",
+    "azure",
+    "beige",
+    "bisque",
+    "black",
+    "blanchedalmond",
+    "blue",
+    "blueviolet",
+    "brown",
+    "burlywood",
+    "cadetblue",
+    "chartreuse",
+    "chocolate",
+    "coral",
+    "cornflowerblue",
+    "cornsilk",
+    "crimson",
+    "cyan",
+    "darkblue",
+    "darkcyan",
+    "darkgoldenrod",
+    "darkgray",
+    "darkgreen",
+    "darkgrey",
+    "darkkhaki",
+    "darkmagenta",
+    "darkolivegreen",
+    "darkorange",
+    "darkorchid",
+    "darkred",
+    "darksalmon",
+    "darkseagreen",
+    "darkslateblue",
+    "darkslategray",
+    "darkslategrey",
+    "darkturquoise",
+    "darkviolet",
+    "deeppink",
+    "deepskyblue",
+    "dimgray",
+    "dimgrey",
+    "dodgerblue",
+    "firebrick",
+    "floralwhite",
+    "forestgreen",
+    "fuchsia",
+    "gainsboro",
+    "ghostwhite",
+    "gold",
+    "goldenrod",
+    "gray",
+    "green",
+    "greenyellow",
+    "grey",
+    "honeydew",
+    "hotpink",
+    "indianred",
+    "indigo",
+    "ivory",
+    "khaki",
+    "lavender",
+    "lavenderblush",
+    "lawngreen",
+    "lemonchiffon",
+    "lightblue",
+    "lightcoral",
+    "lightcyan",
+    "lightgoldenrodyellow",
+    "lightgray",
+    "lightgreen",
+    "lightgrey",
+    "lightpink",
+    "lightsalmon",
+    "lightseagreen",
+    "lightskyblue",
+    "lightslategray",
+    "lightslategrey",
+    "lightsteelblue",
+    "lightyellow",
+    "lime",
+    "limegreen",
+    "linen",
+    "magenta",
+    "maroon",
+    "mediumaquamarine",
+    "mediumblue",
+    "mediumorchid",
+    "mediumpurple",
+    "mediumseagreen",
+    "mediumslateblue",
+    "mediumspringgreen",
+    "mediumturquoise",
+    "mediumvioletred",
+    "midnightblue",
+    "mintcream",
+    "mistyrose",
+    "moccasin",
+    "navajowhite",
+    "navy",
+    "oldlace",
+    "olive",
+    "olivedrab",
+    "orange",
+    "orangered",
+    "orchid",
+    "palegoldenrod",
+    "palegreen",
+    "paleturquoise",
+    "palevioletred",
+    "papayawhip",
+    "peachpuff",
+    "peru",
+    "pink",
+    "plum",
+    "powderblue",
+    "purple",
+    "rebeccapurple",
+    "red",
+    "rosybrown",
+    "royalblue",
+    "saddlebrown",
+    "salmon",
+    "sandybrown",
+    "seagreen",
+    "seashell",
+    "sienna",
+    "silver",
+    "skyblue",
+    "slateblue",
+    "slategray",
+    "slategrey",
+    "snow",
+    "springgreen",
+    "steelblue",
+    "tan",
+    "teal",
+    "thistle",
+    "tomato",
+    "turquoise",
+    "violet",
+    "wheat",
+    "white",
+    "whitesmoke",
+    "yellow",
+    "yellowgreen",
+];
+
+/// CSS가 정의한 색상 이름인가. 나무위키는 이 목록에 있는 이름만 색으로 받는다.
+pub fn is_css_color_name(name: &str) -> bool {
+    CSS_COLOR_NAMES
+        .binary_search(&name.to_ascii_lowercase().as_str())
+        .is_ok()
 }
 
 // 색상은 `#` 접두사로 표기한다. hex는 `#` 포함 그대로, 색상 이름은 `#`를 제거해 보관한다.
@@ -127,7 +335,7 @@ fn parse_color(source: &str) -> Option<String> {
     let body = source.strip_prefix('#')?;
     if matches!(body.len(), 3 | 6) && body.bytes().all(|byte| byte.is_ascii_hexdigit()) {
         Some(source.to_string())
-    } else if !body.is_empty() && body.chars().all(char::is_alphanumeric) {
+    } else if is_css_color_name(body) {
         Some(body.to_string())
     } else {
         None
@@ -260,10 +468,66 @@ pub fn split_anchor(target: &str) -> (&str, Option<String>) {
     if strip_link_prefix(target, &["http://", "https://", "ftp://"]).is_some() {
         return (target, None);
     }
-    match target.rsplit_once('#') {
-        Some((page, anchor)) if !anchor.is_empty() => (page, Some(anchor.to_string())),
-        _ => (target, None),
+    // 마지막 `#`은 앵커 구분자다. 뒤가 비어 있어도 구분자 노릇은 하므로 대상에서
+    // 떨어져 나간다(렌더확정: the seed는 `[[##]]`를 제목이 `#`인 문서로 보낸다).
+    match last_unescaped(target, b'#') {
+        Some(index) => (
+            &target[..index],
+            Some(target[index + 1..].to_string()).filter(|anchor| !anchor.is_empty()),
+        ),
+        None => (target, None),
     }
+}
+
+/// `[[대상|표시]]`의 본문을 대상과 표시부로 가른다. `\|`는 글자라 구분자가 아니다
+/// (렌더확정: the seed는 `[[\|]]`를 제목이 `|`인 문서로 보낸다).
+pub fn split_link_body(body: &str) -> (&str, Option<&str>) {
+    match first_unescaped(body, b'|') {
+        Some(index) => (&body[..index], Some(&body[index + 1..])),
+        None => (body, None),
+    }
+}
+
+/// `\`가 앞에 붙지 않은 첫 `needle`의 자리.
+fn first_unescaped(text: &str, needle: u8) -> Option<usize> {
+    unescaped_positions(text, needle).next()
+}
+
+fn last_unescaped(text: &str, needle: u8) -> Option<usize> {
+    unescaped_positions(text, needle).last()
+}
+
+fn unescaped_positions(text: &str, needle: u8) -> impl Iterator<Item = usize> + '_ {
+    let bytes = text.as_bytes();
+    let mut index = 0;
+    std::iter::from_fn(move || {
+        while index < bytes.len() {
+            let at = index;
+            index += 1;
+            match bytes[at] {
+                b'\\' => index += 1,
+                byte if byte == needle => return Some(at),
+                _ => {}
+            }
+        }
+        None
+    })
+}
+
+/// `\X`를 `X`로 되돌린다. 링크 대상처럼 인라인 파서를 거치지 않는 문자열에 쓴다.
+pub fn unescape(text: &str) -> String {
+    let mut output = String::with_capacity(text.len());
+    let mut characters = text.chars();
+    while let Some(character) = characters.next() {
+        if character == '\\' {
+            if let Some(escaped) = characters.next() {
+                output.push(escaped);
+            }
+        } else {
+            output.push(character);
+        }
+    }
+    output
 }
 
 // ---- 지시자 ----
@@ -545,26 +809,52 @@ fn is_bare_color(token: &str) -> bool {
     if let Some(hex) = token.strip_prefix('#') {
         matches!(hex.len(), 3 | 6) && hex.bytes().all(|byte| byte.is_ascii_hexdigit())
     } else {
-        !token.is_empty() && token.chars().all(char::is_alphanumeric)
+        // 이름형 배경색은 실제 CSS 색상명만이다 — `<br>`·`<sup>` 같은 임의의 단어를
+        // 색으로 오인하면 셀 옵션으로 먹혀 사라진다(렌더확정: `||<br>을 …`의 `<br>`은 글자).
+        is_css_color_name(token)
     }
 }
 
 /// 행 원문을 (선행 `||` 쌍 수, 셀 텍스트 범위)로 분리한다.
+/// 이 브레이스 런의 한두 칸 뒤에서 짝이 맞는 그룹이 열리는가.
+pub fn opens_within_run(rest: &str) -> bool {
+    (1..=2).any(|offset| {
+        rest.as_bytes()[offset..].starts_with(b"{{{")
+            && find_matching_braces(&rest[offset..]).is_some()
+    })
+}
+
 pub fn split_cell_ranges(row_source: &str) -> Vec<(usize, std::ops::Range<usize>)> {
     let bytes = row_source.as_bytes();
     let mut cells = Vec::new();
     let mut span_pairs = pipe_run_length(bytes, 0) / 2;
     let mut position = span_pairs * 2;
     let mut cell_start = position;
-    let mut depth = 0usize;
     while position < bytes.len() {
+        // `\|`는 글자라 셀 구분자가 아니다(렌더확정: `|| {{{\|| 표 문법 무효 \||}}} || … ||`가
+        // the seed에서 두 셀이다).
+        if bytes[position] == b'\\' {
+            position += 2;
+            continue;
+        }
+        // 짝이 맞는 그룹은 통째로 건너뛴다.
         if bytes[position..].starts_with(b"{{{") {
-            depth += 1;
-            position += 3;
-        } else if bytes[position..].starts_with(b"}}}") {
-            depth = depth.saturating_sub(1);
-            position += 3;
-        } else if depth == 0 && bytes[position] == b'|' {
+            match find_matching_braces(&row_source[position..]) {
+                Some(close) => {
+                    position += close + 3;
+                    continue;
+                }
+                // 바로 옆에서 다시 열어 짝이 맞으면 이 `{`는 글자다(the seed의 복구 —
+                // [`has_open_group`]). 그것도 아니면 이 그룹은 정말 열린 채라
+                // 남은 줄을 통째로 머금는다 — 그 안의 `||`는 셀 구분자가 아니다.
+                None if !opens_within_run(&row_source[position..]) => break,
+                None => {
+                    position += 1;
+                    continue;
+                }
+            }
+        }
+        if bytes[position] == b'|' {
             let run = pipe_run_length(bytes, position);
             if run >= 2 {
                 cells.push((span_pairs, cell_start..position));
@@ -595,7 +885,7 @@ pub fn pipe_run_length(bytes: &[u8], start: usize) -> usize {
 }
 
 pub fn is_row_complete(row_source: &str) -> bool {
-    if brace_delta(row_source) > 0 {
+    if has_open_group(row_source) {
         return false;
     }
     let trimmed = row_source.trim_end();
@@ -614,4 +904,40 @@ pub fn caption_range(line: &str) -> Option<std::ops::Range<usize>> {
     let rest = &line[1..];
     let end = rest.find('|')?;
     Some(1..1 + end)
+}
+
+/// 틀 인자 표기의 모양. `@이름@` 또는 `@이름=기본값@`.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct VariableShape {
+    /// `@`를 포함한 표기 전체의 길이.
+    pub length: usize,
+    /// 표기 안에서 이름이 차지하는 범위.
+    pub name: Range<usize>,
+    /// 기본값 범위. `=`가 없으면 None이다.
+    pub default: Option<Range<usize>>,
+}
+
+/// 문자열 맨 앞이 틀 인자 표기인지 본다.
+///
+/// 이름과 기본값에는 `@`와 줄바꿈이 올 수 없다. 이 규칙 덕에 본문의 평범한 `@`
+/// (이메일 주소 등)는 인자로 오인되지 않는다.
+pub fn variable_shape(source: &str) -> Option<VariableShape> {
+    let after = source.strip_prefix('@')?;
+    let end = after.find('@')?;
+    let body = &after[..end];
+    if body.is_empty() || body.contains('\n') {
+        return None;
+    }
+    let (name, default) = match body.find('=') {
+        Some(index) => (1..1 + index, Some(1 + index + 1..1 + end)),
+        None => (1..1 + end, None),
+    };
+    if name.is_empty() {
+        return None;
+    }
+    Some(VariableShape {
+        length: end + 2,
+        name,
+        default,
+    })
 }

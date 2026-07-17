@@ -1,0 +1,19 @@
+근거: 도움말예제 | 원문: 1줄 | 의미론: 15줄 | 렌더링: 2줄 | 6단계 문단
+====== 문단 6 ======
+Document {
+    blocks: [
+        Heading(
+            Heading {
+                level: 6,
+                folded: false,
+                content: [
+                    Text(
+                        "문단 6",
+                    ),
+                ],
+            },
+        ),
+    ],
+}
+<h6 class="wiki-heading"><a id="s-1" href="#toc">1.</a> <span id="문단 6">문단 6</span></h6>
+<div class="wiki-heading-content"></div>

@@ -1,0 +1,97 @@
+근거: 미확인 | 원문: 4줄 | 의미론: 80줄 | 렌더링: 12줄 | 리스트-인용 깊은 교차
+ * 하나
+  > 인용
+  * 둘
+   > 인용2
+Document {
+    blocks: [
+        List(
+            List {
+                kind: Unordered,
+                items: [
+                    ListItem {
+                        start_number: None,
+                        blocks: [
+                            Paragraph(
+                                [
+                                    Text(
+                                        "하나",
+                                    ),
+                                ],
+                            ),
+                            Indent(
+                                [
+                                    Quote(
+                                        [
+                                            Indent(
+                                                [
+                                                    Paragraph(
+                                                        [
+                                                            Text(
+                                                                "인용",
+                                                            ),
+                                                        ],
+                                                    ),
+                                                ],
+                                            ),
+                                        ],
+                                    ),
+                                    List(
+                                        List {
+                                            kind: Unordered,
+                                            items: [
+                                                ListItem {
+                                                    start_number: None,
+                                                    blocks: [
+                                                        Paragraph(
+                                                            [
+                                                                Text(
+                                                                    "둘",
+                                                                ),
+                                                            ],
+                                                        ),
+                                                        Indent(
+                                                            [
+                                                                Quote(
+                                                                    [
+                                                                        Indent(
+                                                                            [
+                                                                                Paragraph(
+                                                                                    [
+                                                                                        Text(
+                                                                                            "인용2",
+                                                                                        ),
+                                                                                    ],
+                                                                                ),
+                                                                            ],
+                                                                        ),
+                                                                    ],
+                                                                ),
+                                                            ],
+                                                        ),
+                                                    ],
+                                                },
+                                            ],
+                                        },
+                                    ),
+                                ],
+                            ),
+                        ],
+                    },
+                ],
+            },
+        ),
+    ],
+}
+<ul class="wiki-list"><li><div class="wiki-paragraph">하나</div>
+<div class="wiki-indent"><blockquote class="wiki-quote"><div class="wiki-indent"><div class="wiki-paragraph">인용</div>
+</div>
+</blockquote>
+<ul class="wiki-list"><li><div class="wiki-paragraph">둘</div>
+<div class="wiki-indent"><blockquote class="wiki-quote"><div class="wiki-indent"><div class="wiki-paragraph">인용2</div>
+</div>
+</blockquote>
+</div>
+</li></ul>
+</div>
+</li></ul>

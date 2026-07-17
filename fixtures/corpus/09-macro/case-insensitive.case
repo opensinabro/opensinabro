@@ -1,0 +1,35 @@
+근거: 도움말서술 | 원문: 1줄 | 의미론: 32줄 | 렌더링: 1줄 | 매크로 이름 대소문자 무관
+[date] [Date] [DATE]
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Macro(
+                    Macro {
+                        name: "date",
+                        argument: None,
+                    },
+                ),
+                Text(
+                    " ",
+                ),
+                Macro(
+                    Macro {
+                        name: "Date",
+                        argument: None,
+                    },
+                ),
+                Text(
+                    " ",
+                ),
+                Macro(
+                    Macro {
+                        name: "DATE",
+                        argument: None,
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph">2026-07-17 12:00:00 2026-07-17 12:00:00 2026-07-17 12:00:00</div>

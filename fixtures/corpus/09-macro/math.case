@@ -1,0 +1,25 @@
+근거: 미확인 | 원문: 1줄 | 의미론: 22줄 | 렌더링: 1줄 | 수식 — 도움말은 하위 문서로 위임
+[math(x^2)]
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Macro(
+                    Macro {
+                        name: "math",
+                        argument: Some(
+                            Template(
+                                [
+                                    Text(
+                                        "x^2",
+                                    ),
+                                ],
+                            ),
+                        ),
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><span class="wiki-math" data-formula="x^2">\(x^2\)</span></div>

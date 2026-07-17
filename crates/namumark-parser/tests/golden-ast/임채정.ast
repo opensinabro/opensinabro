@@ -3,410 +3,283 @@
 Paragraph: Macro(include "틀:역대 대한민국 국회의장")
 Table:
   Row:
-    Cell span=1x1 align=Center attrs=[Table/width=100% Table/align=center Table/bordercolor=#580009 Table/bgcolor=#580009]:
+    Cell span=1x1 align=Some(Center) attrs=[Table/width=100% Table/align=center Table/bordercolor=#580009 Table/bgcolor=#580009]:
       Paragraph: Bold(Colored(#cfa547 | "역임한 직위 "))
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#1f2023]:
-      Folding summary="[ 펼치기 · 접기 ]":
-        HorizontalRule
-        Table:
-          Row:
-            Cell span=5x1 align=Center attrs=[Table/width=100% Table/bordercolor=#580009 Table/bgcolor=#ffffff,#1f2023 Cell/bgcolor=#580009]:
-              Paragraph: Link("대한민국 국회" | Image("국회휘장(9대-19대).png" width=30)) " " Colored(#cfa547 | Bold(Link("대한민국 국회의원" | Colored(#cfa547 | "대한민국 국회의원")) " (" Link("서울특별시" | Colored(#CFA547 | "서울")) " " Link("노원구 을" | Colored(#CFA547 | "노원구 을")) ")"))
-          Row:
-            Cell span=1x1 align=Center attrs=[Cell/width=30%]:
-              Paragraph: "제13대" Macro(br) Link("김용채")
-            Cell span=1x1 align=Center attrs=[Cell/width=5%]:
-              Paragraph: "→"
-            Cell span=1x1 align=Center attrs=[Cell/width=30%]:
-              Paragraph: Bold("제14~16대" Macro(br) "임채정")
-            Cell span=1x1 align=Center attrs=[Cell/width=5%]:
-              Paragraph: "→"
-            Cell span=1x1 align=Center attrs=[Cell/width=30%]:
-              Paragraph: "제17대" Macro(br) Link("우원식")
-          Row:
-            Cell span=5x1 align=Center attrs=[Cell/bgcolor=#580009]:
-              Paragraph: Link("대한민국 국회" | Image("국회휘장(9대-19대).png" width=30)) " " Colored(#cfa547 | Bold(Link("대한민국 국회의원" | Colored(#cfa547 | "대한민국 국회의원")) " (" Link("서울특별시" | Colored(#CFA547 | "서울")) " " Link("노원구 병" | Colored(#CFA547 | "노원구 병")) ")"))
-          Row:
-            Cell span=1x1 align=Center attrs=[Cell/width=30%]:
-              Paragraph: Italic("선거구 신설") Macro(br) "임채정" Footnote(| "노원구 을 선거구의 제16대 국회의원")
-            Cell span=1x1 align=Center attrs=[Cell/width=5%]:
-              Paragraph: "→"
-            Cell span=1x1 align=Center attrs=[Cell/width=30%]:
-              Paragraph: Bold("제17대" Macro(br) "임채정")
-            Cell span=1x1 align=Center attrs=[Cell/width=5%]:
-              Paragraph: "→"
-            Cell span=1x1 align=Center attrs=[Cell/width=30%]:
-              Paragraph: "제18대" Macro(br) Link("홍정욱")
-        HorizontalRule
-        Table:
-          Row:
-            Cell span=5x1 align=Center attrs=[Table/width=100% Table/bordercolor=#580009 Table/bgcolor=#ffffff,#1f2023 Cell/bgcolor=#580009]:
-              Paragraph: Link("대한민국 국회" | Image("국회휘장(9대-19대).png" width=30)) " " Colored(#cfa547 | Bold(Link("대한민국 국회" | Colored(#cfa547 | "대한민국 국회")) " " Link("외교통일위원회" | Colored(#CFA547 | "통일외교통상위원장"))))
-          Row:
-            Cell span=1x1 align=Center attrs=[Cell/width=30%]:
-              Paragraph: "제16대 후반기" Macro(br) Link("서정화(1933)" | "서정화")
-            Cell span=1x1 align=Center attrs=[Cell/width=5%]:
-              Paragraph: "→"
-            Cell span=1x1 align=Center attrs=[Cell/width=30%]:
-              Paragraph: Bold("제17대 전반기" Macro(br) "임채정")
-            Cell span=1x1 align=Center attrs=[Cell/width=5%]:
-              Paragraph: "→"
-            Cell span=1x1 align=Center attrs=[Cell/width=30%]:
-              Paragraph: "제17대 후반기" Macro(br) Link("김원웅")
-        HorizontalRule
-        Paragraph: Macro(include "틀:열린우리당 의장")
-        HorizontalRule
-        Paragraph: Macro(include "틀:더불어민주당 상임고문")
-        HorizontalRule
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#1f2023]:
+      Paragraph: Folding([ 펼치기 · 접기 ] | HorizontalRule Table:   Row:     Cell span=5x1 align=Some(Center) attrs=[Table/width=100% Table/bordercolor=#580009 Table/bgcolor=#ffffff,#1f2023 Cell/bgcolor=#580009]:       Paragraph: Link("대한민국 국회" | Image("국회휘장(9대-19대).png" width=30)) " " Colored(#cfa547 | Bold(Link("대한민국 국회의원" | Colored(#cfa547 | "대한민국 국회의원")) " (" Link("서울특별시" | Colored(#CFA547 | "서울")) " " Link("노원구 을" | Colored(#CFA547 | "노원구 을")) ")"))   Row:     Cell span=1x1 align=Some(Center) attrs=[Cell/width=30%]:       Paragraph: "제13대" Macro(br) Link("김용채")     Cell span=1x1 align=Some(Center) attrs=[Cell/width=5%]:       Paragraph: "→"     Cell span=1x1 align=Some(Center) attrs=[Cell/width=30%]:       Paragraph: Bold("제14~16대" Macro(br) "임채정")     Cell span=1x1 align=Some(Center) attrs=[Cell/width=5%]:       Paragraph: "→"     Cell span=1x1 align=Some(Center) attrs=[Cell/width=30%]:       Paragraph: "제17대" Macro(br) Link("우원식")   Row:     Cell span=5x1 align=Some(Center) attrs=[Cell/bgcolor=#580009]:       Paragraph: Link("대한민국 국회" | Image("국회휘장(9대-19대).png" width=30)) " " Colored(#cfa547 | Bold(Link("대한민국 국회의원" | Colored(#cfa547 | "대한민국 국회의원")) " (" Link("서울특별시" | Colored(#CFA547 | "서울")) " " Link("노원구 병" | Colored(#CFA547 | "노원구 병")) ")"))   Row:     Cell span=1x1 align=Some(Center) attrs=[Cell/width=30%]:       Paragraph: Italic("선거구 신설") Macro(br) "임채정" Footnote(| "노원구 을 선거구의 제16대 국회의원")     Cell span=1x1 align=Some(Center) attrs=[Cell/width=5%]:       Paragraph: "→"     Cell span=1x1 align=Some(Center) attrs=[Cell/width=30%]:       Paragraph: Bold("제17대" Macro(br) "임채정")     Cell span=1x1 align=Some(Center) attrs=[Cell/width=5%]:       Paragraph: "→"     Cell span=1x1 align=Some(Center) attrs=[Cell/width=30%]:       Paragraph: "제18대" Macro(br) Link("홍정욱") HorizontalRule Table:   Row:     Cell span=5x1 align=Some(Center) attrs=[Table/width=100% Table/bordercolor=#580009 Table/bgcolor=#ffffff,#1f2023 Cell/bgcolor=#580009]:       Paragraph: Link("대한민국 국회" | Image("국회휘장(9대-19대).png" width=30)) " " Colored(#cfa547 | Bold(Link("대한민국 국회" | Colored(#cfa547 | "대한민국 국회")) " " Link("외교통일위원회" | Colored(#CFA547 | "통일외교통상위원장"))))   Row:     Cell span=1x1 align=Some(Center) attrs=[Cell/width=30%]:       Paragraph: "제16대 후반기" Macro(br) Link("서정화(1933)" | "서정화")     Cell span=1x1 align=Some(Center) attrs=[Cell/width=5%]:       Paragraph: "→"     Cell span=1x1 align=Some(Center) attrs=[Cell/width=30%]:       Paragraph: Bold("제17대 전반기" Macro(br) "임채정")     Cell span=1x1 align=Some(Center) attrs=[Cell/width=5%]:       Paragraph: "→"     Cell span=1x1 align=Some(Center) attrs=[Cell/width=30%]:       Paragraph: "제17대 후반기" Macro(br) Link("김원웅") HorizontalRule Paragraph: Macro(include "틀:열린우리당 의장") HorizontalRule Paragraph: Macro(include "틀:더불어민주당 상임고문") HorizontalRule)
+Paragraph: 
 Table:
   Row:
-    Cell span=2x1 align=Center attrs=[Table/width=420 Table/align=right Table/bordercolor=#580009 Table/bgcolor=#fff,#191919]:
-      WikiStyle style=Some("margin: -5px -10px; padding: 7px 10px; background-image: linear-gradient(to right, #580009 0%, #580009 20%, #580009 80%, #580009)") dark_style=None:
-        Paragraph: Bold(Link("대한민국 국회의장" | Colored(#CFA547 | "대한민국 제17대 후반기 국회의장")) Macro(br) Colored(#CFA547 | Sized(+1 | "임채정") Macro(br) "林采正 | Lim Chae-jung"))
+    Cell span=2x1 align=Some(Center) attrs=[Table/width=420 Table/align=right Table/bordercolor=#580009 Table/bgcolor=#fff,#191919]:
+      Paragraph: WikiStyle(style=Some("margin: -5px -10px; padding: 7px 10px; background-image: linear-gradient(to right, #580009 0%, #580009 20%, #580009 80%, #580009)") dark=None | Paragraph: Bold(Link("대한민국 국회의장" | Colored(#CFA547 | "대한민국 제17대 후반기 국회의장")) Macro(br) Colored(#CFA547 | Sized(+1 | "임채정") Macro(br) "林采正 | Lim Chae-jung")))
   Row:
-    Cell span=2x1 align=Center:
-      WikiStyle style=Some("margin: -5px -10px") dark_style=None:
-        Paragraph: Image("임채정 국회의장.jpg" width=100%)
+    Cell span=2x1 align=Some(Center):
+      Paragraph: WikiStyle(style=Some("margin: -5px -10px") dark=None | Paragraph: Image("임채정 국회의장.jpg" width=100%))
   Row:
-    Cell span=1x2 align=Center attrs=[Cell/width=100 Cell/bgcolor=#580009]:
+    Cell span=1x2 align=Some(Center) attrs=[Cell/width=100 Cell/bgcolor=#580009]:
       Paragraph: Colored(#CFA547 | Bold("출생"))
-    Cell span=1x1 align=Left:
+    Cell span=1x1 align=Some(Left):
       Paragraph: Link("1941년") " " Link("5월 14일") " (" Macro(age "1941-05-14") "세)"
   Row:
-    Cell span=1x1 align=Left:
+    Cell span=1x1 align=Some(Left):
       Paragraph: Link("전라남도") " " Link("나주시" | "나주군") " 다시면 신풍리" Macro(br) "(現 전라남도 " Link("나주시") " 다시면 회진리)" Footnote(| "인근의 가운리와 함께 " Link("나주 임씨") " 집성촌이다. " Link("임인채") " 전 국회의원도 이 마을 출신이다.") Link("http://www.vote114.kr/will/people/polman.asp?checkpost=checkpost2015&mfldname=will&prm1name=%C0%D3%C3%A4%C1%A4&prm1value=1941%2F05%2F14&prm2name=14380&prm2value=&jcd=&cid=915&partcid=&menuno=1&submenuno=2&page=&memcheck=1234567vs&PHONE_NUMBER=&apgugun=&aprange=&tablename=assembly17_17%B4%EB&dbname=voteresult&gourl=&id=&app=&version=" | "#")
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#580009]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#580009]:
       Paragraph: Colored(#CFA547 | Bold("본관"))
-    Cell span=1x1 align=Left:
+    Cell span=1x1 align=Some(Left):
       Paragraph: Link("나주 임씨") Footnote(| "절도공파 31세 " Bold("채(采)") " 동(東) 근(根) 항렬.")
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#580009]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#580009]:
       Paragraph: Colored(#CFA547 | Bold("현직"))
-    Cell span=1x1 align=Left:
+    Cell span=1x1 align=Some(Left):
       Paragraph: Link("더불어민주당") " 상임고문" Macro(br) Link("한국기원") " 총재"
   Row:
-    Cell span=1x2 align=Center attrs=[Cell/bgcolor=#580009]:
+    Cell span=1x2 align=Some(Center) attrs=[Cell/bgcolor=#580009]:
       Paragraph: Colored(#CFA547 | Bold("재임기간"))
-    Cell span=1x1 align=Left attrs=[Cell/bgcolor=#f5f5f5,#191919]:
+    Cell span=1x1 align=Some(Left) attrs=[Cell/bgcolor=#f5f5f5,#191919]:
       Paragraph: "제17대 후반기 국회의장"
   Row:
-    Cell span=1x1 align=Left:
+    Cell span=1x1 align=Some(Left):
       Paragraph: Link("2006년") " " Link("6월 19일") " ~ " Link("2008년") " " Link("5월 29일")
   Row:
-    Cell span=2x1 align=Center:
-      WikiStyle style=Some("margin: 0 -10px") dark_style=None:
-        Folding summary="[ 펼치기 · 접기 ]":
-          WikiStyle style=Some("margin: -6px -1px") dark_style=None:
-            Table:
-              Row:
-                Cell span=1x1 align=Center attrs=[Table/bgcolor=#580009 Table/width=100% Cell/width=100]:
-                  Paragraph: Colored(#CFA547 | Bold("배우자"))
-                Cell span=1x1 align=Left attrs=[Column/bgcolor=#fff,#191919]:
-                  Paragraph: "기영남"
-              Row:
-                Cell span=1x1 align=Center:
-                  Paragraph: Colored(#CFA547 | Bold("자녀"))
-                Cell span=1x1 align=Left:
-                  Paragraph: "슬하 2남"
-              Row:
-                Cell span=1x1 align=Center:
-                  Paragraph: Colored(#CFA547 | Bold("학력"))
-                Cell span=1x1 align=Left:
-                  Paragraph: Link("광주제일고등학교") " " Sized(-2 | "(졸업 / 34회)") Macro(br) Link("고려대학교") " " Sized(-2 | "(법학 / 학사)")
-              Row:
-                Cell span=1x1 align=Center:
-                  Paragraph: Colored(#CFA547 | Bold("정당"))
-                Cell span=1x1 align=Left:
-                  Paragraph: Macro(include "틀:더불어민주당")
-              Row:
-                Cell span=1x1 align=Center:
-                  Paragraph: Colored(#CFA547 | Bold("의원 선수"))
-                Cell span=1x1 align=Left:
-                  Paragraph: Bold("4")
-              Row:
-                Cell span=1x1 align=Center:
-                  Paragraph: Colored(#CFA547 | Bold("의원 대수"))
-                Cell span=1x1 align=Left:
-                  Paragraph: Link("제14대 국회의원" | Bold("14")) ", " Link("제15대 국회의원 목록" | Bold("15")) ", " Link("제16대 국회의원 목록" | Bold("16")) ", " Link("제17대 국회의원 목록" | Bold("17"))
-              Row:
-                Cell span=1x1 align=Center:
-                  Paragraph: Colored(#CFA547 | Bold("약력"))
-                Cell span=1x1 align=Left:
-                  Paragraph: Link("동아일보") " 해직 기자" Macro(br) Link("새정치국민회의") " 정책위원회 의장" Macro(br) Link("새천년민주당") " 정책위원회 의장" Macro(br) Link("제17대 국회") " 전반기 " Link("외교통일위원회" | "통일외교통상위원장") Macro(br) "제16대 " Link("대통령직인수위원회") " 위원장" Macro(br) Link("열린우리당") " 열린정책연구원 원장" Macro(br) Link("열린우리당") " 임시집행위원장" Macro(br) "제17대후반기 국회의장"
-Paragraph: Macro(목차) <br> Macro(clearfix)
+    Cell span=2x1 align=Some(Center):
+      Paragraph: WikiStyle(style=Some("margin: 0 -10px") dark=None | Paragraph: Folding([ 펼치기 · 접기 ] | Paragraph: WikiStyle(style=Some("margin: -6px -1px") dark=None | Table:   Row:     Cell span=1x1 align=Some(Center) attrs=[Table/bgcolor=#580009 Table/width=100% Cell/width=100]:       Paragraph: Colored(#CFA547 | Bold("배우자"))     Cell span=1x1 align=Some(Left) attrs=[Column { columns: 1 }/bgcolor=#fff,#191919]:       Paragraph: "기영남"   Row:     Cell span=1x1 align=Some(Center):       Paragraph: Colored(#CFA547 | Bold("자녀"))     Cell span=1x1 align=Some(Left):       Paragraph: "슬하 2남"   Row:     Cell span=1x1 align=Some(Center):       Paragraph: Colored(#CFA547 | Bold("학력"))     Cell span=1x1 align=Some(Left):       Paragraph: Link("광주제일고등학교") " " Sized(-2 | "(졸업 / 34회)") Macro(br) Link("고려대학교") " " Sized(-2 | "(법학 / 학사)")   Row:     Cell span=1x1 align=Some(Center):       Paragraph: Colored(#CFA547 | Bold("정당"))     Cell span=1x1 align=Some(Left):       Paragraph: Macro(include "틀:더불어민주당")   Row:     Cell span=1x1 align=Some(Center):       Paragraph: Colored(#CFA547 | Bold("의원 선수"))     Cell span=1x1 align=Some(Left):       Paragraph: Bold("4")   Row:     Cell span=1x1 align=Some(Center):       Paragraph: Colored(#CFA547 | Bold("의원 대수"))     Cell span=1x1 align=Some(Left):       Paragraph: Link("제14대 국회의원" | Bold("14")) ", " Link("제15대 국회의원 목록" | Bold("15")) ", " Link("제16대 국회의원 목록" | Bold("16")) ", " Link("제17대 국회의원 목록" | Bold("17"))   Row:     Cell span=1x1 align=Some(Center):       Paragraph: Colored(#CFA547 | Bold("약력"))     Cell span=1x1 align=Some(Left):       Paragraph: Link("동아일보") " 해직 기자" Macro(br) Link("새정치국민회의") " 정책위원회 의장" Macro(br) Link("새천년민주당") " 정책위원회 의장" Macro(br) Link("제17대 국회") " 전반기 " Link("외교통일위원회" | "통일외교통상위원장") Macro(br) "제16대 " Link("대통령직인수위원회") " 위원장" Macro(br) Link("열린우리당") " 열린정책연구원 원장" Macro(br) Link("열린우리당") " 임시집행위원장" Macro(br) "제17대후반기 국회의장")))
+Paragraph: <br> Macro(목차) <br> Macro(clearfix)
 Heading level=2 folded=false: "개요"
-Paragraph: Link("대한민국") "의 " Link("기자") "이자 " Link("정치인") "."
+Paragraph: Link("대한민국") "의 " Link("기자") "이자 " Link("정치인") "." <br>
 Heading level=2 folded=false: "생애"
-Paragraph: "1941년 5월 14일 전라남도 나주군 다시면 신풍리(현 나주시 다시면 회진리)에서 " Link("전남대학교") " 법과대학장을 지낸 아버지 임광택(林光澤)과 어머니 " Link("양(성씨)" | "제주 양씨") " 양경자(梁敬子)의 3남 2녀 중 장남으로 태어났다."
-Paragraph: Link("광주제일고등학교") "(34회)" Footnote(| Link("이용훈(1942)" | "이용훈") " 전 " Link("대법원장") "과 고교 동기다.") ", " Link("고려대학교") " " Link("고려대학교/학부/법과대학" | "법과대학") "을 졸업하였다. 이후 1969년부터 1975년까지 " Link("동아일보") " 기자로 근무하였다. 1975년 " Link("박정희") " 정권의 동아일보 " Link("광고") " 탄압에 대항하여 동아자유언론수호투쟁위원회를 조직하고 상임위원으로 활동하다 해직당하였다. "
-Paragraph: "1979년 " Link("YWCA 위장결혼식 사건") "에 참석하였다가 " Link("국군기무사령부" | "국군보안사령부") "에 끌려가 고문당하였다. 이후로도 재야에서 민주화운동에 참여하였다."
-Paragraph: "1988년 다른 재야인사인 " Link("박영숙") ", " Link("문동환") " 등과 " Link("평화민주당") "에 입당하였다. 그리고 " Link("제13대 국회의원 선거") "에서 평화민주당 후보로 " Link("서울특별시") " " Link("노원구") " 을 지역구에 출마하였으나 " Link("신민주공화당") " 김용채 후보에 밀려 낙선하였다. "
-Paragraph: "1992년 " Link("제14대 국회의원 선거") "에서 " Link("민주당(1991년)" | "민주당") " 후보로 같은 지역구에 출마하였다. 처음에는 낙선으로 개표되었으나 소송을 제기하였고 재검표 끝에 " Link("민주자유당") " " Link("김용채") " 후보를 꺾고 당선되었다." Link("http://news.joins.com/article/2729363" | "당시 중앙일보 기사") "를 보면 " Bold("임채정의 표 100표를 통째로 김용채 후보의 표로 집계") "했다고 한다. (하필 군부재자 투표함 쪽이었다는 건 숨은 함정.)"
-Paragraph: "이후 같은 지역구에서 제15대, 16대, 17대 " Link("대한민국 국회의원" | "국회의원") "(" Link("새정치국민회의") ", " Link("새천년민주당") ", " Link("열린우리당") ", " Link("대통합민주신당") ", " Link("민주당(2008년)" | "민주당") ")으로 더 당선되었다." Footnote(| "제17대 국회의원 선거의 경우 노원(을)이 아니라 신생지역구 노원(병)에 출마하였다.") " "
-Paragraph: "제17대 국회 전반기인 2004년부터 2006년까지 " Link("대한민국 국회") " 통일외교통상위원회 위원장을 역임하였다. 2005년 " Link("열린우리당") " 당의장을 역임하였다. "
-Paragraph: "제17대 국회 후반기인 2006년부터 2008년까지 " Link("대한민국 국회의장" | "국회의장") "을 역임하였다. 재야출신으로서 첫 입법부 수장이 되었으며, 역대 의장과 비교해 상대적으로 낮은 4선이라는 선수(選數)에도 불구, 열린우리당 내 지지에 힘입어 국회의원으로서는 `정상'의 자리에 올랐다." Footnote(| "4선 국회의장 등극은 1983년 " Link("채문식") "(蔡汶植.11대) 의장 이후 23년 만이다. 또 언론인 출신으로는 채 의장과 이만섭(李萬燮) 의장, 김원기(金元基) 의장에 이어 네 번째다. 특히 임 의장은 이만섭 의장과 김원기 의장과 같은 " Link("동아일보") " 출신이라는 점에서 특정 신문사 출신이 국회의장을 3번이나 연달아 차지하는 진기록도 세우게 됐다.")
-Paragraph: "2008년 제18대 국회의원 총선거에는 출마하지 않겠다고 선언하였다. 노원(병) 선거구에는 " Link("한나라당") " " Link("홍정욱") "과 " Link("진보신당") " " Link("노회찬") "이 출마하여 대결하였는데, 한나라당 홍정욱이 승리하여 임채정의 후임자가 되었다."
-Paragraph: "2019년 5월 27일에 " Link("한국기원") " 총재로 추대되어 29일에 취임했다. 아마 5단으로 바둑에 대해 굉장히 관심이 높은 것으로 알려져 있다."
+Paragraph: "1941년 5월 14일 전라남도 나주군 다시면 신풍리(현 나주시 다시면 회진리)에서 " Link("전남대학교") " 법과대학장을 지낸 아버지 임광택(林光澤)과 어머니 " Link("양(성씨)" | "제주 양씨") " 양경자(梁敬子)의 3남 2녀 중 장남으로 태어났다." <br> <br> Link("광주제일고등학교") "(34회)" Footnote(| Link("이용훈(1942)" | "이용훈") " 전 " Link("대법원장") "과 고교 동기다.") ", " Link("고려대학교") " " Link("고려대학교/학부/법과대학" | "법과대학") "을 졸업하였다. 이후 1969년부터 1975년까지 " Link("동아일보") " 기자로 근무하였다. 1975년 " Link("박정희") " 정권의 동아일보 " Link("광고") " 탄압에 대항하여 동아자유언론수호투쟁위원회를 조직하고 상임위원으로 활동하다 해직당하였다. " <br> <br> "1979년 " Link("YWCA 위장결혼식 사건") "에 참석하였다가 " Link("국군기무사령부" | "국군보안사령부") "에 끌려가 고문당하였다. 이후로도 재야에서 민주화운동에 참여하였다." <br> <br> "1988년 다른 재야인사인 " Link("박영숙") ", " Link("문동환") " 등과 " Link("평화민주당") "에 입당하였다. 그리고 " Link("제13대 국회의원 선거") "에서 평화민주당 후보로 " Link("서울특별시") " " Link("노원구") " 을 지역구에 출마하였으나 " Link("신민주공화당") " 김용채 후보에 밀려 낙선하였다. " <br> <br> "1992년 " Link("제14대 국회의원 선거") "에서 " Link("민주당(1991년)" | "민주당") " 후보로 같은 지역구에 출마하였다. 처음에는 낙선으로 개표되었으나 소송을 제기하였고 재검표 끝에 " Link("민주자유당") " " Link("김용채") " 후보를 꺾고 당선되었다." Link("http://news.joins.com/article/2729363" | "당시 중앙일보 기사") "를 보면 " Bold("임채정의 표 100표를 통째로 김용채 후보의 표로 집계") "했다고 한다. (하필 군부재자 투표함 쪽이었다는 건 숨은 함정.)" <br> <br> "이후 같은 지역구에서 제15대, 16대, 17대 " Link("대한민국 국회의원" | "국회의원") "(" Link("새정치국민회의") ", " Link("새천년민주당") ", " Link("열린우리당") ", " Link("대통합민주신당") ", " Link("민주당(2008년)" | "민주당") ")으로 더 당선되었다." Footnote(| "제17대 국회의원 선거의 경우 노원(을)이 아니라 신생지역구 노원(병)에 출마하였다.") " " <br> <br> "제17대 국회 전반기인 2004년부터 2006년까지 " Link("대한민국 국회") " 통일외교통상위원회 위원장을 역임하였다. 2005년 " Link("열린우리당") " 당의장을 역임하였다. " <br> <br> "제17대 국회 후반기인 2006년부터 2008년까지 " Link("대한민국 국회의장" | "국회의장") "을 역임하였다. 재야출신으로서 첫 입법부 수장이 되었으며, 역대 의장과 비교해 상대적으로 낮은 4선이라는 선수(選數)에도 불구, 열린우리당 내 지지에 힘입어 국회의원으로서는 `정상'의 자리에 올랐다." Footnote(| "4선 국회의장 등극은 1983년 " Link("채문식") "(蔡汶植.11대) 의장 이후 23년 만이다. 또 언론인 출신으로는 채 의장과 이만섭(李萬燮) 의장, 김원기(金元基) 의장에 이어 네 번째다. 특히 임 의장은 이만섭 의장과 김원기 의장과 같은 " Link("동아일보") " 출신이라는 점에서 특정 신문사 출신이 국회의장을 3번이나 연달아 차지하는 진기록도 세우게 됐다.") <br> <br> "2008년 제18대 국회의원 총선거에는 출마하지 않겠다고 선언하였다. 노원(병) 선거구에는 " Link("한나라당") " " Link("홍정욱") "과 " Link("진보신당") " " Link("노회찬") "이 출마하여 대결하였는데, 한나라당 홍정욱이 승리하여 임채정의 후임자가 되었다." <br> <br> "2019년 5월 27일에 " Link("한국기원") " 총재로 추대되어 29일에 취임했다. 아마 5단으로 바둑에 대해 굉장히 관심이 높은 것으로 알려져 있다."
 Heading level=3 folded=false: "정치 활동"
-Paragraph: Link("동아일보") " 해직 기자 출신으로 재야운동에 매진했다."
-Paragraph: "1975년 자유언론수호투쟁으로 해직된 이후 민통련 사무처장 등 재야운동에 투신했다가, 13대 대선 당시 " Link("김대중") "(金大中) 후보에 대한 `비판적 지지' 입장을 표명하면서 " Link("평화민주당") "에 입당했다."
-Paragraph: "당내 실세그룹인 동교동계와 소원해 당직 운이 그다지 없었지만, 1997년 탁월한 정세판단 감각을 인정받아 국민회의 정세분석위원장을 맡으면서 두각을 나타내기 시작했다."
-Paragraph: "이후 2000년 민주당 국가전략연구소장, 2002년 " Link("제16대 대통령 선거") " 당시 민주당 정책선거특별본부장 등 요직을 섭렵했다. 2002년 대선 이후에는 대통령직 인수위원회 위원장을 맡아 참여정부 각종 정책의 기틀을 마련하는 산파역을 맡기도 했다."
-Paragraph: Link("열린우리당") "이 계파대립 등으로 어려운 상황에 처할 때마다 당의 `부름'을 받고 위기관리에 나서 '구원투수'라는 별명을 얻었다. 재야에 뿌리를 두고 있음에도 불구하고, 개혁성과 실용주의를 적절히 가미한 `합리적' 리더십이 당내의 폭넓은 신망을 얻게한 요인으로 지적된다. 2005년 1월 당 지도부가 " Link("4대 개혁입법") "의 국회 통과 실패에 대한 책임을 지고 총사퇴했을 때 거의 모든 계파의 추대를 받아 임시의장직을 맡은 것은 그의 단면을 잘 보여주는 사례이다."
-Paragraph: "2005년 " Link("열린우리당") " 기획전략자문위원장과 열린정책연구원장 등 기획 및 정책분야에서 주로 활약했다."
+Paragraph: Link("동아일보") " 해직 기자 출신으로 재야운동에 매진했다." <br> <br> "1975년 자유언론수호투쟁으로 해직된 이후 민통련 사무처장 등 재야운동에 투신했다가, 13대 대선 당시 " Link("김대중") "(金大中) 후보에 대한 `비판적 지지' 입장을 표명하면서 " Link("평화민주당") "에 입당했다." <br> <br> "당내 실세그룹인 동교동계와 소원해 당직 운이 그다지 없었지만, 1997년 탁월한 정세판단 감각을 인정받아 국민회의 정세분석위원장을 맡으면서 두각을 나타내기 시작했다." <br> <br> "이후 2000년 민주당 국가전략연구소장, 2002년 " Link("제16대 대통령 선거") " 당시 민주당 정책선거특별본부장 등 요직을 섭렵했다. 2002년 대선 이후에는 대통령직 인수위원회 위원장을 맡아 참여정부 각종 정책의 기틀을 마련하는 산파역을 맡기도 했다." <br> <br> Link("열린우리당") "이 계파대립 등으로 어려운 상황에 처할 때마다 당의 `부름'을 받고 위기관리에 나서 '구원투수'라는 별명을 얻었다. 재야에 뿌리를 두고 있음에도 불구하고, 개혁성과 실용주의를 적절히 가미한 `합리적' 리더십이 당내의 폭넓은 신망을 얻게한 요인으로 지적된다. 2005년 1월 당 지도부가 " Link("4대 개혁입법") "의 국회 통과 실패에 대한 책임을 지고 총사퇴했을 때 거의 모든 계파의 추대를 받아 임시의장직을 맡은 것은 그의 단면을 잘 보여주는 사례이다." <br> <br> "2005년 " Link("열린우리당") " 기획전략자문위원장과 열린정책연구원장 등 기획 및 정책분야에서 주로 활약했다." <br>
 Heading level=2 folded=false: "가족"
 List kind=Unordered:
   Item:
     Paragraph: "부인 기영남(奇永男) 씨 사이에 아들만 둘을 두고 있다."
+Paragraph: 
 Heading level=2 folded=false: "여담"
 List kind=Unordered:
   Item:
     Paragraph: "머리가 좋고, 정세 판단과 정책 개발을 잘 했으며" Footnote(| "그의 지역구에서 그 뒤로 처음 민주당으로 당선된 " Link("김성환(1965)" | "김성환") " 의원도 정책을 잘 짜, 참여정부 정책조정비서관으로 근무한 경력이 있다.") ", 선거 전략을 아주 잘 짰다고 한다. 열린우리당 내에서 " Link("이해찬") " 의원과 더불어 최고의 전략가로 꼽혔는데, 임채정 의원과 이해찬 의원 두 사람이 마주 앉아 바둑이나 장기를 두고 있을 때면, 마치 " Link("제갈량") "과 " Link("방통") "이 마주 앉아 있는 듯한 포스를 풍겼다고 한다."
+Paragraph: 
 List kind=Unordered:
   Item:
     Paragraph: Link("2004년 노무현 대통령 탄핵 사태" | "탄핵 표결") " 당시 " Link("송광호") " 의원에게 " Bold(Link("싸대기")) "를 맞은 적이 있었고. 그 장면이 " Bold("아예 뉴스까지 뜨고 TV에 중계까지 되었다.") " 때린 이유가 " Bold("임채정 의원이 " Link("사타구니") "를 때려서...") " 근데 임채정 의원은 때린 기억이 안 난다고..."
+Paragraph: 
 List kind=Unordered:
   Item:
     Paragraph: "나이에 비해 목소리가 상당이 젊다."
+Paragraph: 
 Heading level=2 folded=false: "선거 이력"
 Comment: "당 내부 선거가 아닌 대한민국 선출직 공직자 선거 결과만 기록한다."
 Table:
   Row:
-    Cell span=1x1 align=Center attrs=[Table/align=center Table/width=100% Table/bordercolor=#004ea2 Table/bgcolor=#f5f5f5,#191919 Cell/width=10% Row/bgcolor=#004ea2]:
+    Cell span=1x1 align=Some(Center) attrs=[Table/align=center Table/width=100% Table/bordercolor=#004ea2 Table/bgcolor=#f5f5f5,#191919 Cell/width=10% Row/bgcolor=#004ea2]:
       Paragraph: Colored(#ffffff | "연도")
-    Cell span=1x1 align=Center attrs=[Cell/width=20%]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/width=20%]:
       Paragraph: Colored(#ffffff | "선거 종류")
-    Cell span=1x1 align=Center attrs=[Cell/width=12%]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/width=12%]:
       Paragraph: Colored(#ffffff | "선거구")
-    Cell span=1x1 align=Center attrs=[Cell/width=15%]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/width=15%]:
       Paragraph: Colored(#ffffff | "소속 정당")
-    Cell span=1x1 align=Center attrs=[Cell/width=15%]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/width=15%]:
       Paragraph: Colored(#ffffff | "득표수 (득표율)")
-    Cell span=1x1 align=Center attrs=[Cell/width=10%]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/width=10%]:
       Paragraph: Colored(#ffffff | "당선 여부")
-    Cell span=1x1 align=Center attrs=[Cell/width=10%]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/width=10%]:
       Paragraph: Colored(#ffffff | "비고")
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "1988"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Link("제13대 국회의원 선거")
-    Cell span=1x4 align=Center:
+    Cell span=1x4 align=Some(Center):
       Paragraph: "서울 " Link("노원구 을" | "노원 을")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Macro(include "틀:평화민주당")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "30,346 (29.99%)"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "낙선 (2위)"
-    Cell span=1x1 align=Right:
+    Cell span=1x1 align=Some(Right):
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "1992"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Link("제14대 국회의원 선거")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Macro(include "틀:민주당(1991년)")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("40,602 (32.96%)")
-    Cell span=1x4 align=Center:
+    Cell span=1x4 align=Some(Center):
       Paragraph: Bold("당선 (1위)")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("초선") Footnote(| "출처는 " Link("http://news.joins.com/article/2729363" | "당시 중앙일보 기사") "다. 중앙선관위 역대선거정보시스템에서는 재검표 결과가 반영되어 있지 않다. 낙선 직후 재검표, 소송으로 번복" Macro(br) "1995년 탈당" Macro(br) Link("새정치국민회의") " 입당 ")
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "1996"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Link("제15대 국회의원 선거")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Macro(include "틀:새정치국민회의")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("41,615 (33.25%)")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("재선")
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "2000"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Link("제16대 국회의원 선거")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Macro(include "틀:새천년민주당")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("47,815 (41.11%)")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("3선") Footnote(| "2003년 탈당" Macro(br) "열린우리당 입당 ")
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "2004"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Link("제17대 국회의원 선거")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "서울 " Link("노원구 병" | "노원 병")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Macro(include "틀:열린우리당")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("44,923 (45.21%)")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("4선") Footnote(| "하반기 국회의장 ")
+Paragraph: 
 Table:
   Row:
-    Cell span=1x1 align=Center attrs=[Table/align=center Table/width=100% Table/bordercolor=#1870b9 Table/bgcolor=#1870b9]:
+    Cell span=1x1 align=Some(Center) attrs=[Table/align=center Table/width=100% Table/bordercolor=#1870b9 Table/bgcolor=#1870b9]:
       Paragraph: Colored(#ffffff | Bold("역대 선거 벽보"))
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#191919]:
-      Folding summary="[ 펼치기 · 접기 ]":
-        Table:
-          Row:
-            Cell span=1x1 align=Center attrs=[Cell/width=50% Row/bgcolor=#ffffff,#191919]:
-              Paragraph: Image("임채정_평민당_13.jpg" width=100%)
-            Cell span=1x1 align=Center attrs=[Cell/width=50%]:
-              Paragraph: Image("임채정_민주당_14.jpg" width=100%)
-          Row:
-            Cell span=1x1 align=Center:
-              Paragraph: Link("제13대 국회의원 선거" | Colored(#000000,#e5e5e5 | "13대 총선")) " " Link("노원구 을" | Colored(#000000,#e5e5e5 | "(서울 노원구 을)"))
-            Cell span=1x1 align=Center:
-              Paragraph: Link("제14대 국회의원 선거" | Colored(#000000,#e5e5e5 | "14회 총선")) " " Link("노원구 을" | Colored(#000000,#e5e5e5 | "(서울 노원구 을)"))
-          Row:
-            Cell span=1x1 align=Center attrs=[Row/bgcolor=#ffffff,#191919]:
-              Paragraph: Image("임채정_새정치국민회의_15.jpg" width=100%)
-            Cell span=1x1 align=Center:
-              Paragraph: Image("임채정_새천년_16.jpg" width=100%)
-          Row:
-            Cell span=1x1 align=Center:
-              Paragraph: Link("제15대 국회의원 선거" | Colored(#000000,#e5e5e5 | "15대 총선")) " " Link("노원구 을" | Colored(#000000,#e5e5e5 | "(서울 노원구 을)"))
-            Cell span=1x1 align=Center:
-              Paragraph: Link("제16대 국회의원 선거" | Colored(#000000,#e5e5e5 | "16대 총선")) " " Link("노원구 을" | Colored(#000000,#e5e5e5 | "(서울 노원구 을)"))
-          Row:
-            Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#191919]:
-              Paragraph: Image("임채정_열린우리당_17.jpg" width=100%)
-            Cell span=1x1 align=Right:
-          Row:
-            Cell span=1x1 align=Center:
-              Paragraph: Link("제17대 국회의원 선거" | Colored(#000000,#e5e5e5 | "17대 총선")) " " Link("노원구 병" | Colored(#000000,#e5e5e5 | "(서울 노원구 병)"))
-            Cell span=1x1 align=Right:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#191919]:
+      Paragraph: Folding([ 펼치기 · 접기 ] | Table:   Row:     Cell span=1x1 align=Some(Center) attrs=[Cell/width=50% Row/bgcolor=#ffffff,#191919]:       Paragraph: Image("임채정_평민당_13.jpg" width=100%)     Cell span=1x1 align=Some(Center) attrs=[Cell/width=50%]:       Paragraph: Image("임채정_민주당_14.jpg" width=100%)   Row:     Cell span=1x1 align=Some(Center):       Paragraph: Link("제13대 국회의원 선거" | Colored(#000000,#e5e5e5 | "13대 총선")) " " Link("노원구 을" | Colored(#000000,#e5e5e5 | "(서울 노원구 을)"))     Cell span=1x1 align=Some(Center):       Paragraph: Link("제14대 국회의원 선거" | Colored(#000000,#e5e5e5 | "14회 총선")) " " Link("노원구 을" | Colored(#000000,#e5e5e5 | "(서울 노원구 을)"))   Row:     Cell span=1x1 align=Some(Center) attrs=[Row/bgcolor=#ffffff,#191919]:       Paragraph: Image("임채정_새정치국민회의_15.jpg" width=100%)     Cell span=1x1 align=Some(Center):       Paragraph: Image("임채정_새천년_16.jpg" width=100%)   Row:     Cell span=1x1 align=Some(Center):       Paragraph: Link("제15대 국회의원 선거" | Colored(#000000,#e5e5e5 | "15대 총선")) " " Link("노원구 을" | Colored(#000000,#e5e5e5 | "(서울 노원구 을)"))     Cell span=1x1 align=Some(Center):       Paragraph: Link("제16대 국회의원 선거" | Colored(#000000,#e5e5e5 | "16대 총선")) " " Link("노원구 을" | Colored(#000000,#e5e5e5 | "(서울 노원구 을)"))   Row:     Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#191919]:       Paragraph: Image("임채정_열린우리당_17.jpg" width=100%)     Cell span=1x1 align=Some(Right):   Row:     Cell span=1x1 align=Some(Center):       Paragraph: Link("제17대 국회의원 선거" | Colored(#000000,#e5e5e5 | "17대 총선")) " " Link("노원구 병" | Colored(#000000,#e5e5e5 | "(서울 노원구 병)"))     Cell span=1x1 align=Some(Right):)
+Paragraph: 
 Heading level=2 folded=false: "소속 정당"
 Table:
   Row:
-    Cell span=1x1 align=Center attrs=[Table/align=center Table/bordercolor=#580009 Table/bgcolor=#fff,#1f2023 Row/bgcolor=#580009]:
+    Cell span=1x1 align=Some(Center) attrs=[Table/align=center Table/bordercolor=#580009 Table/bgcolor=#fff,#1f2023 Row/bgcolor=#580009]:
       Paragraph: Bold(Colored(#ffc224,#db9e00 | "소속"))
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold(Colored(#ffc224,#db9e00 | "기간"))
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold(Colored(#ffc224,#db9e00 | "비고"))
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Macro(include "틀:평화민주당")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "1988 - 1991"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "정계 입문"
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Macro(include "틀:신민주연합당")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "1991"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "당명 변경"
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Macro(include "틀:무소속")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "1991"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "탈당"
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Macro(include "틀:민주당(1991년)")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "1991 - 1995"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "입당"
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Macro(include "틀:무소속")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "1995"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Link("새정치국민회의") " 합류를 위한 탈당"
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Macro(include "틀:새정치국민회의")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "1995 - 2000"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "창당"
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Macro(include "틀:새천년민주당")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "2000 - 2003"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "합당" Footnote(| Link("새천년민주당") "에 흡수 합당")
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Macro(include "틀:무소속")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "2003"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Link("열린우리당") " 창당을 위해 탈당"
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Macro(include "틀:열린우리당")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "2003 - 2006"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "창당"
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Macro(include "틀:무소속")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "2006 - 2008"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "국회의장 취임으로 인한 탈당"
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Macro(include "틀:통합민주당(2008년)")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "2008"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "복당" Macro(br) "정계 은퇴"
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Macro(include "틀:민주당(2008년)")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "2008 - 2011"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "당명 변경"
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Macro(include "틀:민주통합당")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "2011 - 2013"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "합당" Footnote(| Link("시민통합당") "과 신설 합당")
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Macro(include "틀:민주당(2013년)")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "2013 - 2014"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "당명 변경"
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Macro(include "틀:새정치민주연합")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "2014 - 2015"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "합당" Footnote(| Link("새정치민주연합") "에 흡수 합당")
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Macro(include "틀:더불어민주당")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "2015 -"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "당명 변경"
 Heading level=2 folded=false: "둘러보기"
 Paragraph: Macro(include "틀:제15대 국회의원/서울특별시") <br> Macro(include "틀:제16대 국회의원/서울특별시") <br> Macro(include "틀:제17대 국회의원/서울특별시")
-Paragraph: Category("대한민국 국회의장") Category("기자") Category("나주 임씨") Category("나주시 출신 인물") Category("1941년 출생") Category("제14대 국회의원") Category("제15대 국회의원") Category("제16대 국회의원") Category("제17대 국회의원") Category("민주당(1991년) 국회의원") Category("새정치국민회의 국회의원") Category("새천년민주당 국회의원") Category("열린우리당 국회의원") Category("열린우리당 의장") Category("기자 출신 정치인") " " Category("광주제일고등학교 출신") Category("고려대학교 출신")
+Paragraph: " " <br> Category("대한민국 국회의장") Category("기자") Category("나주 임씨") Category("나주시 출신 인물") Category("1941년 출생") Category("제14대 국회의원") Category("제15대 국회의원") Category("제16대 국회의원") Category("제17대 국회의원") Category("민주당(1991년) 국회의원") Category("새정치국민회의 국회의원") Category("새천년민주당 국회의원") Category("열린우리당 국회의원") Category("열린우리당 의장") Category("기자 출신 정치인") " " Category("광주제일고등학교 출신") Category("고려대학교 출신")

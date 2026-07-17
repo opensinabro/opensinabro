@@ -1,0 +1,54 @@
+근거: 도움말서술 | 원문: 3줄 | 의미론: 45줄 | 렌더링: 5줄 | 도움말: 빈 줄이 리스트를 끊음
+ * 리스트 1
+
+ * 새 리스트
+Document {
+    blocks: [
+        List(
+            List {
+                kind: Unordered,
+                items: [
+                    ListItem {
+                        start_number: None,
+                        blocks: [
+                            Paragraph(
+                                [
+                                    Text(
+                                        "리스트 1",
+                                    ),
+                                ],
+                            ),
+                        ],
+                    },
+                ],
+            },
+        ),
+        Paragraph(
+            [],
+        ),
+        List(
+            List {
+                kind: Unordered,
+                items: [
+                    ListItem {
+                        start_number: None,
+                        blocks: [
+                            Paragraph(
+                                [
+                                    Text(
+                                        "새 리스트",
+                                    ),
+                                ],
+                            ),
+                        ],
+                    },
+                ],
+            },
+        ),
+    ],
+}
+<ul class="wiki-list"><li><div class="wiki-paragraph">리스트 1</div>
+</li></ul>
+<div class="wiki-paragraph"></div>
+<ul class="wiki-list"><li><div class="wiki-paragraph">새 리스트</div>
+</li></ul>

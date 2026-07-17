@@ -1,0 +1,41 @@
+근거: 도움말서술 | 원문: 1줄 | 의미론: 37줄 | 렌더링: 2줄 | 세로 위 정렬
+||<^|1> 위 ||
+Document {
+    blocks: [
+        Table(
+            Table {
+                caption: None,
+                rows: [
+                    TableRow {
+                        cells: [
+                            TableCell {
+                                column_span: None,
+                                row_span: Some(
+                                    1,
+                                ),
+                                horizontal_alignment: Some(
+                                    Center,
+                                ),
+                                vertical_alignment: Some(
+                                    Top,
+                                ),
+                                attributes: [],
+                                blocks: [
+                                    Paragraph(
+                                        [
+                                            Text(
+                                                "위",
+                                            ),
+                                        ],
+                                    ),
+                                ],
+                            },
+                        ],
+                    },
+                ],
+            },
+        ),
+    ],
+}
+<div class="wiki-table-wrap"><table class="wiki-table"><tbody><tr class="wiki-table-tr"><td rowspan="1" style="text-align: center; vertical-align: top;"><div class="wiki-paragraph">위</div>
+</td></tr></tbody></table></div>

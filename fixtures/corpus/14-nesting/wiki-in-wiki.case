@@ -1,0 +1,58 @@
+근거: 미확인 | 원문: 5줄 | 의미론: 51줄 | 렌더링: 1줄 | #!wiki 중첩
+{{{#!wiki style="margin: 4px"
+{{{#!wiki style="color: red"
+안쪽
+}}}
+}}}
+Document {
+    blocks: [
+        Paragraph(
+            [
+                WikiStyle(
+                    WikiStyle {
+                        style: Some(
+                            Template(
+                                [
+                                    Text(
+                                        "margin: 4px",
+                                    ),
+                                ],
+                            ),
+                        ),
+                        dark_style: None,
+                        blocks: [
+                            Paragraph(
+                                [
+                                    WikiStyle(
+                                        WikiStyle {
+                                            style: Some(
+                                                Template(
+                                                    [
+                                                        Text(
+                                                            "color: red",
+                                                        ),
+                                                    ],
+                                                ),
+                                            ),
+                                            dark_style: None,
+                                            blocks: [
+                                                Paragraph(
+                                                    [
+                                                        Text(
+                                                            "안쪽",
+                                                        ),
+                                                    ],
+                                                ),
+                                            ],
+                                        },
+                                    ),
+                                ],
+                            ),
+                        ],
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><div style="margin: 4px"><div style="color: red">안쪽</div></div></div>

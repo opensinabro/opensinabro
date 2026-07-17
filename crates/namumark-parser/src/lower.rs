@@ -5,9 +5,9 @@
 
 use crate::semantics;
 use namumark_ast::{
-    Block, Category, CodeBlock, ColoredBlock, ColoredText, Document, Folding, Footnote, Heading,
-    HorizontalAlignment, Image, Inline, Link, List, ListItem, ListKind, Macro, SizedBlock,
-    SizedText, Table, TableCell, TableRow, WikiStyle,
+    Block, Category, CodeBlock, ColoredText, Conditional, Document, Folding, Footnote, Fragment,
+    Heading, HorizontalAlignment, Image, Inline, Link, List, ListItem, ListKind, Macro, SizedText,
+    Table, TableCell, TableRow, Template, Variable, WikiStyle,
 };
 use namumark_syntax::{NodeOrToken, SyntaxKind, SyntaxNode};
 use namumark_text as text;
@@ -40,58 +40,35 @@ fn lower_block(node: &SyntaxNode) -> Option<Block> {
         SyntaxKind::Indent => Block::Indent(lower_block_children(node)),
         SyntaxKind::List => lower_list(node),
         SyntaxKind::Table => lower_table(node),
-        SyntaxKind::CodeBlock => lower_code_block(node),
-        SyntaxKind::HtmlBlock => Block::Html(raw_content_text(node)),
-        SyntaxKind::WikiStyle => {
-            let header = first_marker_text(node).unwrap_or_default();
-            let rest = text::strip_directive(header.trim_start_matches("{{{"), "#!wiki")
-                .unwrap_or_default();
-            let (style, dark_style, _) = text::parse_wiki_style_attributes(rest);
-            Block::WikiStyle(WikiStyle {
-                style,
-                dark_style,
-                blocks: lower_block_children(node),
-            })
-        }
-        SyntaxKind::Folding => {
-            let summary = node
-                .children()
-                .find(|child| child.kind() == SyntaxKind::FoldingSummary)
-                .map(|summary| assemble_inlines(&summary))
-                .unwrap_or_default();
-            Block::Folding(Folding {
-                summary,
-                blocks: lower_block_children(node),
-            })
-        }
-        SyntaxKind::ColoredBlock => {
-            let header = first_marker_text(node).unwrap_or_default();
-            let (color, dark_color, _) =
-                text::parse_color_marker(header.trim_start_matches("{{{"))?;
-            Block::Colored(ColoredBlock {
-                color,
-                dark_color,
-                blocks: lower_block_children(node),
-            })
-        }
-        SyntaxKind::SizedBlock => {
-            let header = first_marker_text(node).unwrap_or_default();
-            let (level, _) = text::parse_size_marker(header.trim_start_matches("{{{"))?;
-            Block::Sized(SizedBlock {
-                level,
-                blocks: lower_block_children(node),
-            })
-        }
         SyntaxKind::Comment => {
             let line = raw_text_tokens(node);
             Block::Comment(line.strip_prefix("##").unwrap_or(&line).to_string())
         }
         SyntaxKind::Redirect => {
             let line = raw_text_tokens(node);
-            Block::Redirect(text::parse_redirect(&line)?)
+            Block::Redirect(template_of(&text::parse_redirect(&line)?))
         }
         _ => return None,
     })
+}
+
+/// `{{{#색상}}}`·`{{{+N}}}`이 여러 줄에 걸친 경우의 내용.
+/// 이 그룹들은 서식일 뿐이라 안쪽 블록을 인라인으로 편다.
+fn block_children_as_inlines(node: &SyntaxNode) -> Vec<Inline> {
+    let mut inlines = Vec::new();
+    for block in lower_block_children(node) {
+        match block {
+            Block::Paragraph(mut content) => {
+                if !inlines.is_empty() {
+                    inlines.push(Inline::LineBreak);
+                }
+                inlines.append(&mut content);
+            }
+            // 서식 그룹 안의 표·리스트는 인라인으로 펼 수 없다. 드문 형태라 버린다.
+            _ => continue,
+        }
+    }
+    inlines
 }
 
 fn lower_list(node: &SyntaxNode) -> Block {
@@ -102,8 +79,10 @@ fn lower_list(node: &SyntaxNode) -> Block {
         .filter(|child| child.kind() == SyntaxKind::ListItem)
         .enumerate()
     {
+        // 여러 줄 항목은 마커를 하위 영역의 줄머리로 옮기므로 자손까지 본다.
+        // 문서 순서상 처음 나오는 것이 이 항목의 마커다(중첩 리스트의 것보다 앞선다).
         let marker_text = item
-            .children_with_tokens()
+            .descendants_with_tokens()
             .filter_map(NodeOrToken::into_token)
             .find(|token| token.kind() == SyntaxKind::ListMarker)
             .map(|token| token.text().to_string())
@@ -156,9 +135,9 @@ fn lower_table(node: &SyntaxNode) -> Block {
                 },
             }
         }
-        if !cells.is_empty() {
-            rows.push(TableRow { cells });
-        }
+        // 셀이 없는 행도 행이다 — 위 행의 rowspan에 덮인 자리를 이렇게 비워 둔다
+        // (렌더확정: 원문 `||||` 행이 the seed에서 `<tr class='wiki-table-tr'></tr>`다).
+        rows.push(TableRow { cells });
     }
     Block::Table(Table { caption, rows })
 }
@@ -191,20 +170,24 @@ fn lower_table_cell(node: &SyntaxNode, pending_pairs: usize) -> TableCell {
 
     let shape = text::cell_shape(&options_text);
     let cell = semantics::cell_semantics(&shape);
-    let horizontal_alignment = cell.horizontal_alignment.unwrap_or({
+    // 나무위키는 정렬을 **지정한** 셀에만 text-align을 방출한다. 공백 없는 셀은
+    // 기본(왼쪽)이라 지정이 없는 것으로 남긴다.
+    let horizontal_alignment = cell.horizontal_alignment.or({
         if leading_space && trailing_space {
-            HorizontalAlignment::Center
+            Some(HorizontalAlignment::Center)
         } else if leading_space {
-            HorizontalAlignment::Right
+            Some(HorizontalAlignment::Right)
+        } else if trailing_space {
+            Some(HorizontalAlignment::Left)
         } else {
-            HorizontalAlignment::Left
+            None
         }
     });
     TableCell {
+        // 지정한 대로만 싣는다 — the seed는 `<-1>`로 적힌 1도 `colspan='1'`로 낸다.
         column_span: cell
             .column_span_override
-            .unwrap_or(pending_pairs as u32)
-            .max(1),
+            .or_else(|| (pending_pairs > 1).then_some(pending_pairs as u32)),
         row_span: cell.row_span,
         horizontal_alignment,
         vertical_alignment: cell.vertical_alignment,
@@ -213,21 +196,25 @@ fn lower_table_cell(node: &SyntaxNode, pending_pairs: usize) -> TableCell {
     }
 }
 
-fn lower_code_block(node: &SyntaxNode) -> Block {
+fn lower_code_block(node: &SyntaxNode) -> CodeBlock {
     let language = node
         .children_with_tokens()
         .filter_map(NodeOrToken::into_token)
         .filter(|token| token.kind() == SyntaxKind::Marker)
         .find_map(|token| {
-            let text = token.text().trim_start_matches("{{{").to_string();
+            let text = token
+                .text()
+                .trim_start()
+                .trim_start_matches("{{{")
+                .to_string();
             let rest = text::strip_directive(&text, "#!syntax")?.trim().to_string();
             Some(rest)
         })
         .filter(|language| !language.is_empty());
-    Block::CodeBlock(CodeBlock {
+    CodeBlock {
         language,
         source: raw_content_text(node),
-    })
+    }
 }
 
 /// CodeBlock/HtmlBlock의 원문 복원: Text 토큰과 개행만 모으고 가장자리 개행 하나씩 제거.
@@ -254,6 +241,18 @@ fn raw_text_tokens(node: &SyntaxNode) -> String {
         .filter(|token| token.kind() == SyntaxKind::Text)
         .map(|token| token.text().to_string())
         .collect()
+}
+
+/// 그룹 헤더 마커에서 지시자 부분만 꺼낸다.
+///
+/// 문단 중간에서 열린 그룹은 마커가 앞 개행까지 머금는다(`"\n{{{#!wiki …"`) —
+/// 무손실 트리라 그 바이트도 어딘가에는 있어야 하기 때문이다. 의미를 볼 때는 걷어낸다.
+fn group_header(node: &SyntaxNode) -> String {
+    first_marker_text(node)
+        .unwrap_or_default()
+        .trim_start()
+        .trim_start_matches("{{{")
+        .to_string()
 }
 
 fn first_marker_text(node: &SyntaxNode) -> Option<String> {
@@ -306,7 +305,7 @@ fn lower_inline(node: &SyntaxNode) -> Option<Inline> {
         SyntaxKind::Superscript => Inline::Superscript(assemble_inlines(node)),
         SyntaxKind::Subscript => Inline::Subscript(assemble_inlines(node)),
         SyntaxKind::Literal => Inline::Literal(raw_text_tokens(node)),
-        SyntaxKind::InlineHtml => Inline::Html(raw_text_tokens(node)),
+        SyntaxKind::InlineHtml => Inline::Html(template_of(&raw_text_tokens(node))),
         SyntaxKind::ColoredText => {
             let marker = first_marker_text(node)?;
             let (color, dark_color, _) = text::parse_color_marker(&marker[3..])?;
@@ -327,10 +326,8 @@ fn lower_inline(node: &SyntaxNode) -> Option<Inline> {
         SyntaxKind::Link => {
             let node_text = node.text().to_string();
             let body = &node_text[2..node_text.len() - 2];
-            let (target, has_display) = match body.split_once('|') {
-                Some((target, _)) => (target, true),
-                None => (body, false),
-            };
+            let (target, display) = text::split_link_body(body);
+            let has_display = display.is_some();
             let target = match target.strip_prefix(':') {
                 Some(stripped)
                     if text::strip_link_prefix(
@@ -345,8 +342,10 @@ fn lower_inline(node: &SyntaxNode) -> Option<Inline> {
             };
             let (target, anchor) = text::split_anchor(target);
             Inline::Link(Link {
-                target: target.to_string(),
-                anchor,
+                target: template_of(&text::unescape(target)),
+                anchor: anchor
+                    .as_deref()
+                    .map(|anchor| template_of(&text::unescape(anchor))),
                 display: has_display.then(|| assemble_inlines(node)),
             })
         }
@@ -359,8 +358,64 @@ fn lower_inline(node: &SyntaxNode) -> Option<Inline> {
             };
             let file_name = text::strip_link_prefix(target, &["파일:", "file:"])?;
             Inline::Image(Image {
-                file_name: file_name.to_string(),
+                file_name: template_of(file_name),
                 options: semantics::image_options(display),
+            })
+        }
+        SyntaxKind::WikiStyle => {
+            let header = group_header(node);
+            let rest = text::strip_directive(&header, "#!wiki").unwrap_or_default();
+            let (style, dark_style, _) = text::parse_wiki_style_attributes(rest);
+            Inline::WikiStyle(WikiStyle {
+                style: style.as_deref().map(template_of),
+                dark_style: dark_style.as_deref().map(template_of),
+                blocks: lower_block_children(node),
+            })
+        }
+        SyntaxKind::Folding => Inline::Folding(Folding {
+            summary: template_of(
+                &node
+                    .children()
+                    .find(|child| child.kind() == SyntaxKind::FoldingSummary)
+                    .map(|summary| summary.text().to_string())
+                    .unwrap_or_default(),
+            ),
+            blocks: lower_block_children(node),
+        }),
+        SyntaxKind::Conditional => Inline::Conditional(Conditional {
+            expression: node
+                .children()
+                .find(|child| child.kind() == SyntaxKind::ConditionExpression)
+                .map(|expression| expression.text().to_string())
+                .unwrap_or_default(),
+            blocks: lower_block_children(node),
+        }),
+        SyntaxKind::CodeBlock => Inline::CodeBlock(lower_code_block(node)),
+        SyntaxKind::HtmlBlock => Inline::Html(template_of(&raw_content_text(node))),
+        SyntaxKind::ColoredBlock => {
+            let (color, dark_color) = text::parse_color_specification(&group_header(node))?;
+            Inline::Colored(ColoredText {
+                color,
+                dark_color,
+                content: block_children_as_inlines(node),
+            })
+        }
+        SyntaxKind::SizedBlock => {
+            let (level, _) = text::parse_size_marker(&group_header(node))?;
+            Inline::Sized(SizedText {
+                level,
+                content: block_children_as_inlines(node),
+            })
+        }
+        SyntaxKind::TemplateVariable => {
+            let shape = text::variable_shape(&node.text().to_string())?;
+            let node_text = node.text().to_string();
+            Inline::Variable(Variable {
+                name: node_text[shape.name.clone()].to_string(),
+                default: shape
+                    .default
+                    .clone()
+                    .map(|range| node_text[range].to_string()),
             })
         }
         SyntaxKind::Category => {
@@ -399,9 +454,44 @@ fn lower_inline(node: &SyntaxNode) -> Option<Inline> {
             };
             Inline::Macro(Macro {
                 name: name.to_string(),
-                argument,
+                argument: argument.as_deref().map(template_of),
             })
         }
         _ => return None,
     })
+}
+
+/// 토큰 텍스트에서 틀 인자 표기를 갈라 `Template`을 만든다.
+///
+/// 인라인 문맥의 인자는 구문 트리가 이미 노드로 끊어 주지만, 헤더나 옵션처럼
+/// 마커 토큰 하나로 들어오는 문자열은 여기서 갈라낸다(leaf 의미 계산).
+pub(crate) fn template_of(source: &str) -> Template {
+    let mut fragments = Vec::new();
+    let mut pending = String::new();
+    let mut rest = source;
+    while !rest.is_empty() {
+        if let Some(shape) = text::variable_shape(rest) {
+            if !pending.is_empty() {
+                fragments.push(Fragment::Text(std::mem::take(&mut pending)));
+            }
+            fragments.push(Fragment::Variable(Variable {
+                name: rest[shape.name.clone()].to_string(),
+                default: shape.default.clone().map(|range| rest[range].to_string()),
+            }));
+            rest = &rest[shape.length..];
+            continue;
+        }
+        let next = rest
+            .char_indices()
+            .skip(1)
+            .find(|(_, character)| *character == '@')
+            .map(|(index, _)| index)
+            .unwrap_or(rest.len());
+        pending.push_str(&rest[..next]);
+        rest = &rest[next..];
+    }
+    if !pending.is_empty() {
+        fragments.push(Fragment::Text(pending));
+    }
+    Template(fragments)
 }

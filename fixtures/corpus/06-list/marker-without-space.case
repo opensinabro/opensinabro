@@ -1,0 +1,27 @@
+근거: 미확인 | 원문: 1줄 | 의미론: 23줄 | 렌더링: 2줄 | 마커와 내용이 붙음
+ *붙은 내용
+Document {
+    blocks: [
+        List(
+            List {
+                kind: Unordered,
+                items: [
+                    ListItem {
+                        start_number: None,
+                        blocks: [
+                            Paragraph(
+                                [
+                                    Text(
+                                        "붙은 내용",
+                                    ),
+                                ],
+                            ),
+                        ],
+                    },
+                ],
+            },
+        ),
+    ],
+}
+<ul class="wiki-list"><li><div class="wiki-paragraph">붙은 내용</div>
+</li></ul>

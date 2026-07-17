@@ -1,0 +1,33 @@
+근거: 도움말예제 | 원문: 2줄 | 의미론: 26줄 | 렌더링: 4줄 | 도움말: 깊이를 두 단계 건너뜀
+== 문단 2 ==
+==== 문단 4 ====
+Document {
+    blocks: [
+        Heading(
+            Heading {
+                level: 2,
+                folded: false,
+                content: [
+                    Text(
+                        "문단 2",
+                    ),
+                ],
+            },
+        ),
+        Heading(
+            Heading {
+                level: 4,
+                folded: false,
+                content: [
+                    Text(
+                        "문단 4",
+                    ),
+                ],
+            },
+        ),
+    ],
+}
+<h2 class="wiki-heading"><a id="s-1" href="#toc">1.</a> <span id="문단 2">문단 2</span></h2>
+<div class="wiki-heading-content"></div>
+<h4 class="wiki-heading"><a id="s-1.1" href="#toc">1.1.</a> <span id="문단 4">문단 4</span></h4>
+<div class="wiki-heading-content"></div>

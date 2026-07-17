@@ -2,432 +2,417 @@
 # residue: [[=0 ]]=0 {{{=0 }}}=0 '''=0 ||=0 [*=0 #!=0
 Paragraph: Macro(목차)
 Heading level=2 folded=false: "개요"
-Paragraph: "프론티어 웍스(フロンティアワークス)에서 기획한 " Link("미디어 믹스") " 시리즈. " Link("TV 애니메이션") "과 코믹스 발매가 결정되었다."
+Paragraph: "프론티어 웍스(フロンティアワークス)에서 기획한 " Link("미디어 믹스") " 시리즈. " Link("TV 애니메이션") "과 코믹스 발매가 결정되었다." <br>
 Heading level=2 folded=false: "등장인물"
 List kind=Unordered:
   Item:
     Paragraph: Bold("아리시바 에이지") "(嵐柴エイジ)"
 Table:
   Row:
-    Cell span=2x1 align=Left attrs=[Cell/width=550 Cell/bgcolor=#ffffff]:
-      WikiStyle style=Some("margin: -6px -10px") dark_style=None:
-        Paragraph: Image("아라시바 에이지 (프레이터의 상처).png" width=100%)
+    Cell span=2x1 align=None attrs=[Cell/width=550 Cell/bgcolor=#ffffff]:
+      Paragraph: WikiStyle(style=Some("margin: -6px -10px") dark=None | Paragraph: Image("아라시바 에이지 (프레이터의 상처).png" width=100%))
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("나이")
-    Cell span=1x1 align=Center attrs=[Column/bgcolor=#ffffff]:
+    Cell span=1x1 align=Some(Center) attrs=[Column { columns: 1 }/bgcolor=#ffffff]:
       Paragraph: "24세"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("생일")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("1월 9일") Footnote(| "공교롭게도 1화가 방영된 날이며 이 날 이 캐릭터는 방송에서 사망했다.")
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("키")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "185cm"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("능력")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "살기의 냄새에 반응하는 능력"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("문신")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "케르베로스"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("성우")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Image("일본 국기.svg" width=20) " " Link("코우사카 아츠시")
-Paragraph: "아카츠키 특구의 트러블 슈터," <br> "『헤리오스』의 리더이자 4년 전에 아카츠키 항쟁으로 인하여 무법지대가 된 아카츠키 특구를 지킨 『아카츠키의 영웅』" <br> "항상 촐랑거리고 있으나 동료들을 지킬 때에는 진정의 강함을 보인다." <br> "또한 북카페 『티턴』의 점장이지만 운영은 남동생 카즈마에게 맡긴 채 언제나 혼나고 있다." <br> "하지만 본인은 그것마저도 즐기고 있는 점이…"
-Paragraph: Macro(Include "틀:스포일러")
-Paragraph: "1화에서 자신을 감싸고 큰 부상을 입은 카이 야마토를 살리기 위해 자신의 타투인 케로베로스를 넘기고 추격해온 적들을 모두 쓰러뜨린 뒤 야마토의 등에 기댄 채 힘이 다한다. 이후 카이의 나레이션으로 이 날 아카츠키는 영웅을 잃었다고 언급되기에 사망한 것으로 추정된다. 직접적으로 사망이 확인되지는 않았으며, 2화에서도 확인 없이 사망했다고만 언급된다." <br> "워낙 전개가 충격적이여서인지 1화 방송 후, 성우 본인이 방송에서 다음의 전개가 기대된다는 평을 직접 밝히기도 했다."
+Paragraph: <br> "아카츠키 특구의 트러블 슈터," <br> "『헤리오스』의 리더이자 4년 전에 아카츠키 항쟁으로 인하여 무법지대가 된 아카츠키 특구를 지킨 『아카츠키의 영웅』" <br> "항상 촐랑거리고 있으나 동료들을 지킬 때에는 진정의 강함을 보인다." <br> "또한 북카페 『티턴』의 점장이지만 운영은 남동생 카즈마에게 맡긴 채 언제나 혼나고 있다." <br> "하지만 본인은 그것마저도 즐기고 있는 점이…" <br> <br> Macro(Include "틀:스포일러") <br> <br> "1화에서 자신을 감싸고 큰 부상을 입은 카이 야마토를 살리기 위해 자신의 타투인 케로베로스를 넘기고 추격해온 적들을 모두 쓰러뜨린 뒤 야마토의 등에 기댄 채 힘이 다한다. 이후 카이의 나레이션으로 이 날 아카츠키는 영웅을 잃었다고 언급되기에 사망한 것으로 추정된다. 직접적으로 사망이 확인되지는 않았으며, 2화에서도 확인 없이 사망했다고만 언급된다." <br> "워낙 전개가 충격적이여서인지 1화 방송 후, 성우 본인이 방송에서 다음의 전개가 기대된다는 평을 직접 밝히기도 했다." <br>
 HorizontalRule
 List kind=Unordered:
   Item:
     Paragraph: Bold("아리시바 카즈마") "(嵐柴カズマ)"
 Table:
   Row:
-    Cell span=2x1 align=Left attrs=[Cell/width=550 Cell/bgcolor=#ffffff]:
-      WikiStyle style=Some("margin: -6px -10px") dark_style=None:
-        Paragraph: Image("아라시바 카즈마 (프레이터의 상처).png" width=100%)
+    Cell span=2x1 align=None attrs=[Cell/width=550 Cell/bgcolor=#ffffff]:
+      Paragraph: WikiStyle(style=Some("margin: -6px -10px") dark=None | Paragraph: Image("아라시바 카즈마 (프레이터의 상처).png" width=100%))
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("나이")
-    Cell span=1x1 align=Center attrs=[Column/bgcolor=#ffffff]:
+    Cell span=1x1 align=Some(Center) attrs=[Column { columns: 1 }/bgcolor=#ffffff]:
       Paragraph: "18세"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("생일")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "6월 3일"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("키")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "179cm"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("능력")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "문신의 능력을 저해 및 봉인하는 능력"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("문신")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "캣 시"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("성우")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Image("일본 국기.svg" width=20) " " Link("치바 쇼야")
-Paragraph: "주인공이었던 에이지의 의붓동생. 형인 에이지에게 강한 동경을 품고 있다. " <br> "감정 그대로의 분노를 나타내기도 하지만, 북카페 『티턴』 운영을 에이지들을 대신해 혼자 꾸려나가거나 아이들을 상대로는 서투르면서도 부드럽게 대하는 등의 성실하고 상냥한 면이 있다."
-Paragraph: "팀 헬리오스에 소속되어 반리로부터 『케트시』를 이어받은 스카드."
+Paragraph: <br> "주인공이었던 에이지의 의붓동생. 형인 에이지에게 강한 동경을 품고 있다. " <br> "감정 그대로의 분노를 나타내기도 하지만, 북카페 『티턴』 운영을 에이지들을 대신해 혼자 꾸려나가거나 아이들을 상대로는 서투르면서도 부드럽게 대하는 등의 성실하고 상냥한 면이 있다." <br> <br> "팀 헬리오스에 소속되어 반리로부터 『케트시』를 이어받은 스카드." <br>
 HorizontalRule
 List kind=Unordered:
   Item:
     Paragraph: Bold("사키시마 카가미") "(茶木縞カガミ)"
 Table:
   Row:
-    Cell span=2x1 align=Left attrs=[Cell/width=550 Cell/bgcolor=#ffffff]:
-      WikiStyle style=Some("margin: -6px -10px") dark_style=None:
-        Paragraph: Image("사키시마 카가미 (프레이터의 상처).png" width=100%)
+    Cell span=2x1 align=None attrs=[Cell/width=550 Cell/bgcolor=#ffffff]:
+      Paragraph: WikiStyle(style=Some("margin: -6px -10px") dark=None | Paragraph: Image("사키시마 카가미 (프레이터의 상처).png" width=100%))
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("나이")
-    Cell span=1x1 align=Center attrs=[Column/bgcolor=#ffffff]:
+    Cell span=1x1 align=Some(Center) attrs=[Column { columns: 1 }/bgcolor=#ffffff]:
       Paragraph: "23세"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("생일")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "4월 19일"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("키")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "177cm"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("능력")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "언급한 것의 육체를 변화시키는 능력"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("문신")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "우로보로스"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("성우")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Image("일본 국기.svg" width=20) " " Link("에노키 준야")
-Paragraph: "에이지의 절친이자 헬리오스에 소속된 『우로보로스의』 스카드. 박식하며 문신이나 의술, 주술 등에 능하다. 별로 싸우는 것이 능숙하지 않기 때문에, 서포트 역할을 담당하다. 일견 태도가 부드럽고 친절해 보이지만, 관심이 없는 일에는 거들떠보지도 않는다."
-Paragraph: "본래 새벽 특구의 항쟁을 지휘할 터였다. 『사키시마·홀딩구스』의 후계자."
+Paragraph: <br> "에이지의 절친이자 헬리오스에 소속된 『우로보로스의』 스카드. 박식하며 문신이나 의술, 주술 등에 능하다. 별로 싸우는 것이 능숙하지 않기 때문에, 서포트 역할을 담당하다. 일견 태도가 부드럽고 친절해 보이지만, 관심이 없는 일에는 거들떠보지도 않는다." <br> <br> "본래 새벽 특구의 항쟁을 지휘할 터였다. 『사키시마·홀딩구스』의 후계자." <br>
 HorizontalRule
 List kind=Unordered:
   Item:
     Paragraph: Bold("와사미네 란") "(鷲峰ラン)"
 Table:
   Row:
-    Cell span=2x1 align=Left attrs=[Cell/width=550 Cell/bgcolor=#ffffff]:
-      WikiStyle style=Some("margin: -6px -10px") dark_style=None:
-        Paragraph: Image("와시미네 란 (프레이터의 상처).png" width=100%)
+    Cell span=2x1 align=None attrs=[Cell/width=550 Cell/bgcolor=#ffffff]:
+      Paragraph: WikiStyle(style=Some("margin: -6px -10px") dark=None | Paragraph: Image("와시미네 란 (프레이터의 상처).png" width=100%))
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("나이")
-    Cell span=1x1 align=Center attrs=[Column/bgcolor=#ffffff]:
+    Cell span=1x1 align=Some(Center) attrs=[Column { columns: 1 }/bgcolor=#ffffff]:
       Paragraph: "21세"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("생일")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "8월 1일"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("키")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "180cm"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("능력")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "얼음을 생성, 조작하는 능력"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("문신")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "흐레스벨그"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("성우")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Image("일본 국기.svg" width=20) " " Link("마스야마 타케아키")
-Paragraph: "'아르테미스' 소속."
+Paragraph: <br> "'아르테미스' 소속." <br>
 HorizontalRule
 List kind=Unordered:
   Item:
     Paragraph: Bold("카라스에 진") "(烏末ジン)"
 Table:
   Row:
-    Cell span=2x1 align=Left attrs=[Cell/width=550 Cell/bgcolor=#ffffff]:
-      WikiStyle style=Some("margin: -6px -10px") dark_style=None:
-        Paragraph: Image("카라스에 진 (프레이터의 상처).png" width=100%)
+    Cell span=2x1 align=None attrs=[Cell/width=550 Cell/bgcolor=#ffffff]:
+      Paragraph: WikiStyle(style=Some("margin: -6px -10px") dark=None | Paragraph: Image("카라스에 진 (프레이터의 상처).png" width=100%))
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("나이")
-    Cell span=1x1 align=Center attrs=[Column/bgcolor=#ffffff]:
+    Cell span=1x1 align=Some(Center) attrs=[Column { columns: 1 }/bgcolor=#ffffff]:
       Paragraph: "21세"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("생일")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "10월 31일"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("키")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "179cm"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("능력")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "환영 능력, 평소에는 불꽃의 능력으로 위장하고 있다"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("문신")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "모리건"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("성우")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Image("일본 국기.svg" width=20) " " Link("노가미 쇼")
-Paragraph: "'아르테미스' 소속. 란의 동료. 애니메이션을 좋아한다."
+Paragraph: <br> "'아르테미스' 소속. 란의 동료. 애니메이션을 좋아한다." <br>
 HorizontalRule
 List kind=Unordered:
   Item:
     Paragraph: Bold("타츠마 코우가") "(龍眞コウガ)"
 Table:
   Row:
-    Cell span=2x1 align=Left attrs=[Cell/width=550 Cell/bgcolor=#ffffff]:
-      WikiStyle style=Some("margin: -6px -10px") dark_style=None:
-        Paragraph: Image("타츠마 코우가 (프레이터의 상처).png" width=100%)
+    Cell span=2x1 align=None attrs=[Cell/width=550 Cell/bgcolor=#ffffff]:
+      Paragraph: WikiStyle(style=Some("margin: -6px -10px") dark=None | Paragraph: Image("타츠마 코우가 (프레이터의 상처).png" width=100%))
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("나이")
-    Cell span=1x1 align=Center attrs=[Column/bgcolor=#ffffff]:
+    Cell span=1x1 align=Some(Center) attrs=[Column { columns: 1 }/bgcolor=#ffffff]:
       Paragraph: "36세"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("생일")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "11월 8일"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("키")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "188cm"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("능력")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "자신과 물질의 강도를 더해주는 능력"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("문신")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "파프닐"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("성우")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Image("일본 국기.svg" width=20) " " Link("야시로 타쿠")
-Paragraph: "공안특무 경찰관."
+Paragraph: <br> "공안특무 경찰관." <br>
 HorizontalRule
 List kind=Unordered:
   Item:
     Paragraph: Bold("토라타카 이츠키") "(虎尊イツキ)"
 Table:
   Row:
-    Cell span=2x1 align=Left attrs=[Cell/width=550 Cell/bgcolor=#ffffff]:
-      WikiStyle style=Some("margin: -6px -10px") dark_style=None:
-        Paragraph: Image("토라타카 이츠키 (프레이터의 상처).png" width=100%)
+    Cell span=2x1 align=None attrs=[Cell/width=550 Cell/bgcolor=#ffffff]:
+      Paragraph: WikiStyle(style=Some("margin: -6px -10px") dark=None | Paragraph: Image("토라타카 이츠키 (프레이터의 상처).png" width=100%))
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("나이")
-    Cell span=1x1 align=Center attrs=[Column/bgcolor=#ffffff]:
+    Cell span=1x1 align=Some(Center) attrs=[Column { columns: 1 }/bgcolor=#ffffff]:
       Paragraph: "17세"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("생일")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "2월 29일"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("키")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "174cm"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("능력")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "공중을 이동하는 능력"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("문신")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "큐우키"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("성우")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Image("일본 국기.svg" width=20) " " Link("하타나카 타스쿠")
-Paragraph: "공안특무 경찰관."
+Paragraph: <br> "공안특무 경찰관." <br>
 HorizontalRule
 List kind=Unordered:
   Item:
     Paragraph: Bold("카이 야마토") "(甲斐ヤマト)"
 Table:
   Row:
-    Cell span=2x1 align=Left attrs=[Cell/width=550 Cell/bgcolor=#ffffff]:
-      WikiStyle style=Some("margin: -6px -10px") dark_style=None:
-        Paragraph: Image("카이 야마토 (프레이터의 상처).png" width=100%)
+    Cell span=2x1 align=None attrs=[Cell/width=550 Cell/bgcolor=#ffffff]:
+      Paragraph: WikiStyle(style=Some("margin: -6px -10px") dark=None | Paragraph: Image("카이 야마토 (프레이터의 상처).png" width=100%))
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("나이")
-    Cell span=1x1 align=Center attrs=[Column/bgcolor=#ffffff]:
+    Cell span=1x1 align=Some(Center) attrs=[Column { columns: 1 }/bgcolor=#ffffff]:
       Paragraph: "20세"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("생일")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "7월 20일"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("키")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "182cm"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("성우")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Image("일본 국기.svg" width=20) " " Link("란즈베리 아서")
-Paragraph: "불법점거지구인 B1에서 생활하고 있으며 과거의 영웅이었던 에이지를 동경하고 있다. 초반에는 문신을 소유하고 있지 않았으나 에이지와 어울려 사고에 휘말리게 되면서 그의 문신을 이어받게 되었다. 이후 에이지의 사망을 곁에서 지켜봤기에 그 역할이 꽤나 무거운 짐이 될지도."
+Paragraph: <br> "불법점거지구인 B1에서 생활하고 있으며 과거의 영웅이었던 에이지를 동경하고 있다. 초반에는 문신을 소유하고 있지 않았으나 에이지와 어울려 사고에 휘말리게 되면서 그의 문신을 이어받게 되었다. 이후 에이지의 사망을 곁에서 지켜봤기에 그 역할이 꽤나 무거운 짐이 될지도." <br>
 HorizontalRule
 List kind=Unordered:
   Item:
     Paragraph: Bold("카이 미나토") "(甲斐ミナト)"
 Table:
   Row:
-    Cell span=2x1 align=Left attrs=[Cell/width=550 Cell/bgcolor=#ffffff]:
-      WikiStyle style=Some("margin: -6px -10px") dark_style=None:
-        Paragraph: Image("카이 미나토 (프레이터의 상처).png" width=100%)
+    Cell span=2x1 align=None attrs=[Cell/width=550 Cell/bgcolor=#ffffff]:
+      Paragraph: WikiStyle(style=Some("margin: -6px -10px") dark=None | Paragraph: Image("카이 미나토 (프레이터의 상처).png" width=100%))
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("나이")
-    Cell span=1x1 align=Center attrs=[Column/bgcolor=#ffffff]:
+    Cell span=1x1 align=Some(Center) attrs=[Column { columns: 1 }/bgcolor=#ffffff]:
       Paragraph: "14세"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("생일")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "3월 30일"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("키")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "165cm"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("성우")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Image("일본 국기.svg" width=20) " " Link("야마야 요시타카")
-Paragraph: "야마토의 의붓동생."
+Paragraph: <br> "야마토의 의붓동생." <br>
 HorizontalRule
 List kind=Unordered:
   Item:
     Paragraph: Bold("미카도 반리") "(三門バンリ)"
 Table:
   Row:
-    Cell span=2x1 align=Left attrs=[Cell/width=550 Cell/bgcolor=#ffffff]:
-      WikiStyle style=Some("margin: -6px -10px") dark_style=None:
-        Paragraph: Image("미카도 반리 (프레이터의 상처).png" width=100%)
+    Cell span=2x1 align=None attrs=[Cell/width=550 Cell/bgcolor=#ffffff]:
+      Paragraph: WikiStyle(style=Some("margin: -6px -10px") dark=None | Paragraph: Image("미카도 반리 (프레이터의 상처).png" width=100%))
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("나이")
-    Cell span=1x1 align=Center attrs=[Column/bgcolor=#ffffff]:
+    Cell span=1x1 align=Some(Center) attrs=[Column { columns: 1 }/bgcolor=#ffffff]:
       Paragraph: "24세"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("생일")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "2월 22일"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("키")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "183cm"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("성우")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Image("일본 국기.svg" width=20) " " Link("후쿠야마 쥰")
-Paragraph: "캣 시의 과거 소유자."
+Paragraph: <br> "캣 시의 과거 소유자." <br>
 HorizontalRule
 List kind=Unordered:
   Item:
     Paragraph: Bold("유키 아즈사") "(由岐アズサ)"
 Table:
   Row:
-    Cell span=2x1 align=Left attrs=[Cell/width=550 Cell/bgcolor=#ffffff]:
-      WikiStyle style=Some("margin: -6px -10px") dark_style=None:
-        Paragraph: Image("유키 아즈사 (프레이터의 상처).png" width=100%)
+    Cell span=2x1 align=None attrs=[Cell/width=550 Cell/bgcolor=#ffffff]:
+      Paragraph: WikiStyle(style=Some("margin: -6px -10px") dark=None | Paragraph: Image("유키 아즈사 (프레이터의 상처).png" width=100%))
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("나이")
-    Cell span=1x1 align=Center attrs=[Column/bgcolor=#ffffff]:
+    Cell span=1x1 align=Some(Center) attrs=[Column { columns: 1 }/bgcolor=#ffffff]:
       Paragraph: "25세"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("생일")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "9월 15일"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("키")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "170cm"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("능력")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "달빛을 어떤 성질도 변화할 수 있는 능력"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("문신")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "아르테미스"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#010101]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#010101]:
       Paragraph: Bold("성우")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Image("일본 국기.svg" width=20) " " Link("쿠기미야 리에")
-Paragraph: "'아르테미스'의 리더. 피부가 약한듯 하여 평상시에는 양산을 쓰고 다닌다."
+Paragraph: <br> "'아르테미스'의 리더. 피부가 약한듯 하여 평상시에는 양산을 쓰고 다닌다." <br>
 HorizontalRule
 List kind=Unordered:
   Item:
     Paragraph: Bold("쿠라마 호쿠토") " " Sized(-1 | "- 성우: " Link("후쿠하라 카츠미"))
 Table:
   Row:
-    Cell span=1x1 align=Left attrs=[Cell/width=550 Cell/bgcolor=#ffffff]:
-      WikiStyle style=Some("margin: -6px -10px") dark_style=None:
-        Paragraph: Image("쿠라마 호쿠토 (프레이터의 상처).png" width=100%)
+    Cell span=1x1 align=None attrs=[Cell/width=550 Cell/bgcolor=#ffffff]:
+      Paragraph: WikiStyle(style=Some("margin: -6px -10px") dark=None | Paragraph: Image("쿠라마 호쿠토 (프레이터의 상처).png" width=100%))
 Indent:
   Paragraph: "범죄그룹 '다스쿠'의 리더."
+Paragraph: 
 List kind=Unordered:
   Item:
     Paragraph: "선대 흐레스벨그 " Sized(-1 | "- 성우: " Link("츠다 켄지로"))
@@ -436,356 +421,236 @@ List kind=Unordered:
 Heading level=2 folded=false: "TV 애니메이션"
 Table:
   Row:
-    Cell span=2x1 align=Center attrs=[Table/width=500 Table/align=center Table/bordercolor=#d82438,#d82438 Cell/bgcolor=#ffffff,#ffffff]:
+    Cell span=2x1 align=Some(Center) attrs=[Table/width=500 Table/align=center Table/bordercolor=#d82438,#d82438 Cell/bgcolor=#ffffff,#ffffff]:
       Paragraph: Colored(#d82438,#d82438 | Bold(Sized(+1 | "프레이터" Colored(#d82438,#ffffff | "의") " 상처")) Macro(br) "プレイタ" Colored(#d82438,#ffffff | "の") "傷")
   Row:
-    Cell span=2x1 align=Center attrs=[Cell/bgcolor=#ffffff,#2d2f34]:
-      WikiStyle style=Some("margin: -6px -10px") dark_style=None:
-        Paragraph: Image("프레이터의상처_애니키비주얼.jpg" width=100%)
+    Cell span=2x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#2d2f34]:
+      Paragraph: WikiStyle(style=Some("margin: -6px -10px") dark=None | Paragraph: Image("프레이터의상처_애니키비주얼.jpg" width=100%))
   Row:
-    Cell span=2x1 align=Center attrs=[Cell/bgcolor=#ffffff,#ffffff]:
-      ColoredBlock color=#d82438,#d82438:
-        WikiStyle style=Some("margin: 0px -11px") dark_style=None:
-          Folding summary="작품 정보 ▼":
-            Table:
-              Row:
-                Cell span=1x1 align=Center attrs=[Table/width=100% Table/bgcolor=#ffffff,#2d2f34 Table/color=#373a3c,#ffffff Cell/bgcolor=#ffffff,#ffffff]:
-                  Paragraph: Bold(Colored(#d82438,#d82438 | "원작"))
-                Cell span=1x1 align=Left:
-                  Paragraph: Link("GoHands") Macro(br) "Frontier Works"
-              Row:
-                Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#ffffff]:
-                  Paragraph: Bold(Colored(#d82438,#d82438 | "감독"))
-                Cell span=1x2 align=Left:
-                  Paragraph: "스즈키 신고(鈴木信吾)"
-              Row:
-                Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#ffffff]:
-                  Paragraph: Bold(Colored(#d82438,#d82438 | "캐릭터 디자인"))
-              Row:
-                Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#ffffff]:
-                  Paragraph: Bold(Colored(#d82438,#d82438 | "각본"))
-                Cell span=1x1 align=Left:
-                  Paragraph: "야나기 타마조(八薙玉造)"
-              Row:
-                Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#ffffff]:
-                  Paragraph: Bold(Colored(#d82438,#d82438 | "총 작화감독"))
-                Cell span=1x1 align=Left:
-                  Paragraph: "후루타 마코토(古田 誠)" Macro(br) "타니 케이지(谷 圭司)"
-              Row:
-                Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#ffffff]:
-                  Paragraph: Bold(Colored(#d82438,#d82438 | "메카 디자이너"))
-                Cell span=1x1 align=Left:
-                  Paragraph: "오오쿠보 히로시(大久保 宏)"
-              Row:
-                Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#ffffff]:
-                  Paragraph: Bold(Colored(#d82438,#d82438 | "메인 애니메이터"))
-                Cell span=1x1 align=Left:
-                  Paragraph: "우치다 타카유키(内田孝行)" Macro(br) "오오쿠보 히로시"
-              Row:
-                Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#ffffff]:
-                  Paragraph: Bold(Colored(#d82438,#d82438 | "미술 감독"))
-                Cell span=1x1 align=Left:
-                  Paragraph: "나이토 켄(内藤 健)"
-              Row:
-                Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#ffffff]:
-                  Paragraph: Bold(Colored(#d82438,#d82438 | "촬영 감독"))
-                Cell span=1x1 align=Left:
-                  Paragraph: "타케사다 신노스케(武貞慎之介)"
-              Row:
-                Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#ffffff]:
-                  Paragraph: Bold(Colored(#d82438,#d82438 | "음향 감독"))
-                Cell span=1x1 align=Left:
-                  Paragraph: "무라마츠 히사시(村松久進)"
-              Row:
-                Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#ffffff]:
-                  Paragraph: Bold(Colored(#d82438,#d82438 | "음향 제작"))
-                Cell span=1x1 align=Left:
-                  Paragraph: "글로비전(グロービジョン)"
-              Row:
-                Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#ffffff]:
-                  Paragraph: Bold(Colored(#d82438,#d82438 | "음악"))
-                Cell span=1x1 align=Left:
-                  Paragraph: "유닛슈(コーニッシュ)" Macro(br) "GOON TRAX"
-              Row:
-                Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#ffffff]:
-                  Paragraph: Bold(Colored(#d82438,#d82438 | "애니메이션 제작"))
-                Cell span=1x1 align=Left:
-                  Paragraph: Link("GoHands")
-              Row:
-                Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#ffffff]:
-                  Paragraph: Bold(Colored(#d82438,#d82438 | "제작"))
-                Cell span=1x1 align=Left:
-                  Paragraph: "Praeter- Projet"
-              Row:
-                Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#ffffff]:
-                  Paragraph: Bold(Colored(#d82438,#d82438 | "방영 기간"))
-                Cell span=1x1 align=Left:
-                  Paragraph: Link("애니메이션/2021년 1월" | "2021. 01. 09.") " ~ 방영 중"
-              Row:
-                Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#ffffff]:
-                  Paragraph: Bold(Colored(#d82438,#d82438 | "방송국"))
-                Cell span=1x1 align=Left:
-                  Paragraph: Image("일본 국기.svg" width=20) " " Link("TBS 테레비" | "TBS") ", " Link("마이니치 방송" | "MBS") "(" Link("아니메이즘") ") / (토) 01:55" Macro(br) Image("대한민국 국기.svg" width=20) " " Link("애니플러스" | Image("애니플러스 CI.png" width=90)) Macro(br) "(토) 03:00" Sup("LIVE") Macro(br) "(수) 00:00" Sup("TV")
-              Row:
-                Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#ffffff]:
-                  Paragraph: Bold(Colored(#d82438,#d82438 | "편당 방영 시간"))
-                Cell span=1x1 align=Left:
-                  Paragraph: "24분"
-              Row:
-                Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#ffffff]:
-                  Paragraph: Bold(Colored(#d82438,#d82438 | "화수"))
-                Cell span=1x1 align=Left:
-                  Paragraph: "○○화"
-              Row:
-                Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#ffffff]:
-                  Paragraph: Bold(Colored(#d82438,#d82438 | "국내 심의 등급"))
-                Cell span=1x1 align=Left attrs=[Cell/bgcolor=#ffce44]:
-                  Paragraph: Link("15세 이용가" | Colored(#373a3c | "15세 이상 시청가")) " " Sub(Colored(#373a3c | "(폭력성)"))
-              Row:
-                Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#ffffff]:
-                  Paragraph: Bold(Colored(#d82438,#d82438 | "관련 사이트"))
-                Cell span=1x1 align=Left:
-                  Paragraph: Link("https://project-scard.com/" | Image("홈페이지 아이콘.png" width=25)) ", " Link("https://twitter.com/pj_scard" | Image("트위터 아이콘.svg" width=25))
-Paragraph: "TV 애니메이션화가 결정되었다. 감독은 스즈키 신고, 방영 시기는 " Link("애니메이션/2021년 1월" | "2021년 1월") "."
-Paragraph: "애니플러스가 " Link("학생회 임원들") " 이후 오랜만에 가져가는 " Link("GoHands") " 작품이다."
+    Cell span=2x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#ffffff]:
+      Paragraph: Colored(#d82438,#d82438 | WikiStyle(style=Some("margin: 0px -11px") dark=None | Paragraph: Folding(작품 정보 ▼ | Table:   Row:     Cell span=1x1 align=Some(Center) attrs=[Table/width=100% Table/bgcolor=#ffffff,#2d2f34 Table/color=#373a3c,#ffffff Cell/bgcolor=#ffffff,#ffffff]:       Paragraph: Bold(Colored(#d82438,#d82438 | "원작"))     Cell span=1x1 align=Some(Left):       Paragraph: Link("GoHands") Macro(br) "Frontier Works"   Row:     Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#ffffff]:       Paragraph: Bold(Colored(#d82438,#d82438 | "감독"))     Cell span=1x2 align=Some(Left):       Paragraph: "스즈키 신고(鈴木信吾)"   Row:     Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#ffffff]:       Paragraph: Bold(Colored(#d82438,#d82438 | "캐릭터 디자인"))   Row:     Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#ffffff]:       Paragraph: Bold(Colored(#d82438,#d82438 | "각본"))     Cell span=1x1 align=Some(Left):       Paragraph: "야나기 타마조(八薙玉造)"   Row:     Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#ffffff]:       Paragraph: Bold(Colored(#d82438,#d82438 | "총 작화감독"))     Cell span=1x1 align=Some(Left):       Paragraph: "후루타 마코토(古田 誠)" Macro(br) "타니 케이지(谷 圭司)"   Row:     Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#ffffff]:       Paragraph: Bold(Colored(#d82438,#d82438 | "메카 디자이너"))     Cell span=1x1 align=Some(Left):       Paragraph: "오오쿠보 히로시(大久保 宏)"   Row:     Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#ffffff]:       Paragraph: Bold(Colored(#d82438,#d82438 | "메인 애니메이터"))     Cell span=1x1 align=Some(Left):       Paragraph: "우치다 타카유키(内田孝行)" Macro(br) "오오쿠보 히로시"   Row:     Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#ffffff]:       Paragraph: Bold(Colored(#d82438,#d82438 | "미술 감독"))     Cell span=1x1 align=Some(Left):       Paragraph: "나이토 켄(内藤 健)"   Row:     Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#ffffff]:       Paragraph: Bold(Colored(#d82438,#d82438 | "촬영 감독"))     Cell span=1x1 align=Some(Left):       Paragraph: "타케사다 신노스케(武貞慎之介)"   Row:     Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#ffffff]:       Paragraph: Bold(Colored(#d82438,#d82438 | "음향 감독"))     Cell span=1x1 align=Some(Left):       Paragraph: "무라마츠 히사시(村松久進)"   Row:     Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#ffffff]:       Paragraph: Bold(Colored(#d82438,#d82438 | "음향 제작"))     Cell span=1x1 align=Some(Left):       Paragraph: "글로비전(グロービジョン)"   Row:     Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#ffffff]:       Paragraph: Bold(Colored(#d82438,#d82438 | "음악"))     Cell span=1x1 align=Some(Left):       Paragraph: "유닛슈(コーニッシュ)" Macro(br) "GOON TRAX"   Row:     Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#ffffff]:       Paragraph: Bold(Colored(#d82438,#d82438 | "애니메이션 제작"))     Cell span=1x1 align=Some(Left):       Paragraph: Link("GoHands")   Row:     Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#ffffff]:       Paragraph: Bold(Colored(#d82438,#d82438 | "제작"))     Cell span=1x1 align=Some(Left):       Paragraph: "Praeter- Projet"   Row:     Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#ffffff]:       Paragraph: Bold(Colored(#d82438,#d82438 | "방영 기간"))     Cell span=1x1 align=Some(Left):       Paragraph: Link("애니메이션/2021년 1월" | "2021. 01. 09.") " ~ 방영 중"   Row:     Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#ffffff]:       Paragraph: Bold(Colored(#d82438,#d82438 | "방송국"))     Cell span=1x1 align=Some(Left):       Paragraph: Image("일본 국기.svg" width=20) " " Link("TBS 테레비" | "TBS") ", " Link("마이니치 방송" | "MBS") "(" Link("아니메이즘") ") / (토) 01:55" Macro(br) Image("대한민국 국기.svg" width=20) " " Link("애니플러스" | Image("애니플러스 CI.png" width=90)) Macro(br) "(토) 03:00" Sup("LIVE") Macro(br) "(수) 00:00" Sup("TV")   Row:     Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#ffffff]:       Paragraph: Bold(Colored(#d82438,#d82438 | "편당 방영 시간"))     Cell span=1x1 align=Some(Left):       Paragraph: "24분"   Row:     Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#ffffff]:       Paragraph: Bold(Colored(#d82438,#d82438 | "화수"))     Cell span=1x1 align=Some(Left):       Paragraph: "○○화"   Row:     Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#ffffff]:       Paragraph: Bold(Colored(#d82438,#d82438 | "국내 심의 등급"))     Cell span=1x1 align=Some(Left) attrs=[Cell/bgcolor=#ffce44]:       Paragraph: Link("15세 이용가" | Colored(#373a3c | "15세 이상 시청가")) " " Sub(Colored(#373a3c | "(폭력성)"))   Row:     Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#ffffff]:       Paragraph: Bold(Colored(#d82438,#d82438 | "관련 사이트"))     Cell span=1x1 align=Some(Left):       Paragraph: Link("https://project-scard.com/" | Image("홈페이지 아이콘.png" width=25)) ", " Link("https://twitter.com/pj_scard" | Image("트위터 아이콘.svg" width=25)))))
+Paragraph: <br> "TV 애니메이션화가 결정되었다. 감독은 스즈키 신고, 방영 시기는 " Link("애니메이션/2021년 1월" | "2021년 1월") "." <br> <br> "애니플러스가 " Link("학생회 임원들") " 이후 오랜만에 가져가는 " Link("GoHands") " 작품이다." <br>
 Heading level=3 folded=false: "줄거리"
 Quote:
-  Paragraph: "친구만 있으면 청춘은 계속된다." <br> "우리들은 같은 길을 달려 나간다." <br> "그리고 우리들은 가족이 된다."
-  Paragraph: "도쿄 '아카츠키 특구'" <br> "국가로부터 버림받아 무법 지대가 된 거리를 지키는 것은" <br> "신을 봉인한 타투를 지닌 자들 '스카드'였다."
-  Paragraph: "다양한 위협이 '헬리오스' '아르테미스' '공안 특무'를 덮쳐 오고 " <br> "그들은 이에 맞부딪치면서 이를 극복해 나간다." <br> "어느샌가 그들을 이어주는 인연은 증오와 분노에서 신뢰로 형태를 바꾸어 간다."
-  Paragraph: "'프레이터의 상처'는 그들이 서로 등을 맡길 수 있는 " <br> "동료가 되기까지의 이야기이다...."
+  Paragraph: "친구만 있으면 청춘은 계속된다." <br> "우리들은 같은 길을 달려 나간다." <br> "그리고 우리들은 가족이 된다." <br> <br> "도쿄 '아카츠키 특구'" <br> "국가로부터 버림받아 무법 지대가 된 거리를 지키는 것은" <br> "신을 봉인한 타투를 지닌 자들 '스카드'였다." <br> <br> "다양한 위협이 '헬리오스' '아르테미스' '공안 특무'를 덮쳐 오고 " <br> "그들은 이에 맞부딪치면서 이를 극복해 나간다." <br> "어느샌가 그들을 이어주는 인연은 증오와 분노에서 신뢰로 형태를 바꾸어 간다." <br> <br> "'프레이터의 상처'는 그들이 서로 등을 맡길 수 있는 " <br> "동료가 되기까지의 이야기이다...."
   HorizontalRule
   Paragraph: Italic("― " Link("https://www.aniplustv.com/" | "애니플러스"))
+Paragraph: 
 Heading level=3 folded=false: "PV"
 Table:
   Row:
-    Cell span=1x1 align=Center attrs=[Table/align=center Table/width=650 Table/bordercolor=#d82438,#d82438]:
-      WikiStyle style=Some("margin: -5px -10px -6px") dark_style=None:
-        Paragraph: Macro(youtube "5YN02y0Xkes, width=100%")
+    Cell span=1x1 align=Some(Center) attrs=[Table/align=center Table/width=650 Table/bordercolor=#d82438,#d82438]:
+      Paragraph: WikiStyle(style=Some("margin: -5px -10px -6px") dark=None | Paragraph: Macro(youtube "5YN02y0Xkes, width=100%"))
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#ffffff Cell/color=#d82438,#d82438]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#ffffff Cell/color=#d82438,#d82438]:
       Paragraph: Bold("애니플러스 PV")
+Paragraph: 
 Heading level=3 folded=false: "주제가"
 Table:
   Row:
-    Cell span=2x1 align=Center attrs=[Table/align=center Table/width=650 Table/bordercolor=#d82438,#d82438 Cell/bgcolor=#ffffff,#ffffff Table/bgcolor=#ffffff,#2d2f34 Table/color=#373a3c,#dddddd]:
+    Cell span=2x1 align=Some(Center) attrs=[Table/align=center Table/width=650 Table/bordercolor=#d82438,#d82438 Cell/bgcolor=#ffffff,#ffffff Table/bgcolor=#ffffff,#2d2f34 Table/color=#373a3c,#dddddd]:
       Paragraph: Bold(Colored(#d82438,#d82438 | "프레이터의 상처 여는 노래"))
   Row:
-    Cell span=2x1 align=Center:
-      WikiStyle style=Some("margin: -6px -10px") dark_style=None:
-        Paragraph: Macro(youtube ", width=100%")
+    Cell span=2x1 align=Some(Center):
+      Paragraph: WikiStyle(style=Some("margin: -6px -10px") dark=None | Paragraph: Macro(youtube ", width=100%"))
   Row:
-    Cell span=2x1 align=Center attrs=[Cell/bgcolor=#ffffff,#ffffff]:
+    Cell span=2x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#ffffff]:
       Paragraph: Bold(Colored(#d82438,#d82438 | "TV ver."))
   Row:
-    Cell span=2x1 align=Center:
-      WikiStyle style=Some("margin: -6px -10px") dark_style=None:
-        Paragraph: Macro(youtube ", width=100%")
+    Cell span=2x1 align=Some(Center):
+      Paragraph: WikiStyle(style=Some("margin: -6px -10px") dark=None | Paragraph: Macro(youtube ", width=100%"))
   Row:
-    Cell span=2x1 align=Center attrs=[Cell/bgcolor=#ffffff,#ffffff]:
+    Cell span=2x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#ffffff]:
       Paragraph: Bold(Colored(#d82438,#d82438 | "Full ver."))
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/width=30% Column/bgcolor=#ffffff,#ffffff Column/color=#d82438,#d82438]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/width=30% Column { columns: 1 }/bgcolor=#ffffff,#ffffff Column { columns: 1 }/color=#d82438,#d82438]:
       Paragraph: Bold("제목")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "プレイタの傷"
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("노래")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "카이 야마토(CV." Link("란즈베리 아서") ")" Macro(br) "아리시바 에이지(CV." Link("코우사카 아츠시") ")" Macro(br) "아리시바 카즈마(CV." Link("치바 쇼야") ")" Macro(br) "사키시마 카가미(CV." Link("에노키 준야") ")" Macro(br) "와사미네 란(CV." Link("마스야마 타케아키") ")" Macro(br) "카라스에 진(CV." Link("노가미 쇼") ")" Macro(br) "타츠마 코우가(CV." Link("야시로 타쿠") ")" Macro(br) "토라타카 이츠키(CV." Link("하타나카 타스쿠") ")"
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("작사")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "AKANE"
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("작곡")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "Ryosuke Kojima"
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("콘티")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "스즈키 신고(鈴木信吾)"
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("연출")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "요코미네 카츠마사(横峯克昌)"
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("작화감독")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "아다치 쇼헤이(安達翔平)" Macro(br) "우치다 타카유키(内田孝行)" Macro(br) "타니 케이지(谷 圭司)" Macro(br) "후루타 마코토(古田 誠)" Macro(br) "후지사카 마이(藤坂真衣)"
   Row:
-    Cell span=2x1 align=Center attrs=[Cell/bgcolor=#ffffff,#ffffff Cell/color=#d82438,#d82438]:
-      Folding summary="가사 ▼":
-        Table:
-          Row:
-            Cell span=1x1 align=Center attrs=[Table/width=100% Table/color=#373a3c,#dddddd Cell/bgcolor=#ffffff,#ffffff Cell/color=#d82438,#d82438]:
-              Paragraph: Bold("(원어 가사)")
-          Row:
-            Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#2d2f34 Cell/color=#373a3c,#dddddd]:
-              Paragraph: "(한국어 가사)"
+    Cell span=2x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#ffffff Cell/color=#d82438,#d82438]:
+      Paragraph: Folding(가사 ▼ | Table:   Row:     Cell span=1x1 align=Some(Center) attrs=[Table/width=100% Table/color=#373a3c,#dddddd Cell/bgcolor=#ffffff,#ffffff Cell/color=#d82438,#d82438]:       Paragraph: Bold("(원어 가사)")   Row:     Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#2d2f34 Cell/color=#373a3c,#dddddd]:       Paragraph: "(한국어 가사)")
+Paragraph: 
 Table:
   Row:
-    Cell span=2x1 align=Center attrs=[Table/align=center Table/width=650 Table/bordercolor=#d82438,#d82438 Cell/bgcolor=#ffffff,#ffffff Table/bgcolor=#ffffff,#2d2f34 Table/color=#373a3c,#dddddd]:
+    Cell span=2x1 align=Some(Center) attrs=[Table/align=center Table/width=650 Table/bordercolor=#d82438,#d82438 Cell/bgcolor=#ffffff,#ffffff Table/bgcolor=#ffffff,#2d2f34 Table/color=#373a3c,#dddddd]:
       Paragraph: Bold(Colored(#d82438,#d82438 | "프레이터의 상처 닫는 노래"))
   Row:
-    Cell span=2x1 align=Center:
-      WikiStyle style=Some("margin: -6px -10px") dark_style=None:
-        Paragraph: Macro(youtube ", width=100%")
+    Cell span=2x1 align=Some(Center):
+      Paragraph: WikiStyle(style=Some("margin: -6px -10px") dark=None | Paragraph: Macro(youtube ", width=100%"))
   Row:
-    Cell span=2x1 align=Center attrs=[Cell/bgcolor=#ffffff,#ffffff]:
+    Cell span=2x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#ffffff]:
       Paragraph: Bold(Colored(#d82438,#d82438 | "TV ver."))
   Row:
-    Cell span=2x1 align=Center:
-      WikiStyle style=Some("margin: -6px -10px") dark_style=None:
-        Paragraph: Macro(youtube ", width=100%")
+    Cell span=2x1 align=Some(Center):
+      Paragraph: WikiStyle(style=Some("margin: -6px -10px") dark=None | Paragraph: Macro(youtube ", width=100%"))
   Row:
-    Cell span=2x1 align=Center attrs=[Cell/bgcolor=#ffffff,#ffffff]:
+    Cell span=2x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#ffffff]:
       Paragraph: Bold(Colored(#d82438,#d82438 | "Full ver."))
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/width=30% Column/bgcolor=#ffffff,#ffffff Column/color=#d82438,#d82438]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/width=30% Column { columns: 1 }/bgcolor=#ffffff,#ffffff Column { columns: 1 }/color=#d82438,#d82438]:
       Paragraph: Bold("제목")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "BUSTLING SHOW"
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("작곡")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "Ryosuke Kojima"
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("콘티")
-    Cell span=1x4 align=Center:
+    Cell span=1x4 align=Some(Center):
       Paragraph: "스즈키 신고(鈴木信吾)"
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("연출")
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("3D")
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("촬영")
   Row:
-    Cell span=2x1 align=Center attrs=[Cell/bgcolor=#ffffff,#ffffff Cell/color=#d82438,#d82438]:
-      Folding summary="가사 ▼":
-        Table:
-          Row:
-            Cell span=1x1 align=Center attrs=[Table/width=100% Table/color=#373a3c,#dddddd Cell/bgcolor=#ffffff,#ffffff Cell/color=#d82438,#d82438]:
-              Paragraph: Bold("(원어 가사)")
-          Row:
-            Cell span=1x1 align=Center attrs=[Cell/bgcolor=#ffffff,#2d2f34 Cell/color=#373a3c,#dddddd]:
-              Paragraph: "(한국어 가사)"
+    Cell span=2x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#ffffff Cell/color=#d82438,#d82438]:
+      Paragraph: Folding(가사 ▼ | Table:   Row:     Cell span=1x1 align=Some(Center) attrs=[Table/width=100% Table/color=#373a3c,#dddddd Cell/bgcolor=#ffffff,#ffffff Cell/color=#d82438,#d82438]:       Paragraph: Bold("(원어 가사)")   Row:     Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#ffffff,#2d2f34 Cell/color=#373a3c,#dddddd]:       Paragraph: "(한국어 가사)")
+Paragraph: 
 Heading level=3 folded=false: "회차 목록"
-Paragraph: Macro(include "틀:애니플러스 신작")
+Paragraph: Macro(include "틀:애니플러스 신작") <br>
 Table:
   Row:
-    Cell span=1x1 align=Center attrs=[Table/width=100% Table/bordercolor=#d82438,#d82438 Row/bgcolor=#ffffff,#ffffff Row/color=#d82438,#d82438 Table/bgcolor=#ffffff,#2d2f34]:
+    Cell span=1x1 align=Some(Center) attrs=[Table/width=100% Table/bordercolor=#d82438,#d82438 Row/bgcolor=#ffffff,#ffffff Row/color=#d82438,#d82438 Table/bgcolor=#ffffff,#2d2f34]:
       Paragraph: Bold("회차")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("제목") Footnote(| "국내 번역 제목은 정식 방영사인 " Link("애니플러스") " 방영판을 기준으로 한다.")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("각본")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("콘티")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("연출")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("작화감독")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("방영일")
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Sized(-2 | "제1화")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Sized(-2 | "この街には英雄がいた" Macro(br) "이 거리에는 영웅이 있었다")
-    Cell span=1x8 align=Center:
+    Cell span=1x8 align=Some(Center):
       Paragraph: Sized(-2 | "야나기 타마조" Macro(br) "(八薙玉造)")
-    Cell span=2x1 align=Center:
+    Cell span=2x1 align=Some(Center):
       Paragraph: Sized(-2 | "요코미네 카츠마사" Macro(br) "(横峯克昌)")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Sized(-2 | "아다치 쇼헤이" Macro(br) "(安達翔平)" Macro(br) "우에키 리나" Macro(br) "(植木理奈)" Macro(br) "우치다 타카유키" Macro(br) "(内田孝行)" Macro(br) "후루타 마코토" Macro(br) "(古田 誠)" Macro(br) "세키야 나츠미" Macro(br) "(関谷夏実)" Macro(br) "타니 케이지" Macro(br) "(谷 圭司)" Macro(br) "후지사카 마이" Macro(br) "(藤坂真衣)")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Sized(-2 | "日: 2021.01.09." Macro(br) "韓" Sup("LIVE") ": 2021.01.09." Macro(br) "韓" Sup("TV") ": 2021.01.13.")
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Sized(-2 | "제2화")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Sized(-2 | "ケルベロス" Macro(br) "케르베로스")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Sized(-2 | "요코미네 카츠마사")
-    Cell span=1x2 align=Center:
+    Cell span=1x2 align=Some(Center):
       Paragraph: Sized(-2 | "타치바나 마사유키" Macro(br) "(立花昌之)")
-    Cell span=1x2 align=Center:
+    Cell span=1x2 align=Some(Center):
       Paragraph: Sized(-2 | "아다치 쇼헤이" Macro(br) "우에키 리나" Macro(br) "세키야 나츠미" Macro(br) "타니 케이지" Macro(br) "후지사카 마이" Macro(br) "후루타 마코토")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Sized(-2 | "日: 2021.01.16." Macro(br) "韓" Sup("LIVE") ": 2021.01.16." Macro(br) "韓" Sup("TV") ": 2021.01.20.")
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Sized(-2 | "제3화")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Sized(-2 | "アルテミスの双翼" Macro(br) "아르테미스의 쌍익")
-    Cell span=1x2 align=Center:
+    Cell span=1x2 align=Some(Center):
       Paragraph: Sized(-2 | "카나자와 히로미치" Macro(br) "(金澤洪充)")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Sized(-2 | "日: 2021.01.23." Macro(br) "韓" Sup("LIVE") ": 2021.01.23." Macro(br) "韓" Sup("TV") ": 2021.01.27.")
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Sized(-2 | "제4화")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Sized(-2 | "公安特務" Macro(br) "공안 특무")
-    Cell span=1x2 align=Center:
+    Cell span=1x2 align=Some(Center):
       Paragraph: Sized(-2 | "카나자와 히로미치" Macro(br) "야마기시 테츠이치" Macro(br) "(山岸徹一)")
-    Cell span=1x2 align=Center:
+    Cell span=1x2 align=Some(Center):
       Paragraph: Sized(-2 | "고토 레이나" Macro(br) "(後藤玲奈)" Macro(br) "타니 케이지" Macro(br) "후루타 마코토" Macro(br) "호리 호노카" Macro(br) "(堀ほのか)")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Sized(-2 | "日: 2021.01.30." Macro(br) "韓" Sup("LIVE") ": 2021.01.30." Macro(br) "韓" Sup("TV") ": 2021.02.03.")
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Sized(-2 | "제5화")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Sized(-2 | "我ら双翼は誓う" Macro(br) "우리 쌍익은 맹세한다")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Sized(-2 | "시마즈 히로유키" Macro(br) "(島津裕行)")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Sized(-2 | "日: 2021.02.06." Macro(br) "韓" Sup("LIVE") ": 2021.02.06." Macro(br) "韓" Sup("TV") ": 2021.02.10.")
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Sized(-2 | "제6화")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Sized(-2 | "力による正義" Macro(br) "힘에 의한 정의")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Sized(-2 | "카나자와 히로미치")
-    Cell span=1x2 align=Center:
+    Cell span=1x2 align=Some(Center):
       Paragraph: Sized(-2 | "타치바나 마사유키")
-    Cell span=1x2 align=Center:
+    Cell span=1x2 align=Some(Center):
       Paragraph: Sized(-2 | "우에키 리나" Macro(br) "우치다 타카유키" Macro(br) "세키야 나츠미" Macro(br) "타니 케이지" Macro(br) "후지사카 마이" Macro(br) "후루타 마코토" Macro(br) "무로이 다이치" Macro(br) "(室井大地)")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Sized(-2 | "日: 2021.02.13." Macro(br) "韓" Sup("LIVE") ": 2021.02.13." Macro(br) "韓" Sup("TV") ": 2021.02.17.")
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Sized(-2 | "제7화")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Sized(-2 | "ダスク現る" Macro(br) "더스크 나타나다")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Sized(-2 | "시마즈 히로유키")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Sized(-2 | "日: 2021.02.20." Macro(br) "韓" Sup("LIVE") ": 2021.02.20." Macro(br) "韓" Sup("TV") ": 2021.02.24.")
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Sized(-2 | "제8화")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Sized(-2 | "夜明け" Macro(br))
-    Cell span=2x1 align=Center:
+    Cell span=2x1 align=Some(Center):
       Paragraph: Sized(-2 | "요코미네 카츠마사")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Sized(-2 | "우치다 타카유키" Macro(br) "고토 레이나" Macro(br) "타니 케이지" Macro(br) "후루타 마코토" Macro(br) "호리 호노카")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Sized(-2 | "日: 2021.02.27." Macro(br) "韓" Sup("LIVE") ": 2021.02.27." Macro(br) "韓" Sup("TV") ": 2021.03.03.")
+Paragraph: 
 Heading level=2 folded=false: "코믹스"
-Paragraph: Category("미디어 믹스") Category("일본 애니메이션/라틴 문자") Category("2021년 1분기 일본 애니메이션")
+Paragraph: <br> Category("미디어 믹스") Category("일본 애니메이션/라틴 문자") Category("2021년 1분기 일본 애니메이션")

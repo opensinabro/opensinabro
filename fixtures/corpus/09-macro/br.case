@@ -1,0 +1,23 @@
+근거: 도움말서술 | 원문: 1줄 | 의미론: 20줄 | 렌더링: 1줄 | 줄바꿈 매크로
+앞[br]뒤
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Text(
+                    "앞",
+                ),
+                Macro(
+                    Macro {
+                        name: "br",
+                        argument: None,
+                    },
+                ),
+                Text(
+                    "뒤",
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph">앞<br>뒤</div>

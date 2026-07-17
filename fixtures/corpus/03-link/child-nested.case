@@ -1,0 +1,24 @@
+근거: 도움말예제 | 원문: 1줄 | 의미론: 21줄 | 렌더링: 1줄 | 하위의 하위 문서 링크
+[[/심화/TeX]]
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Link(
+                    Link {
+                        target: Template(
+                            [
+                                Text(
+                                    "/심화/TeX",
+                                ),
+                            ],
+                        ),
+                        anchor: None,
+                        display: None,
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><a class="wiki-link-internal not-exist" href="/w/%EC%8B%9C%ED%97%98%20%EB%AC%B8%EC%84%9C/%ED%95%98%EC%9C%84/%EC%8B%AC%ED%99%94/TeX" rel="nofollow" title="시험 문서/하위/심화/TeX">/심화/TeX</a></div>

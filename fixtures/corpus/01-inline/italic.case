@@ -1,0 +1,18 @@
+근거: 도움말예제 | 원문: 1줄 | 의미론: 15줄 | 렌더링: 1줄 | 기울임
+''기울임''
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Italic(
+                    [
+                        Text(
+                            "기울임",
+                        ),
+                    ],
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><em>기울임</em></div>

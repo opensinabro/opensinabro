@@ -1,0 +1,26 @@
+근거: 도움말예제 | 원문: 1줄 | 의미론: 23줄 | 렌더링: 1줄 | 색상 안의 밑줄 — 밑줄에 색 적용
+{{{#red __밑줄 포함__}}}
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Colored(
+                    ColoredText {
+                        color: "red",
+                        dark_color: None,
+                        content: [
+                            Underline(
+                                [
+                                    Text(
+                                        "밑줄 포함",
+                                    ),
+                                ],
+                            ),
+                        ],
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><span style="color:red" data-dark-style="color:red;"><u>밑줄 포함</u></span></div>

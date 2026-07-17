@@ -1,0 +1,17 @@
+근거: 도움말서술 | 원문: 1줄 | 의미론: 14줄 | 렌더링: 1줄 | 틀 매개변수
+@매개변수@
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Variable(
+                    Variable {
+                        name: "매개변수",
+                        default: None,
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"></div>

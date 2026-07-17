@@ -5,7 +5,7 @@
 //! 골든 파일 헤더의 `residue` 줄은 파싱 후에도 일반 텍스트에 남은 마크업 토큰 수로,
 //! 아직 지원하지 않는 문법을 가리키는 지표다. 0에 가까울수록 실제 화면과 가깝다.
 
-use namumark_ast::{Block, Document, Inline};
+use namumark_ast::{Block, Document, Inline, Template};
 use std::fmt::Write as _;
 use std::fs;
 use std::path::Path;
@@ -118,30 +118,8 @@ fn collect_block_text(block: &Block, output: &mut String) {
                 }
             }
         }
-        Block::WikiStyle(wiki_style) => {
-            for block in &wiki_style.blocks {
-                collect_block_text(block, output);
-            }
-        }
-        Block::Folding(folding) => {
-            collect_inline_text(&folding.summary, output);
-            for block in &folding.blocks {
-                collect_block_text(block, output);
-            }
-        }
-        Block::Colored(colored) => {
-            for block in &colored.blocks {
-                collect_block_text(block, output);
-            }
-        }
-        Block::Sized(sized) => {
-            for block in &sized.blocks {
-                collect_block_text(block, output);
-            }
-        }
-        // CodeBlock/Html/Comment/Redirect는 원문 그대로 보존되는 것이 정상이다.
-        Block::CodeBlock(_) | Block::Html(_) | Block::Comment(_) | Block::Redirect(_) => {}
-        Block::HorizontalRule => {}
+        // Comment/Redirect는 원문 그대로 보존되는 것이 정상이다.
+        Block::Comment(_) | Block::Redirect(_) | Block::HorizontalRule => {}
     }
     output.push('\n');
 }
@@ -168,7 +146,28 @@ fn collect_inline_text(inlines: &[Inline], output: &mut String) {
             Inline::Footnote(footnote) => collect_inline_text(&footnote.content, output),
             Inline::Colored(colored) => collect_inline_text(&colored.content, output),
             Inline::Sized(sized) => collect_inline_text(&sized.content, output),
-            Inline::LineBreak | Inline::Literal(_) | Inline::Macro(_) | Inline::Html(_) => {}
+            Inline::WikiStyle(wiki_style) => {
+                for block in &wiki_style.blocks {
+                    collect_block_text(block, output);
+                }
+            }
+            Inline::Folding(folding) => {
+                output.push_str(&folding.summary.to_string());
+                for block in &folding.blocks {
+                    collect_block_text(block, output);
+                }
+            }
+            Inline::Conditional(conditional) => {
+                for block in &conditional.blocks {
+                    collect_block_text(block, output);
+                }
+            }
+            Inline::LineBreak
+            | Inline::Literal(_)
+            | Inline::Macro(_)
+            | Inline::Variable(_)
+            | Inline::CodeBlock(_)
+            | Inline::Html(_) => {}
         }
     }
 }
@@ -225,7 +224,9 @@ fn render_block(block: &Block, depth: usize, output: &mut String) {
                     push_indent(output, depth + 2);
                     let mut header = format!(
                         "Cell span={}x{} align={:?}",
-                        cell.column_span, cell.row_span, cell.horizontal_alignment
+                        cell.column_span.unwrap_or(1),
+                        cell.row_span.unwrap_or(1),
+                        cell.horizontal_alignment
                     );
                     if let Some(vertical_alignment) = cell.vertical_alignment {
                         write!(header, " vertical={vertical_alignment:?}").unwrap();
@@ -254,53 +255,11 @@ fn render_block(block: &Block, depth: usize, output: &mut String) {
                 }
             }
         }
-        Block::CodeBlock(code_block) => {
-            writeln!(
-                output,
-                "CodeBlock language={:?}: {:?}",
-                code_block.language, code_block.source
-            )
-            .unwrap();
-        }
-        Block::WikiStyle(wiki_style) => {
-            writeln!(
-                output,
-                "WikiStyle style={:?} dark_style={:?}:",
-                wiki_style.style, wiki_style.dark_style
-            )
-            .unwrap();
-            render_children(&wiki_style.blocks, depth + 1, output);
-        }
-        Block::Folding(folding) => {
-            writeln!(
-                output,
-                "Folding summary={}:",
-                render_inlines(&folding.summary)
-            )
-            .unwrap();
-            render_children(&folding.blocks, depth + 1, output);
-        }
-        Block::Colored(colored) => {
-            let dark = colored
-                .dark_color
-                .as_ref()
-                .map(|dark_color| format!(",{dark_color}"))
-                .unwrap_or_default();
-            writeln!(output, "ColoredBlock color={}{dark}:", colored.color).unwrap();
-            render_children(&colored.blocks, depth + 1, output);
-        }
-        Block::Sized(sized) => {
-            writeln!(output, "SizedBlock level={:+}:", sized.level).unwrap();
-            render_children(&sized.blocks, depth + 1, output);
-        }
-        Block::Html(html) => {
-            writeln!(output, "Html: {html:?}").unwrap();
-        }
         Block::Comment(comment) => {
             writeln!(output, "Comment: {comment:?}").unwrap();
         }
         Block::Redirect(target) => {
-            writeln!(output, "Redirect: {target:?}").unwrap();
+            writeln!(output, "Redirect: {:?}", target.to_string()).unwrap();
         }
     }
 }
@@ -315,6 +274,15 @@ fn push_indent(output: &mut String, depth: usize) {
     for _ in 0..depth {
         output.push_str("  ");
     }
+}
+
+/// 인라인 안에 든 블록들. 골든에서는 한 줄로 편다.
+fn render_blocks_inline(blocks: &[Block]) -> String {
+    let mut output = String::new();
+    for block in blocks {
+        render_block(block, 0, &mut output);
+    }
+    output.replace('\n', " ").trim().to_string()
 }
 
 fn render_inlines(inlines: &[Inline]) -> String {
@@ -342,10 +310,10 @@ fn render_inline(inline: &Inline) -> String {
             match &link.display {
                 Some(display) => format!(
                     "Link({:?}{anchor} | {})",
-                    link.target,
+                    link.target.to_string(),
                     render_inlines(display)
                 ),
-                None => format!("Link({:?}{anchor})", link.target),
+                None => format!("Link({:?}{anchor})", link.target.to_string()),
             }
         }
         Inline::Image(image) => {
@@ -358,9 +326,13 @@ fn render_inline(inline: &Inline) -> String {
                 })
                 .collect();
             if options.is_empty() {
-                format!("Image({:?})", image.file_name)
+                format!("Image({:?})", image.file_name.to_string())
             } else {
-                format!("Image({:?} {})", image.file_name, options.join("&"))
+                format!(
+                    "Image({:?} {})",
+                    image.file_name.to_string(),
+                    options.join("&")
+                )
             }
         }
         Inline::Category(category) => format!("Category({:?})", category.name),
@@ -373,7 +345,7 @@ fn render_inline(inline: &Inline) -> String {
             format!("Footnote({name}| {})", render_inlines(&footnote.content))
         }
         Inline::Macro(macro_call) => match &macro_call.argument {
-            Some(argument) => format!("Macro({} {argument:?})", macro_call.name),
+            Some(argument) => format!("Macro({} {:?})", macro_call.name, argument.to_string()),
             None => format!("Macro({})", macro_call.name),
         },
         Inline::Colored(colored) => {
@@ -395,6 +367,27 @@ fn render_inline(inline: &Inline) -> String {
                 render_inlines(&sized.content)
             )
         }
-        Inline::Html(html) => format!("InlineHtml({html:?})"),
+        Inline::Html(html) => format!("InlineHtml({:?})", html.to_string()),
+        Inline::WikiStyle(wiki_style) => format!(
+            "WikiStyle(style={:?} dark={:?} | {})",
+            wiki_style.style.as_ref().map(Template::to_string),
+            wiki_style.dark_style.as_ref().map(Template::to_string),
+            render_blocks_inline(&wiki_style.blocks)
+        ),
+        Inline::Folding(folding) => format!(
+            "Folding({} | {})",
+            folding.summary,
+            render_blocks_inline(&folding.blocks)
+        ),
+        Inline::Conditional(conditional) => format!(
+            "Conditional(if={:?} | {})",
+            conditional.expression,
+            render_blocks_inline(&conditional.blocks)
+        ),
+        Inline::CodeBlock(code_block) => format!(
+            "CodeBlock(language={:?} | {:?})",
+            code_block.language, code_block.source
+        ),
+        Inline::Variable(variable) => format!("Variable({variable})"),
     }
 }

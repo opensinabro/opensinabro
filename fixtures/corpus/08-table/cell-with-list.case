@@ -1,0 +1,56 @@
+근거: 미확인 | 원문: 3줄 | 의미론: 48줄 | 렌더링: 4줄 | 셀 안 리스트
+||<-1>
+ * 리스트
+||
+Document {
+    blocks: [
+        Table(
+            Table {
+                caption: None,
+                rows: [
+                    TableRow {
+                        cells: [
+                            TableCell {
+                                column_span: Some(
+                                    1,
+                                ),
+                                row_span: None,
+                                horizontal_alignment: None,
+                                vertical_alignment: None,
+                                attributes: [],
+                                blocks: [
+                                    Paragraph(
+                                        [],
+                                    ),
+                                    List(
+                                        List {
+                                            kind: Unordered,
+                                            items: [
+                                                ListItem {
+                                                    start_number: None,
+                                                    blocks: [
+                                                        Paragraph(
+                                                            [
+                                                                Text(
+                                                                    "리스트",
+                                                                ),
+                                                            ],
+                                                        ),
+                                                    ],
+                                                },
+                                            ],
+                                        },
+                                    ),
+                                ],
+                            },
+                        ],
+                    },
+                ],
+            },
+        ),
+    ],
+}
+<div class="wiki-table-wrap"><table class="wiki-table"><tbody><tr class="wiki-table-tr"><td colspan="1" style=""><div class="wiki-paragraph"></div>
+<ul class="wiki-list"><li><div class="wiki-paragraph">리스트</div>
+</li></ul>
+</td></tr></tbody></table></div>

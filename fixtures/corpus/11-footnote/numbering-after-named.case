@@ -1,0 +1,73 @@
+근거: 미확인 | 원문: 2줄 | 의미론: 68줄 | 렌더링: 2줄 | 이름 각주가 번호를 차지한 뒤의 무명 각주 번호
+[*A 가] [* 나] [*B 다] [* 라]
+[각주]
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Footnote(
+                    Footnote {
+                        name: Some(
+                            "A",
+                        ),
+                        content: [
+                            Text(
+                                "가",
+                            ),
+                        ],
+                    },
+                ),
+                Text(
+                    " ",
+                ),
+                Footnote(
+                    Footnote {
+                        name: None,
+                        content: [
+                            Text(
+                                "나",
+                            ),
+                        ],
+                    },
+                ),
+                Text(
+                    " ",
+                ),
+                Footnote(
+                    Footnote {
+                        name: Some(
+                            "B",
+                        ),
+                        content: [
+                            Text(
+                                "다",
+                            ),
+                        ],
+                    },
+                ),
+                Text(
+                    " ",
+                ),
+                Footnote(
+                    Footnote {
+                        name: None,
+                        content: [
+                            Text(
+                                "라",
+                            ),
+                        ],
+                    },
+                ),
+                LineBreak,
+                Macro(
+                    Macro {
+                        name: "각주",
+                        argument: None,
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><a class="wiki-fn-content" title="가" href="#fn-A"><span id="rfn-1"></span>[A]</a> <a class="wiki-fn-content" title="나" href="#fn-2"><span id="rfn-2"></span>[2]</a> <a class="wiki-fn-content" title="다" href="#fn-B"><span id="rfn-3"></span>[B]</a> <a class="wiki-fn-content" title="라" href="#fn-4"><span id="rfn-4"></span>[4]</a><br><div class="wiki-macro-footnote"><span class="footnote-list"><span id="fn-A"></span><a href="#rfn-1">[A]</a> 가</span><span class="footnote-list"><span id="fn-2"></span><a href="#rfn-2">[2]</a> 나</span><span class="footnote-list"><span id="fn-B"></span><a href="#rfn-3">[B]</a> 다</span><span class="footnote-list"><span id="fn-4"></span><a href="#rfn-4">[4]</a> 라</span></div>
+</div>

@@ -1,0 +1,25 @@
+근거: 미확인 | 원문: 1줄 | 의미론: 19줄 | 렌더링: 4줄 | 인용 마커만
+>>>
+Document {
+    blocks: [
+        Quote(
+            [
+                Quote(
+                    [
+                        Quote(
+                            [
+                                Paragraph(
+                                    [],
+                                ),
+                            ],
+                        ),
+                    ],
+                ),
+            ],
+        ),
+    ],
+}
+<blockquote class="wiki-quote"><blockquote class="wiki-quote"><blockquote class="wiki-quote"><div class="wiki-paragraph"></div>
+</blockquote>
+</blockquote>
+</blockquote>

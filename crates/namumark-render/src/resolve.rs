@@ -4,13 +4,28 @@
 //! 링크 존재 여부를 해석하고, include를 확장하고, 분류를 수집한다.
 //! 블록 성격의 매크로([목차], [각주], [include])는 문단을 분할해 블록으로 승격한다.
 
+use crate::condition;
 use crate::context::WikiContext;
-use namumark_ast::{Block, Document, Inline};
+use namumark_ast::{Block, Conditional, Document, Fragment, Inline, Template};
 use namumark_ir::{
-    Color, ColorValue, Dimension, ImageAlignment, ImageLayout, ImageTheme, RenderBlock,
-    RenderInline, RenderListItem, RenderTable, RenderTableCell, RenderTableRow, TextStyle,
-    VideoProvider,
+    Color, ColorValue, Dimension, DocumentLinkKind, ImageAlignment, ImageLayout, ImageTheme,
+    RenderBlock, RenderInline, RenderListItem, RenderTable, RenderTableAttribute, RenderTableCell,
+    RenderTableRow, TextStyle, VideoProvider,
 };
+use std::collections::HashMap;
+
+/// 문서 안 include 인스턴스의 순번(1부터). 나무위키는 틀 안에서 쓴 같은 문서 앵커에
+/// 이 번호를 접두사로 붙여 틀끼리 앵커가 겹치지 않게 한다.
+#[derive(Debug, Clone, Copy)]
+struct IncludeInstance(u32);
+
+impl IncludeInstance {
+    /// 렌더확정: 3번째 include인 `틀:다른 뜻` 안의 `[[#s-@paragraph1@]]`가
+    /// the seed에서 `href='#i3-s-'`로 나온다.
+    fn qualify(self, anchor: &str) -> String {
+        format!("i{}-{anchor}", self.0)
+    }
+}
 
 pub(crate) struct Resolved {
     pub redirect: Option<String>,
@@ -23,7 +38,10 @@ pub(crate) fn resolve(document: &Document, context: &dyn WikiContext) -> Resolve
         context,
         categories: Vec::new(),
         redirect: None,
-        include_stack: Vec::new(),
+        include_instance: None,
+        expanded_includes: 0,
+        scope: HashMap::new(),
+        in_cell: false,
     };
     let blocks = resolver.resolve_blocks(&document.blocks);
     Resolved {
@@ -33,16 +51,46 @@ pub(crate) fn resolve(document: &Document, context: &dyn WikiContext) -> Resolve
     }
 }
 
-const MAXIMUM_INCLUDE_DEPTH: usize = 8;
-
 struct Resolver<'context> {
     context: &'context dyn WikiContext,
     categories: Vec<String>,
     redirect: Option<String>,
-    include_stack: Vec<String>,
+    /// 지금 확장 중인 include가 문서의 몇 번째인가. 나무위키는 틀 속의 틀을 확장하지
+    /// 않으므로 깊이는 최대 1이고, 이 값 하나로 "안에 있는가"까지 같이 나타낸다.
+    include_instance: Option<IncludeInstance>,
+    /// 지금까지 확장한 include 수. 다음 인스턴스의 번호가 된다.
+    expanded_includes: u32,
+    /// 틀 인자와 `#!if`가 만든 변수. `@이름@`의 값이 여기서 정해진다.
+    scope: HashMap<String, String>,
+    /// 지금 표 셀 안을 해석 중인가. 셀 안에서는 뒤가 invisible(분류·include)이어도
+    /// 콘텐츠 뒤 개행이 `<br>`로 남는다(렌더확정: 표 셀 안 `[include(틀:글무리)]`).
+    in_cell: bool,
 }
 
 impl Resolver<'_> {
+    /// 틀 인자를 값으로 바꿔 문자열을 완성한다. 인자 > 기본값 > 빈 문자열 순이다.
+    fn fill(&self, template: &Template) -> String {
+        let mut output = String::new();
+        for fragment in &template.0 {
+            match fragment {
+                Fragment::Text(text) => output.push_str(text),
+                Fragment::Variable(variable) => output.push_str(
+                    &self
+                        .scope
+                        .get(&variable.name)
+                        .cloned()
+                        .or_else(|| variable.default.clone())
+                        .unwrap_or_default(),
+                ),
+            }
+        }
+        output
+    }
+
+    fn fill_option(&self, template: &Option<Template>) -> Option<String> {
+        template.as_ref().map(|template| self.fill(template))
+    }
+
     fn resolve_blocks(&mut self, blocks: &[Block]) -> Vec<RenderBlock> {
         let mut resolved = Vec::new();
         for block in blocks {
@@ -51,6 +99,7 @@ impl Resolver<'_> {
                     level: heading.level,
                     folded: heading.folded,
                     number: String::new(),
+                    anchor: String::new(),
                     content: self.resolve_inlines(&heading.content),
                 }),
                 Block::Paragraph(inlines) => {
@@ -91,42 +140,31 @@ impl Resolver<'_> {
                                     row_span: cell.row_span,
                                     horizontal_alignment: cell.horizontal_alignment,
                                     vertical_alignment: cell.vertical_alignment,
-                                    attributes: cell.attributes.clone(),
-                                    blocks: self.resolve_blocks(&cell.blocks),
+                                    attributes: cell
+                                        .attributes
+                                        .iter()
+                                        .map(|attribute| RenderTableAttribute {
+                                            scope: attribute.scope,
+                                            name: attribute.name.clone(),
+                                            value: self.fill_option(&attribute.value),
+                                        })
+                                        .collect(),
+                                    blocks: {
+                                        let previous = self.in_cell;
+                                        self.in_cell = true;
+                                        let resolved = self.resolve_blocks(&cell.blocks);
+                                        self.in_cell = previous;
+                                        resolved
+                                    },
                                 })
                                 .collect(),
                         })
                         .collect(),
                 })),
-                Block::CodeBlock(code_block) => resolved.push(RenderBlock::CodeBlock {
-                    language: code_block.language.clone(),
-                    source: code_block.source.clone(),
-                }),
-                Block::WikiStyle(wiki_style) => resolved.push(RenderBlock::WikiStyle {
-                    style: wiki_style.style.clone(),
-                    dark_style: wiki_style.dark_style.clone(),
-                    blocks: self.resolve_blocks(&wiki_style.blocks),
-                }),
-                Block::Folding(folding) => resolved.push(RenderBlock::Folding {
-                    summary: self.resolve_inlines(&folding.summary),
-                    blocks: self.resolve_blocks(&folding.blocks),
-                }),
-                Block::Colored(colored) => resolved.push(RenderBlock::Colored {
-                    color: Color {
-                        light: ColorValue::parse(&colored.color),
-                        dark: colored.dark_color.as_deref().map(ColorValue::parse),
-                    },
-                    blocks: self.resolve_blocks(&colored.blocks),
-                }),
-                Block::Sized(sized) => resolved.push(RenderBlock::Sized {
-                    level: sized.level,
-                    blocks: self.resolve_blocks(&sized.blocks),
-                }),
-                Block::Html(html) => resolved.push(RenderBlock::Html(html.clone())),
                 Block::Comment(_) => {}
                 Block::Redirect(target) => {
-                    if self.redirect.is_none() && self.include_stack.is_empty() {
-                        self.redirect = Some(target.clone());
+                    if self.redirect.is_none() && self.include_instance.is_none() {
+                        self.redirect = Some(self.fill(target));
                     }
                 }
             }
@@ -136,15 +174,15 @@ impl Resolver<'_> {
 
     // 문단 안의 블록 성격 매크로([목차]·[각주]·[include])를 만나면 문단을 분할한다.
     fn resolve_paragraph(&mut self, inlines: &[Inline]) -> Vec<RenderBlock> {
+        // 원문에 있던 빈 문단은 화면에도 빈 문단으로 남는다(렌더확정: 리스트 항목의
+        // 속내용 뒤 빈 줄이 the seed에서 `<div class='wiki-paragraph'></div>`가 된다).
+        if inlines.is_empty() {
+            return vec![RenderBlock::Paragraph(Vec::new())];
+        }
         let mut blocks = Vec::new();
         let mut current: Vec<RenderInline> = Vec::new();
+        // 문단 가장자리의 줄바꿈도 화면에 남는다 — 나무위키는 빈 줄을 그대로 보여준다.
         let flush = |current: &mut Vec<RenderInline>, blocks: &mut Vec<RenderBlock>| {
-            while current.last() == Some(&RenderInline::LineBreak) {
-                current.pop();
-            }
-            while current.first() == Some(&RenderInline::LineBreak) {
-                current.remove(0);
-            }
             if !current.is_empty() {
                 blocks.push(RenderBlock::Paragraph(std::mem::take(current)));
             } else {
@@ -152,32 +190,41 @@ impl Resolver<'_> {
             }
         };
 
-        for inline in inlines {
-            if let Inline::Macro(macro_call) = inline {
-                let name = macro_call.name.to_ascii_lowercase();
-                match name.as_str() {
-                    "목차" | "tableofcontents" => {
+        // 줄 단위로 본다 — include가 제 문단을 이루는지(줄 첫머리) 같은 문단에 중첩되는지
+        // (줄 중간, 각주 뒤 `[각주][include]`)를 줄 내 위치로 가른다.
+        let lines: Vec<&[Inline]> = inlines.split(|inline| matches!(inline, Inline::LineBreak)).collect();
+        for (index, line) in lines.iter().enumerate() {
+            let rest_invisible = lines[index + 1..].iter().all(|line| is_invisible_line(line));
+            let line_start = current.len();
+            for inline in *line {
+                if let Inline::Conditional(conditional) = inline {
+                    current.extend(self.resolve_conditional(conditional));
+                    continue;
+                }
+                if let Inline::Macro(macro_call) = inline
+                    && macro_call.name.eq_ignore_ascii_case("include")
+                {
+                    let argument = self.fill_option(&macro_call.argument);
+                    let expanded = self.expand_include(argument.as_deref());
+                    // 같은 줄에 앞선 내용이 있으면(각주 뒤 `[각주][include(틀:문서 가져옴)]`)
+                    // 그 문단 안에 중첩되고(렌더확정: the seed의 바깥 wiki-paragraph 하나가
+                    // 각주 섹션과 문서 가져옴을 함께 감싼다), 줄 첫머리면 제 문단을 이룬다.
+                    if current.len() > line_start {
+                        current.push(RenderInline::Blocks(expanded));
+                    } else {
                         flush(&mut current, &mut blocks);
-                        blocks.push(RenderBlock::TableOfContents {
-                            entries: Vec::new(),
-                        });
-                        continue;
+                        blocks.extend(expanded);
                     }
-                    "각주" | "footnote" => {
-                        flush(&mut current, &mut blocks);
-                        blocks.push(RenderBlock::FootnoteSection { notes: Vec::new() });
-                        continue;
-                    }
-                    "include" => {
-                        flush(&mut current, &mut blocks);
-                        blocks.extend(self.expand_include(macro_call.argument.as_deref()));
-                        continue;
-                    }
-                    _ => {}
+                    continue;
+                }
+                if let Some(resolved) = self.resolve_inline(inline) {
+                    current.push(resolved);
                 }
             }
-            if let Some(resolved) = self.resolve_inline(inline) {
-                current.push(resolved);
+            // 줄 사이 개행은 화면에 br로 남는다. 단 뒤가 전부 invisible(분류·include)이면
+            // 그 앞 개행까지 사라진다 — 표 셀 안에서는 남는다(규칙 (3)·셀 문맥).
+            if index + 1 < lines.len() && !is_invisible_line(line) && (self.in_cell || !rest_invisible) {
+                current.push(RenderInline::LineBreak);
             }
         }
         flush(&mut current, &mut blocks);
@@ -185,10 +232,108 @@ impl Resolver<'_> {
     }
 
     fn resolve_inlines(&mut self, inlines: &[Inline]) -> Vec<RenderInline> {
+        let mut resolved = Vec::new();
+        for inline in inlines {
+            if let Inline::Conditional(conditional) = inline {
+                resolved.extend(self.resolve_conditional(conditional));
+                continue;
+            }
+            if let Some(inline) = self.resolve_inline(inline) {
+                resolved.push(inline);
+            }
+        }
+        resolved
+    }
+
+    /// 현재 문서를 기준으로 한 상대 링크를 문서명으로 편다.
+    ///
+    /// 렌더확정: `알파위키:문법 도움말/심화`에서 `[[../#문법 무효화|…]]`는
+    /// `/w/알파위키:문법 도움말#문법 무효화`로, `알파위키:문법 도움말`에서 `[[/심화]]`는
+    /// `/w/알파위키:문법 도움말/심화`로 간다. `../`는 여러 번 써도 한 단계만 올라가므로
+    /// 첫 하나만 해석한다(상위가 없으면 현재 문서 자신).
+    fn resolve_link_target(&self, written: &str) -> String {
+        // `문서:`는 이름공간이 아니라 "본문 이름공간"을 못박는 표시다. 제목이 `/`로
+        // 시작해 하위 문서로 읽히는 것을 막을 때 쓴다(렌더확정: `[[문서:/// (너 먹구름 비)]]`가
+        // the seed에서 `/w////%20(%EB%84%88%20…)`로 간다).
+        if let Some(absolute) = written.strip_prefix("문서:") {
+            return absolute.to_string();
+        }
+        let Some(current) = self.context.current_title() else {
+            return written.to_string();
+        };
+        if let Some(rest) = written.strip_prefix("../") {
+            let parent = match current.rsplit_once('/') {
+                Some((parent, _)) => parent,
+                None => &current,
+            };
+            return if rest.is_empty() {
+                parent.to_string()
+            } else {
+                format!("{parent}/{rest}")
+            };
+        }
+        match written.strip_prefix('/') {
+            Some(child) => format!("{current}/{child}"),
+            None => written.to_string(),
+        }
+    }
+
+    /// 렌더확정: `[[#앵커]]`처럼 앵커만 있는 링크는 문서 자신을 가리켜도 자기 링크가
+    /// 아니라 `wiki-link-internal`이다(the seed). 문서로 가는 링크만 자기 링크가 된다.
+    /// 틀 안에서 쓴 **같은 문서** 앵커에만 인스턴스 번호를 붙인다. 다른 문서의 앵커는
+    /// 그 문서의 것이라 건드리지 않는다(렌더확정: `틀:다른 뜻`의 `[[@rd1@#s-@paragraph1@]]`가
+    /// rd1이 있으면 `/w/알파위키:기능 도움말#s-5`로 그대로 간다).
+    fn qualify_anchor(&self, title: &str, anchor: String) -> String {
+        match self.include_instance {
+            Some(instance) if title.is_empty() => instance.qualify(&anchor),
+            _ => anchor,
+        }
+    }
+
+    fn link_kind(&self, title: &str, anchor: Option<&str>) -> DocumentLinkKind {
+        // 지금 보고 있는 문서는 물어볼 것도 없이 있다.
+        if title.is_empty() || self.context.current_title().as_deref() == Some(title) {
+            return match anchor {
+                Some(_) => DocumentLinkKind::Existing,
+                None => DocumentLinkKind::Current,
+            };
+        }
+        if self.context.document_exists(title) {
+            DocumentLinkKind::Existing
+        } else {
+            DocumentLinkKind::Missing
+        }
+    }
+
+    /// `#!if`는 감싸는 요소를 만들지 않는다 — 조건이 참이면 내용만 남는다.
+    fn resolve_conditional(&mut self, conditional: &Conditional) -> Vec<RenderInline> {
+        // 조건식은 값을 내면서 변수도 만든다. 만들어진 변수는 뒤따르는
+        // `#!if`와 `@이름@`이 함께 쓰므로 스코프에 남긴다.
+        let Some(bindings) = condition::evaluate(&conditional.expression, &self.scope) else {
+            return Vec::new();
+        };
+        self.scope.extend(bindings);
+        self.resolve_blocks_as_inlines(&conditional.blocks)
+    }
+
+    /// `#!if` 안의 블록들을 감싸는 요소 없이 인라인으로 편다.
+    fn resolve_blocks_as_inlines(&mut self, blocks: &[Block]) -> Vec<RenderInline> {
+        let mut inlines = Vec::new();
+        for block in blocks {
+            match block {
+                Block::Paragraph(content) => {
+                    if !inlines.is_empty() {
+                        inlines.push(RenderInline::LineBreak);
+                    }
+                    inlines.extend(self.resolve_inlines(content));
+                }
+                // 표·리스트는 인라인으로 펼 수 없다. 감싸는 요소 없이 담아 둔다.
+                other => inlines.push(RenderInline::Blocks(
+                    self.resolve_blocks(std::slice::from_ref(other)),
+                )),
+            }
+        }
         inlines
-            .iter()
-            .filter_map(|inline| self.resolve_inline(inline))
-            .collect()
     }
 
     fn resolve_inline(&mut self, inline: &Inline) -> Option<RenderInline> {
@@ -204,10 +349,11 @@ impl Resolver<'_> {
             Inline::Superscript(content) => self.resolve_styled(TextStyle::Superscript, content),
             Inline::Subscript(content) => self.resolve_styled(TextStyle::Subscript, content),
             Inline::Literal(text) => RenderInline::Literal(text.clone()),
+            // 문법이 색상 그룹으로 인정한 표기라 색 판정은 이미 끝나 있다.
             Inline::Colored(colored) => RenderInline::Colored {
                 color: Color {
-                    light: ColorValue::parse(&colored.color),
-                    dark: colored.dark_color.as_deref().map(ColorValue::parse),
+                    light: ColorValue::parse_known(&colored.color),
+                    dark: colored.dark_color.as_deref().map(ColorValue::parse_known),
                 },
                 content: self.resolve_inlines(&colored.content),
             },
@@ -220,30 +366,41 @@ impl Resolver<'_> {
                     .display
                     .as_ref()
                     .map(|display| self.resolve_inlines(display));
-                if is_external_url(&link.target) {
+                let written = self.fill(&link.target);
+                if is_external_url(&written) {
                     RenderInline::ExternalLink {
-                        url: link.target.clone(),
+                        url: written,
                         display,
                     }
                 } else {
+                    let title = self.resolve_link_target(&written);
+                    // 틀 인자가 비면 앵커도 빈다. the seed는 그때 `#`를 붙이지 않는다.
+                    let anchor = self
+                        .fill_option(&link.anchor)
+                        .filter(|anchor| !anchor.is_empty())
+                        .map(|anchor| self.qualify_anchor(&title, anchor));
                     RenderInline::DocumentLink {
-                        title: link.target.clone(),
-                        anchor: link.anchor.clone(),
-                        exists: link.target.is_empty()
-                            || self.context.document_exists(&link.target),
-                        display,
+                        kind: self.link_kind(&title, anchor.as_deref()),
+                        // 표시부가 없으면 적힌 그대로가 글자다 — 해석한 문서명이 아니다
+                        // (렌더확정: `[[/심화]]` → `/심화`, `[[#개요]]` → `#개요`).
+                        display: display.unwrap_or_else(|| {
+                            vec![RenderInline::Text(written_link(&written, &anchor))]
+                        }),
+                        title,
+                        anchor,
                     }
                 }
             }
             Inline::Image(image) => {
                 let mut layout = ImageLayout::default();
                 for option in &image.options {
-                    let Some(value) = option.value.as_deref() else {
+                    let Some(value) = self.fill_option(&option.value) else {
                         continue;
                     };
+                    let value = value.as_str();
                     match option.name.as_str() {
-                        "width" => layout.width = Some(Dimension::parse(value)),
-                        "height" => layout.height = Some(Dimension::parse(value)),
+                        "width" => layout.width = Some(Dimension::parse_image(value)),
+                        "height" => layout.height = Some(Dimension::parse_image(value)),
                         "align" => {
                             layout.align = match value.trim() {
                                 "left" => Some(ImageAlignment::Left),
@@ -252,7 +409,7 @@ impl Resolver<'_> {
                                 _ => None,
                             }
                         }
-                        "bgcolor" => layout.background_color = Some(ColorValue::parse(value)),
+                        "bgcolor" => layout.background_color = ColorValue::parse(value),
                         "theme" => {
                             layout.theme = match value.trim() {
                                 "light" => Some(ImageTheme::Light),
@@ -263,12 +420,39 @@ impl Resolver<'_> {
                         _ => {}
                     }
                 }
+                let file_name = self.fill(&image.file_name);
                 RenderInline::Image {
-                    url: self.context.file_url(&image.file_name),
-                    file_name: image.file_name.clone(),
+                    url: self.context.file_url(&file_name),
+                    file_name,
                     layout,
                 }
             }
+            Inline::WikiStyle(wiki_style) => RenderInline::WikiStyle {
+                style: self.fill_option(&wiki_style.style),
+                dark_style: self.fill_option(&wiki_style.dark_style),
+                blocks: self.resolve_blocks(&wiki_style.blocks),
+            },
+            Inline::Folding(folding) => RenderInline::Folding {
+                summary: self.fill(&folding.summary),
+                blocks: self.resolve_blocks(&folding.blocks),
+            },
+            // 조건식은 값을 내면서 변수도 만든다. 만들어진 변수는 뒤따르는
+            // `#!if`와 `@이름@`이 함께 쓰므로 스코프에 남긴다.
+            // `#!if`는 resolve_inlines가 스코프를 다루며 처리한다.
+            Inline::Conditional(_) => return None,
+            Inline::CodeBlock(code_block) => RenderInline::CodeBlock {
+                language: code_block.language.clone(),
+                source: code_block.source.clone(),
+            },
+            Inline::Html(html) => RenderInline::Html(self.fill(html)),
+            // 텍스트 문맥의 `@이름@`. 값이 없으면 아무것도 남기지 않는다.
+            Inline::Variable(variable) => RenderInline::Text(
+                self.scope
+                    .get(&variable.name)
+                    .cloned()
+                    .or_else(|| variable.default.clone())
+                    .unwrap_or_default(),
+            ),
             Inline::Category(category) => {
                 if !self.categories.contains(&category.name) {
                     self.categories.push(category.name.clone());
@@ -280,9 +464,9 @@ impl Resolver<'_> {
                 content: self.resolve_inlines(&footnote.content),
             },
             Inline::Macro(macro_call) => {
-                self.resolve_macro(&macro_call.name, macro_call.argument.as_deref())
+                let argument = self.fill_option(&macro_call.argument);
+                self.resolve_macro(&macro_call.name, argument.as_deref())
             }
-            Inline::Html(html) => RenderInline::Html(html.clone()),
         })
     }
 
@@ -299,6 +483,10 @@ impl Resolver<'_> {
             argument: argument.map(str::to_string),
         };
         match name.to_ascii_lowercase().as_str() {
+            "목차" | "tableofcontents" => RenderInline::TableOfContents {
+                entries: Vec::new(),
+            },
+            "각주" | "footnote" => RenderInline::FootnoteSection { notes: Vec::new() },
             "br" => RenderInline::LineBreak,
             "clearfix" => RenderInline::ClearFix,
             "anchor" => match argument {
@@ -344,7 +532,7 @@ impl Resolver<'_> {
             "kakaotv" => self.resolve_video(VideoProvider::KakaoTv, argument, unresolved),
             "nicovideo" => self.resolve_video(VideoProvider::NicoVideo, argument, unresolved),
             "ruby" => match argument.and_then(parse_ruby) {
-                Some((content, ruby)) => RenderInline::Ruby { content, ruby },
+                Some(ruby) => ruby,
                 None => unresolved(),
             },
             _ => unresolved(),
@@ -391,31 +579,42 @@ impl Resolver<'_> {
                 argument: argument.map(str::to_string),
             }])]
         };
+        // 나무위키는 틀 속의 틀(중첩 include)을 확장하지 않는다. 원문을 노출하지도 않고
+        // 조용히 버린다 — 틀 문서 끝의 `[include(틀:X/설명 문서)]`가 그 틀을 쓴 문서에
+        // 딸려오지 않는 것이 이 규칙 때문이다.
+        if self.include_instance.is_some() {
+            return Vec::new();
+        }
         let Some(argument) = argument else {
             return unresolved(argument);
         };
         let mut parts = argument.split(',');
         let title = parts.next().unwrap_or_default().trim().to_string();
-        if title.is_empty()
-            || self.include_stack.len() >= MAXIMUM_INCLUDE_DEPTH
-            || self.include_stack.contains(&title)
-        {
+        if title.is_empty() {
             return unresolved(Some(argument));
         }
         let Some(source) = self.context.include_source(&title) else {
             return unresolved(Some(argument));
         };
-        // 인자 치환: 틀 본문의 `@이름@`을 호출 인자로 바꾼다.
-        let mut substituted = source;
-        for part in parts {
-            if let Some((key, value)) = part.split_once('=') {
-                substituted = substituted.replace(&format!("@{}@", key.trim()), value.trim());
-            }
+
+        // 인자는 스코프에 담긴다. 틀 본문의 `@이름@`을 resolve가 이 스코프로 채운다 —
+        // 원문을 미리 치환하지 않으므로 파싱은 한 번뿐이다.
+        let mut scope: HashMap<String, String> = parts
+            .filter_map(|part| part.split_once('='))
+            .map(|(key, value)| (key.trim().to_string(), value.trim().to_string()))
+            .collect();
+        // 틀은 호출한 쪽 문서명을 `calleeTitle`로 볼 수 있다.
+        if let Some(title) = self.context.current_title() {
+            scope.insert("calleeTitle".to_string(), title);
         }
-        let document = namumark_parser::parse(&substituted);
-        self.include_stack.push(title);
+
+        let document = namumark_parser::parse(&source);
+        let outer_scope = std::mem::replace(&mut self.scope, scope);
+        self.expanded_includes += 1;
+        self.include_instance = Some(IncludeInstance(self.expanded_includes));
         let blocks = self.resolve_blocks(&document.blocks);
-        self.include_stack.pop();
+        self.include_instance = None;
+        self.scope = outer_scope;
         blocks
     }
 }
@@ -438,10 +637,40 @@ fn parse_date(source: &str) -> Option<crate::context::Date> {
     Some(crate::context::Date { year, month, day })
 }
 
-fn parse_ruby(argument: &str) -> Option<(String, String)> {
+/// 표시부 없는 링크에 나오는 글자. 적힌 대상 그대로이고 앵커는 빠진다
+/// (렌더확정: `[[알파위키#기능]]` → `알파위키`). 대상이 없으면 앵커가 곧 글자다
+/// (`[[#개요]]` → `#개요`).
+fn written_link(target: &str, anchor: &Option<String>) -> String {
+    match (target, anchor) {
+        ("", Some(anchor)) => format!("#{anchor}"),
+        _ => target.to_string(),
+    }
+}
+
+fn parse_ruby(argument: &str) -> Option<RenderInline> {
     let (content, options) = argument.split_once(',')?;
-    let ruby = options
-        .split(',')
-        .find_map(|part| part.trim().strip_prefix("ruby="))?;
-    Some((content.trim().to_string(), ruby.trim().to_string()))
+    let option = |name: &str| {
+        options
+            .split(',')
+            .find_map(|part| part.trim().strip_prefix(name))
+            .map(str::trim)
+    };
+    Some(RenderInline::Ruby {
+        content: content.trim().to_string(),
+        ruby: option("ruby=")?.to_string(),
+        color: option("color=").and_then(ColorValue::parse),
+    })
+}
+
+/// 분류·`[include]`만 있는 줄은 화면에 아무것도 남기지 않는다 — 그런 줄로만 뒤가
+/// 채워지면 그 앞 개행까지 `<br>`이 되지 않고 사라진다(렌더 증거: 원문
+/// `[[분류:X]]\n[include(틀:Y)]\n[목차]\n[clearfix]`를 the seed는
+/// `<div class='wiki-paragraph'><목차><br><clearfix></div>`로 낸다). [`Resolver::resolve_paragraph`]가 쓴다.
+fn is_invisible_line(line: &[Inline]) -> bool {
+    !line.is_empty()
+        && line.iter().all(|inline| match inline {
+            Inline::Category(_) => true,
+            Inline::Macro(macro_call) => macro_call.name.eq_ignore_ascii_case("include"),
+            _ => false,
+        })
 }

@@ -1,0 +1,25 @@
+근거: 도움말서술 | 원문: 1줄 | 의미론: 22줄 | 렌더링: 1줄 | 루비 문자
+[ruby(글자,ruby=루비)]
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Macro(
+                    Macro {
+                        name: "ruby",
+                        argument: Some(
+                            Template(
+                                [
+                                    Text(
+                                        "글자,ruby=루비",
+                                    ),
+                                ],
+                            ),
+                        ),
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><ruby>글자<rp>(</rp><rt>루비</rt><rp>)</rp></ruby></div>

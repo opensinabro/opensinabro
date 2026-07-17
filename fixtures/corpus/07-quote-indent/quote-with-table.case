@@ -1,0 +1,47 @@
+근거: 미확인 | 원문: 1줄 | 의미론: 41줄 | 렌더링: 4줄 | 인용문 안 표
+> || 인용 속 표 ||
+Document {
+    blocks: [
+        Quote(
+            [
+                Indent(
+                    [
+                        Table(
+                            Table {
+                                caption: None,
+                                rows: [
+                                    TableRow {
+                                        cells: [
+                                            TableCell {
+                                                column_span: None,
+                                                row_span: None,
+                                                horizontal_alignment: Some(
+                                                    Center,
+                                                ),
+                                                vertical_alignment: None,
+                                                attributes: [],
+                                                blocks: [
+                                                    Paragraph(
+                                                        [
+                                                            Text(
+                                                                "인용 속 표",
+                                                            ),
+                                                        ],
+                                                    ),
+                                                ],
+                                            },
+                                        ],
+                                    },
+                                ],
+                            },
+                        ),
+                    ],
+                ),
+            ],
+        ),
+    ],
+}
+<blockquote class="wiki-quote"><div class="wiki-indent"><div class="wiki-table-wrap"><table class="wiki-table"><tbody><tr class="wiki-table-tr"><td style="text-align: center;"><div class="wiki-paragraph">인용 속 표</div>
+</td></tr></tbody></table></div>
+</div>
+</blockquote>

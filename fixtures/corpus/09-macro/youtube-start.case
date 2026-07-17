@@ -1,0 +1,25 @@
+근거: 도움말예제 | 원문: 1줄 | 의미론: 22줄 | 렌더링: 1줄 | 도움말: start 지원. 우리는 폐기함
+[youtube(jNQXAC9IVRw,start=8)]
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Macro(
+                    Macro {
+                        name: "youtube",
+                        argument: Some(
+                            Template(
+                                [
+                                    Text(
+                                        "jNQXAC9IVRw,start=8",
+                                    ),
+                                ],
+                            ),
+                        ),
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><iframe class="wiki-media" src="//www.youtube.com/embed/jNQXAC9IVRw" width="640" height="360" frameborder="0" allowfullscreen loading="lazy"></iframe></div>

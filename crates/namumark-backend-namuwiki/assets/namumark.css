@@ -36,18 +36,24 @@
   background: #26282c;
   border-color: #444;
 }
-.wiki-macro-toc .toc-head {
+.wiki-macro-toc summary {
   font-weight: 600;
   margin-bottom: 0.4em;
+  cursor: pointer;
+}
+.wiki-macro-toc summary::after {
+  content: "목차";
+}
+.wiki-macro-toc .toc-item {
+  display: block;
 }
 .wiki-macro-toc .toc-item a {
   text-decoration: none;
 }
-.toc-indent-2 { margin-left: 1em; }
-.toc-indent-3 { margin-left: 2em; }
-.toc-indent-4 { margin-left: 3em; }
-.toc-indent-5 { margin-left: 4em; }
-.toc-indent-6 { margin-left: 5em; }
+/* 깊이는 toc-indent 중첩으로 표현된다. 최상위만 들여쓰지 않는다. */
+.wiki-macro-toc .toc-indent .toc-indent {
+  margin-left: 1em;
+}
 
 .wiki-link-internal { color: #0275d8; text-decoration: none; }
 .wiki-link-internal.not-exist { color: #dd3333; }
@@ -90,16 +96,16 @@
 }
 .dark .wiki-code { background: #1e2022; border-color: #444; }
 
-.wiki-folding > dt {
+.wiki-folding > summary {
   cursor: pointer;
   font-weight: 600;
   border-bottom: 1px dotted #999;
   display: inline-block;
 }
-.wiki-folding > dd { margin: 0.4em 0 0 1em; }
+.wiki-folding > div { margin: 0.4em 0 0 1em; }
 
-.wiki-colored { color: var(--wiki-color); }
-.dark .wiki-colored { color: var(--wiki-color-dark); }
+/* 색상은 style(라이트)과 data-dark-style(다크)로 나간다 — 나무위키 표기다.
+   다크 테마에서 그 값을 적용하는 것은 스킨의 몫이다. */
 
 .wiki-size-up-1 { font-size: 1.2em; }
 .wiki-size-up-2 { font-size: 1.4em; }

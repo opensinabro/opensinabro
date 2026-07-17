@@ -1,0 +1,19 @@
+근거: 도움말예제 | 원문: 1줄 | 의미론: 15줄 | 렌더링: 2줄 | 인용문
+>인용문
+Document {
+    blocks: [
+        Quote(
+            [
+                Paragraph(
+                    [
+                        Text(
+                            "인용문",
+                        ),
+                    ],
+                ),
+            ],
+        ),
+    ],
+}
+<blockquote class="wiki-quote"><div class="wiki-paragraph">인용문</div>
+</blockquote>

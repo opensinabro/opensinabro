@@ -1,0 +1,21 @@
+근거: 미확인 | 원문: 1줄 | 의미론: 18줄 | 렌더링: 1줄 | 마커가 서로 교차
+'''굵게 ''기울임''' 기울임''
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Bold(
+                    [
+                        Text(
+                            "굵게 ''기울임",
+                        ),
+                    ],
+                ),
+                Text(
+                    " 기울임''",
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><strong>굵게 ''기울임</strong> 기울임''</div>

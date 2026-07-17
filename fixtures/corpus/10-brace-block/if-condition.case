@@ -1,0 +1,41 @@
+근거: 미확인 | 원문: 2줄 | 의미론: 38줄 | 렌더링: 0줄 | #!if — 도움말에 없으나 the seed 지원(틀:상위 문서). 조건식이 변수도 만듦
+{{{#!if 문서명1 != null
+상위 문서: [[@문서명1@]]}}}
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Conditional(
+                    Conditional {
+                        expression: "문서명1 != null",
+                        blocks: [
+                            Paragraph(
+                                [
+                                    Text(
+                                        "상위 문서: ",
+                                    ),
+                                    Link(
+                                        Link {
+                                            target: Template(
+                                                [
+                                                    Variable(
+                                                        Variable {
+                                                            name: "문서명1",
+                                                            default: None,
+                                                        },
+                                                    ),
+                                                ],
+                                            ),
+                                            anchor: None,
+                                            display: None,
+                                        },
+                                    ),
+                                ],
+                            ),
+                        ],
+                    },
+                ),
+            ],
+        ),
+    ],
+}

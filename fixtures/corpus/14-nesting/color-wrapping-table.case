@@ -1,0 +1,20 @@
+근거: 미확인 | 원문: 3줄 | 의미론: 15줄 | 렌더링: 1줄 | 색상 그룹 안의 표 — 인라인으로 펼 수 없어 버려짐
+{{{#red
+|| 표 ||
+}}}
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Colored(
+                    ColoredText {
+                        color: "red",
+                        dark_color: None,
+                        content: [],
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><span style="color:red" data-dark-style="color:red;"></span></div>

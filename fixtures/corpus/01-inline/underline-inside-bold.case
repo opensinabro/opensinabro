@@ -1,0 +1,28 @@
+근거: 미확인 | 원문: 1줄 | 의미론: 25줄 | 렌더링: 1줄 | 굵게 안의 밑줄
+'''굵게 __밑줄__ 굵게'''
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Bold(
+                    [
+                        Text(
+                            "굵게 ",
+                        ),
+                        Underline(
+                            [
+                                Text(
+                                    "밑줄",
+                                ),
+                            ],
+                        ),
+                        Text(
+                            " 굵게",
+                        ),
+                    ],
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><strong>굵게 <u>밑줄</u> 굵게</strong></div>

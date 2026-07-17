@@ -1,0 +1,109 @@
+근거: 도움말서술 | 원문: 2줄 | 의미론: 101줄 | 렌더링: 5줄 | 표 안의 표
+||<-4> {{{#!wiki
+||<tablewidth=100%> 3 || 셋 ||}}} ||
+Document {
+    blocks: [
+        Table(
+            Table {
+                caption: None,
+                rows: [
+                    TableRow {
+                        cells: [
+                            TableCell {
+                                column_span: Some(
+                                    4,
+                                ),
+                                row_span: None,
+                                horizontal_alignment: Some(
+                                    Center,
+                                ),
+                                vertical_alignment: None,
+                                attributes: [],
+                                blocks: [
+                                    Paragraph(
+                                        [
+                                            WikiStyle(
+                                                WikiStyle {
+                                                    style: None,
+                                                    dark_style: None,
+                                                    blocks: [
+                                                        Table(
+                                                            Table {
+                                                                caption: None,
+                                                                rows: [
+                                                                    TableRow {
+                                                                        cells: [
+                                                                            TableCell {
+                                                                                column_span: None,
+                                                                                row_span: None,
+                                                                                horizontal_alignment: Some(
+                                                                                    Center,
+                                                                                ),
+                                                                                vertical_alignment: None,
+                                                                                attributes: [
+                                                                                    TableAttribute {
+                                                                                        scope: Table,
+                                                                                        name: "width",
+                                                                                        value: Some(
+                                                                                            Template(
+                                                                                                [
+                                                                                                    Text(
+                                                                                                        "100%",
+                                                                                                    ),
+                                                                                                ],
+                                                                                            ),
+                                                                                        ),
+                                                                                    },
+                                                                                ],
+                                                                                blocks: [
+                                                                                    Paragraph(
+                                                                                        [
+                                                                                            Text(
+                                                                                                "3",
+                                                                                            ),
+                                                                                        ],
+                                                                                    ),
+                                                                                ],
+                                                                            },
+                                                                            TableCell {
+                                                                                column_span: None,
+                                                                                row_span: None,
+                                                                                horizontal_alignment: Some(
+                                                                                    Center,
+                                                                                ),
+                                                                                vertical_alignment: None,
+                                                                                attributes: [],
+                                                                                blocks: [
+                                                                                    Paragraph(
+                                                                                        [
+                                                                                            Text(
+                                                                                                "셋",
+                                                                                            ),
+                                                                                        ],
+                                                                                    ),
+                                                                                ],
+                                                                            },
+                                                                        ],
+                                                                    },
+                                                                ],
+                                                            },
+                                                        ),
+                                                    ],
+                                                },
+                                            ),
+                                        ],
+                                    ),
+                                ],
+                            },
+                        ],
+                    },
+                ],
+            },
+        ),
+    ],
+}
+<div class="wiki-table-wrap"><table class="wiki-table"><tbody><tr class="wiki-table-tr"><td colspan="4" style="text-align: center;"><div class="wiki-paragraph"><div><div class="wiki-table-wrap" style="width: 100%;"><table class="wiki-table" style=" width: 100%;"><tbody><tr class="wiki-table-tr"><td style="text-align: center;"><div class="wiki-paragraph">3</div>
+</td><td style="text-align: center;"><div class="wiki-paragraph">셋</div>
+</td></tr></tbody></table></div>
+</div></div>
+</td></tr></tbody></table></div>

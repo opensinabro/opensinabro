@@ -1,0 +1,25 @@
+근거: 도움말서술 | 원문: 1줄 | 의미론: 22줄 | 렌더링: 1줄 | 카카오TV
+[kakaotv(301157150)]
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Macro(
+                    Macro {
+                        name: "kakaotv",
+                        argument: Some(
+                            Template(
+                                [
+                                    Text(
+                                        "301157150",
+                                    ),
+                                ],
+                            ),
+                        ),
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><iframe class="wiki-media" src="//tv.kakao.com/embed/player/cliplink/301157150" width="640" height="360" frameborder="0" allowfullscreen loading="lazy"></iframe></div>

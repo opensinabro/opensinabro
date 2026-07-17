@@ -9,6 +9,4 @@ license.workspace = true
 namumark-ast = { path = "../namumark-ast" }
 namumark-ir = { path = "../namumark-ir" }
 namumark-parser = { path = "../namumark-parser" }
-
-[dev-dependencies]
 namumark-text = { path = "../namumark-text" }

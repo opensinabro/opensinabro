@@ -1,0 +1,51 @@
+근거: 도움말서술 | 원문: 1줄 | 의미론: 47줄 | 렌더링: 2줄 | 행 배경색
+||<rowbgcolor=#ff0000> 행 ||
+Document {
+    blocks: [
+        Table(
+            Table {
+                caption: None,
+                rows: [
+                    TableRow {
+                        cells: [
+                            TableCell {
+                                column_span: None,
+                                row_span: None,
+                                horizontal_alignment: Some(
+                                    Center,
+                                ),
+                                vertical_alignment: None,
+                                attributes: [
+                                    TableAttribute {
+                                        scope: Row,
+                                        name: "bgcolor",
+                                        value: Some(
+                                            Template(
+                                                [
+                                                    Text(
+                                                        "#ff0000",
+                                                    ),
+                                                ],
+                                            ),
+                                        ),
+                                    },
+                                ],
+                                blocks: [
+                                    Paragraph(
+                                        [
+                                            Text(
+                                                "행",
+                                            ),
+                                        ],
+                                    ),
+                                ],
+                            },
+                        ],
+                    },
+                ],
+            },
+        ),
+    ],
+}
+<div class="wiki-table-wrap"><table class="wiki-table"><tbody><tr class="wiki-table-tr" style=" background-color: #ff0000;"><td style="text-align: center;"><div class="wiki-paragraph">행</div>
+</td></tr></tbody></table></div>

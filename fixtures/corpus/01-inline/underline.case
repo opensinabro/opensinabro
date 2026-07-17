@@ -1,0 +1,18 @@
+근거: 도움말예제 | 원문: 1줄 | 의미론: 15줄 | 렌더링: 1줄 | 밑줄
+__밑줄__
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Underline(
+                    [
+                        Text(
+                            "밑줄",
+                        ),
+                    ],
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><u>밑줄</u></div>

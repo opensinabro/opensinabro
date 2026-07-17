@@ -1,0 +1,17 @@
+근거: 도움말예제 | 원문: 1줄 | 의미론: 14줄 | 렌더링: 1줄 | 도움말: 정수 출력. 우리는 미해결 매크로로 원문 노출
+[pagecount]
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Macro(
+                    Macro {
+                        name: "pagecount",
+                        argument: None,
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph">[pagecount]</div>

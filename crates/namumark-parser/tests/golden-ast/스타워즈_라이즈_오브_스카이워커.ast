@@ -3,131 +3,112 @@
 Paragraph: Macro(include "틀:스타워즈")
 Table:
   Row:
-    Cell span=1x1 align=Center attrs=[Table/width=100% Table/align=center Table/bordercolor=#000000 Cell/bgcolor=#000000]:
+    Cell span=1x1 align=Some(Center) attrs=[Table/width=100% Table/align=center Table/bordercolor=#000000 Cell/bgcolor=#000000]:
       Paragraph: Bold(Colored(#51a1e0 | "스타워즈: 라이즈 오브 스카이워커 관련 틀"))
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#fff,#010101]:
-      Folding summary="[ 펼치기 · 접기 ]":
-        Paragraph: Macro(include "틀:스타워즈: 라이즈 오브 스카이워커") <br> Macro(include "틀:J.J. 에이브럼스 감독 장편 연출 작품") <br> Macro(include "틀:스타워즈 시리즈 장편 영화, a=한 솔로: 스타워즈 스토리, b=한 솔로: 스타워즈 스토리, c=라이즈 오브 스카이워커, d=스타워즈: 로그 스쿼드론, e=로그 스쿼드론")
-        Table:
-          Row:
-            Cell span=5x1 align=Center attrs=[Table/align=center Table/bgcolor=#ffffff Cell/bgcolor=#ffe400]:
-              Paragraph: Bold(Link("10억 달러 돌파 영화" | "역대 전 세계 10억 달러 돌파 영화"))
-          Row:
-            Cell span=1x1 align=Center attrs=[Cell/width=30%]:
-              Paragraph: "2019" Macro(br) Link("겨울왕국 2") Macro(br) "진행중"
-            Cell span=1x1 align=Center attrs=[Cell/width=5%]:
-              Paragraph: "→"
-            Cell span=1x1 align=Center attrs=[Cell/width=30% Cell/bgcolor=#ffe400]:
-              Paragraph: "2019" Macro(br) Bold("스타워즈: 라이즈 오브 스카이워커") Macro(br) "진행중"
-            Cell span=1x1 align=Center attrs=[Cell/width=5%]:
-              Paragraph: "→"
-            Cell span=1x1 align=Center attrs=[Cell/width=30%]:
-              Paragraph: "미정"
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#fff,#010101]:
+      Paragraph: Folding([ 펼치기 · 접기 ] | Paragraph: Macro(include "틀:스타워즈: 라이즈 오브 스카이워커") <br> Macro(include "틀:J.J. 에이브럼스 감독 장편 연출 작품") <br> Macro(include "틀:스타워즈 시리즈 장편 영화, a=한 솔로: 스타워즈 스토리, b=한 솔로: 스타워즈 스토리, c=라이즈 오브 스카이워커, d=스타워즈: 로그 스쿼드론, e=로그 스쿼드론") Table:   Row:     Cell span=5x1 align=Some(Center) attrs=[Table/align=center Table/bgcolor=#ffffff Cell/bgcolor=#ffe400]:       Paragraph: Bold(Link("10억 달러 돌파 영화" | "역대 전 세계 10억 달러 돌파 영화"))   Row:     Cell span=1x1 align=Some(Center) attrs=[Cell/width=30%]:       Paragraph: "2019" Macro(br) Link("겨울왕국 2") Macro(br) "진행중"     Cell span=1x1 align=Some(Center) attrs=[Cell/width=5%]:       Paragraph: "→"     Cell span=1x1 align=Some(Center) attrs=[Cell/width=30% Cell/bgcolor=#ffe400]:       Paragraph: "2019" Macro(br) Bold("스타워즈: 라이즈 오브 스카이워커") Macro(br) "진행중"     Cell span=1x1 align=Some(Center) attrs=[Cell/width=5%]:       Paragraph: "→"     Cell span=1x1 align=Some(Center) attrs=[Cell/width=30%]:       Paragraph: "미정")
+Paragraph: 
 Table:
   Row:
-    Cell span=2x1 align=Center attrs=[Table/width=550 Table/align=center Table/bordercolor=#51a1e0 Cell/bgcolor=#000000 Table/bgcolor=#ffffff,#353535]:
+    Cell span=2x1 align=Some(Center) attrs=[Table/width=550 Table/align=center Table/bordercolor=#51a1e0 Cell/bgcolor=#000000 Table/bgcolor=#ffffff,#353535]:
       Paragraph: Colored(#51a1e0 | Bold(Sized(+2 | "스타워즈: 라이즈 오브 스카이워커")) " (2019)" Macro(br) Italic("Star Wars: The Rise of Skywalker"))
   Row:
-    Cell span=2x1 align=Center attrs=[Cell/bgcolor=#000000]:
-      WikiStyle style=Some("margin: -6px -10px") dark_style=None:
-        Paragraph: Image("rise-of-skywalker-theatrical-poster.jpg" width=100%) Footnote(| Link("파일:스타워즈: 라이즈 오브 스카이워커 한국 포스터.jpg" | "한국 포스터"))
+    Cell span=2x1 align=Some(Center) attrs=[Cell/bgcolor=#000000]:
+      Paragraph: WikiStyle(style=Some("margin: -6px -10px") dark=None | Paragraph: Image("rise-of-skywalker-theatrical-poster.jpg" width=100%) Footnote(| Link("파일:스타워즈: 라이즈 오브 스카이워커 한국 포스터.jpg" | "한국 포스터")))
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#000000]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#000000]:
       Paragraph: Bold(Colored(#51a1e0 | "감독"))
-    Cell span=1x1 align=Left:
+    Cell span=1x1 align=None:
       Paragraph: Link("J.J. 에이브럼스") Footnote(| Link("콜린 트러보로") "로 정해져 있었으나 견해 차이로 하차 후 JJ로 내정.")
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#000000]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#000000]:
       Paragraph: Bold(Colored(#51a1e0 | "제작"))
-    Cell span=1x1 align=Left:
+    Cell span=1x1 align=None:
       Paragraph: "J.J. 에이브럼스" Macro(br) Link("캐슬린 케네디") Macro(br) "미셸 레즈완"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#000000]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#000000]:
       Paragraph: Bold(Colored(#51a1e0 | "각본"))
-    Cell span=1x1 align=Left:
+    Cell span=1x1 align=None:
       Paragraph: "J.J. 에이브럼스" Macro(br) Link("크리스 테리오")
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#000000]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#000000]:
       Paragraph: Bold(Colored(#51a1e0 | "원안"))
-    Cell span=1x1 align=Left:
+    Cell span=1x1 align=None:
       Paragraph: "J.J. 에이브럼스" Macro(br) "크리스 테리오" Macro(br) Link("콜린 트러보로") Macro(br) "데릭 코널리"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#000000]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#000000]:
       Paragraph: Bold(Colored(#51a1e0 | "음악"))
-    Cell span=1x1 align=Left:
+    Cell span=1x1 align=None:
       Paragraph: Link("존 윌리엄스")
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#000000]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#000000]:
       Paragraph: Bold(Colored(#51a1e0 | "출연"))
-    Cell span=1x1 align=Left:
+    Cell span=1x1 align=None:
       Paragraph: Link("데이지 리들리") Macro(br) Link("아담 드라이버") Macro(br) Link("존 보예가") Macro(br) Link("오스카 아이작") " " Sub("외")
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#000000]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#000000]:
       Paragraph: Bold(Colored(#51a1e0 | "촬영기간"))
-    Cell span=1x1 align=Left:
+    Cell span=1x1 align=None:
       Paragraph: Link("2018년") " " Link("8월 1일") " ~ " Link("2019년") " " Link("2월 15일")
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#000000]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#000000]:
       Paragraph: Bold(Colored(#51a1e0 | "상영시간"))
-    Cell span=1x1 align=Left:
+    Cell span=1x1 align=Some(Left):
       Paragraph: "142분"
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#000000]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#000000]:
       Paragraph: Bold(Colored(#51a1e0 | "개봉일"))
-    Cell span=1x1 align=Left:
+    Cell span=1x1 align=Some(Left):
       Paragraph: Image("미국 국기.svg" width=20px) " " Link("2019년") " " Link("12월 20일") Macro(br) Image("대한민국 국기.svg" width=20px) " " Link("2020년") " " Link("1월 8일") Footnote(| "미국보다 개봉일이 3주 가량 늦어져서인지 팬들 사이에서 " Link("디즈니 코리아") "가 까이고 있다.")
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#000000]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#000000]:
       Paragraph: Bold(Colored(#51a1e0 | "제작사"))
-    Cell span=1x1 align=Left:
-      WikiStyle style=Some("display: inline-table; background: #FFF; border-radius: 4px") dark_style=None:
-        Paragraph: Link("루카스필름" | Image("Lucasfilm_LTD_logo.png" height=20))
-      Paragraph: Macro(br) Image("미국 국기.svg" width=20px) " " Link("배드 로봇 프로덕션")
+    Cell span=1x1 align=None:
+      Paragraph: WikiStyle(style=Some("display: inline-table; background: #FFF; border-radius: 4px") dark=None | Paragraph: Link("루카스필름" | Image("Lucasfilm_LTD_logo.png" height=20))) Macro(br) Image("미국 국기.svg" width=20px) " " Link("배드 로봇 프로덕션")
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#000000]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#000000]:
       Paragraph: Bold(Colored(#51a1e0 | "배급사"))
-    Cell span=1x1 align=Left:
+    Cell span=1x1 align=None:
       Paragraph: Image("미국 국기.svg" width=20px) " " Link("월트 디즈니 스튜디오스 모션 픽처스") Macro(br) Image("대한민국 국기.svg" width=20px) " " Link("월트 디즈니 컴퍼니 코리아")
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#000000]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#000000]:
       Paragraph: Bold(Colored(#51a1e0 | "제작비"))
-    Cell span=1x1 align=Left:
+    Cell span=1x1 align=None:
       Paragraph: Bold("2억 5천만~3억 달러") Sup(Link("https://www.hollywoodreporter.com/news/china-box-office-star-wars-rise-skywalker-beaten-by-local-films-1264388" | "할리우드 리포터"))
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#000000]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#000000]:
       Paragraph: Bold(Colored(#51a1e0 | "북미 박스오피스"))
-    Cell span=1x1 align=Left:
+    Cell span=1x1 align=Some(Left):
       Paragraph: Bold("$515,202,542") Sup("(최종)")
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#000000]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#000000]:
       Paragraph: Bold(Colored(#51a1e0 | "월드 박스오피스"))
-    Cell span=1x1 align=Left:
+    Cell span=1x1 align=Some(Left):
       Paragraph: Bold("$1,074,144,248") Sup("(최종)")
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#000000]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#000000]:
       Paragraph: Bold(Colored(#51a1e0 | "대한민국 총 관객수"))
-    Cell span=1x1 align=Left:
+    Cell span=1x1 align=Some(Left):
       Paragraph: "507,891명" Sup("(최종)")
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#000000]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#000000]:
       Paragraph: Bold(Link("영상물 등급 제도/대한민국" | Colored(#51a1e0 | "국내 등급")))
-    Cell span=1x1 align=Left:
+    Cell span=1x1 align=Some(Left):
       Paragraph: Link("12세 관람가" | Image("12세 관람가.png" height=20)) " " Bold("12세 관람가")
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#000000]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#000000]:
       Paragraph: Bold(Colored(#51a1e0 | "미국 등급"))
-    Cell span=1x1 align=Left:
+    Cell span=1x1 align=Some(Left):
       Paragraph: Link("영상물 등급 제도/미국" | Image("PG-13 로고.png" height=20))
-Paragraph: Macro(목차)
+Paragraph: <br> Macro(목차)
 Heading level=2 folded=false: "개요"
 Quote:
-  Paragraph: Bold("Every generation has a legend") Footnote(| "4월 12일 스타워즈 셀러브레이션에서 공개된 티저의 캐치프레이즈. 이 문구는 " Link("스타워즈 프리퀄 시리즈" | "프리퀄 시리즈") "의 첫 작품인 " Link("보이지 않는 위험") "의 트레일러에서 등장한 문구이기도 하다.") <br> Bold(" 모든 세대에는 전설이 있다 ")
-Paragraph: Link("스타워즈") " 정규 넘버링 시리즈의 9번째 작품이자 " Link("스타워즈 시퀄 시리즈") "의 3번째 영화이다. 2019년 12월 20일 개봉되었다." Footnote(| "원래는 동년 5월 예정이었으나 연기되었다.") Footnote(| "덤으로 2019년도는 " Bold(Link("스타워즈 프리퀄 시리즈") " 20주년") "이기도 하다.") " 감독은 " Link("스타워즈: 깨어난 포스" | "에피소드 7") "을 맡았던 " Link("J.J. 에이브럼스") "이다." Footnote(| "2017년 9월, 루카스필름이 원래 정해졌었던 \"" Link("콜린 트러보로") "가 견해 차이로 하차하게 되었다\"는 입장을 발표했다. 그리고 루카스필름이 J.J.에이브럼스와 라이언 존슨 중에서 고민 중이라는 소문이 흐르고, 얼마 지나지 않아 J.J. 에이브럼스로 감독이 정해졌다. 이로써 에이브럼스는 프리퀄 시리즈 3부작 모두 감독을 맡았던 조지 루카스 이외에 처음으로 두 작품 이상 감독을 맡게 되었다.") " 각본은 " Link("크리스 테리오") Footnote(| "오스카 각본상을 수상한 " Link("아르고(영화)" | "아르고") "와 " Link("배트맨 대 슈퍼맨: 저스티스의 시작") ", " Link("저스티스 리그(영화)" | "저스티스 리그") "를 쓴 적이 있다.") "와 J.J. 에이브럼스가 공동 집필했다."
-Paragraph: Bold(Link("스타워즈 시퀄 시리즈") "를 마무리 지을 3부작의 " Link("최종장")) "인 동시에 " Bold("1977년 첫 스타워즈 영화 개봉 후 42년동안 이어진 " Link("스카이워커 사가") " 9부작의 마지막") "이라는 아주 중요한 위치에 있는 작품이다. 이 작품이 가지는 상징성이 큰만큼, 그동안 매우 인기있었던 캐릭터들이 대거 출연했다. " Link("스타워즈: 라스트 제다이" | "여러모로 큰 논란을 일으켰었던 전작") " 이후 이야기 전개를 어떻게 해나갈 지 크게 큰 관심과 우려를 받았고, 개봉 후 반응은 그래도 전작의 설정 파괴를 어느 정도 수습한 작품이라는 호평과, 전작 수습에만 급급한 나머지 본편 영화의 정체성과 재미를 살리지 못한 어정쩡한 작품이라는 혹평으로 갈렸다. "
-Paragraph: "전작 " Link("라스트 제다이") "와 마찬가지로 부제가 음역되었는데, 반응은 마찬가지로 좋지 않다. 국내 얼마없는 " Link("스타워즈") " 팬들은 라스트 제다이의 경우와 마찬가지로 ‘라오스’로 줄여 부르는 편이다. 서구권 팬들은 \"TROS\"로 줄여서 부르는 편이 많다." Footnote(| "참고로 3편 시스의 복수는 ROTS, 6편 제다이의 귀환은 ROTJ로 줄여서 부른다.")
+  Indent:
+    Paragraph: Bold("Every generation has a legend") Footnote(| "4월 12일 스타워즈 셀러브레이션에서 공개된 티저의 캐치프레이즈. 이 문구는 " Link("스타워즈 프리퀄 시리즈" | "프리퀄 시리즈") "의 첫 작품인 " Link("보이지 않는 위험") "의 트레일러에서 등장한 문구이기도 하다.") <br> Bold(" 모든 세대에는 전설이 있다 ")
+Paragraph: <br> Link("스타워즈") " 정규 넘버링 시리즈의 9번째 작품이자 " Link("스타워즈 시퀄 시리즈") "의 3번째 영화이다. 2019년 12월 20일 개봉되었다." Footnote(| "원래는 동년 5월 예정이었으나 연기되었다.") Footnote(| "덤으로 2019년도는 " Bold(Link("스타워즈 프리퀄 시리즈") " 20주년") "이기도 하다.") " 감독은 " Link("스타워즈: 깨어난 포스" | "에피소드 7") "을 맡았던 " Link("J.J. 에이브럼스") "이다." Footnote(| "2017년 9월, 루카스필름이 원래 정해졌었던 \"" Link("콜린 트러보로") "가 견해 차이로 하차하게 되었다\"는 입장을 발표했다. 그리고 루카스필름이 J.J.에이브럼스와 라이언 존슨 중에서 고민 중이라는 소문이 흐르고, 얼마 지나지 않아 J.J. 에이브럼스로 감독이 정해졌다. 이로써 에이브럼스는 프리퀄 시리즈 3부작 모두 감독을 맡았던 조지 루카스 이외에 처음으로 두 작품 이상 감독을 맡게 되었다.") " 각본은 " Link("크리스 테리오") Footnote(| "오스카 각본상을 수상한 " Link("아르고(영화)" | "아르고") "와 " Link("배트맨 대 슈퍼맨: 저스티스의 시작") ", " Link("저스티스 리그(영화)" | "저스티스 리그") "를 쓴 적이 있다.") "와 J.J. 에이브럼스가 공동 집필했다." <br> <br> Bold(Link("스타워즈 시퀄 시리즈") "를 마무리 지을 3부작의 " Link("최종장")) "인 동시에 " Bold("1977년 첫 스타워즈 영화 개봉 후 42년동안 이어진 " Link("스카이워커 사가") " 9부작의 마지막") "이라는 아주 중요한 위치에 있는 작품이다. 이 작품이 가지는 상징성이 큰만큼, 그동안 매우 인기있었던 캐릭터들이 대거 출연했다. " Link("스타워즈: 라스트 제다이" | "여러모로 큰 논란을 일으켰었던 전작") " 이후 이야기 전개를 어떻게 해나갈 지 크게 큰 관심과 우려를 받았고, 개봉 후 반응은 그래도 전작의 설정 파괴를 어느 정도 수습한 작품이라는 호평과, 전작 수습에만 급급한 나머지 본편 영화의 정체성과 재미를 살리지 못한 어정쩡한 작품이라는 혹평으로 갈렸다. " <br> <br> "전작 " Link("라스트 제다이") "와 마찬가지로 부제가 음역되었는데, 반응은 마찬가지로 좋지 않다. 국내 얼마없는 " Link("스타워즈") " 팬들은 라스트 제다이의 경우와 마찬가지로 ‘라오스’로 줄여 부르는 편이다. 서구권 팬들은 \"TROS\"로 줄여서 부르는 편이 많다." Footnote(| "참고로 3편 시스의 복수는 ROTS, 6편 제다이의 귀환은 ROTJ로 줄여서 부른다.")
 Heading level=2 folded=false: Link("스타워즈: 라이즈 오브 스카이워커/개봉 전 정보" | "개봉 전 정보")
-Paragraph: Macro(include "틀:상세 내용, 문서명=스타워즈: 라이즈 오브 스카이워커/개봉 전 정보")
+Paragraph: Macro(include "틀:상세 내용, 문서명=스타워즈: 라이즈 오브 스카이워커/개봉 전 정보") <br>
 Heading level=2 folded=false: "등장인물"
 Paragraph: Macro(include "틀:스포일러")
 List kind=Unordered:
@@ -166,6 +147,7 @@ List kind=Unordered:
         Paragraph: "저항군 병사 - " Link("도미닉 모나한") Footnote(| Link("반지의 제왕") "의 호빗 4인방 중 " Link("강노루 집안 메리아독" | "메리") " 역으로 유명하다.")
       Item:
         Paragraph: "케이델 코 코닉스 - 빌리 로드"
+Paragraph: 
 List kind=Unordered:
   Item:
     Paragraph: "시스 이터널 / 파이널 오더"
@@ -219,6 +201,7 @@ List kind=Unordered:
         Paragraph: Link("루미나라 운둘리")
       Item:
         Paragraph: Link("아디 갈리아")
+Paragraph: 
 Heading level=2 folded=false: "등장 지역"
 List kind=Unordered:
   Item:
@@ -245,20 +228,23 @@ List kind=Unordered:
     Paragraph: Link("자쿠(스타워즈)" | "자쿠")
   Item:
     Paragraph: Link("타투인")
+Paragraph: 
 Heading level=2 folded=false: "예고편"
 Heading level=3 folded=false: "티저 예고편"
 Table:
   Row:
-    Cell span=1x1 align=Left attrs=[Table/align=center Table/bgcolor=#181818]:
+    Cell span=1x1 align=None attrs=[Table/align=center Table/bgcolor=#181818]:
       Paragraph: Macro(youtube "XhtlHGBIP8U")
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Colored(#51a1e0 | Bold("티저 예고편"))
 Quote:
-  Paragraph: Bold("Roll it Again!") <br> Bold("다시 시작하라!")
+  Indent:
+    Paragraph: Bold("Roll it Again!") <br> Bold("다시 시작하라!")
   HorizontalRule
-  Paragraph: Link("쉬브 팰퍼틴") " 역의 이안 맥디미어드가, 공식 티저 공개 직후 " Link("https://youtu.be/RnhiLZOprZE?t=5132" | "깜짝 등장") "에서 외친 말. 셀레브레이션 참가자들의 열띤 환호에 감정을 주체하지 못하는 듯 미소와 감격어린 표정을 짓다가, 이 세 마디를 " Bold("다스 시디어스 톤으로") " 외치고 티저를 다시 한번 더 보여준 다음 끝났다."
-Paragraph: "4월 12일, 2019 스타워즈 셀러브레이션 현장에서 에피소드 9 패널을 마무리하며 공개된 티저. " Link("https://youtu.be/ZxofOXCzBOo" | "HDR 버전")
+  Indent:
+    Paragraph: Link("쉬브 팰퍼틴") " 역의 이안 맥디미어드가, 공식 티저 공개 직후 " Link("https://youtu.be/RnhiLZOprZE?t=5132" | "깜짝 등장") "에서 외친 말. 셀레브레이션 참가자들의 열띤 환호에 감정을 주체하지 못하는 듯 미소와 감격어린 표정을 짓다가, 이 세 마디를 " Bold("다스 시디어스 톤으로") " 외치고 티저를 다시 한번 더 보여준 다음 끝났다."
+Paragraph: "4월 12일, 2019 스타워즈 셀러브레이션 현장에서 에피소드 9 패널을 마무리하며 공개된 티저. " Link("https://youtu.be/ZxofOXCzBOo" | "HDR 버전") <br>
 List kind=Unordered:
   Item:
     Paragraph: "레이의 장면에서 " Link("알프레드 히치콕") "의 영화 " Link("북북서로 진로를 돌려라") "를 레퍼런스한 장면이 있다."
@@ -278,13 +264,14 @@ List kind=Unordered:
     Paragraph: "티저 예고편 컨셉이 얼마전에 공개된 " Link("겨울왕국2") "와 비슷하다."
   Item:
     Paragraph: "티저 공개 직후 24시간 동안 전 세계에서 " Bold("1억 1100만 조회수") "를 기록하며 에피소드 7과 8의 기록을 모두 크게 뛰어넘었다. " Link("https://deadline.com/2019/04/star-wars-the-rise-of-skywalker-teaser-clocked-111m-in-first-24-hours-more-viral-than-last-jedi-force-awakens-1202601505/" | "#") " 같은 2019년의 최대 기대작인 " Link("어벤져스: 엔드게임") "이 같은 시간 동안 " Bold("2억 8900만 조회수") "를 기록한 것에 비하면 초라해 보일 수 있으나, 상기 조회수는 온라인에 한정되어 있기 때문에 에피소드 9 패널 현장에서 티저를 시청한 사람과 그 공식 생방송을 시청하던 수백만의 사람들이 빠진 수치다. 물론 합쳐도 엔드게임의 기록을 뛰어넘기는 어렵겠지만." Footnote(| "스타워즈와 달리 " Link("마블 시네마틱 유니버스") "는 오프라인 현장으로 예고편을 공개하는 일이 적은 편이다.") " "
+Paragraph: 
 Heading level=3 folded=false: "D23 특전 영상"
 Table:
   Row:
-    Cell span=1x1 align=Left attrs=[Table/align=center Table/bgcolor=#181818]:
+    Cell span=1x1 align=None attrs=[Table/align=center Table/bgcolor=#181818]:
       Paragraph: Macro(youtube "3n1T3HxHd7Y")
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Colored(#51a1e0 | Bold("D23 특전 영상"))
 Paragraph: "2019년 8월 26일, D23 엑스포 특전 영상이 공개되었다."
 List kind=Unordered:
@@ -294,16 +281,19 @@ List kind=Unordered:
     Paragraph: "검은 로브를 두른 채 접이식 " Link("다스 몰" | "붉은 양날 라이트세이버") "를 든 레이의 모습이 등장한다. 팬들은 팰퍼틴 혹은 강력한 다크사이드 포스 사용자의 능력으로 레이가 다크사이드로 빠진 가상현실을 보여준 환영의 일부가 아닐까 라는 등, 어느 쪽이든 " Bold("실제로 레이가 다크사이드로 타락한 것은 아닐 것") "이라는 전제를 두고 다양한 가설을 제시하고 있다. 이는 깨어난 포스에서도 마치 핀이 새로운 제다이가 될 것처럼 예고편을 만들었고, 라스트 제다이의 예고편에서도 레이가 벤에게 하소연하며 마치 타락하는 듯한 내용을 보여주어 낚시를 한 전적이 있기 때문이며, 영화가 개봉하기 전 까진 설레발을 떨지 말자는 의견이 지배적이다."
   Item:
     Paragraph: "또한 예고편에서 " Link("다스 베이더") "의 숨소리가 들리는 것으로 보아 출연이 확정된 팰퍼틴 이외에도 베이더 등 또다른 주요 인물들이 재출연 할 수도 있다."
+Paragraph: 
 Heading level=3 folded=false: "최종 예고편"
 Table:
   Row:
-    Cell span=1x1 align=Left attrs=[Table/align=center Table/bgcolor=#181818]:
+    Cell span=1x1 align=None attrs=[Table/align=center Table/bgcolor=#181818]:
       Paragraph: Macro(youtube "_-nMy2goCnI")
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Colored(#51a1e0 | Bold("최종 예고편"))
+Paragraph: 
 Quote:
-  Paragraph: Bold("The Saga Will End. The Story Lives Forever.") <br> Bold("전설은 끝나지만, 이야기는 영원하다.")
+  Indent:
+    Paragraph: Bold("The Saga Will End. The Story Lives Forever.") <br> Bold("전설은 끝나지만, 이야기는 영원하다.")
 Paragraph: "2019년 10월 21일, 최종 예고편 영상이 공개되며 미국에서의 예매가 시작되었다. " Link("https://youtu.be/DYM9u_COOLs" | "HDR 버전") " 개봉일은 12월 20일이지만 12월 19일 저녁에 첫 회 상영이 시작된다."
 List kind=Unordered:
   Item:
@@ -322,105 +312,115 @@ List kind=Unordered:
     Paragraph: "레이와 카일로 렌이 다스 베이더의 헬멧의 거치대를 같이 부수는 장면이 나온다. 레이의 한쪽 손에는 낡은 단검 한 자루가 들려있다."
   Item:
     Paragraph: "마지막 장면에 뒷모습만 나온 팰퍼틴으로 추정되는 인물이 레이와 마주하였다." Footnote(| "등 쪽에 커다란 기계장치들이 붙어있는데, 아마도 데스스타 II의 환풍구로 떨어졌을 때 입은 부상 때문에 생명유지장치를 설치한 것일지도 모른다.")
+Paragraph: 
 Heading level=2 folded=false: Link("스타워즈: 라이즈 오브 스카이워커/줄거리" | "줄거리")
 Paragraph: Macro(include "틀:상세 내용, 문서명=스타워즈: 라이즈 오브 스카이워커/줄거리")
 Table:
   Row:
-    Cell span=1x1 align=Left attrs=[Cell/bgcolor=#000000 Table/align=center Table/bordercolor=#000000 Table/width=300]:
+    Cell span=1x1 align=None attrs=[Cell/bgcolor=#000000 Table/align=center Table/bordercolor=#000000 Table/width=300]:
       Paragraph: Bold(Colored(#1eecef | "A long time ago in a galaxy far," Macro(br) "far away….")) <br> Bold(Colored(#1eecef | "오래 전 멀고 먼 은하계에…."))
+Paragraph: 
 Table:
   Row:
-    Cell span=1x1 align=Center attrs=[Cell/bgcolor=#000000 Table/bordercolor=#000000 Table/align=center Table/width=300]:
+    Cell span=1x1 align=Some(Center) attrs=[Cell/bgcolor=#000000 Table/bordercolor=#000000 Table/align=center Table/width=300]:
       Paragraph: Bold(Colored(gold | "Episode IX")) <br> Bold(Sized(+1 | Colored(gold | "THE RISE OF SKYWALKER")))
   Row:
-    Cell span=1x1 align=Left attrs=[Cell/bgcolor=#000000]:
-      Paragraph: "'''"
-      ColoredBlock color=gold:
-        Paragraph: "The dead speak! The galaxy has heard a mysterious broadcast, a threat of REVENGE in the sinister voice of the late EMPEROR PALPATINE."
-        Paragraph: "GENERAL LEIA ORGANA dispatches secret agents to gather intelligence, while REY, the last hope of the Jedi, trains for battle against the diabolical FIRST ORDER."
-        Paragraph: "Meanwhile, Supreme Leader KYLO REN rages in search of the phantom Emperor, determined to destroy any threat to his power...."
-      Paragraph: "'''"
+    Cell span=1x1 align=None attrs=[Cell/bgcolor=#000000]:
+      Paragraph: "'''" Colored(gold | "The dead speak! The galaxy has heard a mysterious broadcast, a threat of REVENGE in the sinister voice of the late EMPEROR PALPATINE." <br> <br> "GENERAL LEIA ORGANA dispatches secret agents to gather intelligence, while REY, the last hope of the Jedi, trains for battle against the diabolical FIRST ORDER." <br> <br> "Meanwhile, Supreme Leader KYLO REN rages in search of the phantom Emperor, determined to destroy any threat to his power....") "'''"
       HorizontalRule
-      Paragraph: "'''"
-      ColoredBlock color=gold:
-        Paragraph: "죽은 자가 말하다!" Footnote(| "번역 초기에는 " Bold("괴방송") "이라고 번역해 논란이 좀 있었다.") " 은하계는 옛 황제 " Link("쉬브 팰퍼틴" #s-4 | Colored(gold | "팰퍼틴")) "이 불길한 음성으로 복수하겠다는 알 수 없는 신호를 듣게 된다." Footnote(| Link("쉬브 팰퍼틴" | "세계관에서 가장 중요한 인물") "의 부활을 이 두 문장으로 처리하다 보니 현재 시스갤에서 엄청 까이고 있다. 적어도 영화의 러닝타임의 절반 이상을 이 인물의 부활을 위해 설명했어야 한다는 의견이 중점적이다.")
-        Paragraph: Link("레아 오가나" | Colored(gold | "레아 오르가나")) " 장군은 정보를 모으기 위해 비밀 요원들을 파견하고, 한편 제다이의 마지막 희망인 " Link("레이(스타워즈)" | Colored(gold | "레이")) "는 사악한 퍼스트 오더에 대항하기 위해 훈련한다."
-        Paragraph: "한편, 최고 지도자 " Link("카일로 렌" | Colored(gold | "카일로 렌")) "은 자신의 권력에 위협이 되는 것은 없애기로 결심하고 유령 황제를 찾아다닌다...." Footnote(| "이 역시 초기에는 '자신의 권력에 위협이 될 것은 제거하겠다고 다짐하며....'라고 번역되었다.")
-      Paragraph: "'''"
+      Paragraph: "'''" Colored(gold | "죽은 자가 말하다!" Footnote(| "번역 초기에는 " Bold("괴방송") "이라고 번역해 논란이 좀 있었다.") " 은하계는 옛 황제 " Link("쉬브 팰퍼틴" #s-4 | Colored(gold | "팰퍼틴")) "이 불길한 음성으로 복수하겠다는 알 수 없는 신호를 듣게 된다." Footnote(| Link("쉬브 팰퍼틴" | "세계관에서 가장 중요한 인물") "의 부활을 이 두 문장으로 처리하다 보니 현재 시스갤에서 엄청 까이고 있다. 적어도 영화의 러닝타임의 절반 이상을 이 인물의 부활을 위해 설명했어야 한다는 의견이 중점적이다.") <br> <br> Link("레아 오가나" | Colored(gold | "레아 오르가나")) " 장군은 정보를 모으기 위해 비밀 요원들을 파견하고, 한편 제다이의 마지막 희망인 " Link("레이(스타워즈)" | Colored(gold | "레이")) "는 사악한 퍼스트 오더에 대항하기 위해 훈련한다." <br> <br> "한편, 최고 지도자 " Link("카일로 렌" | Colored(gold | "카일로 렌")) "은 자신의 권력에 위협이 되는 것은 없애기로 결심하고 유령 황제를 찾아다닌다...." Footnote(| "이 역시 초기에는 '자신의 권력에 위협이 될 것은 제거하겠다고 다짐하며....'라고 번역되었다.")) "'''"
+Paragraph: 
 Heading level=2 folded=false: Link("스타워즈: 라이즈 오브 스카이워커/평가" | "평가")
-Paragraph: Macro(include "틀:상세 내용, 문서명=스타워즈: 라이즈 오브 스카이워커/평가")
+Paragraph: Macro(include "틀:상세 내용, 문서명=스타워즈: 라이즈 오브 스카이워커/평가") <br>
 Heading level=2 folded=false: Link("스타워즈: 라이즈 오브 스카이워커/흥행" | "흥행")
-Paragraph: Macro(include "틀:상세 내용, 문서명=스타워즈: 라이즈 오브 스카이워커/흥행")
+Paragraph: Macro(include "틀:상세 내용, 문서명=스타워즈: 라이즈 오브 스카이워커/흥행") <br>
 Heading level=2 folded=false: Link("스타워즈/사운드트랙" #s-2.12 | "사운드트랙")
-Paragraph: Macro(include "틀:상세 내용, 문서명=스타워즈/사운드트랙, 문단=2.12")
+Paragraph: Macro(include "틀:상세 내용, 문서명=스타워즈/사운드트랙, 문단=2.12") <br>
 Heading level=2 folded=false: "이야깃거리"
 List kind=Unordered:
   Item:
     Paragraph: "소설판에서 구체화된 설정에 따르면, 본편에 나오는 팰퍼틴은 영혼만 그대로이고 몸은 클론이다. 이러한 핵심 설정이 본편 영화가 아닌 소설을 통해 소개되었기 때문에 스타워즈 팬들은 다시 한 번 분개했다."
+Paragraph: 
 List kind=Unordered:
   Item:
     Paragraph: "J.J.에이브럼스는 원래 이 영화의 감독직을 고사하려고 했다가 " Link("캐슬린 케네디") "가 전화를 걸어 진지하게 다시 연출을 맡는 것에 대해 고려해 보라고 해서 고민 끝에 결국 승낙했다고 한다." Link("https://comicbook.com/starwars/2019/04/10/star-wars-episode-9-jj-abrams-colin-trevorrow/" | "#")
+Paragraph: 
 List kind=Unordered:
   Item:
     Paragraph: "이 영화 이후 " Link("스타워즈") " 시리즈는 적어도 " Link("2021년") "까지 TV 시리즈에 집중할 것으로 보인다." Link("https://www.bloomberg.com/news/articles/2019-04-12/star-wars-movies-will-take-a-break-after-episode-ix-disney-says?utm_medium=social&utm_campaign=socialflow-organic&cmpid=socialflow-twitter-business&utm_source=twitter&utm_content=business" | "#") Link("https://ew.com/movies/2019/04/13/lucasfilm-star-wars-movies-hiatus/" | "#") " 런던 외곽의 새로운 스튜디오가 완공되면 기존의 촬영 장소였던 파인우드 스튜디오를 떠나게 된다." Link("https://comicbook.com/starwars/2019/05/01/star-wars-future-films-game-of-thrones-rian-johnson/" | "#") " 그 이후 " Link("2022년") ", " Link("2024년") ", " Link("2026년") "에 새 영화들을 계획 중이나 " Link("라이언 존슨") "의 " Link("스타워즈 신규 시리즈" | "삼부작") "으로 예상될 뿐 아직 개봉 일정 이외에 공개된 것은 없다."
+Paragraph: 
 List kind=Unordered:
   Item:
-    Paragraph: "오리지널 트릴로지의 경우 로고색은 1편(새로운 희망)은 기본색인 노란색, 2편(제국의 역습)은 파란색, 3편(제다이의 귀환)이 붉은색으로 나왔다. 그런데 시퀄 트릴로지에서는 라스트 제다이가 붉은색으로 나오면서 본작이 파란색으로 나오게 되었다."
-Indent:
-  Paragraph: Image("starwars_saga.jpg" width=100%)
+    Paragraph: "오리지널 트릴로지의 경우 로고색은 1편(새로운 희망)은 기본색인 노란색, 2편(제국의 역습)은 파란색, 3편(제다이의 귀환)이 붉은색으로 나왔다. 그런데 시퀄 트릴로지에서는 라스트 제다이가 붉은색으로 나오면서 본작이 파란색으로 나오게 되었다." <br> Image("starwars_saga.jpg" width=100%)
+Paragraph: 
 List kind=Unordered:
   Item:
     Paragraph: "라이즈 오브 스카이워커 새 티저 포스터의 팰퍼틴은 다시 디자인 한 것은 아니고 이미 나온 팰퍼틴 핫토이스 피규어를 그대로 사용했다고 하는데 " Link("https://screenrant.com/star-wars-9-palpatine-poster-toy-movie-cartoon/" | "논란이 되고 있다.") " 아마 새 팰퍼틴 디자인의 유출을 막기 위한 조치인 듯 하다. " Link("솔로: 스타워즈 스토리") "의 포스터도 음악 커버 이미지를 그대로 차용해서 논란이 있었다."
+Paragraph: 
 List kind=Unordered:
   Item:
     Paragraph: "죽음을 눈앞에 둔 한 " Link("스타워즈") " 팬이 입원해 있는 호스피스 병원에서 '죽기 전,그의 아들과 함께 영화를 보고 싶다고 하여 혹시 누군가 기쁜 일을 했으면 좋겠다' 라는 글을 올렸는데, 놀랍게도 디즈니는 그에게 개인 시사회를 열어주었고 이에 대하여 그는 감사함을 전했다. " Link("https://news.v.daum.net/v/20191130175104737" | "참고")
+Paragraph: 
 List kind=Unordered:
   Item:
     Paragraph: "시퀄 트릴로지 주인공들을 맡은 " Link("데이지 리들리") ", " Link("존 보예가") ", " Link("오스카 아이작") "은 공식적으로 " Bold("스타워즈 시리즈에서 은퇴한다") "고 밝히며 향후 어떠한 스타워즈 시리즈에서도 출연하지 않기로 했다." Link("https://www.slashfilm.com/new-star-wars-trio-future-disney/" | "#")
+Paragraph: 
 List kind=Unordered:
   Item:
     Paragraph: Link("삼성") "에서 " Link("갤럭시 노트10+") "전용 한정판으로 스타워즈 에디션 갤럭시 노트 10+를 출시했다."
+Paragraph: 
 List kind=Unordered:
   Item:
     Paragraph: "영국의 유명 셰프 " Link("제이미 올리버") "가 본작에서 스톰 트루퍼 중 한 명으로 출연했다고 직접 밝혔다."
+Paragraph: 
 List kind=Unordered:
   Item:
     Paragraph: "콜린 트러보로 감독이 계획했던 컨셉아트를 공개하였다." Link("https://m.ruliweb.com/av/board/300013/read/2692417?" | "#")
+Paragraph: 
 List kind=Unordered:
   Item:
     Paragraph: "감독판, 일명 JJ컷에 대해 영화의 관련인들과 쌍제이의 주변인들에 의한 증언이 나왔다. " Link("https://extmovie.com/movietalk/52879085" | "어딘가에 존재한다는 \"JJ컷\"에 대해 (스포일러 주의)")
+Paragraph: 
 List kind=Unordered:
   Item:
     Paragraph: "삼촌" Footnote(| "웨지 안틸레스 역의 데니스 로우슨") "이 나온 " Link("스타워즈 오리지널 시리즈") "를 보고 감명을 받았던 " Link("이완 맥그리거") "가 드디어 함께 영화에 출연하였다."
+Paragraph: 
 List kind=Unordered:
   Item:
     Paragraph: "한국의 경우 일부 아이맥스 상영관에서 1월 14일까지 " Link("테넷") "의 프롤로그 부분을 라이즈 오브 스카이워커 상영종료 후 상영한다."
+Paragraph: 
 List kind=Unordered:
   Item:
     Paragraph: "전작들과의 연관성&떡밥 총정리(스포)" Link("https://extmovie.com/index.php?mid=movietalk&category=21915420&document_srl=53138461" | "#")
+Paragraph: 
 List kind=Unordered:
   Item:
     Paragraph: "국내 영화채널에서 나온 광고에서 카일로렌이 카이로렌으로 나온 적 있다."
+Paragraph: 
 List kind=Unordered:
   Item:
     Paragraph: "초안에서의 가제는 " Link("https://m.dcinside.com/board/starwars3/210388?headid=&recommend=&s_type=all&serval=Duel%20of%20the%20fates" | "’Duel of the fates(운명의 대결)") Footnote(| "프리퀄에서도 손꼽히는 명브금과 같은 이름이다.") "이였다고. Tor Valum" Footnote(| "팰퍼틴의 스승.플레이거스와 동일 인물인지는 불명.") "등의 컨셉 아트가 발견되면서 거의 확실시 되는 중."
+Paragraph: 
 List kind=Unordered:
   Item:
     Paragraph: "한 솔로 출연은 감독의 결정이었다고 한다." Link("https://comicbook.com/starwars/2020/02/12/star-wars-the-rise-of-skywalker-harrison-ford-han-solo-return-comments-reaction/" | "#") " "
+Paragraph: 
 List kind=Unordered:
   Item:
     Paragraph: "감독이 황제의 본인이 아닌 황제의 클론의 등장을 원했다고 한다." Link("https://screenrant.com/star-wars-jj-abrams-palpatine-clone-force-awakens/" | "#") Footnote(| "근데 이게 반은 이루어졌고 반은 아닌데 몸은 클론이며 영혼은 그대로 원래 팰퍼틴이다.")
+Paragraph: 
 List kind=Unordered:
   Item:
     Paragraph: Link("한 솔로: 스타워즈 스토리") "의 흥행 대실패와 더빙판 불발, " Link("스타워즈 시퀄 시리즈") "의 연이은 실패로 한국어 더빙판의 발매가 불확실했으나 다행히 " Link("https://serieson.naver.com/movie/detail.nhn?productNo=4950535" | "네이버 VOD 페이지") "에서 더빙판이 발매된다는 사실을 공지했다."
+Paragraph: 
 List kind=Unordered:
   Item:
     Paragraph: "2020년 5월 4일부터 " Link("디즈니+") "에서 스트리밍한다." Link("https://www.disneyplus.com/movies/star-wars-the-rise-of-skywalker-episode-ix/5e8JThYwCYgw" | "디즈니+")
   Item:
     Paragraph: "시리즈 완결작이라 그런지 " Link("레이(스타워즈)" | "레이") "역의 " Link("데이지 리들리") " " Link("핀(스타워즈)" | "핀") "역의 " Link("존 보예가") "가 A~Z라는 라는 걸 준비했다."
-Paragraph: Macro(Youtube "bIifbTn_GRE") <br> "정리하면 " <br> "A:" Link("아나킨 스카이워커") <br> "B:" Link("보바 펫") <br> "C:" Link("C-3PO") <br> "D:" Link("드로이드") <br> "E:" Link("이웍") <br> "F:" Link("핀(스타워즈)" | "핀") <br> "G:" Link("아미타지 헉스") <br> "H:" Link("한 솔로") <br> "I:" Link("은하제국(스타워즈)") <br> "J:" Link("자바 더 헛") <br> "K:" Link("카일로 렌") <br> "L:" Link("랜도 칼리시안") <br> "M:" Link("메이스 윈두") <br> "N:" Link("니엔 넌브") <br> "O:" Link("오비완 케노비") <br> "P:" Link("쉬브 팰퍼틴") <br> "Q:" Link("키라(스타워즈)" | "키라") <br> "R:" Link("레이(스타워즈)" | "레이") <br> "S:" Link("스톰트루퍼(스타워즈)" | "스톰트루퍼") <br> "T:?" <br> "U:운카 플럿" <br> "V:" Link("다스베이더") Footnote(| "베이더라고도 부르기 때문에") <br> "W:" Link("우키") <br> "X:" Link("X-wing") <br> "Y:" Link("요다") <br> "Z:조리 블리스"
+Paragraph: Macro(Youtube "bIifbTn_GRE") <br> "정리하면 " <br> "A:" Link("아나킨 스카이워커") <br> "B:" Link("보바 펫") <br> "C:" Link("C-3PO") <br> "D:" Link("드로이드") <br> "E:" Link("이웍") <br> "F:" Link("핀(스타워즈)" | "핀") <br> "G:" Link("아미타지 헉스") <br> "H:" Link("한 솔로") <br> "I:" Link("은하제국(스타워즈)") <br> "J:" Link("자바 더 헛") <br> "K:" Link("카일로 렌") <br> "L:" Link("랜도 칼리시안") <br> "M:" Link("메이스 윈두") <br> "N:" Link("니엔 넌브") <br> "O:" Link("오비완 케노비") <br> "P:" Link("쉬브 팰퍼틴") <br> "Q:" Link("키라(스타워즈)" | "키라") <br> "R:" Link("레이(스타워즈)" | "레이") <br> "S:" Link("스톰트루퍼(스타워즈)" | "스톰트루퍼") <br> "T:?" <br> "U:운카 플럿" <br> "V:" Link("다스베이더") Footnote(| "베이더라고도 부르기 때문에") <br> "W:" Link("우키") <br> "X:" Link("X-wing") <br> "Y:" Link("요다") <br> "Z:조리 블리스" <br> <br>
 Heading level=2 folded=false: "외부 링크"
 List kind=Unordered:
   Item:
     Paragraph: Link("우키피디아") " " Link("http://starwars.wikia.com/wiki/Star_Wars:_Episode_IX" | "Star Wars: Episode IX The Rise of Skywalker") " 문서."
-Paragraph: Category("스타워즈: 라이즈 오브 스카이워커")
+Paragraph: <br> Category("스타워즈: 라이즈 오브 스카이워커")

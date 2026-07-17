@@ -1,0 +1,14 @@
+근거: 도움말서술 | 원문: 1줄 | 의미론: 11줄 | 렌더링: 1줄 | 도움말: #RRGGBBAA 미지원. 우리는 이름 색상으로 통과시킴(더 관대)
+{{{#ff000080 반투명}}}
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Literal(
+                    "#ff000080 반투명",
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><code>#ff000080 반투명</code></div>

@@ -1,0 +1,30 @@
+근거: 도움말예제 | 원문: 1줄 | 의미론: 27줄 | 렌더링: 1줄 | 표시명 분리
+[[문서|출력글자]]
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Link(
+                    Link {
+                        target: Template(
+                            [
+                                Text(
+                                    "문서",
+                                ),
+                            ],
+                        ),
+                        anchor: None,
+                        display: Some(
+                            [
+                                Text(
+                                    "출력글자",
+                                ),
+                            ],
+                        ),
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><a class="wiki-link-internal" href="/w/%EB%AC%B8%EC%84%9C" title="문서">출력글자</a></div>

@@ -1,0 +1,25 @@
+근거: 미확인 | 원문: 1줄 | 의미론: 22줄 | 렌더링: 1줄 | 인자가 없으면 호출자 문서명(calleeTitle)으로 떨어짐
+[include(틀:상위 문서)]
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Macro(
+                    Macro {
+                        name: "include",
+                        argument: Some(
+                            Template(
+                                [
+                                    Text(
+                                        "틀:상위 문서",
+                                    ),
+                                ],
+                            ),
+                        ),
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph">상위 문서: <a class="wiki-self-link" href="/w/%EC%8B%9C%ED%97%98%20%EB%AC%B8%EC%84%9C/%ED%95%98%EC%9C%84" title="시험 문서/하위">시험 문서/하위</a></div>

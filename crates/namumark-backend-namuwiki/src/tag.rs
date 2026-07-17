@@ -144,15 +144,48 @@ pub(crate) fn percent_encode(text: &str) -> impl Display + '_ {
     PercentEncode(text)
 }
 
-struct PercentEncode<'text>(&'text str);
+/// 각주 앵커의 퍼센트 인코딩. 문서 경로와 달리 **소문자** hex를 쓰고 `:`·`/`도 인코딩한다
+/// (렌더확정: 각주 `[*예시 …]`의 참조가 `href='#fn-%ec%98%88%ec%8b%9c'`다).
+pub(crate) fn percent_encode_anchor(text: &str) -> impl Display + '_ {
+    PercentEncodeAnchor(text)
+}
 
-impl Display for PercentEncode<'_> {
+struct PercentEncodeAnchor<'text>(&'text str);
+
+impl Display for PercentEncodeAnchor<'_> {
     fn fmt(&self, formatter: &mut Formatter<'_>) -> fmt::Result {
         for byte in self.0.bytes() {
             match byte {
                 b'A'..=b'Z' | b'a'..=b'z' | b'0'..=b'9' | b'-' | b'_' | b'.' | b'~' => {
                     formatter.write_char(byte as char)?
                 }
+                _ => write!(formatter, "%{byte:02x}")?,
+            }
+        }
+        Ok(())
+    }
+}
+
+struct PercentEncode<'text>(&'text str);
+
+impl Display for PercentEncode<'_> {
+    fn fmt(&self, formatter: &mut Formatter<'_>) -> fmt::Result {
+        for byte in self.0.bytes() {
+            match byte {
+                // 나무위키는 문서 경로에서 이름공간 구분자 `:`, 하위 문서 구분자 `/`,
+                // 동음이의 괄호 `()`를 인코딩하지 않는다
+                // (렌더확정: `[[표(자료)]]` → `/w/%ED%91%9C(%EC%9E%90%EB%A3%8C)`).
+                b'A'..=b'Z'
+                | b'a'..=b'z'
+                | b'0'..=b'9'
+                | b'-'
+                | b'_'
+                | b'.'
+                | b'~'
+                | b':'
+                | b'/'
+                | b'('
+                | b')' => formatter.write_char(byte as char)?,
                 _ => write!(formatter, "%{byte:02X}")?,
             }
         }

@@ -1,0 +1,13 @@
+[package]
+name = "parity"
+description = "나무위키(the seed) 렌더 결과와 우리 렌더 결과를 대조하는 검증 도구"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish = false
+
+[dependencies]
+namumark-ast = { path = "../../crates/namumark-ast" }
+namumark-backend-namuwiki = { path = "../../crates/namumark-backend-namuwiki" }
+namumark-parser = { path = "../../crates/namumark-parser" }
+namumark-render = { path = "../../crates/namumark-render" }

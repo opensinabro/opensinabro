@@ -1,0 +1,71 @@
+근거: 미확인 | 원문: 3줄 | 의미론: 61줄 | 렌더링: 6줄 | 종류가 섞인 중첩
+ * 불릿
+  1. 번호
+   a. 알파벳
+Document {
+    blocks: [
+        List(
+            List {
+                kind: Unordered,
+                items: [
+                    ListItem {
+                        start_number: None,
+                        blocks: [
+                            Paragraph(
+                                [
+                                    Text(
+                                        "불릿",
+                                    ),
+                                ],
+                            ),
+                            List(
+                                List {
+                                    kind: Decimal,
+                                    items: [
+                                        ListItem {
+                                            start_number: None,
+                                            blocks: [
+                                                Paragraph(
+                                                    [
+                                                        Text(
+                                                            "번호",
+                                                        ),
+                                                    ],
+                                                ),
+                                                List(
+                                                    List {
+                                                        kind: LowerAlphabet,
+                                                        items: [
+                                                            ListItem {
+                                                                start_number: None,
+                                                                blocks: [
+                                                                    Paragraph(
+                                                                        [
+                                                                            Text(
+                                                                                "알파벳",
+                                                                            ),
+                                                                        ],
+                                                                    ),
+                                                                ],
+                                                            },
+                                                        ],
+                                                    },
+                                                ),
+                                            ],
+                                        },
+                                    ],
+                                },
+                            ),
+                        ],
+                    },
+                ],
+            },
+        ),
+    ],
+}
+<ul class="wiki-list"><li><div class="wiki-paragraph">불릿</div>
+<ol class="wiki-list wiki-list" start="1"><li><div class="wiki-paragraph">번호</div>
+<ol class="wiki-list wiki-list-alpha" start="1"><li><div class="wiki-paragraph">알파벳</div>
+</li></ol>
+</li></ol>
+</li></ul>

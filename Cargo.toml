@@ -8,6 +8,7 @@ members = [
     "crates/namumark-render",
     "crates/namumark-syntax",
     "crates/namumark-text",
+    "tools/parity",
 ]
 
 [workspace.package]

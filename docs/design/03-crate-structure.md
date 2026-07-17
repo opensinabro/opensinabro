@@ -30,7 +30,7 @@
 
 | 크레이트 | 단일 역할 | 의존 | 공개 API |
 |---|---|---|---|
-| `namumark-text` | 나무마크 표기의 문자열 수준 판정 | 없음 | `heading_shape`, `find_matching_*`, `cell_shape`, `list_marker`, … |
+| `namumark-text` | 나무마크 표기의 문자열 수준 판정 | 없음 | `heading_shape`, `find_matching_*`, `cell_shape`, `list_marker`, `variable_shape`, … |
 | `namumark-ast` | 의미 모델 타입 정의 | 없음 | `Document`, `Block`, `Inline`, … |
 | `namumark-syntax` | 완전무손실 구문 트리 | text, rowan | `parse() -> SyntaxTree`, `SyntaxKind`, `SyntaxNode` |
 | `namumark-parser` | lowering (구문 트리 → 의미 모델) | syntax, ast, text | `parse() -> Document` |
@@ -39,7 +39,10 @@
 | `namumark-backend-namuwiki` | 나무위키 동등 마크업 방출 | ast, ir | `NamuwikiMarkup`, `namuwiki_markup()`, `stylesheet()` |
 
 † 표 속성·정렬·리스트 종류는 언어 어휘이므로 ir이 ast 타입을 재사용한다 (초안의 "의존성 0"에서 수정).
-‡ render → parser 의존은 `[include]` 확장이 원문 재파싱을 요구하기 때문이다.
+‡ render → parser 의존은 `[include]`가 **다른 문서**를 가져와 파싱하기 때문이다.
+
+틀 인자(`@이름@`)와 `{{{#!if}}}`도 이 파이프라인을 그대로 탄다 — 별도 전개 단계를 두지 않는다.
+근거는 docs/design/05-template-parameters.md 참고.
 
 ## 계층 위반 해소 (text.rs 분해)
 

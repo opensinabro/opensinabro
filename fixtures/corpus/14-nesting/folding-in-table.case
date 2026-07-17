@@ -1,0 +1,109 @@
+근거: 미확인 | 원문: 5줄 | 의미론: 98줄 | 렌더링: 5줄 | 표 셀 안의 접기
+||<:>셀
+{{{#!folding 접기
+|| 안쪽 || 표 ||
+}}}
+끝 ||
+Document {
+    blocks: [
+        Table(
+            Table {
+                caption: None,
+                rows: [
+                    TableRow {
+                        cells: [
+                            TableCell {
+                                column_span: None,
+                                row_span: None,
+                                horizontal_alignment: Some(
+                                    Center,
+                                ),
+                                vertical_alignment: None,
+                                attributes: [],
+                                blocks: [
+                                    Paragraph(
+                                        [
+                                            Text(
+                                                "셀",
+                                            ),
+                                            LineBreak,
+                                            Folding(
+                                                Folding {
+                                                    summary: Template(
+                                                        [
+                                                            Text(
+                                                                "접기",
+                                                            ),
+                                                        ],
+                                                    ),
+                                                    blocks: [
+                                                        Table(
+                                                            Table {
+                                                                caption: None,
+                                                                rows: [
+                                                                    TableRow {
+                                                                        cells: [
+                                                                            TableCell {
+                                                                                column_span: None,
+                                                                                row_span: None,
+                                                                                horizontal_alignment: Some(
+                                                                                    Center,
+                                                                                ),
+                                                                                vertical_alignment: None,
+                                                                                attributes: [],
+                                                                                blocks: [
+                                                                                    Paragraph(
+                                                                                        [
+                                                                                            Text(
+                                                                                                "안쪽",
+                                                                                            ),
+                                                                                        ],
+                                                                                    ),
+                                                                                ],
+                                                                            },
+                                                                            TableCell {
+                                                                                column_span: None,
+                                                                                row_span: None,
+                                                                                horizontal_alignment: Some(
+                                                                                    Center,
+                                                                                ),
+                                                                                vertical_alignment: None,
+                                                                                attributes: [],
+                                                                                blocks: [
+                                                                                    Paragraph(
+                                                                                        [
+                                                                                            Text(
+                                                                                                "표",
+                                                                                            ),
+                                                                                        ],
+                                                                                    ),
+                                                                                ],
+                                                                            },
+                                                                        ],
+                                                                    },
+                                                                ],
+                                                            },
+                                                        ),
+                                                    ],
+                                                },
+                                            ),
+                                            LineBreak,
+                                            Text(
+                                                "끝",
+                                            ),
+                                        ],
+                                    ),
+                                ],
+                            },
+                        ],
+                    },
+                ],
+            },
+        ),
+    ],
+}
+<div class="wiki-table-wrap"><table class="wiki-table"><tbody><tr class="wiki-table-tr"><td style="text-align: center;"><div class="wiki-paragraph">셀<br><details class="wiki-folding"><summary>접기</summary><div><div class="wiki-table-wrap"><table class="wiki-table"><tbody><tr class="wiki-table-tr"><td style="text-align: center;"><div class="wiki-paragraph">안쪽</div>
+</td><td style="text-align: center;"><div class="wiki-paragraph">표</div>
+</td></tr></tbody></table></div>
+</div></details><br>끝</div>
+</td></tr></tbody></table></div>

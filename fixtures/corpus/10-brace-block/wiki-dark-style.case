@@ -1,0 +1,44 @@
+근거: 도움말서술 | 원문: 3줄 | 의미론: 39줄 | 렌더링: 1줄 | #!wiki dark-style
+{{{#!wiki style="background-color:#fff" dark-style="background-color: #2d2f34;"
+내용
+}}}
+Document {
+    blocks: [
+        Paragraph(
+            [
+                WikiStyle(
+                    WikiStyle {
+                        style: Some(
+                            Template(
+                                [
+                                    Text(
+                                        "background-color:#fff",
+                                    ),
+                                ],
+                            ),
+                        ),
+                        dark_style: Some(
+                            Template(
+                                [
+                                    Text(
+                                        "background-color: #2d2f34;",
+                                    ),
+                                ],
+                            ),
+                        ),
+                        blocks: [
+                            Paragraph(
+                                [
+                                    Text(
+                                        "내용",
+                                    ),
+                                ],
+                            ),
+                        ],
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><div style="background-color: #fff" data-dark-style="background-color: #2d2f34">내용</div></div>

@@ -1,0 +1,28 @@
+근거: 도움말예제 | 원문: 1줄 | 의미론: 24줄 | 렌더링: 2줄 | 인용문 안 개행
+>문장1[br]문장2
+Document {
+    blocks: [
+        Quote(
+            [
+                Paragraph(
+                    [
+                        Text(
+                            "문장1",
+                        ),
+                        Macro(
+                            Macro {
+                                name: "br",
+                                argument: None,
+                            },
+                        ),
+                        Text(
+                            "문장2",
+                        ),
+                    ],
+                ),
+            ],
+        ),
+    ],
+}
+<blockquote class="wiki-quote"><div class="wiki-paragraph">문장1<br>문장2</div>
+</blockquote>

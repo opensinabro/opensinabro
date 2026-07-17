@@ -1,0 +1,18 @@
+근거: 도움말예제 | 원문: 1줄 | 의미론: 15줄 | 렌더링: 1줄 | 물결 취소선
+~~취소선 1~~
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Strikethrough(
+                    [
+                        Text(
+                            "취소선 1",
+                        ),
+                    ],
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><del>취소선 1</del></div>

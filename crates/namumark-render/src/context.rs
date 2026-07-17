@@ -7,6 +7,11 @@ pub trait WikiContext {
         false
     }
 
+    /// 지금 렌더 중인 문서의 제목. 틀이 조건식에서 `calleeTitle`로 참조한다.
+    fn current_title(&self) -> Option<String> {
+        None
+    }
+
     /// `[include(...)]` 대상 문서의 나무마크 원문.
     fn include_source(&self, title: &str) -> Option<String> {
         let _ = title;

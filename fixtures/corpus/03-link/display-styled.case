@@ -1,0 +1,38 @@
+근거: 도움말예제 | 원문: 1줄 | 의미론: 35줄 | 렌더링: 1줄 | 표시명에 색상 문법
+[[문서|{{{#ff85b1 문서}}}]]
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Link(
+                    Link {
+                        target: Template(
+                            [
+                                Text(
+                                    "문서",
+                                ),
+                            ],
+                        ),
+                        anchor: None,
+                        display: Some(
+                            [
+                                Colored(
+                                    ColoredText {
+                                        color: "#ff85b1",
+                                        dark_color: None,
+                                        content: [
+                                            Text(
+                                                "문서",
+                                            ),
+                                        ],
+                                    },
+                                ),
+                            ],
+                        ),
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><a class="wiki-link-internal" href="/w/%EB%AC%B8%EC%84%9C" title="문서"><span style="color:#ff85b1" data-dark-style="color:#ff85b1;">문서</span></a></div>

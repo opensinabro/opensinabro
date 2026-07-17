@@ -1,0 +1,21 @@
+근거: 미확인 | 원문: 3줄 | 의미론: 16줄 | 렌더링: 1줄 | 목록에 없는 언어
+{{{#!syntax 우주어
+코드
+}}}
+Document {
+    blocks: [
+        Paragraph(
+            [
+                CodeBlock(
+                    CodeBlock {
+                        language: Some(
+                            "우주어",
+                        ),
+                        source: "코드",
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><pre><code class="hljs" data-language="우주어">코드</code></pre></div>

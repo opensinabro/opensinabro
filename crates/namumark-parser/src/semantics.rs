@@ -21,7 +21,7 @@ pub(crate) fn list_kind(kind: ListMarkerKind) -> ListKind {
 
 pub(crate) struct CellSemantics {
     pub column_span_override: Option<u32>,
-    pub row_span: u32,
+    pub row_span: Option<u32>,
     pub horizontal_alignment: Option<HorizontalAlignment>,
     pub vertical_alignment: Option<VerticalAlignment>,
     pub attributes: Vec<TableAttribute>,
@@ -30,7 +30,7 @@ pub(crate) struct CellSemantics {
 pub(crate) fn cell_semantics(shape: &CellShape<'_>) -> CellSemantics {
     let mut semantics = CellSemantics {
         column_span_override: None,
-        row_span: 1,
+        row_span: None,
         horizontal_alignment: None,
         vertical_alignment: None,
         attributes: Vec::new(),
@@ -45,7 +45,7 @@ pub(crate) fn cell_semantics(shape: &CellShape<'_>) -> CellSemantics {
                 span,
                 vertical_position,
             } => {
-                semantics.row_span = *span;
+                semantics.row_span = Some(*span);
                 if let Some(vertical_position) = vertical_position {
                     semantics.vertical_alignment = Some(match vertical_position {
                         VerticalPosition::Top => VerticalAlignment::Top,
@@ -54,21 +54,21 @@ pub(crate) fn cell_semantics(shape: &CellShape<'_>) -> CellSemantics {
                 }
             }
             CellOption::Flag { scope, name } => semantics.attributes.push(TableAttribute {
-                scope: attribute_scope(*scope),
+                scope: attribute_scope(*scope, semantics.column_span_override),
                 name: (*name).to_string(),
                 value: None,
             }),
             CellOption::Attribute { scope, name, value } => {
                 semantics.attributes.push(TableAttribute {
-                    scope: attribute_scope(*scope),
+                    scope: attribute_scope(*scope, semantics.column_span_override),
                     name: (*name).to_string(),
-                    value: Some((*value).to_string()),
+                    value: Some(crate::lower::template_of(value)),
                 });
             }
             CellOption::BackgroundColor(value) => semantics.attributes.push(TableAttribute {
                 scope: TableAttributeScope::Cell,
                 name: "bgcolor".to_string(),
-                value: Some((*value).to_string()),
+                value: Some(crate::lower::template_of(value)),
             }),
         }
     }
@@ -83,11 +83,14 @@ fn horizontal_alignment(alignment: CellAlignment) -> HorizontalAlignment {
     }
 }
 
-fn attribute_scope(scope: CellOptionScope) -> TableAttributeScope {
+fn attribute_scope(scope: CellOptionScope, columns: Option<u32>) -> TableAttributeScope {
     match scope {
         CellOptionScope::Cell => TableAttributeScope::Cell,
         CellOptionScope::Row => TableAttributeScope::Row,
-        CellOptionScope::Column => TableAttributeScope::Column,
+        // 여기까지 아는 칸 수만큼의 열에 걸린다 — 나무위키는 옵션을 왼쪽부터 처리한다.
+        CellOptionScope::Column => TableAttributeScope::Column {
+            columns: columns.unwrap_or(1),
+        },
         CellOptionScope::Table => TableAttributeScope::Table,
     }
 }
@@ -99,7 +102,7 @@ pub(crate) fn image_options(source: &str) -> Vec<ImageOption> {
         .map(|part| match part.split_once('=') {
             Some((name, value)) => ImageOption {
                 name: name.trim().to_string(),
-                value: Some(value.trim().to_string()),
+                value: Some(crate::lower::template_of(value.trim())),
             },
             None => ImageOption {
                 name: part.trim().to_string(),

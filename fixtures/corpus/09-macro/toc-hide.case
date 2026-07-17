@@ -1,0 +1,40 @@
+근거: 도움말예제 | 원문: 2줄 | 의미론: 33줄 | 렌더링: 4줄 | 도움말: 접힌 목차. 우리는 인자를 무시함
+[목차(hide)]
+== 문단 ==
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Macro(
+                    Macro {
+                        name: "목차",
+                        argument: Some(
+                            Template(
+                                [
+                                    Text(
+                                        "hide",
+                                    ),
+                                ],
+                            ),
+                        ),
+                    },
+                ),
+            ],
+        ),
+        Heading(
+            Heading {
+                level: 2,
+                folded: false,
+                content: [
+                    Text(
+                        "문단",
+                    ),
+                ],
+            },
+        ),
+    ],
+}
+<div class="wiki-paragraph"><div class="wiki-macro-toc" id="toc"><details open><summary></summary><div class="toc-indent"><span class="toc-item"><a href="#s-1">1</a>. 문단</span></div></details></div>
+</div>
+<h2 class="wiki-heading"><a id="s-1" href="#toc">1.</a> <span id="문단">문단</span></h2>
+<div class="wiki-heading-content"></div>

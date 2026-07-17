@@ -1,0 +1,14 @@
+근거: 도움말예제 | 원문: 1줄 | 의미론: 11줄 | 렌더링: 1줄 | 한 줄 리터럴 — 안쪽 문법 미적용
+{{{[[리터럴]]}}}
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Literal(
+                    "[[리터럴]]",
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><code>[[리터럴]]</code></div>

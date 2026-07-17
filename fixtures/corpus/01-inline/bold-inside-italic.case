@@ -1,0 +1,28 @@
+근거: 미확인 | 원문: 1줄 | 의미론: 25줄 | 렌더링: 1줄 | 기울임 안의 굵게
+''기울임 '''굵게''' 기울임''
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Italic(
+                    [
+                        Text(
+                            "기울임 ",
+                        ),
+                    ],
+                ),
+                Text(
+                    "'굵게",
+                ),
+                Italic(
+                    [
+                        Text(
+                            "' 기울임",
+                        ),
+                    ],
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><em>기울임 </em>'굵게<em>' 기울임</em></div>

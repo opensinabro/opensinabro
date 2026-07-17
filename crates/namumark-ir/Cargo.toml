@@ -7,3 +7,4 @@ license.workspace = true
 
 [dependencies]
 namumark-ast = { path = "../namumark-ast" }
+namumark-text = { path = "../namumark-text" }

@@ -1,0 +1,20 @@
+근거: 미확인 | 원문: 1줄 | 의미론: 17줄 | 렌더링: 1줄 | sanitizer — 엔티티는 글자로 디코드
+{{{#!html a&nbsp;b}}}
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Html(
+                    Template(
+                        [
+                            Text(
+                                "a&nbsp;b",
+                            ),
+                        ],
+                    ),
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph">a b</div>

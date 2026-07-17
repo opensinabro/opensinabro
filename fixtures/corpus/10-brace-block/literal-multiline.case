@@ -1,0 +1,14 @@
+근거: 도움말서술 | 원문: 1줄 | 의미론: 11줄 | 렌더링: 1줄 | 도움말: {{{ }}} 사이에 { 또는 }를 3개 이상 연속으로 쓸 수 없음
+{{{{{{}}}}}}
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Literal(
+                    "{{{}}}",
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><code>{{{}}}</code></div>

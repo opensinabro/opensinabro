@@ -25,11 +25,26 @@ fn text_is_escaped() {
     assert!(markup.contains("&lt;script&gt;"));
 }
 
+// 라이트 색은 style로, 다크 색은 data-dark-style로 — 나무위키 표기다.
 #[test]
-fn dual_color_uses_css_variables() {
+fn dual_color_splits_into_style_and_dark_style() {
     let markup = render("{{{#ff0000,#00ff00 듀얼}}}");
-    assert!(markup.contains("--wiki-color: #ff0000"));
-    assert!(markup.contains("--wiki-color-dark: #00ff00"));
+    assert!(markup.contains(r#"style="color:#ff0000""#), "{markup}");
+    assert!(
+        markup.contains(r#"data-dark-style="color:#00ff00;""#),
+        "{markup}"
+    );
+}
+
+// 다크 색을 따로 주지 않아도 나무위키는 같은 값으로 채운다.
+#[test]
+fn single_color_fills_dark_style_with_same_value() {
+    let markup = render("{{{#ff0000 하나}}}");
+    assert!(markup.contains(r#"style="color:#ff0000""#), "{markup}");
+    assert!(
+        markup.contains(r#"data-dark-style="color:#ff0000;""#),
+        "{markup}"
+    );
 }
 
 #[test]

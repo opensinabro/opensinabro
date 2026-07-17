@@ -3,155 +3,145 @@
 Paragraph: Macro(include "틀:사건사고") <br> Macro(include "틀:김영삼")
 Table:
   Row:
-    Cell span=1x1 align=Left attrs=[Table/align=center Table/bordercolor=#000000 Cell/bgcolor=#ffffff]:
+    Cell span=1x1 align=Some(Left) attrs=[Table/align=center Table/bordercolor=#000000 Cell/bgcolor=#ffffff]:
       Paragraph: Image("1997imf.jpg" width=100%)
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "▲ " Link("IMF") " 구제금융 신청 직후 " Link("동아일보") " 보도."
   Row:
-    Cell span=1x1 align=Left attrs=[Cell/bgcolor=#ffffff]:
+    Cell span=1x1 align=Some(Left) attrs=[Cell/bgcolor=#ffffff]:
       Paragraph: Image("attachment/1997년 외환 위기/97imfdealer.jpg" width=100%)
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "▲ 달러 환율이 달러당 각각 " Bold("1500원") "과 " Bold("2000원") "을 돌파하자 절망하는 딜러의 모습."
-Paragraph: Macro(목차) <br> Macro(clearfix)
+Paragraph: <br> Macro(목차) <br> Macro(clearfix)
 Heading level=2 folded=false: "개요"
 Table:
   Row:
-    Cell span=1x1 align=Left:
-      WikiStyle style=Some("margin: -5px -10px") dark_style=None:
-        Paragraph: Macro(youtube "W3bFU1aSKy0")
+    Cell span=1x1 align=None:
+      Paragraph: WikiStyle(style=Some("margin: -5px -10px") dark=None | Paragraph: Macro(youtube "W3bFU1aSKy0"))
   Row:
-    Cell span=1x1 align=Left:
-      WikiStyle style=Some("margin: -5px -10px") dark_style=None:
-        Paragraph: Macro(youtube "XmPiH3nE15c")
+    Cell span=1x1 align=None:
+      Paragraph: WikiStyle(style=Some("margin: -5px -10px") dark=None | Paragraph: Macro(youtube "XmPiH3nE15c"))
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "KBS 및 MBC가 보도한 외환위기 보도 모음집."
 Quote:
   Paragraph: Bold("실로 부끄럽고 치욕스러운 한 주일을 보냈습니다. 新경제를 내세우면서 " Link("OECD" | "세계 부자 대열에 끼었다고 자랑하던 게") " " Link("1996년" | "엊그제인데") " 하루 아침에 빚더미 삼류 국가로 전락했습니다.")
   HorizontalRule
   Paragraph: "1997년 11월 22일 " Link("MBC 뉴스데스크") " " Link("권재홍") " 앵커의 오프닝 멘트." Footnote(| "반면 같은 날 " Link("류근찬") " KBS 뉴스 9 앵커는 오프닝부터 김영삼 대통령 동정 멘트로 " Link("http://mn.kbs.co.kr/mobile/vod/program.do?bcd=0001&ref=mGnb#19971122&1" | "시작했다.")) Footnote(| Link("https://imnews.imbc.com/replay/1997/nwdesk/article/1771262_30717.html" | "출처"))
+Paragraph: 
 Quote:
   Paragraph: Bold("시급한 외환 확보를 위해 " Link("국제통화기금") "의 자금 지원체제를 활용하겠습니다. 이에 따른 다방면에 걸친 경제 구조조정 부담도 능동적으로 감내해 나가도록 최선을 다할 것입니다.")
   HorizontalRule
   Paragraph: Link("1997년") " " Link("11월 22일") " " Link("김영삼") ". " Bold("이 담화를 기점으로" Footnote(| "정확히는 양해각서가 체결된 12월 3일부터.") " 대한민국 경제는 " Link("국제통화기금" | "IMF") "의 관리 하에 운영됐다.")
+Paragraph: 
 Table:
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("대한민국의 IMF 관리 체제 기간")
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: "1997년 12월 3일 ~ 2001년 8월 23일"
-Paragraph: Link("1997년") "부터 " Link("아시아") " 지역을 중심으로 발생했던 외환 " Link("유동성") " 위기를 통칭하는 말."
-Paragraph: "외환 위기 사태 발생 직전까지, " Link("김영삼 정부") "의 금융정책으로 인해 각 기업들은 무분별한 차입에 의존하며 무분별한 과잉투자를 벌였다. 동시에 국외적으로는 태국의 고정환율제 포기로 인해 환율을 이용한 외국 자본의 차익 실현으로 인해 동남아시아의 통화 위기가 발생하였고, 동북아시아를 거쳐 세계 경제에 불안을 가져왔다. 이러한 경제 불안은 한국 뿐만 아나라 아시아 전체에 경제 위기를 불러왔다. 이를 1997 아시아 금융위기(1997 Asia Financial Crisis)라고 한다. 인도네시아와 태국은 위기의 영향을 가장 많이 받은 국가였고, 한국은 단순 지표상으로는 앞의 두 국가보다는 덜했으나 역시 엄청난 위기를 겪었다. 홍콩, 라오스, 말레이시아, 필리핀도 침체에 시달렸다. 브루나이, 중국, 싱가포르, 대만, 베트남 또한 어려움을 겪었지만 영향을 덜 받았다. " Link("잃어버린 10년/일본" | "일본은 이미 침체") "에 들어가 있었기에 영향은 아주 크지는 않았지만 그럼에도 경제성장률도 1995년을 기점으로 점차 회복세에 접어들었는데 소비세를 5%로 인상한 일로 소비심리가 급속히 위축되었고 또한 금융회사들이 잇따라 도산하는 일이 벌어지며 경제회복에 대한 기대감은 확 꺾여져버리고 말았고 이로 인해 1998년도에 마이너스 성장률을 기록했으며 잃어버린 10년 초중기 기간 동안 미약하게나마 증가했던 실질임금과 가처분소득도 1997년을 기점으로 고점을 찍고 하락세로 접어들어 일본의 경기침체를 연장시키는데 공헌하게 된다. 이러한 점에 있어서 경기 불황에서 막 다시 딛고 일어서려던 차였던 일본을 다시 끌어내려는데 한몫했다는 점에서 여파가 작다고 할 수 없다. "
-Paragraph: "이러한 아시아 금융위기 속에서 무분별한 차입으로 의존하던 국내기업의 외국자본의 단기부채의 만료와 아시아 경제에 불안을 느낀 외국자본의 급격한 유출로 인하여 " Bold("외환 보유고가 바닥나게 되었고, 충격을 극복할 수 없을 정도로 단기간에 기업의 파산이나 부도, 대량 실직이 일어나게 되었다.") " 경제 위기로 인하여 단기부채의 연장이 이루어지지 않았고 상환을 독촉받았다. 한국은 이러한 충격을 극복하기 위한 " Link("IMF") "에 구제금융을 요청하고 이를 상환한 일련의 과정을 말한다. 1997년 말에 발생하여 2001년 8월까지 약 4년간 지속되었으며, 이 후에도 'IMF 사태 이후로 힘든 시기'나 'IMF보다 힘든 시기'같은 표현으로 IMF는 경제적 고난을 상징하는 대명사로 자리잡게 된다."
-Paragraph: "외환 위기 직전이 호황이었다고는 하지만 사실 조짐 자체는 전년인 1996년도부터 보였다. 1996년도의 경제성장률이 1995년도의 9.6%에서 7.6%로 떨어졌던 것이 그 단초였고, 경기가 침체라는 언론을 통해 잇따라 보도가 되었던 것이었다. 사실 당대에도 경제성장률 7% 정도면 경제성장률이 전혀 낮지 않은 평균 정도는 된 수준이었기에 언론에서 경기침체라고 부채질한 것이야 호들갑 수준이기는 했는데 1994년과 1995년도의 경제성장률이 9%대를 잇따라 기록할 정도로 활황이었기에 성장률이 떨어진 것 자체는 큰 문제가 아니었지만" Footnote(| "1989년과 1992년, 그리고 1993년에 경제성장률이 7% 아래를 기록하기도 했다.(GNP 기준)") " 문제는 이번에는 성장률 감소가 수출액 감소, 대외채무 폭증 등과 맞물려 있었다는 것이다. 그럼에도 정부와 기업들은 구조개선 노력을 하지 않았고, 결국 외환 위기를 불러오게 됐다. 당시 대한민국에서 손가락 안에 꼽히는 대기업과 은행마저도 나날이 무너지며 대규모 " Link("실업" | "실직") "과 무더기 부동산 매각, 금융불안 등이 일어나게 되었고, 외환위기 상황임이 확실화된 이후에야 IMF의 계획에 따라 전방위적인 경제적 체질개선과 대규모의 " Link("구조조정") "이 실행되었다."
-Paragraph: "'평생 직장'이라는 개념도 사실 외환위기 이전의 경직된 노동시장에서나 통했던 말이 되었을 정도로 대한민국 경제 구조에 큰 영향을 끼쳤다. 고용 시장이 불안정해진 이래 대한민국 사회는 현재까지 그 후유증을 극복하지 못하고 있다."
+Paragraph: <br> Link("1997년") "부터 " Link("아시아") " 지역을 중심으로 발생했던 외환 " Link("유동성") " 위기를 통칭하는 말." <br> <br> "외환 위기 사태 발생 직전까지, " Link("김영삼 정부") "의 금융정책으로 인해 각 기업들은 무분별한 차입에 의존하며 무분별한 과잉투자를 벌였다. 동시에 국외적으로는 태국의 고정환율제 포기로 인해 환율을 이용한 외국 자본의 차익 실현으로 인해 동남아시아의 통화 위기가 발생하였고, 동북아시아를 거쳐 세계 경제에 불안을 가져왔다. 이러한 경제 불안은 한국 뿐만 아나라 아시아 전체에 경제 위기를 불러왔다. 이를 1997 아시아 금융위기(1997 Asia Financial Crisis)라고 한다. 인도네시아와 태국은 위기의 영향을 가장 많이 받은 국가였고, 한국은 단순 지표상으로는 앞의 두 국가보다는 덜했으나 역시 엄청난 위기를 겪었다. 홍콩, 라오스, 말레이시아, 필리핀도 침체에 시달렸다. 브루나이, 중국, 싱가포르, 대만, 베트남 또한 어려움을 겪었지만 영향을 덜 받았다. " Link("잃어버린 10년/일본" | "일본은 이미 침체") "에 들어가 있었기에 영향은 아주 크지는 않았지만 그럼에도 경제성장률도 1995년을 기점으로 점차 회복세에 접어들었는데 소비세를 5%로 인상한 일로 소비심리가 급속히 위축되었고 또한 금융회사들이 잇따라 도산하는 일이 벌어지며 경제회복에 대한 기대감은 확 꺾여져버리고 말았고 이로 인해 1998년도에 마이너스 성장률을 기록했으며 잃어버린 10년 초중기 기간 동안 미약하게나마 증가했던 실질임금과 가처분소득도 1997년을 기점으로 고점을 찍고 하락세로 접어들어 일본의 경기침체를 연장시키는데 공헌하게 된다. 이러한 점에 있어서 경기 불황에서 막 다시 딛고 일어서려던 차였던 일본을 다시 끌어내려는데 한몫했다는 점에서 여파가 작다고 할 수 없다. " <br> <br> "이러한 아시아 금융위기 속에서 무분별한 차입으로 의존하던 국내기업의 외국자본의 단기부채의 만료와 아시아 경제에 불안을 느낀 외국자본의 급격한 유출로 인하여 " Bold("외환 보유고가 바닥나게 되었고, 충격을 극복할 수 없을 정도로 단기간에 기업의 파산이나 부도, 대량 실직이 일어나게 되었다.") " 경제 위기로 인하여 단기부채의 연장이 이루어지지 않았고 상환을 독촉받았다. 한국은 이러한 충격을 극복하기 위한 " Link("IMF") "에 구제금융을 요청하고 이를 상환한 일련의 과정을 말한다. 1997년 말에 발생하여 2001년 8월까지 약 4년간 지속되었으며, 이 후에도 'IMF 사태 이후로 힘든 시기'나 'IMF보다 힘든 시기'같은 표현으로 IMF는 경제적 고난을 상징하는 대명사로 자리잡게 된다." <br> <br> "외환 위기 직전이 호황이었다고는 하지만 사실 조짐 자체는 전년인 1996년도부터 보였다. 1996년도의 경제성장률이 1995년도의 9.6%에서 7.6%로 떨어졌던 것이 그 단초였고, 경기가 침체라는 언론을 통해 잇따라 보도가 되었던 것이었다. 사실 당대에도 경제성장률 7% 정도면 경제성장률이 전혀 낮지 않은 평균 정도는 된 수준이었기에 언론에서 경기침체라고 부채질한 것이야 호들갑 수준이기는 했는데 1994년과 1995년도의 경제성장률이 9%대를 잇따라 기록할 정도로 활황이었기에 성장률이 떨어진 것 자체는 큰 문제가 아니었지만" Footnote(| "1989년과 1992년, 그리고 1993년에 경제성장률이 7% 아래를 기록하기도 했다.(GNP 기준)") " 문제는 이번에는 성장률 감소가 수출액 감소, 대외채무 폭증 등과 맞물려 있었다는 것이다. 그럼에도 정부와 기업들은 구조개선 노력을 하지 않았고, 결국 외환 위기를 불러오게 됐다. 당시 대한민국에서 손가락 안에 꼽히는 대기업과 은행마저도 나날이 무너지며 대규모 " Link("실업" | "실직") "과 무더기 부동산 매각, 금융불안 등이 일어나게 되었고, 외환위기 상황임이 확실화된 이후에야 IMF의 계획에 따라 전방위적인 경제적 체질개선과 대규모의 " Link("구조조정") "이 실행되었다." <br> <br> "'평생 직장'이라는 개념도 사실 외환위기 이전의 경직된 노동시장에서나 통했던 말이 되었을 정도로 대한민국 경제 구조에 큰 영향을 끼쳤다. 고용 시장이 불안정해진 이래 대한민국 사회는 현재까지 그 후유증을 극복하지 못하고 있다." <br>
 Heading level=2 folded=false: "당시 상황"
 Table:
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("구분(전기대비)")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Link("1997년") " 3분기"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Link("1997년") " 4분기"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Link("1998년") " 1분기"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Link("1998년") " 2분기"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Link("1998년") " 3분기"
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Link("1998년") " 4분기"
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("민간소비(C)")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Colored(red | "+1.0%")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Colored(blue | "-1.0%")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Colored(blue | "-13.6%")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Colored(red | "+0.2%")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Colored(red | "+2.1%")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Colored(red | "+2.3%")
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("설비투자(I1)")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Colored(blue | "-8.7%")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Colored(blue | "-14.6%")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Colored(blue | "-24.8%")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Colored(blue | "-10.1%")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Colored(red | "+1.0%")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Colored(red | "+7.7%")
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("건설투자(I2)")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Colored(red | "+3.9%")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Indent:
         Paragraph: Colored(red | "+0.7%")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Colored(blue | "-9.7%")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Colored(blue | "-6.5%")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Colored(blue | "-2.9%")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Colored(blue | "-0.7%")
   Row:
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Bold("경제성장률(지출부문)")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Colored(red | "+0.8%")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Colored(blue | "-0.6%")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Colored(blue | "-7.0%")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Colored(blue | "-0.6%")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Colored(red | "+1.5%")
-    Cell span=1x1 align=Center:
+    Cell span=1x1 align=Some(Center):
       Paragraph: Colored(red | "+2.3%")
-Paragraph: Link("한국은행") " 경제통계시스템 ECOS에 나와있는 외환위기 시절 경제성장률 지출 부문. 정부지출은 빠져있다. 참고로 이것은 표에도 나와있지만 전년 대비가 아니라 " Bold("전기 대비") "다. 기업 설비투자는 1997년 2분기 대비 1998년 2분기, 즉 1년 연간 대비로 하면 " Bold("-47.3%") "를 기록했다."
-Paragraph: Image("external/thimg.todayhumor.co.kr/14667613531b571e226cf14030abdf961c78f43239__mn701294__w600__h325__f57841__Ym201606.jpg") <br> "▲ 외환위기가 일어나기 불과 몇달 전인 1997년 " Link("https://newslibrary.naver.com/viewer/index.nhn?articleId=1997030800239110005&editNo=1&printCount=1&publishDate=1997-03-08&officeId=00023&pageNo=10&printNo=23647&publishType=00010" | "3월 8일") "과 " Link("https://newslibrary.naver.com/viewer/index.nhn?articleId=1997091800239101002&editNo=1&printCount=1&publishDate=1997-09-18&officeId=00023&pageNo=1&printNo=23828&publishType=00010" | "9월 18일") " " Link("조선일보") " 지면에 나온 기사."
-Paragraph: "그 외에도 " Link("http://www.bigkinds.or.kr/news/newsDetailView.do?newsId=01100201.19970918000000203" | "국민일보") ", " Link("http://www.bigkinds.or.kr/news/newsDetailView.do?newsId=01101001.19970918000000803" | "한겨레신문") ", " Link("http://www.bigkinds.or.kr/news/newsDetailView.do?newsId=01100101.19970918000000803" | "경향신문") " 등에서 비슷한 기사를 냈다. (3월 8일자 조선일보 기사는 단독 인터뷰였으므로 타 언론이 보도하지 않았다.)"
-Paragraph: "단, 인터넷 커뮤니티들에는 위와 같은 기사 캡쳐들이 마치 " Bold("한국 언론사들이 외환위기 직전까지도 한국은 안전하다고 선동을 했다는 식으로 돌아다니는 경우가 많은데 저 기사는 " Link("미셸 캉드쉬" | "IMF 총재") "와 IMF측 인터뷰를 그대로 보도한 것일 뿐이며 언론사들이 선동한 것이 아니다.") " 1997년 9월경 IMF뿐만 아니라 " Link("http://www.bigkinds.or.kr/news/newsDetailView.do?newsId=02100311.20160315213111313" | "BIS") ", " Link("http://www.bigkinds.or.kr/news/newsDetailView.do?newsId=01500601.19970913023948001" | "OECD") ", " Link("http://biz.chosun.com/site/data/html_dir/1997/09/22/1997092270403.html" | "세계은행") " 등의 수장이 불과 며칠 사이에 동일한 취지의 발언을 하였고, 역시 다수의 언론에 의하여 보도되었다. 특정 의도를 가지고 듣보를 전문가랍시고 인터뷰해서 보도하는 것도 아니고 " Link("IMF") "나 " Link("세계은행") " 등이 그렇다는데 그 내용을 보도를 안하는게 더 이상한 것이다. 따라서 이것이 손바닥으로 하늘을 가리려 하는 언론사(들)의 농간이라고 해석하는 것은 무리이다. 조선일보도 외환 위기 발생 가능성이 높다는 취지의 기사를 다수 보도한 바 있고(" Link("http://biz.chosun.com/site/data/html_dir/1997/09/03/1997090370055.html" | "#") " " Link("http://biz.chosun.com/site/data/html_dir/1997/10/01/1997100170472.html" | "#") " " Link("http://biz.chosun.com/site/data/html_dir/1997/03/14/1997031470163.html" | "#") ") 1997년 당시 기사들을 찾아보면 알겠지만 그해 동안 대부분의 언론사들이 " Bold("외환위기 위험을 우려하는 보도들을 수두룩하게 냈다.")
-Paragraph: Image("external/img.imnews.imbc.com/DN19970184-00_01000501.jpg") <br> Image("external/img.imnews.imbc.com/DN19970176-00_01044727.jpg") <br> Image("external/img.imnews.imbc.com/DN19970183-00_01024518.jpg") <br> Image("external/img.imnews.imbc.com/DN19980166-00_01195720.jpg") <br> Image("external/img.imnews.imbc.com/DN19980163-00_01000612.jpg") <br> Image("attachment/1997.jpg" width=650) <br> "▲ " Link("1997년") ", " Link("1998년") ", " Link("1999년") "의 뉴스. 운지 등의 논란이 있는 인터넷 커뮤니티 용어는 전부 가려졌다."
-Paragraph: "이 모든 뉴스가 불과 " Bold("2년") " 만에 일어난 것이다. 출처는 1997년과 1998년의 " Link("MBC 뉴스데스크") ". 출연자는 당시 평일 앵커인 이인용/김지은-정혜정, 주말 앵커인 권재홍/최율미. 단 " Link("대우그룹") " 부도는 1999년이다. 그 밖에 위의 스크린샷에서 언급된 기업들 가운데 일부는 외환위기 이후에 회생되었거나 부도를 당하지 않은 다른 기업에게 넘어가 이름까지 바뀌기도 하였다."
-Paragraph: Image("attachment/1997년 외환 위기/97imfdealer.jpg" width=700) <br> "▲ 미친듯한 환율 폭등으로 절망감에 빠진 외환 딜러들의 모습."
-Paragraph: "경제를 조금이라도 배웠다면 저게 얼마나 심각한 상황인지는 쉽게 알 것이다. 저 사진에 나온 딜러의 표정이 모든 걸 말해 준다. 혹시 환율이 높으니 수출하기 좋지 않겠냐고 하겠지만 기업들이 도산하던 시점이라 수출할 물건이 그리 많지 않았고 많은 외채로 인해 많은 달러가 필요했던 상황이었다. 팔 물건이 없는데 환율 높아봐야 아무런 의미가 없다."
+Paragraph: <br> Link("한국은행") " 경제통계시스템 ECOS에 나와있는 외환위기 시절 경제성장률 지출 부문. 정부지출은 빠져있다. 참고로 이것은 표에도 나와있지만 전년 대비가 아니라 " Bold("전기 대비") "다. 기업 설비투자는 1997년 2분기 대비 1998년 2분기, 즉 1년 연간 대비로 하면 " Bold("-47.3%") "를 기록했다." <br> <br> Image("external/thimg.todayhumor.co.kr/14667613531b571e226cf14030abdf961c78f43239__mn701294__w600__h325__f57841__Ym201606.jpg") <br> "▲ 외환위기가 일어나기 불과 몇달 전인 1997년 " Link("https://newslibrary.naver.com/viewer/index.nhn?articleId=1997030800239110005&editNo=1&printCount=1&publishDate=1997-03-08&officeId=00023&pageNo=10&printNo=23647&publishType=00010" | "3월 8일") "과 " Link("https://newslibrary.naver.com/viewer/index.nhn?articleId=1997091800239101002&editNo=1&printCount=1&publishDate=1997-09-18&officeId=00023&pageNo=1&printNo=23828&publishType=00010" | "9월 18일") " " Link("조선일보") " 지면에 나온 기사." <br> <br> "그 외에도 " Link("http://www.bigkinds.or.kr/news/newsDetailView.do?newsId=01100201.19970918000000203" | "국민일보") ", " Link("http://www.bigkinds.or.kr/news/newsDetailView.do?newsId=01101001.19970918000000803" | "한겨레신문") ", " Link("http://www.bigkinds.or.kr/news/newsDetailView.do?newsId=01100101.19970918000000803" | "경향신문") " 등에서 비슷한 기사를 냈다. (3월 8일자 조선일보 기사는 단독 인터뷰였으므로 타 언론이 보도하지 않았다.)" <br> <br> "단, 인터넷 커뮤니티들에는 위와 같은 기사 캡쳐들이 마치 " Bold("한국 언론사들이 외환위기 직전까지도 한국은 안전하다고 선동을 했다는 식으로 돌아다니는 경우가 많은데 저 기사는 " Link("미셸 캉드쉬" | "IMF 총재") "와 IMF측 인터뷰를 그대로 보도한 것일 뿐이며 언론사들이 선동한 것이 아니다.") " 1997년 9월경 IMF뿐만 아니라 " Link("http://www.bigkinds.or.kr/news/newsDetailView.do?newsId=02100311.20160315213111313" | "BIS") ", " Link("http://www.bigkinds.or.kr/news/newsDetailView.do?newsId=01500601.19970913023948001" | "OECD") ", " Link("http://biz.chosun.com/site/data/html_dir/1997/09/22/1997092270403.html" | "세계은행") " 등의 수장이 불과 며칠 사이에 동일한 취지의 발언을 하였고, 역시 다수의 언론에 의하여 보도되었다. 특정 의도를 가지고 듣보를 전문가랍시고 인터뷰해서 보도하는 것도 아니고 " Link("IMF") "나 " Link("세계은행") " 등이 그렇다는데 그 내용을 보도를 안하는게 더 이상한 것이다. 따라서 이것이 손바닥으로 하늘을 가리려 하는 언론사(들)의 농간이라고 해석하는 것은 무리이다. 조선일보도 외환 위기 발생 가능성이 높다는 취지의 기사를 다수 보도한 바 있고(" Link("http://biz.chosun.com/site/data/html_dir/1997/09/03/1997090370055.html" | "#") " " Link("http://biz.chosun.com/site/data/html_dir/1997/10/01/1997100170472.html" | "#") " " Link("http://biz.chosun.com/site/data/html_dir/1997/03/14/1997031470163.html" | "#") ") 1997년 당시 기사들을 찾아보면 알겠지만 그해 동안 대부분의 언론사들이 " Bold("외환위기 위험을 우려하는 보도들을 수두룩하게 냈다.") <br> <br> Image("external/img.imnews.imbc.com/DN19970184-00_01000501.jpg") <br> Image("external/img.imnews.imbc.com/DN19970176-00_01044727.jpg") <br> Image("external/img.imnews.imbc.com/DN19970183-00_01024518.jpg") <br> Image("external/img.imnews.imbc.com/DN19980166-00_01195720.jpg") <br> Image("external/img.imnews.imbc.com/DN19980163-00_01000612.jpg") <br> Image("attachment/1997.jpg" width=650) <br> "▲ " Link("1997년") ", " Link("1998년") ", " Link("1999년") "의 뉴스. 운지 등의 논란이 있는 인터넷 커뮤니티 용어는 전부 가려졌다." <br> <br> "이 모든 뉴스가 불과 " Bold("2년") " 만에 일어난 것이다. 출처는 1997년과 1998년의 " Link("MBC 뉴스데스크") ". 출연자는 당시 평일 앵커인 이인용/김지은-정혜정, 주말 앵커인 권재홍/최율미. 단 " Link("대우그룹") " 부도는 1999년이다. 그 밖에 위의 스크린샷에서 언급된 기업들 가운데 일부는 외환위기 이후에 회생되었거나 부도를 당하지 않은 다른 기업에게 넘어가 이름까지 바뀌기도 하였다." <br> <br> Image("attachment/1997년 외환 위기/97imfdealer.jpg" width=700) <br> "▲ 미친듯한 환율 폭등으로 절망감에 빠진 외환 딜러들의 모습." <br> <br> "경제를 조금이라도 배웠다면 저게 얼마나 심각한 상황인지는 쉽게 알 것이다. 저 사진에 나온 딜러의 표정이 모든 걸 말해 준다. 혹시 환율이 높으니 수출하기 좋지 않겠냐고 하겠지만 기업들이 도산하던 시점이라 수출할 물건이 그리 많지 않았고 많은 외채로 인해 많은 달러가 필요했던 상황이었다. 팔 물건이 없는데 환율 높아봐야 아무런 의미가 없다." <br>
 Heading level=2 folded=false: Link("1997년 외환 위기/연표" | "경과")
 Paragraph: Macro(include "틀: 상세 내용, 문서명=1997년 외환 위기/연표") <br> Image("external/img.imnews.imbc.com/DN19970167-00_01082905.jpg")
 Quote:
   Paragraph: Bold("한국은 눈앞의 위기를 애써 외면하려 한다.")
   HorizontalRule
-  Paragraph: "1997년 12월 13일 미셸 캉드쉬 IMF 총재"
+  Indent:
+    Paragraph: "1997년 12월 13일 미셸 캉드쉬 IMF 총재"
+Paragraph: 
 Quote:
-  Paragraph: "\"기아자동차와 진로, 한보, 대우 등 천문학적인 부채 위에 세워진 이른바 한국의 재벌 기업이 문제의 시작점이었다. 10대 재벌의 " Bold("부채") " 비율은 " Bold("500%") "를 웃돌았다. 상상하기 힘든 수치였다. 이들 재벌이 부채상환 불능상태에 이르면서, 11월이면 은행까지 채무불이행(" Link("디폴트") ")에 빠질 위기였다."
+  Indent:
+    Paragraph: "\"기아자동차와 진로, 한보, 대우 등 천문학적인 부채 위에 세워진 이른바 한국의 재벌 기업이 문제의 시작점이었다. 10대 재벌의 " Bold("부채") " 비율은 " Bold("500%") "를 웃돌았다. 상상하기 힘든 수치였다. 이들 재벌이 부채상환 불능상태에 이르면서, 11월이면 은행까지 채무불이행(" Link("디폴트") ")에 빠질 위기였다."
   HorizontalRule
-  Paragraph: "윌리엄 로즈 전 시티은행 부행장. 1997년 11월 국제채권위원단 의장 신분으로 방한하였다."
-Paragraph: "정확히 말하면 외채 상환은 해야 하는데, 당장 갚을 외화는(달러$) 없어서 김영삼 대통령 시절의 " Link("문민정부") "가 " Link("국제통화기금" | "IMF") "에다 " Bold("\"돈 좀 빌려주세요. 곧 갚을게요.\"") "라고 요청한 사건이다. 2008년 " Link("그리스 경제위기") " 같은 사건 수준의 엄청난 재난이다. 그냥 돈을 빌려주고 제때 이자를 쳐서 받으면 그만인데, 돈을 빌려주는 대신 명령대로 나라 경제 운영을 해야 한다는 것 때문에 IMF가 비판받아야 한다는 의견이 있었다. " Link("1980년대") " 중반부터 " Link("1990년대") " 중반, 즉, 외환 위기 사태 발생 전이었던 대한민국이 OECD에 가입한 " Link("1996년") "까지의 대한민국은 " Bold("단군 이래 최대 호황") "이라고 불리던 시절을 누렸다고 했다. 그러나 1996년의 무역 적자는 무려 230억 달러에 달하며 외채는 천억 달러를 뛰어넘는 등, 이미 대내외적으로 장기적인 문제점이 내재되어 있었다. 그럼에도 당시 상당수의 한국 경제학자들은 " Link("잃어버린 10년") "을 겪던 " Link("일본") "을 능가할 것이라며 장밋빛 전망을 내놓기에 급급했다. 즉, 현실 인식을 완전히 반대로 했다. " Bold("결국 외환 보유액 부족과 " Link("정경유착" | "여러 가지") " " Link("대마불사" | "경제 문제") "를 조기에 해결하지 못한 것") "이 발목을 잡게 되면서 이후의, 그리고 현재까지의 대한민국 사회에 돌이킬 수 없는  악영향을 끼치게 된다."
+  Indent:
+    Paragraph: "윌리엄 로즈 전 시티은행 부행장. 1997년 11월 국제채권위원단 의장 신분으로 방한하였다."
+Paragraph: "정확히 말하면 외채 상환은 해야 하는데, 당장 갚을 외화는(달러$) 없어서 김영삼 대통령 시절의 " Link("문민정부") "가 " Link("국제통화기금" | "IMF") "에다 " Bold("\"돈 좀 빌려주세요. 곧 갚을게요.\"") "라고 요청한 사건이다. 2008년 " Link("그리스 경제위기") " 같은 사건 수준의 엄청난 재난이다. 그냥 돈을 빌려주고 제때 이자를 쳐서 받으면 그만인데, 돈을 빌려주는 대신 명령대로 나라 경제 운영을 해야 한다는 것 때문에 IMF가 비판받아야 한다는 의견이 있었다. " Link("1980년대") " 중반부터 " Link("1990년대") " 중반, 즉, 외환 위기 사태 발생 전이었던 대한민국이 OECD에 가입한 " Link("1996년") "까지의 대한민국은 " Bold("단군 이래 최대 호황") "이라고 불리던 시절을 누렸다고 했다. 그러나 1996년의 무역 적자는 무려 230억 달러에 달하며 외채는 천억 달러를 뛰어넘는 등, 이미 대내외적으로 장기적인 문제점이 내재되어 있었다. 그럼에도 당시 상당수의 한국 경제학자들은 " Link("잃어버린 10년") "을 겪던 " Link("일본") "을 능가할 것이라며 장밋빛 전망을 내놓기에 급급했다. 즉, 현실 인식을 완전히 반대로 했다. " Bold("결국 외환 보유액 부족과 " Link("정경유착" | "여러 가지") " " Link("대마불사" | "경제 문제") "를 조기에 해결하지 못한 것") "이 발목을 잡게 되면서 이후의, 그리고 현재까지의 대한민국 사회에 돌이킬 수 없는  악영향을 끼치게 된다." <br>
 Heading level=3 folded=false: "동남아시아 외환위기 발생"
-Paragraph: Image("아시아 금융위기.png") <br> "먼저 배경으로 짚고 넘어가야 할 것이 있다. " Bold("1997년 외환위기는 " Link("아시아") " 전체에 일어난 대형사태였다.") " 1997년 여름 " Link("태국") "부터 시작해서 " Link("말레이시아") ", " Link("인도네시아") " 등의 " Link("동남아시아") " 국가부터 번진 외환 위기 는 같은 해 가을 한국을 연쇄적으로 강타했고, 직접적인 경제 위기까지는 아니었던 중국과 일본도 적지 않은 영향을 받았다. 태국은 1995년부터 자국 통화가 위기에 빠질 때 중앙은행 간에 서로 도와주기로 한다는 쌍무협정을 주변 국가들과 체결해 놓고 있었다. 미국에서 시작된 금융사들의 투자성 환율공격이 이를 연쇄적으로 터트린 것. 그런데 " Link("중국") "과 " Link("일본") "의 경우에는 동아시아 경제 위기 이후 동남아 지역의 투자가 증가하면서 일시적인 반사 이익을 좀 받긴 했다. 특히 중국은 동아시아 외환 위기로 동아시아 경제 블록 내에서 위상이 급격히 높아졌다. 그래서 외국에서는 이 사태를 총체적으로 " Bold("아시아 금융 위기(Asian Financial Crisis)") "라고 칭한다."
-Paragraph: Link("1980년대 일본 거품경제") "에 힘입어 동아시아에서 " Link("대한민국") "과 " Link("대만") "이 그 뒤를 쫓아 치고 오르고 있었고, 그것을 본 " Link("태국") ", " Link("필리핀") ", " Link("말레이시아") ", " Link("인도네시아") " 등 동남아의 여러 나라들까지 그에 따라 하기 시작한 이른바 안행 효과(雁行效果)가 일단 세계적 흐름의 배경으로 볼 수 있다. 이후 " Link("잃어버린 10년/일본" | "일본의 버블 붕괴") "까지 시작되며 '" Link("3저호황") "'으로 경제 성장률이 오르기 시작했고, 기본적으로 당시 수출 주도형 국가들의 시스템은 " Bold("자기 자본이 없는 국가") "지만 " Bold("외국 자본을 많이 도입") "함으로써 " Bold("자국 화폐 가치를 평가절하") "해" Footnote(| "간단히 설명하자면 원-달러 환율 액면가를 높게 설정해") " 그 반사 이익으로 " Bold("수출의 증대") ", 그렇게 생산되는 제품들을 통한 " Bold("기술력 증대") ", 하여 결과적으로 " Bold("자국의 경제적 부흥") "을 이끌어 내는 시스템이었다."
-Paragraph: "이렇게 되었을 때 계속해서 잘 굴러가게 되면 자국의 자본이 적더라도 외국 자본을 통해 외국의 설비를 들여와 자국의 생산 기술을 올리며 그렇게 벌어들인 돈으로 기초과학과 기본기술을 올려 생산설비의 자체제작도 노려볼 수 있는 괜찮은 시스템으로 볼 수 있다. 그리고 또 이미 그렇게 성장해 온 나라로서 싱가포르와 한국, " Link("대만") "이라는 이른바 '" Link("아시아의 네 마리 용") "'이라는 아주 좋은 케이스가 이미 존재하고 있었다. 보통 여기에 " Link("홍콩") "도 포함이 되나, 홍콩은 " Link("제조업") "이 아닌 " Link("금융업") "이 성장을 주도했다는 차이점이 있다. 다만 이 경우 " Bold("수출의 증대") " 를 통해 " Bold("자국의 국가경쟁력이 강화") " 되면 " Bold("자국의 화폐가 평가절상") Footnote(| "상기의 평가절하의 반대상황으로, 원-달러 환율 액면가가 낮아지게 되는 상황이다.") "되게 된다. 이렇게 되면 " Bold("경상수지 적자") " 상황이 나기 때문에 환율조작을 통해 다시 강제적으로 " Bold("자국의 화폐를 평가절하") "시켜야만 다시 수출을 할 수 있게 되고 경제가 굴러갈 수 있게 된다."
-Paragraph: "게다가 " Bold("기업고정자본형성") "이라는 고정투자로 " Bold("투자 증가로 인한 경기확장") "으로 이어지게 만들었고, 이는 물가안정에 도움을 주는 동시에 경상수지와 경제성장률을 높이게 만들었다. 다만 " Link("이원복") " 교수는 교양만화 <먼나라 이웃나라> 일본편 1권에선 홍콩, 싱가포르, 대만이 외환위기를 피한 이유를 중국인의 국민성에서 찾았는데, 이 세 나라의 주류민족인 화교들은 특유의 철저한 저축정신으로 일관하여 외화까지 차근차근 모아다가 외환위기를 극복해냈으며 특히 대만은 1997년 기준 외환보유고가 835억 달러였다. 그러나 이들도 글로벌화에 둔감하다 보니 외환위기를 당할 조짐이 점차 보이기 시작했다."
+Paragraph: Image("아시아 금융위기.png") <br> "먼저 배경으로 짚고 넘어가야 할 것이 있다. " Bold("1997년 외환위기는 " Link("아시아") " 전체에 일어난 대형사태였다.") " 1997년 여름 " Link("태국") "부터 시작해서 " Link("말레이시아") ", " Link("인도네시아") " 등의 " Link("동남아시아") " 국가부터 번진 외환 위기 는 같은 해 가을 한국을 연쇄적으로 강타했고, 직접적인 경제 위기까지는 아니었던 중국과 일본도 적지 않은 영향을 받았다. 태국은 1995년부터 자국 통화가 위기에 빠질 때 중앙은행 간에 서로 도와주기로 한다는 쌍무협정을 주변 국가들과 체결해 놓고 있었다. 미국에서 시작된 금융사들의 투자성 환율공격이 이를 연쇄적으로 터트린 것. 그런데 " Link("중국") "과 " Link("일본") "의 경우에는 동아시아 경제 위기 이후 동남아 지역의 투자가 증가하면서 일시적인 반사 이익을 좀 받긴 했다. 특히 중국은 동아시아 외환 위기로 동아시아 경제 블록 내에서 위상이 급격히 높아졌다. 그래서 외국에서는 이 사태를 총체적으로 " Bold("아시아 금융 위기(Asian Financial Crisis)") "라고 칭한다." <br> <br> Link("1980년대 일본 거품경제") "에 힘입어 동아시아에서 " Link("대한민국") "과 " Link("대만") "이 그 뒤를 쫓아 치고 오르고 있었고, 그것을 본 " Link("태국") ", " Link("필리핀") ", " Link("말레이시아") ", " Link("인도네시아") " 등 동남아의 여러 나라들까지 그에 따라 하기 시작한 이른바 안행 효과(雁行效果)가 일단 세계적 흐름의 배경으로 볼 수 있다. 이후 " Link("잃어버린 10년/일본" | "일본의 버블 붕괴") "까지 시작되며 '" Link("3저호황") "'으로 경제 성장률이 오르기 시작했고, 기본적으로 당시 수출 주도형 국가들의 시스템은 " Bold("자기 자본이 없는 국가") "지만 " Bold("외국 자본을 많이 도입") "함으로써 " Bold("자국 화폐 가치를 평가절하") "해" Footnote(| "간단히 설명하자면 원-달러 환율 액면가를 높게 설정해") " 그 반사 이익으로 " Bold("수출의 증대") ", 그렇게 생산되는 제품들을 통한 " Bold("기술력 증대") ", 하여 결과적으로 " Bold("자국의 경제적 부흥") "을 이끌어 내는 시스템이었다." <br> <br> "이렇게 되었을 때 계속해서 잘 굴러가게 되면 자국의 자본이 적더라도 외국 자본을 통해 외국의 설비를 들여와 자국의 생산 기술을 올리며 그렇게 벌어들인 돈으로 기초과학과 기본기술을 올려 생산설비의 자체제작도 노려볼 수 있는 괜찮은 시스템으로 볼 수 있다. 그리고 또 이미 그렇게 성장해 온 나라로서 싱가포르와 한국, " Link("대만") "이라는 이른바 '" Link("아시아의 네 마리 용") "'이라는 아주 좋은 케이스가 이미 존재하고 있었다. 보통 여기에 " Link("홍콩") "도 포함이 되나, 홍콩은 " Link("제조업") "이 아닌 " Link("금융업") "이 성장을 주도했다는 차이점이 있다. 다만 이 경우 " Bold("수출의 증대") " 를 통해 " Bold("자국의 국가경쟁력이 강화") " 되면 " Bold("자국의 화폐가 평가절상") Footnote(| "상기의 평가절하의 반대상황으로, 원-달러 환율 액면가가 낮아지게 되는 상황이다.") "되게 된다. 이렇게 되면 " Bold("경상수지 적자") " 상황이 나기 때문에 환율조작을 통해 다시 강제적으로 " Bold("자국의 화폐를 평가절하") "시켜야만 다시 수출을 할 수 있게 되고 경제가 굴러갈 수 있게 된다." <br> <br> "게다가 " Bold("기업고정자본형성") "이라는 고정투자로 " Bold("투자 증가로 인한 경기확장") "으로 이어지게 만들었고, 이는 물가안정에 도움을 주는 동시에 경상수지와 경제성장률을 높이게 만들었다. 다만 " Link("이원복") " 교수는 교양만화 <먼나라 이웃나라> 일본편 1권에선 홍콩, 싱가포르, 대만이 외환위기를 피한 이유를 중국인의 국민성에서 찾았는데, 이 세 나라의 주류민족인 화교들은 특유의 철저한 저축정신으로 일관하여 외화까지 차근차근 모아다가 외환위기를 극복해냈으며 특히 대만은 1997년 기준 외환보유고가 835억 달러였다. 그러나 이들도 글로벌화에 둔감하다 보니 외환위기를 당할 조짐이 점차 보이기 시작했다." <br>
 Heading level=3 folded=false: "한국은 괜찮을까?"
-Paragraph: "하지만, 한국은 1996년에 GDP의 5%에 달하는 경상수지 적자를 맞았고, 정부는 사치성 수입재가 경상수지 적자의 원인이라고 해명하며, 투자로 수출을 늘려보려는 시도를 했지만 실패한다."
+Paragraph: "하지만, 한국은 1996년에 GDP의 5%에 달하는 경상수지 적자를 맞았고, 정부는 사치성 수입재가 경상수지 적자의 원인이라고 해명하며, 투자로 수출을 늘려보려는 시도를 했지만 실패한다." <br>
 List kind=Decimal:
   Item:
     Paragraph: "게다가 1997년 1월 미국에서 " Bold("금리 인상") "을 시작했고, 그로 인해 " Bold("미국 내수가 일시 축소") "되는 동시에 " Bold("미국의 대외수입이 감소") "하며 한국을 비롯한 수출주도형 국가들이 수출을 할 시장의 규모가 감소했다."
@@ -159,20 +149,17 @@ List kind=Decimal:
     Paragraph: "이로 인해 생산된 물품을 해외에 판매하는 것은 고사하고, 투자나 융자로 외국자본을 유치한 국가들은 미국의 " Bold("금리 인상") " 여파로 " Bold("\"일부 큰손들이 썰물처럼 빠져나가는 현상\"") "을 감당해야 하고 + " Bold("갚아야 할 돈이 늘어나는 사태") "를 맞게 되었다 + 특히 수출을 늘리고자 " Bold("자국의 화폐를 평가절하") " 시키는 순간 " Bold("갚아야 할 돈이 더더욱 늘어나는 악재") "까지 나타나는 등 대형 악재가 연이어 터진 것이다."
   Item:
     Paragraph: "화폐의 평가절하를 못 하게 되자 기업들은 경상수지 악화를 견뎌야 했고, 일시적인 수출량 부재에 이어 전에 계약해 둔 수입 물품으로 인해 유동자금 경색이 시작되자 재고품을 덤핑 판매하여 자금을 수혈했으며, 최후의 보루로 " Bold("단기부채") "를 끌어오게 된 것이다. 외환위기 직전 한국은 자동차 덤핑 대미 수출로 미국의 반덤핑 무역 제재법인 " Link("슈퍼 301조") " 조치를 받았던 게 대표적인 예이다."
-Paragraph: "당시 " Link("김영삼 정부") " 측에서는 한국의 외환보유고가 매년 300억 달러를 유지한다는 걸 국민들에게 알리며 안심시켰으나, 실상은 정부 발표 외환보유액인 300억 달러의 " Bold("5배를 족히 뛰어넘는 1530억 달러라는 막대한 외채") "가 확인되었다." Footnote(| Link("https://imnews.imbc.com/replay/1997/nwdesk/article/1983140_30717.html" | "외채 1530억불 1997.12.30 MBC뉴스")) " 건물의 기둥이 균열나면 건물자체가 불안정하게 흔들리다가 폭삭 내려앉는것과 같다. 돈을 신용, 즉 적정 한도 이상으로 빌리면, 그리고 외환을 적정 수준으로 보유하지 못하면 나라가 망할 수도 있다는 것을 가르쳐 준 좋은 사례다. 자세한 것은 " Link("http://pressian.com/article/article.asp?article_num=60120726141526&section=02" | "이 기사") "를 참고."
+Paragraph: <br> "당시 " Link("김영삼 정부") " 측에서는 한국의 외환보유고가 매년 300억 달러를 유지한다는 걸 국민들에게 알리며 안심시켰으나, 실상은 정부 발표 외환보유액인 300억 달러의 " Bold("5배를 족히 뛰어넘는 1530억 달러라는 막대한 외채") "가 확인되었다." Footnote(| Link("https://imnews.imbc.com/replay/1997/nwdesk/article/1983140_30717.html" | "외채 1530억불 1997.12.30 MBC뉴스")) " 건물의 기둥이 균열나면 건물자체가 불안정하게 흔들리다가 폭삭 내려앉는것과 같다. 돈을 신용, 즉 적정 한도 이상으로 빌리면, 그리고 외환을 적정 수준으로 보유하지 못하면 나라가 망할 수도 있다는 것을 가르쳐 준 좋은 사례다. 자세한 것은 " Link("http://pressian.com/article/article.asp?article_num=60120726141526&section=02" | "이 기사") "를 참고." <br>
 List kind=Decimal:
   Item:
     Paragraph: "한국은행이 97년 3월 26일 외환위기 도래 가능성을 예고하고, 청와대와 재정경제원에 국제통화기금(IMF)을 비롯한 국제금융기구로부터 외화를 긴급차입하는 비상대책을 강구할 것을 건의했으며,"
   Item:
-    Paragraph: "역시 97년 3월에 " Link("한국개발연구원") "(KDI) 역시 위기 가능성을 시사하며 대책강구를 촉구하는 보고서를 발간하였다. " Link("강경식(1936)" | "강경식") " 전 경제부장관이 이 보고서가 시중에 유포되는 걸 못마땅해하는 눈치라, 강경식 장관이 홍콩 출장 중일 때 전국에 배포했는데, 강 장관이 이를 알고 홍콩에서 대노, " Link("재정경제원") "에서 해당 보고서를 다시 회수하는 일이 있었다."
-Indent:
-  Paragraph: "※ 3년 후 강경식 전 경제부장관은 국회의원 선거에 출마하고자 " Link("한나라당") " 입당을 시도했으나, 외환위기와 이 보고서 회수건이 빌미가 되어 무산된다." Footnote(| "결과론이지만 이때(97년 3월) 조치를 취했으면 최악의 상황까지는 가지 않았을 가능성이 높다. 한나라당에서 강경식 전 장관을 받아들이지 않은 일 자체가 그만큼 강 전 장관이 책임소재에서 자유롭지 못하다는 걸 방증하는 것이다.")
+    Paragraph: "역시 97년 3월에 " Link("한국개발연구원") "(KDI) 역시 위기 가능성을 시사하며 대책강구를 촉구하는 보고서를 발간하였다. " Link("강경식(1936)" | "강경식") " 전 경제부장관이 이 보고서가 시중에 유포되는 걸 못마땅해하는 눈치라, 강경식 장관이 홍콩 출장 중일 때 전국에 배포했는데, 강 장관이 이를 알고 홍콩에서 대노, " Link("재정경제원") "에서 해당 보고서를 다시 회수하는 일이 있었다." <br> "※ 3년 후 강경식 전 경제부장관은 국회의원 선거에 출마하고자 " Link("한나라당") " 입당을 시도했으나, 외환위기와 이 보고서 회수건이 빌미가 되어 무산된다." Footnote(| "결과론이지만 이때(97년 3월) 조치를 취했으면 최악의 상황까지는 가지 않았을 가능성이 높다. 한나라당에서 강경식 전 장관을 받아들이지 않은 일 자체가 그만큼 강 전 장관이 책임소재에서 자유롭지 못하다는 걸 방증하는 것이다.")
+Paragraph: 
 Heading level=3 folded=false: "50만$까지는 묻지 않겠다"
-Paragraph: "사실 정부에서도 마냥 손 놓고 있지만은 않았다."
-Paragraph: "뒤늦게나마 금융개혁법을 발표하는 한편, 중반기인 7월 무렵에는 기존 1만 달러였던 \"" Bold("(비사업자) 개인의 외환보유 한도를 50만 달러까지") " 확대하고, 출처를 문제삼지 않겠다\"는 취지의 시행법령을 발표한 것이다. 즉 어떤 경로로든지 좋으니 1인당 50만 불까지는 " Link("양지") "로 꺼내달라는 부탁이었던 것. 영화 <" Link("국가부도의 날") ">에 등장하는 금융인 윤정학의 실제모델로 알려진 " Link("박현주") " " Link("미래에셋금융그룹") " 회장이 업계 실력자 8명과 함께 잘 나가던 금융사를 퇴사한 게 바로 이 무렵이다."
-Paragraph: "이런 노력 끝에 300억 달러 수준의 외환보유고를 유지해나갈 수 있었으나..."
+Paragraph: "사실 정부에서도 마냥 손 놓고 있지만은 않았다." <br> <br> "뒤늦게나마 금융개혁법을 발표하는 한편, 중반기인 7월 무렵에는 기존 1만 달러였던 \"" Bold("(비사업자) 개인의 외환보유 한도를 50만 달러까지") " 확대하고, 출처를 문제삼지 않겠다\"는 취지의 시행법령을 발표한 것이다. 즉 어떤 경로로든지 좋으니 1인당 50만 불까지는 " Link("양지") "로 꺼내달라는 부탁이었던 것. 영화 <" Link("국가부도의 날") ">에 등장하는 금융인 윤정학의 실제모델로 알려진 " Link("박현주") " " Link("미래에셋금융그룹") " 회장이 업계 실력자 8명과 함께 잘 나가던 금융사를 퇴사한 게 바로 이 무렵이다." <br> <br> "이런 노력 끝에 300억 달러 수준의 외환보유고를 유지해나갈 수 있었으나..." <br>
 Heading level=3 folded=false: "장애물에 직면하다"
-Paragraph: "전년도까지 동남아시아 금융시장을 무대로 앉아서 돈을 쓸어 담았던 " Link("종합금융회사") "(약칭 " Bold("종금사") ")들과 " Link("OECD") "에 29번째로 가입해 " Bold("선진국 클럽에 합류한 한국의 위상 문제") ", 그리고 12월에 실시하는 대통령 선거가 발목을 잡게 된다."
+Paragraph: "전년도까지 동남아시아 금융시장을 무대로 앉아서 돈을 쓸어 담았던 " Link("종합금융회사") "(약칭 " Bold("종금사") ")들과 " Link("OECD") "에 29번째로 가입해 " Bold("선진국 클럽에 합류한 한국의 위상 문제") ", 그리고 12월에 실시하는 대통령 선거가 발목을 잡게 된다." <br>
 List kind=Decimal:
   Item:
     Paragraph: Bold("30여 개") "에 달하는 종금사들이 일본 등지에서 1년 이하 " Bold("\"단기 외채로\"") " 끌어들인 돈을 다시 빌려주었던 동남아시아 국가들의 경제상황이 점점 나빠지고 + 미국의 금리인상 여파로" Footnote(| Link("앨런 그린스펀") " 미국 연장준비제도(" Link("FRB") ") 의장이 본인 업무 스타일대로, 사전에 금리 인상 필요성과 가능성을 시장에 예고한 바 있으나, 실제 금리인상 조치 여파는 우리나라 전문가들의 예측보다 더 컸다고.") " 아시아 국가들에 투자된 자금 일부가 다시 미국으로 몰리는 상황에서 12월, 1 ~ 2월인 만기일이 점점 다가오고 있었다."
@@ -182,37 +169,17 @@ List kind=Decimal:
     Paragraph: "96년 BIS 비율의 도입으로 일본은행들이 한국에 빌려준 부채를 회수하기 시작했다."
   Item:
     Paragraph: "게다가 96년 총선의 압승으로 여권 단독 표결로 통과시킬 수 있는 각종 개혁 입법들 마저도, 정권 말 지지도가 급락한 " Bold("YS와 거리를 두려는 여당") "의원들의 비협조로 통과하지 못하였다. 표결에 다수가 불참했다고 한다."
-Paragraph: "이 때문에 외환위기가 시작된 1997년 10월과 11월 사이 정부는 환율 급등을 막기 위해 118억 달러를 외환시장에 쏟아부었으나, 해외시장에서 한국의 대외신인도를 다시 끌어올리지 못하고 " Link("무디스") " 등지의 신용평가회사들의 평점은 계속 하락하는 악재가 연이어 발생하게 된다. 이 와중에 대외부채상환용 외환마저 모두 다 써버려서 추후 있는 외채를 막기에는 역부족이었다. 앞서 말한 300억 달러 유지는 사실상 11월을 지나면서 이미 바닥을 드러낸 지 오래전이었다."
+Paragraph: <br> "이 때문에 외환위기가 시작된 1997년 10월과 11월 사이 정부는 환율 급등을 막기 위해 118억 달러를 외환시장에 쏟아부었으나, 해외시장에서 한국의 대외신인도를 다시 끌어올리지 못하고 " Link("무디스") " 등지의 신용평가회사들의 평점은 계속 하락하는 악재가 연이어 발생하게 된다. 이 와중에 대외부채상환용 외환마저 모두 다 써버려서 추후 있는 외채를 막기에는 역부족이었다. 앞서 말한 300억 달러 유지는 사실상 11월을 지나면서 이미 바닥을 드러낸 지 오래전이었다." <br>
 Heading level=3 folded=false: "둑이 무너지다"
-Paragraph: "미국의 조기 자금지원으로 국가부도 위기를 넘기고 외채의 만기연장률도 1997년 12월 18일 5.1퍼센트에서 1998년 1월 15일 77.4퍼센트로 급속회복되었으나 외환분야에서 실물분야로 위기가 전염되어 유례를 찾을 수 없는 대량해고가 발생했다." Link("1997년") " " Link("12월") ", 사태가 시작된 직후의 국내 실업률은 3.1%로 집계되었다." Footnote(| Link("http://newslibrary.naver.com/viewer/index.nhn?articleId=1998013100289107001&editNo=7&printCount=1&publishDate=1998-01-31&officeId=00028&pageNo=7&printNo=3104&publishType=00010" | "지난달 실업률 3.1% 4년 반 만에 최고") ", " Link("http://newslibrary.naver.com/viewer/index.nhn?articleId=1998013100209107003&editNo=45&printCount=1&publishDate=1998-01-31&officeId=00020&pageNo=7&printNo=23780&publishType=00010" | "실업률 3.1% 최악 수준") " ") " 그러나 98년 1월에 집계된 실업률은 4.7%를 기록하고 1년전보다 " Bold("3배") " 많은 3300여 개의 업체가 도산한다. 노동부마저 감당하기 어려울 정도로 실업급여 신청자수가 폭증하였으며" Link("https://www.google.com/amp/s/www.hankyung.com/society/amp/1998022800441" | "#") ", 임금체불 신고도 급증하였다" Link("https://mnews.joins.com/article/3594157" | "#") ".그로부터 1년 후인 " Link("1999년") " 2월, 실업률이 1966년 이후 최고인 8.7%에 달해 전무후무한 경기위축을 실감하게 하였다. " Link("1999년") " 2월을 피크로 실업률은 하락하였으나 현재까지도 여파가 미쳐 취업난은 아직까지도 " Link("대한민국/경제" | "한국 경제") "를 괴롭히는 주요 문제다." Footnote(| Link("http://newslibrary.naver.com/viewer/index.nhn?articleId=1999041700289108001&editNo=5&printCount=1&publishDate=1999-04-17&officeId=00028&pageNo=8&printNo=3479&publishType=00010" | "실업률 8.7%... 사상최악") ", " Link("http://newslibrary.naver.com/viewer/index.nhn?articleId=1999041700209107017&editNo=45&printCount=1&publishDate=1999-04-17&officeId=00020&pageNo=7&printNo=24172&publishType=00010" | "실업률 8.7%... 사상최악2") " ")
-Paragraph: Link("1997년") " " Link("10월") ", 외환위기 직전 " Link("고용노동부" | "노동부") "에 신고된 전국 사업장 체불임금 금액은 6480억 원에 달해 수많은 " Link("노동자") "들이 " Link("임금") "도 못 받는 상황에 직면해 " Link("경제") "위기 상황을 실감케 해 준다." Footnote(| Link("http://newslibrary.naver.com/viewer/index.nhn?articleId=1997102300329122005&editNo=45&printCount=1&publishDate=1997-10-23&officeId=00032&pageNo=22&printNo=16252&publishType=00010" | "체불임금 6480억원") " ") " "
-Paragraph: "여담으로 이때 당시 뉴코아나 미도파 등이 부도났는데도 시민들에게 그 사실을 알리지않아 많은 시민들이 평소와 같이 백화점을 찾았는데 알고보니 부도가 났다는 것을 알게되는 " Link("http://mn.kbs.co.kr/mobile/news/view.do?ncd=3778940#kbsnews" | "상황들도 많았다.") " 이는 종금사나 증권사도 마찬가지였다."
+Paragraph: "미국의 조기 자금지원으로 국가부도 위기를 넘기고 외채의 만기연장률도 1997년 12월 18일 5.1퍼센트에서 1998년 1월 15일 77.4퍼센트로 급속회복되었으나 외환분야에서 실물분야로 위기가 전염되어 유례를 찾을 수 없는 대량해고가 발생했다." Link("1997년") " " Link("12월") ", 사태가 시작된 직후의 국내 실업률은 3.1%로 집계되었다." Footnote(| Link("http://newslibrary.naver.com/viewer/index.nhn?articleId=1998013100289107001&editNo=7&printCount=1&publishDate=1998-01-31&officeId=00028&pageNo=7&printNo=3104&publishType=00010" | "지난달 실업률 3.1% 4년 반 만에 최고") ", " Link("http://newslibrary.naver.com/viewer/index.nhn?articleId=1998013100209107003&editNo=45&printCount=1&publishDate=1998-01-31&officeId=00020&pageNo=7&printNo=23780&publishType=00010" | "실업률 3.1% 최악 수준") " ") " 그러나 98년 1월에 집계된 실업률은 4.7%를 기록하고 1년전보다 " Bold("3배") " 많은 3300여 개의 업체가 도산한다. 노동부마저 감당하기 어려울 정도로 실업급여 신청자수가 폭증하였으며" Link("https://www.google.com/amp/s/www.hankyung.com/society/amp/1998022800441" | "#") ", 임금체불 신고도 급증하였다" Link("https://mnews.joins.com/article/3594157" | "#") ".그로부터 1년 후인 " Link("1999년") " 2월, 실업률이 1966년 이후 최고인 8.7%에 달해 전무후무한 경기위축을 실감하게 하였다. " Link("1999년") " 2월을 피크로 실업률은 하락하였으나 현재까지도 여파가 미쳐 취업난은 아직까지도 " Link("대한민국/경제" | "한국 경제") "를 괴롭히는 주요 문제다." Footnote(| Link("http://newslibrary.naver.com/viewer/index.nhn?articleId=1999041700289108001&editNo=5&printCount=1&publishDate=1999-04-17&officeId=00028&pageNo=8&printNo=3479&publishType=00010" | "실업률 8.7%... 사상최악") ", " Link("http://newslibrary.naver.com/viewer/index.nhn?articleId=1999041700209107017&editNo=45&printCount=1&publishDate=1999-04-17&officeId=00020&pageNo=7&printNo=24172&publishType=00010" | "실업률 8.7%... 사상최악2") " ") <br> <br> Link("1997년") " " Link("10월") ", 외환위기 직전 " Link("고용노동부" | "노동부") "에 신고된 전국 사업장 체불임금 금액은 6480억 원에 달해 수많은 " Link("노동자") "들이 " Link("임금") "도 못 받는 상황에 직면해 " Link("경제") "위기 상황을 실감케 해 준다." Footnote(| Link("http://newslibrary.naver.com/viewer/index.nhn?articleId=1997102300329122005&editNo=45&printCount=1&publishDate=1997-10-23&officeId=00032&pageNo=22&printNo=16252&publishType=00010" | "체불임금 6480억원") " ") " " <br> <br> "여담으로 이때 당시 뉴코아나 미도파 등이 부도났는데도 시민들에게 그 사실을 알리지않아 많은 시민들이 평소와 같이 백화점을 찾았는데 알고보니 부도가 났다는 것을 알게되는 " Link("http://mn.kbs.co.kr/mobile/news/view.do?ncd=3778940#kbsnews" | "상황들도 많았다.") " 이는 종금사나 증권사도 마찬가지였다." <br>
 Heading level=3 folded=false: Link("국제통화기금" | "IMF") " 구제금융 신청"
-Paragraph: Link("11월 19일") ", 경제가 위기에 빠져들면서 " Link("강경식(1936)" | "강경식") " 경제부총리가 물러나고 " Link("임창열") " 통상산업부 장관이 새 경제 부총리로 임명됐다."
-Paragraph: Link("환율") " 변동 폭을 현행 2.25% 범위 내에서 10% 범위 내로 대폭 확대한다고 발표한다."
-Paragraph: Image("external/img.imnews.imbc.com/DN19970145-00_01040504.jpg")
-Paragraph: "이튿날 " Link("11월 21일") ", 정부가 결국 국제 통화기금 " Link("IMF") "의 구제 금융을 신청하기로 했다."
-Paragraph: "IMF 구제금융 요청은 1970년대 '" Link("한강의 기적") "'에서 시작하여 1980년대~90년대 초반까지 이어진 대한민국의 지속적인 고도 경제 성장이 사실상 종료되었으며, 그러한 방향에 부실한 지점이 있다는 것까지 의미했다. 당시 MBC " Link("이인용(1957)" | "이인용") " 앵커의 말대로 한국은 전 세계에 국가 부도를 인정함과 동시에 국제기관의 품 안에서 여태까지와 전혀 다른 방식으로 회생을 도모해야 하는 뼈아픈 처지가 된 것이다. 이와 관련하여 " Link("http://imnews.imbc.com/20dbnews/history/1997/1771235_19482.html" | "IMF의 지원을 받은 나라들이 경제 주권을 포기할 정도") "라는 말이 있듯, IMF가 그냥 무조건적으로 돈을 빌려주는 곳이 아니며 IMF의 명령에 따라 경제 운영을 해야 하기 때문에 이에 대한 불만도 상당했다. 그러나 당시 KBS 보도 중에선 부작용 관련 얘기가 " Link("http://news.kbs.co.kr/vod/program.do?bcd=0001#1997.11.21" | "별로 없었다.")
-Paragraph: "IMF 구제금융 요청으로 대한민국이라는 국가 경제자체의 신뢰도는 끝장이 났고 IMF의 경제식민지가 된 이상세계의 금융기관들 사이에서 나라경제 신뢰도는 남미의 개도국 아르헨티나수준으로 끝장났으며, IMF 측에서도 한국이 IMF와 맺은 약속을 지킬 의지가 있는지에 대해서 강하게 의심했다. 오죽하면 " Link("미셸 캉드쉬") " 당시 IMF 총재가 12월 13일 미국 PBS 기자회견에서 \"한국 정부는 금융기관 기업과 " Link("근친상간") "적인 관계\"라며 힐난했다.(" Link("https://imnews.imbc.com/replay/1997/nwdesk/article/1772050_30717.html" | "MBC 보도") ") 다만 KBS에서는 캉드쉬의 동일 인터뷰를 다루며 \"한국은 최악의 위기상황을 벗어났다\"는 발언을 강조하여 다른 관점으로 " Link("http://news.kbs.co.kr/news/view.do?ncd=3780871" | "보도했다.")
-Paragraph: "임창열 당시 경제부총리는 " Link("김영삼") " 대통령과 3당 대통령 후보와의 청와대 만찬에 참석해 " Link("IMF") " 구제 금융의 불가피성을 설명한 뒤 그날 밤 10시에 IMF 구제금융 요청 사실을 공식 발표한다. " Link("임창열") " 부총리는 그날 우리나라를 방문 중인 " Link("스탠리 피셔") " IMF 부총재와 티모시 가이트너" Footnote(| "로버트 루빈 미국 재무부장관 인맥으로 분류되는 금융전문가로, " Link("버락 오바마") " 정부 출범 후 08년 금융위기에 대처할 구원투수로서 미 재무부장관직을 맡게 된다.") " 미국 재무부 차관보와의 잇단 접촉에서 우리나라가 " Link("IMF") "로부터 자금 지원을 받는 것이 불가피하다는 데 의견을 같이 한 것으로 알려졌다." Link("https://imnews.imbc.com/replay/1997/nwdesk/article/1771225_30717.html" | "#") " 그리고 " Link("12월 3일") " IMF와의 협상이 최종적으로 발표되었다."
-Paragraph: Image("external/monthly.chosun.com/1101_b084.jpg" width=700) <br> "임창열 경제부총리와 " Link("미셸 캉드쉬") " IMF 총재는 협상을 마치고 세종로 정부종합청사 대회의장으로 나와서 협상의 타결 소식을 전했는데, 캉드쉬 총재는 이 자리에서 한국에 지원할 자금 규모는 모두 550억 달러로 결정됐다고 말했다. 먼저 550억 달러의 자금 조달 내역을 보면 " Link("IMF") "가 210억 달러, " Link("IBRD") " 세계은행이 100억 달러, ADB 아시아 개발은행이 40억 달러 등 국제기구에서 350억 달러를 지원하는 데 합의했다. 사실상 경제주권을 " Link("IMF") "에 바친 셈이다." Link("https://imnews.imbc.com/replay/1997/nwdesk/article/1772050_30717.html" | "#") " 이 양해각서가 체결된 12월 3일은 대한민국이 " Bold("IMF 관리 체제") "로 들어선 시점으로 보는 편이다."
-Paragraph: "한편 대선주자들 간에 의견충돌이 있었는데, 김대중 후보와 국민회의 측은 " Bold("\"우리나라에 지나친 부담이 되는 부분에 대한 개선이 필요하다... 세부사항에 대한 추가협상을 통해 국민들의 고통을 최소한으로 줄여야 할 것.\"") ", " Bold("\"지금의 협약내용대로면 한국 경제가 대량실업 등으로 힘들어질 것\"") "이라며 재협상 혹은 추가협상을 주장하였고" Footnote(| "미국 재무부 입김이 반영된 고이율 정책(" Bold("29.5%") ")은 김대중 정부 초기인 98년 전반기에 재협상이 성사 → " Bold("국내 금융기관을 외국 기업이 인수가능(= 금융시장 개방)") "하도록 하는 조건으로 낮추게 된다.") ", 이에대해 이회창후보와 조순 한나라당 총재는 " Bold("\"한국 측이 더 적극적으로 IMF에 협조하겠다는 뜻을 밝혀야 경제위기를 빠른 시간 안에 극복할 수 있다.\"") ", " Bold("\"국민회의의 재협상 주장은 정치적 인기발언이다.\"") "며 김대중 측을 비판하였다. IMF는 당시 김대중, 이회창, 이인제 등 유력 대선 후보들로부터 ‘협정 준수 이행 각서’에 서명하도록 요구했다." Link("http://imnews.imbc.com//20dbnews/history/1997/1771985_19482.html" | "#") Link("https://news.naver.com/main/read.nhn?mode=LSD&mid=sec&sid1=100&oid=001&aid=0004206435" | "#") Link("https://news.naver.com/main/read.nhn?mode=LSD&mid=sec&sid1=101&oid=015&aid=0004090343" | "#")
-Paragraph: "이후 4년간 한국 경제는 " Link("IMF") "의 경제 정책에 무조건적으로 " Link("복종") "하게 되었다.(" Link("http://news.kbs.co.kr/news/view.do?ncd=3780517" | "KBS") ", " Link("https://imnews.imbc.com/replay/1997/nwdesk/article/1772050_30717.html" | "IMF 협약 반드시 지켜야") ") 이런 관계는 " Link("2001년") " " Link("8월 23일") " 한국은행이 IMF 구제금융 차입금 195억 달러 전액을 상환해서 당초 예정보다 3년 빨리 IMF 관리 체제 종료가 될 때까지 이어진다."
+Paragraph: Link("11월 19일") ", 경제가 위기에 빠져들면서 " Link("강경식(1936)" | "강경식") " 경제부총리가 물러나고 " Link("임창열") " 통상산업부 장관이 새 경제 부총리로 임명됐다." <br> <br> Link("환율") " 변동 폭을 현행 2.25% 범위 내에서 10% 범위 내로 대폭 확대한다고 발표한다." <br> <br> Image("external/img.imnews.imbc.com/DN19970145-00_01040504.jpg") <br> <br> "이튿날 " Link("11월 21일") ", 정부가 결국 국제 통화기금 " Link("IMF") "의 구제 금융을 신청하기로 했다." <br> <br> "IMF 구제금융 요청은 1970년대 '" Link("한강의 기적") "'에서 시작하여 1980년대~90년대 초반까지 이어진 대한민국의 지속적인 고도 경제 성장이 사실상 종료되었으며, 그러한 방향에 부실한 지점이 있다는 것까지 의미했다. 당시 MBC " Link("이인용(1957)" | "이인용") " 앵커의 말대로 한국은 전 세계에 국가 부도를 인정함과 동시에 국제기관의 품 안에서 여태까지와 전혀 다른 방식으로 회생을 도모해야 하는 뼈아픈 처지가 된 것이다. 이와 관련하여 " Link("http://imnews.imbc.com/20dbnews/history/1997/1771235_19482.html" | "IMF의 지원을 받은 나라들이 경제 주권을 포기할 정도") "라는 말이 있듯, IMF가 그냥 무조건적으로 돈을 빌려주는 곳이 아니며 IMF의 명령에 따라 경제 운영을 해야 하기 때문에 이에 대한 불만도 상당했다. 그러나 당시 KBS 보도 중에선 부작용 관련 얘기가 " Link("http://news.kbs.co.kr/vod/program.do?bcd=0001#1997.11.21" | "별로 없었다.") <br> <br> "IMF 구제금융 요청으로 대한민국이라는 국가 경제자체의 신뢰도는 끝장이 났고 IMF의 경제식민지가 된 이상세계의 금융기관들 사이에서 나라경제 신뢰도는 남미의 개도국 아르헨티나수준으로 끝장났으며, IMF 측에서도 한국이 IMF와 맺은 약속을 지킬 의지가 있는지에 대해서 강하게 의심했다. 오죽하면 " Link("미셸 캉드쉬") " 당시 IMF 총재가 12월 13일 미국 PBS 기자회견에서 \"한국 정부는 금융기관 기업과 " Link("근친상간") "적인 관계\"라며 힐난했다.(" Link("https://imnews.imbc.com/replay/1997/nwdesk/article/1772050_30717.html" | "MBC 보도") ") 다만 KBS에서는 캉드쉬의 동일 인터뷰를 다루며 \"한국은 최악의 위기상황을 벗어났다\"는 발언을 강조하여 다른 관점으로 " Link("http://news.kbs.co.kr/news/view.do?ncd=3780871" | "보도했다.") <br> <br> "임창열 당시 경제부총리는 " Link("김영삼") " 대통령과 3당 대통령 후보와의 청와대 만찬에 참석해 " Link("IMF") " 구제 금융의 불가피성을 설명한 뒤 그날 밤 10시에 IMF 구제금융 요청 사실을 공식 발표한다. " Link("임창열") " 부총리는 그날 우리나라를 방문 중인 " Link("스탠리 피셔") " IMF 부총재와 티모시 가이트너" Footnote(| "로버트 루빈 미국 재무부장관 인맥으로 분류되는 금융전문가로, " Link("버락 오바마") " 정부 출범 후 08년 금융위기에 대처할 구원투수로서 미 재무부장관직을 맡게 된다.") " 미국 재무부 차관보와의 잇단 접촉에서 우리나라가 " Link("IMF") "로부터 자금 지원을 받는 것이 불가피하다는 데 의견을 같이 한 것으로 알려졌다." Link("https://imnews.imbc.com/replay/1997/nwdesk/article/1771225_30717.html" | "#") " 그리고 " Link("12월 3일") " IMF와의 협상이 최종적으로 발표되었다." <br> <br> Image("external/monthly.chosun.com/1101_b084.jpg" width=700) <br> "임창열 경제부총리와 " Link("미셸 캉드쉬") " IMF 총재는 협상을 마치고 세종로 정부종합청사 대회의장으로 나와서 협상의 타결 소식을 전했는데, 캉드쉬 총재는 이 자리에서 한국에 지원할 자금 규모는 모두 550억 달러로 결정됐다고 말했다. 먼저 550억 달러의 자금 조달 내역을 보면 " Link("IMF") "가 210억 달러, " Link("IBRD") " 세계은행이 100억 달러, ADB 아시아 개발은행이 40억 달러 등 국제기구에서 350억 달러를 지원하는 데 합의했다. 사실상 경제주권을 " Link("IMF") "에 바친 셈이다." Link("https://imnews.imbc.com/replay/1997/nwdesk/article/1772050_30717.html" | "#") " 이 양해각서가 체결된 12월 3일은 대한민국이 " Bold("IMF 관리 체제") "로 들어선 시점으로 보는 편이다." <br> <br> "한편 대선주자들 간에 의견충돌이 있었는데, 김대중 후보와 국민회의 측은 " Bold("\"우리나라에 지나친 부담이 되는 부분에 대한 개선이 필요하다... 세부사항에 대한 추가협상을 통해 국민들의 고통을 최소한으로 줄여야 할 것.\"") ", " Bold("\"지금의 협약내용대로면 한국 경제가 대량실업 등으로 힘들어질 것\"") "이라며 재협상 혹은 추가협상을 주장하였고" Footnote(| "미국 재무부 입김이 반영된 고이율 정책(" Bold("29.5%") ")은 김대중 정부 초기인 98년 전반기에 재협상이 성사 → " Bold("국내 금융기관을 외국 기업이 인수가능(= 금융시장 개방)") "하도록 하는 조건으로 낮추게 된다.") ", 이에대해 이회창후보와 조순 한나라당 총재는 " Bold("\"한국 측이 더 적극적으로 IMF에 협조하겠다는 뜻을 밝혀야 경제위기를 빠른 시간 안에 극복할 수 있다.\"") ", " Bold("\"국민회의의 재협상 주장은 정치적 인기발언이다.\"") "며 김대중 측을 비판하였다. IMF는 당시 김대중, 이회창, 이인제 등 유력 대선 후보들로부터 ‘협정 준수 이행 각서’에 서명하도록 요구했다." Link("http://imnews.imbc.com//20dbnews/history/1997/1771985_19482.html" | "#") Link("https://news.naver.com/main/read.nhn?mode=LSD&mid=sec&sid1=100&oid=001&aid=0004206435" | "#") Link("https://news.naver.com/main/read.nhn?mode=LSD&mid=sec&sid1=101&oid=015&aid=0004090343" | "#") <br> <br> "이후 4년간 한국 경제는 " Link("IMF") "의 경제 정책에 무조건적으로 " Link("복종") "하게 되었다.(" Link("http://news.kbs.co.kr/news/view.do?ncd=3780517" | "KBS") ", " Link("https://imnews.imbc.com/replay/1997/nwdesk/article/1772050_30717.html" | "IMF 협약 반드시 지켜야") ") 이런 관계는 " Link("2001년") " " Link("8월 23일") " 한국은행이 IMF 구제금융 차입금 195억 달러 전액을 상환해서 당초 예정보다 3년 빨리 IMF 관리 체제 종료가 될 때까지 이어진다." <br>
 Heading level=3 folded=false: "후유증과 복기"
-Paragraph: "경제위기 이전의 성장 이면이 봇물터지듯 드러나면서 대한민국은 경제위기 이후 한동안 벼랑 끝으로 추락했다. 단기간에 회복하긴 했지만 사회적, 경제적으로 막대한 후유증이 나타났다. 양극화, 고용불안, 청년실업 등 이전에는 거의 드러나지 않다시피 했던 문제가 현실로 나타났고, 그에 따라 사회적으로도 자살률의 급증, 가정의 붕괴와 " Link("이혼") " 등의 " Bold("암울한 그림자") "를 남겼다. 이 문제들을 보면 알겠지만 " Bold("아직도 해결하지 못한 현재진행형 문제들이다.")
-Paragraph: "그럼에도 불구하고 1997년 외환위기가 거진 20년이 지난 2017년 이후에도 그 원인 규명에 대해서는 " Bold("첨예하게 얽힌 이해관계로 인해") " 대충 넘어가는 경향이 있다. 원인을 규명하려면 누구의 책임인지 여부를 당연히 논하게 되는데, 여기에 당시 여당인 신한국당(현재 " Link("국민의힘") ")과 우리나라 경제의 주축인 재벌이 묶여 버리기 때문이다. '경제는 보수'라는 슬로건을 앞세우는 보수진영에서 원인을 규명하면 당연히 직접 책임이 자신들에게 있으므로 진영적으로 손해이다."
-Paragraph: "또한 이미 주류 언론, 재벌 기업과 깊은 관계를 맺은 보수정당 측에서 막판에 시도했던 개혁 입법들이 무산된 책임을 당시 야당에게까지 집요하게 물으면서 정치공세를 늦추지 않기 때문에, 논의가 길어지면 당시 야당이었던 " Link("새정치국민회의") "에게도 득이 되지 않기 때문. 사실 1996년 " Link("제15대 국회의원 선거") "에서 여당인 " Link("신한국당") "이 " Bold("압승") "을 거두었기 때문에 정말 입법시키고자 하는 의지가 강했다면, " Bold("단독 표결로도 충분히 승산") "이 있었다. 심지어 " Link("이인제") " 후보가 의원 6명을 데리고 " Link("국민신당(대한민국)" | "국민신당") "으로 갈라진 상황에서도 모든 야권의석보다 신한국당 의석이 더 많았기 때문."
-Paragraph: "당시 가계저축률 감소 추세를 수치로 보면, 1992년에는 17.5%였던 것이 1997년 12.6%로 줄었다. 물론 가계저축률 12.6% 수준이 과소비라면 겨우 3%대를 깔짝거리는 지금은 초 과소비인가 하는 의문이 들 수 있다. 그러나 그 당시의 서민들은 '경기 침체'라는 단어 자체를 낯설어했으나, 현재는 경기침체는 물론이고 가계 소득이 악화되었으며 생필품 가격은 " Link("OECD") "에서도 탑클래스를 달리고 있다는 점을 고려해야 한다. 다시 말하면 당시에는 웬만해선 저축을 어느 정도 할 수 있었으나, 지금은 저축을 어느 정도 할 수 있으면 오히려 중산층 정도는 된다는 소리다. 당장 일부 인식과 달리 대출의 상당수는 주택 거래나 투기를 위한 것이 아니라 생활을 위한 신용대출이 많다는 통계도 있다. 저축률이 3% 대로 떨어지는 것도 무리는 아니다."
-Paragraph: "한편 외환위기 이전의 가계저축은 실제로 감소했다기보다 사회보장부담의 증가에 따라 가계저축이 정부저축으로 이전된 것에 불과하다고 생각할 수 있지만, 정부저축률은 1982년에 5.5%를 달성한 이후 1997년에야 겨우 10%였다."
-Paragraph: Image("external/img.khan.co.kr/l_2012121301001673200133322.jpg")
-Paragraph: "그리고 가계저축률 하락에 발을 맞추듯 총저축률 역시 감소추세에 들어가고 있던 시점이기도 했다. 다만 상당수 대기업들이 호황기를 틈타 투자를 과도하게 했다가, 외환위기가 닥쳐온 후(혹은 닥쳐오기 직전에) 부도된 사례는 꽤 많았다. 예: 기아그룹, 한보그룹, 대우그룹, 뉴코아그룹, 해태그룹, 나산그룹, 쌍방울그룹 등등."
-Paragraph: "하지만 IMF 외환위기의 원인이 과다한 외채 때문이라고 하면 정답이거나 정답에 가깝다고 할 수 있지만 최소한 자산 시장에 거품이 잔뜩 끼어서 경제 위기가 왔던 상황은 아니었다. 사실 부동산 광풍은 " Link("3저호황") "의 영향으로 시중에 자금이 넘쳐나던 노태우 정부때 가장 심각했었고 그래서 집값과 전월세비 상승으로 체감하는 체감되는 경제 성장폭이 그렇게까지 높은 건 아니었다."
-Paragraph: "그러다가 1990년대 초반 신도시들과 주택 개발지구의 대대적인 분양으로 주택 물량이 쏟아져 나온 데다가, 토지공개념 3법과 부동산 거래 실명제로 완연히 가라앉았고 문민정부 시기 내내 부동산 시장은 안정세를 보였다. 1996년에 약간의 반등이 보이기는 했지만 오래가지 못했던 상황인 데다가 주식시장 또한 1994년 11월에 종합주가지수(현재 " Link("코스피") " 지수)가 1138P로 최고점을 찍은 이후로 계속 하락하여 1996년 12월에는 651P로 한해를 마감할 정도로 내리막을 걷던 상황이었다."
-Paragraph: "물론 이때 부동산 침체의 영향으로 상당수 기업들이 아파트를 짓다가 파산하는 징조를 보이기는 했다. 다만 임금 상승률은 그동안의 저임금에 짓눌려서 노조 설립 붐 및 임금 인상 투쟁이 대대적으로 벌어졌던 1980년대 후반과 1990년대 초반보다야 조금 못하기는 하지만 그래도 집값과 전월세비의 인상이 더뎠기 때문에 그만큼의 불로소득이 소비나 저축자금으로 바로 전환되었으니 만큼 소비가 크게 활발해졌던 것은 사실이었다. 그렇다 해도 무조건적인 과소비가 원인이라고 하기에는 가계저축률이 높았기 때문에 책임 전가라는 비판을 피할 수는 없었지만..."
+Paragraph: "경제위기 이전의 성장 이면이 봇물터지듯 드러나면서 대한민국은 경제위기 이후 한동안 벼랑 끝으로 추락했다. 단기간에 회복하긴 했지만 사회적, 경제적으로 막대한 후유증이 나타났다. 양극화, 고용불안, 청년실업 등 이전에는 거의 드러나지 않다시피 했던 문제가 현실로 나타났고, 그에 따라 사회적으로도 자살률의 급증, 가정의 붕괴와 " Link("이혼") " 등의 " Bold("암울한 그림자") "를 남겼다. 이 문제들을 보면 알겠지만 " Bold("아직도 해결하지 못한 현재진행형 문제들이다.") <br> <br> "그럼에도 불구하고 1997년 외환위기가 거진 20년이 지난 2017년 이후에도 그 원인 규명에 대해서는 " Bold("첨예하게 얽힌 이해관계로 인해") " 대충 넘어가는 경향이 있다. 원인을 규명하려면 누구의 책임인지 여부를 당연히 논하게 되는데, 여기에 당시 여당인 신한국당(현재 " Link("국민의힘") ")과 우리나라 경제의 주축인 재벌이 묶여 버리기 때문이다. '경제는 보수'라는 슬로건을 앞세우는 보수진영에서 원인을 규명하면 당연히 직접 책임이 자신들에게 있으므로 진영적으로 손해이다." <br> <br> "또한 이미 주류 언론, 재벌 기업과 깊은 관계를 맺은 보수정당 측에서 막판에 시도했던 개혁 입법들이 무산된 책임을 당시 야당에게까지 집요하게 물으면서 정치공세를 늦추지 않기 때문에, 논의가 길어지면 당시 야당이었던 " Link("새정치국민회의") "에게도 득이 되지 않기 때문. 사실 1996년 " Link("제15대 국회의원 선거") "에서 여당인 " Link("신한국당") "이 " Bold("압승") "을 거두었기 때문에 정말 입법시키고자 하는 의지가 강했다면, " Bold("단독 표결로도 충분히 승산") "이 있었다. 심지어 " Link("이인제") " 후보가 의원 6명을 데리고 " Link("국민신당(대한민국)" | "국민신당") "으로 갈라진 상황에서도 모든 야권의석보다 신한국당 의석이 더 많았기 때문." <br> <br> "당시 가계저축률 감소 추세를 수치로 보면, 1992년에는 17.5%였던 것이 1997년 12.6%로 줄었다. 물론 가계저축률 12.6% 수준이 과소비라면 겨우 3%대를 깔짝거리는 지금은 초 과소비인가 하는 의문이 들 수 있다. 그러나 그 당시의 서민들은 '경기 침체'라는 단어 자체를 낯설어했으나, 현재는 경기침체는 물론이고 가계 소득이 악화되었으며 생필품 가격은 " Link("OECD") "에서도 탑클래스를 달리고 있다는 점을 고려해야 한다. 다시 말하면 당시에는 웬만해선 저축을 어느 정도 할 수 있었으나, 지금은 저축을 어느 정도 할 수 있으면 오히려 중산층 정도는 된다는 소리다. 당장 일부 인식과 달리 대출의 상당수는 주택 거래나 투기를 위한 것이 아니라 생활을 위한 신용대출이 많다는 통계도 있다. 저축률이 3% 대로 떨어지는 것도 무리는 아니다." <br> <br> "한편 외환위기 이전의 가계저축은 실제로 감소했다기보다 사회보장부담의 증가에 따라 가계저축이 정부저축으로 이전된 것에 불과하다고 생각할 수 있지만, 정부저축률은 1982년에 5.5%를 달성한 이후 1997년에야 겨우 10%였다." <br> <br> Image("external/img.khan.co.kr/l_2012121301001673200133322.jpg") <br> <br> "그리고 가계저축률 하락에 발을 맞추듯 총저축률 역시 감소추세에 들어가고 있던 시점이기도 했다. 다만 상당수 대기업들이 호황기를 틈타 투자를 과도하게 했다가, 외환위기가 닥쳐온 후(혹은 닥쳐오기 직전에) 부도된 사례는 꽤 많았다. 예: 기아그룹, 한보그룹, 대우그룹, 뉴코아그룹, 해태그룹, 나산그룹, 쌍방울그룹 등등." <br> <br> "하지만 IMF 외환위기의 원인이 과다한 외채 때문이라고 하면 정답이거나 정답에 가깝다고 할 수 있지만 최소한 자산 시장에 거품이 잔뜩 끼어서 경제 위기가 왔던 상황은 아니었다. 사실 부동산 광풍은 " Link("3저호황") "의 영향으로 시중에 자금이 넘쳐나던 노태우 정부때 가장 심각했었고 그래서 집값과 전월세비 상승으로 체감하는 체감되는 경제 성장폭이 그렇게까지 높은 건 아니었다." <br> <br> "그러다가 1990년대 초반 신도시들과 주택 개발지구의 대대적인 분양으로 주택 물량이 쏟아져 나온 데다가, 토지공개념 3법과 부동산 거래 실명제로 완연히 가라앉았고 문민정부 시기 내내 부동산 시장은 안정세를 보였다. 1996년에 약간의 반등이 보이기는 했지만 오래가지 못했던 상황인 데다가 주식시장 또한 1994년 11월에 종합주가지수(현재 " Link("코스피") " 지수)가 1138P로 최고점을 찍은 이후로 계속 하락하여 1996년 12월에는 651P로 한해를 마감할 정도로 내리막을 걷던 상황이었다." <br> <br> "물론 이때 부동산 침체의 영향으로 상당수 기업들이 아파트를 짓다가 파산하는 징조를 보이기는 했다. 다만 임금 상승률은 그동안의 저임금에 짓눌려서 노조 설립 붐 및 임금 인상 투쟁이 대대적으로 벌어졌던 1980년대 후반과 1990년대 초반보다야 조금 못하기는 하지만 그래도 집값과 전월세비의 인상이 더뎠기 때문에 그만큼의 불로소득이 소비나 저축자금으로 바로 전환되었으니 만큼 소비가 크게 활발해졌던 것은 사실이었다. 그렇다 해도 무조건적인 과소비가 원인이라고 하기에는 가계저축률이 높았기 때문에 책임 전가라는 비판을 피할 수는 없었지만..." <br>
 Heading level=2 folded=false: Link("1997년 외환 위기/원인" | "원인")
-Paragraph: Macro(include "틀: 상세 내용, 문서명=1997년 외환 위기/원인")
+Paragraph: Macro(include "틀: 상세 내용, 문서명=1997년 외환 위기/원인") <br>
 Heading level=2 folded=false: Link("1997년 외환 위기/영향" | "영향")
-Paragraph: Macro(include "틀: 상세 내용, 문서명=1997년 외환 위기/영향")
+Paragraph: Macro(include "틀: 상세 내용, 문서명=1997년 외환 위기/영향") <br>
 Heading level=2 folded=false: "여담"
 List kind=Unordered:
   Item:
@@ -259,6 +226,7 @@ List kind=Unordered:
     Paragraph: "2017년에 개봉한 영화 " Link("기억의 밤") "도 외환위기를 소재로 한 영화이다."
   Item:
     Paragraph: "2020년에 방영된 tvN 수목드라마 <머니게임>에서도 해당 사건이 종종 언급되는데, 주요 등장인물들의 인생에 크나큰 영향을 주었다."
+Paragraph: 
 Heading level=2 folded=false: "참고 자료"
 List kind=Unordered:
   Item:
@@ -273,6 +241,7 @@ List kind=Unordered:
     Paragraph: "대한민국 50년사 2권 - 임영태 저. 들녘. 1998. p436~438."
   Item:
     Paragraph: "업그레이드 먼나라 이웃나라 7권: 일본 1-일본인 편 - 이원복 글/그림. 김영사. 2018. p168."
+Paragraph: 
 Heading level=2 folded=false: "같이보기"
 List kind=Unordered:
   Item:

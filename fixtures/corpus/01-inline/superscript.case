@@ -1,0 +1,18 @@
+근거: 도움말예제 | 원문: 1줄 | 의미론: 15줄 | 렌더링: 1줄 | 위첨자
+^^위첨자^^
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Superscript(
+                    [
+                        Text(
+                            "위첨자",
+                        ),
+                    ],
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><sup>위첨자</sup></div>

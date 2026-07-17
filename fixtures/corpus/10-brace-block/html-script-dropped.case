@@ -1,0 +1,20 @@
+근거: 미확인 | 원문: 1줄 | 의미론: 17줄 | 렌더링: 1줄 | sanitizer — script는 내용까지 폐기
+{{{#!html <script>alert(1)</script>}}}
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Html(
+                    Template(
+                        [
+                            Text(
+                                "<script>alert(1)</script>",
+                            ),
+                        ],
+                    ),
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"></div>

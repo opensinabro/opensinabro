@@ -1,0 +1,21 @@
+근거: 도움말예제 | 원문: 1줄 | 의미론: 18줄 | 렌더링: 1줄 | 크기 +1단계
+{{{+1 +1단계}}}
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Sized(
+                    SizedText {
+                        level: 1,
+                        content: [
+                            Text(
+                                "+1단계",
+                            ),
+                        ],
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><span class="wiki-size-up-1">+1단계</span></div>

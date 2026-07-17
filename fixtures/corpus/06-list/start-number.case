@@ -1,0 +1,29 @@
+근거: 도움말예제 | 원문: 1줄 | 의미론: 25줄 | 렌더링: 2줄 | 시작 번호 지정
+ I.#11 이 리스트는 11(XI)부터 시작
+Document {
+    blocks: [
+        List(
+            List {
+                kind: UpperRoman,
+                items: [
+                    ListItem {
+                        start_number: Some(
+                            11,
+                        ),
+                        blocks: [
+                            Paragraph(
+                                [
+                                    Text(
+                                        "이 리스트는 11(XI)부터 시작",
+                                    ),
+                                ],
+                            ),
+                        ],
+                    },
+                ],
+            },
+        ),
+    ],
+}
+<ol class="wiki-list wiki-list-upper-roman" start="11"><li><div class="wiki-paragraph">이 리스트는 11(XI)부터 시작</div>
+</li></ol>

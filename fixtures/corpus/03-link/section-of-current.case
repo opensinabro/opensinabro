@@ -1,0 +1,34 @@
+근거: 도움말예제 | 원문: 1줄 | 의미론: 31줄 | 렌더링: 1줄 | 현재 문서 문단 번호 링크
+[[#s-1|1문단으로]]
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Link(
+                    Link {
+                        target: Template(
+                            [],
+                        ),
+                        anchor: Some(
+                            Template(
+                                [
+                                    Text(
+                                        "s-1",
+                                    ),
+                                ],
+                            ),
+                        ),
+                        display: Some(
+                            [
+                                Text(
+                                    "1문단으로",
+                                ),
+                            ],
+                        ),
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><a class="wiki-link-internal" href="#s-1" title="">1문단으로</a></div>

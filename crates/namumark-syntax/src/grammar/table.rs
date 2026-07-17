@@ -7,6 +7,8 @@ use namumark_text as text;
 use std::ops::Range;
 
 struct RowSource {
+    /// 이 행 바로 앞에 있던 주석 줄들. 주석은 표를 끊지 않으므로 행 사이에 끼어 있다.
+    leading_comments: Range<usize>,
     line_range: Range<usize>,
     /// 결정용 행 텍스트. 캡션 행은 `|캡션|`이 `||`로 치환된 합성 문자열이다.
     text: String,
@@ -31,6 +33,20 @@ pub(crate) fn try_parse_table(
     let mut index = start_index;
     while index < line_count {
         if !parser.tick() {
+            break;
+        }
+        // 주석 줄은 표를 끊지 않는다 — 나무위키는 주석을 지우고 나머지를 이어 읽는다
+        // (렌더확정: 행 사이의 `## 내용` 줄을 사이에 두고도 the seed의 표가 이어진다).
+        let comments_start = index;
+        while index < line_count
+            && region.lines[index].prefix.is_empty()
+            && region.line_text(index).starts_with("##")
+            && !rows.is_empty()
+        {
+            index += 1;
+        }
+        let leading_comments = comments_start..index;
+        if index >= line_count {
             break;
         }
         let row_start = index;
@@ -59,6 +75,7 @@ pub(crate) fn try_parse_table(
             return None;
         }
         rows.push(RowSource {
+            leading_comments: leading_comments.clone(),
             line_range: row_start..index,
             text: row_text,
             joined_bias,
@@ -102,6 +119,13 @@ fn emit_row(
     cells: &[(usize, Range<usize>)],
     caption: Option<&Range<usize>>,
 ) {
+    for line in row.leading_comments.clone() {
+        let marker = parser.start_node();
+        emit_line_prefix(parser, region, line);
+        parser.emit_token(SyntaxKind::Text, region.lines[line].content.end);
+        marker.complete(parser, SyntaxKind::Comment);
+        emit_line_newline(parser, region, line);
+    }
     let first_line = row.line_range.start;
     let row_joined_start = region.joined_start(first_line);
     // 합성 행 텍스트 오프셋 → joined 오프셋. 캡션 행의 가상 `||`(offset < 2)에는 쓰지 않는다.
@@ -189,7 +213,8 @@ fn emit_cell(
         let content_joined = to_joined(cell_range.start + semantics.content_start)
             ..to_joined(cell_range.start + semantics.content_end);
         let sub = region.sub_region_from_joined(parser.source(), content_joined);
-        block::parse_region_blocks(parser, &sub, false);
+        let sub = sub.reclaim_prefixes(parser.source());
+        block::parse_region_blocks(parser, &sub, block::RegionContext::Fresh);
     }
     if cell_range.start + semantics.content_end < cell_range.end {
         emit_joined_range_as(

@@ -1,0 +1,29 @@
+근거: 도움말예제 | 원문: 3줄 | 의미론: 24줄 | 렌더링: 1줄 | 도움말: 안내 문구가 없으면 More
+{{{#!folding
+내용
+}}}
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Folding(
+                    Folding {
+                        summary: Template(
+                            [],
+                        ),
+                        blocks: [
+                            Paragraph(
+                                [
+                                    Text(
+                                        "내용",
+                                    ),
+                                ],
+                            ),
+                        ],
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><details class="wiki-folding"><summary>More</summary><div>내용</div></details></div>

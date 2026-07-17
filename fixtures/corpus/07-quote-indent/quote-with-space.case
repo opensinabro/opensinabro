@@ -1,0 +1,24 @@
+근거: 도움말예제 | 원문: 1줄 | 의미론: 19줄 | 렌더링: 3줄 | 부등호 뒤 공백
+> 인용문
+Document {
+    blocks: [
+        Quote(
+            [
+                Indent(
+                    [
+                        Paragraph(
+                            [
+                                Text(
+                                    "인용문",
+                                ),
+                            ],
+                        ),
+                    ],
+                ),
+            ],
+        ),
+    ],
+}
+<blockquote class="wiki-quote"><div class="wiki-indent"><div class="wiki-paragraph">인용문</div>
+</div>
+</blockquote>

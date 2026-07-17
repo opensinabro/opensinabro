@@ -1,0 +1,24 @@
+근거: 도움말예제 | 원문: 1줄 | 의미론: 21줄 | 렌더링: 1줄 | 문서 링크
+[[문서]]
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Link(
+                    Link {
+                        target: Template(
+                            [
+                                Text(
+                                    "문서",
+                                ),
+                            ],
+                        ),
+                        anchor: None,
+                        display: None,
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><a class="wiki-link-internal" href="/w/%EB%AC%B8%EC%84%9C" title="문서">문서</a></div>

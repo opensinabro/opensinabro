@@ -1,0 +1,40 @@
+근거: 미확인 | 원문: 1줄 | 의미론: 37줄 | 렌더링: 1줄 | 존재하는 문서는 빨간 링크가 아님
+[[문서]] [[없는 문서]]
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Link(
+                    Link {
+                        target: Template(
+                            [
+                                Text(
+                                    "문서",
+                                ),
+                            ],
+                        ),
+                        anchor: None,
+                        display: None,
+                    },
+                ),
+                Text(
+                    " ",
+                ),
+                Link(
+                    Link {
+                        target: Template(
+                            [
+                                Text(
+                                    "없는 문서",
+                                ),
+                            ],
+                        ),
+                        anchor: None,
+                        display: None,
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><a class="wiki-link-internal" href="/w/%EB%AC%B8%EC%84%9C" title="문서">문서</a> <a class="wiki-link-internal not-exist" href="/w/%EC%97%86%EB%8A%94%20%EB%AC%B8%EC%84%9C" rel="nofollow" title="없는 문서">없는 문서</a></div>

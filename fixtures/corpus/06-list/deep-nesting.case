@@ -1,0 +1,93 @@
+근거: 미확인 | 원문: 4줄 | 의미론: 80줄 | 렌더링: 8줄 | 깊은 중첩
+ * 1
+  * 2
+   * 3
+    * 4
+Document {
+    blocks: [
+        List(
+            List {
+                kind: Unordered,
+                items: [
+                    ListItem {
+                        start_number: None,
+                        blocks: [
+                            Paragraph(
+                                [
+                                    Text(
+                                        "1",
+                                    ),
+                                ],
+                            ),
+                            List(
+                                List {
+                                    kind: Unordered,
+                                    items: [
+                                        ListItem {
+                                            start_number: None,
+                                            blocks: [
+                                                Paragraph(
+                                                    [
+                                                        Text(
+                                                            "2",
+                                                        ),
+                                                    ],
+                                                ),
+                                                List(
+                                                    List {
+                                                        kind: Unordered,
+                                                        items: [
+                                                            ListItem {
+                                                                start_number: None,
+                                                                blocks: [
+                                                                    Paragraph(
+                                                                        [
+                                                                            Text(
+                                                                                "3",
+                                                                            ),
+                                                                        ],
+                                                                    ),
+                                                                    List(
+                                                                        List {
+                                                                            kind: Unordered,
+                                                                            items: [
+                                                                                ListItem {
+                                                                                    start_number: None,
+                                                                                    blocks: [
+                                                                                        Paragraph(
+                                                                                            [
+                                                                                                Text(
+                                                                                                    "4",
+                                                                                                ),
+                                                                                            ],
+                                                                                        ),
+                                                                                    ],
+                                                                                },
+                                                                            ],
+                                                                        },
+                                                                    ),
+                                                                ],
+                                                            },
+                                                        ],
+                                                    },
+                                                ),
+                                            ],
+                                        },
+                                    ],
+                                },
+                            ),
+                        ],
+                    },
+                ],
+            },
+        ),
+    ],
+}
+<ul class="wiki-list"><li><div class="wiki-paragraph">1</div>
+<ul class="wiki-list"><li><div class="wiki-paragraph">2</div>
+<ul class="wiki-list"><li><div class="wiki-paragraph">3</div>
+<ul class="wiki-list"><li><div class="wiki-paragraph">4</div>
+</li></ul>
+</li></ul>
+</li></ul>
+</li></ul>

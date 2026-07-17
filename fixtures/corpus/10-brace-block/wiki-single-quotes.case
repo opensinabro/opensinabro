@@ -1,0 +1,36 @@
+근거: 미확인 | 원문: 3줄 | 의미론: 31줄 | 렌더링: 1줄 | 홑따옴표 속성
+{{{#!wiki style='color: red'
+내용
+}}}
+Document {
+    blocks: [
+        Paragraph(
+            [
+                WikiStyle(
+                    WikiStyle {
+                        style: Some(
+                            Template(
+                                [
+                                    Text(
+                                        "color: red",
+                                    ),
+                                ],
+                            ),
+                        ),
+                        dark_style: None,
+                        blocks: [
+                            Paragraph(
+                                [
+                                    Text(
+                                        "내용",
+                                    ),
+                                ],
+                            ),
+                        ],
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph"><div style="color: red">내용</div></div>

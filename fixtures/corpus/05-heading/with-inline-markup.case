@@ -1,0 +1,26 @@
+근거: 미확인 | 원문: 1줄 | 의미론: 22줄 | 렌더링: 2줄 | 문단명 안의 서식
+== '''굵은''' 문단 ==
+Document {
+    blocks: [
+        Heading(
+            Heading {
+                level: 2,
+                folded: false,
+                content: [
+                    Bold(
+                        [
+                            Text(
+                                "굵은",
+                            ),
+                        ],
+                    ),
+                    Text(
+                        " 문단",
+                    ),
+                ],
+            },
+        ),
+    ],
+}
+<h2 class="wiki-heading"><a id="s-1" href="#toc">1.</a> <span id="굵은 문단"><strong>굵은</strong> 문단</span></h2>
+<div class="wiki-heading-content"></div>

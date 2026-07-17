@@ -1,0 +1,25 @@
+근거: 미확인 | 원문: 1줄 | 의미론: 22줄 | 렌더링: 1줄 | 모르는 매크로는 원문 표기로 방출
+[우주(1)]
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Macro(
+                    Macro {
+                        name: "우주",
+                        argument: Some(
+                            Template(
+                                [
+                                    Text(
+                                        "1",
+                                    ),
+                                ],
+                            ),
+                        ),
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph">[우주(1)]</div>

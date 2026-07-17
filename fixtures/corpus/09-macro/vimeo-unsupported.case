@@ -1,0 +1,25 @@
+근거: 도움말예제 | 원문: 1줄 | 의미론: 22줄 | 렌더링: 1줄 | 도움말: 지원. 우리는 미해결 매크로로 원문 노출
+[vimeo(584524359)]
+Document {
+    blocks: [
+        Paragraph(
+            [
+                Macro(
+                    Macro {
+                        name: "vimeo",
+                        argument: Some(
+                            Template(
+                                [
+                                    Text(
+                                        "584524359",
+                                    ),
+                                ],
+                            ),
+                        ),
+                    },
+                ),
+            ],
+        ),
+    ],
+}
+<div class="wiki-paragraph">[vimeo(584524359)]</div>
