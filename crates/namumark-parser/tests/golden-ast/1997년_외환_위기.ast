@@ -97,8 +97,7 @@ Table:
     Cell span=1x1 align=Some(Center):
       Paragraph: Colored(red | "+3.9%")
     Cell span=1x1 align=Some(Center):
-      Indent:
-        Paragraph: Colored(red | "+0.7%")
+      Paragraph: Colored(red | "+0.7%")
     Cell span=1x1 align=Some(Center):
       Paragraph: Colored(blue | "-9.7%")
     Cell span=1x1 align=Some(Center):

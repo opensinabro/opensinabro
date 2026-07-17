@@ -13,16 +13,15 @@
 //! sanitizer([`sanitize`])를 거쳐 아는 태그·속성만 통과시킨다.
 
 mod sanitize;
-mod style;
 mod tag;
 
-use crate::style::SupportedStyle;
 use crate::tag::{escape_text, percent_encode, percent_encode_anchor, tag};
 use namumark_ast::{HorizontalAlignment, ListKind, TableAttributeScope, VerticalAlignment};
 use namumark_ir::{
-    Color, ColorValue, Dimension, DocumentLinkKind, ImageAlignment, ImageLayout, ImageTheme,
-    RenderBackend, RenderBlock, RenderInline, RenderTable, RenderTableAttribute, RenderTableCell,
-    RenderTableRow, RenderTree, RenderedFootnote, TableOfContentsEntry, TextStyle, VideoProvider,
+    Color, DocumentLinkKind, ImageAlignment, ImageLayout, ImageTheme, RenderBackend, RenderBlock,
+    RenderInline, RenderTable, RenderTableAttribute, RenderTableCell, RenderTableRow, RenderTree,
+    RenderedFootnote, StyleDeclaration, TableOfContentsEntry, TableStyleProperty, TextStyle,
+    VideoProvider,
 };
 use std::fmt::{self, Display, Formatter, Write as _};
 
@@ -105,24 +104,14 @@ impl Display for WikiStyleMarkup<'_> {
         else {
             return Ok(());
         };
-        // 위키 입력이 CSS로 나가는 자리라 걸러 낸다.
-        let style = style.as_deref().map(SupportedStyle);
-        let dark_style = dark_style.as_deref().map(SupportedStyle);
         // `#!wiki`는 style만 실은 맨 div다 — 나무위키는 여기에 클래스를 주지 않는다.
+        // 남는 선언이 하나도 없으면 style 속성 자체를 두지 않는다.
         tag(formatter, "div")?
-            .attribute_if_some(
-                "style",
-                style
-                    .as_ref()
-                    .filter(|style| !style.is_empty())
-                    .map(|style| style as &dyn Display),
-            )?
-            .attribute_if_some(
+            .attribute_when(!style.is_empty(), "style", &StyleDeclarations(style))?
+            .attribute_when(
+                !dark_style.is_empty(),
                 "data-dark-style",
-                dark_style
-                    .as_ref()
-                    .filter(|style| !style.is_empty())
-                    .map(|style| style as &dyn Display),
+                &StyleDeclarations(dark_style),
             )?
             .content(|formatter| write_wiki_style_content(formatter, blocks))
     }
@@ -355,8 +344,10 @@ struct TableMarkup<'table>(&'table RenderTable);
 impl Display for TableMarkup<'_> {
     fn fmt(&self, formatter: &mut Formatter<'_>) -> fmt::Result {
         let table = self.0;
-        let has_width = table_attributes(table).any(|attribute| attribute.name == "width");
-        let has_table_style = table_attributes(table).any(emits_table_style);
+        let has_width = table_attributes(table)
+            .any(|attribute| matches!(attribute.property, TableStyleProperty::Width(_)));
+        let has_table_style =
+            table_attributes(table).any(|attribute| attribute.property.emits_table_style());
         tag(formatter, "div")?
             .attribute("class", &TableWrapClass(table))?
             .attribute_when(has_width, "style", &TableWrapStyle(table))?
@@ -388,7 +379,7 @@ impl Display for TableRowMarkup<'_> {
     fn fmt(&self, formatter: &mut Formatter<'_>) -> fmt::Result {
         let has_row_style = self.0.cells.iter().any(|cell| {
             cell.attributes.iter().any(|attribute| {
-                attribute.scope == TableAttributeScope::Row && emits_style(attribute)
+                attribute.scope == TableAttributeScope::Row && attribute.property.emits_cell_style()
             })
         });
         tag(formatter, "tr")?
@@ -410,7 +401,8 @@ impl Display for TableCellMarkup<'_> {
         let cell = self.0;
         // `<nopad>`는 style이 아니라 클래스로 나간다.
         let nopadding = cell.attributes.iter().any(|attribute| {
-            attribute.scope == TableAttributeScope::Cell && attribute.name == "nopad"
+            attribute.scope == TableAttributeScope::Cell
+                && matches!(attribute.property, TableStyleProperty::NoPadding)
         });
         tag(formatter, "td")?
             .attribute_when(nopadding, "class", &"wiki-table-nopadding")?
@@ -436,38 +428,27 @@ impl Display for TableCellMarkup<'_> {
 
 // ---- 스타일 값 (Display 합성, 중간 문자열 없음) ----
 
-/// 이 속성이 스타일 속성 문자열을 실제로 방출하는가
-fn emits_style(attribute: &RenderTableAttribute) -> bool {
-    attribute.value.is_some()
-        && matches!(
-            attribute.name.as_str(),
-            "bgcolor" | "color" | "width" | "height" | "textalign"
-        )
+/// 행·열·셀의 `style`로 나가는 속성 값을 방출한다. 그 외 속성(정렬·패딩)은 아무것도 쓰지 않는다.
+fn write_cell_style(formatter: &mut Formatter<'_>, property: &TableStyleProperty) -> fmt::Result {
+    match property {
+        TableStyleProperty::BackgroundColor(color) => {
+            write!(formatter, " background-color: {color};")
+        }
+        TableStyleProperty::Color(color) => write!(formatter, " color: {color};"),
+        TableStyleProperty::Width(width) => write!(formatter, " width: {width};"),
+        TableStyleProperty::Height(height) => write!(formatter, " height: {height};"),
+        TableStyleProperty::TextAlign(alignment) => {
+            write!(formatter, " text-align: {};", horizontal_alignment_name(*alignment))
+        }
+        _ => Ok(()),
+    }
 }
 
-fn write_table_style(
-    formatter: &mut Formatter<'_>,
-    attribute: &RenderTableAttribute,
-) -> fmt::Result {
-    let Some(value) = &attribute.value else {
-        return Ok(());
-    };
-    // 듀얼 색상(`#fff,#000`)은 라이트 값을 쓴다. 다크 모드 값은 후속 과제.
-    let value = value.split(',').next().unwrap_or(value);
-    // 색이 아닌 값이 들어온 선언은 통째로 버린다 — 나무위키가 그렇게 한다.
-    match attribute.name.as_str() {
-        "bgcolor" => match ColorValue::parse(value) {
-            Some(color) => write!(formatter, " background-color: {color};"),
-            None => Ok(()),
-        },
-        "color" => match ColorValue::parse(value) {
-            Some(color) => write!(formatter, " color: {color};"),
-            None => Ok(()),
-        },
-        "width" => write!(formatter, " width: {};", Dimension::parse(value)),
-        "height" => write!(formatter, " height: {};", Dimension::parse(value)),
-        "textalign" => write!(formatter, " text-align: {};", value.trim()),
-        _ => Ok(()),
+fn horizontal_alignment_name(alignment: HorizontalAlignment) -> &'static str {
+    match alignment {
+        HorizontalAlignment::Left => "left",
+        HorizontalAlignment::Center => "center",
+        HorizontalAlignment::Right => "right",
     }
 }
 
@@ -486,14 +467,6 @@ fn table_attributes(table: &RenderTable) -> impl Iterator<Item = &RenderTableAtt
         .filter(|attribute| attribute.scope == TableAttributeScope::Table)
 }
 
-fn emits_table_style(attribute: &RenderTableAttribute) -> bool {
-    attribute.value.is_some()
-        && matches!(
-            attribute.name.as_str(),
-            "bgcolor" | "color" | "bordercolor" | "height" | "textalign" | "width"
-        )
-}
-
 struct TableWrapClass<'table>(&'table RenderTable);
 
 impl Display for TableWrapClass<'_> {
@@ -501,13 +474,15 @@ impl Display for TableWrapClass<'_> {
         formatter.write_str("wiki-table-wrap")?;
         // 같은 속성이 여러 번 지정되면 마지막 것이 이긴다.
         let alignment = table_attributes(self.0)
-            .filter(|attribute| attribute.name == "align")
-            .filter_map(|attribute| attribute.value.as_deref())
+            .filter_map(|attribute| match attribute.property {
+                TableStyleProperty::Align(alignment) => Some(alignment),
+                _ => None,
+            })
             .last();
-        match alignment.map(str::trim) {
-            // 왼쪽은 기본값이라 클래스를 붙이지 않는다.
-            Some("center") => formatter.write_str(" table-center"),
-            Some("right") => formatter.write_str(" table-right"),
+        match alignment {
+            // 왼쪽(기본)이나 인식 못한 값은 클래스를 붙이지 않는다.
+            Some(HorizontalAlignment::Center) => formatter.write_str(" table-center"),
+            Some(HorizontalAlignment::Right) => formatter.write_str(" table-right"),
             _ => Ok(()),
         }
     }
@@ -518,10 +493,8 @@ struct TableWrapStyle<'table>(&'table RenderTable);
 impl Display for TableWrapStyle<'_> {
     fn fmt(&self, formatter: &mut Formatter<'_>) -> fmt::Result {
         for attribute in table_attributes(self.0) {
-            if attribute.name == "width"
-                && let Some(value) = &attribute.value
-            {
-                write!(formatter, "width: {};", Dimension::parse(value))?;
+            if let TableStyleProperty::Width(width) = &attribute.property {
+                write!(formatter, "width: {width};")?;
             }
         }
         Ok(())
@@ -533,32 +506,21 @@ struct TableStyle<'table>(&'table RenderTable);
 impl Display for TableStyle<'_> {
     fn fmt(&self, formatter: &mut Formatter<'_>) -> fmt::Result {
         for attribute in table_attributes(self.0) {
-            let Some(value) = &attribute.value else {
-                continue;
-            };
-            // 듀얼 색상(`#fff,#000`)은 라이트 값을 쓴다. 다크 모드 값은 후속 과제.
-            let value = value.split(',').next().unwrap_or(value);
-            match attribute.name.as_str() {
+            match &attribute.property {
                 // 너비가 지정되면 감싸는 div가 그 폭을 갖고 표는 그 안을 채운다.
-                "width" => write!(formatter, " width: 100%;",)?,
-                "bgcolor" => {
-                    if let Some(color) = ColorValue::parse(value) {
-                        write!(formatter, " background-color: {color};")?;
-                    }
+                TableStyleProperty::Width(_) => write!(formatter, " width: 100%;")?,
+                TableStyleProperty::BackgroundColor(color) => {
+                    write!(formatter, " background-color: {color};")?;
                 }
-                "color" => {
-                    if let Some(color) = ColorValue::parse(value) {
-                        write!(formatter, " color: {color};")?;
-                    }
+                TableStyleProperty::Color(color) => write!(formatter, " color: {color};")?,
+                TableStyleProperty::BorderColor(color) => {
+                    write!(formatter, " border: 2px solid {color};")?;
                 }
-                "bordercolor" => {
-                    if let Some(color) = ColorValue::parse(value) {
-                        write!(formatter, " border: 2px solid {color};")?;
-                    }
+                TableStyleProperty::Height(height) => write!(formatter, " height: {height};")?,
+                TableStyleProperty::TextAlign(alignment) => {
+                    write!(formatter, " text-align: {};", horizontal_alignment_name(*alignment))?;
                 }
-                "height" => write!(formatter, " height: {};", Dimension::parse(value))?,
-                "textalign" => write!(formatter, " text-align: {};", value.trim())?,
-                _ => {}
+                TableStyleProperty::Align(_) | TableStyleProperty::NoPadding => {}
             }
         }
         Ok(())
@@ -572,7 +534,7 @@ impl Display for RowStyle<'_> {
         for cell in &self.0.cells {
             for attribute in &cell.attributes {
                 if attribute.scope == TableAttributeScope::Row {
-                    write_table_style(formatter, attribute)?;
+                    write_cell_style(formatter, &attribute.property)?;
                 }
             }
         }
@@ -588,11 +550,7 @@ impl Display for CellStyle<'_> {
             write!(
                 formatter,
                 "text-align: {};",
-                match alignment {
-                    HorizontalAlignment::Left => "left",
-                    HorizontalAlignment::Center => "center",
-                    HorizontalAlignment::Right => "right",
-                }
+                horizontal_alignment_name(alignment)
             )?;
         }
         if let Some(vertical_alignment) = self.0.vertical_alignment {
@@ -611,7 +569,9 @@ impl Display for CellStyle<'_> {
         for attribute in &self.0.attributes {
             let overridden = matches!(attribute.scope, TableAttributeScope::Column { .. })
                 && self.0.attributes.iter().any(|other| {
-                    other.scope == TableAttributeScope::Cell && other.name == attribute.name
+                    other.scope == TableAttributeScope::Cell
+                        && std::mem::discriminant(&other.property)
+                            == std::mem::discriminant(&attribute.property)
                 });
             if !overridden
                 && matches!(
@@ -619,7 +579,7 @@ impl Display for CellStyle<'_> {
                     TableAttributeScope::Cell | TableAttributeScope::Column { .. }
                 )
             {
-                write_table_style(formatter, attribute)?;
+                write_cell_style(formatter, &attribute.property)?;
             }
         }
         Ok(())
@@ -658,11 +618,12 @@ impl Display for InlineMarkup<'_> {
             }
             // 여러 줄 리터럴은 `<pre><code>`다(렌더확정: 각주 안 `{{{|| … ⏎ … ||}}}`이
             // the seed에서 `<pre><code>…</code></pre>`). 한 줄 리터럴은 인라인 `<code>`뿐이다.
-            RenderInline::Literal(text) if text.contains('\n') => tag(formatter, "pre")?
-                .content(|formatter| {
+            RenderInline::Literal(text) if text.contains('\n') => {
+                tag(formatter, "pre")?.content(|formatter| {
                     tag(formatter, "code")?
                         .content(|formatter| write!(formatter, "{}", escape_text(text)))
-                }),
+                })
+            }
             RenderInline::Literal(text) => tag(formatter, "code")?
                 .content(|formatter| write!(formatter, "{}", escape_text(text))),
             RenderInline::Colored { color, content } => tag(formatter, "span")?
@@ -727,21 +688,31 @@ impl Display for InlineMarkup<'_> {
             } => match url {
                 // 나무위키는 이미지를 두 겹의 span으로 감싼다. 바깥이 크기·정렬을 잡고,
                 // 안쪽 wrapper와 img는 그 안을 100%로 채운다.
-                Some(url) => tag(formatter, "span")?
-                    .attribute("class", &ImageClass(layout))?
-                    .attribute("style", &ImageStyle(layout))?
-                    .content(|formatter| {
-                        tag(formatter, "span")?
-                            .attribute("class", &"wiki-image-wrapper")?
-                            .attribute("style", &"width: 100%;")?
-                            .content(|formatter| {
-                                tag(formatter, "img")?
-                                    .attribute("width", &"100%")?
-                                    .attribute("src", &url)?
-                                    .attribute("alt", &format_args!("파일:{file_name}"))?
-                                    .void()
-                            })
-                    }),
+                Some(url) => {
+                    // 안쪽 wrapper·img가 100%로 채우는 축은 지정한 옵션을 따른다 — 높이만
+                    // 준 이미지는 `height:100%`다(렌더확정: `[[파일:…|height=32]]`이 the seed에서
+                    // `<span … style='height:100%'><img height='100%'>`).
+                    let axis = if layout.width.is_none() && layout.height.is_some() {
+                        "height"
+                    } else {
+                        "width"
+                    };
+                    tag(formatter, "span")?
+                        .attribute("class", &ImageClass(layout))?
+                        .attribute("style", &ImageStyle(layout))?
+                        .content(|formatter| {
+                            tag(formatter, "span")?
+                                .attribute("class", &"wiki-image-wrapper")?
+                                .attribute("style", &format_args!("{axis}: 100%;"))?
+                                .content(|formatter| {
+                                    tag(formatter, "img")?
+                                        .attribute(axis, &"100%")?
+                                        .attribute("src", &url)?
+                                        .attribute("alt", &format_args!("파일:{file_name}"))?
+                                        .void()
+                                })
+                        })
+                }
                 // 없는 파일은 그 파일 문서로 가는 없는 문서 링크가 된다.
                 None => tag(formatter, "a")?
                     .attribute("class", &DocumentLinkClass(DocumentLinkKind::Missing))?
@@ -977,6 +948,21 @@ impl Display for CategoriesMarkup<'_> {
 /// `--wiki-color`/`--wiki-color-dark` CSS 변수 값. 이스케이프는 속성 방출부가 담당한다.
 /// 라이트 색상은 `style`로, 다크 색상은 `data-dark-style`로 나간다 — 나무위키 표기다.
 /// 다크를 따로 주지 않은 색도 나무위키는 같은 값으로 채운다.
+/// 걸러진 CSS 선언들을 `속성: 값; 속성: 값` 꼴로 잇는다.
+struct StyleDeclarations<'declarations>(&'declarations [StyleDeclaration]);
+
+impl Display for StyleDeclarations<'_> {
+    fn fmt(&self, formatter: &mut Formatter<'_>) -> fmt::Result {
+        for (index, declaration) in self.0.iter().enumerate() {
+            if index > 0 {
+                formatter.write_str("; ")?;
+            }
+            write!(formatter, "{declaration}")?;
+        }
+        Ok(())
+    }
+}
+
 struct ColorStyle<'color>(&'color Color);
 
 impl Display for ColorStyle<'_> {
@@ -1023,7 +1009,7 @@ impl Display for ImageClass<'_> {
                 ImageTheme::Light => "light",
                 ImageTheme::Dark => "dark",
             };
-            write!(formatter, " wiki-image-theme-{theme}")?;
+            write!(formatter, " wiki-theme-{theme}")?;
         }
         Ok(())
     }

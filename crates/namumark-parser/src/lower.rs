@@ -356,7 +356,9 @@ fn lower_inline(node: &SyntaxNode) -> Option<Inline> {
                 Some((target, display)) => (target, display),
                 None => (body, ""),
             };
-            let file_name = text::strip_link_prefix(target, &["파일:", "file:"])?;
+            // `파일:` 접두사 뒤 공백은 파일 이름이 아니다(렌더확정: `[[파일: 특별행정구기.svg]]`가
+            // the seed에서 이미지로 뜬다 — 공백째 이름으로 삼으면 파일을 못 찾는다).
+            let file_name = text::strip_link_prefix(target, &["파일:", "file:"])?.trim();
             Inline::Image(Image {
                 file_name: template_of(file_name),
                 options: semantics::image_options(display),

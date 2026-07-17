@@ -665,20 +665,23 @@ pub fn cell_shape(source: &str) -> CellShape<'_> {
         .next_back();
     let explicit_alignment = alignment.is_some();
 
+    // 정렬은 내용 앞뒤 공백의 유무로 정하고, 그 공백은 몇 칸이든 내용에서 걷어낸다
+    // (렌더확정: `<bgcolor=transparent>  [[NamuFix]] …`처럼 공백 2칸으로 시작해도 the seed는
+    // `text-align:center`에 내용은 공백 없이 낸다 — 남은 공백을 두면 블록 파서가 들여쓴다).
     let mut content = rest;
+    let has_leading = content.starts_with(' ');
+    let has_trailing = content.ends_with(' ');
     if explicit_alignment {
-        content = content.strip_prefix(' ').unwrap_or(content);
-        content = content.strip_suffix(' ').unwrap_or(content);
-    } else if let Some(stripped) = content.strip_prefix(' ') {
-        if let Some(both) = stripped.strip_suffix(' ') {
-            alignment = Some(CellAlignment::Center);
-            content = both;
+        content = content.trim_matches(' ');
+    } else if has_leading {
+        alignment = Some(if has_trailing {
+            CellAlignment::Center
         } else {
-            alignment = Some(CellAlignment::Right);
-            content = stripped;
-        }
+            CellAlignment::Right
+        });
+        content = content.trim_matches(' ');
     } else {
-        content = content.strip_suffix(' ').unwrap_or(content);
+        content = content.trim_end_matches(' ');
     }
     let content_offset = content.as_ptr() as usize - source.as_ptr() as usize;
     CellShape {

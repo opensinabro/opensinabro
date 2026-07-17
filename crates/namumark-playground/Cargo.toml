@@ -1,0 +1,17 @@
+[package]
+name = "namumark-playground"
+description = "나무마크 플레이그라운드 WASM 바인딩"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish = false
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+namumark-ir = { path = "../namumark-ir" }
+namumark-parser = { path = "../namumark-parser" }
+namumark-render = { path = "../namumark-render" }
+namumark-backend-namuwiki = { path = "../namumark-backend-namuwiki" }
+wasm-bindgen = "=0.2.120"

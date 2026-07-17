@@ -6,11 +6,11 @@
 
 use crate::condition;
 use crate::context::WikiContext;
-use namumark_ast::{Block, Conditional, Document, Fragment, Inline, Template};
+use namumark_ast::{Block, Conditional, Document, Fragment, HorizontalAlignment, Inline, Template};
 use namumark_ir::{
     Color, ColorValue, Dimension, DocumentLinkKind, ImageAlignment, ImageLayout, ImageTheme,
     RenderBlock, RenderInline, RenderListItem, RenderTable, RenderTableAttribute, RenderTableCell,
-    RenderTableRow, TextStyle, VideoProvider,
+    RenderTableRow, StyleDeclaration, TableStyleProperty, TextStyle, VideoProvider,
 };
 use std::collections::HashMap;
 
@@ -91,6 +91,26 @@ impl Resolver<'_> {
         template.as_ref().map(|template| self.fill(template))
     }
 
+    /// `#!wiki`의 style 인자를 채운 뒤 나무위키가 받아들이는 선언만 걸러 남긴다.
+    fn fill_style(&self, template: &Option<Template>) -> Vec<StyleDeclaration> {
+        match template {
+            Some(template) => StyleDeclaration::parse(&self.fill(template)),
+            None => Vec::new(),
+        }
+    }
+
+    /// 표 속성의 틀 인자를 채워 값으로 확정하고, 방출되는 속성만 타입화해 남긴다.
+    fn resolve_table_attribute(
+        &self,
+        attribute: &namumark_ast::TableAttribute,
+    ) -> Option<RenderTableAttribute> {
+        let value = self.fill_option(&attribute.value);
+        Some(RenderTableAttribute {
+            scope: attribute.scope,
+            property: table_style_property(&attribute.name, value.as_deref())?,
+        })
+    }
+
     fn resolve_blocks(&mut self, blocks: &[Block]) -> Vec<RenderBlock> {
         let mut resolved = Vec::new();
         for block in blocks {
@@ -143,10 +163,8 @@ impl Resolver<'_> {
                                     attributes: cell
                                         .attributes
                                         .iter()
-                                        .map(|attribute| RenderTableAttribute {
-                                            scope: attribute.scope,
-                                            name: attribute.name.clone(),
-                                            value: self.fill_option(&attribute.value),
+                                        .filter_map(|attribute| {
+                                            self.resolve_table_attribute(attribute)
                                         })
                                         .collect(),
                                     blocks: {
@@ -192,9 +210,13 @@ impl Resolver<'_> {
 
         // 줄 단위로 본다 — include가 제 문단을 이루는지(줄 첫머리) 같은 문단에 중첩되는지
         // (줄 중간, 각주 뒤 `[각주][include]`)를 줄 내 위치로 가른다.
-        let lines: Vec<&[Inline]> = inlines.split(|inline| matches!(inline, Inline::LineBreak)).collect();
+        let lines: Vec<&[Inline]> = inlines
+            .split(|inline| matches!(inline, Inline::LineBreak))
+            .collect();
         for (index, line) in lines.iter().enumerate() {
-            let rest_invisible = lines[index + 1..].iter().all(|line| is_invisible_line(line));
+            let rest_invisible = lines[index + 1..]
+                .iter()
+                .all(|line| is_invisible_line(line));
             let line_start = current.len();
             for inline in *line {
                 if let Inline::Conditional(conditional) = inline {
@@ -223,7 +245,10 @@ impl Resolver<'_> {
             }
             // 줄 사이 개행은 화면에 br로 남는다. 단 뒤가 전부 invisible(분류·include)이면
             // 그 앞 개행까지 사라진다 — 표 셀 안에서는 남는다(규칙 (3)·셀 문맥).
-            if index + 1 < lines.len() && !is_invisible_line(line) && (self.in_cell || !rest_invisible) {
+            if index + 1 < lines.len()
+                && !is_invisible_line(line)
+                && (self.in_cell || !rest_invisible)
+            {
                 current.push(RenderInline::LineBreak);
             }
         }
@@ -428,8 +453,8 @@ impl Resolver<'_> {
                 }
             }
             Inline::WikiStyle(wiki_style) => RenderInline::WikiStyle {
-                style: self.fill_option(&wiki_style.style),
-                dark_style: self.fill_option(&wiki_style.dark_style),
+                style: self.fill_style(&wiki_style.style),
+                dark_style: self.fill_style(&wiki_style.dark_style),
                 blocks: self.resolve_blocks(&wiki_style.blocks),
             },
             Inline::Folding(folding) => RenderInline::Folding {
@@ -616,6 +641,42 @@ impl Resolver<'_> {
         self.include_instance = None;
         self.scope = outer_scope;
         blocks
+    }
+}
+
+/// 표 속성 이름과 확정된 값을 타입화된 스타일 속성으로 옮긴다.
+///
+/// 색 표기가 아닌 값(틀 인자가 안 채워진 `<bgcolor=@배경색@>` 등)은 통째로 버린다 —
+/// 나무위키가 그렇게 한다. 방출되지 않는 `keepall`·`class`도 여기서 사라진다.
+fn table_style_property(name: &str, value: Option<&str>) -> Option<TableStyleProperty> {
+    // 값은 따옴표로 감쌀 수 있다(렌더확정: `<tablealign="center">`도 the seed에서 center다).
+    let value = value.map(|value| value.trim().trim_matches('"'));
+    // 색은 듀얼 표기의 라이트 값만 쓴다(표 색의 다크 모드는 후속 과제).
+    let color = |value: Option<&str>| {
+        let value = value?;
+        ColorValue::parse(value.split(',').next().unwrap_or(value))
+    };
+    match name {
+        "bgcolor" => Some(TableStyleProperty::BackgroundColor(color(value)?)),
+        "color" => Some(TableStyleProperty::Color(color(value)?)),
+        "bordercolor" => Some(TableStyleProperty::BorderColor(color(value)?)),
+        "width" => Some(TableStyleProperty::Width(Dimension::parse(value?))),
+        "height" => Some(TableStyleProperty::Height(Dimension::parse(value?))),
+        // 나무위키는 left·center·right만 받는다. 그 외 값은 색처럼 선언을 통째로 버린다.
+        "textalign" => Some(TableStyleProperty::TextAlign(match value? {
+            "left" => HorizontalAlignment::Left,
+            "center" => HorizontalAlignment::Center,
+            "right" => HorizontalAlignment::Right,
+            _ => return None,
+        })),
+        // center·right만 정렬 클래스를 만든다. left(기본)·인식 못한 값은 클래스가 없다.
+        "align" => Some(TableStyleProperty::Align(match value? {
+            "center" => HorizontalAlignment::Center,
+            "right" => HorizontalAlignment::Right,
+            _ => HorizontalAlignment::Left,
+        })),
+        "nopad" => Some(TableStyleProperty::NoPadding),
+        _ => None,
     }
 }
 

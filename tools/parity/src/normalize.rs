@@ -51,7 +51,10 @@ fn is_unwrapped(name: &str, attributes: &[(String, String)]) -> bool {
             .iter()
             .any(|(attribute, _)| attribute == "style" || attribute == "class");
     let is_highlight_token = attributes.iter().any(|(attribute, value)| {
-        attribute == "class" && value.split_whitespace().any(|name| name.starts_with("hljs-"))
+        attribute == "class"
+            && value
+                .split_whitespace()
+                .any(|name| name.starts_with("hljs-"))
     });
     has_paragraph_anchor || is_highlight_token
 }

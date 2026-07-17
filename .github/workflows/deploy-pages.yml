@@ -1,0 +1,70 @@
+name: Deploy Playground to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "crates/**"
+      - "playground/**"
+      - ".github/workflows/deploy-pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: playground
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Rust 툴체인 (wasm32)
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+
+      - name: Cargo 캐시
+        uses: Swatinem/rust-cache@v2
+
+      - name: wasm-pack 설치
+        uses: jetli/wasm-pack-action@v0.4.0
+
+      - name: Node 설정
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: playground/package-lock.json
+
+      - run: npm ci
+
+      - name: WASM 빌드
+        run: npm run wasm
+
+      - name: 정적 번들 빌드
+        run: npm run build
+
+      - name: Pages 아티팩트 업로드
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: playground/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Pages 배포
+        id: deployment
+        uses: actions/deploy-pages@v4

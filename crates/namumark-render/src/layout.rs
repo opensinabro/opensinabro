@@ -8,7 +8,7 @@ use crate::resolve::Resolved;
 use namumark_ast::TableAttributeScope;
 use namumark_ir::{
     RenderBlock, RenderInline, RenderTable, RenderTableAttribute, RenderTree, RenderedFootnote,
-    TableOfContentsEntry,
+    TableOfContentsEntry, TableStyleProperty,
 };
 use std::collections::HashMap;
 
@@ -269,6 +269,12 @@ fn write_plain_text(inlines: &[RenderInline], output: &mut String) {
 ///
 /// 나무위키의 `<colbgcolor=…>`가 열 전체를 칠하는 관용이 이것이다. 아래쪽 셀이 같은
 /// 열에서 col 속성을 다시 지정하면 거기서부터 새 값으로 바뀐다.
+/// 열 속성의 축(배경색·글자색·너비·…). 같은 축은 셀 지정이 열 상속을 덮고, 다른 축은
+/// 독립적으로 상속된다.
+fn attribute_kind(attribute: &RenderTableAttribute) -> std::mem::Discriminant<TableStyleProperty> {
+    std::mem::discriminant(&attribute.property)
+}
+
 fn propagate_column_attributes(table: &mut RenderTable) {
     let mut inherited: HashMap<usize, Vec<RenderTableAttribute>> = HashMap::new();
     // 위 행의 `<|N>`이 아직 덮고 있는 열 → 남은 행 수. 그 열은 이 행의 셀이 쓰지 않는다.
@@ -286,33 +292,35 @@ fn propagate_column_attributes(table: &mut RenderTable) {
                 .cloned()
                 .collect();
             let span = cell.column_span.unwrap_or(1) as usize;
-            if declared.is_empty() {
-                // 여러 칸을 합친 셀은 덮는 열 중 **오른쪽부터** 찾아 지정이 있는 열의 것을
-                // 따라간다(문법 도움말: "입력한 숫자 값만큼 왼쪽/위의 셀의 것을 따라갑니다"
-                // + 렌더확정: 열 2에 `<colbgcolor=#80C0BB>`가 있을 때 열 1~2를 덮는 `<-2>`
-                // 셀이 그 색이다).
-                if let Some(attributes) = (column..column + span)
-                    .rev()
-                    .find_map(|covered| inherited.get(&covered))
-                {
-                    cell.attributes.extend(attributes.iter().cloned());
+            // 열 속성은 축(배경색·글자색·…)별로 독립 전파된다. 셀이 어떤 축을 스스로 지정해도
+            // 지정하지 않은 축은 위 행에서 상속한다(렌더확정: `<colcolor=#fff>`가 걸린 열의
+            // `<colbgcolor=#00a495>` 셀이 the seed에서 `color:#fff`도 함께 갖는다).
+            let declared_kinds: Vec<_> = declared.iter().map(attribute_kind).collect();
+            // 덮는 열 중 **오른쪽부터** 찾아 지정이 있는 열의 것을 따라간다(문법 도움말:
+            // "입력한 숫자 값만큼 왼쪽/위의 셀의 것을 따라갑니다").
+            let inherited_here: Vec<RenderTableAttribute> = (column..column + span)
+                .rev()
+                .find_map(|covered| inherited.get(&covered))
+                .cloned()
+                .unwrap_or_default();
+            for attribute in inherited_here {
+                if !declared_kinds.contains(&attribute_kind(&attribute)) {
+                    cell.attributes.push(attribute);
                 }
-            } else {
-                // 속성마다 제가 걸리는 열 수가 다르다 — 옵션을 적은 자리까지 아는 칸 수다.
-                let mut per_column: HashMap<usize, Vec<RenderTableAttribute>> = HashMap::new();
-                for attribute in declared {
-                    let columns = match attribute.scope {
-                        TableAttributeScope::Column { columns } => (columns as usize).max(1),
-                        _ => 1,
-                    };
-                    for covered in column..column + columns {
-                        per_column
-                            .entry(covered)
-                            .or_default()
-                            .push(attribute.clone());
-                    }
+            }
+            // 지정한 속성은 걸리는 열마다 등록한다(제 축만 교체, 다른 축의 상속은 남긴다).
+            // 열 수는 옵션을 적은 자리까지 아는 칸 수다.
+            for attribute in declared {
+                let columns = match attribute.scope {
+                    TableAttributeScope::Column { columns } => (columns as usize).max(1),
+                    _ => 1,
+                };
+                let kind = attribute_kind(&attribute);
+                for covered in column..column + columns {
+                    let entry = inherited.entry(covered).or_default();
+                    entry.retain(|existing| attribute_kind(existing) != kind);
+                    entry.push(attribute.clone());
                 }
-                inherited.extend(per_column);
             }
             if let Some(rows) = cell.row_span.filter(|rows| *rows > 1) {
                 for covered in column..column + span {
