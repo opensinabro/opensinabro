@@ -1,14 +1,7 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 11줄 | 렌더링: 1줄 | 도움말: 3개는 수평줄이 아님
+근거: 도움말예제 | 원문: 1줄 | 의미론: 4줄 | 렌더링: 1줄 | 도움말: 3개는 수평줄이 아님
 ---
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Text(
-                    "---",
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..4
+  Paragraph@0..3
+    Text@0..3 "---"
+  Newline@3..4 "\n"
 <div class="wiki-paragraph">---</div>

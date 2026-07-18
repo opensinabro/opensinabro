@@ -70,7 +70,7 @@ fn golden_content(slug: &str, source: &str, document: &Document) -> String {
     let mut output = String::new();
     writeln!(output, "# {slug}.namu — {} bytes", source.len()).unwrap();
     writeln!(output, "# residue: {}", residue_report(document)).unwrap();
-    for block in &document.blocks {
+    for block in &document.blocks() {
         render_block(block, 0, &mut output);
     }
     output
@@ -80,7 +80,7 @@ fn golden_content(slug: &str, source: &str, document: &Document) -> String {
 fn residue_report(document: &Document) -> String {
     const SUSPICIOUS_MARKERS: [&str; 8] = ["[[", "]]", "{{{", "}}}", "'''", "||", "[*", "#!"];
     let mut plain_text = String::new();
-    for block in &document.blocks {
+    for block in &document.blocks() {
         collect_block_text(block, &mut plain_text);
     }
     let counts: Vec<String> = SUSPICIOUS_MARKERS
@@ -92,25 +92,30 @@ fn residue_report(document: &Document) -> String {
 
 fn collect_block_text(block: &Block, output: &mut String) {
     match block {
-        Block::Heading(heading) => collect_inline_text(&heading.content, output),
-        Block::Paragraph(inlines) => collect_inline_text(inlines, output),
-        Block::Quote(blocks) | Block::Indent(blocks) => {
-            for block in blocks {
+        Block::Heading(heading) => collect_inline_text(&heading.content(), output),
+        Block::Paragraph(paragraph) => collect_inline_text(&paragraph.inlines(), output),
+        Block::Quote(quote) => {
+            for block in &quote.blocks() {
+                collect_block_text(block, output);
+            }
+        }
+        Block::Indent(indent) => {
+            for block in &indent.blocks() {
                 collect_block_text(block, output);
             }
         }
         Block::List(list) => {
-            for item in &list.items {
-                for block in &item.blocks {
+            for item in &list.items() {
+                for block in &item.blocks() {
                     collect_block_text(block, output);
                 }
             }
         }
         Block::Table(table) => {
-            if let Some(caption) = &table.caption {
+            if let Some(caption) = &table.caption() {
                 collect_inline_text(caption, output);
             }
-            for row in &table.rows {
+            for row in &table.rows() {
                 for cell in &row.cells {
                     for block in &cell.blocks {
                         collect_block_text(block, output);
@@ -131,34 +136,34 @@ fn collect_inline_text(inlines: &[Inline], output: &mut String) {
                 output.push_str(text);
                 output.push('\n');
             }
-            Inline::Bold(content)
-            | Inline::Italic(content)
-            | Inline::Strikethrough(content)
-            | Inline::Underline(content)
-            | Inline::Superscript(content)
-            | Inline::Subscript(content) => collect_inline_text(content, output),
+            Inline::Bold(styled) => collect_inline_text(&styled.content(), output),
+            Inline::Italic(styled) => collect_inline_text(&styled.content(), output),
+            Inline::Strikethrough(styled) => collect_inline_text(&styled.content(), output),
+            Inline::Underline(styled) => collect_inline_text(&styled.content(), output),
+            Inline::Superscript(styled) => collect_inline_text(&styled.content(), output),
+            Inline::Subscript(styled) => collect_inline_text(&styled.content(), output),
             Inline::Link(link) => {
-                if let Some(display) = &link.display {
+                if let Some(display) = &link.display() {
                     collect_inline_text(display, output);
                 }
             }
             Inline::Image(_) | Inline::Category(_) => {}
-            Inline::Footnote(footnote) => collect_inline_text(&footnote.content, output),
-            Inline::Colored(colored) => collect_inline_text(&colored.content, output),
-            Inline::Sized(sized) => collect_inline_text(&sized.content, output),
+            Inline::Footnote(footnote) => collect_inline_text(&footnote.content(), output),
+            Inline::Colored(colored) => collect_inline_text(&colored.content(), output),
+            Inline::Sized(sized) => collect_inline_text(&sized.content(), output),
             Inline::WikiStyle(wiki_style) => {
-                for block in &wiki_style.blocks {
+                for block in &wiki_style.blocks() {
                     collect_block_text(block, output);
                 }
             }
             Inline::Folding(folding) => {
-                output.push_str(&folding.summary.to_string());
-                for block in &folding.blocks {
+                output.push_str(&folding.summary().to_string());
+                for block in &folding.blocks() {
                     collect_block_text(block, output);
                 }
             }
             Inline::Conditional(conditional) => {
-                for block in &conditional.blocks {
+                for block in &conditional.blocks() {
                     collect_block_text(block, output);
                 }
             }
@@ -179,45 +184,45 @@ fn render_block(block: &Block, depth: usize, output: &mut String) {
             writeln!(
                 output,
                 "Heading level={} folded={}: {}",
-                heading.level,
-                heading.folded,
-                render_inlines(&heading.content)
+                heading.level(),
+                heading.folded(),
+                render_inlines(&heading.content())
             )
             .unwrap();
         }
-        Block::Paragraph(inlines) => {
-            writeln!(output, "Paragraph: {}", render_inlines(inlines)).unwrap();
+        Block::Paragraph(paragraph) => {
+            writeln!(output, "Paragraph: {}", render_inlines(&paragraph.inlines())).unwrap();
         }
         Block::HorizontalRule => {
             output.push_str("HorizontalRule\n");
         }
-        Block::Quote(blocks) => {
+        Block::Quote(quote) => {
             output.push_str("Quote:\n");
-            render_children(blocks, depth + 1, output);
+            render_children(&quote.blocks(), depth + 1, output);
         }
-        Block::Indent(blocks) => {
+        Block::Indent(indent) => {
             output.push_str("Indent:\n");
-            render_children(blocks, depth + 1, output);
+            render_children(&indent.blocks(), depth + 1, output);
         }
         Block::List(list) => {
-            writeln!(output, "List kind={:?}:", list.kind).unwrap();
-            for item in &list.items {
+            writeln!(output, "List kind={:?}:", list.kind()).unwrap();
+            for item in &list.items() {
                 push_indent(output, depth + 1);
-                match item.start_number {
+                match item.start_number() {
                     Some(start_number) => writeln!(output, "Item start={start_number}:").unwrap(),
                     None => output.push_str("Item:\n"),
                 }
-                render_children(&item.blocks, depth + 2, output);
+                render_children(&item.blocks(), depth + 2, output);
             }
         }
         Block::Table(table) => {
-            match &table.caption {
+            match &table.caption() {
                 Some(caption) => {
                     writeln!(output, "Table caption={}:", render_inlines(caption)).unwrap()
                 }
                 None => output.push_str("Table:\n"),
             }
-            for row in &table.rows {
+            for row in &table.rows() {
                 push_indent(output, depth + 1);
                 output.push_str("Row:\n");
                 for cell in &row.cells {
@@ -256,10 +261,10 @@ fn render_block(block: &Block, depth: usize, output: &mut String) {
             }
         }
         Block::Comment(comment) => {
-            writeln!(output, "Comment: {comment:?}").unwrap();
+            writeln!(output, "Comment: {:?}", comment.text()).unwrap();
         }
-        Block::Redirect(target) => {
-            writeln!(output, "Redirect: {:?}", target.to_string()).unwrap();
+        Block::Redirect(redirect) => {
+            writeln!(output, "Redirect: {:?}", redirect.target().to_string()).unwrap();
         }
     }
 }
@@ -294,31 +299,31 @@ fn render_inline(inline: &Inline) -> String {
     match inline {
         Inline::Text(text) => format!("{text:?}"),
         Inline::LineBreak => "<br>".to_string(),
-        Inline::Bold(content) => format!("Bold({})", render_inlines(content)),
-        Inline::Italic(content) => format!("Italic({})", render_inlines(content)),
-        Inline::Strikethrough(content) => format!("Strike({})", render_inlines(content)),
-        Inline::Underline(content) => format!("Underline({})", render_inlines(content)),
-        Inline::Superscript(content) => format!("Sup({})", render_inlines(content)),
-        Inline::Subscript(content) => format!("Sub({})", render_inlines(content)),
+        Inline::Bold(styled) => format!("Bold({})", render_inlines(&styled.content())),
+        Inline::Italic(styled) => format!("Italic({})", render_inlines(&styled.content())),
+        Inline::Strikethrough(styled) => format!("Strike({})", render_inlines(&styled.content())),
+        Inline::Underline(styled) => format!("Underline({})", render_inlines(&styled.content())),
+        Inline::Superscript(styled) => format!("Sup({})", render_inlines(&styled.content())),
+        Inline::Subscript(styled) => format!("Sub({})", render_inlines(&styled.content())),
         Inline::Literal(text) => format!("Literal({text:?})"),
         Inline::Link(link) => {
             let anchor = link
-                .anchor
+                .anchor()
                 .as_ref()
                 .map(|anchor| format!(" #{anchor}"))
                 .unwrap_or_default();
-            match &link.display {
+            match &link.display() {
                 Some(display) => format!(
                     "Link({:?}{anchor} | {})",
-                    link.target.to_string(),
+                    link.target().to_string(),
                     render_inlines(display)
                 ),
-                None => format!("Link({:?}{anchor})", link.target.to_string()),
+                None => format!("Link({:?}{anchor})", link.target().to_string()),
             }
         }
         Inline::Image(image) => {
             let options: Vec<String> = image
-                .options
+                .options()
                 .iter()
                 .map(|option| match &option.value {
                     Some(value) => format!("{}={value}", option.name),
@@ -326,63 +331,63 @@ fn render_inline(inline: &Inline) -> String {
                 })
                 .collect();
             if options.is_empty() {
-                format!("Image({:?})", image.file_name.to_string())
+                format!("Image({:?})", image.file_name().to_string())
             } else {
                 format!(
                     "Image({:?} {})",
-                    image.file_name.to_string(),
+                    image.file_name().to_string(),
                     options.join("&")
                 )
             }
         }
-        Inline::Category(category) => format!("Category({:?})", category.name),
+        Inline::Category(category) => format!("Category({:?})", category.name()),
         Inline::Footnote(footnote) => {
             let name = footnote
-                .name
+                .name()
                 .as_ref()
                 .map(|name| format!("{name} "))
                 .unwrap_or_default();
-            format!("Footnote({name}| {})", render_inlines(&footnote.content))
+            format!("Footnote({name}| {})", render_inlines(&footnote.content()))
         }
-        Inline::Macro(macro_call) => match &macro_call.argument {
-            Some(argument) => format!("Macro({} {:?})", macro_call.name, argument.to_string()),
-            None => format!("Macro({})", macro_call.name),
+        Inline::Macro(macro_call) => match &macro_call.argument() {
+            Some(argument) => format!("Macro({} {:?})", macro_call.name(), argument.to_string()),
+            None => format!("Macro({})", macro_call.name()),
         },
         Inline::Colored(colored) => {
             let dark = colored
-                .dark_color
+                .dark_color()
                 .as_ref()
                 .map(|dark_color| format!(",{dark_color}"))
                 .unwrap_or_default();
             format!(
                 "Colored({}{dark} | {})",
-                colored.color,
-                render_inlines(&colored.content)
+                colored.color(),
+                render_inlines(&colored.content())
             )
         }
         Inline::Sized(sized) => {
             format!(
                 "Sized({:+} | {})",
-                sized.level,
-                render_inlines(&sized.content)
+                sized.level(),
+                render_inlines(&sized.content())
             )
         }
         Inline::Html(html) => format!("InlineHtml({:?})", html.to_string()),
         Inline::WikiStyle(wiki_style) => format!(
             "WikiStyle(style={:?} dark={:?} | {})",
-            wiki_style.style.as_ref().map(Template::to_string),
-            wiki_style.dark_style.as_ref().map(Template::to_string),
-            render_blocks_inline(&wiki_style.blocks)
+            wiki_style.style().as_ref().map(Template::to_string),
+            wiki_style.dark_style().as_ref().map(Template::to_string),
+            render_blocks_inline(&wiki_style.blocks())
         ),
         Inline::Folding(folding) => format!(
             "Folding({} | {})",
-            folding.summary,
-            render_blocks_inline(&folding.blocks)
+            folding.summary(),
+            render_blocks_inline(&folding.blocks())
         ),
         Inline::Conditional(conditional) => format!(
             "Conditional(if={:?} | {})",
-            conditional.expression,
-            render_blocks_inline(&conditional.blocks)
+            conditional.expression(),
+            render_blocks_inline(&conditional.blocks())
         ),
         Inline::CodeBlock(code_block) => format!(
             "CodeBlock(language={:?} | {:?})",

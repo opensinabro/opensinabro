@@ -1,16 +1,11 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 13줄 | 렌더링: 1줄 | 분류 블러
+근거: 도움말예제 | 원문: 1줄 | 의미론: 8줄 | 렌더링: 1줄 | 분류 블러
 [[분류:알파위키#blur]]
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Category(
-                    Category {
-                        name: "알파위키#blur",
-                    },
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..29
+  Paragraph@0..28
+    Category@0..28
+      DelimiterOpen@0..2 "[["
+      LinkNamespace@2..9 "분류:"
+      LinkTarget@9..26 "알파위키#blur"
+      DelimiterClose@26..28 "]]"
+  Newline@28..29 "\n"
 <div class="wiki-categories">분류: <a href="/w/%EB%B6%84%EB%A5%98%3A%EC%95%8C%ED%8C%8C%EC%9C%84%ED%82%A4%23blur">알파위키#blur</a></div>

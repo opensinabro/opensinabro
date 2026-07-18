@@ -1,24 +1,11 @@
-근거: 미확인 | 원문: 1줄 | 의미론: 21줄 | 렌더링: 1줄 | 앵커 구분자만 있고 뒤가 빔
+근거: 미확인 | 원문: 1줄 | 의미론: 8줄 | 렌더링: 1줄 | 앵커 구분자만 있고 뒤가 빔
 [[##]]
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Link(
-                    Link {
-                        target: Template(
-                            [
-                                Text(
-                                    "#",
-                                ),
-                            ],
-                        ),
-                        anchor: None,
-                        display: None,
-                    },
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..7
+  Paragraph@0..6
+    Link@0..6
+      DelimiterOpen@0..2 "[["
+      LinkTarget@2..3 "#"
+      Separator@3..4 "#"
+      DelimiterClose@4..6 "]]"
+  Newline@6..7 "\n"
 <div class="wiki-paragraph"><a class="wiki-link-internal not-exist" href="/w/%23" rel="nofollow" title="#">#</a></div>

@@ -1,26 +1,15 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 23줄 | 렌더링: 1줄 | 색상 안의 밑줄 — 밑줄에 색 적용
+근거: 도움말예제 | 원문: 1줄 | 의미론: 12줄 | 렌더링: 1줄 | 색상 안의 밑줄 — 밑줄에 색 적용
 {{{#red __밑줄 포함__}}}
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Colored(
-                    ColoredText {
-                        color: "red",
-                        dark_color: None,
-                        content: [
-                            Underline(
-                                [
-                                    Text(
-                                        "밑줄 포함",
-                                    ),
-                                ],
-                            ),
-                        ],
-                    },
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..29
+  Paragraph@0..28
+    ColoredText@0..28
+      DelimiterOpen@0..3 "{{{"
+      ColorValue@3..7 "#red"
+      Separator@7..8 " "
+      Underline@8..25
+        DelimiterOpen@8..10 "__"
+        Text@10..23 "밑줄 포함"
+        DelimiterClose@23..25 "__"
+      DelimiterClose@25..28 "}}}"
+  Newline@28..29 "\n"
 <div class="wiki-paragraph"><span style="color:red" data-dark-style="color:red;"><u>밑줄 포함</u></span></div>

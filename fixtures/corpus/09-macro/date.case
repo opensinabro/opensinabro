@@ -1,17 +1,10 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 14줄 | 렌더링: 1줄 | 현재 날짜
+근거: 도움말예제 | 원문: 1줄 | 의미론: 7줄 | 렌더링: 1줄 | 현재 날짜
 [date]
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Macro(
-                    Macro {
-                        name: "date",
-                        argument: None,
-                    },
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..7
+  Paragraph@0..6
+    MacroCall@0..6
+      DelimiterOpen@0..1 "["
+      MacroName@1..5 "date"
+      DelimiterClose@5..6 "]"
+  Newline@6..7 "\n"
 <div class="wiki-paragraph">2026-07-17 12:00:00</div>

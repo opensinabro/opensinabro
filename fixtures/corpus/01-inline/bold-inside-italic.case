@@ -1,28 +1,15 @@
-근거: 미확인 | 원문: 1줄 | 의미론: 25줄 | 렌더링: 1줄 | 기울임 안의 굵게
+근거: 미확인 | 원문: 1줄 | 의미론: 12줄 | 렌더링: 1줄 | 기울임 안의 굵게
 ''기울임 '''굵게''' 기울임''
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Italic(
-                    [
-                        Text(
-                            "기울임 ",
-                        ),
-                    ],
-                ),
-                Text(
-                    "'굵게",
-                ),
-                Italic(
-                    [
-                        Text(
-                            "' 기울임",
-                        ),
-                    ],
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..37
+  Paragraph@0..36
+    Italic@0..14
+      DelimiterOpen@0..2 "''"
+      Text@2..12 "기울임 "
+      DelimiterClose@12..14 "''"
+    Text@14..21 "'굵게"
+    Italic@21..36
+      DelimiterOpen@21..23 "''"
+      Text@23..34 "' 기울임"
+      DelimiterClose@34..36 "''"
+  Newline@36..37 "\n"
 <div class="wiki-paragraph"><em>기울임 </em>'굵게<em>' 기울임</em></div>

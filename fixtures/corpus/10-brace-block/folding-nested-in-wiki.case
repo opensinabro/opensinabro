@@ -1,55 +1,30 @@
-근거: 도움말예제 | 원문: 5줄 | 의미론: 48줄 | 렌더링: 1줄 | 여백 제거 관용구 — #!wiki 안의 접기
+근거: 도움말예제 | 원문: 5줄 | 의미론: 23줄 | 렌더링: 1줄 | 여백 제거 관용구 — #!wiki 안의 접기
 {{{#!wiki style="margin:0 -10px -5px"
 {{{#!folding [ 펼치기 · 접기 ]
 내용
 }}}
 }}}
-Document {
-    blocks: [
-        Paragraph(
-            [
-                WikiStyle(
-                    WikiStyle {
-                        style: Some(
-                            Template(
-                                [
-                                    Text(
-                                        "margin:0 -10px -5px",
-                                    ),
-                                ],
-                            ),
-                        ),
-                        dark_style: None,
-                        blocks: [
-                            Paragraph(
-                                [
-                                    Folding(
-                                        Folding {
-                                            summary: Template(
-                                                [
-                                                    Text(
-                                                        "[ 펼치기 · 접기 ]",
-                                                    ),
-                                                ],
-                                            ),
-                                            blocks: [
-                                                Paragraph(
-                                                    [
-                                                        Text(
-                                                            "내용",
-                                                        ),
-                                                    ],
-                                                ),
-                                            ],
-                                        },
-                                    ),
-                                ],
-                            ),
-                        ],
-                    },
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..90
+  Paragraph@0..89
+    WikiStyle@0..89
+      DelimiterOpen@0..3 "{{{"
+      Directive@3..9 "#!wiki"
+      Separator@9..10 " "
+      AttributeName@10..15 "style"
+      Separator@15..16 "="
+      AttributeValue@16..37 "\"margin:0 -10px -5px\""
+      Newline@37..38 "\n"
+      Paragraph@38..85
+        Folding@38..85
+          DelimiterOpen@38..41 "{{{"
+          Directive@41..50 "#!folding"
+          Separator@50..51 " "
+          FoldingSummary@51..74
+            Text@51..74 "[ 펼치기 · 접기 ]"
+          Newline@74..75 "\n"
+          Paragraph@75..81
+            Text@75..81 "내용"
+          DelimiterClose@81..85 "\n}}}"
+      DelimiterClose@85..89 "\n}}}"
+  Newline@89..90 "\n"
 <div class="wiki-paragraph"><div style="margin: 0 -10px -5px"><details class="wiki-folding"><summary>[ 펼치기 · 접기 ]</summary><div>내용</div></details></div></div>

@@ -1,51 +1,20 @@
-근거: 도움말서술 | 원문: 1줄 | 의미론: 47줄 | 렌더링: 2줄 | 셀 높이
+근거: 도움말서술 | 원문: 1줄 | 의미론: 16줄 | 렌더링: 2줄 | 셀 높이
 ||<height=200px> 높이 ||
-Document {
-    blocks: [
-        Table(
-            Table {
-                caption: None,
-                rows: [
-                    TableRow {
-                        cells: [
-                            TableCell {
-                                column_span: None,
-                                row_span: None,
-                                horizontal_alignment: Some(
-                                    Center,
-                                ),
-                                vertical_alignment: None,
-                                attributes: [
-                                    TableAttribute {
-                                        scope: Cell,
-                                        name: "height",
-                                        value: Some(
-                                            Template(
-                                                [
-                                                    Text(
-                                                        "200px",
-                                                    ),
-                                                ],
-                                            ),
-                                        ),
-                                    },
-                                ],
-                                blocks: [
-                                    Paragraph(
-                                        [
-                                            Text(
-                                                "높이",
-                                            ),
-                                        ],
-                                    ),
-                                ],
-                            },
-                        ],
-                    },
-                ],
-            },
-        ),
-    ],
-}
+Document@0..27
+  Table@0..26
+    TableRow@0..26
+      Separator@0..2 "||"
+      TableCell@2..24
+        DelimiterOpen@2..3 "<"
+        CellOptionName@3..9 "height"
+        Separator@9..10 "="
+        CellOptionValue@10..15 "200px"
+        DelimiterClose@15..16 ">"
+        AlignmentSpace@16..17 " "
+        Paragraph@17..23
+          Text@17..23 "높이"
+        AlignmentSpace@23..24 " "
+      Separator@24..26 "||"
+  Newline@26..27 "\n"
 <div class="wiki-table-wrap"><table class="wiki-table"><tbody><tr class="wiki-table-tr"><td style="text-align: center; height: 200px;"><div class="wiki-paragraph">높이</div>
 </td></tr></tbody></table></div>

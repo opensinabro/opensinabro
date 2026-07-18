@@ -1,8 +1,7 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 5줄 | 렌더링: 1줄 | 수평줄 최대 개수
+근거: 도움말예제 | 원문: 1줄 | 의미론: 4줄 | 렌더링: 1줄 | 수평줄 최대 개수
 ---------
-Document {
-    blocks: [
-        HorizontalRule,
-    ],
-}
+Document@0..10
+  HorizontalRule@0..9
+    Marker@0..9 "---------"
+  Newline@9..10 "\n"
 <hr>

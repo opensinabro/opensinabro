@@ -1,28 +1,15 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 25줄 | 렌더링: 1줄 | 굵게+기울임 중첩
+근거: 도움말예제 | 원문: 1줄 | 의미론: 12줄 | 렌더링: 1줄 | 굵게+기울임 중첩
 ''' ''굵게 기울임'' '''
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Bold(
-                    [
-                        Text(
-                            " ",
-                        ),
-                        Italic(
-                            [
-                                Text(
-                                    "굵게 기울임",
-                                ),
-                            ],
-                        ),
-                        Text(
-                            " ",
-                        ),
-                    ],
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..29
+  Paragraph@0..28
+    Bold@0..28
+      DelimiterOpen@0..3 "'''"
+      Text@3..4 " "
+      Italic@4..24
+        DelimiterOpen@4..6 "''"
+        Text@6..22 "굵게 기울임"
+        DelimiterClose@22..24 "''"
+      Text@24..25 " "
+      DelimiterClose@25..28 "'''"
+  Newline@28..29 "\n"
 <div class="wiki-paragraph"><strong> <em>굵게 기울임</em> </strong></div>

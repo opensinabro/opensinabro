@@ -1,21 +1,12 @@
-근거: 미확인 | 원문: 3줄 | 의미론: 16줄 | 렌더링: 1줄 | 빈 줄은 문단 경계가 아니라 줄바꿈 둘
+근거: 미확인 | 원문: 3줄 | 의미론: 7줄 | 렌더링: 1줄 | 빈 줄은 문단 경계가 아니라 줄바꿈 둘
 앞
 
 뒤
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Text(
-                    "앞",
-                ),
-                LineBreak,
-                LineBreak,
-                Text(
-                    "뒤",
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..9
+  Paragraph@0..8
+    Text@0..3 "앞"
+    Newline@3..4 "\n"
+    Newline@4..5 "\n"
+    Text@5..8 "뒤"
+  Newline@8..9 "\n"
 <div class="wiki-paragraph">앞<br><br>뒤</div>

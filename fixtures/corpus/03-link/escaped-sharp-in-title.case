@@ -1,24 +1,10 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 21줄 | 렌더링: 1줄 | 제목의 # 이스케이프
+근거: 도움말예제 | 원문: 1줄 | 의미론: 7줄 | 렌더링: 1줄 | 제목의 # 이스케이프
 [[\#1 to Infinity]]
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Link(
-                    Link {
-                        target: Template(
-                            [
-                                Text(
-                                    "#1 to Infinity",
-                                ),
-                            ],
-                        ),
-                        anchor: None,
-                        display: None,
-                    },
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..20
+  Paragraph@0..19
+    Link@0..19
+      DelimiterOpen@0..2 "[["
+      LinkTarget@2..17 "\\#1 to Infinity"
+      DelimiterClose@17..19 "]]"
+  Newline@19..20 "\n"
 <div class="wiki-paragraph"><a class="wiki-link-internal not-exist" href="/w/%231%20to%20Infinity" rel="nofollow" title="#1 to Infinity">#1 to Infinity</a></div>

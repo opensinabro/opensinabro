@@ -1,29 +1,17 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 26줄 | 렌더링: 1줄 | 크기 안의 색상 — 순서 무관
+근거: 도움말예제 | 원문: 1줄 | 의미론: 14줄 | 렌더링: 1줄 | 크기 안의 색상 — 순서 무관
 {{{+1 {{{#blue 큰글자파랑}}}}}}
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Sized(
-                    SizedText {
-                        level: 1,
-                        content: [
-                            Colored(
-                                ColoredText {
-                                    color: "blue",
-                                    dark_color: None,
-                                    content: [
-                                        Text(
-                                            "큰글자파랑",
-                                        ),
-                                    ],
-                                },
-                            ),
-                        ],
-                    },
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..37
+  Paragraph@0..36
+    SizedText@0..36
+      DelimiterOpen@0..3 "{{{"
+      SizeLevel@3..5 "+1"
+      Separator@5..6 " "
+      ColoredText@6..33
+        DelimiterOpen@6..9 "{{{"
+        ColorValue@9..14 "#blue"
+        Separator@14..15 " "
+        Text@15..30 "큰글자파랑"
+        DelimiterClose@30..33 "}}}"
+      DelimiterClose@33..36 "}}}"
+  Newline@36..37 "\n"
 <div class="wiki-paragraph"><span class="wiki-size-up-1"><span style="color:blue" data-dark-style="color:blue;">큰글자파랑</span></span></div>

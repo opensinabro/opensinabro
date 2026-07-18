@@ -1,36 +1,15 @@
-근거: 도움말서술 | 원문: 1줄 | 의미론: 33줄 | 렌더링: 1줄 | 도움말: middle은 center 동의어. 우리는 폐기함
+근거: 도움말서술 | 원문: 1줄 | 의미론: 12줄 | 렌더링: 1줄 | 도움말: middle은 center 동의어. 우리는 폐기함
 [[파일:example.png|align=middle]]
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Image(
-                    Image {
-                        file_name: Template(
-                            [
-                                Text(
-                                    "example.png",
-                                ),
-                            ],
-                        ),
-                        options: [
-                            ImageOption {
-                                name: "align",
-                                value: Some(
-                                    Template(
-                                        [
-                                            Text(
-                                                "middle",
-                                            ),
-                                        ],
-                                    ),
-                                ),
-                            },
-                        ],
-                    },
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..36
+  Paragraph@0..35
+    Image@0..35
+      DelimiterOpen@0..2 "[["
+      LinkNamespace@2..9 "파일:"
+      LinkTarget@9..20 "example.png"
+      Separator@20..21 "|"
+      ArgumentName@21..26 "align"
+      Separator@26..27 "="
+      ArgumentValue@27..33 "middle"
+      DelimiterClose@33..35 "]]"
+  Newline@35..36 "\n"
 <div class="wiki-paragraph"><span class="wiki-image-align-normal" style=""><span class="wiki-image-wrapper"><img src="/file/example.png" alt="파일:example.png"></span></span></div>

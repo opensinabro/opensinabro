@@ -1,20 +1,22 @@
-근거: 미확인 | 원문: 3줄 | 의미론: 15줄 | 렌더링: 1줄 | 색상 그룹 안의 표 — 인라인으로 펼 수 없어 버려짐
+근거: 미확인 | 원문: 3줄 | 의미론: 17줄 | 렌더링: 1줄 | 색상 그룹 안의 표 — 인라인으로 펼 수 없어 버려짐
 {{{#red
 || 표 ||
 }}}
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Colored(
-                    ColoredText {
-                        color: "red",
-                        dark_color: None,
-                        content: [],
-                    },
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..22
+  Paragraph@0..21
+    ColoredBlock@0..21
+      DelimiterOpen@0..3 "{{{"
+      ColorValue@3..7 "#red"
+      Newline@7..8 "\n"
+      Table@8..17
+        TableRow@8..17
+          Separator@8..10 "||"
+          TableCell@10..15
+            AlignmentSpace@10..11 " "
+            Paragraph@11..14
+              Text@11..14 "표"
+            AlignmentSpace@14..15 " "
+          Separator@15..17 "||"
+      DelimiterClose@17..21 "\n}}}"
+  Newline@21..22 "\n"
 <div class="wiki-paragraph"><span style="color:red" data-dark-style="color:red;"></span></div>

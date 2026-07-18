@@ -1,37 +1,14 @@
-근거: 도움말서술 | 원문: 1줄 | 의미론: 33줄 | 렌더링: 2줄 | 도움말: <color#RRGGBB> 지원. 우리는 옵션 파싱 중단
+근거: 도움말서술 | 원문: 1줄 | 의미론: 10줄 | 렌더링: 2줄 | 도움말: <color#RRGGBB> 지원. 우리는 옵션 파싱 중단
 ||<color#ff0000> 글자 ||
-Document {
-    blocks: [
-        Table(
-            Table {
-                caption: None,
-                rows: [
-                    TableRow {
-                        cells: [
-                            TableCell {
-                                column_span: None,
-                                row_span: None,
-                                horizontal_alignment: Some(
-                                    Left,
-                                ),
-                                vertical_alignment: None,
-                                attributes: [],
-                                blocks: [
-                                    Paragraph(
-                                        [
-                                            Text(
-                                                "<color#ff0000> 글자",
-                                            ),
-                                        ],
-                                    ),
-                                ],
-                            },
-                        ],
-                    },
-                ],
-            },
-        ),
-    ],
-}
+Document@0..27
+  Table@0..26
+    TableRow@0..26
+      Separator@0..2 "||"
+      TableCell@2..24
+        Paragraph@2..23
+          Text@2..23 "<color#ff0000> 글자"
+        AlignmentSpace@23..24 " "
+      Separator@24..26 "||"
+  Newline@26..27 "\n"
 <div class="wiki-table-wrap"><table class="wiki-table"><tbody><tr class="wiki-table-tr"><td style="text-align: left;"><div class="wiki-paragraph">&lt;color#ff0000&gt; 글자</div>
 </td></tr></tbody></table></div>

@@ -1,61 +1,24 @@
-근거: 미확인 | 원문: 2줄 | 의미론: 55줄 | 렌더링: 3줄 | 공백 위치로 유도되는 정렬
+근거: 미확인 | 원문: 2줄 | 의미론: 18줄 | 렌더링: 3줄 | 공백 위치로 유도되는 정렬
 ||가운데 정렬 ||
 || 오른쪽 정렬||
-Document {
-    blocks: [
-        Table(
-            Table {
-                caption: None,
-                rows: [
-                    TableRow {
-                        cells: [
-                            TableCell {
-                                column_span: None,
-                                row_span: None,
-                                horizontal_alignment: Some(
-                                    Left,
-                                ),
-                                vertical_alignment: None,
-                                attributes: [],
-                                blocks: [
-                                    Paragraph(
-                                        [
-                                            Text(
-                                                "가운데 정렬",
-                                            ),
-                                        ],
-                                    ),
-                                ],
-                            },
-                        ],
-                    },
-                    TableRow {
-                        cells: [
-                            TableCell {
-                                column_span: None,
-                                row_span: None,
-                                horizontal_alignment: Some(
-                                    Right,
-                                ),
-                                vertical_alignment: None,
-                                attributes: [],
-                                blocks: [
-                                    Paragraph(
-                                        [
-                                            Text(
-                                                "오른쪽 정렬",
-                                            ),
-                                        ],
-                                    ),
-                                ],
-                            },
-                        ],
-                    },
-                ],
-            },
-        ),
-    ],
-}
+Document@0..44
+  Table@0..43
+    TableRow@0..21
+      Separator@0..2 "||"
+      TableCell@2..19
+        Paragraph@2..18
+          Text@2..18 "가운데 정렬"
+        AlignmentSpace@18..19 " "
+      Separator@19..21 "||"
+    Newline@21..22 "\n"
+    TableRow@22..43
+      Separator@22..24 "||"
+      TableCell@24..41
+        AlignmentSpace@24..25 " "
+        Paragraph@25..41
+          Text@25..41 "오른쪽 정렬"
+      Separator@41..43 "||"
+  Newline@43..44 "\n"
 <div class="wiki-table-wrap"><table class="wiki-table"><tbody><tr class="wiki-table-tr"><td style="text-align: left;"><div class="wiki-paragraph">가운데 정렬</div>
 </td></tr><tr class="wiki-table-tr"><td style="text-align: right;"><div class="wiki-paragraph">오른쪽 정렬</div>
 </td></tr></tbody></table></div>

@@ -1,21 +1,17 @@
-근거: 도움말서술 | 원문: 3줄 | 의미론: 16줄 | 렌더링: 1줄 | 문법 강조 python
+근거: 도움말서술 | 원문: 3줄 | 의미론: 12줄 | 렌더링: 1줄 | 문법 강조 python
 {{{#!syntax python
 print(1)
 }}}
-Document {
-    blocks: [
-        Paragraph(
-            [
-                CodeBlock(
-                    CodeBlock {
-                        language: Some(
-                            "python",
-                        ),
-                        source: "print(1)",
-                    },
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..32
+  Paragraph@0..31
+    CodeBlock@0..31
+      DelimiterOpen@0..3 "{{{"
+      Directive@3..11 "#!syntax"
+      Separator@11..12 " "
+      CodeLanguage@12..18 "python"
+      Newline@18..19 "\n"
+      Text@19..27 "print(1)"
+      Newline@27..28 "\n"
+      DelimiterClose@28..31 "}}}"
+  Newline@31..32 "\n"
 <div class="wiki-paragraph"><pre><code class="hljs" data-language="python">print(1)</code></pre></div>

@@ -1,36 +1,19 @@
-근거: 도움말예제 | 원문: 3줄 | 의미론: 31줄 | 렌더링: 1줄 | #!wiki style
+근거: 도움말예제 | 원문: 3줄 | 의미론: 14줄 | 렌더링: 1줄 | #!wiki style
 {{{#!wiki style="text-align:center"
 가운데
 }}}
-Document {
-    blocks: [
-        Paragraph(
-            [
-                WikiStyle(
-                    WikiStyle {
-                        style: Some(
-                            Template(
-                                [
-                                    Text(
-                                        "text-align:center",
-                                    ),
-                                ],
-                            ),
-                        ),
-                        dark_style: None,
-                        blocks: [
-                            Paragraph(
-                                [
-                                    Text(
-                                        "가운데",
-                                    ),
-                                ],
-                            ),
-                        ],
-                    },
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..50
+  Paragraph@0..49
+    WikiStyle@0..49
+      DelimiterOpen@0..3 "{{{"
+      Directive@3..9 "#!wiki"
+      Separator@9..10 " "
+      AttributeName@10..15 "style"
+      Separator@15..16 "="
+      AttributeValue@16..35 "\"text-align:center\""
+      Newline@35..36 "\n"
+      Paragraph@36..45
+        Text@36..45 "가운데"
+      DelimiterClose@45..49 "\n}}}"
+  Newline@49..50 "\n"
 <div class="wiki-paragraph"><div style="text-align: center">가운데</div></div>

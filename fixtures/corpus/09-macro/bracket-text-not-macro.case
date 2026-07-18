@@ -1,26 +1,15 @@
-근거: 미확인 | 원문: 1줄 | 의미론: 23줄 | 렌더링: 1줄 | 매크로처럼 보이는 평범한 대괄호 텍스트
+근거: 미확인 | 원문: 1줄 | 의미론: 12줄 | 렌더링: 1줄 | 매크로처럼 보이는 평범한 대괄호 텍스트
 [V] [Chorus]
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Macro(
-                    Macro {
-                        name: "V",
-                        argument: None,
-                    },
-                ),
-                Text(
-                    " ",
-                ),
-                Macro(
-                    Macro {
-                        name: "Chorus",
-                        argument: None,
-                    },
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..13
+  Paragraph@0..12
+    MacroCall@0..3
+      DelimiterOpen@0..1 "["
+      MacroName@1..2 "V"
+      DelimiterClose@2..3 "]"
+    Text@3..4 " "
+    MacroCall@4..12
+      DelimiterOpen@4..5 "["
+      MacroName@5..11 "Chorus"
+      DelimiterClose@11..12 "]"
+  Newline@12..13 "\n"
 <div class="wiki-paragraph">[V] [Chorus]</div>

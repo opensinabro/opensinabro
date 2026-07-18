@@ -1,28 +1,15 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 24줄 | 렌더링: 2줄 | 인용문 안 개행
+근거: 도움말예제 | 원문: 1줄 | 의미론: 11줄 | 렌더링: 2줄 | 인용문 안 개행
 >문장1[br]문장2
-Document {
-    blocks: [
-        Quote(
-            [
-                Paragraph(
-                    [
-                        Text(
-                            "문장1",
-                        ),
-                        Macro(
-                            Macro {
-                                name: "br",
-                                argument: None,
-                            },
-                        ),
-                        Text(
-                            "문장2",
-                        ),
-                    ],
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..20
+  Quote@0..20
+    Paragraph@0..19
+      QuoteMarker@0..1 ">"
+      Text@1..8 "문장1"
+      MacroCall@8..12
+        DelimiterOpen@8..9 "["
+        MacroName@9..11 "br"
+        DelimiterClose@11..12 "]"
+      Text@12..19 "문장2"
+    Newline@19..20 "\n"
 <blockquote class="wiki-quote"><div class="wiki-paragraph">문장1<br>문장2</div>
 </blockquote>

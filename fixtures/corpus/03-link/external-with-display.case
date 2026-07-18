@@ -1,30 +1,12 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 27줄 | 렌더링: 1줄 | 외부 링크 표시명
+근거: 도움말예제 | 원문: 1줄 | 의미론: 9줄 | 렌더링: 1줄 | 외부 링크 표시명
 [[https://www.google.com/|구글]]
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Link(
-                    Link {
-                        target: Template(
-                            [
-                                Text(
-                                    "https://www.google.com/",
-                                ),
-                            ],
-                        ),
-                        anchor: None,
-                        display: Some(
-                            [
-                                Text(
-                                    "구글",
-                                ),
-                            ],
-                        ),
-                    },
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..35
+  Paragraph@0..34
+    Link@0..34
+      DelimiterOpen@0..2 "[["
+      LinkTarget@2..25 "https://www.google.com/"
+      Separator@25..26 "|"
+      Text@26..32 "구글"
+      DelimiterClose@32..34 "]]"
+  Newline@34..35 "\n"
 <div class="wiki-paragraph"><a class="wiki-link-external" href="https://www.google.com/" target="_blank" rel="nofollow noopener ugc" title="https://www.google.com/">구글</a></div>

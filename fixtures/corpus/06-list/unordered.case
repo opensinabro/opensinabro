@@ -1,41 +1,22 @@
-근거: 도움말예제 | 원문: 2줄 | 의미론: 35줄 | 렌더링: 3줄 | 불릿 리스트
+근거: 도움말예제 | 원문: 2줄 | 의미론: 16줄 | 렌더링: 3줄 | 불릿 리스트
  * 리스트 1
  * 리스트 2
-Document {
-    blocks: [
-        List(
-            List {
-                kind: Unordered,
-                items: [
-                    ListItem {
-                        start_number: None,
-                        blocks: [
-                            Paragraph(
-                                [
-                                    Text(
-                                        "리스트 1",
-                                    ),
-                                ],
-                            ),
-                        ],
-                    },
-                    ListItem {
-                        start_number: None,
-                        blocks: [
-                            Paragraph(
-                                [
-                                    Text(
-                                        "리스트 2",
-                                    ),
-                                ],
-                            ),
-                        ],
-                    },
-                ],
-            },
-        ),
-    ],
-}
+Document@0..30
+  List@0..30
+    ListItem@0..15
+      IndentMarker@0..1 " "
+      ListMarker@1..2 "*"
+      Separator@2..3 " "
+      Paragraph@3..14
+        Text@3..14 "리스트 1"
+      Newline@14..15 "\n"
+    ListItem@15..30
+      IndentMarker@15..16 " "
+      ListMarker@16..17 "*"
+      Separator@17..18 " "
+      Paragraph@18..29
+        Text@18..29 "리스트 2"
+      Newline@29..30 "\n"
 <ul class="wiki-list"><li><div class="wiki-paragraph">리스트 1</div>
 </li><li><div class="wiki-paragraph">리스트 2</div>
 </li></ul>

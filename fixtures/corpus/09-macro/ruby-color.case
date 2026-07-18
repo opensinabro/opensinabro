@@ -1,25 +1,21 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 22줄 | 렌더링: 1줄 | 도움말: color는 윗첨자에만 적용
+근거: 도움말예제 | 원문: 1줄 | 의미론: 18줄 | 렌더링: 1줄 | 도움말: color는 윗첨자에만 적용
 [ruby(글자,ruby=루비,color=red)]
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Macro(
-                    Macro {
-                        name: "ruby",
-                        argument: Some(
-                            Template(
-                                [
-                                    Text(
-                                        "글자,ruby=루비,color=red",
-                                    ),
-                                ],
-                            ),
-                        ),
-                    },
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..37
+  Paragraph@0..36
+    MacroCall@0..36
+      DelimiterOpen@0..1 "["
+      MacroName@1..5 "ruby"
+      Separator@5..6 "("
+      MacroArgument@6..12 "글자"
+      Separator@12..13 ","
+      ArgumentName@13..17 "ruby"
+      Separator@17..18 "="
+      ArgumentValue@18..24 "루비"
+      Separator@24..25 ","
+      ArgumentName@25..30 "color"
+      Separator@30..31 "="
+      ArgumentValue@31..34 "red"
+      Separator@34..35 ")"
+      DelimiterClose@35..36 "]"
+  Newline@36..37 "\n"
 <div class="wiki-paragraph"><ruby>글자<rp>(</rp><rt><span style="color:red">루비</span></rt><rp>)</rp></ruby></div>

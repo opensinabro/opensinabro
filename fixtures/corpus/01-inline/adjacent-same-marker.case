@@ -1,28 +1,15 @@
-근거: 미확인 | 원문: 1줄 | 의미론: 25줄 | 렌더링: 1줄 | 같은 마커가 연달아 두 번
+근거: 미확인 | 원문: 1줄 | 의미론: 12줄 | 렌더링: 1줄 | 같은 마커가 연달아 두 번
 '''하나''' 사이 '''둘'''
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Bold(
-                    [
-                        Text(
-                            "하나",
-                        ),
-                    ],
-                ),
-                Text(
-                    " 사이 ",
-                ),
-                Bold(
-                    [
-                        Text(
-                            "둘",
-                        ),
-                    ],
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..30
+  Paragraph@0..29
+    Bold@0..12
+      DelimiterOpen@0..3 "'''"
+      Text@3..9 "하나"
+      DelimiterClose@9..12 "'''"
+    Text@12..20 " 사이 "
+    Bold@20..29
+      DelimiterOpen@20..23 "'''"
+      Text@23..26 "둘"
+      DelimiterClose@26..29 "'''"
+  Newline@29..30 "\n"
 <div class="wiki-paragraph"><strong>하나</strong> 사이 <strong>둘</strong></div>

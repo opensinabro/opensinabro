@@ -1,51 +1,20 @@
-근거: 도움말서술 | 원문: 1줄 | 의미론: 47줄 | 렌더링: 2줄 | 표 너비
+근거: 도움말서술 | 원문: 1줄 | 의미론: 16줄 | 렌더링: 2줄 | 표 너비
 ||<tablewidth=600px> 표 ||
-Document {
-    blocks: [
-        Table(
-            Table {
-                caption: None,
-                rows: [
-                    TableRow {
-                        cells: [
-                            TableCell {
-                                column_span: None,
-                                row_span: None,
-                                horizontal_alignment: Some(
-                                    Center,
-                                ),
-                                vertical_alignment: None,
-                                attributes: [
-                                    TableAttribute {
-                                        scope: Table,
-                                        name: "width",
-                                        value: Some(
-                                            Template(
-                                                [
-                                                    Text(
-                                                        "600px",
-                                                    ),
-                                                ],
-                                            ),
-                                        ),
-                                    },
-                                ],
-                                blocks: [
-                                    Paragraph(
-                                        [
-                                            Text(
-                                                "표",
-                                            ),
-                                        ],
-                                    ),
-                                ],
-                            },
-                        ],
-                    },
-                ],
-            },
-        ),
-    ],
-}
+Document@0..28
+  Table@0..27
+    TableRow@0..27
+      Separator@0..2 "||"
+      TableCell@2..25
+        DelimiterOpen@2..3 "<"
+        CellOptionName@3..13 "tablewidth"
+        Separator@13..14 "="
+        CellOptionValue@14..19 "600px"
+        DelimiterClose@19..20 ">"
+        AlignmentSpace@20..21 " "
+        Paragraph@21..24
+          Text@21..24 "표"
+        AlignmentSpace@24..25 " "
+      Separator@25..27 "||"
+  Newline@27..28 "\n"
 <div class="wiki-table-wrap" style="width: 600px;"><table class="wiki-table" style=" width: 100%;"><tbody><tr class="wiki-table-tr"><td style="text-align: center;"><div class="wiki-paragraph">표</div>
 </td></tr></tbody></table></div>

@@ -1,21 +1,12 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 18줄 | 렌더링: 1줄 | 크기 -3단계
+근거: 도움말예제 | 원문: 1줄 | 의미론: 9줄 | 렌더링: 1줄 | 크기 -3단계
 {{{-3 -3단계}}}
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Sized(
-                    SizedText {
-                        level: -3,
-                        content: [
-                            Text(
-                                "-3단계",
-                            ),
-                        ],
-                    },
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..18
+  Paragraph@0..17
+    SizedText@0..17
+      DelimiterOpen@0..3 "{{{"
+      SizeLevel@3..5 "-3"
+      Separator@5..6 " "
+      Text@6..14 "-3단계"
+      DelimiterClose@14..17 "}}}"
+  Newline@17..18 "\n"
 <div class="wiki-paragraph"><span class="wiki-size-down-3">-3단계</span></div>

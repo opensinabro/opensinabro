@@ -6,3 +6,5 @@ edition.workspace = true
 license.workspace = true
 
 [dependencies]
+namumark-syntax = { path = "../namumark-syntax" }
+namumark-text = { path = "../namumark-text" }

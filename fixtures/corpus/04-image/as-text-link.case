@@ -1,24 +1,10 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 21줄 | 렌더링: 1줄 | 콜론 접두사로 파일을 텍스트 링크화
+근거: 도움말예제 | 원문: 1줄 | 의미론: 7줄 | 렌더링: 1줄 | 콜론 접두사로 파일을 텍스트 링크화
 [[:파일:알파위키 로고.svg]]
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Link(
-                    Link {
-                        target: Template(
-                            [
-                                Text(
-                                    "파일:알파위키 로고.svg",
-                                ),
-                            ],
-                        ),
-                        anchor: None,
-                        display: None,
-                    },
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..36
+  Paragraph@0..35
+    Link@0..35
+      DelimiterOpen@0..2 "[["
+      LinkTarget@2..33 ":파일:알파위키  ..."
+      DelimiterClose@33..35 "]]"
+  Newline@35..36 "\n"
 <div class="wiki-paragraph"><a class="wiki-link-internal not-exist" href="/w/%ED%8C%8C%EC%9D%BC:%EC%95%8C%ED%8C%8C%EC%9C%84%ED%82%A4%20%EB%A1%9C%EA%B3%A0.svg" rel="nofollow" title="파일:알파위키 로고.svg">파일:알파위키 로고.svg</a></div>

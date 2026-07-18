@@ -1,43 +1,28 @@
-근거: 미확인 | 원문: 3줄 | 의미론: 36줄 | 렌더링: 6줄 | 접힌 문단이 목차에 오르는지
+근거: 미확인 | 원문: 3줄 | 의미론: 21줄 | 렌더링: 6줄 | 접힌 문단이 목차에 오르는지
 [목차]
 ==# 접힌 문단 #==
 === 하위 ===
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Macro(
-                    Macro {
-                        name: "목차",
-                        argument: None,
-                    },
-                ),
-            ],
-        ),
-        Heading(
-            Heading {
-                level: 2,
-                folded: true,
-                content: [
-                    Text(
-                        "접힌 문단",
-                    ),
-                ],
-            },
-        ),
-        Heading(
-            Heading {
-                level: 3,
-                folded: false,
-                content: [
-                    Text(
-                        "하위",
-                    ),
-                ],
-            },
-        ),
-    ],
-}
+Document@0..46
+  Paragraph@0..8
+    MacroCall@0..8
+      DelimiterOpen@0..1 "["
+      MacroName@1..7 "목차"
+      DelimiterClose@7..8 "]"
+  Newline@8..9 "\n"
+  Heading@9..30
+    DelimiterOpen@9..12 "==#"
+    Separator@12..13 " "
+    Text@13..26 "접힌 문단"
+    Separator@26..27 " "
+    DelimiterClose@27..30 "#=="
+  Newline@30..31 "\n"
+  Heading@31..45
+    DelimiterOpen@31..34 "==="
+    Separator@34..35 " "
+    Text@35..41 "하위"
+    Separator@41..42 " "
+    DelimiterClose@42..45 "==="
+  Newline@45..46 "\n"
 <div class="wiki-paragraph"><div class="wiki-macro-toc" id="toc"><details open><summary></summary><div class="toc-indent"><span class="toc-item"><a href="#s-1">1</a>. 접힌 문단</span><div class="toc-indent"><span class="toc-item"><a href="#s-1.1">1.1</a>. 하위</span></div></div></details></div>
 </div>
 <h2 class="wiki-heading wiki-heading-folded"><a id="s-1" href="#toc">1.</a> <span id="접힌 문단">접힌 문단</span></h2>

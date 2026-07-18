@@ -1,7 +1,10 @@
-use namumark_ast::{
-    Block, CodeBlock, ColoredText, Folding, Footnote, Heading, HorizontalAlignment, Inline, Link,
-    List, ListItem, ListKind, SizedText, Table, TableCell, TableRow, WikiStyle,
+mod model;
+
+use model::{
+    Block, CodeBlock, ColoredText, Folding, Footnote, Heading, Inline, Link, List, ListItem,
+    SizedText, Table, TableCell, TableRow, WikiStyle,
 };
+use namumark_ast::{HorizontalAlignment, ListKind};
 use namumark_parser::parse;
 
 fn text(content: &str) -> Inline {
@@ -40,7 +43,7 @@ fn unordered_list(items: Vec<Vec<Block>>) -> Block {
 fn quote_containing_table_list_and_paragraph() {
     let document = parse(">|| A ||\n> * 항목\n>텍스트");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![Block::Quote(vec![
             Block::Table(Table {
                 caption: None,
@@ -58,7 +61,7 @@ fn quote_containing_table_list_and_paragraph() {
 fn table_cell_containing_folding_with_inner_table() {
     let document = parse("||<:>첫\n{{{#!folding 보기\n|| 안 || 표 ||\n}}}\n끝 ||");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![Block::Table(Table {
             caption: None,
             rows: vec![TableRow {
@@ -96,7 +99,7 @@ fn table_cell_containing_folding_with_inner_table() {
 fn wiki_style_containing_list_and_table() {
     let document = parse("{{{#!wiki\n * 항목\n|| A ||\n}}}");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![paragraph(vec![Inline::WikiStyle(WikiStyle {
             style: None,
             dark_style: None,
@@ -117,7 +120,7 @@ fn wiki_style_containing_list_and_table() {
 fn nested_folding_blocks() {
     let document = parse("{{{#!folding 바깥\n{{{#!folding 안쪽\n내용\n}}}\n}}}");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![paragraph(vec![Inline::Folding(Folding {
             summary: "바깥".into(),
             blocks: vec![paragraph(vec![Inline::Folding(Folding {
@@ -132,7 +135,7 @@ fn nested_folding_blocks() {
 fn sized_inside_colored_inside_bold() {
     let document = parse("'''{{{#red {{{+2 강조}}}}}}'''");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![paragraph(vec![Inline::Bold(vec![Inline::Colored(
             ColoredText {
                 color: "red".to_string(),
@@ -150,7 +153,7 @@ fn sized_inside_colored_inside_bold() {
 fn footnote_inside_footnote() {
     let document = parse("본문[* 바깥 [* 안쪽]]");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![paragraph(vec![
             text("본문"),
             Inline::Footnote(Footnote {
@@ -171,7 +174,7 @@ fn footnote_inside_footnote() {
 fn triple_nested_unordered_lists() {
     let document = parse(" * 일\n  * 이\n   * 삼");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![unordered_list(vec![vec![
             paragraph(vec![text("일")]),
             unordered_list(vec![vec![
@@ -186,7 +189,7 @@ fn triple_nested_unordered_lists() {
 fn ordered_list_with_nested_unordered_list() {
     let document = parse(" 1. 하나\n  * 점\n 1. 둘");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![Block::List(List {
             kind: ListKind::Decimal,
             items: vec![
@@ -210,7 +213,7 @@ fn ordered_list_with_nested_unordered_list() {
 fn list_item_containing_code_block() {
     let document = parse(" * 항목\n  {{{\n  코드\n  }}}");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![unordered_list(vec![vec![
             paragraph(vec![text("항목")]),
             Block::Indent(vec![paragraph(vec![Inline::CodeBlock(CodeBlock {
@@ -226,7 +229,7 @@ fn list_item_containing_code_block() {
 fn table_inside_list_item() {
     let document = parse(" * 항목\n  || A ||");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![unordered_list(vec![vec![
             paragraph(vec![text("항목")]),
             Block::Indent(vec![Block::Table(Table {
@@ -243,7 +246,7 @@ fn table_inside_list_item() {
 fn heading_content_with_markup() {
     let document = parse("== [[문서]] '''굵게''' ==");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![Block::Heading(Heading {
             level: 2,
             folded: false,
@@ -264,7 +267,7 @@ fn heading_content_with_markup() {
 fn link_display_containing_colored_text() {
     let document = parse("[[대상|{{{#blue 파랑}}}]]");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![paragraph(vec![Inline::Link(Link {
             anchor: None,
             target: "대상".into(),
@@ -282,7 +285,7 @@ fn link_display_containing_colored_text() {
 fn nested_quote_containing_list() {
     let document = parse("> 바깥\n>>  * 안쪽");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![Block::Quote(vec![
             Block::Indent(vec![paragraph(vec![text("바깥")])]),
             Block::Quote(vec![Block::Indent(vec![unordered_list(vec![vec![
@@ -299,7 +302,7 @@ fn nested_quote_containing_list() {
 fn quote_containing_multiline_wiki_style() {
     let document = parse(">{{{#!wiki style=\"margin:1em\"\n인용문}}}");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![Block::Quote(vec![paragraph(vec![Inline::WikiStyle(
             WikiStyle {
                 style: Some("margin:1em".into()),
@@ -314,7 +317,7 @@ fn quote_containing_multiline_wiki_style() {
 fn list_item_containing_multiline_wiki_style() {
     let document = parse(" * {{{#!wiki style=\"display: inline\"\n내용}}}");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![unordered_list(vec![vec![paragraph(vec![
             Inline::WikiStyle(WikiStyle {
                 style: Some("display: inline".into()),
@@ -329,7 +332,7 @@ fn list_item_containing_multiline_wiki_style() {
 fn list_item_containing_multiline_folding() {
     let document = parse(" * {{{#!folding [ 펼치기 ]\n내용\n}}}");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![unordered_list(vec![vec![paragraph(vec![
             Inline::Folding(Folding {
                 summary: "[ 펼치기 ]".into(),
@@ -343,7 +346,7 @@ fn list_item_containing_multiline_folding() {
 fn indent_containing_multiline_wiki_style() {
     let document = parse(" 들여쓰기 {{{#!wiki style=\"margin:0\"\n내용}}}");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![Block::Indent(vec![paragraph(vec![
             text("들여쓰기 "),
             Inline::WikiStyle(WikiStyle {
@@ -360,7 +363,7 @@ fn indent_containing_multiline_wiki_style() {
 fn quote_with_unclosed_group_keeps_marker_rule() {
     let document = parse(">{{{#!wiki style=\"margin:1em\"\n바깥 문단");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![
             Block::Quote(vec![paragraph(vec![text(
                 "{{{#!wiki style=\"margin:1em\""
@@ -376,8 +379,9 @@ fn quote_with_unclosed_group_keeps_marker_rule() {
 #[test]
 fn unclosed_group_does_not_swallow_cell_separator() {
     let document = parse("||<-3> {{{{{{-5 {{{-5 -10단계}}}}}} ||<-3> 뒤 ||");
-    let [Block::Table(table)] = document.blocks.as_slice() else {
-        panic!("표 하나여야 한다: {:?}", document.blocks);
+    let blocks = model::of(&document);
+    let [Block::Table(table)] = blocks.as_slice() else {
+        panic!("표 하나여야 한다: {blocks:?}");
     };
     let [row] = table.rows.as_slice() else {
         panic!("행 하나여야 한다");
@@ -399,7 +403,7 @@ fn unclosed_group_does_not_swallow_cell_separator() {
 fn list_item_paragraph_continues_on_unmarked_line() {
     let document = parse(" * 항목\n 이어짐");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![unordered_list(vec![vec![paragraph(vec![
             text("항목"),
             Inline::LineBreak,

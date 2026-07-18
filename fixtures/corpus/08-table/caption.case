@@ -1,62 +1,25 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 57줄 | 렌더링: 3줄 | 표 캡션
+근거: 도움말예제 | 원문: 1줄 | 의미론: 20줄 | 렌더링: 3줄 | 표 캡션
 |캡션| 테이블 || 내용 ||
-Document {
-    blocks: [
-        Table(
-            Table {
-                caption: Some(
-                    [
-                        Text(
-                            "캡션",
-                        ),
-                    ],
-                ),
-                rows: [
-                    TableRow {
-                        cells: [
-                            TableCell {
-                                column_span: None,
-                                row_span: None,
-                                horizontal_alignment: Some(
-                                    Center,
-                                ),
-                                vertical_alignment: None,
-                                attributes: [],
-                                blocks: [
-                                    Paragraph(
-                                        [
-                                            Text(
-                                                "테이블",
-                                            ),
-                                        ],
-                                    ),
-                                ],
-                            },
-                            TableCell {
-                                column_span: None,
-                                row_span: None,
-                                horizontal_alignment: Some(
-                                    Center,
-                                ),
-                                vertical_alignment: None,
-                                attributes: [],
-                                blocks: [
-                                    Paragraph(
-                                        [
-                                            Text(
-                                                "내용",
-                                            ),
-                                        ],
-                                    ),
-                                ],
-                            },
-                        ],
-                    },
-                ],
-            },
-        ),
-    ],
-}
+Document@0..32
+  Table@0..31
+    TableRow@0..31
+      TableCaption@0..8
+        DelimiterOpen@0..1 "|"
+        Text@1..7 "캡션"
+        DelimiterClose@7..8 "|"
+      TableCell@8..19
+        AlignmentSpace@8..9 " "
+        Paragraph@9..18
+          Text@9..18 "테이블"
+        AlignmentSpace@18..19 " "
+      Separator@19..21 "||"
+      TableCell@21..29
+        AlignmentSpace@21..22 " "
+        Paragraph@22..28
+          Text@22..28 "내용"
+        AlignmentSpace@28..29 " "
+      Separator@29..31 "||"
+  Newline@31..32 "\n"
 <div class="wiki-table-wrap"><table class="wiki-table"><caption>캡션</caption><tbody><tr class="wiki-table-tr"><td style="text-align: center;"><div class="wiki-paragraph">테이블</div>
 </td><td style="text-align: center;"><div class="wiki-paragraph">내용</div>
 </td></tr></tbody></table></div>

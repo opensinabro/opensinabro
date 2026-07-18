@@ -1,18 +1,10 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 15줄 | 렌더링: 1줄 | 위첨자
+근거: 도움말예제 | 원문: 1줄 | 의미론: 7줄 | 렌더링: 1줄 | 위첨자
 ^^위첨자^^
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Superscript(
-                    [
-                        Text(
-                            "위첨자",
-                        ),
-                    ],
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..14
+  Paragraph@0..13
+    Superscript@0..13
+      DelimiterOpen@0..2 "^^"
+      Text@2..11 "위첨자"
+      DelimiterClose@11..13 "^^"
+  Newline@13..14 "\n"
 <div class="wiki-paragraph"><sup>위첨자</sup></div>

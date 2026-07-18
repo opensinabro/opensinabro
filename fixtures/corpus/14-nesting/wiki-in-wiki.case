@@ -1,58 +1,31 @@
-근거: 미확인 | 원문: 5줄 | 의미론: 51줄 | 렌더링: 1줄 | #!wiki 중첩
+근거: 미확인 | 원문: 5줄 | 의미론: 24줄 | 렌더링: 1줄 | #!wiki 중첩
 {{{#!wiki style="margin: 4px"
 {{{#!wiki style="color: red"
 안쪽
 }}}
 }}}
-Document {
-    blocks: [
-        Paragraph(
-            [
-                WikiStyle(
-                    WikiStyle {
-                        style: Some(
-                            Template(
-                                [
-                                    Text(
-                                        "margin: 4px",
-                                    ),
-                                ],
-                            ),
-                        ),
-                        dark_style: None,
-                        blocks: [
-                            Paragraph(
-                                [
-                                    WikiStyle(
-                                        WikiStyle {
-                                            style: Some(
-                                                Template(
-                                                    [
-                                                        Text(
-                                                            "color: red",
-                                                        ),
-                                                    ],
-                                                ),
-                                            ),
-                                            dark_style: None,
-                                            blocks: [
-                                                Paragraph(
-                                                    [
-                                                        Text(
-                                                            "안쪽",
-                                                        ),
-                                                    ],
-                                                ),
-                                            ],
-                                        },
-                                    ),
-                                ],
-                            ),
-                        ],
-                    },
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..74
+  Paragraph@0..73
+    WikiStyle@0..73
+      DelimiterOpen@0..3 "{{{"
+      Directive@3..9 "#!wiki"
+      Separator@9..10 " "
+      AttributeName@10..15 "style"
+      Separator@15..16 "="
+      AttributeValue@16..29 "\"margin: 4px\""
+      Newline@29..30 "\n"
+      Paragraph@30..69
+        WikiStyle@30..69
+          DelimiterOpen@30..33 "{{{"
+          Directive@33..39 "#!wiki"
+          Separator@39..40 " "
+          AttributeName@40..45 "style"
+          Separator@45..46 "="
+          AttributeValue@46..58 "\"color: red\""
+          Newline@58..59 "\n"
+          Paragraph@59..65
+            Text@59..65 "안쪽"
+          DelimiterClose@65..69 "\n}}}"
+      DelimiterClose@69..73 "\n}}}"
+  Newline@73..74 "\n"
 <div class="wiki-paragraph"><div style="margin: 4px"><div style="color: red">안쪽</div></div></div>

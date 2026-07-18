@@ -1,26 +1,15 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 23줄 | 렌더링: 1줄 | 밑줄 안의 색상 — 밑줄에 색 미적용
+근거: 도움말예제 | 원문: 1줄 | 의미론: 12줄 | 렌더링: 1줄 | 밑줄 안의 색상 — 밑줄에 색 미적용
 __{{{#red 밑줄 제외}}}__
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Underline(
-                    [
-                        Colored(
-                            ColoredText {
-                                color: "red",
-                                dark_color: None,
-                                content: [
-                                    Text(
-                                        "밑줄 제외",
-                                    ),
-                                ],
-                            },
-                        ),
-                    ],
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..29
+  Paragraph@0..28
+    Underline@0..28
+      DelimiterOpen@0..2 "__"
+      ColoredText@2..26
+        DelimiterOpen@2..5 "{{{"
+        ColorValue@5..9 "#red"
+        Separator@9..10 " "
+        Text@10..23 "밑줄 제외"
+        DelimiterClose@23..26 "}}}"
+      DelimiterClose@26..28 "__"
+  Newline@28..29 "\n"
 <div class="wiki-paragraph"><u><span style="color:red" data-dark-style="color:red;">밑줄 제외</span></u></div>

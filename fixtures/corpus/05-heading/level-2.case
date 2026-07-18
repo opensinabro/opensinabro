@@ -1,19 +1,12 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 15줄 | 렌더링: 2줄 | 2단계 문단
+근거: 도움말예제 | 원문: 1줄 | 의미론: 8줄 | 렌더링: 2줄 | 2단계 문단
 == 문단 2 ==
-Document {
-    blocks: [
-        Heading(
-            Heading {
-                level: 2,
-                folded: false,
-                content: [
-                    Text(
-                        "문단 2",
-                    ),
-                ],
-            },
-        ),
-    ],
-}
+Document@0..15
+  Heading@0..14
+    DelimiterOpen@0..2 "=="
+    Separator@2..3 " "
+    Text@3..11 "문단 2"
+    Separator@11..12 " "
+    DelimiterClose@12..14 "=="
+  Newline@14..15 "\n"
 <h2 class="wiki-heading"><a id="s-1" href="#toc">1.</a> <span id="문단 2">문단 2</span></h2>
 <div class="wiki-heading-content"></div>

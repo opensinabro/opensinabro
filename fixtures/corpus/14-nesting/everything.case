@@ -1,4 +1,4 @@
-근거: 미확인 | 원문: 8줄 | 의미론: 167줄 | 렌더링: 11줄 | 복합 — 여러 문법이 한 문서에
+근거: 미확인 | 원문: 8줄 | 의미론: 74줄 | 렌더링: 11줄 | 복합 — 여러 문법이 한 문서에
 [목차]
 == 개요 ==
 '''굵게''' [[링크]] [* 각주]
@@ -7,173 +7,80 @@
  * 리스트
 }}}
 [각주]
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Macro(
-                    Macro {
-                        name: "목차",
-                        argument: None,
-                    },
-                ),
-            ],
-        ),
-        Heading(
-            Heading {
-                level: 2,
-                folded: false,
-                content: [
-                    Text(
-                        "개요",
-                    ),
-                ],
-            },
-        ),
-        Paragraph(
-            [
-                Bold(
-                    [
-                        Text(
-                            "굵게",
-                        ),
-                    ],
-                ),
-                Text(
-                    " ",
-                ),
-                Link(
-                    Link {
-                        target: Template(
-                            [
-                                Text(
-                                    "링크",
-                                ),
-                            ],
-                        ),
-                        anchor: None,
-                        display: None,
-                    },
-                ),
-                Text(
-                    " ",
-                ),
-                Footnote(
-                    Footnote {
-                        name: None,
-                        content: [
-                            Text(
-                                "각주",
-                            ),
-                        ],
-                    },
-                ),
-            ],
-        ),
-        Table(
-            Table {
-                caption: None,
-                rows: [
-                    TableRow {
-                        cells: [
-                            TableCell {
-                                column_span: None,
-                                row_span: None,
-                                horizontal_alignment: Some(
-                                    Center,
-                                ),
-                                vertical_alignment: None,
-                                attributes: [
-                                    TableAttribute {
-                                        scope: Table,
-                                        name: "align",
-                                        value: Some(
-                                            Template(
-                                                [
-                                                    Text(
-                                                        "center",
-                                                    ),
-                                                ],
-                                            ),
-                                        ),
-                                    },
-                                    TableAttribute {
-                                        scope: Cell,
-                                        name: "bgcolor",
-                                        value: Some(
-                                            Template(
-                                                [
-                                                    Text(
-                                                        "#eee",
-                                                    ),
-                                                ],
-                                            ),
-                                        ),
-                                    },
-                                ],
-                                blocks: [
-                                    Paragraph(
-                                        [
-                                            Text(
-                                                "표",
-                                            ),
-                                        ],
-                                    ),
-                                ],
-                            },
-                        ],
-                    },
-                ],
-            },
-        ),
-        Paragraph(
-            [
-                WikiStyle(
-                    WikiStyle {
-                        style: Some(
-                            Template(
-                                [
-                                    Text(
-                                        "margin: 4px",
-                                    ),
-                                ],
-                            ),
-                        ),
-                        dark_style: None,
-                        blocks: [
-                            List(
-                                List {
-                                    kind: Unordered,
-                                    items: [
-                                        ListItem {
-                                            start_number: None,
-                                            blocks: [
-                                                Paragraph(
-                                                    [
-                                                        Text(
-                                                            "리스트",
-                                                        ),
-                                                    ],
-                                                ),
-                                            ],
-                                        },
-                                    ],
-                                },
-                            ),
-                        ],
-                    },
-                ),
-                LineBreak,
-                Macro(
-                    Macro {
-                        name: "각주",
-                        argument: None,
-                    },
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..156
+  Paragraph@0..8
+    MacroCall@0..8
+      DelimiterOpen@0..1 "["
+      MacroName@1..7 "목차"
+      DelimiterClose@7..8 "]"
+  Newline@8..9 "\n"
+  Heading@9..21
+    DelimiterOpen@9..11 "=="
+    Separator@11..12 " "
+    Text@12..18 "개요"
+    Separator@18..19 " "
+    DelimiterClose@19..21 "=="
+  Newline@21..22 "\n"
+  Paragraph@22..56
+    Bold@22..34
+      DelimiterOpen@22..25 "'''"
+      Text@25..31 "굵게"
+      DelimiterClose@31..34 "'''"
+    Text@34..35 " "
+    Link@35..45
+      DelimiterOpen@35..37 "[["
+      LinkTarget@37..43 "링크"
+      DelimiterClose@43..45 "]]"
+    Text@45..46 " "
+    Footnote@46..56
+      DelimiterOpen@46..48 "[*"
+      Separator@48..49 " "
+      Text@49..55 "각주"
+      DelimiterClose@55..56 "]"
+  Newline@56..57 "\n"
+  Table@57..99
+    TableRow@57..99
+      Separator@57..59 "||"
+      TableCell@59..97
+        DelimiterOpen@59..60 "<"
+        CellOptionName@60..70 "tablealign"
+        Separator@70..71 "="
+        CellOptionValue@71..77 "center"
+        DelimiterClose@77..78 ">"
+        DelimiterOpen@78..79 "<"
+        CellOptionName@79..86 "bgcolor"
+        Separator@86..87 "="
+        CellOptionValue@87..91 "#eee"
+        DelimiterClose@91..92 ">"
+        AlignmentSpace@92..93 " "
+        Paragraph@93..96
+          Text@93..96 "표"
+        AlignmentSpace@96..97 " "
+      Separator@97..99 "||"
+  Newline@99..100 "\n"
+  Paragraph@100..155
+    WikiStyle@100..146
+      DelimiterOpen@100..103 "{{{"
+      Directive@103..109 "#!wiki"
+      Separator@109..110 " "
+      AttributeName@110..115 "style"
+      Separator@115..116 "="
+      AttributeValue@116..129 "\"margin: 4px\""
+      Newline@129..130 "\n"
+      List@130..142
+        ListItem@130..142
+          IndentMarker@130..131 " "
+          ListMarker@131..132 "*"
+          Separator@132..133 " "
+          Paragraph@133..142
+            Text@133..142 "리스트"
+      DelimiterClose@142..146 "\n}}}"
+    Newline@146..147 "\n"
+    MacroCall@147..155
+      DelimiterOpen@147..148 "["
+      MacroName@148..154 "각주"
+      DelimiterClose@154..155 "]"
+  Newline@155..156 "\n"
 <div class="wiki-paragraph"><div class="wiki-macro-toc" id="toc"><details open><summary></summary><div class="toc-indent"><span class="toc-item"><a href="#s-1">1</a>. 개요</span></div></details></div>
 </div>
 <h2 class="wiki-heading"><a id="s-1" href="#toc">1.</a> <span id="개요">개요</span></h2>

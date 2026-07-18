@@ -1,24 +1,10 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 21줄 | 렌더링: 1줄 | 외부 링크
+근거: 도움말예제 | 원문: 1줄 | 의미론: 7줄 | 렌더링: 1줄 | 외부 링크
 [[https://www.google.com/]]
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Link(
-                    Link {
-                        target: Template(
-                            [
-                                Text(
-                                    "https://www.google.com/",
-                                ),
-                            ],
-                        ),
-                        anchor: None,
-                        display: None,
-                    },
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..28
+  Paragraph@0..27
+    Link@0..27
+      DelimiterOpen@0..2 "[["
+      LinkTarget@2..25 "https://www.google.com/"
+      DelimiterClose@25..27 "]]"
+  Newline@27..28 "\n"
 <div class="wiki-paragraph"><a class="wiki-link-external" href="https://www.google.com/" target="_blank" rel="nofollow noopener ugc" title="https://www.google.com/">https://www.google.com/</a></div>

@@ -1,25 +1,13 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 22줄 | 렌더링: 1줄 | 도움말: 지원. 우리는 미해결 매크로로 원문 노출
+근거: 도움말예제 | 원문: 1줄 | 의미론: 10줄 | 렌더링: 1줄 | 도움말: 지원. 우리는 미해결 매크로로 원문 노출
 [vimeo(584524359)]
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Macro(
-                    Macro {
-                        name: "vimeo",
-                        argument: Some(
-                            Template(
-                                [
-                                    Text(
-                                        "584524359",
-                                    ),
-                                ],
-                            ),
-                        ),
-                    },
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..19
+  Paragraph@0..18
+    MacroCall@0..18
+      DelimiterOpen@0..1 "["
+      MacroName@1..6 "vimeo"
+      Separator@6..7 "("
+      MacroArgument@7..16 "584524359"
+      Separator@16..17 ")"
+      DelimiterClose@17..18 "]"
+  Newline@18..19 "\n"
 <div class="wiki-paragraph">[vimeo(584524359)]</div>

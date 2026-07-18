@@ -1,44 +1,23 @@
-근거: 도움말서술 | 원문: 3줄 | 의미론: 39줄 | 렌더링: 1줄 | #!wiki dark-style
+근거: 도움말서술 | 원문: 3줄 | 의미론: 18줄 | 렌더링: 1줄 | #!wiki dark-style
 {{{#!wiki style="background-color:#fff" dark-style="background-color: #2d2f34;"
 내용
 }}}
-Document {
-    blocks: [
-        Paragraph(
-            [
-                WikiStyle(
-                    WikiStyle {
-                        style: Some(
-                            Template(
-                                [
-                                    Text(
-                                        "background-color:#fff",
-                                    ),
-                                ],
-                            ),
-                        ),
-                        dark_style: Some(
-                            Template(
-                                [
-                                    Text(
-                                        "background-color: #2d2f34;",
-                                    ),
-                                ],
-                            ),
-                        ),
-                        blocks: [
-                            Paragraph(
-                                [
-                                    Text(
-                                        "내용",
-                                    ),
-                                ],
-                            ),
-                        ],
-                    },
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..91
+  Paragraph@0..90
+    WikiStyle@0..90
+      DelimiterOpen@0..3 "{{{"
+      Directive@3..9 "#!wiki"
+      Separator@9..10 " "
+      AttributeName@10..15 "style"
+      Separator@15..16 "="
+      AttributeValue@16..39 "\"background-color:#fff\""
+      Separator@39..40 " "
+      AttributeName@40..50 "dark-style"
+      Separator@50..51 "="
+      AttributeValue@51..79 "\"background-color: #2 ..."
+      Newline@79..80 "\n"
+      Paragraph@80..86
+        Text@80..86 "내용"
+      DelimiterClose@86..90 "\n}}}"
+  Newline@90..91 "\n"
 <div class="wiki-paragraph"><div style="background-color: #fff" data-dark-style="background-color: #2d2f34">내용</div></div>

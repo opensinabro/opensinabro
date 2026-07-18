@@ -1,41 +1,18 @@
-근거: 도움말서술 | 원문: 1줄 | 의미론: 37줄 | 렌더링: 2줄 | 세로 아래 정렬
+근거: 도움말서술 | 원문: 1줄 | 의미론: 14줄 | 렌더링: 2줄 | 세로 아래 정렬
 ||<v|1> 아래 ||
-Document {
-    blocks: [
-        Table(
-            Table {
-                caption: None,
-                rows: [
-                    TableRow {
-                        cells: [
-                            TableCell {
-                                column_span: None,
-                                row_span: Some(
-                                    1,
-                                ),
-                                horizontal_alignment: Some(
-                                    Center,
-                                ),
-                                vertical_alignment: Some(
-                                    Bottom,
-                                ),
-                                attributes: [],
-                                blocks: [
-                                    Paragraph(
-                                        [
-                                            Text(
-                                                "아래",
-                                            ),
-                                        ],
-                                    ),
-                                ],
-                            },
-                        ],
-                    },
-                ],
-            },
-        ),
-    ],
-}
+Document@0..18
+  Table@0..17
+    TableRow@0..17
+      Separator@0..2 "||"
+      TableCell@2..15
+        DelimiterOpen@2..3 "<"
+        CellOption@3..6 "v|1"
+        DelimiterClose@6..7 ">"
+        AlignmentSpace@7..8 " "
+        Paragraph@8..14
+          Text@8..14 "아래"
+        AlignmentSpace@14..15 " "
+      Separator@15..17 "||"
+  Newline@17..18 "\n"
 <div class="wiki-table-wrap"><table class="wiki-table"><tbody><tr class="wiki-table-tr"><td rowspan="1" style="text-align: center; vertical-align: bottom;"><div class="wiki-paragraph">아래</div>
 </td></tr></tbody></table></div>

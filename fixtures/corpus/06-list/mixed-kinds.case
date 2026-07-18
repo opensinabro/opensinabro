@@ -1,68 +1,35 @@
-근거: 미확인 | 원문: 3줄 | 의미론: 61줄 | 렌더링: 6줄 | 종류가 섞인 중첩
+근거: 미확인 | 원문: 3줄 | 의미론: 28줄 | 렌더링: 6줄 | 종류가 섞인 중첩
  * 불릿
   1. 번호
    a. 알파벳
-Document {
-    blocks: [
-        List(
-            List {
-                kind: Unordered,
-                items: [
-                    ListItem {
-                        start_number: None,
-                        blocks: [
-                            Paragraph(
-                                [
-                                    Text(
-                                        "불릿",
-                                    ),
-                                ],
-                            ),
-                            List(
-                                List {
-                                    kind: Decimal,
-                                    items: [
-                                        ListItem {
-                                            start_number: None,
-                                            blocks: [
-                                                Paragraph(
-                                                    [
-                                                        Text(
-                                                            "번호",
-                                                        ),
-                                                    ],
-                                                ),
-                                                List(
-                                                    List {
-                                                        kind: LowerAlphabet,
-                                                        items: [
-                                                            ListItem {
-                                                                start_number: None,
-                                                                blocks: [
-                                                                    Paragraph(
-                                                                        [
-                                                                            Text(
-                                                                                "알파벳",
-                                                                            ),
-                                                                        ],
-                                                                    ),
-                                                                ],
-                                                            },
-                                                        ],
-                                                    },
-                                                ),
-                                            ],
-                                        },
-                                    ],
-                                },
-                            ),
-                        ],
-                    },
-                ],
-            },
-        ),
-    ],
-}
+Document@0..38
+  List@0..38
+    ListItem@0..38
+      IndentMarker@0..1 " "
+      ListMarker@1..2 "*"
+      Separator@2..3 " "
+      Paragraph@3..9
+        Text@3..9 "불릿"
+      Newline@9..10 "\n"
+      List@10..38
+        ListItem@10..38
+          IndentMarker@10..11 " "
+          IndentMarker@11..12 " "
+          ListMarker@12..14 "1."
+          Separator@14..15 " "
+          Paragraph@15..21
+            Text@15..21 "번호"
+          Newline@21..22 "\n"
+          List@22..38
+            ListItem@22..38
+              IndentMarker@22..23 " "
+              IndentMarker@23..24 " "
+              IndentMarker@24..25 " "
+              ListMarker@25..27 "a."
+              Separator@27..28 " "
+              Paragraph@28..37
+                Text@28..37 "알파벳"
+              Newline@37..38 "\n"
 <ul class="wiki-list"><li><div class="wiki-paragraph">불릿</div>
 <ol class="wiki-list wiki-list" start="1"><li><div class="wiki-paragraph">번호</div>
 <ol class="wiki-list wiki-list-alpha" start="1"><li><div class="wiki-paragraph">알파벳</div>

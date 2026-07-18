@@ -1,18 +1,13 @@
-//! 나무마크 파서: 무손실 구문 트리를 의미 모델로 lowering한다.
+//! 나무마크 파서 facade.
 //!
-//! 트리는 구조만 담고 있으므로 leaf 의미(색상 값, 앵커, 셀 옵션 등)는
-//! 토큰 텍스트에 표기 판정(namumark-text)을 적용해 계산한다.
-
-mod lower;
-mod semantics;
+//! 무손실 구문 트리([`namumark_syntax`])를 파싱해 의미 모델 뷰([`namumark_ast`])로
+//! 노출한다. 의미값은 뷰 접근자가 토큰에서 계산하므로 이 계층은 얇은 진입점일 뿐이다.
 
 pub use namumark_ast::Document;
 
 /// 나무마크 원문을 의미 모델([`Document`])로 파싱한다.
 ///
-/// 원문 위치 정보가 필요하면 [`namumark_syntax::parse`]로 무손실 구문 트리를
-/// 직접 사용하면 된다.
+/// 원문 위치·토큰이 필요하면 [`namumark_ast::AstNode::syntax`]로 구문 노드를 쓴다.
 pub fn parse(source: &str) -> Document {
-    let tree = namumark_syntax::parse(source);
-    lower::lower_document(&tree.root())
+    namumark_ast::parse(source)
 }

@@ -1,23 +1,12 @@
-근거: 도움말서술 | 원문: 1줄 | 의미론: 20줄 | 렌더링: 1줄 | 줄바꿈 매크로
+근거: 도움말서술 | 원문: 1줄 | 의미론: 9줄 | 렌더링: 1줄 | 줄바꿈 매크로
 앞[br]뒤
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Text(
-                    "앞",
-                ),
-                Macro(
-                    Macro {
-                        name: "br",
-                        argument: None,
-                    },
-                ),
-                Text(
-                    "뒤",
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..11
+  Paragraph@0..10
+    Text@0..3 "앞"
+    MacroCall@3..7
+      DelimiterOpen@3..4 "["
+      MacroName@4..6 "br"
+      DelimiterClose@6..7 "]"
+    Text@7..10 "뒤"
+  Newline@10..11 "\n"
 <div class="wiki-paragraph">앞<br>뒤</div>

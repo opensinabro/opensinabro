@@ -1,18 +1,10 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 15줄 | 렌더링: 1줄 | 아래첨자
+근거: 도움말예제 | 원문: 1줄 | 의미론: 7줄 | 렌더링: 1줄 | 아래첨자
 ,,아래첨자,,
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Subscript(
-                    [
-                        Text(
-                            "아래첨자",
-                        ),
-                    ],
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..17
+  Paragraph@0..16
+    Subscript@0..16
+      DelimiterOpen@0..2 ",,"
+      Text@2..14 "아래첨자"
+      DelimiterClose@14..16 ",,"
+  Newline@16..17 "\n"
 <div class="wiki-paragraph"><sub>아래첨자</sub></div>

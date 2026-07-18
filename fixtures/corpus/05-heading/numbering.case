@@ -1,44 +1,29 @@
-근거: 미확인 | 원문: 3줄 | 의미론: 37줄 | 렌더링: 6줄 | 문단 번호 매김(s-1, s-1.1)
+근거: 미확인 | 원문: 3줄 | 의미론: 22줄 | 렌더링: 6줄 | 문단 번호 매김(s-1, s-1.1)
 == 하나 ==
 === 하나의 하나 ===
 == 둘 ==
-Document {
-    blocks: [
-        Heading(
-            Heading {
-                level: 2,
-                folded: false,
-                content: [
-                    Text(
-                        "하나",
-                    ),
-                ],
-            },
-        ),
-        Heading(
-            Heading {
-                level: 3,
-                folded: false,
-                content: [
-                    Text(
-                        "하나의 하나",
-                    ),
-                ],
-            },
-        ),
-        Heading(
-            Heading {
-                level: 2,
-                folded: false,
-                content: [
-                    Text(
-                        "둘",
-                    ),
-                ],
-            },
-        ),
-    ],
-}
+Document@0..48
+  Heading@0..12
+    DelimiterOpen@0..2 "=="
+    Separator@2..3 " "
+    Text@3..9 "하나"
+    Separator@9..10 " "
+    DelimiterClose@10..12 "=="
+  Newline@12..13 "\n"
+  Heading@13..37
+    DelimiterOpen@13..16 "==="
+    Separator@16..17 " "
+    Text@17..33 "하나의 하나"
+    Separator@33..34 " "
+    DelimiterClose@34..37 "==="
+  Newline@37..38 "\n"
+  Heading@38..47
+    DelimiterOpen@38..40 "=="
+    Separator@40..41 " "
+    Text@41..44 "둘"
+    Separator@44..45 " "
+    DelimiterClose@45..47 "=="
+  Newline@47..48 "\n"
 <h2 class="wiki-heading"><a id="s-1" href="#toc">1.</a> <span id="하나">하나</span></h2>
 <div class="wiki-heading-content"></div>
 <h3 class="wiki-heading"><a id="s-1.1" href="#toc">1.1.</a> <span id="하나의 하나">하나의 하나</span></h3>

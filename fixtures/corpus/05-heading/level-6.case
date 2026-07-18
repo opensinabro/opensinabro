@@ -1,19 +1,12 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 15줄 | 렌더링: 2줄 | 6단계 문단
+근거: 도움말예제 | 원문: 1줄 | 의미론: 8줄 | 렌더링: 2줄 | 6단계 문단
 ====== 문단 6 ======
-Document {
-    blocks: [
-        Heading(
-            Heading {
-                level: 6,
-                folded: false,
-                content: [
-                    Text(
-                        "문단 6",
-                    ),
-                ],
-            },
-        ),
-    ],
-}
+Document@0..23
+  Heading@0..22
+    DelimiterOpen@0..6 "======"
+    Separator@6..7 " "
+    Text@7..15 "문단 6"
+    Separator@15..16 " "
+    DelimiterClose@16..22 "======"
+  Newline@22..23 "\n"
 <h6 class="wiki-heading"><a id="s-1" href="#toc">1.</a> <span id="문단 6">문단 6</span></h6>
 <div class="wiki-heading-content"></div>

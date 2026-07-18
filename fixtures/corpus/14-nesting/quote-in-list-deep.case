@@ -1,88 +1,47 @@
-근거: 미확인 | 원문: 4줄 | 의미론: 80줄 | 렌더링: 12줄 | 리스트-인용 깊은 교차
+근거: 미확인 | 원문: 4줄 | 의미론: 39줄 | 렌더링: 12줄 | 리스트-인용 깊은 교차
  * 하나
   > 인용
   * 둘
    > 인용2
-Document {
-    blocks: [
-        List(
-            List {
-                kind: Unordered,
-                items: [
-                    ListItem {
-                        start_number: None,
-                        blocks: [
-                            Paragraph(
-                                [
-                                    Text(
-                                        "하나",
-                                    ),
-                                ],
-                            ),
-                            Indent(
-                                [
-                                    Quote(
-                                        [
-                                            Indent(
-                                                [
-                                                    Paragraph(
-                                                        [
-                                                            Text(
-                                                                "인용",
-                                                            ),
-                                                        ],
-                                                    ),
-                                                ],
-                                            ),
-                                        ],
-                                    ),
-                                    List(
-                                        List {
-                                            kind: Unordered,
-                                            items: [
-                                                ListItem {
-                                                    start_number: None,
-                                                    blocks: [
-                                                        Paragraph(
-                                                            [
-                                                                Text(
-                                                                    "둘",
-                                                                ),
-                                                            ],
-                                                        ),
-                                                        Indent(
-                                                            [
-                                                                Quote(
-                                                                    [
-                                                                        Indent(
-                                                                            [
-                                                                                Paragraph(
-                                                                                    [
-                                                                                        Text(
-                                                                                            "인용2",
-                                                                                        ),
-                                                                                    ],
-                                                                                ),
-                                                                            ],
-                                                                        ),
-                                                                    ],
-                                                                ),
-                                                            ],
-                                                        ),
-                                                    ],
-                                                },
-                                            ],
-                                        },
-                                    ),
-                                ],
-                            ),
-                        ],
-                    },
-                ],
-            },
-        ),
-    ],
-}
+Document@0..42
+  List@0..42
+    ListItem@0..42
+      IndentMarker@0..1 " "
+      ListMarker@1..2 "*"
+      Separator@2..3 " "
+      Paragraph@3..9
+        Text@3..9 "하나"
+      Newline@9..10 "\n"
+      Indent@10..42
+        Quote@10..21
+          Indent@10..21
+            Paragraph@10..20
+              IndentMarker@10..11 " "
+              IndentMarker@11..12 " "
+              QuoteMarker@12..13 ">"
+              IndentMarker@13..14 " "
+              Text@14..20 "인용"
+            Newline@20..21 "\n"
+        List@21..42
+          ListItem@21..42
+            IndentMarker@21..22 " "
+            IndentMarker@22..23 " "
+            ListMarker@23..24 "*"
+            Separator@24..25 " "
+            Paragraph@25..28
+              Text@25..28 "둘"
+            Newline@28..29 "\n"
+            Indent@29..42
+              Quote@29..42
+                Indent@29..42
+                  Paragraph@29..41
+                    IndentMarker@29..30 " "
+                    IndentMarker@30..31 " "
+                    IndentMarker@31..32 " "
+                    QuoteMarker@32..33 ">"
+                    IndentMarker@33..34 " "
+                    Text@34..41 "인용2"
+                  Newline@41..42 "\n"
 <ul class="wiki-list"><li><div class="wiki-paragraph">하나</div>
 <div class="wiki-indent"><blockquote class="wiki-quote"><div class="wiki-indent"><div class="wiki-paragraph">인용</div>
 </div>

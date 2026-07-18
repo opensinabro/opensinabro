@@ -1,39 +1,23 @@
-근거: 도움말예제 | 원문: 2줄 | 의미론: 33줄 | 렌더링: 4줄 | 도움말: 접힌 목차. 우리는 인자를 무시함
+근거: 도움말예제 | 원문: 2줄 | 의미론: 17줄 | 렌더링: 4줄 | 도움말: 접힌 목차. 우리는 인자를 무시함
 [목차(hide)]
 == 문단 ==
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Macro(
-                    Macro {
-                        name: "목차",
-                        argument: Some(
-                            Template(
-                                [
-                                    Text(
-                                        "hide",
-                                    ),
-                                ],
-                            ),
-                        ),
-                    },
-                ),
-            ],
-        ),
-        Heading(
-            Heading {
-                level: 2,
-                folded: false,
-                content: [
-                    Text(
-                        "문단",
-                    ),
-                ],
-            },
-        ),
-    ],
-}
+Document@0..28
+  Paragraph@0..14
+    MacroCall@0..14
+      DelimiterOpen@0..1 "["
+      MacroName@1..7 "목차"
+      Separator@7..8 "("
+      MacroArgument@8..12 "hide"
+      Separator@12..13 ")"
+      DelimiterClose@13..14 "]"
+  Newline@14..15 "\n"
+  Heading@15..27
+    DelimiterOpen@15..17 "=="
+    Separator@17..18 " "
+    Text@18..24 "문단"
+    Separator@24..25 " "
+    DelimiterClose@25..27 "=="
+  Newline@27..28 "\n"
 <div class="wiki-paragraph"><div class="wiki-macro-toc" id="toc"><details open><summary></summary><div class="toc-indent"><span class="toc-item"><a href="#s-1">1</a>. 문단</span></div></details></div>
 </div>
 <h2 class="wiki-heading"><a id="s-1" href="#toc">1.</a> <span id="문단">문단</span></h2>

@@ -1,48 +1,19 @@
-근거: 미확인 | 원문: 1줄 | 의미론: 43줄 | 렌더링: 3줄 | 빈 셀
+근거: 미확인 | 원문: 1줄 | 의미론: 14줄 | 렌더링: 3줄 | 빈 셀
 || || 빈 셀 ||
-Document {
-    blocks: [
-        Table(
-            Table {
-                caption: None,
-                rows: [
-                    TableRow {
-                        cells: [
-                            TableCell {
-                                column_span: None,
-                                row_span: None,
-                                horizontal_alignment: Some(
-                                    Right,
-                                ),
-                                vertical_alignment: None,
-                                attributes: [],
-                                blocks: [],
-                            },
-                            TableCell {
-                                column_span: None,
-                                row_span: None,
-                                horizontal_alignment: Some(
-                                    Center,
-                                ),
-                                vertical_alignment: None,
-                                attributes: [],
-                                blocks: [
-                                    Paragraph(
-                                        [
-                                            Text(
-                                                "빈 셀",
-                                            ),
-                                        ],
-                                    ),
-                                ],
-                            },
-                        ],
-                    },
-                ],
-            },
-        ),
-    ],
-}
+Document@0..17
+  Table@0..16
+    TableRow@0..16
+      Separator@0..2 "||"
+      TableCell@2..3
+        AlignmentSpace@2..3 " "
+      Separator@3..5 "||"
+      TableCell@5..14
+        AlignmentSpace@5..6 " "
+        Paragraph@6..13
+          Text@6..13 "빈 셀"
+        AlignmentSpace@13..14 " "
+      Separator@14..16 "||"
+  Newline@16..17 "\n"
 <div class="wiki-table-wrap"><table class="wiki-table"><tbody><tr class="wiki-table-tr"><td style="text-align: right;"><div class="wiki-paragraph"></div>
 </td><td style="text-align: center;"><div class="wiki-paragraph">빈 셀</div>
 </td></tr></tbody></table></div>

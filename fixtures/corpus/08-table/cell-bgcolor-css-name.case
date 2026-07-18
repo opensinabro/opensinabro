@@ -1,51 +1,20 @@
-근거: 도움말서술 | 원문: 1줄 | 의미론: 47줄 | 렌더링: 2줄 | CSS 색상명은 # 없이
+근거: 도움말서술 | 원문: 1줄 | 의미론: 16줄 | 렌더링: 2줄 | CSS 색상명은 # 없이
 ||<bgcolor=white,white> 흰색 ||
-Document {
-    blocks: [
-        Table(
-            Table {
-                caption: None,
-                rows: [
-                    TableRow {
-                        cells: [
-                            TableCell {
-                                column_span: None,
-                                row_span: None,
-                                horizontal_alignment: Some(
-                                    Center,
-                                ),
-                                vertical_alignment: None,
-                                attributes: [
-                                    TableAttribute {
-                                        scope: Cell,
-                                        name: "bgcolor",
-                                        value: Some(
-                                            Template(
-                                                [
-                                                    Text(
-                                                        "white,white",
-                                                    ),
-                                                ],
-                                            ),
-                                        ),
-                                    },
-                                ],
-                                blocks: [
-                                    Paragraph(
-                                        [
-                                            Text(
-                                                "흰색",
-                                            ),
-                                        ],
-                                    ),
-                                ],
-                            },
-                        ],
-                    },
-                ],
-            },
-        ),
-    ],
-}
+Document@0..34
+  Table@0..33
+    TableRow@0..33
+      Separator@0..2 "||"
+      TableCell@2..31
+        DelimiterOpen@2..3 "<"
+        CellOptionName@3..10 "bgcolor"
+        Separator@10..11 "="
+        CellOptionValue@11..22 "white,white"
+        DelimiterClose@22..23 ">"
+        AlignmentSpace@23..24 " "
+        Paragraph@24..30
+          Text@24..30 "흰색"
+        AlignmentSpace@30..31 " "
+      Separator@31..33 "||"
+  Newline@33..34 "\n"
 <div class="wiki-table-wrap"><table class="wiki-table"><tbody><tr class="wiki-table-tr"><td style="text-align: center; background-color: white;"><div class="wiki-paragraph">흰색</div>
 </td></tr></tbody></table></div>

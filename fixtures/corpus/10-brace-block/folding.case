@@ -1,33 +1,18 @@
-근거: 도움말예제 | 원문: 3줄 | 의미론: 28줄 | 렌더링: 1줄 | 접기
+근거: 도움말예제 | 원문: 3줄 | 의미론: 13줄 | 렌더링: 1줄 | 접기
 {{{#!folding [ 펼치기 · 접기 ]
 내용
 }}}
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Folding(
-                    Folding {
-                        summary: Template(
-                            [
-                                Text(
-                                    "[ 펼치기 · 접기 ]",
-                                ),
-                            ],
-                        ),
-                        blocks: [
-                            Paragraph(
-                                [
-                                    Text(
-                                        "내용",
-                                    ),
-                                ],
-                            ),
-                        ],
-                    },
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..48
+  Paragraph@0..47
+    Folding@0..47
+      DelimiterOpen@0..3 "{{{"
+      Directive@3..12 "#!folding"
+      Separator@12..13 " "
+      FoldingSummary@13..36
+        Text@13..36 "[ 펼치기 · 접기 ]"
+      Newline@36..37 "\n"
+      Paragraph@37..43
+        Text@37..43 "내용"
+      DelimiterClose@43..47 "\n}}}"
+  Newline@47..48 "\n"
 <div class="wiki-paragraph"><details class="wiki-folding"><summary>[ 펼치기 · 접기 ]</summary><div>내용</div></details></div>

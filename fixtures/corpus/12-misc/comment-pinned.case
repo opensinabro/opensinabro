@@ -1,18 +1,12 @@
-근거: 도움말예제 | 원문: 2줄 | 의미론: 14줄 | 렌더링: 1줄 | 고정 주석
+근거: 도움말예제 | 원문: 2줄 | 의미론: 8줄 | 렌더링: 1줄 | 고정 주석
 ##@ 편집 창에서만 노출 기능 예시입니다.
 본문
-Document {
-    blocks: [
-        Comment(
-            "@ 편집 창에서만 노출 기능 예시입니다.",
-        ),
-        Paragraph(
-            [
-                Text(
-                    "본문",
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..62
+  Comment@0..54
+    Marker@0..2 "##"
+    Text@2..54 "@ 편집 창에서만 ..."
+  Newline@54..55 "\n"
+  Paragraph@55..61
+    Text@55..61 "본문"
+  Newline@61..62 "\n"
 <div class="wiki-paragraph">본문</div>

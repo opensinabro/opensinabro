@@ -1,52 +1,26 @@
-근거: 도움말서술 | 원문: 3줄 | 의미론: 45줄 | 렌더링: 5줄 | 도움말: 빈 줄이 리스트를 끊음
+근거: 도움말서술 | 원문: 3줄 | 의미론: 19줄 | 렌더링: 5줄 | 도움말: 빈 줄이 리스트를 끊음
  * 리스트 1
 
  * 새 리스트
-Document {
-    blocks: [
-        List(
-            List {
-                kind: Unordered,
-                items: [
-                    ListItem {
-                        start_number: None,
-                        blocks: [
-                            Paragraph(
-                                [
-                                    Text(
-                                        "리스트 1",
-                                    ),
-                                ],
-                            ),
-                        ],
-                    },
-                ],
-            },
-        ),
-        Paragraph(
-            [],
-        ),
-        List(
-            List {
-                kind: Unordered,
-                items: [
-                    ListItem {
-                        start_number: None,
-                        blocks: [
-                            Paragraph(
-                                [
-                                    Text(
-                                        "새 리스트",
-                                    ),
-                                ],
-                            ),
-                        ],
-                    },
-                ],
-            },
-        ),
-    ],
-}
+Document@0..33
+  List@0..15
+    ListItem@0..15
+      IndentMarker@0..1 " "
+      ListMarker@1..2 "*"
+      Separator@2..3 " "
+      Paragraph@3..14
+        Text@3..14 "리스트 1"
+      Newline@14..15 "\n"
+  Paragraph@15..15
+  Newline@15..16 "\n"
+  List@16..33
+    ListItem@16..33
+      IndentMarker@16..17 " "
+      ListMarker@17..18 "*"
+      Separator@18..19 " "
+      Paragraph@19..32
+        Text@19..32 "새 리스트"
+      Newline@32..33 "\n"
 <ul class="wiki-list"><li><div class="wiki-paragraph">리스트 1</div>
 </li></ul>
 <div class="wiki-paragraph"></div>

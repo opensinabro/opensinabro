@@ -1,36 +1,17 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 32줄 | 렌더링: 2줄 | 리스트 안 [br] 개행
+근거: 도움말예제 | 원문: 1줄 | 의미론: 13줄 | 렌더링: 2줄 | 리스트 안 [br] 개행
  *매크로를 이용한[br]리스트 내의 개행
-Document {
-    blocks: [
-        List(
-            List {
-                kind: Unordered,
-                items: [
-                    ListItem {
-                        start_number: None,
-                        blocks: [
-                            Paragraph(
-                                [
-                                    Text(
-                                        "매크로를 이용한",
-                                    ),
-                                    Macro(
-                                        Macro {
-                                            name: "br",
-                                            argument: None,
-                                        },
-                                    ),
-                                    Text(
-                                        "리스트 내의 개행",
-                                    ),
-                                ],
-                            ),
-                        ],
-                    },
-                ],
-            },
-        ),
-    ],
-}
+Document@0..52
+  List@0..52
+    ListItem@0..52
+      IndentMarker@0..1 " "
+      ListMarker@1..2 "*"
+      Paragraph@2..51
+        Text@2..24 "매크로를 이용한"
+        MacroCall@24..28
+          DelimiterOpen@24..25 "["
+          MacroName@25..27 "br"
+          DelimiterClose@27..28 "]"
+        Text@28..51 "리스트 내의 개행"
+      Newline@51..52 "\n"
 <ul class="wiki-list"><li><div class="wiki-paragraph">매크로를 이용한<br>리스트 내의 개행</div>
 </li></ul>

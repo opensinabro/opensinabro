@@ -1,25 +1,17 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 22줄 | 렌더링: 1줄 | 도움말: start 지원. 우리는 폐기함
+근거: 도움말예제 | 원문: 1줄 | 의미론: 14줄 | 렌더링: 1줄 | 도움말: start 지원. 우리는 폐기함
 [youtube(jNQXAC9IVRw,start=8)]
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Macro(
-                    Macro {
-                        name: "youtube",
-                        argument: Some(
-                            Template(
-                                [
-                                    Text(
-                                        "jNQXAC9IVRw,start=8",
-                                    ),
-                                ],
-                            ),
-                        ),
-                    },
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..31
+  Paragraph@0..30
+    MacroCall@0..30
+      DelimiterOpen@0..1 "["
+      MacroName@1..8 "youtube"
+      Separator@8..9 "("
+      MacroArgument@9..20 "jNQXAC9IVRw"
+      Separator@20..21 ","
+      ArgumentName@21..26 "start"
+      Separator@26..27 "="
+      ArgumentValue@27..28 "8"
+      Separator@28..29 ")"
+      DelimiterClose@29..30 "]"
+  Newline@30..31 "\n"
 <div class="wiki-paragraph"><iframe class="wiki-media" src="//www.youtube.com/embed/jNQXAC9IVRw" width="640" height="360" frameborder="0" allowfullscreen loading="lazy"></iframe></div>

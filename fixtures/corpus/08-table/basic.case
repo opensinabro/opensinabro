@@ -1,56 +1,22 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 51줄 | 렌더링: 3줄 | 표 기본
+근거: 도움말예제 | 원문: 1줄 | 의미론: 17줄 | 렌더링: 3줄 | 표 기본
 || 테이블 || 테이블 ||
-Document {
-    blocks: [
-        Table(
-            Table {
-                caption: None,
-                rows: [
-                    TableRow {
-                        cells: [
-                            TableCell {
-                                column_span: None,
-                                row_span: None,
-                                horizontal_alignment: Some(
-                                    Center,
-                                ),
-                                vertical_alignment: None,
-                                attributes: [],
-                                blocks: [
-                                    Paragraph(
-                                        [
-                                            Text(
-                                                "테이블",
-                                            ),
-                                        ],
-                                    ),
-                                ],
-                            },
-                            TableCell {
-                                column_span: None,
-                                row_span: None,
-                                horizontal_alignment: Some(
-                                    Center,
-                                ),
-                                vertical_alignment: None,
-                                attributes: [],
-                                blocks: [
-                                    Paragraph(
-                                        [
-                                            Text(
-                                                "테이블",
-                                            ),
-                                        ],
-                                    ),
-                                ],
-                            },
-                        ],
-                    },
-                ],
-            },
-        ),
-    ],
-}
+Document@0..29
+  Table@0..28
+    TableRow@0..28
+      Separator@0..2 "||"
+      TableCell@2..13
+        AlignmentSpace@2..3 " "
+        Paragraph@3..12
+          Text@3..12 "테이블"
+        AlignmentSpace@12..13 " "
+      Separator@13..15 "||"
+      TableCell@15..26
+        AlignmentSpace@15..16 " "
+        Paragraph@16..25
+          Text@16..25 "테이블"
+        AlignmentSpace@25..26 " "
+      Separator@26..28 "||"
+  Newline@28..29 "\n"
 <div class="wiki-table-wrap"><table class="wiki-table"><tbody><tr class="wiki-table-tr"><td style="text-align: center;"><div class="wiki-paragraph">테이블</div>
 </td><td style="text-align: center;"><div class="wiki-paragraph">테이블</div>
 </td></tr></tbody></table></div>

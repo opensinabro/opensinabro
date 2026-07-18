@@ -1,22 +1,12 @@
-근거: 미확인 | 원문: 1줄 | 의미론: 18줄 | 렌더링: 2줄 | [각주] 없이 각주만
+근거: 미확인 | 원문: 1줄 | 의미론: 8줄 | 렌더링: 2줄 | [각주] 없이 각주만
 [* 각주]
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Footnote(
-                    Footnote {
-                        name: None,
-                        content: [
-                            Text(
-                                "각주",
-                            ),
-                        ],
-                    },
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..11
+  Paragraph@0..10
+    Footnote@0..10
+      DelimiterOpen@0..2 "[*"
+      Separator@2..3 " "
+      Text@3..9 "각주"
+      DelimiterClose@9..10 "]"
+  Newline@10..11 "\n"
 <div class="wiki-paragraph"><a class="wiki-fn-content" title="각주" href="#fn-1"><span id="rfn-1"></span>[1]</a></div>
 <div class="wiki-macro-footnote"><span class="footnote-list"><span id="fn-1"></span><a href="#rfn-1">[1]</a> 각주</span></div>

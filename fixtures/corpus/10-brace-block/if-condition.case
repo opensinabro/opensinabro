@@ -1,41 +1,20 @@
-근거: 미확인 | 원문: 2줄 | 의미론: 38줄 | 렌더링: 0줄 | #!if — 도움말에 없으나 the seed 지원(틀:상위 문서). 조건식이 변수도 만듦
+근거: 미확인 | 원문: 2줄 | 의미론: 17줄 | 렌더링: 0줄 | #!if — 도움말에 없으나 the seed 지원(틀:상위 문서). 조건식이 변수도 만듦
 {{{#!if 문서명1 != null
 상위 문서: [[@문서명1@]]}}}
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Conditional(
-                    Conditional {
-                        expression: "문서명1 != null",
-                        blocks: [
-                            Paragraph(
-                                [
-                                    Text(
-                                        "상위 문서: ",
-                                    ),
-                                    Link(
-                                        Link {
-                                            target: Template(
-                                                [
-                                                    Variable(
-                                                        Variable {
-                                                            name: "문서명1",
-                                                            default: None,
-                                                        },
-                                                    ),
-                                                ],
-                                            ),
-                                            anchor: None,
-                                            display: None,
-                                        },
-                                    ),
-                                ],
-                            ),
-                        ],
-                    },
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..62
+  Paragraph@0..61
+    Conditional@0..61
+      DelimiterOpen@0..3 "{{{"
+      Directive@3..7 "#!if"
+      Separator@7..8 " "
+      ConditionExpression@8..26
+        Text@8..26 "문서명1 != null"
+      Newline@26..27 "\n"
+      Paragraph@27..58
+        Text@27..42 "상위 문서: "
+        Link@42..58
+          DelimiterOpen@42..44 "[["
+          LinkTarget@44..56 "@문서명1@"
+          DelimiterClose@56..58 "]]"
+      DelimiterClose@58..61 "}}}"
+  Newline@61..62 "\n"

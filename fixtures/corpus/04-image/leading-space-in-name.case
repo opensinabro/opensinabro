@@ -1,24 +1,10 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 21줄 | 렌더링: 1줄 | 도움말: 작동하나 비권장
+근거: 도움말예제 | 원문: 1줄 | 의미론: 7줄 | 렌더링: 1줄 | 도움말: 작동하나 비권장
 [[ 파일:example.png]]
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Link(
-                    Link {
-                        target: Template(
-                            [
-                                Text(
-                                    " 파일:example.png",
-                                ),
-                            ],
-                        ),
-                        anchor: None,
-                        display: None,
-                    },
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..24
+  Paragraph@0..23
+    Link@0..23
+      DelimiterOpen@0..2 "[["
+      LinkTarget@2..21 " 파일:example.png"
+      DelimiterClose@21..23 "]]"
+  Newline@23..24 "\n"
 <div class="wiki-paragraph"><a class="wiki-link-internal not-exist" href="/w/%20%ED%8C%8C%EC%9D%BC:example.png" rel="nofollow" title=" 파일:example.png"> 파일:example.png</a></div>

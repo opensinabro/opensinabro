@@ -1,81 +1,35 @@
-근거: 도움말서술 | 원문: 2줄 | 의미론: 75줄 | 렌더링: 4줄 | 도움말: 필요한 줄을 정확히 입력하지 않으면 제대로 표시되지 않음
+근거: 도움말서술 | 원문: 2줄 | 의미론: 29줄 | 렌더링: 4줄 | 도움말: 필요한 줄을 정확히 입력하지 않으면 제대로 표시되지 않음
 ||<|3> 세줄 || 하나 ||
 || 둘 ||
-Document {
-    blocks: [
-        Table(
-            Table {
-                caption: None,
-                rows: [
-                    TableRow {
-                        cells: [
-                            TableCell {
-                                column_span: None,
-                                row_span: Some(
-                                    3,
-                                ),
-                                horizontal_alignment: Some(
-                                    Center,
-                                ),
-                                vertical_alignment: None,
-                                attributes: [],
-                                blocks: [
-                                    Paragraph(
-                                        [
-                                            Text(
-                                                "세줄",
-                                            ),
-                                        ],
-                                    ),
-                                ],
-                            },
-                            TableCell {
-                                column_span: None,
-                                row_span: None,
-                                horizontal_alignment: Some(
-                                    Center,
-                                ),
-                                vertical_alignment: None,
-                                attributes: [],
-                                blocks: [
-                                    Paragraph(
-                                        [
-                                            Text(
-                                                "하나",
-                                            ),
-                                        ],
-                                    ),
-                                ],
-                            },
-                        ],
-                    },
-                    TableRow {
-                        cells: [
-                            TableCell {
-                                column_span: None,
-                                row_span: None,
-                                horizontal_alignment: Some(
-                                    Center,
-                                ),
-                                vertical_alignment: None,
-                                attributes: [],
-                                blocks: [
-                                    Paragraph(
-                                        [
-                                            Text(
-                                                "둘",
-                                            ),
-                                        ],
-                                    ),
-                                ],
-                            },
-                        ],
-                    },
-                ],
-            },
-        ),
-    ],
-}
+Document@0..37
+  Table@0..36
+    TableRow@0..26
+      Separator@0..2 "||"
+      TableCell@2..14
+        DelimiterOpen@2..3 "<"
+        CellOption@3..5 "|3"
+        DelimiterClose@5..6 ">"
+        AlignmentSpace@6..7 " "
+        Paragraph@7..13
+          Text@7..13 "세줄"
+        AlignmentSpace@13..14 " "
+      Separator@14..16 "||"
+      TableCell@16..24
+        AlignmentSpace@16..17 " "
+        Paragraph@17..23
+          Text@17..23 "하나"
+        AlignmentSpace@23..24 " "
+      Separator@24..26 "||"
+    Newline@26..27 "\n"
+    TableRow@27..36
+      Separator@27..29 "||"
+      TableCell@29..34
+        AlignmentSpace@29..30 " "
+        Paragraph@30..33
+          Text@30..33 "둘"
+        AlignmentSpace@33..34 " "
+      Separator@34..36 "||"
+  Newline@36..37 "\n"
 <div class="wiki-table-wrap"><table class="wiki-table"><tbody><tr class="wiki-table-tr"><td rowspan="3" style="text-align: center;"><div class="wiki-paragraph">세줄</div>
 </td><td style="text-align: center;"><div class="wiki-paragraph">하나</div>
 </td></tr><tr class="wiki-table-tr"><td style="text-align: center;"><div class="wiki-paragraph">둘</div>

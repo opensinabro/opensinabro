@@ -1,31 +1,20 @@
-근거: 도움말예제 | 원문: 2줄 | 의미론: 25줄 | 렌더링: 4줄 | 목차
+근거: 도움말예제 | 원문: 2줄 | 의미론: 14줄 | 렌더링: 4줄 | 목차
 [목차]
 == 문단 ==
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Macro(
-                    Macro {
-                        name: "목차",
-                        argument: None,
-                    },
-                ),
-            ],
-        ),
-        Heading(
-            Heading {
-                level: 2,
-                folded: false,
-                content: [
-                    Text(
-                        "문단",
-                    ),
-                ],
-            },
-        ),
-    ],
-}
+Document@0..22
+  Paragraph@0..8
+    MacroCall@0..8
+      DelimiterOpen@0..1 "["
+      MacroName@1..7 "목차"
+      DelimiterClose@7..8 "]"
+  Newline@8..9 "\n"
+  Heading@9..21
+    DelimiterOpen@9..11 "=="
+    Separator@11..12 " "
+    Text@12..18 "문단"
+    Separator@18..19 " "
+    DelimiterClose@19..21 "=="
+  Newline@21..22 "\n"
 <div class="wiki-paragraph"><div class="wiki-macro-toc" id="toc"><details open><summary></summary><div class="toc-indent"><span class="toc-item"><a href="#s-1">1</a>. 문단</span></div></details></div>
 </div>
 <h2 class="wiki-heading"><a id="s-1" href="#toc">1.</a> <span id="문단">문단</span></h2>

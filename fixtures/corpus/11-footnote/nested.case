@@ -1,40 +1,23 @@
-근거: 도움말서술 | 원문: 2줄 | 의미론: 35줄 | 렌더링: 2줄 | 도움말: 각주 안의 각주는 금지 — 정상 표시되지 않음
+근거: 도움말서술 | 원문: 2줄 | 의미론: 18줄 | 렌더링: 2줄 | 도움말: 각주 안의 각주는 금지 — 정상 표시되지 않음
 [* 바깥 [* 안쪽]]
 [각주]
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Footnote(
-                    Footnote {
-                        name: None,
-                        content: [
-                            Text(
-                                "바깥 ",
-                            ),
-                            Footnote(
-                                Footnote {
-                                    name: None,
-                                    content: [
-                                        Text(
-                                            "안쪽",
-                                        ),
-                                    ],
-                                },
-                            ),
-                        ],
-                    },
-                ),
-                LineBreak,
-                Macro(
-                    Macro {
-                        name: "각주",
-                        argument: None,
-                    },
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..31
+  Paragraph@0..30
+    Footnote@0..21
+      DelimiterOpen@0..2 "[*"
+      Separator@2..3 " "
+      Text@3..10 "바깥 "
+      Footnote@10..20
+        DelimiterOpen@10..12 "[*"
+        Separator@12..13 " "
+        Text@13..19 "안쪽"
+        DelimiterClose@19..20 "]"
+      DelimiterClose@20..21 "]"
+    Newline@21..22 "\n"
+    MacroCall@22..30
+      DelimiterOpen@22..23 "["
+      MacroName@23..29 "각주"
+      DelimiterClose@29..30 "]"
+  Newline@30..31 "\n"
 <div class="wiki-paragraph"><a class="wiki-fn-content" title="바깥 " href="#fn-2"><span id="rfn-2"></span>[2]</a><br><div class="wiki-macro-footnote"><span class="footnote-list"><span id="fn-1"></span><a href="#rfn-1">[1]</a> 안쪽</span><span class="footnote-list"><span id="fn-2"></span><a href="#rfn-2">[2]</a> 바깥 <a class="wiki-fn-content" title="안쪽" href="#fn-1"><span id="rfn-1"></span>[1]</a></span></div>
 </div>

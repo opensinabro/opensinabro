@@ -34,7 +34,7 @@ fn main() {
         let document = namumark_parser::parse(&source);
 
         let mut plain_text = String::new();
-        for block in &document.blocks {
+        for block in &document.blocks() {
             collect_block_text(block, &mut plain_text);
         }
         collect_macro_names(&document, &mut macro_totals);
@@ -81,19 +81,19 @@ fn collect_macro_names(document: &Document, totals: &mut BTreeMap<String, usize>
         for inline in inlines {
             match inline {
                 Inline::Macro(macro_call) => {
-                    *totals.entry(macro_call.name.clone()).or_default() += 1
+                    *totals.entry(macro_call.name()).or_default() += 1
                 }
-                Inline::Bold(content)
-                | Inline::Italic(content)
-                | Inline::Strikethrough(content)
-                | Inline::Underline(content)
-                | Inline::Superscript(content)
-                | Inline::Subscript(content) => walk_inlines(content, totals),
-                Inline::Colored(colored) => walk_inlines(&colored.content, totals),
-                Inline::Sized(sized) => walk_inlines(&sized.content, totals),
-                Inline::Footnote(footnote) => walk_inlines(&footnote.content, totals),
+                Inline::Bold(styled) => walk_inlines(&styled.content(), totals),
+                Inline::Italic(styled) => walk_inlines(&styled.content(), totals),
+                Inline::Strikethrough(styled) => walk_inlines(&styled.content(), totals),
+                Inline::Underline(styled) => walk_inlines(&styled.content(), totals),
+                Inline::Superscript(styled) => walk_inlines(&styled.content(), totals),
+                Inline::Subscript(styled) => walk_inlines(&styled.content(), totals),
+                Inline::Colored(colored) => walk_inlines(&colored.content(), totals),
+                Inline::Sized(sized) => walk_inlines(&sized.content(), totals),
+                Inline::Footnote(footnote) => walk_inlines(&footnote.content(), totals),
                 Inline::Link(link) => {
-                    if let Some(display) = &link.display {
+                    if let Some(display) = &link.display() {
                         walk_inlines(display, totals)
                     }
                 }
@@ -104,17 +104,22 @@ fn collect_macro_names(document: &Document, totals: &mut BTreeMap<String, usize>
 
     fn walk_block(block: &Block, totals: &mut BTreeMap<String, usize>) {
         match block {
-            Block::Heading(heading) => walk_inlines(&heading.content, totals),
-            Block::Paragraph(inlines) => walk_inlines(inlines, totals),
-            Block::Quote(blocks) | Block::Indent(blocks) => {
-                blocks.iter().for_each(|block| walk_block(block, totals))
-            }
-            Block::List(list) => list.items.iter().for_each(|item| {
-                item.blocks
+            Block::Heading(heading) => walk_inlines(&heading.content(), totals),
+            Block::Paragraph(paragraph) => walk_inlines(&paragraph.inlines(), totals),
+            Block::Quote(quote) => quote
+                .blocks()
+                .iter()
+                .for_each(|block| walk_block(block, totals)),
+            Block::Indent(indent) => indent
+                .blocks()
+                .iter()
+                .for_each(|block| walk_block(block, totals)),
+            Block::List(list) => list.items().iter().for_each(|item| {
+                item.blocks()
                     .iter()
                     .for_each(|block| walk_block(block, totals))
             }),
-            Block::Table(table) => table.rows.iter().for_each(|row| {
+            Block::Table(table) => table.rows().iter().for_each(|row| {
                 row.cells.iter().for_each(|cell| {
                     cell.blocks
                         .iter()
@@ -126,32 +131,37 @@ fn collect_macro_names(document: &Document, totals: &mut BTreeMap<String, usize>
     }
 
     document
-        .blocks
+        .blocks()
         .iter()
         .for_each(|block| walk_block(block, totals));
 }
 
 fn collect_block_text(block: &Block, output: &mut String) {
     match block {
-        Block::Heading(heading) => collect_inline_text(&heading.content, output),
-        Block::Paragraph(inlines) => collect_inline_text(inlines, output),
-        Block::Quote(blocks) | Block::Indent(blocks) => {
-            for block in blocks {
+        Block::Heading(heading) => collect_inline_text(&heading.content(), output),
+        Block::Paragraph(paragraph) => collect_inline_text(&paragraph.inlines(), output),
+        Block::Quote(quote) => {
+            for block in &quote.blocks() {
+                collect_block_text(block, output);
+            }
+        }
+        Block::Indent(indent) => {
+            for block in &indent.blocks() {
                 collect_block_text(block, output);
             }
         }
         Block::List(list) => {
-            for item in &list.items {
-                for block in &item.blocks {
+            for item in &list.items() {
+                for block in &item.blocks() {
                     collect_block_text(block, output);
                 }
             }
         }
         Block::Table(table) => {
-            if let Some(caption) = &table.caption {
+            if let Some(caption) = &table.caption() {
                 collect_inline_text(caption, output);
             }
-            for row in &table.rows {
+            for row in &table.rows() {
                 for cell in &row.cells {
                     for block in &cell.blocks {
                         collect_block_text(block, output);
@@ -172,34 +182,34 @@ fn collect_inline_text(inlines: &[Inline], output: &mut String) {
                 output.push_str(text);
                 output.push('\n');
             }
-            Inline::Bold(content)
-            | Inline::Italic(content)
-            | Inline::Strikethrough(content)
-            | Inline::Underline(content)
-            | Inline::Superscript(content)
-            | Inline::Subscript(content) => collect_inline_text(content, output),
+            Inline::Bold(styled) => collect_inline_text(&styled.content(), output),
+            Inline::Italic(styled) => collect_inline_text(&styled.content(), output),
+            Inline::Strikethrough(styled) => collect_inline_text(&styled.content(), output),
+            Inline::Underline(styled) => collect_inline_text(&styled.content(), output),
+            Inline::Superscript(styled) => collect_inline_text(&styled.content(), output),
+            Inline::Subscript(styled) => collect_inline_text(&styled.content(), output),
             Inline::Link(link) => {
-                if let Some(display) = &link.display {
+                if let Some(display) = &link.display() {
                     collect_inline_text(display, output);
                 }
             }
             Inline::Image(_) | Inline::Category(_) => {}
-            Inline::Footnote(footnote) => collect_inline_text(&footnote.content, output),
-            Inline::Colored(colored) => collect_inline_text(&colored.content, output),
-            Inline::Sized(sized) => collect_inline_text(&sized.content, output),
+            Inline::Footnote(footnote) => collect_inline_text(&footnote.content(), output),
+            Inline::Colored(colored) => collect_inline_text(&colored.content(), output),
+            Inline::Sized(sized) => collect_inline_text(&sized.content(), output),
             Inline::WikiStyle(wiki_style) => {
-                for block in &wiki_style.blocks {
+                for block in &wiki_style.blocks() {
                     collect_block_text(block, output);
                 }
             }
             Inline::Folding(folding) => {
-                output.push_str(&folding.summary.to_string());
-                for block in &folding.blocks {
+                output.push_str(&folding.summary().to_string());
+                for block in &folding.blocks() {
                     collect_block_text(block, output);
                 }
             }
             Inline::Conditional(conditional) => {
-                for block in &conditional.blocks {
+                for block in &conditional.blocks() {
                     collect_block_text(block, output);
                 }
             }

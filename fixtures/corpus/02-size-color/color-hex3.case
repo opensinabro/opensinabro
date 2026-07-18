@@ -1,22 +1,12 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 19줄 | 렌더링: 1줄 | 3자리 헥스 색상
+근거: 도움말예제 | 원문: 1줄 | 의미론: 9줄 | 렌더링: 1줄 | 3자리 헥스 색상
 {{{#f00 텍스트}}}
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Colored(
-                    ColoredText {
-                        color: "#f00",
-                        dark_color: None,
-                        content: [
-                            Text(
-                                "텍스트",
-                            ),
-                        ],
-                    },
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..21
+  Paragraph@0..20
+    ColoredText@0..20
+      DelimiterOpen@0..3 "{{{"
+      ColorValue@3..7 "#f00"
+      Separator@7..8 " "
+      Text@8..17 "텍스트"
+      DelimiterClose@17..20 "}}}"
+  Newline@20..21 "\n"
 <div class="wiki-paragraph"><span style="color:#ff0000" data-dark-style="color:#ff0000;">텍스트</span></div>

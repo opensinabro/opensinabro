@@ -1,48 +1,24 @@
-근거: 도움말예제 | 원문: 2줄 | 의미론: 42줄 | 렌더링: 4줄 | 중첩 불릿
+근거: 도움말예제 | 원문: 2줄 | 의미론: 18줄 | 렌더링: 4줄 | 중첩 불릿
  * 리스트 1
   * 리스트 1.1
-Document {
-    blocks: [
-        List(
-            List {
-                kind: Unordered,
-                items: [
-                    ListItem {
-                        start_number: None,
-                        blocks: [
-                            Paragraph(
-                                [
-                                    Text(
-                                        "리스트 1",
-                                    ),
-                                ],
-                            ),
-                            List(
-                                List {
-                                    kind: Unordered,
-                                    items: [
-                                        ListItem {
-                                            start_number: None,
-                                            blocks: [
-                                                Paragraph(
-                                                    [
-                                                        Text(
-                                                            "리스트 1.1",
-                                                        ),
-                                                    ],
-                                                ),
-                                            ],
-                                        },
-                                    ],
-                                },
-                            ),
-                        ],
-                    },
-                ],
-            },
-        ),
-    ],
-}
+Document@0..33
+  List@0..33
+    ListItem@0..33
+      IndentMarker@0..1 " "
+      ListMarker@1..2 "*"
+      Separator@2..3 " "
+      Paragraph@3..14
+        Text@3..14 "리스트 1"
+      Newline@14..15 "\n"
+      List@15..33
+        ListItem@15..33
+          IndentMarker@15..16 " "
+          IndentMarker@16..17 " "
+          ListMarker@17..18 "*"
+          Separator@18..19 " "
+          Paragraph@19..32
+            Text@19..32 "리스트 1.1"
+          Newline@32..33 "\n"
 <ul class="wiki-list"><li><div class="wiki-paragraph">리스트 1</div>
 <ul class="wiki-list"><li><div class="wiki-paragraph">리스트 1.1</div>
 </li></ul>

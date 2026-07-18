@@ -1,107 +1,48 @@
-근거: 미확인 | 원문: 5줄 | 의미론: 98줄 | 렌더링: 5줄 | 표 셀 안의 접기
+근거: 미확인 | 원문: 5줄 | 의미론: 39줄 | 렌더링: 5줄 | 표 셀 안의 접기
 ||<:>셀
 {{{#!folding 접기
 || 안쪽 || 표 ||
 }}}
 끝 ||
-Document {
-    blocks: [
-        Table(
-            Table {
-                caption: None,
-                rows: [
-                    TableRow {
-                        cells: [
-                            TableCell {
-                                column_span: None,
-                                row_span: None,
-                                horizontal_alignment: Some(
-                                    Center,
-                                ),
-                                vertical_alignment: None,
-                                attributes: [],
-                                blocks: [
-                                    Paragraph(
-                                        [
-                                            Text(
-                                                "셀",
-                                            ),
-                                            LineBreak,
-                                            Folding(
-                                                Folding {
-                                                    summary: Template(
-                                                        [
-                                                            Text(
-                                                                "접기",
-                                                            ),
-                                                        ],
-                                                    ),
-                                                    blocks: [
-                                                        Table(
-                                                            Table {
-                                                                caption: None,
-                                                                rows: [
-                                                                    TableRow {
-                                                                        cells: [
-                                                                            TableCell {
-                                                                                column_span: None,
-                                                                                row_span: None,
-                                                                                horizontal_alignment: Some(
-                                                                                    Center,
-                                                                                ),
-                                                                                vertical_alignment: None,
-                                                                                attributes: [],
-                                                                                blocks: [
-                                                                                    Paragraph(
-                                                                                        [
-                                                                                            Text(
-                                                                                                "안쪽",
-                                                                                            ),
-                                                                                        ],
-                                                                                    ),
-                                                                                ],
-                                                                            },
-                                                                            TableCell {
-                                                                                column_span: None,
-                                                                                row_span: None,
-                                                                                horizontal_alignment: Some(
-                                                                                    Center,
-                                                                                ),
-                                                                                vertical_alignment: None,
-                                                                                attributes: [],
-                                                                                blocks: [
-                                                                                    Paragraph(
-                                                                                        [
-                                                                                            Text(
-                                                                                                "표",
-                                                                                            ),
-                                                                                        ],
-                                                                                    ),
-                                                                                ],
-                                                                            },
-                                                                        ],
-                                                                    },
-                                                                ],
-                                                            },
-                                                        ),
-                                                    ],
-                                                },
-                                            ),
-                                            LineBreak,
-                                            Text(
-                                                "끝",
-                                            ),
-                                        ],
-                                    ),
-                                ],
-                            },
-                        ],
-                    },
-                ],
-            },
-        ),
-    ],
-}
+Document@0..60
+  Table@0..59
+    TableRow@0..59
+      Separator@0..2 "||"
+      TableCell@2..57
+        DelimiterOpen@2..3 "<"
+        CellOption@3..4 ":"
+        DelimiterClose@4..5 ">"
+        Paragraph@5..56
+          Text@5..8 "셀"
+          Newline@8..9 "\n"
+          Folding@9..52
+            DelimiterOpen@9..12 "{{{"
+            Directive@12..21 "#!folding"
+            Separator@21..22 " "
+            FoldingSummary@22..28
+              Text@22..28 "접기"
+            Newline@28..29 "\n"
+            Table@29..48
+              TableRow@29..48
+                Separator@29..31 "||"
+                TableCell@31..39
+                  AlignmentSpace@31..32 " "
+                  Paragraph@32..38
+                    Text@32..38 "안쪽"
+                  AlignmentSpace@38..39 " "
+                Separator@39..41 "||"
+                TableCell@41..46
+                  AlignmentSpace@41..42 " "
+                  Paragraph@42..45
+                    Text@42..45 "표"
+                  AlignmentSpace@45..46 " "
+                Separator@46..48 "||"
+            DelimiterClose@48..52 "\n}}}"
+          Newline@52..53 "\n"
+          Text@53..56 "끝"
+        AlignmentSpace@56..57 " "
+      Separator@57..59 "||"
+  Newline@59..60 "\n"
 <div class="wiki-table-wrap"><table class="wiki-table"><tbody><tr class="wiki-table-tr"><td style="text-align: center;"><div class="wiki-paragraph">셀<br><details class="wiki-folding"><summary>접기</summary><div><div class="wiki-table-wrap"><table class="wiki-table"><tbody><tr class="wiki-table-tr"><td style="text-align: center;"><div class="wiki-paragraph">안쪽</div>
 </td><td style="text-align: center;"><div class="wiki-paragraph">표</div>
 </td></tr></tbody></table></div>

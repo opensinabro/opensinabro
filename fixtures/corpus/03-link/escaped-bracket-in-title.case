@@ -1,24 +1,10 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 21줄 | 렌더링: 1줄 | 제목의 대괄호 이스케이프
+근거: 도움말예제 | 원문: 1줄 | 의미론: 7줄 | 렌더링: 1줄 | 제목의 대괄호 이스케이프
 [[[12:00\]]]
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Link(
-                    Link {
-                        target: Template(
-                            [
-                                Text(
-                                    "[12:00]",
-                                ),
-                            ],
-                        ),
-                        anchor: None,
-                        display: None,
-                    },
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..13
+  Paragraph@0..12
+    Link@0..12
+      DelimiterOpen@0..2 "[["
+      LinkTarget@2..10 "[12:00\\]"
+      DelimiterClose@10..12 "]]"
+  Newline@12..13 "\n"
 <div class="wiki-paragraph"><a class="wiki-link-internal not-exist" href="/w/%5B12:00%5D" rel="nofollow" title="[12:00]">[12:00]</a></div>

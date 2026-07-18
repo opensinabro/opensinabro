@@ -1,29 +1,15 @@
-근거: 도움말예제 | 원문: 3줄 | 의미론: 24줄 | 렌더링: 1줄 | 도움말: 안내 문구가 없으면 More
+근거: 도움말예제 | 원문: 3줄 | 의미론: 10줄 | 렌더링: 1줄 | 도움말: 안내 문구가 없으면 More
 {{{#!folding
 내용
 }}}
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Folding(
-                    Folding {
-                        summary: Template(
-                            [],
-                        ),
-                        blocks: [
-                            Paragraph(
-                                [
-                                    Text(
-                                        "내용",
-                                    ),
-                                ],
-                            ),
-                        ],
-                    },
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..24
+  Paragraph@0..23
+    Folding@0..23
+      DelimiterOpen@0..3 "{{{"
+      Directive@3..12 "#!folding"
+      Newline@12..13 "\n"
+      Paragraph@13..19
+        Text@13..19 "내용"
+      DelimiterClose@19..23 "\n}}}"
+  Newline@23..24 "\n"
 <div class="wiki-paragraph"><details class="wiki-folding"><summary>More</summary><div>내용</div></details></div>

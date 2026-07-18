@@ -1,14 +1,7 @@
-근거: 미확인 | 원문: 1줄 | 의미론: 11줄 | 렌더링: 1줄 | 닫히지 않은 중괄호와 본문
+근거: 미확인 | 원문: 1줄 | 의미론: 4줄 | 렌더링: 1줄 | 닫히지 않은 중괄호와 본문
 {{{#!wiki style="열림
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Text(
-                    "{{{#!wiki style=\"열림",
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..24
+  Paragraph@0..23
+    Text@0..23 "{{{#!wiki style=\"열림"
+  Newline@23..24 "\n"
 <div class="wiki-paragraph">{{{#!wiki style="열림</div>

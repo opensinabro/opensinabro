@@ -1,22 +1,12 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 19줄 | 렌더링: 1줄 | CSS 색상명
+근거: 도움말예제 | 원문: 1줄 | 의미론: 9줄 | 렌더링: 1줄 | CSS 색상명
 {{{#red 텍스트}}}
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Colored(
-                    ColoredText {
-                        color: "red",
-                        dark_color: None,
-                        content: [
-                            Text(
-                                "텍스트",
-                            ),
-                        ],
-                    },
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..21
+  Paragraph@0..20
+    ColoredText@0..20
+      DelimiterOpen@0..3 "{{{"
+      ColorValue@3..7 "#red"
+      Separator@7..8 " "
+      Text@8..17 "텍스트"
+      DelimiterClose@17..20 "}}}"
+  Newline@20..21 "\n"
 <div class="wiki-paragraph"><span style="color:red" data-dark-style="color:red;">텍스트</span></div>

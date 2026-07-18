@@ -1,68 +1,35 @@
-근거: 미확인 | 원문: 1줄 | 의미론: 65줄 | 렌더링: 1줄 | 한 줄에 모든 서식 — 서로 간섭하지 않는지
+근거: 미확인 | 원문: 1줄 | 의미론: 32줄 | 렌더링: 1줄 | 한 줄에 모든 서식 — 서로 간섭하지 않는지
 '''굵게''' ''기울임'' ~~취소~~ __밑줄__ ^^위^^ ,,아래,,
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Bold(
-                    [
-                        Text(
-                            "굵게",
-                        ),
-                    ],
-                ),
-                Text(
-                    " ",
-                ),
-                Italic(
-                    [
-                        Text(
-                            "기울임",
-                        ),
-                    ],
-                ),
-                Text(
-                    " ",
-                ),
-                Strikethrough(
-                    [
-                        Text(
-                            "취소",
-                        ),
-                    ],
-                ),
-                Text(
-                    " ",
-                ),
-                Underline(
-                    [
-                        Text(
-                            "밑줄",
-                        ),
-                    ],
-                ),
-                Text(
-                    " ",
-                ),
-                Superscript(
-                    [
-                        Text(
-                            "위",
-                        ),
-                    ],
-                ),
-                Text(
-                    " ",
-                ),
-                Subscript(
-                    [
-                        Text(
-                            "아래",
-                        ),
-                    ],
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..68
+  Paragraph@0..67
+    Bold@0..12
+      DelimiterOpen@0..3 "'''"
+      Text@3..9 "굵게"
+      DelimiterClose@9..12 "'''"
+    Text@12..13 " "
+    Italic@13..26
+      DelimiterOpen@13..15 "''"
+      Text@15..24 "기울임"
+      DelimiterClose@24..26 "''"
+    Text@26..27 " "
+    Strikethrough@27..37
+      DelimiterOpen@27..29 "~~"
+      Text@29..35 "취소"
+      DelimiterClose@35..37 "~~"
+    Text@37..38 " "
+    Underline@38..48
+      DelimiterOpen@38..40 "__"
+      Text@40..46 "밑줄"
+      DelimiterClose@46..48 "__"
+    Text@48..49 " "
+    Superscript@49..56
+      DelimiterOpen@49..51 "^^"
+      Text@51..54 "위"
+      DelimiterClose@54..56 "^^"
+    Text@56..57 " "
+    Subscript@57..67
+      DelimiterOpen@57..59 ",,"
+      Text@59..65 "아래"
+      DelimiterClose@65..67 ",,"
+  Newline@67..68 "\n"
 <div class="wiki-paragraph"><strong>굵게</strong> <em>기울임</em> <del>취소</del> <u>밑줄</u> <sup>위</sup> <sub>아래</sub></div>

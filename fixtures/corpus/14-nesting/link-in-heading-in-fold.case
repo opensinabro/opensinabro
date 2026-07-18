@@ -1,51 +1,27 @@
-근거: 미확인 | 원문: 3줄 | 의미론: 45줄 | 렌더링: 2줄 | 접기 안 문단 안 링크
+근거: 미확인 | 원문: 3줄 | 의미론: 21줄 | 렌더링: 2줄 | 접기 안 문단 안 링크
 {{{#!folding 접기
 == [[링크]] 문단 ==
 }}}
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Folding(
-                    Folding {
-                        summary: Template(
-                            [
-                                Text(
-                                    "접기",
-                                ),
-                            ],
-                        ),
-                        blocks: [
-                            Heading(
-                                Heading {
-                                    level: 2,
-                                    folded: false,
-                                    content: [
-                                        Link(
-                                            Link {
-                                                target: Template(
-                                                    [
-                                                        Text(
-                                                            "링크",
-                                                        ),
-                                                    ],
-                                                ),
-                                                anchor: None,
-                                                display: None,
-                                            },
-                                        ),
-                                        Text(
-                                            " 문단",
-                                        ),
-                                    ],
-                                },
-                            ),
-                        ],
-                    },
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..48
+  Paragraph@0..47
+    Folding@0..47
+      DelimiterOpen@0..3 "{{{"
+      Directive@3..12 "#!folding"
+      Separator@12..13 " "
+      FoldingSummary@13..19
+        Text@13..19 "접기"
+      Newline@19..20 "\n"
+      Heading@20..43
+        DelimiterOpen@20..22 "=="
+        Separator@22..23 " "
+        Link@23..33
+          DelimiterOpen@23..25 "[["
+          LinkTarget@25..31 "링크"
+          DelimiterClose@31..33 "]]"
+        Text@33..40 " 문단"
+        Separator@40..41 " "
+        DelimiterClose@41..43 "=="
+      DelimiterClose@43..47 "\n}}}"
+  Newline@47..48 "\n"
 <div class="wiki-paragraph"><details class="wiki-folding"><summary>접기</summary><div><h2 class="wiki-heading"><a id="s-1" href="#toc">1.</a> <span id="링크 문단"><a class="wiki-link-internal" href="/w/%EB%A7%81%ED%81%AC" title="링크">링크</a> 문단</span></h2>
 </div></details></div>

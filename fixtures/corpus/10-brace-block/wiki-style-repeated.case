@@ -1,36 +1,23 @@
-근거: 미확인 | 원문: 3줄 | 의미론: 31줄 | 렌더링: 1줄 | style을 두 번 주면 이어붙는지
+근거: 미확인 | 원문: 3줄 | 의미론: 18줄 | 렌더링: 1줄 | style을 두 번 주면 이어붙는지
 {{{#!wiki style="color:red" style="margin:1px"
 내용
 }}}
-Document {
-    blocks: [
-        Paragraph(
-            [
-                WikiStyle(
-                    WikiStyle {
-                        style: Some(
-                            Template(
-                                [
-                                    Text(
-                                        "color:redmargin:1px",
-                                    ),
-                                ],
-                            ),
-                        ),
-                        dark_style: None,
-                        blocks: [
-                            Paragraph(
-                                [
-                                    Text(
-                                        "내용",
-                                    ),
-                                ],
-                            ),
-                        ],
-                    },
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..58
+  Paragraph@0..57
+    WikiStyle@0..57
+      DelimiterOpen@0..3 "{{{"
+      Directive@3..9 "#!wiki"
+      Separator@9..10 " "
+      AttributeName@10..15 "style"
+      Separator@15..16 "="
+      AttributeValue@16..27 "\"color:red\""
+      Separator@27..28 " "
+      AttributeName@28..33 "style"
+      Separator@33..34 "="
+      AttributeValue@34..46 "\"margin:1px\""
+      Newline@46..47 "\n"
+      Paragraph@47..53
+        Text@47..53 "내용"
+      DelimiterClose@53..57 "\n}}}"
+  Newline@57..58 "\n"
 <div class="wiki-paragraph"><div style="color: redmargin:1px">내용</div></div>

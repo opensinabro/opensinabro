@@ -1,14 +1,8 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 11줄 | 렌더링: 1줄 | 문법 무효화 — 색상
+근거: 도움말예제 | 원문: 1줄 | 의미론: 5줄 | 렌더링: 1줄 | 문법 무효화 — 색상
 \{{{#red 색상 무효}}}
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Text(
-                    "{{{#red 색상 무효}}}",
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..26
+  Paragraph@0..25
+    Escaped@0..2 "\\{"
+    Text@2..25 "{{#red 색상 무효}}}"
+  Newline@25..26 "\n"
 <div class="wiki-paragraph">{{{#red 색상 무효}}}</div>

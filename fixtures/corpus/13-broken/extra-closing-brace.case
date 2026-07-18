@@ -1,14 +1,7 @@
-근거: 미확인 | 원문: 1줄 | 의미론: 11줄 | 렌더링: 1줄 | 짝 없는 닫는 중괄호
+근거: 미확인 | 원문: 1줄 | 의미론: 4줄 | 렌더링: 1줄 | 짝 없는 닫는 중괄호
 본문 }}}
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Text(
-                    "본문 }}}",
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..11
+  Paragraph@0..10
+    Text@0..10 "본문 }}}"
+  Newline@10..11 "\n"
 <div class="wiki-paragraph">본문 }}}</div>

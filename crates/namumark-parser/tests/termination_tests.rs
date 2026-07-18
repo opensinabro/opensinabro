@@ -8,7 +8,7 @@ fn assert_parse_terminates(label: &str, source: String) {
         .stack_size(16 * 1024 * 1024)
         .spawn(move || {
             let document = namumark_parser::parse(&source);
-            let _ = sender.send(document.blocks.len());
+            let _ = sender.send(document.blocks().len());
         })
         .expect("파싱 스레드 생성 실패");
     match receiver.recv_timeout(Duration::from_secs(10)) {
@@ -270,7 +270,7 @@ fn snippet_pair_combinations_terminate() {
 #[test]
 fn crlf_input_is_handled() {
     let document = namumark_parser::parse("= 제목 =\r\n본문\r\n");
-    assert_eq!(document.blocks.len(), 2);
+    assert_eq!(document.blocks().len(), 2);
 }
 
 #[test]

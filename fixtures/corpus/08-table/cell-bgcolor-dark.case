@@ -1,51 +1,20 @@
-근거: 도움말서술 | 원문: 1줄 | 의미론: 47줄 | 렌더링: 2줄 | 셀 배경색 다크 쌍
+근거: 도움말서술 | 원문: 1줄 | 의미론: 16줄 | 렌더링: 2줄 | 셀 배경색 다크 쌍
 ||<bgcolor=#ffffff,#000000> 듀얼 ||
-Document {
-    blocks: [
-        Table(
-            Table {
-                caption: None,
-                rows: [
-                    TableRow {
-                        cells: [
-                            TableCell {
-                                column_span: None,
-                                row_span: None,
-                                horizontal_alignment: Some(
-                                    Center,
-                                ),
-                                vertical_alignment: None,
-                                attributes: [
-                                    TableAttribute {
-                                        scope: Cell,
-                                        name: "bgcolor",
-                                        value: Some(
-                                            Template(
-                                                [
-                                                    Text(
-                                                        "#ffffff,#000000",
-                                                    ),
-                                                ],
-                                            ),
-                                        ),
-                                    },
-                                ],
-                                blocks: [
-                                    Paragraph(
-                                        [
-                                            Text(
-                                                "듀얼",
-                                            ),
-                                        ],
-                                    ),
-                                ],
-                            },
-                        ],
-                    },
-                ],
-            },
-        ),
-    ],
-}
+Document@0..38
+  Table@0..37
+    TableRow@0..37
+      Separator@0..2 "||"
+      TableCell@2..35
+        DelimiterOpen@2..3 "<"
+        CellOptionName@3..10 "bgcolor"
+        Separator@10..11 "="
+        CellOptionValue@11..26 "#ffffff,#000000"
+        DelimiterClose@26..27 ">"
+        AlignmentSpace@27..28 " "
+        Paragraph@28..34
+          Text@28..34 "듀얼"
+        AlignmentSpace@34..35 " "
+      Separator@35..37 "||"
+  Newline@37..38 "\n"
 <div class="wiki-table-wrap"><table class="wiki-table"><tbody><tr class="wiki-table-tr"><td style="text-align: center; background-color: #ffffff;"><div class="wiki-paragraph">듀얼</div>
 </td></tr></tbody></table></div>

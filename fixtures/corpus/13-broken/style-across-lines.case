@@ -1,23 +1,13 @@
-근거: 미확인 | 원문: 2줄 | 의미론: 19줄 | 렌더링: 1줄 | 서식은 줄 단위 — 여러 줄에 걸친 마커는 잔여 텍스트
+근거: 미확인 | 원문: 2줄 | 의미론: 9줄 | 렌더링: 1줄 | 서식은 줄 단위 — 여러 줄에 걸친 마커는 잔여 텍스트
 '''여러
 줄 굵게'''
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Bold(
-                    [
-                        Text(
-                            "여러",
-                        ),
-                        LineBreak,
-                        Text(
-                            "줄 굵게",
-                        ),
-                    ],
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..24
+  Paragraph@0..23
+    Bold@0..23
+      DelimiterOpen@0..3 "'''"
+      Text@3..9 "여러"
+      Newline@9..10 "\n"
+      Text@10..20 "줄 굵게"
+      DelimiterClose@20..23 "'''"
+  Newline@23..24 "\n"
 <div class="wiki-paragraph"><strong>여러<br>줄 굵게</strong></div>

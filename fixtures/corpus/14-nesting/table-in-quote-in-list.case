@@ -1,78 +1,40 @@
-근거: 미확인 | 원문: 3줄 | 의미론: 71줄 | 렌더링: 8줄 | 리스트 안 인용 안 표
+근거: 미확인 | 원문: 3줄 | 의미론: 33줄 | 렌더링: 8줄 | 리스트 안 인용 안 표
  * 리스트
   > 인용
   > || 표 ||
-Document {
-    blocks: [
-        List(
-            List {
-                kind: Unordered,
-                items: [
-                    ListItem {
-                        start_number: None,
-                        blocks: [
-                            Paragraph(
-                                [
-                                    Text(
-                                        "리스트",
-                                    ),
-                                ],
-                            ),
-                            Indent(
-                                [
-                                    Quote(
-                                        [
-                                            Indent(
-                                                [
-                                                    Paragraph(
-                                                        [
-                                                            Text(
-                                                                "인용",
-                                                            ),
-                                                        ],
-                                                    ),
-                                                    Table(
-                                                        Table {
-                                                            caption: None,
-                                                            rows: [
-                                                                TableRow {
-                                                                    cells: [
-                                                                        TableCell {
-                                                                            column_span: None,
-                                                                            row_span: None,
-                                                                            horizontal_alignment: Some(
-                                                                                Center,
-                                                                            ),
-                                                                            vertical_alignment: None,
-                                                                            attributes: [],
-                                                                            blocks: [
-                                                                                Paragraph(
-                                                                                    [
-                                                                                        Text(
-                                                                                            "표",
-                                                                                        ),
-                                                                                    ],
-                                                                                ),
-                                                                            ],
-                                                                        },
-                                                                    ],
-                                                                },
-                                                            ],
-                                                        },
-                                                    ),
-                                                ],
-                                            ),
-                                        ],
-                                    ),
-                                ],
-                            ),
-                        ],
-                    },
-                ],
-            },
-        ),
-    ],
-}
+Document@0..38
+  List@0..38
+    ListItem@0..38
+      IndentMarker@0..1 " "
+      ListMarker@1..2 "*"
+      Separator@2..3 " "
+      Paragraph@3..12
+        Text@3..12 "리스트"
+      Newline@12..13 "\n"
+      Indent@13..38
+        Quote@13..38
+          Indent@13..38
+            Paragraph@13..23
+              IndentMarker@13..14 " "
+              IndentMarker@14..15 " "
+              QuoteMarker@15..16 ">"
+              IndentMarker@16..17 " "
+              Text@17..23 "인용"
+            Newline@23..24 "\n"
+            Table@24..37
+              TableRow@24..37
+                IndentMarker@24..25 " "
+                IndentMarker@25..26 " "
+                QuoteMarker@26..27 ">"
+                IndentMarker@27..28 " "
+                Separator@28..30 "||"
+                TableCell@30..35
+                  AlignmentSpace@30..31 " "
+                  Paragraph@31..34
+                    Text@31..34 "표"
+                  AlignmentSpace@34..35 " "
+                Separator@35..37 "||"
+            Newline@37..38 "\n"
 <ul class="wiki-list"><li><div class="wiki-paragraph">리스트</div>
 <div class="wiki-indent"><blockquote class="wiki-quote"><div class="wiki-indent"><div class="wiki-paragraph">인용</div>
 <div class="wiki-table-wrap"><table class="wiki-table"><tbody><tr class="wiki-table-tr"><td style="text-align: center;"><div class="wiki-paragraph">표</div>

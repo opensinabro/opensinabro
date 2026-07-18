@@ -1,19 +1,10 @@
-근거: 미확인 | 원문: 2줄 | 의미론: 15줄 | 렌더링: 1줄 | 닫히지 않은 #!wiki
+근거: 미확인 | 원문: 2줄 | 의미론: 6줄 | 렌더링: 1줄 | 닫히지 않은 #!wiki
 {{{#!wiki style="color:red"
 내용
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Text(
-                    "{{{#!wiki style=\"color:red\"",
-                ),
-                LineBreak,
-                Text(
-                    "내용",
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..35
+  Paragraph@0..34
+    Text@0..27 "{{{#!wiki style=\"colo ..."
+    Newline@27..28 "\n"
+    Text@28..34 "내용"
+  Newline@34..35 "\n"
 <div class="wiki-paragraph">{{{#!wiki style="color:red"<br>내용</div>

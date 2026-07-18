@@ -1,28 +1,15 @@
-근거: 미확인 | 원문: 1줄 | 의미론: 25줄 | 렌더링: 1줄 | 굵게 안의 밑줄
+근거: 미확인 | 원문: 1줄 | 의미론: 12줄 | 렌더링: 1줄 | 굵게 안의 밑줄
 '''굵게 __밑줄__ 굵게'''
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Bold(
-                    [
-                        Text(
-                            "굵게 ",
-                        ),
-                        Underline(
-                            [
-                                Text(
-                                    "밑줄",
-                                ),
-                            ],
-                        ),
-                        Text(
-                            " 굵게",
-                        ),
-                    ],
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..31
+  Paragraph@0..30
+    Bold@0..30
+      DelimiterOpen@0..3 "'''"
+      Text@3..10 "굵게 "
+      Underline@10..20
+        DelimiterOpen@10..12 "__"
+        Text@12..18 "밑줄"
+        DelimiterClose@18..20 "__"
+      Text@20..27 " 굵게"
+      DelimiterClose@27..30 "'''"
+  Newline@30..31 "\n"
 <div class="wiki-paragraph"><strong>굵게 <u>밑줄</u> 굵게</strong></div>

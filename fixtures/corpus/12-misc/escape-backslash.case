@@ -1,14 +1,7 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 11줄 | 렌더링: 1줄 | 역슬래시 자체 무효화
+근거: 도움말예제 | 원문: 1줄 | 의미론: 4줄 | 렌더링: 1줄 | 역슬래시 자체 무효화
 \\
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Text(
-                    "\\",
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..3
+  Paragraph@0..2
+    Escaped@0..2 "\\\\"
+  Newline@2..3 "\n"
 <div class="wiki-paragraph">\</div>

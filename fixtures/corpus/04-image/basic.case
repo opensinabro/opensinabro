@@ -1,23 +1,11 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 20줄 | 렌더링: 1줄 | 이미지 삽입
+근거: 도움말예제 | 원문: 1줄 | 의미론: 8줄 | 렌더링: 1줄 | 이미지 삽입
 [[파일:example.png]]
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Image(
-                    Image {
-                        file_name: Template(
-                            [
-                                Text(
-                                    "example.png",
-                                ),
-                            ],
-                        ),
-                        options: [],
-                    },
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..23
+  Paragraph@0..22
+    Image@0..22
+      DelimiterOpen@0..2 "[["
+      LinkNamespace@2..9 "파일:"
+      LinkTarget@9..20 "example.png"
+      DelimiterClose@20..22 "]]"
+  Newline@22..23 "\n"
 <div class="wiki-paragraph"><span class="wiki-image-align-normal" style=""><span class="wiki-image-wrapper"><img src="/file/example.png" alt="파일:example.png"></span></span></div>

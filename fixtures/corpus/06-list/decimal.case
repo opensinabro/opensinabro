@@ -1,41 +1,22 @@
-근거: 도움말예제 | 원문: 2줄 | 의미론: 35줄 | 렌더링: 3줄 | 번호 리스트
+근거: 도움말예제 | 원문: 2줄 | 의미론: 16줄 | 렌더링: 3줄 | 번호 리스트
  1. 리스트 1
  1. 리스트 2
-Document {
-    blocks: [
-        List(
-            List {
-                kind: Decimal,
-                items: [
-                    ListItem {
-                        start_number: None,
-                        blocks: [
-                            Paragraph(
-                                [
-                                    Text(
-                                        "리스트 1",
-                                    ),
-                                ],
-                            ),
-                        ],
-                    },
-                    ListItem {
-                        start_number: None,
-                        blocks: [
-                            Paragraph(
-                                [
-                                    Text(
-                                        "리스트 2",
-                                    ),
-                                ],
-                            ),
-                        ],
-                    },
-                ],
-            },
-        ),
-    ],
-}
+Document@0..32
+  List@0..32
+    ListItem@0..16
+      IndentMarker@0..1 " "
+      ListMarker@1..3 "1."
+      Separator@3..4 " "
+      Paragraph@4..15
+        Text@4..15 "리스트 1"
+      Newline@15..16 "\n"
+    ListItem@16..32
+      IndentMarker@16..17 " "
+      ListMarker@17..19 "1."
+      Separator@19..20 " "
+      Paragraph@20..31
+        Text@20..31 "리스트 2"
+      Newline@31..32 "\n"
 <ol class="wiki-list wiki-list" start="1"><li><div class="wiki-paragraph">리스트 1</div>
 </li><li><div class="wiki-paragraph">리스트 2</div>
 </li></ol>

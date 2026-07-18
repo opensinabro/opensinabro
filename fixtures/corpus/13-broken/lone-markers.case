@@ -1,35 +1,21 @@
-근거: 미확인 | 원문: 5줄 | 의미론: 28줄 | 렌더링: 1줄 | 마커만 있는 줄
+근거: 미확인 | 원문: 5줄 | 의미론: 14줄 | 렌더링: 1줄 | 마커만 있는 줄
 '''
 ''
 __
 ^^
 ,,
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Italic(
-                    [
-                        Text(
-                            "'",
-                        ),
-                        LineBreak,
-                    ],
-                ),
-                LineBreak,
-                Text(
-                    "__",
-                ),
-                LineBreak,
-                Text(
-                    "^^",
-                ),
-                LineBreak,
-                Text(
-                    ",,",
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..16
+  Paragraph@0..15
+    Italic@0..6
+      DelimiterOpen@0..2 "''"
+      Text@2..3 "'"
+      Newline@3..4 "\n"
+      DelimiterClose@4..6 "''"
+    Newline@6..7 "\n"
+    Text@7..9 "__"
+    Newline@9..10 "\n"
+    Text@10..12 "^^"
+    Newline@12..13 "\n"
+    Text@13..15 ",,"
+  Newline@15..16 "\n"
 <div class="wiki-paragraph"><em>'<br></em><br>__<br>^^<br>,,</div>

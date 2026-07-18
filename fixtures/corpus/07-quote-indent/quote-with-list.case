@@ -1,32 +1,16 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 27줄 | 렌더링: 3줄 | 인용문 안 리스트
+근거: 도움말예제 | 원문: 1줄 | 의미론: 11줄 | 렌더링: 3줄 | 인용문 안 리스트
 > * 목록이 담긴 인용문
-Document {
-    blocks: [
-        Quote(
-            [
-                List(
-                    List {
-                        kind: Unordered,
-                        items: [
-                            ListItem {
-                                start_number: None,
-                                blocks: [
-                                    Paragraph(
-                                        [
-                                            Text(
-                                                "목록이 담긴 인용문",
-                                            ),
-                                        ],
-                                    ),
-                                ],
-                            },
-                        ],
-                    },
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..31
+  Quote@0..31
+    List@0..31
+      ListItem@0..31
+        QuoteMarker@0..1 ">"
+        IndentMarker@1..2 " "
+        ListMarker@2..3 "*"
+        Separator@3..4 " "
+        Paragraph@4..30
+          Text@4..30 "목록이 담긴 인용 ..."
+        Newline@30..31 "\n"
 <blockquote class="wiki-quote"><ul class="wiki-list"><li><div class="wiki-paragraph">목록이 담긴 인용문</div>
 </li></ul>
 </blockquote>

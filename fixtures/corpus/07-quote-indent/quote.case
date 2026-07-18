@@ -1,19 +1,10 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 15줄 | 렌더링: 2줄 | 인용문
+근거: 도움말예제 | 원문: 1줄 | 의미론: 6줄 | 렌더링: 2줄 | 인용문
 >인용문
-Document {
-    blocks: [
-        Quote(
-            [
-                Paragraph(
-                    [
-                        Text(
-                            "인용문",
-                        ),
-                    ],
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..11
+  Quote@0..11
+    Paragraph@0..10
+      QuoteMarker@0..1 ">"
+      Text@1..10 "인용문"
+    Newline@10..11 "\n"
 <blockquote class="wiki-quote"><div class="wiki-paragraph">인용문</div>
 </blockquote>

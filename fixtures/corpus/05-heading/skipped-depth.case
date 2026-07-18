@@ -1,32 +1,21 @@
-근거: 도움말예제 | 원문: 2줄 | 의미론: 26줄 | 렌더링: 4줄 | 도움말: 깊이를 두 단계 건너뜀
+근거: 도움말예제 | 원문: 2줄 | 의미론: 15줄 | 렌더링: 4줄 | 도움말: 깊이를 두 단계 건너뜀
 == 문단 2 ==
 ==== 문단 4 ====
-Document {
-    blocks: [
-        Heading(
-            Heading {
-                level: 2,
-                folded: false,
-                content: [
-                    Text(
-                        "문단 2",
-                    ),
-                ],
-            },
-        ),
-        Heading(
-            Heading {
-                level: 4,
-                folded: false,
-                content: [
-                    Text(
-                        "문단 4",
-                    ),
-                ],
-            },
-        ),
-    ],
-}
+Document@0..34
+  Heading@0..14
+    DelimiterOpen@0..2 "=="
+    Separator@2..3 " "
+    Text@3..11 "문단 2"
+    Separator@11..12 " "
+    DelimiterClose@12..14 "=="
+  Newline@14..15 "\n"
+  Heading@15..33
+    DelimiterOpen@15..19 "===="
+    Separator@19..20 " "
+    Text@20..28 "문단 4"
+    Separator@28..29 " "
+    DelimiterClose@29..33 "===="
+  Newline@33..34 "\n"
 <h2 class="wiki-heading"><a id="s-1" href="#toc">1.</a> <span id="문단 2">문단 2</span></h2>
 <div class="wiki-heading-content"></div>
 <h4 class="wiki-heading"><a id="s-1.1" href="#toc">1.1.</a> <span id="문단 4">문단 4</span></h4>

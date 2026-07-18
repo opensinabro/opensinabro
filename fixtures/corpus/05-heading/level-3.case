@@ -1,19 +1,12 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 15줄 | 렌더링: 2줄 | 3단계 문단
+근거: 도움말예제 | 원문: 1줄 | 의미론: 8줄 | 렌더링: 2줄 | 3단계 문단
 === 문단 3 ===
-Document {
-    blocks: [
-        Heading(
-            Heading {
-                level: 3,
-                folded: false,
-                content: [
-                    Text(
-                        "문단 3",
-                    ),
-                ],
-            },
-        ),
-    ],
-}
+Document@0..17
+  Heading@0..16
+    DelimiterOpen@0..3 "==="
+    Separator@3..4 " "
+    Text@4..12 "문단 3"
+    Separator@12..13 " "
+    DelimiterClose@13..16 "==="
+  Newline@16..17 "\n"
 <h3 class="wiki-heading"><a id="s-1" href="#toc">1.</a> <span id="문단 3">문단 3</span></h3>
 <div class="wiki-heading-content"></div>

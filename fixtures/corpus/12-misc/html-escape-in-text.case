@@ -1,14 +1,7 @@
-근거: 미확인 | 원문: 1줄 | 의미론: 11줄 | 렌더링: 1줄 | 본문의 HTML 특수문자 이스케이프
+근거: 미확인 | 원문: 1줄 | 의미론: 4줄 | 렌더링: 1줄 | 본문의 HTML 특수문자 이스케이프
 <script>alert(1)</script> & "따옴표"
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Text(
-                    "<script>alert(1)</script> & \"따옴표\"",
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..40
+  Paragraph@0..39
+    Text@0..39 "<script>alert(1)</scr ..."
+  Newline@39..40 "\n"
 <div class="wiki-paragraph">&lt;script&gt;alert(1)&lt;/script&gt; &amp; "따옴표"</div>

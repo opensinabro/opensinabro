@@ -1,60 +1,22 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 55줄 | 렌더링: 3줄 | 파이프 런으로 가로 합치기
+근거: 도움말예제 | 원문: 1줄 | 의미론: 17줄 | 렌더링: 3줄 | 파이프 런으로 가로 합치기
 |||| 두칸 |||| 짜리 ||
-Document {
-    blocks: [
-        Table(
-            Table {
-                caption: None,
-                rows: [
-                    TableRow {
-                        cells: [
-                            TableCell {
-                                column_span: Some(
-                                    2,
-                                ),
-                                row_span: None,
-                                horizontal_alignment: Some(
-                                    Center,
-                                ),
-                                vertical_alignment: None,
-                                attributes: [],
-                                blocks: [
-                                    Paragraph(
-                                        [
-                                            Text(
-                                                "두칸",
-                                            ),
-                                        ],
-                                    ),
-                                ],
-                            },
-                            TableCell {
-                                column_span: Some(
-                                    2,
-                                ),
-                                row_span: None,
-                                horizontal_alignment: Some(
-                                    Center,
-                                ),
-                                vertical_alignment: None,
-                                attributes: [],
-                                blocks: [
-                                    Paragraph(
-                                        [
-                                            Text(
-                                                "짜리",
-                                            ),
-                                        ],
-                                    ),
-                                ],
-                            },
-                        ],
-                    },
-                ],
-            },
-        ),
-    ],
-}
+Document@0..27
+  Table@0..26
+    TableRow@0..26
+      Separator@0..4 "||||"
+      TableCell@4..12
+        AlignmentSpace@4..5 " "
+        Paragraph@5..11
+          Text@5..11 "두칸"
+        AlignmentSpace@11..12 " "
+      Separator@12..16 "||||"
+      TableCell@16..24
+        AlignmentSpace@16..17 " "
+        Paragraph@17..23
+          Text@17..23 "짜리"
+        AlignmentSpace@23..24 " "
+      Separator@24..26 "||"
+  Newline@26..27 "\n"
 <div class="wiki-table-wrap"><table class="wiki-table"><tbody><tr class="wiki-table-tr"><td colspan="2" style="text-align: center;"><div class="wiki-paragraph">두칸</div>
 </td><td colspan="2" style="text-align: center;"><div class="wiki-paragraph">짜리</div>
 </td></tr></tbody></table></div>

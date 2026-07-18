@@ -1,11 +1,9 @@
 [package]
 name = "namumark-parser"
-description = "나무마크 파서: 구문 트리를 의미 모델로 lowering"
+description = "나무마크 파서: 구문 트리를 의미 모델 뷰로 노출하는 facade"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
 
 [dependencies]
 namumark-ast = { path = "../namumark-ast" }
-namumark-syntax = { path = "../namumark-syntax" }
-namumark-text = { path = "../namumark-text" }

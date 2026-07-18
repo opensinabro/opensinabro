@@ -1,43 +1,18 @@
-근거: 도움말서술 | 원문: 1줄 | 의미론: 39줄 | 렌더링: 2줄 | 셀 여백 제거
+근거: 도움말서술 | 원문: 1줄 | 의미론: 14줄 | 렌더링: 2줄 | 셀 여백 제거
 ||<nopad> 여백 없음 ||
-Document {
-    blocks: [
-        Table(
-            Table {
-                caption: None,
-                rows: [
-                    TableRow {
-                        cells: [
-                            TableCell {
-                                column_span: None,
-                                row_span: None,
-                                horizontal_alignment: Some(
-                                    Center,
-                                ),
-                                vertical_alignment: None,
-                                attributes: [
-                                    TableAttribute {
-                                        scope: Cell,
-                                        name: "nopad",
-                                        value: None,
-                                    },
-                                ],
-                                blocks: [
-                                    Paragraph(
-                                        [
-                                            Text(
-                                                "여백 없음",
-                                            ),
-                                        ],
-                                    ),
-                                ],
-                            },
-                        ],
-                    },
-                ],
-            },
-        ),
-    ],
-}
+Document@0..27
+  Table@0..26
+    TableRow@0..26
+      Separator@0..2 "||"
+      TableCell@2..24
+        DelimiterOpen@2..3 "<"
+        CellOption@3..8 "nopad"
+        DelimiterClose@8..9 ">"
+        AlignmentSpace@9..10 " "
+        Paragraph@10..23
+          Text@10..23 "여백 없음"
+        AlignmentSpace@23..24 " "
+      Separator@24..26 "||"
+  Newline@26..27 "\n"
 <div class="wiki-table-wrap"><table class="wiki-table"><tbody><tr class="wiki-table-tr"><td class="wiki-table-nopadding" style="text-align: center;"><div class="wiki-paragraph">여백 없음</div>
 </td></tr></tbody></table></div>

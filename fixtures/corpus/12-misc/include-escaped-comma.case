@@ -1,25 +1,19 @@
-근거: 도움말서술 | 원문: 1줄 | 의미론: 22줄 | 렌더링: 1줄 | 도움말: 값의 쉼표는 \, 로
+근거: 도움말서술 | 원문: 1줄 | 의미론: 16줄 | 렌더링: 1줄 | 도움말: 값의 쉼표는 \, 로
 [include(틀:설명, 설명=하나\,둘)]
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Macro(
-                    Macro {
-                        name: "include",
-                        argument: Some(
-                            Template(
-                                [
-                                    Text(
-                                        "틀:설명, 설명=하나\\,둘",
-                                    ),
-                                ],
-                            ),
-                        ),
-                    },
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..42
+  Paragraph@0..41
+    MacroCall@0..41
+      DelimiterOpen@0..1 "["
+      MacroName@1..8 "include"
+      Separator@8..9 "("
+      MacroArgument@9..19 "틀:설명"
+      Separator@19..20 ","
+      ArgumentName@20..27 " 설명"
+      Separator@27..28 "="
+      ArgumentValue@28..35 "하나\\"
+      Separator@35..36 ","
+      MacroArgument@36..39 "둘"
+      Separator@39..40 ")"
+      DelimiterClose@40..41 "]"
+  Newline@41..42 "\n"
 <div class="wiki-paragraph">하나\</div>

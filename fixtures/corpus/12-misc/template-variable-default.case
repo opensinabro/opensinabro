@@ -1,19 +1,12 @@
-근거: 도움말서술 | 원문: 1줄 | 의미론: 16줄 | 렌더링: 1줄 | 틀 매개변수 기본값
+근거: 도움말서술 | 원문: 1줄 | 의미론: 9줄 | 렌더링: 1줄 | 틀 매개변수 기본값
 @매개변수=디폴트값@
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Variable(
-                    Variable {
-                        name: "매개변수",
-                        default: Some(
-                            "디폴트값",
-                        ),
-                    },
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..28
+  Paragraph@0..27
+    TemplateVariable@0..27
+      DelimiterOpen@0..1 "@"
+      VariableName@1..13 "매개변수"
+      Separator@13..14 "="
+      VariableDefault@14..26 "디폴트값"
+      DelimiterClose@26..27 "@"
+  Newline@27..28 "\n"
 <div class="wiki-paragraph">디폴트값</div>

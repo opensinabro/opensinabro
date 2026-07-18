@@ -1,39 +1,18 @@
-근거: 도움말서술 | 원문: 1줄 | 의미론: 35줄 | 렌더링: 2줄 | 도움말: 큰 수 병합은 테두리가 깨질 수 있음
+근거: 도움말서술 | 원문: 1줄 | 의미론: 14줄 | 렌더링: 2줄 | 도움말: 큰 수 병합은 테두리가 깨질 수 있음
 ||<-9> 전체 병합 ||
-Document {
-    blocks: [
-        Table(
-            Table {
-                caption: None,
-                rows: [
-                    TableRow {
-                        cells: [
-                            TableCell {
-                                column_span: Some(
-                                    9,
-                                ),
-                                row_span: None,
-                                horizontal_alignment: Some(
-                                    Center,
-                                ),
-                                vertical_alignment: None,
-                                attributes: [],
-                                blocks: [
-                                    Paragraph(
-                                        [
-                                            Text(
-                                                "전체 병합",
-                                            ),
-                                        ],
-                                    ),
-                                ],
-                            },
-                        ],
-                    },
-                ],
-            },
-        ),
-    ],
-}
+Document@0..24
+  Table@0..23
+    TableRow@0..23
+      Separator@0..2 "||"
+      TableCell@2..21
+        DelimiterOpen@2..3 "<"
+        CellOption@3..5 "-9"
+        DelimiterClose@5..6 ">"
+        AlignmentSpace@6..7 " "
+        Paragraph@7..20
+          Text@7..20 "전체 병합"
+        AlignmentSpace@20..21 " "
+      Separator@21..23 "||"
+  Newline@23..24 "\n"
 <div class="wiki-table-wrap"><table class="wiki-table"><tbody><tr class="wiki-table-tr"><td colspan="9" style="text-align: center;"><div class="wiki-paragraph">전체 병합</div>
 </td></tr></tbody></table></div>

@@ -1,30 +1,18 @@
-근거: 도움말예제 | 원문: 2줄 | 의미론: 25줄 | 렌더링: 2줄 | 무명 각주
+근거: 도움말예제 | 원문: 2줄 | 의미론: 13줄 | 렌더링: 2줄 | 무명 각주
 [* 텍스트 1]
 [각주]
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Footnote(
-                    Footnote {
-                        name: None,
-                        content: [
-                            Text(
-                                "텍스트 1",
-                            ),
-                        ],
-                    },
-                ),
-                LineBreak,
-                Macro(
-                    Macro {
-                        name: "각주",
-                        argument: None,
-                    },
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..25
+  Paragraph@0..24
+    Footnote@0..15
+      DelimiterOpen@0..2 "[*"
+      Separator@2..3 " "
+      Text@3..14 "텍스트 1"
+      DelimiterClose@14..15 "]"
+    Newline@15..16 "\n"
+    MacroCall@16..24
+      DelimiterOpen@16..17 "["
+      MacroName@17..23 "각주"
+      DelimiterClose@23..24 "]"
+  Newline@24..25 "\n"
 <div class="wiki-paragraph"><a class="wiki-fn-content" title="텍스트 1" href="#fn-1"><span id="rfn-1"></span>[1]</a><br><div class="wiki-macro-footnote"><span class="footnote-list"><span id="fn-1"></span><a href="#rfn-1">[1]</a> 텍스트 1</span></div>
 </div>

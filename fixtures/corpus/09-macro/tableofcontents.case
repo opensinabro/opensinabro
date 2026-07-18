@@ -1,31 +1,20 @@
-근거: 도움말예제 | 원문: 2줄 | 의미론: 25줄 | 렌더링: 4줄 | 목차 영문 이름
+근거: 도움말예제 | 원문: 2줄 | 의미론: 14줄 | 렌더링: 4줄 | 목차 영문 이름
 [tableofcontents]
 == 문단 ==
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Macro(
-                    Macro {
-                        name: "tableofcontents",
-                        argument: None,
-                    },
-                ),
-            ],
-        ),
-        Heading(
-            Heading {
-                level: 2,
-                folded: false,
-                content: [
-                    Text(
-                        "문단",
-                    ),
-                ],
-            },
-        ),
-    ],
-}
+Document@0..31
+  Paragraph@0..17
+    MacroCall@0..17
+      DelimiterOpen@0..1 "["
+      MacroName@1..16 "tableofcontents"
+      DelimiterClose@16..17 "]"
+  Newline@17..18 "\n"
+  Heading@18..30
+    DelimiterOpen@18..20 "=="
+    Separator@20..21 " "
+    Text@21..27 "문단"
+    Separator@27..28 " "
+    DelimiterClose@28..30 "=="
+  Newline@30..31 "\n"
 <div class="wiki-paragraph"><div class="wiki-macro-toc" id="toc"><details open><summary></summary><div class="toc-indent"><span class="toc-item"><a href="#s-1">1</a>. 문단</span></div></details></div>
 </div>
 <h2 class="wiki-heading"><a id="s-1" href="#toc">1.</a> <span id="문단">문단</span></h2>

@@ -1,25 +1,16 @@
-근거: 미확인 | 원문: 2줄 | 의미론: 22줄 | 렌더링: 0줄 | #!if 거짓이면 내용 없음
+근거: 미확인 | 원문: 2줄 | 의미론: 13줄 | 렌더링: 0줄 | #!if 거짓이면 내용 없음
 {{{#!if null
 숨김}}}
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Conditional(
-                    Conditional {
-                        expression: "null",
-                        blocks: [
-                            Paragraph(
-                                [
-                                    Text(
-                                        "숨김",
-                                    ),
-                                ],
-                            ),
-                        ],
-                    },
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..23
+  Paragraph@0..22
+    Conditional@0..22
+      DelimiterOpen@0..3 "{{{"
+      Directive@3..7 "#!if"
+      Separator@7..8 " "
+      ConditionExpression@8..12
+        Text@8..12 "null"
+      Newline@12..13 "\n"
+      Paragraph@13..19
+        Text@13..19 "숨김"
+      DelimiterClose@19..22 "}}}"
+  Newline@22..23 "\n"

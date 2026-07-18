@@ -1,55 +1,26 @@
-근거: 미확인 | 원문: 3줄 | 의미론: 48줄 | 렌더링: 4줄 | 셀 안 리스트
+근거: 미확인 | 원문: 3줄 | 의미론: 19줄 | 렌더링: 4줄 | 셀 안 리스트
 ||<-1>
  * 리스트
 ||
-Document {
-    blocks: [
-        Table(
-            Table {
-                caption: None,
-                rows: [
-                    TableRow {
-                        cells: [
-                            TableCell {
-                                column_span: Some(
-                                    1,
-                                ),
-                                row_span: None,
-                                horizontal_alignment: None,
-                                vertical_alignment: None,
-                                attributes: [],
-                                blocks: [
-                                    Paragraph(
-                                        [],
-                                    ),
-                                    List(
-                                        List {
-                                            kind: Unordered,
-                                            items: [
-                                                ListItem {
-                                                    start_number: None,
-                                                    blocks: [
-                                                        Paragraph(
-                                                            [
-                                                                Text(
-                                                                    "리스트",
-                                                                ),
-                                                            ],
-                                                        ),
-                                                    ],
-                                                },
-                                            ],
-                                        },
-                                    ),
-                                ],
-                            },
-                        ],
-                    },
-                ],
-            },
-        ),
-    ],
-}
+Document@0..23
+  Table@0..22
+    TableRow@0..22
+      Separator@0..2 "||"
+      TableCell@2..19
+        DelimiterOpen@2..3 "<"
+        CellOption@3..5 "-1"
+        DelimiterClose@5..6 ">"
+        Paragraph@6..6
+        Newline@6..7 "\n"
+        List@7..19
+          ListItem@7..19
+            IndentMarker@7..8 " "
+            ListMarker@8..9 "*"
+            Separator@9..10 " "
+            Paragraph@10..19
+              Text@10..19 "리스트"
+      Separator@19..22 "\n||"
+  Newline@22..23 "\n"
 <div class="wiki-table-wrap"><table class="wiki-table"><tbody><tr class="wiki-table-tr"><td colspan="1" style=""><div class="wiki-paragraph"></div>
 <ul class="wiki-list"><li><div class="wiki-paragraph">리스트</div>
 </li></ul>

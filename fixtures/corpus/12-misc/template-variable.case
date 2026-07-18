@@ -1,17 +1,10 @@
-근거: 도움말서술 | 원문: 1줄 | 의미론: 14줄 | 렌더링: 1줄 | 틀 매개변수
+근거: 도움말서술 | 원문: 1줄 | 의미론: 7줄 | 렌더링: 1줄 | 틀 매개변수
 @매개변수@
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Variable(
-                    Variable {
-                        name: "매개변수",
-                        default: None,
-                    },
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..15
+  Paragraph@0..14
+    TemplateVariable@0..14
+      DelimiterOpen@0..1 "@"
+      VariableName@1..13 "매개변수"
+      DelimiterClose@13..14 "@"
+  Newline@14..15 "\n"
 <div class="wiki-paragraph"></div>

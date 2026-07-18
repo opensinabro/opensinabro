@@ -1,92 +1,35 @@
-근거: 도움말서술 | 원문: 1줄 | 의미론: 88줄 | 렌더링: 2줄 | 도움말: bgcolor > colbgcolor > rowbgcolor > tablebgcolor 우선순위
+근거: 도움말서술 | 원문: 1줄 | 의미론: 31줄 | 렌더링: 2줄 | 도움말: bgcolor > colbgcolor > rowbgcolor > tablebgcolor 우선순위
 ||<tablebgcolor=#111111><rowbgcolor=#222222><colbgcolor=#333333><bgcolor=#444444> 우선순위 ||
-Document {
-    blocks: [
-        Table(
-            Table {
-                caption: None,
-                rows: [
-                    TableRow {
-                        cells: [
-                            TableCell {
-                                column_span: None,
-                                row_span: None,
-                                horizontal_alignment: Some(
-                                    Center,
-                                ),
-                                vertical_alignment: None,
-                                attributes: [
-                                    TableAttribute {
-                                        scope: Table,
-                                        name: "bgcolor",
-                                        value: Some(
-                                            Template(
-                                                [
-                                                    Text(
-                                                        "#111111",
-                                                    ),
-                                                ],
-                                            ),
-                                        ),
-                                    },
-                                    TableAttribute {
-                                        scope: Row,
-                                        name: "bgcolor",
-                                        value: Some(
-                                            Template(
-                                                [
-                                                    Text(
-                                                        "#222222",
-                                                    ),
-                                                ],
-                                            ),
-                                        ),
-                                    },
-                                    TableAttribute {
-                                        scope: Column {
-                                            columns: 1,
-                                        },
-                                        name: "bgcolor",
-                                        value: Some(
-                                            Template(
-                                                [
-                                                    Text(
-                                                        "#333333",
-                                                    ),
-                                                ],
-                                            ),
-                                        ),
-                                    },
-                                    TableAttribute {
-                                        scope: Cell,
-                                        name: "bgcolor",
-                                        value: Some(
-                                            Template(
-                                                [
-                                                    Text(
-                                                        "#444444",
-                                                    ),
-                                                ],
-                                            ),
-                                        ),
-                                    },
-                                ],
-                                blocks: [
-                                    Paragraph(
-                                        [
-                                            Text(
-                                                "우선순위",
-                                            ),
-                                        ],
-                                    ),
-                                ],
-                            },
-                        ],
-                    },
-                ],
-            },
-        ),
-    ],
-}
+Document@0..98
+  Table@0..97
+    TableRow@0..97
+      Separator@0..2 "||"
+      TableCell@2..95
+        DelimiterOpen@2..3 "<"
+        CellOptionName@3..15 "tablebgcolor"
+        Separator@15..16 "="
+        CellOptionValue@16..23 "#111111"
+        DelimiterClose@23..24 ">"
+        DelimiterOpen@24..25 "<"
+        CellOptionName@25..35 "rowbgcolor"
+        Separator@35..36 "="
+        CellOptionValue@36..43 "#222222"
+        DelimiterClose@43..44 ">"
+        DelimiterOpen@44..45 "<"
+        CellOptionName@45..55 "colbgcolor"
+        Separator@55..56 "="
+        CellOptionValue@56..63 "#333333"
+        DelimiterClose@63..64 ">"
+        DelimiterOpen@64..65 "<"
+        CellOptionName@65..72 "bgcolor"
+        Separator@72..73 "="
+        CellOptionValue@73..80 "#444444"
+        DelimiterClose@80..81 ">"
+        AlignmentSpace@81..82 " "
+        Paragraph@82..94
+          Text@82..94 "우선순위"
+        AlignmentSpace@94..95 " "
+      Separator@95..97 "||"
+  Newline@97..98 "\n"
 <div class="wiki-table-wrap"><table class="wiki-table" style=" background-color: #111111;"><tbody><tr class="wiki-table-tr" style=" background-color: #222222;"><td style="text-align: center; background-color: #444444;"><div class="wiki-paragraph">우선순위</div>
 </td></tr></tbody></table></div>

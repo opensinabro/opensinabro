@@ -1,18 +1,12 @@
-근거: 도움말예제 | 원문: 2줄 | 의미론: 14줄 | 렌더링: 1줄 | 주석
+근거: 도움말예제 | 원문: 2줄 | 의미론: 8줄 | 렌더링: 1줄 | 주석
 ## 주석
 본문
-Document {
-    blocks: [
-        Comment(
-            " 주석",
-        ),
-        Paragraph(
-            [
-                Text(
-                    "본문",
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..17
+  Comment@0..9
+    Marker@0..2 "##"
+    Text@2..9 " 주석"
+  Newline@9..10 "\n"
+  Paragraph@10..16
+    Text@10..16 "본문"
+  Newline@16..17 "\n"
 <div class="wiki-paragraph">본문</div>

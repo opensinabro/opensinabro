@@ -1,44 +1,26 @@
-근거: 도움말예제 | 원문: 3줄 | 의미론: 37줄 | 렌더링: 6줄 | 중첩 인용문
+근거: 도움말예제 | 원문: 3줄 | 의미론: 19줄 | 렌더링: 6줄 | 중첩 인용문
 >인용문1
 >>인용문2
 >>>인용문3
-Document {
-    blocks: [
-        Quote(
-            [
-                Paragraph(
-                    [
-                        Text(
-                            "인용문1",
-                        ),
-                    ],
-                ),
-                Quote(
-                    [
-                        Paragraph(
-                            [
-                                Text(
-                                    "인용문2",
-                                ),
-                            ],
-                        ),
-                        Quote(
-                            [
-                                Paragraph(
-                                    [
-                                        Text(
-                                            "인용문3",
-                                        ),
-                                    ],
-                                ),
-                            ],
-                        ),
-                    ],
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..39
+  Quote@0..39
+    Paragraph@0..11
+      QuoteMarker@0..1 ">"
+      Text@1..11 "인용문1"
+    Newline@11..12 "\n"
+    Quote@12..39
+      Paragraph@12..24
+        QuoteMarker@12..13 ">"
+        QuoteMarker@13..14 ">"
+        Text@14..24 "인용문2"
+      Newline@24..25 "\n"
+      Quote@25..39
+        Paragraph@25..38
+          QuoteMarker@25..26 ">"
+          QuoteMarker@26..27 ">"
+          QuoteMarker@27..28 ">"
+          Text@28..38 "인용문3"
+        Newline@38..39 "\n"
 <blockquote class="wiki-quote"><div class="wiki-paragraph">인용문1</div>
 <blockquote class="wiki-quote"><div class="wiki-paragraph">인용문2</div>
 <blockquote class="wiki-quote"><div class="wiki-paragraph">인용문3</div>

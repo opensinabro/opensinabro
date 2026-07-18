@@ -1,107 +1,44 @@
-근거: 도움말서술 | 원문: 2줄 | 의미론: 101줄 | 렌더링: 5줄 | 표 안의 표
+근거: 도움말서술 | 원문: 2줄 | 의미론: 38줄 | 렌더링: 5줄 | 표 안의 표
 ||<-4> {{{#!wiki
 ||<tablewidth=100%> 3 || 셋 ||}}} ||
-Document {
-    blocks: [
-        Table(
-            Table {
-                caption: None,
-                rows: [
-                    TableRow {
-                        cells: [
-                            TableCell {
-                                column_span: Some(
-                                    4,
-                                ),
-                                row_span: None,
-                                horizontal_alignment: Some(
-                                    Center,
-                                ),
-                                vertical_alignment: None,
-                                attributes: [],
-                                blocks: [
-                                    Paragraph(
-                                        [
-                                            WikiStyle(
-                                                WikiStyle {
-                                                    style: None,
-                                                    dark_style: None,
-                                                    blocks: [
-                                                        Table(
-                                                            Table {
-                                                                caption: None,
-                                                                rows: [
-                                                                    TableRow {
-                                                                        cells: [
-                                                                            TableCell {
-                                                                                column_span: None,
-                                                                                row_span: None,
-                                                                                horizontal_alignment: Some(
-                                                                                    Center,
-                                                                                ),
-                                                                                vertical_alignment: None,
-                                                                                attributes: [
-                                                                                    TableAttribute {
-                                                                                        scope: Table,
-                                                                                        name: "width",
-                                                                                        value: Some(
-                                                                                            Template(
-                                                                                                [
-                                                                                                    Text(
-                                                                                                        "100%",
-                                                                                                    ),
-                                                                                                ],
-                                                                                            ),
-                                                                                        ),
-                                                                                    },
-                                                                                ],
-                                                                                blocks: [
-                                                                                    Paragraph(
-                                                                                        [
-                                                                                            Text(
-                                                                                                "3",
-                                                                                            ),
-                                                                                        ],
-                                                                                    ),
-                                                                                ],
-                                                                            },
-                                                                            TableCell {
-                                                                                column_span: None,
-                                                                                row_span: None,
-                                                                                horizontal_alignment: Some(
-                                                                                    Center,
-                                                                                ),
-                                                                                vertical_alignment: None,
-                                                                                attributes: [],
-                                                                                blocks: [
-                                                                                    Paragraph(
-                                                                                        [
-                                                                                            Text(
-                                                                                                "셋",
-                                                                                            ),
-                                                                                        ],
-                                                                                    ),
-                                                                                ],
-                                                                            },
-                                                                        ],
-                                                                    },
-                                                                ],
-                                                            },
-                                                        ),
-                                                    ],
-                                                },
-                                            ),
-                                        ],
-                                    ),
-                                ],
-                            },
-                        ],
-                    },
-                ],
-            },
-        ),
-    ],
-}
+Document@0..55
+  Table@0..54
+    TableRow@0..54
+      Separator@0..2 "||"
+      TableCell@2..52
+        DelimiterOpen@2..3 "<"
+        CellOption@3..5 "-4"
+        DelimiterClose@5..6 ">"
+        AlignmentSpace@6..7 " "
+        Paragraph@7..51
+          WikiStyle@7..51
+            DelimiterOpen@7..10 "{{{"
+            Directive@10..16 "#!wiki"
+            Newline@16..17 "\n"
+            Table@17..48
+              TableRow@17..48
+                Separator@17..19 "||"
+                TableCell@19..39
+                  DelimiterOpen@19..20 "<"
+                  CellOptionName@20..30 "tablewidth"
+                  Separator@30..31 "="
+                  CellOptionValue@31..35 "100%"
+                  DelimiterClose@35..36 ">"
+                  AlignmentSpace@36..37 " "
+                  Paragraph@37..38
+                    Text@37..38 "3"
+                  AlignmentSpace@38..39 " "
+                Separator@39..41 "||"
+                TableCell@41..46
+                  AlignmentSpace@41..42 " "
+                  Paragraph@42..45
+                    Text@42..45 "셋"
+                  AlignmentSpace@45..46 " "
+                Separator@46..48 "||"
+            DelimiterClose@48..51 "}}}"
+        AlignmentSpace@51..52 " "
+      Separator@52..54 "||"
+  Newline@54..55 "\n"
 <div class="wiki-table-wrap"><table class="wiki-table"><tbody><tr class="wiki-table-tr"><td colspan="4" style="text-align: center;"><div class="wiki-paragraph"><div><div class="wiki-table-wrap" style="width: 100%;"><table class="wiki-table" style=" width: 100%;"><tbody><tr class="wiki-table-tr"><td style="text-align: center;"><div class="wiki-paragraph">3</div>
 </td><td style="text-align: center;"><div class="wiki-paragraph">셋</div>
 </td></tr></tbody></table></div>

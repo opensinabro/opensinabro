@@ -1,51 +1,20 @@
-근거: 도움말서술 | 원문: 1줄 | 의미론: 47줄 | 렌더링: 2줄 | 행 배경색
+근거: 도움말서술 | 원문: 1줄 | 의미론: 16줄 | 렌더링: 2줄 | 행 배경색
 ||<rowbgcolor=#ff0000> 행 ||
-Document {
-    blocks: [
-        Table(
-            Table {
-                caption: None,
-                rows: [
-                    TableRow {
-                        cells: [
-                            TableCell {
-                                column_span: None,
-                                row_span: None,
-                                horizontal_alignment: Some(
-                                    Center,
-                                ),
-                                vertical_alignment: None,
-                                attributes: [
-                                    TableAttribute {
-                                        scope: Row,
-                                        name: "bgcolor",
-                                        value: Some(
-                                            Template(
-                                                [
-                                                    Text(
-                                                        "#ff0000",
-                                                    ),
-                                                ],
-                                            ),
-                                        ),
-                                    },
-                                ],
-                                blocks: [
-                                    Paragraph(
-                                        [
-                                            Text(
-                                                "행",
-                                            ),
-                                        ],
-                                    ),
-                                ],
-                            },
-                        ],
-                    },
-                ],
-            },
-        ),
-    ],
-}
+Document@0..30
+  Table@0..29
+    TableRow@0..29
+      Separator@0..2 "||"
+      TableCell@2..27
+        DelimiterOpen@2..3 "<"
+        CellOptionName@3..13 "rowbgcolor"
+        Separator@13..14 "="
+        CellOptionValue@14..21 "#ff0000"
+        DelimiterClose@21..22 ">"
+        AlignmentSpace@22..23 " "
+        Paragraph@23..26
+          Text@23..26 "행"
+        AlignmentSpace@26..27 " "
+      Separator@27..29 "||"
+  Newline@29..30 "\n"
 <div class="wiki-table-wrap"><table class="wiki-table"><tbody><tr class="wiki-table-tr" style=" background-color: #ff0000;"><td style="text-align: center;"><div class="wiki-paragraph">행</div>
 </td></tr></tbody></table></div>

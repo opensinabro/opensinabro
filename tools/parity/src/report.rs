@@ -80,33 +80,33 @@ fn report_section(title: &str, counts: &BTreeMap<String, usize>) {
 }
 
 fn walk_document(document: &Document, findings: &mut Findings) {
-    for block in &document.blocks {
+    walk_blocks(&document.blocks(), findings);
+}
+
+fn walk_blocks(blocks: &[Block], findings: &mut Findings) {
+    for block in blocks {
         walk_block(block, findings);
     }
 }
 
 fn walk_block(block: &Block, findings: &mut Findings) {
     match block {
-        Block::Heading(heading) => walk_inlines(&heading.content, findings),
-        Block::Paragraph(inlines) => walk_inlines(inlines, findings),
-        Block::Quote(blocks) | Block::Indent(blocks) => {
-            blocks.iter().for_each(|block| walk_block(block, findings))
-        }
-        Block::List(list) => list.items.iter().for_each(|item| {
-            item.blocks
-                .iter()
-                .for_each(|block| walk_block(block, findings))
-        }),
+        Block::Heading(heading) => walk_inlines(&heading.content(), findings),
+        Block::Paragraph(paragraph) => walk_inlines(&paragraph.inlines(), findings),
+        Block::Quote(quote) => walk_blocks(&quote.blocks(), findings),
+        Block::Indent(indent) => walk_blocks(&indent.blocks(), findings),
+        Block::List(list) => list
+            .items()
+            .iter()
+            .for_each(|item| walk_blocks(&item.blocks(), findings)),
         Block::Table(table) => {
-            if let Some(caption) = &table.caption {
+            if let Some(caption) = &table.caption() {
                 walk_inlines(caption, findings);
             }
-            table.rows.iter().for_each(|row| {
-                row.cells.iter().for_each(|cell| {
-                    cell.blocks
-                        .iter()
-                        .for_each(|block| walk_block(block, findings))
-                })
+            table.rows().iter().for_each(|row| {
+                row.cells
+                    .iter()
+                    .for_each(|cell| walk_blocks(&cell.blocks, findings))
             })
         }
         Block::Comment(_) | Block::Redirect(_) | Block::HorizontalRule => {}
@@ -117,13 +117,14 @@ fn walk_inlines(inlines: &[Inline], findings: &mut Findings) {
     for inline in inlines {
         match inline {
             Inline::Macro(macro_call) => {
-                let name = macro_call.name.to_ascii_lowercase();
+                let raw = macro_call.name();
+                let name = raw.to_ascii_lowercase();
                 if !KNOWN_MACROS.contains(&name.as_str()) {
-                    *findings.macros.entry(macro_call.name.clone()).or_default() += 1;
+                    *findings.macros.entry(raw).or_default() += 1;
                 }
             }
             Inline::Image(image) => {
-                for option in &image.options {
+                for option in &image.options() {
                     let name = option.name.to_ascii_lowercase();
                     if !KNOWN_IMAGE_OPTIONS.contains(&name.as_str()) {
                         *findings
@@ -133,31 +134,22 @@ fn walk_inlines(inlines: &[Inline], findings: &mut Findings) {
                     }
                 }
             }
-            Inline::Bold(content)
-            | Inline::Italic(content)
-            | Inline::Strikethrough(content)
-            | Inline::Underline(content)
-            | Inline::Superscript(content)
-            | Inline::Subscript(content) => walk_inlines(content, findings),
-            Inline::Colored(colored) => walk_inlines(&colored.content, findings),
-            Inline::Sized(sized) => walk_inlines(&sized.content, findings),
-            Inline::WikiStyle(wiki_style) => wiki_style
-                .blocks
-                .iter()
-                .for_each(|block| walk_block(block, findings)),
+            Inline::Bold(styled) => walk_inlines(&styled.content(), findings),
+            Inline::Italic(styled) => walk_inlines(&styled.content(), findings),
+            Inline::Strikethrough(styled) => walk_inlines(&styled.content(), findings),
+            Inline::Underline(styled) => walk_inlines(&styled.content(), findings),
+            Inline::Superscript(styled) => walk_inlines(&styled.content(), findings),
+            Inline::Subscript(styled) => walk_inlines(&styled.content(), findings),
+            Inline::Colored(colored) => walk_inlines(&colored.content(), findings),
+            Inline::Sized(sized) => walk_inlines(&sized.content(), findings),
+            Inline::WikiStyle(wiki_style) => walk_blocks(&wiki_style.blocks(), findings),
             // 접기 문구는 글자라 매크로도 옵션도 들어 있지 않다.
-            Inline::Folding(folding) => folding
-                .blocks
-                .iter()
-                .for_each(|block| walk_block(block, findings)),
-            Inline::Conditional(conditional) => conditional
-                .blocks
-                .iter()
-                .for_each(|block| walk_block(block, findings)),
+            Inline::Folding(folding) => walk_blocks(&folding.blocks(), findings),
+            Inline::Conditional(conditional) => walk_blocks(&conditional.blocks(), findings),
             Inline::CodeBlock(_) => {}
-            Inline::Footnote(footnote) => walk_inlines(&footnote.content, findings),
+            Inline::Footnote(footnote) => walk_inlines(&footnote.content(), findings),
             Inline::Link(link) => {
-                if let Some(display) = &link.display {
+                if let Some(display) = &link.display() {
                     walk_inlines(display, findings)
                 }
             }

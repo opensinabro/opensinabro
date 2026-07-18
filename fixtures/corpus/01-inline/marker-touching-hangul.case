@@ -1,24 +1,12 @@
-근거: 미확인 | 원문: 1줄 | 의미론: 21줄 | 렌더링: 1줄 | 마커가 한글에 바로 붙음
+근거: 미확인 | 원문: 1줄 | 의미론: 9줄 | 렌더링: 1줄 | 마커가 한글에 바로 붙음
 앞'''굵게'''뒤
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Text(
-                    "앞",
-                ),
-                Bold(
-                    [
-                        Text(
-                            "굵게",
-                        ),
-                    ],
-                ),
-                Text(
-                    "뒤",
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..19
+  Paragraph@0..18
+    Text@0..3 "앞"
+    Bold@3..15
+      DelimiterOpen@3..6 "'''"
+      Text@6..12 "굵게"
+      DelimiterClose@12..15 "'''"
+    Text@15..18 "뒤"
+  Newline@18..19 "\n"
 <div class="wiki-paragraph">앞<strong>굵게</strong>뒤</div>

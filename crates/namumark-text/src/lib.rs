@@ -648,7 +648,7 @@ pub fn cell_shape(source: &str) -> CellShape<'_> {
         if token.is_empty() || token.contains('<') {
             break;
         }
-        let Some(option) = classify_cell_option(token) else {
+        let Some(option) = cell_option(token) else {
             break;
         };
         options.push(option);
@@ -693,7 +693,8 @@ pub fn cell_shape(source: &str) -> CellShape<'_> {
     }
 }
 
-fn classify_cell_option(token: &str) -> Option<CellOption<'_>> {
+/// `<...>` 안쪽 한 옵션 토큰을 분류한다(여닫는 꺾쇠 제외). 의미 모델로의 매핑은 소비 측이 한다.
+pub fn cell_option(token: &str) -> Option<CellOption<'_>> {
     match token {
         "(" => return Some(CellOption::Alignment(CellAlignment::Left)),
         ":" => return Some(CellOption::Alignment(CellAlignment::Center)),

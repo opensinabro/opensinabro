@@ -1,34 +1,17 @@
-근거: 도움말서술 | 원문: 1줄 | 의미론: 31줄 | 렌더링: 1줄 | 도움말: style= 뒤 줄바꿈을 생략하면 정상 출력되지 않음
+근거: 도움말서술 | 원문: 1줄 | 의미론: 14줄 | 렌더링: 1줄 | 도움말: style= 뒤 줄바꿈을 생략하면 정상 출력되지 않음
 {{{#!wiki style="color:red" 내용}}}
-Document {
-    blocks: [
-        Paragraph(
-            [
-                WikiStyle(
-                    WikiStyle {
-                        style: Some(
-                            Template(
-                                [
-                                    Text(
-                                        "color:red",
-                                    ),
-                                ],
-                            ),
-                        ),
-                        dark_style: None,
-                        blocks: [
-                            Paragraph(
-                                [
-                                    Text(
-                                        "내용",
-                                    ),
-                                ],
-                            ),
-                        ],
-                    },
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..38
+  Paragraph@0..37
+    WikiStyle@0..37
+      DelimiterOpen@0..3 "{{{"
+      Directive@3..9 "#!wiki"
+      Separator@9..10 " "
+      AttributeName@10..15 "style"
+      Separator@15..16 "="
+      AttributeValue@16..27 "\"color:red\""
+      Separator@27..28 " "
+      Paragraph@28..34
+        Text@28..34 "내용"
+      DelimiterClose@34..37 "}}}"
+  Newline@37..38 "\n"
 <div class="wiki-paragraph"><div style="color: red">내용</div></div>

@@ -1,25 +1,13 @@
-근거: 도움말서술 | 원문: 1줄 | 의미론: 22줄 | 렌더링: 1줄 | 도움말: 유효하지 않은 날짜는 invalid date
+근거: 도움말서술 | 원문: 1줄 | 의미론: 10줄 | 렌더링: 1줄 | 도움말: 유효하지 않은 날짜는 invalid date
 [age(2000-13-01)]
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Macro(
-                    Macro {
-                        name: "age",
-                        argument: Some(
-                            Template(
-                                [
-                                    Text(
-                                        "2000-13-01",
-                                    ),
-                                ],
-                            ),
-                        ),
-                    },
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..18
+  Paragraph@0..17
+    MacroCall@0..17
+      DelimiterOpen@0..1 "["
+      MacroName@1..4 "age"
+      Separator@4..5 "("
+      MacroArgument@5..15 "2000-13-01"
+      Separator@15..16 ")"
+      DelimiterClose@16..17 "]"
+  Newline@17..18 "\n"
 <div class="wiki-paragraph">[age(2000-13-01)]</div>

@@ -1,72 +1,30 @@
-근거: 도움말서술 | 원문: 3줄 | 의미론: 65줄 | 렌더링: 5줄 | 도움말: 표 사이에 빈 줄이 있어야 별개 표
+근거: 도움말서술 | 원문: 3줄 | 의미론: 23줄 | 렌더링: 5줄 | 도움말: 표 사이에 빈 줄이 있어야 별개 표
 || 1 ||
 
 || 2 ||
-Document {
-    blocks: [
-        Table(
-            Table {
-                caption: None,
-                rows: [
-                    TableRow {
-                        cells: [
-                            TableCell {
-                                column_span: None,
-                                row_span: None,
-                                horizontal_alignment: Some(
-                                    Center,
-                                ),
-                                vertical_alignment: None,
-                                attributes: [],
-                                blocks: [
-                                    Paragraph(
-                                        [
-                                            Text(
-                                                "1",
-                                            ),
-                                        ],
-                                    ),
-                                ],
-                            },
-                        ],
-                    },
-                ],
-            },
-        ),
-        Paragraph(
-            [],
-        ),
-        Table(
-            Table {
-                caption: None,
-                rows: [
-                    TableRow {
-                        cells: [
-                            TableCell {
-                                column_span: None,
-                                row_span: None,
-                                horizontal_alignment: Some(
-                                    Center,
-                                ),
-                                vertical_alignment: None,
-                                attributes: [],
-                                blocks: [
-                                    Paragraph(
-                                        [
-                                            Text(
-                                                "2",
-                                            ),
-                                        ],
-                                    ),
-                                ],
-                            },
-                        ],
-                    },
-                ],
-            },
-        ),
-    ],
-}
+Document@0..17
+  Table@0..7
+    TableRow@0..7
+      Separator@0..2 "||"
+      TableCell@2..5
+        AlignmentSpace@2..3 " "
+        Paragraph@3..4
+          Text@3..4 "1"
+        AlignmentSpace@4..5 " "
+      Separator@5..7 "||"
+  Newline@7..8 "\n"
+  Paragraph@8..8
+  Newline@8..9 "\n"
+  Table@9..16
+    TableRow@9..16
+      Separator@9..11 "||"
+      TableCell@11..14
+        AlignmentSpace@11..12 " "
+        Paragraph@12..13
+          Text@12..13 "2"
+        AlignmentSpace@13..14 " "
+      Separator@14..16 "||"
+  Newline@16..17 "\n"
 <div class="wiki-table-wrap"><table class="wiki-table"><tbody><tr class="wiki-table-tr"><td style="text-align: center;"><div class="wiki-paragraph">1</div>
 </td></tr></tbody></table></div>
 <div class="wiki-paragraph"></div>

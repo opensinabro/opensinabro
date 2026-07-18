@@ -1,51 +1,20 @@
-근거: 도움말서술 | 원문: 1줄 | 의미론: 47줄 | 렌더링: 2줄 | 표 클래스 — 도움말에 없는 옵션
+근거: 도움말서술 | 원문: 1줄 | 의미론: 16줄 | 렌더링: 2줄 | 표 클래스 — 도움말에 없는 옵션
 ||<tableclass=우주> 표 ||
-Document {
-    blocks: [
-        Table(
-            Table {
-                caption: None,
-                rows: [
-                    TableRow {
-                        cells: [
-                            TableCell {
-                                column_span: None,
-                                row_span: None,
-                                horizontal_alignment: Some(
-                                    Center,
-                                ),
-                                vertical_alignment: None,
-                                attributes: [
-                                    TableAttribute {
-                                        scope: Table,
-                                        name: "class",
-                                        value: Some(
-                                            Template(
-                                                [
-                                                    Text(
-                                                        "우주",
-                                                    ),
-                                                ],
-                                            ),
-                                        ),
-                                    },
-                                ],
-                                blocks: [
-                                    Paragraph(
-                                        [
-                                            Text(
-                                                "표",
-                                            ),
-                                        ],
-                                    ),
-                                ],
-                            },
-                        ],
-                    },
-                ],
-            },
-        ),
-    ],
-}
+Document@0..29
+  Table@0..28
+    TableRow@0..28
+      Separator@0..2 "||"
+      TableCell@2..26
+        DelimiterOpen@2..3 "<"
+        CellOptionName@3..13 "tableclass"
+        Separator@13..14 "="
+        CellOptionValue@14..20 "우주"
+        DelimiterClose@20..21 ">"
+        AlignmentSpace@21..22 " "
+        Paragraph@22..25
+          Text@22..25 "표"
+        AlignmentSpace@25..26 " "
+      Separator@26..28 "||"
+  Newline@28..29 "\n"
 <div class="wiki-table-wrap"><table class="wiki-table"><tbody><tr class="wiki-table-tr"><td style="text-align: center;"><div class="wiki-paragraph">표</div>
 </td></tr></tbody></table></div>

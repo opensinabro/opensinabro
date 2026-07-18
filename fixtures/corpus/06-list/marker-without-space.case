@@ -1,27 +1,12 @@
-근거: 미확인 | 원문: 1줄 | 의미론: 23줄 | 렌더링: 2줄 | 마커와 내용이 붙음
+근거: 미확인 | 원문: 1줄 | 의미론: 8줄 | 렌더링: 2줄 | 마커와 내용이 붙음
  *붙은 내용
-Document {
-    blocks: [
-        List(
-            List {
-                kind: Unordered,
-                items: [
-                    ListItem {
-                        start_number: None,
-                        blocks: [
-                            Paragraph(
-                                [
-                                    Text(
-                                        "붙은 내용",
-                                    ),
-                                ],
-                            ),
-                        ],
-                    },
-                ],
-            },
-        ),
-    ],
-}
+Document@0..16
+  List@0..16
+    ListItem@0..16
+      IndentMarker@0..1 " "
+      ListMarker@1..2 "*"
+      Paragraph@2..15
+        Text@2..15 "붙은 내용"
+      Newline@15..16 "\n"
 <ul class="wiki-list"><li><div class="wiki-paragraph">붙은 내용</div>
 </li></ul>

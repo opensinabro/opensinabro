@@ -1,6 +1,7 @@
-use namumark_ast::{
-    Block, CodeBlock, Footnote, Heading, Inline, Link, List, ListItem, ListKind, Macro,
-};
+mod model;
+
+use model::{Block, CodeBlock, Footnote, Heading, Inline, Link, List, ListItem, Macro};
+use namumark_ast::ListKind;
 use namumark_parser::parse;
 
 fn text(content: &str) -> Inline {
@@ -15,7 +16,7 @@ fn paragraph(inlines: Vec<Inline>) -> Block {
 fn heading_levels() {
     let document = parse("= 개요 =\n====== 소단락 ======");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![
             Block::Heading(Heading {
                 level: 1,
@@ -35,7 +36,7 @@ fn heading_levels() {
 fn folded_heading() {
     let document = parse("==# 접힌 문단 #==");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![Block::Heading(Heading {
             level: 2,
             folded: true,
@@ -47,14 +48,14 @@ fn folded_heading() {
 #[test]
 fn invalid_heading_is_paragraph() {
     let document = parse("=공백없음=");
-    assert_eq!(document.blocks, vec![paragraph(vec![text("=공백없음=")])]);
+    assert_eq!(model::of(&document), vec![paragraph(vec![text("=공백없음=")])]);
 }
 
 #[test]
 fn bold_and_nested_italic() {
     let document = parse("'''굵게 ''기울임'' 굵게'''");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![paragraph(vec![Inline::Bold(vec![
             text("굵게 "),
             Inline::Italic(vec![text("기울임")]),
@@ -67,7 +68,7 @@ fn bold_and_nested_italic() {
 fn strikethrough_markers() {
     let document = parse("~~물결~~ --대시--");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![paragraph(vec![
             Inline::Strikethrough(vec![text("물결")]),
             text(" "),
@@ -80,7 +81,7 @@ fn strikethrough_markers() {
 fn underline_superscript_subscript() {
     let document = parse("__밑줄__ ^^위^^ ,,아래,,");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![paragraph(vec![
             Inline::Underline(vec![text("밑줄")]),
             text(" "),
@@ -95,7 +96,7 @@ fn underline_superscript_subscript() {
 fn backslash_escapes_markup() {
     let document = parse(r"\[\[링크 아님\]\]");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![paragraph(vec![text("[[링크 아님]]")])]
     );
 }
@@ -104,7 +105,7 @@ fn backslash_escapes_markup() {
 fn inline_literal() {
     let document = parse("앞 {{{'''그대로'''}}} 뒤");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![paragraph(vec![
             text("앞 "),
             Inline::Literal("'''그대로'''".to_string()),
@@ -117,7 +118,7 @@ fn inline_literal() {
 fn code_block_with_language() {
     let document = parse("{{{#!syntax rust\nfn main() {}\n}}}");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![paragraph(vec![Inline::CodeBlock(CodeBlock {
             language: Some("rust".to_string()),
             source: "fn main() {}".to_string(),
@@ -129,7 +130,7 @@ fn code_block_with_language() {
 fn plain_multiline_literal_block() {
     let document = parse("{{{\n여러 줄\n그대로\n}}}");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![paragraph(vec![Inline::CodeBlock(CodeBlock {
             language: None,
             source: "여러 줄\n그대로".to_string(),
@@ -141,7 +142,7 @@ fn plain_multiline_literal_block() {
 fn links() {
     let document = parse("[[대문]] [[대문|첫 화면]] [[https://example.com|예시]]");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![paragraph(vec![
             Inline::Link(Link {
                 anchor: None,
@@ -168,7 +169,7 @@ fn links() {
 fn footnotes() {
     let document = parse("본문[* 각주 내용][*A 이름 있는 각주][*A]");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![paragraph(vec![
             text("본문"),
             Inline::Footnote(Footnote {
@@ -191,7 +192,7 @@ fn footnotes() {
 fn footnote_containing_link() {
     let document = parse("본문[* [[문서]] 참고]");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![paragraph(vec![
             text("본문"),
             Inline::Footnote(Footnote {
@@ -213,7 +214,7 @@ fn footnote_containing_link() {
 fn macros() {
     let document = parse("[br] [age(2000-01-01)] [각주]");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![paragraph(vec![
             Inline::Macro(Macro {
                 name: "br".to_string(),
@@ -237,7 +238,7 @@ fn macros() {
 fn nested_quote() {
     let document = parse(">인용\n>>중첩");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![Block::Quote(vec![
             paragraph(vec![text("인용")]),
             Block::Quote(vec![paragraph(vec![text("중첩")])]),
@@ -249,7 +250,7 @@ fn nested_quote() {
 fn horizontal_rule_comment_redirect() {
     let document = parse("#redirect 대문\n## 주석\n----");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![
             Block::Redirect("대문".into()),
             Block::Comment(" 주석".to_string()),
@@ -262,7 +263,7 @@ fn horizontal_rule_comment_redirect() {
 fn unordered_list_with_nesting() {
     let document = parse(" * 항목1\n  * 하위\n * 항목2");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![Block::List(List {
             kind: ListKind::Unordered,
             items: vec![
@@ -292,7 +293,7 @@ fn unordered_list_with_nesting() {
 fn ordered_list_kinds_split() {
     let document = parse(" 1. 첫째\n a. 알파벳");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![
             Block::List(List {
                 kind: ListKind::Decimal,
@@ -316,7 +317,7 @@ fn ordered_list_kinds_split() {
 fn indented_paragraph() {
     let document = parse(" 들여쓰기 문단");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![Block::Indent(vec![paragraph(vec![text("들여쓰기 문단")])])]
     );
 }
@@ -326,7 +327,7 @@ fn indented_paragraph() {
 fn blank_line_is_two_line_breaks_within_one_paragraph() {
     let document = parse("첫 줄\n둘째 줄\n\n새 문단");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![paragraph(vec![
             text("첫 줄"),
             Inline::LineBreak,
@@ -344,7 +345,7 @@ fn blank_line_is_two_line_breaks_within_one_paragraph() {
 fn blank_line_after_block_leads_next_paragraph() {
     let document = parse(" * 항목\n\n문단");
     assert_eq!(
-        document.blocks.last(),
+        model::of(&document).last(),
         Some(&paragraph(vec![Inline::LineBreak, text("문단")]))
     );
 }
@@ -355,7 +356,7 @@ fn blank_line_after_block_leads_next_paragraph() {
 fn blank_line_before_heading_keeps_one_line_break() {
     let document = parse("내용.\n\n== 다음 ==");
     assert_eq!(
-        document.blocks.first(),
+        model::of(&document).first(),
         Some(&paragraph(vec![text("내용."), Inline::LineBreak]))
     );
 }
@@ -364,14 +365,14 @@ fn blank_line_before_heading_keeps_one_line_break() {
 fn unclosed_markup_is_plain_text() {
     let document = parse("'''닫히지 않음");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![paragraph(vec![text("'''닫히지 않음")])]
     );
 }
 
+use model::{Category, ColoredText, Folding, Image, SizedText, Table, TableCell, TableRow, WikiStyle};
 use namumark_ast::{
-    Category, ColoredText, Folding, HorizontalAlignment, Image, ImageOption, SizedText, Table,
-    TableAttribute, TableAttributeScope, TableCell, TableRow, VerticalAlignment, WikiStyle,
+    HorizontalAlignment, ImageOption, TableAttribute, TableAttributeScope, VerticalAlignment,
 };
 
 fn simple_cell(content: &str, alignment: HorizontalAlignment) -> TableCell {
@@ -389,7 +390,7 @@ fn simple_cell(content: &str, alignment: HorizontalAlignment) -> TableCell {
 fn simple_table() {
     let document = parse("|| A || B ||\n|| C || D ||");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![Block::Table(Table {
             caption: None,
             rows: vec![
@@ -414,7 +415,7 @@ fn simple_table() {
 fn table_alignment_by_spaces() {
     let document = parse("||왼쪽 || 오른쪽|| 가운데 ||");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![Block::Table(Table {
             caption: None,
             rows: vec![TableRow {
@@ -432,7 +433,7 @@ fn table_alignment_by_spaces() {
 fn table_caption() {
     let document = parse("|캡션| A ||");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![Block::Table(Table {
             caption: Some(vec![text("캡션")]),
             rows: vec![TableRow {
@@ -445,7 +446,8 @@ fn table_caption() {
 #[test]
 fn table_automatic_column_span() {
     let document = parse("|||| 병합 ||");
-    let Block::Table(table) = &document.blocks[0] else {
+    let blocks = model::of(&document);
+    let Block::Table(table) = &blocks[0] else {
         panic!("expected table");
     };
     assert_eq!(table.rows[0].cells[0].column_span, Some(2));
@@ -454,7 +456,8 @@ fn table_automatic_column_span() {
 #[test]
 fn table_cell_options() {
     let document = parse("||<-3><^|2><:><bgcolor=#eee><table align=center>내용||");
-    let Block::Table(table) = &document.blocks[0] else {
+    let blocks = model::of(&document);
+    let Block::Table(table) = &blocks[0] else {
         panic!("expected table");
     };
     let cell = &table.rows[0].cells[0];
@@ -483,7 +486,8 @@ fn table_cell_options() {
 #[test]
 fn table_bare_color_option() {
     let document = parse("||<#ddd> 회색 ||");
-    let Block::Table(table) = &document.blocks[0] else {
+    let blocks = model::of(&document);
+    let Block::Table(table) = &blocks[0] else {
         panic!("expected table");
     };
     let cell = &table.rows[0].cells[0];
@@ -501,7 +505,8 @@ fn table_bare_color_option() {
 #[test]
 fn table_multiline_cell() {
     let document = parse("|| 첫 줄\n둘째 줄 ||");
-    let Block::Table(table) = &document.blocks[0] else {
+    let blocks = model::of(&document);
+    let Block::Table(table) = &blocks[0] else {
         panic!("expected table");
     };
     let cell = &table.rows[0].cells[0];
@@ -521,7 +526,7 @@ fn wiki_style_block() {
     let document =
         parse("{{{#!wiki style=\"margin: 10px\" dark-style='color: white'\n'''내용'''\n}}}");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![paragraph(vec![Inline::WikiStyle(WikiStyle {
             style: Some("margin: 10px".into()),
             dark_style: Some("color: white".into()),
@@ -534,7 +539,7 @@ fn wiki_style_block() {
 fn folding_block() {
     let document = parse("{{{#!folding 펼치기\n숨은 내용\n}}}");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![paragraph(vec![Inline::Folding(Folding {
             summary: "펼치기".into(),
             blocks: vec![paragraph(vec![text("숨은 내용")])],
@@ -546,7 +551,7 @@ fn folding_block() {
 fn html_block() {
     let document = parse("{{{#!html\n<b>굵게</b>\n}}}");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![paragraph(vec![Inline::Html("<b>굵게</b>".into())])]
     );
 }
@@ -555,7 +560,7 @@ fn html_block() {
 fn inline_colored_text() {
     let document = parse("{{{#red 빨강}}} {{{#ff0000,#00ff00 듀얼}}}");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![paragraph(vec![
             Inline::Colored(ColoredText {
                 color: "red".to_string(),
@@ -576,7 +581,7 @@ fn inline_colored_text() {
 fn inline_sized_text() {
     let document = parse("{{{+3 크게}}} {{{-2 작게}}}");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![paragraph(vec![
             Inline::Sized(SizedText {
                 level: 3,
@@ -595,7 +600,7 @@ fn inline_sized_text() {
 fn invalid_color_stays_literal() {
     let document = parse("{{{#a-b 텍스트}}}");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![paragraph(vec![Inline::Literal("#a-b 텍스트".to_string())])]
     );
 }
@@ -604,7 +609,7 @@ fn invalid_color_stays_literal() {
 fn multiline_sized_block() {
     let document = parse("{{{+1\n첫 줄\n둘째 줄\n}}}");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![paragraph(vec![Inline::Sized(SizedText {
             level: 1,
             content: vec![text("첫 줄"), Inline::LineBreak, text("둘째 줄")],
@@ -618,7 +623,7 @@ fn multiline_sized_block() {
 fn multiline_colored_block_flattens_to_inline() {
     let document = parse("{{{#red\n빨강\n}}}");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![paragraph(vec![Inline::Colored(ColoredText {
             color: "red".to_string(),
             dark_color: None,
@@ -631,8 +636,9 @@ fn multiline_colored_block_flattens_to_inline() {
 #[test]
 fn brace_group_opened_in_paragraph_middle() {
     let document = parse("앞 텍스트 {{{#!wiki\n|| A ||\n}}} 뒤 텍스트");
-    assert_eq!(document.blocks.len(), 1, "{:?}", document.blocks);
-    let Block::Paragraph(inlines) = &document.blocks[0] else {
+    let blocks = model::of(&document);
+    assert_eq!(blocks.len(), 1, "{blocks:?}");
+    let Block::Paragraph(inlines) = &blocks[0] else {
         panic!("문단이어야 한다");
     };
     assert_eq!(inlines[0], text("앞 텍스트 "));
@@ -647,7 +653,7 @@ fn brace_group_opened_in_paragraph_middle() {
 fn nested_link_in_display() {
     let document = parse("[[문서|[[파일:아이콘.png|width=20]]]]");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![paragraph(vec![Inline::Link(Link {
             target: "문서".into(),
             anchor: None,
@@ -666,7 +672,7 @@ fn nested_link_in_display() {
 fn image_link_with_options() {
     let document = parse("[[파일:예시.png|width=100%&align=center]] [[file:x.png]]");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![paragraph(vec![
             Inline::Image(Image {
                 file_name: "예시.png".into(),
@@ -694,7 +700,7 @@ fn image_link_with_options() {
 fn category_link() {
     let document = parse("[[분류:음악]]");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![paragraph(vec![Inline::Category(Category {
             name: "음악".to_string(),
         })])]
@@ -705,7 +711,7 @@ fn category_link() {
 fn link_anchor_is_split() {
     let document = parse("[[1993년 한국시리즈#s-5.2|5차전]]");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![paragraph(vec![Inline::Link(Link {
             target: "1993년 한국시리즈".into(),
             anchor: Some("s-5.2".into()),
@@ -718,7 +724,7 @@ fn link_anchor_is_split() {
 fn external_url_keeps_fragment() {
     let document = parse("[[https://example.com/a#frag]]");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![paragraph(vec![Inline::Link(Link {
             target: "https://example.com/a#frag".into(),
             anchor: None,
@@ -731,7 +737,7 @@ fn external_url_keeps_fragment() {
 fn colon_escaped_file_link_is_plain_link() {
     let document = parse("[[:파일:포스터.jpg]]");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![paragraph(vec![Inline::Link(Link {
             target: "파일:포스터.jpg".into(),
             anchor: None,
@@ -744,7 +750,7 @@ fn colon_escaped_file_link_is_plain_link() {
 fn ordered_list_start_number() {
     let document = parse(" 1.#42 항목");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![Block::List(List {
             kind: ListKind::Decimal,
             items: vec![ListItem {
@@ -759,7 +765,7 @@ fn ordered_list_start_number() {
 fn list_marker_without_space() {
     let document = parse(" *항목");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![Block::List(List {
             kind: ListKind::Unordered,
             items: vec![ListItem {
@@ -776,7 +782,7 @@ fn list_marker_without_space() {
 fn literal_number_is_not_list_marker() {
     let document = parse(" 1. 하나\n 2. 둘");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![Block::List(List {
             kind: ListKind::Decimal,
             items: vec![ListItem {
@@ -797,7 +803,7 @@ fn literal_number_is_not_list_marker() {
 fn color_group_without_separator_is_a_literal() {
     let document = parse("{{{#212529}}}");
     assert_eq!(
-        document.blocks,
+        model::of(&document),
         vec![paragraph(vec![Inline::Literal("#212529".to_string())])]
     );
 }
@@ -807,11 +813,11 @@ fn color_group_without_separator_is_a_literal() {
 #[test]
 fn space_after_quote_marker_is_an_indent() {
     assert_eq!(
-        parse(">인용문").blocks,
+        model::of(&parse(">인용문")),
         vec![Block::Quote(vec![paragraph(vec![text("인용문")])])]
     );
     assert_eq!(
-        parse("> 인용문").blocks,
+        model::of(&parse("> 인용문")),
         vec![Block::Quote(vec![Block::Indent(vec![paragraph(vec![
             text("인용문")
         ])])])]
@@ -823,7 +829,7 @@ fn space_after_quote_marker_is_an_indent() {
 #[test]
 fn comment_line_leaves_no_line_break() {
     assert_eq!(
-        parse("가나다라\n## 주석\n마바사아").blocks,
+        model::of(&parse("가나다라\n## 주석\n마바사아")),
         vec![paragraph(vec![
             text("가나다라"),
             Inline::LineBreak,
@@ -837,8 +843,9 @@ fn comment_line_leaves_no_line_break() {
 #[test]
 fn folding_summary_is_plain_text() {
     let document = parse("{{{#!folding '''[ 펼치기 ]'''\n내용\n}}}");
-    let [Block::Paragraph(inlines)] = document.blocks.as_slice() else {
-        panic!("문단이어야 한다: {:?}", document.blocks);
+    let blocks = model::of(&document);
+    let [Block::Paragraph(inlines)] = blocks.as_slice() else {
+        panic!("문단이어야 한다: {blocks:?}");
     };
     let [Inline::Folding(folding)] = inlines.as_slice() else {
         panic!("접기여야 한다: {inlines:?}");

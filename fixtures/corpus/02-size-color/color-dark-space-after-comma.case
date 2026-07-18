@@ -1,14 +1,10 @@
-근거: 도움말서술 | 원문: 1줄 | 의미론: 11줄 | 렌더링: 1줄 | 쉼표 뒤 공백 — 도움말: 정상 출력되지 않음
+근거: 도움말서술 | 원문: 1줄 | 의미론: 7줄 | 렌더링: 1줄 | 쉼표 뒤 공백 — 도움말: 정상 출력되지 않음
 {{{#888, #ff0 공백}}}
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Literal(
-                    "#888, #ff0 공백",
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..24
+  Paragraph@0..23
+    Literal@0..23
+      DelimiterOpen@0..3 "{{{"
+      Text@3..20 "#888, #ff0 공백"
+      DelimiterClose@20..23 "}}}"
+  Newline@23..24 "\n"
 <div class="wiki-paragraph"><code>#888, #ff0 공백</code></div>

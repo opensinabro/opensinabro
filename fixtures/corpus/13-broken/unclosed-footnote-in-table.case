@@ -1,37 +1,15 @@
-근거: 미확인 | 원문: 1줄 | 의미론: 33줄 | 렌더링: 2줄 | 표 안의 닫히지 않은 각주
+근거: 미확인 | 원문: 1줄 | 의미론: 11줄 | 렌더링: 2줄 | 표 안의 닫히지 않은 각주
 || [* 각주 ||
-Document {
-    blocks: [
-        Table(
-            Table {
-                caption: None,
-                rows: [
-                    TableRow {
-                        cells: [
-                            TableCell {
-                                column_span: None,
-                                row_span: None,
-                                horizontal_alignment: Some(
-                                    Center,
-                                ),
-                                vertical_alignment: None,
-                                attributes: [],
-                                blocks: [
-                                    Paragraph(
-                                        [
-                                            Text(
-                                                "[* 각주",
-                                            ),
-                                        ],
-                                    ),
-                                ],
-                            },
-                        ],
-                    },
-                ],
-            },
-        ),
-    ],
-}
+Document@0..16
+  Table@0..15
+    TableRow@0..15
+      Separator@0..2 "||"
+      TableCell@2..13
+        AlignmentSpace@2..3 " "
+        Paragraph@3..12
+          Text@3..12 "[* 각주"
+        AlignmentSpace@12..13 " "
+      Separator@13..15 "||"
+  Newline@15..16 "\n"
 <div class="wiki-table-wrap"><table class="wiki-table"><tbody><tr class="wiki-table-tr"><td style="text-align: center;"><div class="wiki-paragraph">[* 각주</div>
 </td></tr></tbody></table></div>

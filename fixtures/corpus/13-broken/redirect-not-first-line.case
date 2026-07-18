@@ -1,24 +1,12 @@
-근거: 도움말예제 | 원문: 2줄 | 의미론: 20줄 | 렌더링: 1줄 | 도움말: 리다이렉트는 그것만 적어야 함
+근거: 도움말예제 | 원문: 2줄 | 의미론: 8줄 | 렌더링: 1줄 | 도움말: 리다이렉트는 그것만 적어야 함
 본문
 #redirect 목적지
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Text(
-                    "본문",
-                ),
-            ],
-        ),
-        Redirect(
-            Template(
-                [
-                    Text(
-                        "목적지",
-                    ),
-                ],
-            ),
-        ),
-    ],
-}
+Document@0..27
+  Paragraph@0..6
+    Text@0..6 "본문"
+  Newline@6..7 "\n"
+  Redirect@7..26
+    Directive@7..17 "#redirect "
+    Text@17..26 "목적지"
+  Newline@26..27 "\n"
 <div class="wiki-paragraph">본문</div>

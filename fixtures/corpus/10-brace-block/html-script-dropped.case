@@ -1,20 +1,11 @@
-근거: 미확인 | 원문: 1줄 | 의미론: 17줄 | 렌더링: 1줄 | sanitizer — script는 내용까지 폐기
+근거: 미확인 | 원문: 1줄 | 의미론: 8줄 | 렌더링: 1줄 | sanitizer — script는 내용까지 폐기
 {{{#!html <script>alert(1)</script>}}}
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Html(
-                    Template(
-                        [
-                            Text(
-                                "<script>alert(1)</script>",
-                            ),
-                        ],
-                    ),
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..39
+  Paragraph@0..38
+    InlineHtml@0..38
+      DelimiterOpen@0..3 "{{{"
+      Directive@3..10 "#!html "
+      Text@10..35 "<script>alert(1)</scr ..."
+      DelimiterClose@35..38 "}}}"
+  Newline@38..39 "\n"
 <div class="wiki-paragraph"></div>

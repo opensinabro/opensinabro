@@ -1,20 +1,11 @@
-근거: 미확인 | 원문: 1줄 | 의미론: 17줄 | 렌더링: 1줄 | sanitizer — 엔티티는 글자로 디코드
+근거: 미확인 | 원문: 1줄 | 의미론: 8줄 | 렌더링: 1줄 | sanitizer — 엔티티는 글자로 디코드
 {{{#!html a&nbsp;b}}}
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Html(
-                    Template(
-                        [
-                            Text(
-                                "a&nbsp;b",
-                            ),
-                        ],
-                    ),
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..22
+  Paragraph@0..21
+    InlineHtml@0..21
+      DelimiterOpen@0..3 "{{{"
+      Directive@3..10 "#!html "
+      Text@10..18 "a&nbsp;b"
+      DelimiterClose@18..21 "}}}"
+  Newline@21..22 "\n"
 <div class="wiki-paragraph">a b</div>

@@ -1,25 +1,17 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 22줄 | 렌더링: 1줄 | 틀 호출
+근거: 도움말예제 | 원문: 1줄 | 의미론: 14줄 | 렌더링: 1줄 | 틀 호출
 [include(틀:다른 뜻 설명, 설명=이것은 설명입니다.)]
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Macro(
-                    Macro {
-                        name: "include",
-                        argument: Some(
-                            Template(
-                                [
-                                    Text(
-                                        "틀:다른 뜻 설명, 설명=이것은 설명입니다.",
-                                    ),
-                                ],
-                            ),
-                        ),
-                    },
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..68
+  Paragraph@0..67
+    MacroCall@0..67
+      DelimiterOpen@0..1 "["
+      MacroName@1..8 "include"
+      Separator@8..9 "("
+      MacroArgument@9..30 "틀:다른 뜻 설명"
+      Separator@30..31 ","
+      ArgumentName@31..38 " 설명"
+      Separator@38..39 "="
+      ArgumentValue@39..65 "이것은 설명입니 ..."
+      Separator@65..66 ")"
+      DelimiterClose@66..67 "]"
+  Newline@67..68 "\n"
 <div class="wiki-paragraph">다른 뜻: 이것은 설명입니다.</div>

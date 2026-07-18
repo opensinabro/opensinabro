@@ -1,51 +1,20 @@
-근거: 도움말서술 | 원문: 1줄 | 의미론: 47줄 | 렌더링: 2줄 | 표 정렬 — 도움말에 없는 옵션
+근거: 도움말서술 | 원문: 1줄 | 의미론: 16줄 | 렌더링: 2줄 | 표 정렬 — 도움말에 없는 옵션
 ||<tabletextalign=center> 표 ||
-Document {
-    blocks: [
-        Table(
-            Table {
-                caption: None,
-                rows: [
-                    TableRow {
-                        cells: [
-                            TableCell {
-                                column_span: None,
-                                row_span: None,
-                                horizontal_alignment: Some(
-                                    Center,
-                                ),
-                                vertical_alignment: None,
-                                attributes: [
-                                    TableAttribute {
-                                        scope: Table,
-                                        name: "textalign",
-                                        value: Some(
-                                            Template(
-                                                [
-                                                    Text(
-                                                        "center",
-                                                    ),
-                                                ],
-                                            ),
-                                        ),
-                                    },
-                                ],
-                                blocks: [
-                                    Paragraph(
-                                        [
-                                            Text(
-                                                "표",
-                                            ),
-                                        ],
-                                    ),
-                                ],
-                            },
-                        ],
-                    },
-                ],
-            },
-        ),
-    ],
-}
+Document@0..33
+  Table@0..32
+    TableRow@0..32
+      Separator@0..2 "||"
+      TableCell@2..30
+        DelimiterOpen@2..3 "<"
+        CellOptionName@3..17 "tabletextalign"
+        Separator@17..18 "="
+        CellOptionValue@18..24 "center"
+        DelimiterClose@24..25 ">"
+        AlignmentSpace@25..26 " "
+        Paragraph@26..29
+          Text@26..29 "표"
+        AlignmentSpace@29..30 " "
+      Separator@30..32 "||"
+  Newline@32..33 "\n"
 <div class="wiki-table-wrap"><table class="wiki-table" style=" text-align: center;"><tbody><tr class="wiki-table-tr"><td style="text-align: center;"><div class="wiki-paragraph">표</div>
 </td></tr></tbody></table></div>

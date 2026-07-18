@@ -1,19 +1,10 @@
-근거: 도움말서술 | 원문: 1줄 | 의미론: 15줄 | 렌더링: 2줄 | 도움말: ## 앞에 공백이 있으면 주석이 아니라 그대로 출력
+근거: 도움말서술 | 원문: 1줄 | 의미론: 6줄 | 렌더링: 2줄 | 도움말: ## 앞에 공백이 있으면 주석이 아니라 그대로 출력
  ## 주석 아님
-Document {
-    blocks: [
-        Indent(
-            [
-                Paragraph(
-                    [
-                        Text(
-                            "## 주석 아님",
-                        ),
-                    ],
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..18
+  Indent@0..18
+    Paragraph@0..17
+      IndentMarker@0..1 " "
+      Text@1..17 "## 주석 아님"
+    Newline@17..18 "\n"
 <div class="wiki-indent"><div class="wiki-paragraph">## 주석 아님</div>
 </div>

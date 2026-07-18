@@ -1,24 +1,10 @@
-근거: 도움말서술 | 원문: 1줄 | 의미론: 21줄 | 렌더링: 1줄 | 도움말: 여러 번 써도 상위의 상위로는 안 감
+근거: 도움말서술 | 원문: 1줄 | 의미론: 7줄 | 렌더링: 1줄 | 도움말: 여러 번 써도 상위의 상위로는 안 감
 [[../../]]
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Link(
-                    Link {
-                        target: Template(
-                            [
-                                Text(
-                                    "../../",
-                                ),
-                            ],
-                        ),
-                        anchor: None,
-                        display: None,
-                    },
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..11
+  Paragraph@0..10
+    Link@0..10
+      DelimiterOpen@0..2 "[["
+      LinkTarget@2..8 "../../"
+      DelimiterClose@8..10 "]]"
+  Newline@10..11 "\n"
 <div class="wiki-paragraph"><a class="wiki-link-internal not-exist" href="/w/%EC%8B%9C%ED%97%98%20%EB%AC%B8%EC%84%9C/../" rel="nofollow" title="시험 문서/../">../../</a></div>

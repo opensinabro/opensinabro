@@ -19,6 +19,7 @@
 mod corpus;
 
 use corpus::CorpusContext;
+use namumark_ast::AstNode;
 use namumark_backend_namuwiki::NamuwikiMarkup;
 use namumark_ir::RenderBackend;
 use std::fs;
@@ -96,7 +97,8 @@ fn regenerate(text: &str) -> Result<String, String> {
 
     let document = namumark_parser::parse(source);
     let tree = namumark_render::build_render_tree(&document, &CorpusContext);
-    let semantics = terminate(&format!("{document:#?}"));
+    // 의미론 섹션은 무손실 구문 트리를 보인다 — 세분화된 토큰·스팬까지 그대로 드러난다.
+    let semantics = terminate(&format!("{:#?}", document.syntax()));
     let markup = terminate(&NamuwikiMarkup.render(&tree));
 
     Ok(format!(

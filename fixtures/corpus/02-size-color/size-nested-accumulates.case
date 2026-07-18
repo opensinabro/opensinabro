@@ -1,28 +1,17 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 25줄 | 렌더링: 1줄 | 크기 중첩 시 누적
+근거: 도움말예제 | 원문: 1줄 | 의미론: 14줄 | 렌더링: 1줄 | 크기 중첩 시 누적
 {{{+5 {{{+5 +10단계}}}}}}
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Sized(
-                    SizedText {
-                        level: 5,
-                        content: [
-                            Sized(
-                                SizedText {
-                                    level: 5,
-                                    content: [
-                                        Text(
-                                            "+10단계",
-                                        ),
-                                    ],
-                                },
-                            ),
-                        ],
-                    },
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..28
+  Paragraph@0..27
+    SizedText@0..27
+      DelimiterOpen@0..3 "{{{"
+      SizeLevel@3..5 "+5"
+      Separator@5..6 " "
+      SizedText@6..24
+        DelimiterOpen@6..9 "{{{"
+        SizeLevel@9..11 "+5"
+        Separator@11..12 " "
+        Text@12..21 "+10단계"
+        DelimiterClose@21..24 "}}}"
+      DelimiterClose@24..27 "}}}"
+  Newline@27..28 "\n"
 <div class="wiki-paragraph"><span class="wiki-size-up-5"><span class="wiki-size-up-5">+10단계</span></span></div>

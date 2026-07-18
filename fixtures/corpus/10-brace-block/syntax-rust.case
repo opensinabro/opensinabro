@@ -1,21 +1,17 @@
-근거: 도움말서술 | 원문: 3줄 | 의미론: 16줄 | 렌더링: 1줄 | 문법 강조 rust
+근거: 도움말서술 | 원문: 3줄 | 의미론: 12줄 | 렌더링: 1줄 | 문법 강조 rust
 {{{#!syntax rust
 fn main() {}
 }}}
-Document {
-    blocks: [
-        Paragraph(
-            [
-                CodeBlock(
-                    CodeBlock {
-                        language: Some(
-                            "rust",
-                        ),
-                        source: "fn main() {}",
-                    },
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..34
+  Paragraph@0..33
+    CodeBlock@0..33
+      DelimiterOpen@0..3 "{{{"
+      Directive@3..11 "#!syntax"
+      Separator@11..12 " "
+      CodeLanguage@12..16 "rust"
+      Newline@16..17 "\n"
+      Text@17..29 "fn main() {}"
+      Newline@29..30 "\n"
+      DelimiterClose@30..33 "}}}"
+  Newline@33..34 "\n"
 <div class="wiki-paragraph"><pre><code class="hljs" data-language="rust">fn main() {}</code></pre></div>

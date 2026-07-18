@@ -1,18 +1,10 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 15줄 | 렌더링: 1줄 | 밑줄
+근거: 도움말예제 | 원문: 1줄 | 의미론: 7줄 | 렌더링: 1줄 | 밑줄
 __밑줄__
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Underline(
-                    [
-                        Text(
-                            "밑줄",
-                        ),
-                    ],
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..11
+  Paragraph@0..10
+    Underline@0..10
+      DelimiterOpen@0..2 "__"
+      Text@2..8 "밑줄"
+      DelimiterClose@8..10 "__"
+  Newline@10..11 "\n"
 <div class="wiki-paragraph"><u>밑줄</u></div>

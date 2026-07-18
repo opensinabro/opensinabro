@@ -43,7 +43,7 @@ pub(crate) fn resolve(document: &Document, context: &dyn WikiContext) -> Resolve
         scope: HashMap::new(),
         in_cell: false,
     };
-    let blocks = resolver.resolve_blocks(&document.blocks);
+    let blocks = resolver.resolve_blocks(&document.blocks());
     Resolved {
         redirect: resolver.redirect,
         blocks,
@@ -116,40 +116,40 @@ impl Resolver<'_> {
         for block in blocks {
             match block {
                 Block::Heading(heading) => resolved.push(RenderBlock::Heading {
-                    level: heading.level,
-                    folded: heading.folded,
+                    level: heading.level(),
+                    folded: heading.folded(),
                     number: String::new(),
                     anchor: String::new(),
-                    content: self.resolve_inlines(&heading.content),
+                    content: self.resolve_inlines(&heading.content()),
                 }),
-                Block::Paragraph(inlines) => {
-                    resolved.extend(self.resolve_paragraph(inlines));
+                Block::Paragraph(paragraph) => {
+                    resolved.extend(self.resolve_paragraph(&paragraph.inlines()));
                 }
                 Block::HorizontalRule => resolved.push(RenderBlock::HorizontalRule),
-                Block::Quote(blocks) => {
-                    resolved.push(RenderBlock::Quote(self.resolve_blocks(blocks)));
+                Block::Quote(quote) => {
+                    resolved.push(RenderBlock::Quote(self.resolve_blocks(&quote.blocks())));
                 }
                 Block::List(list) => resolved.push(RenderBlock::List {
-                    kind: list.kind,
+                    kind: list.kind(),
                     items: list
-                        .items
+                        .items()
                         .iter()
                         .map(|item| RenderListItem {
-                            start_number: item.start_number,
-                            blocks: self.resolve_blocks(&item.blocks),
+                            start_number: item.start_number(),
+                            blocks: self.resolve_blocks(&item.blocks()),
                         })
                         .collect(),
                 }),
-                Block::Indent(blocks) => {
-                    resolved.push(RenderBlock::Indent(self.resolve_blocks(blocks)));
+                Block::Indent(indent) => {
+                    resolved.push(RenderBlock::Indent(self.resolve_blocks(&indent.blocks())));
                 }
                 Block::Table(table) => resolved.push(RenderBlock::Table(RenderTable {
                     caption: table
-                        .caption
+                        .caption()
                         .as_ref()
                         .map(|caption| self.resolve_inlines(caption)),
                     rows: table
-                        .rows
+                        .rows()
                         .iter()
                         .map(|row| RenderTableRow {
                             cells: row
@@ -180,9 +180,9 @@ impl Resolver<'_> {
                         .collect(),
                 })),
                 Block::Comment(_) => {}
-                Block::Redirect(target) => {
+                Block::Redirect(redirect) => {
                     if self.redirect.is_none() && self.include_instance.is_none() {
-                        self.redirect = Some(self.fill(target));
+                        self.redirect = Some(self.fill(&redirect.target()));
                     }
                 }
             }
@@ -226,9 +226,9 @@ impl Resolver<'_> {
                     continue;
                 }
                 if let Inline::Macro(macro_call) = inline
-                    && macro_call.name.eq_ignore_ascii_case("include")
+                    && macro_call.name().eq_ignore_ascii_case("include")
                 {
-                    let argument = self.fill_option(&macro_call.argument);
+                    let argument = self.fill_option(&macro_call.argument());
                     let expanded = self.expand_include(argument.as_deref());
                     // 줄에 앞선 내용이 있으면(각주 뒤 `[각주][include(틀:문서 가져옴)]`) 그 문단에
                     // 블록째 중첩된다(렌더확정: the seed의 바깥 wiki-paragraph 하나가 각주 섹션과
@@ -349,11 +349,11 @@ impl Resolver<'_> {
     fn resolve_conditional(&mut self, conditional: &Conditional) -> Vec<RenderInline> {
         // 조건식은 값을 내면서 변수도 만든다. 만들어진 변수는 뒤따르는
         // `#!if`와 `@이름@`이 함께 쓰므로 스코프에 남긴다.
-        let Some(bindings) = condition::evaluate(&conditional.expression, &self.scope) else {
+        let Some(bindings) = condition::evaluate(&conditional.expression(), &self.scope) else {
             return Vec::new();
         };
         self.scope.extend(bindings);
-        self.resolve_blocks_as_inlines(&conditional.blocks)
+        self.resolve_blocks_as_inlines(&conditional.blocks())
     }
 
     /// `#!if` 안의 블록들을 감싸는 요소 없이 인라인으로 편다.
@@ -361,11 +361,11 @@ impl Resolver<'_> {
         let mut inlines = Vec::new();
         for block in blocks {
             match block {
-                Block::Paragraph(content) => {
+                Block::Paragraph(paragraph) => {
                     if !inlines.is_empty() {
                         inlines.push(RenderInline::LineBreak);
                     }
-                    inlines.extend(self.resolve_inlines(content));
+                    inlines.extend(self.resolve_inlines(&paragraph.inlines()));
                 }
                 // 표·리스트는 인라인으로 펼 수 없다. 감싸는 요소 없이 담아 둔다.
                 other => inlines.push(RenderInline::Blocks(
@@ -380,33 +380,39 @@ impl Resolver<'_> {
         Some(match inline {
             Inline::Text(text) => RenderInline::Text(text.clone()),
             Inline::LineBreak => RenderInline::LineBreak,
-            Inline::Bold(content) => self.resolve_styled(TextStyle::Bold, content),
-            Inline::Italic(content) => self.resolve_styled(TextStyle::Italic, content),
-            Inline::Strikethrough(content) => {
-                self.resolve_styled(TextStyle::Strikethrough, content)
+            Inline::Bold(bold) => self.resolve_styled(TextStyle::Bold, &bold.content()),
+            Inline::Italic(italic) => self.resolve_styled(TextStyle::Italic, &italic.content()),
+            Inline::Strikethrough(struck) => {
+                self.resolve_styled(TextStyle::Strikethrough, &struck.content())
             }
-            Inline::Underline(content) => self.resolve_styled(TextStyle::Underline, content),
-            Inline::Superscript(content) => self.resolve_styled(TextStyle::Superscript, content),
-            Inline::Subscript(content) => self.resolve_styled(TextStyle::Subscript, content),
+            Inline::Underline(underline) => {
+                self.resolve_styled(TextStyle::Underline, &underline.content())
+            }
+            Inline::Superscript(superscript) => {
+                self.resolve_styled(TextStyle::Superscript, &superscript.content())
+            }
+            Inline::Subscript(subscript) => {
+                self.resolve_styled(TextStyle::Subscript, &subscript.content())
+            }
             Inline::Literal(text) => RenderInline::Literal(text.clone()),
             // 문법이 색상 그룹으로 인정한 표기라 색 판정은 이미 끝나 있다.
             Inline::Colored(colored) => RenderInline::Colored {
                 color: Color {
-                    light: ColorValue::parse_known(&colored.color),
-                    dark: colored.dark_color.as_deref().map(ColorValue::parse_known),
+                    light: ColorValue::parse_known(&colored.color()),
+                    dark: colored.dark_color().as_deref().map(ColorValue::parse_known),
                 },
-                content: self.resolve_inlines(&colored.content),
+                content: self.resolve_inlines(&colored.content()),
             },
             Inline::Sized(sized) => RenderInline::Sized {
-                level: sized.level,
-                content: self.resolve_inlines(&sized.content),
+                level: sized.level(),
+                content: self.resolve_inlines(&sized.content()),
             },
             Inline::Link(link) => {
                 let display = link
-                    .display
+                    .display()
                     .as_ref()
                     .map(|display| self.resolve_inlines(display));
-                let written = self.fill(&link.target);
+                let written = self.fill(&link.target());
                 if is_external_url(&written) {
                     RenderInline::ExternalLink {
                         url: written,
@@ -416,7 +422,7 @@ impl Resolver<'_> {
                     let title = self.resolve_link_target(&written);
                     // 틀 인자가 비면 앵커도 빈다. the seed는 그때 `#`를 붙이지 않는다.
                     let anchor = self
-                        .fill_option(&link.anchor)
+                        .fill_option(&link.anchor())
                         .filter(|anchor| !anchor.is_empty())
                         .map(|anchor| self.qualify_anchor(&title, anchor));
                     RenderInline::DocumentLink {
@@ -433,7 +439,7 @@ impl Resolver<'_> {
             }
             Inline::Image(image) => {
                 let mut layout = ImageLayout::default();
-                for option in &image.options {
+                for option in &image.options() {
                     let Some(value) = self.fill_option(&option.value) else {
                         continue;
                     };
@@ -463,7 +469,7 @@ impl Resolver<'_> {
                 // 틀 인자를 채운 뒤 다시 공백을 다듬는다 — 빈 인자(`[[파일:@행정구@ 이름.svg]]`
                 // 에서 행정구 미지정)가 남긴 앞 공백은 파일 이름이 아니다(렌더확정: the seed는
                 // `파일:이름.svg`로 이미지를 찾는다). 파싱 시점 trim은 채우기 전이라 못 잡는다.
-                let file_name = self.fill(&image.file_name).trim().to_string();
+                let file_name = self.fill(&image.file_name()).trim().to_string();
                 RenderInline::Image {
                     url: self.context.file_url(&file_name),
                     file_name,
@@ -471,13 +477,13 @@ impl Resolver<'_> {
                 }
             }
             Inline::WikiStyle(wiki_style) => RenderInline::WikiStyle {
-                style: self.fill_style(&wiki_style.style),
-                dark_style: self.fill_style(&wiki_style.dark_style),
-                blocks: self.resolve_blocks(&wiki_style.blocks),
+                style: self.fill_style(&wiki_style.style()),
+                dark_style: self.fill_style(&wiki_style.dark_style()),
+                blocks: self.resolve_blocks(&wiki_style.blocks()),
             },
             Inline::Folding(folding) => RenderInline::Folding {
-                summary: self.fill(&folding.summary),
-                blocks: self.resolve_blocks(&folding.blocks),
+                summary: self.fill(&folding.summary()),
+                blocks: self.resolve_blocks(&folding.blocks()),
             },
             // 조건식은 값을 내면서 변수도 만든다. 만들어진 변수는 뒤따르는
             // `#!if`와 `@이름@`이 함께 쓰므로 스코프에 남긴다.
@@ -497,18 +503,19 @@ impl Resolver<'_> {
                     .unwrap_or_default(),
             ),
             Inline::Category(category) => {
-                if !self.categories.contains(&category.name) {
-                    self.categories.push(category.name.clone());
+                let name = category.name();
+                if !self.categories.contains(&name) {
+                    self.categories.push(name);
                 }
                 return None;
             }
             Inline::Footnote(footnote) => RenderInline::Footnote {
-                name: footnote.name.clone(),
-                content: self.resolve_inlines(&footnote.content),
+                name: footnote.name(),
+                content: self.resolve_inlines(&footnote.content()),
             },
             Inline::Macro(macro_call) => {
-                let argument = self.fill_option(&macro_call.argument);
-                self.resolve_macro(&macro_call.name, argument.as_deref())
+                let argument = self.fill_option(&macro_call.argument());
+                self.resolve_macro(&macro_call.name(), argument.as_deref())
             }
         })
     }
@@ -655,7 +662,7 @@ impl Resolver<'_> {
         let outer_scope = std::mem::replace(&mut self.scope, scope);
         self.expanded_includes += 1;
         self.include_instance = Some(IncludeInstance(self.expanded_includes));
-        let blocks = self.resolve_blocks(&document.blocks);
+        let blocks = self.resolve_blocks(&document.blocks());
         self.include_instance = None;
         self.scope = outer_scope;
         blocks
@@ -770,7 +777,7 @@ fn is_invisible_line(line: &[Inline]) -> bool {
     !line.is_empty()
         && line.iter().all(|inline| match inline {
             Inline::Category(_) => true,
-            Inline::Macro(macro_call) => macro_call.name.eq_ignore_ascii_case("include"),
+            Inline::Macro(macro_call) => macro_call.name().eq_ignore_ascii_case("include"),
             _ => false,
         })
 }

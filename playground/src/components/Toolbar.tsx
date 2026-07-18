@@ -19,8 +19,8 @@ export function Toolbar() {
   const setMode = usePlaygroundStore((state) => state.setMode)
 
   return (
-    <header className="flex items-center justify-between gap-4 border-b bg-secondary px-4 py-2.5">
-      <h1 className="text-sm font-semibold">나무마크 플레이그라운드</h1>
+    <header className="flex items-center justify-between gap-4 border-b bg-background px-5 py-3">
+      <h1 className="text-sm font-semibold tracking-tight">나무마크 플레이그라운드</h1>
       <div className="flex items-center gap-4">
         <div className="flex items-center gap-2">
           <span className="text-xs text-muted-foreground">예제</span>
@@ -52,16 +52,16 @@ export function Toolbar() {
             </SelectContent>
           </Select>
         </div>
-        <div className="flex rounded-md border p-0.5">
+        <div className="flex rounded-lg bg-muted p-0.5">
           {(['preview', 'tokens'] as const).map((value) => (
             <button
               key={value}
               type="button"
               onClick={() => setMode(value)}
               className={
-                'rounded px-2.5 py-1 text-xs transition-colors ' +
+                'rounded-md px-3 py-1 text-xs transition-colors ' +
                 (mode === value
-                  ? 'bg-primary text-primary-foreground'
+                  ? 'bg-background font-medium text-foreground shadow-sm'
                   : 'text-muted-foreground hover:text-foreground')
               }
             >

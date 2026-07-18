@@ -1,19 +1,14 @@
-근거: 미확인 | 원문: 3줄 | 의미론: 14줄 | 렌더링: 1줄 | 지시자 없는 여러 줄 중괄호
+근거: 미확인 | 원문: 3줄 | 의미론: 9줄 | 렌더링: 1줄 | 지시자 없는 여러 줄 중괄호
 {{{
 코드 '''그대로'''
 }}}
-Document {
-    blocks: [
-        Paragraph(
-            [
-                CodeBlock(
-                    CodeBlock {
-                        language: None,
-                        source: "코드 '''그대로'''",
-                    },
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..31
+  Paragraph@0..30
+    CodeBlock@0..30
+      DelimiterOpen@0..3 "{{{"
+      Newline@3..4 "\n"
+      Text@4..26 "코드 '''그대로'''"
+      Newline@26..27 "\n"
+      DelimiterClose@27..30 "}}}"
+  Newline@30..31 "\n"
 <div class="wiki-paragraph"><pre><code>코드 '''그대로'''</code></pre></div>

@@ -1,21 +1,11 @@
-근거: 미확인 | 원문: 1줄 | 의미론: 18줄 | 렌더링: 1줄 | 마커가 서로 교차
+근거: 미확인 | 원문: 1줄 | 의미론: 8줄 | 렌더링: 1줄 | 마커가 서로 교차
 '''굵게 ''기울임''' 기울임''
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Bold(
-                    [
-                        Text(
-                            "굵게 ''기울임",
-                        ),
-                    ],
-                ),
-                Text(
-                    " 기울임''",
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..37
+  Paragraph@0..36
+    Bold@0..24
+      DelimiterOpen@0..3 "'''"
+      Text@3..21 "굵게 ''기울임"
+      DelimiterClose@21..24 "'''"
+    Text@24..36 " 기울임''"
+  Newline@36..37 "\n"
 <div class="wiki-paragraph"><strong>굵게 ''기울임</strong> 기울임''</div>

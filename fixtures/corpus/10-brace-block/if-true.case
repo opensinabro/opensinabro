@@ -1,26 +1,17 @@
-근거: 미확인 | 원문: 2줄 | 의미론: 22줄 | 렌더링: 1줄 | 조건이 참이면 내용이 보임
+근거: 미확인 | 원문: 2줄 | 의미론: 13줄 | 렌더링: 1줄 | 조건이 참이면 내용이 보임
 {{{#!if 1
 보임}}}
-Document {
-    blocks: [
-        Paragraph(
-            [
-                Conditional(
-                    Conditional {
-                        expression: "1",
-                        blocks: [
-                            Paragraph(
-                                [
-                                    Text(
-                                        "보임",
-                                    ),
-                                ],
-                            ),
-                        ],
-                    },
-                ),
-            ],
-        ),
-    ],
-}
+Document@0..20
+  Paragraph@0..19
+    Conditional@0..19
+      DelimiterOpen@0..3 "{{{"
+      Directive@3..7 "#!if"
+      Separator@7..8 " "
+      ConditionExpression@8..9
+        Text@8..9 "1"
+      Newline@9..10 "\n"
+      Paragraph@10..16
+        Text@10..16 "보임"
+      DelimiterClose@16..19 "}}}"
+  Newline@19..20 "\n"
 <div class="wiki-paragraph">보임</div>

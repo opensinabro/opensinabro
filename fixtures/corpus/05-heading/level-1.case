@@ -1,19 +1,12 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 15줄 | 렌더링: 2줄 | 도움말: 1단계는 일반적으로 금지
+근거: 도움말예제 | 원문: 1줄 | 의미론: 8줄 | 렌더링: 2줄 | 도움말: 1단계는 일반적으로 금지
 = 문단 1 =
-Document {
-    blocks: [
-        Heading(
-            Heading {
-                level: 1,
-                folded: false,
-                content: [
-                    Text(
-                        "문단 1",
-                    ),
-                ],
-            },
-        ),
-    ],
-}
+Document@0..13
+  Heading@0..12
+    DelimiterOpen@0..1 "="
+    Separator@1..2 " "
+    Text@2..10 "문단 1"
+    Separator@10..11 " "
+    DelimiterClose@11..12 "="
+  Newline@12..13 "\n"
 <h1 class="wiki-heading"><a id="s-1" href="#toc">1.</a> <span id="문단 1">문단 1</span></h1>
 <div class="wiki-heading-content"></div>
