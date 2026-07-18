@@ -231,6 +231,26 @@ fn raw_text_tokens(node: &SyntaxNode) -> String {
         .collect()
 }
 
+/// `#!wiki` 헤더의 스타일 속성부를 되짚는다. 지시자 토큰 다음부터 첫 내용 노드 전까지의
+/// 토큰(속성 이름·`=`·값·공백)을 이어붙이면 원래 속성 문자열이 된다.
+fn wiki_attributes_text(node: &SyntaxNode) -> String {
+    let mut text = String::new();
+    let mut after_directive = false;
+    for element in node.children_with_tokens() {
+        match element {
+            NodeOrToken::Token(token) => {
+                if token.kind() == SyntaxKind::Directive {
+                    after_directive = true;
+                } else if after_directive {
+                    text.push_str(token.text());
+                }
+            }
+            NodeOrToken::Node(_) => break,
+        }
+    }
+    text
+}
+
 fn first_token_text(node: &SyntaxNode, kind: SyntaxKind) -> Option<String> {
     node.children_with_tokens()
         .filter_map(NodeOrToken::into_token)
@@ -341,7 +361,7 @@ fn lower_inline(node: &SyntaxNode) -> Option<Inline> {
             })
         }
         SyntaxKind::WikiStyle => {
-            let attributes = first_token_text(node, SyntaxKind::WikiAttributes).unwrap_or_default();
+            let attributes = wiki_attributes_text(node);
             let (style, dark_style, _) = text::parse_wiki_style_attributes(&attributes);
             Inline::WikiStyle(WikiStyle {
                 style: style.as_deref().map(template_of),

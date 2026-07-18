@@ -98,7 +98,9 @@ fn consume_literal(parser: &mut Parser<'_>, position: usize, end: usize) -> usiz
             parser.emit_token(SyntaxKind::Separator, attributes_start);
         }
         if content_start > attributes_start {
-            parser.emit_token(SyntaxKind::WikiAttributes, content_start);
+            let attributes = &content[attributes_start - content_range.start
+                ..content_start - content_range.start];
+            emit_wiki_attributes(parser, attributes_start, attributes);
         }
         let paragraph = parser.start_node();
         parse_inline_range(parser, content_start..content_range.end);
@@ -154,7 +156,7 @@ fn consume_link(parser: &mut Parser<'_>, position: usize, end: usize) -> usize {
     parser.emit_token(SyntaxKind::Text, position);
     let marker = parser.start_node();
     parser.emit_token(SyntaxKind::DelimiterOpen, position + 2);
-    parser.emit_token(SyntaxKind::LinkTarget, position + 2 + target.len());
+    emit_link_target(parser, position + 2, target, kind);
     match display {
         Some(display) => {
             let display_start = position + 2 + target.len() + 1;
@@ -200,6 +202,81 @@ fn emit_argument_list(parser: &mut Parser<'_>, start: usize, list: &str, separat
         }
         cursor += item.len();
     }
+}
+
+/// 링크 대상을 이름공간 접두(`파일:`·`분류:`)·이름·앵커(`#개요`)로 쪼갠다.
+/// `start`는 대상 첫 글자의 원문 오프셋이다.
+fn emit_link_target(parser: &mut Parser<'_>, start: usize, target: &str, kind: SyntaxKind) {
+    let mut cursor = start;
+    let mut name = target;
+    if matches!(kind, SyntaxKind::Image | SyntaxKind::Category)
+        && let Some(rest) =
+            text::strip_link_prefix(target, &["파일:", "file:", "분류:", "category:"])
+    {
+        let prefix_length = target.len() - rest.len();
+        parser.emit_token(SyntaxKind::LinkNamespace, cursor + prefix_length);
+        cursor += prefix_length;
+        name = rest;
+    }
+    if kind == SyntaxKind::Link {
+        let (bare, anchor) = text::split_anchor(name);
+        parser.emit_token(SyntaxKind::LinkTarget, cursor + bare.len());
+        if name.len() > bare.len() {
+            // 앵커 구분자 `#`
+            parser.emit_token(SyntaxKind::Separator, cursor + bare.len() + 1);
+            if anchor.is_some() {
+                parser.emit_token(SyntaxKind::LinkAnchor, cursor + name.len());
+            }
+        }
+    } else {
+        parser.emit_token(SyntaxKind::LinkTarget, cursor + name.len());
+    }
+}
+
+/// `#!wiki`의 스타일 속성부(`style="…" dark-style="…"`)를 속성마다 이름·`=`·값으로 쪼갠다.
+/// `start`는 속성부 첫 글자의 원문 오프셋이다.
+pub(crate) fn emit_wiki_attributes(parser: &mut Parser<'_>, start: usize, attributes: &str) {
+    let mut offset = 0;
+    while offset < attributes.len() {
+        let rest = &attributes[offset..];
+        let trimmed = rest.trim_start();
+        let space_length = rest.len() - trimmed.len();
+        if space_length > 0 {
+            offset += space_length;
+            parser.emit_token(SyntaxKind::Separator, start + offset);
+        }
+        let name = if trimmed.starts_with("style=") {
+            "style"
+        } else if trimmed.starts_with("dark-style=") {
+            "dark-style"
+        } else {
+            break;
+        };
+        offset += name.len();
+        parser.emit_token(SyntaxKind::AttributeName, start + offset);
+        offset += 1;
+        parser.emit_token(SyntaxKind::Separator, start + offset);
+        let value_source = &attributes[offset..];
+        let Some(value_length) = quoted_length(value_source) else {
+            break;
+        };
+        offset += value_length;
+        parser.emit_token(SyntaxKind::AttributeValue, start + offset);
+    }
+    if offset < attributes.len() {
+        parser.emit_token(SyntaxKind::AttributeValue, start + attributes.len());
+    }
+}
+
+/// 따옴표로 감싼 값(`"…"`/`'…'`)의 전체 길이(따옴표 포함). 아니면 None.
+fn quoted_length(source: &str) -> Option<usize> {
+    let quote = source.chars().next()?;
+    if quote != '"' && quote != '\'' {
+        return None;
+    }
+    let inner = &source[1..];
+    let end = inner.find(quote)?;
+    Some(1 + end + 1)
 }
 
 fn consume_footnote(parser: &mut Parser<'_>, position: usize, end: usize) -> usize {

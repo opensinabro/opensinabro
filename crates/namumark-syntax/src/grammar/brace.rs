@@ -1,4 +1,6 @@
-use crate::grammar::{Region, block, emit_joined_range_as, emit_line_newline, emit_line_prefix};
+use crate::grammar::{
+    Region, block, emit_joined_range_as, emit_line_newline, emit_line_prefix, inline,
+};
 use crate::kind::SyntaxKind;
 use crate::parser::Parser;
 use namumark_text as text;
@@ -61,7 +63,11 @@ pub(crate) fn parse_brace_group(
         };
         emit_directive_head(parser, header_global, "#!wiki".len(), attributes_offset);
         if leftover_offset > attributes_offset {
-            parser.emit_token(SyntaxKind::WikiAttributes, header_global(leftover_offset));
+            inline::emit_wiki_attributes(
+                parser,
+                header_global(attributes_offset),
+                &header[attributes_offset..leftover_offset],
+            );
         }
         emit_container_content(
             parser,

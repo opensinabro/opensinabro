@@ -40,8 +40,14 @@ pub enum SyntaxKind {
     Directive,
     /// 코드 블록 언어 (`{{{#!syntax rust}}}`의 `rust`)
     CodeLanguage,
-    /// `#!wiki` 스타일 속성부 (`style="…" dark-style="…"`)
-    WikiAttributes,
+    /// `#!wiki` 스타일 속성 이름 (`style`·`dark-style`)
+    AttributeName,
+    /// `#!wiki` 스타일 속성 값 (`"color:red"` — 따옴표 포함)
+    AttributeValue,
+    /// 링크·이미지·분류의 이름공간 접두 (`파일:`·`분류:`)
+    LinkNamespace,
+    /// 링크 앵커 (`[[문서#개요]]`의 `개요`)
+    LinkAnchor,
     /// 표 셀 정렬용 공백 (내용 앞뒤의 정렬 결정 공백)
     AlignmentSpace,
     /// 표 셀 옵션 값 (`<-2>`의 `-2`, `<:>`의 `:` 등 `=` 없는 것)
