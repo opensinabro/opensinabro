@@ -65,6 +65,15 @@ impl Display for TreeMarkup<'_> {
                 formatter.write_str("<div class=\"wiki-heading-content\">")?;
                 heading_content_open = true;
             } else {
+                // 문서 끝 각주 섹션은 마지막 문단 구역 바깥, 문서 레벨에 온다(렌더확정: the seed는
+                // 각주 앞에서 `wiki-heading-content`를 닫는다).
+                if heading_content_open
+                    && matches!(block, RenderBlock::Paragraph(inlines)
+                        if matches!(inlines.as_slice(), [RenderInline::FootnoteSection { .. }]))
+                {
+                    formatter.write_str("</div>\n")?;
+                    heading_content_open = false;
+                }
                 write!(formatter, "{}", BlockMarkup(block))?;
             }
         }
@@ -163,6 +172,14 @@ impl Display for BlockMarkup<'_> {
                             .attribute("id", &anchor)?
                             .content(|formatter| write!(formatter, "{}", InlinesMarkup(content)))
                     })
+            }
+            // 각주 섹션은 문단으로 감싸지 않고 맨 블록으로 낸다(렌더확정: the seed는 문서 끝
+            // 각주를 `</ul></div> <div class='wiki-macro-footnote'>`처럼 wiki-paragraph 없이 붙인다.
+            // `[목차]`는 반대로 wiki-paragraph로 감싼다).
+            RenderBlock::Paragraph(inlines)
+                if matches!(inlines.as_slice(), [RenderInline::FootnoteSection { .. }]) =>
+            {
+                write!(formatter, "{}", InlinesMarkup(inlines))
             }
             RenderBlock::Paragraph(inlines) => tag(formatter, "div")?
                 .attribute("class", &"wiki-paragraph")?
@@ -480,10 +497,11 @@ impl Display for TableWrapClass<'_> {
             })
             .last();
         match alignment {
-            // 왼쪽(기본)이나 인식 못한 값은 클래스를 붙이지 않는다.
+            // 명시한 정렬만 클래스가 된다. 지정 없으면(=None) 클래스를 붙이지 않는다.
+            Some(HorizontalAlignment::Left) => formatter.write_str(" table-left"),
             Some(HorizontalAlignment::Center) => formatter.write_str(" table-center"),
             Some(HorizontalAlignment::Right) => formatter.write_str(" table-right"),
-            _ => Ok(()),
+            None => Ok(()),
         }
     }
 }
@@ -689,13 +707,18 @@ impl Display for InlineMarkup<'_> {
                 // 나무위키는 이미지를 두 겹의 span으로 감싼다. 바깥이 크기·정렬을 잡고,
                 // 안쪽 wrapper와 img는 그 안을 100%로 채운다.
                 Some(url) => {
-                    // 안쪽 wrapper·img가 100%로 채우는 축은 지정한 옵션을 따른다 — 높이만
-                    // 준 이미지는 `height:100%`다(렌더확정: `[[파일:…|height=32]]`이 the seed에서
-                    // `<span … style='height:100%'><img height='100%'>`).
-                    let axis = if layout.width.is_none() && layout.height.is_some() {
-                        "height"
-                    } else {
-                        "width"
+                    // 안쪽 wrapper·img는 바깥이 잡은 크기 축만 100%로 채운다 — 지정한 축만
+                    // 따르고, 크기 옵션이 아예 없으면 아무 축도 채우지 않는다(렌더확정:
+                    // `[[파일:…|height=32]]`은 `style='height:100%'<img height='100%'>`,
+                    // `[[파일:…|width=25&height=25]]`는 두 축을 다 내지만, 옵션 없는
+                    // `[[파일:엔하계 위키 계보도.png]]`는 wrapper·img에 크기가 전혀 없다).
+                    let fill_height = layout.height.is_some();
+                    let fill_width = layout.width.is_some();
+                    let wrapper_style = match (fill_height, fill_width) {
+                        (true, true) => "height: 100%; width: 100%;",
+                        (true, false) => "height: 100%;",
+                        (false, true) => "width: 100%;",
+                        (false, false) => "",
                     };
                     tag(formatter, "span")?
                         .attribute("class", &ImageClass(layout))?
@@ -703,10 +726,11 @@ impl Display for InlineMarkup<'_> {
                         .content(|formatter| {
                             tag(formatter, "span")?
                                 .attribute("class", &"wiki-image-wrapper")?
-                                .attribute("style", &format_args!("{axis}: 100%;"))?
+                                .attribute_when(fill_height || fill_width, "style", &wrapper_style)?
                                 .content(|formatter| {
                                     tag(formatter, "img")?
-                                        .attribute(axis, &"100%")?
+                                        .attribute_when(fill_height, "height", &"100%")?
+                                        .attribute_when(fill_width, "width", &"100%")?
                                         .attribute("src", &url)?
                                         .attribute("alt", &format_args!("파일:{file_name}"))?
                                         .void()

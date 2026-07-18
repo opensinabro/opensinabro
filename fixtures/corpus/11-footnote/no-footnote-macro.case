@@ -1,4 +1,4 @@
-근거: 미확인 | 원문: 1줄 | 의미론: 18줄 | 렌더링: 3줄 | [각주] 없이 각주만
+근거: 미확인 | 원문: 1줄 | 의미론: 18줄 | 렌더링: 2줄 | [각주] 없이 각주만
 [* 각주]
 Document {
     blocks: [
@@ -19,5 +19,4 @@ Document {
     ],
 }
 <div class="wiki-paragraph"><a class="wiki-fn-content" title="각주" href="#fn-1"><span id="rfn-1"></span>[1]</a></div>
-<div class="wiki-paragraph"><div class="wiki-macro-footnote"><span class="footnote-list"><span id="fn-1"></span><a href="#rfn-1">[1]</a> 각주</span></div>
-</div>
+<div class="wiki-macro-footnote"><span class="footnote-list"><span id="fn-1"></span><a href="#rfn-1">[1]</a> 각주</span></div>

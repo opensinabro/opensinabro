@@ -213,6 +213,8 @@ impl Resolver<'_> {
         let lines: Vec<&[Inline]> = inlines
             .split(|inline| matches!(inline, Inline::LineBreak))
             .collect();
+        // 블록으로 승격한 include가 있었는지. 그 뒤 빈 줄은 화면에 빈 문단으로 남는다.
+        let mut promoted_include = false;
         for (index, line) in lines.iter().enumerate() {
             let rest_invisible = lines[index + 1..]
                 .iter()
@@ -228,20 +230,33 @@ impl Resolver<'_> {
                 {
                     let argument = self.fill_option(&macro_call.argument);
                     let expanded = self.expand_include(argument.as_deref());
-                    // 같은 줄에 앞선 내용이 있으면(각주 뒤 `[각주][include(틀:문서 가져옴)]`)
-                    // 그 문단 안에 중첩되고(렌더확정: the seed의 바깥 wiki-paragraph 하나가
-                    // 각주 섹션과 문서 가져옴을 함께 감싼다), 줄 첫머리면 제 문단을 이룬다.
+                    // 줄에 앞선 내용이 있으면(각주 뒤 `[각주][include(틀:문서 가져옴)]`) 그 문단에
+                    // 블록째 중첩된다(렌더확정: the seed의 바깥 wiki-paragraph 하나가 각주 섹션과
+                    // 문서 가져옴을 함께 감싼다). include가 줄 첫머리인데 뒤에 보이는 내용이 있으면
+                    // (`[include(틀:국기)][각주]`) 확장 문단을 인라인으로 펴 같은 문단에 이어 붙이고
+                    // (렌더확정: the seed는 정보상자 셀에서 국기와 각주를 wrapper 없이 한 문단에
+                    // 나란히 둔다), 줄이 분류·include뿐이면 제 문단을 이룬다.
                     if current.len() > line_start {
                         current.push(RenderInline::Blocks(expanded));
+                    } else if !is_invisible_line(line) {
+                        current.extend(flatten_render_blocks(expanded));
                     } else {
                         flush(&mut current, &mut blocks);
                         blocks.extend(expanded);
+                        promoted_include = true;
                     }
                     continue;
                 }
                 if let Some(resolved) = self.resolve_inline(inline) {
                     current.push(resolved);
                 }
+            }
+            // 블록으로 승격한 include 뒤의 빈 줄은 붙을 데가 없어 빈 문단으로 남는다
+            // (렌더확정: `[include(틀:상세 내용)]` 다음 빈 줄과 헤딩 사이에 the seed는
+            // `<div class='wiki-paragraph'></div>`를 둔다). 앞에 보이는 내용이 있으면 그 br로
+            // 붙으므로(current 비지 않음) 여기 걸리지 않는다.
+            if line.is_empty() && promoted_include && current.is_empty() {
+                blocks.push(RenderBlock::Paragraph(Vec::new()));
             }
             // 줄 사이 개행은 화면에 br로 남는다. 단 뒤가 전부 invisible(분류·include)이면
             // 그 앞 개행까지 사라진다 — 표 셀 안에서는 남는다(규칙 (3)·셀 문맥).
@@ -445,7 +460,10 @@ impl Resolver<'_> {
                         _ => {}
                     }
                 }
-                let file_name = self.fill(&image.file_name);
+                // 틀 인자를 채운 뒤 다시 공백을 다듬는다 — 빈 인자(`[[파일:@행정구@ 이름.svg]]`
+                // 에서 행정구 미지정)가 남긴 앞 공백은 파일 이름이 아니다(렌더확정: the seed는
+                // `파일:이름.svg`로 이미지를 찾는다). 파싱 시점 trim은 채우기 전이라 못 잡는다.
+                let file_name = self.fill(&image.file_name).trim().to_string();
                 RenderInline::Image {
                     url: self.context.file_url(&file_name),
                     file_name,
@@ -669,11 +687,14 @@ fn table_style_property(name: &str, value: Option<&str>) -> Option<TableStylePro
             "right" => HorizontalAlignment::Right,
             _ => return None,
         })),
-        // center·right만 정렬 클래스를 만든다. left(기본)·인식 못한 값은 클래스가 없다.
+        // 명시한 left·center·right는 각각 정렬 클래스를 만든다(렌더확정: `<tablealign=left>`가
+        // the seed에서 `table-left`다). 인식 못한 값은 색처럼 선언을 통째로 버린다 — 정렬을
+        // 아예 지정하지 않은 기본과 같아진다.
         "align" => Some(TableStyleProperty::Align(match value? {
+            "left" => HorizontalAlignment::Left,
             "center" => HorizontalAlignment::Center,
             "right" => HorizontalAlignment::Right,
-            _ => HorizontalAlignment::Left,
+            _ => return None,
         })),
         "nopad" => Some(TableStyleProperty::NoPadding),
         _ => None,
@@ -727,6 +748,24 @@ fn parse_ruby(argument: &str) -> Option<RenderInline> {
 /// 채워지면 그 앞 개행까지 `<br>`이 되지 않고 사라진다(렌더 증거: 원문
 /// `[[분류:X]]\n[include(틀:Y)]\n[목차]\n[clearfix]`를 the seed는
 /// `<div class='wiki-paragraph'><목차><br><clearfix></div>`로 낸다). [`Resolver::resolve_paragraph`]가 쓴다.
+/// include 확장 결과를 인라인 문맥에 이어 붙인다. 문단은 속내용만 펴고(문단 사이는 br),
+/// 표·리스트 등은 감쌀 요소 없이 블록째 담는다. `resolve_blocks_as_inlines`의 RenderBlock판.
+fn flatten_render_blocks(blocks: Vec<RenderBlock>) -> Vec<RenderInline> {
+    let mut inlines = Vec::new();
+    for block in blocks {
+        match block {
+            RenderBlock::Paragraph(content) => {
+                if !inlines.is_empty() {
+                    inlines.push(RenderInline::LineBreak);
+                }
+                inlines.extend(content);
+            }
+            other => inlines.push(RenderInline::Blocks(vec![other])),
+        }
+    }
+    inlines
+}
+
 fn is_invisible_line(line: &[Inline]) -> bool {
     !line.is_empty()
         && line.iter().all(|inline| match inline {

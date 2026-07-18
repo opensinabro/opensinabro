@@ -45,4 +45,4 @@ Document {
         ),
     ],
 }
-<div class="wiki-paragraph"><span class="wiki-image-align-normal" style="width: 100px;height: 50px;"><span class="wiki-image-wrapper" style="width: 100%;"><img width="100%" src="/file/example.png" alt="파일:example.png"></span></span></div>
+<div class="wiki-paragraph"><span class="wiki-image-align-normal" style="width: 100px;height: 50px;"><span class="wiki-image-wrapper" style="height: 100%; width: 100%;"><img height="100%" width="100%" src="/file/example.png" alt="파일:example.png"></span></span></div>

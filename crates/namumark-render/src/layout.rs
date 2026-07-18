@@ -8,7 +8,7 @@ use crate::resolve::Resolved;
 use namumark_ast::TableAttributeScope;
 use namumark_ir::{
     RenderBlock, RenderInline, RenderTable, RenderTableAttribute, RenderTree, RenderedFootnote,
-    TableOfContentsEntry, TableStyleProperty,
+    TableOfContentsEntry, TableStyleProperty, TextStyle,
 };
 use std::collections::HashMap;
 
@@ -184,13 +184,22 @@ impl Layout {
 }
 
 /// 목차에 싣는 제목. 링크는 살리되 `[anchor()]`는 뺀다 — id가 겹치면 안 되기
-/// 때문이다(렌더확정: the seed의 목차에는 `<a id='html'>`이 없다).
+/// 때문이다(렌더확정: the seed의 목차에는 `<a id='html'>`이 없다). 취소선은 목차에서
+/// 벗겨 속내용만 남긴다(렌더확정: `==== --[[오리위키]]-- ====`가 본문 헤딩에서는 `<del>`이지만
+/// 목차에서는 `<a>오리위키</a>`뿐이다). 다른 장식은 the seed가 목차에 그대로 두므로 건드리지 않는다.
 fn table_of_contents_title(content: &[RenderInline]) -> Vec<RenderInline> {
-    content
-        .iter()
-        .filter(|inline| !matches!(inline, RenderInline::Anchor { .. }))
-        .cloned()
-        .collect()
+    let mut title = Vec::new();
+    for inline in content {
+        match inline {
+            RenderInline::Anchor { .. } => {}
+            RenderInline::Styled {
+                style: TextStyle::Strikethrough,
+                content,
+            } => title.extend(table_of_contents_title(content)),
+            other => title.push(other.clone()),
+        }
+    }
+    title
 }
 
 fn fill_table_of_contents(blocks: &mut Vec<RenderBlock>, entries: &[TableOfContentsEntry]) {
@@ -280,6 +289,7 @@ fn propagate_column_attributes(table: &mut RenderTable) {
     // 위 행의 `<|N>`이 아직 덮고 있는 열 → 남은 행 수. 그 열은 이 행의 셀이 쓰지 않는다.
     let mut occupied: HashMap<usize, u32> = HashMap::new();
     for row in &mut table.rows {
+        let single_cell_row = row.cells.len() == 1;
         let mut column = 0usize;
         for cell in &mut row.cells {
             while occupied.contains_key(&column) {
@@ -292,6 +302,17 @@ fn propagate_column_attributes(table: &mut RenderTable) {
                 .cloned()
                 .collect();
             let span = cell.column_span.unwrap_or(1) as usize;
+            // 합친 셀(`<-N>`)이 준 열 속성의 세로 전파 범위: 셀이 행 전체를 차지하거나
+            // 스스로 `<width>`를 지정하면 시작 열에만, 그 외에는 걸치는 열 전체에 등록한다
+            // (렌더확정: 나무위키 정보상자의 전폭 `<-2><colcolor=#fff>`와 심화 「활용 예시」의
+            // 전폭 `<-4><colbgcolor=#fc6>`는 col 0에만, 알파위키 `<width=38%><-2><colcolor=#fff>`
+            // 도 col 0에만 세로 전파되지만, 문법 도움말 「기본 헥스 코드」표의 폭 지정 없는
+            // `<-3><colbgcolor=#f5f5f5>`는 걸친 세 열 모두에 전파된다).
+            let start_column_only = single_cell_row
+                || cell
+                    .attributes
+                    .iter()
+                    .any(|attribute| matches!(attribute.property, TableStyleProperty::Width(_)));
             // 열 속성은 축(배경색·글자색·…)별로 독립 전파된다. 셀이 어떤 축을 스스로 지정해도
             // 지정하지 않은 축은 위 행에서 상속한다(렌더확정: `<colcolor=#fff>`가 걸린 열의
             // `<colbgcolor=#00a495>` 셀이 the seed에서 `color:#fff`도 함께 갖는다).
@@ -308,15 +329,11 @@ fn propagate_column_attributes(table: &mut RenderTable) {
                     cell.attributes.push(attribute);
                 }
             }
-            // 지정한 속성은 걸리는 열마다 등록한다(제 축만 교체, 다른 축의 상속은 남긴다).
-            // 열 수는 옵션을 적은 자리까지 아는 칸 수다.
+            // 지정한 속성을 등록한다(제 축만 교체, 다른 축의 상속은 남긴다).
+            let register_extent = if start_column_only { 1 } else { span };
             for attribute in declared {
-                let columns = match attribute.scope {
-                    TableAttributeScope::Column { columns } => (columns as usize).max(1),
-                    _ => 1,
-                };
                 let kind = attribute_kind(&attribute);
-                for covered in column..column + columns {
+                for covered in column..column + register_extent {
                     let entry = inherited.entry(covered).or_default();
                     entry.retain(|existing| attribute_kind(existing) != kind);
                     entry.push(attribute.clone());
