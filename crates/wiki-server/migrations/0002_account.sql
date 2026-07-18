@@ -1,4 +1,4 @@
--- wiki-account: 행위 주체와 인증 (docs/design/08)
+-- wiki-account: 행위 주체와 인증 (docs/architecture.md)
 -- 이메일은 별도 테이블이 아니라 user_credential의 한 kind다.
 
 CREATE TABLE wiki_user (

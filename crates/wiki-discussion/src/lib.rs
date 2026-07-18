@@ -2,7 +2,7 @@
 //!
 //! 상태 변경·주제 변경 같은 관리 조작도 스레드 안의 항목으로 남긴다. the seed가
 //! 타임라인에 그것들을 끼워 보이기 때문이고, 그래야 "무슨 일이 있었나"가 한 줄기로
-//! 읽힌다 (docs/design/08).
+//! 읽힌다 (docs/architecture.md).
 
 mod edit_request;
 mod error;

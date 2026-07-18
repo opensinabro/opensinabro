@@ -1,20 +1,37 @@
 //! JSON API가 함께 쓰는 표현.
 //!
 //! 프론트엔드가 화면을 그리는 데 필요한 만큼만 담고, 내부 식별자는 내보내지 않는다
-//! (docs/design/08의 내부·외부 식별자 분리).
+//! (docs/architecture.md의 데이터 모델 원칙).
 
 use axum::Json;
+use axum::extract::State;
 use axum::http::StatusCode;
 use axum::response::{IntoResponse, Response};
+use axum_extra::extract::CookieJar;
 use serde::Serialize;
 use uuid::Uuid;
 use wiki_document::RevisionRecord;
+
+use crate::ServerError;
+use crate::security::issue_token;
+use crate::session::Requester;
+use crate::state::AppState;
 
 /// 권한이 없을 때의 응답. 무엇이 막혔는지는 알리지 않는다.
 pub fn forbidden() -> Response {
     (
         StatusCode::FORBIDDEN,
         Json(serde_json::json!({ "error": "forbidden" })),
+    )
+        .into_response()
+}
+
+/// 로그인해야만 쓸 수 있는 API에 비로그인으로 왔을 때. 화면이 로그인으로 이끌 수
+/// 있게 권한 부족(403)과 구분해 낸다.
+pub fn unauthorized() -> Response {
+    (
+        StatusCode::UNAUTHORIZED,
+        Json(serde_json::json!({ "error": "unauthorized" })),
     )
         .into_response()
 }
@@ -27,6 +44,21 @@ pub fn not_found() -> Response {
         .into_response()
 }
 
+/// 제목 목록 화면이 함께 쓰는 한 줄. `note`는 화면마다 다른 곁들임(링크된 횟수·바이트
+/// 수·마지막 편집일)이고, 곁들일 것이 없는 목록은 빈 문자열을 낸다.
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct TitleEntry {
+    pub title: String,
+    pub note: String,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct TitleListPayload {
+    pub entries: Vec<TitleEntry>,
+}
+
 #[derive(Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RevisionSummary {
@@ -37,6 +69,7 @@ pub struct RevisionSummary {
     pub comment: String,
     pub content_bytes: i64,
     pub created_at: String,
+    pub hidden: bool,
 }
 
 impl From<&RevisionRecord> for RevisionSummary {
@@ -49,6 +82,47 @@ impl From<&RevisionRecord> for RevisionSummary {
             comment: record.comment.clone(),
             content_bytes: record.content_bytes,
             created_at: record.created_at.to_rfc3339(),
+            hidden: record.hidden,
         }
     }
+}
+
+/// 셸이 화면마다 필요로 하는 것 — 위키 이름·로그인 상태·알림 수·CSRF 토큰.
+///
+/// 화면마다 따로 묻지 않고 한 번에 내주는 이유는 askama 셸에서 겪은 것과 같다:
+/// 일부 화면만 로그인 상태를 싣지 않으면 그 화면의 폼만 조용히 403을 낸다.
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct SessionView {
+    pub wiki_name: String,
+    pub main_document: String,
+    pub content_license: String,
+    pub user_name: Option<String>,
+    pub unread: i64,
+    pub csrf_token: String,
+}
+
+pub async fn session_api(
+    State(state): State<AppState>,
+    jar: CookieJar,
+    requester: Requester,
+) -> Result<Response, ServerError> {
+    let unread = match &requester.user {
+        Some(user) => wiki_account::unread_count(&state.pool, user.identifier).await?,
+        None => 0,
+    };
+    let (jar, csrf_token) = issue_token(jar);
+
+    Ok((
+        jar,
+        Json(SessionView {
+            wiki_name: state.settings.wiki_name.clone(),
+            main_document: state.settings.main_document.clone(),
+            content_license: state.settings.content_license.clone(),
+            user_name: requester.user.as_ref().map(|user| user.name.clone()),
+            unread,
+            csrf_token,
+        }),
+    )
+        .into_response())
 }

@@ -29,7 +29,7 @@ the seed 본체는 접근이 막혀 있어(namu.wiki는 크롤링 차단), **알
 1차 근거로 삼는다. 알파위키는 the seed와 같은 엔진을 쓰며 원문(`GET /raw/<문서>`)과 렌더
 결과(`GET /w/<문서>`)를 모두 공개한다. 알파위키의 `알파위키:문법 도움말`·`/심화`는 나무위키
 문법 도움말을 그대로 옮긴 문서라, 그 원문과 렌더 결과를 대조하면 the seed 실동작이 확정된다.
-자세한 방법은 [`docs/design/04-namuwiki-parity.md`](../design/04-namuwiki-parity.md).
+자세한 방법은 [`tools/parity/README.md`](../../tools/parity/README.md).
 
 각 규칙에는 근거 등급을 붙인다.
 
@@ -58,7 +58,7 @@ the seed 본체는 접근이 막혀 있어(namu.wiki는 크롤링 차단), **알
 ### 0.3 이 문서가 다루지 않는 것
 
 - 위키 UI(편집 링크, 분류 바 등 스킨이 그리는 것). 본문 마크업 산출물만 다룬다.
-- 렌더 파이프라인·크레이트 구조. 그건 `docs/design/`의 몫이다.
+- 렌더 파이프라인·크레이트 구조. 그건 각 크레이트의 문서주석과 루트 README의 몫이다.
 - 임의 마크업의 the seed 실측. 알파위키에 임의 입력을 넣는 읽기 전용 경로가 없어,
   도움말 예제나 실제 문서가 쓰지 않는 패턴은 [미확인]으로 남는다.
 - **opensinabro 구현이 the seed와 다르거나 아직 구현하지 않은 지점** — 이 문서는 the seed의
@@ -1008,7 +1008,7 @@ the seed와 같은 클래스를 쓴다. 대조·구현의 앵커다.
 
 이 문서의 규칙은 [`fixtures/corpus/`](../../fixtures/corpus)의 287개 케이스가 검증한다. 케이스는
 `원문 → 의미 모델 → 렌더 HTML`을 자기완결적으로 담고 근거 등급을 함께 적는다. 대조 방법론과
-도구는 [`docs/design/04-namuwiki-parity.md`](../design/04-namuwiki-parity.md)에 있다.
+도구는 [`tools/parity/README.md`](../../tools/parity/README.md)에 있다.
 
 > 문서 본문 예제 일부는 알파위키 문법 도움말([CC BY-NC-SA 2.0 KR](https://creativecommons.org/licenses/by-nc-sa/2.0/kr/))에서
 > 옮긴 것이다. 저장소 코드의 MIT 라이선스와 분리된다.

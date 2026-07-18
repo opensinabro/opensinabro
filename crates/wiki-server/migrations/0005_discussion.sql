@@ -1,4 +1,4 @@
--- wiki-discussion: 토론·편집요청 (docs/design/08)
+-- wiki-discussion: 토론·편집요청 (docs/architecture.md)
 
 CREATE TABLE thread (
     id          BIGSERIAL PRIMARY KEY,

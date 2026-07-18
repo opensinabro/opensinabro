@@ -28,7 +28,7 @@
 
 - **정본 대조로 규명한 스펙** — 문서가 아닌 the seed의 실제 동작을 대조실험으로 밝혀 [정밀 스펙](docs/spec/namumark.md)으로 정리했습니다.
 - **완전무손실 파싱** — 공백·주석까지 원문을 100% 보존하는 red-green 구문 트리 위에서 동작합니다.
-- **나무위키 동급 출력** — 알파위키 문법 도움말·심화 기준 [파리티 0](docs/design/04-namuwiki-parity.md)을 달성했습니다.
+- **나무위키 동급 출력** — 알파위키 문법 도움말·심화 기준 [파리티 0](tools/parity/README.md)을 달성했습니다.
 
 ## 직접 실행하기
 
@@ -77,9 +77,10 @@ cargo test
 
 ## 구성
 
-단일 역할 원칙으로 나눈 크레이트들입니다(구조·의존 관계는 [설계 문서](docs/design/03-crate-structure.md)).
+나무마크 엔진은 **산출물**(CST·AST·IR·마크업)로, 위키 서버는 **데이터 소유권**으로 나눕니다.
+각 크레이트의 역할과 의존 방향은 그 `lib.rs` 문서주석에 있습니다.
 
-| 크레이트 | 역할 |
+| 나무마크 엔진 | 역할 |
 | --- | --- |
 | [`namumark-parser`](crates/namumark-parser) | 나무마크 파서 — 무손실 구문 트리(`parse_syntax`)와 의미 모델(`parse` → `Document`) |
 | [`namumark-render`](crates/namumark-render) | 렌더링 파이프라인 — resolve/layout pass를 거쳐 백엔드로 출력 |
@@ -88,7 +89,17 @@ cargo test
 | [`namumark-ast`](crates/namumark-ast) | 의미 모델 타입 |
 | [`namumark-ir`](crates/namumark-ir) | 렌더 IR 타입과 백엔드 계약 |
 | [`namumark-backend-namuwiki`](crates/namumark-backend-namuwiki) | 나무위키 동등 마크업 방출 |
+| [`namumark-analysis`](crates/namumark-analysis) | 의미 모델 진단 (문맥 자유) |
 | [`namumark-playground`](crates/namumark-playground) | 플레이그라운드 WASM 바인딩 |
+
+| 위키 서버 | 소유 영역 |
+| --- | --- |
+| [`wiki-account`](crates/wiki-account) | 행위 주체(actor)와 인증 — 의존 그래프의 뿌리 |
+| [`wiki-document`](crates/wiki-document) | 문서와 그 역사, 렌더 파이프라인 접점 |
+| [`wiki-authorization`](crates/wiki-authorization) | 권한 판정 — ACL·aclgroup·perm |
+| [`wiki-discussion`](crates/wiki-discussion) | 토론 스레드와 편집요청 |
+| [`wiki-search`](crates/wiki-search) | 전문 검색 색인 (tantivy) |
+| [`wiki-server`](crates/wiki-server) | HTTP 조립 — axum 라우팅·세션·JSON API |
 
 ## 문서
 
@@ -96,17 +107,16 @@ cargo test
 
 - [나무마크 문법 스펙](docs/spec/namumark.md) — the seed 동작을 대조실험으로 규명한 구현자용 정밀 스펙.
 - [구현 현황 — 누락과 차이](docs/spec/implementation-status.md) — 우리 렌더러가 the seed와 다르거나 아직 구현하지 않은 지점.
-- [설계 문서](docs/design) — 구문 트리·렌더 파이프라인·크레이트 구조·파리티 검증·위키 서버.
+- [위키 서버 아키텍처](docs/architecture.md) — 크레이트 분할 기준·URL 설계·데이터 모델 원칙과 기각한 대안.
+- [파리티 검증](tools/parity/README.md) — the seed 실동작을 근거로 얻는 경로와 대조 도구 사용법.
 
 ## 로드맵
 
 1. **나무마크 파서** — 완료 (red-green tree, 골든테스트)
-2. **렌더링 엔진** — HTML 백엔드 1차 완료 (다중 백엔드 구조). [파리티 0](docs/design/04-namuwiki-parity.md) 달성.
-3. **위키 서버** — M1(읽기 전용)·M2(편집·리비전·ACL)·M3(계정·권한)·M4(토론·편집요청)·
-   M5(파일·운영)·M6(알림·북마크·API·특수 페이지) 완료. 남은 것은 스킨 체계·TOTP
-   ([요구사항](docs/design/06-wiki-server-requirements.md),
-   [아키텍처·로드맵](docs/design/07-wiki-server-architecture.md),
-   [데이터 모델](docs/design/08-wiki-server-data-model.md))
+2. **렌더링 엔진** — HTML 백엔드 1차 완료 (다중 백엔드 구조). [파리티 0](tools/parity/README.md) 달성.
+3. **위키 서버** — 읽기·편집·리비전·ACL·계정·토론·편집요청·파일·운영·알림·API,
+   그리고 Next.js 프론트엔드까지 완료. 남은 것은 TOTP 로그인입니다.
+   알려진 렌더링 차이는 [구현 현황](docs/spec/implementation-status.md)에 있습니다.
 
 ## 실행
 

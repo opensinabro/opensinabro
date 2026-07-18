@@ -1,13 +1,13 @@
 /* Tailwind을 레이어로 나눠 들인다. preflight를 layer(base)에 가두면, 레이어 없이 실린
    본문 스타일시트(/style.css — backend-namuwiki 소유)가 로드 순서와 무관하게 언제나
-   이긴다. 셸이 본문 어휘를 덮지 않게 하는 경계가 여기다 (docs/design/07). */
+   이긴다. 셸이 본문 어휘를 덮지 않게 하는 경계가 여기다 (docs/architecture.md). */
 @layer theme, base, components, utilities;
 
 @import "tailwindcss/theme.css" layer(theme);
 @import "tailwindcss/preflight.css" layer(base);
 @import "tailwindcss/utilities.css" layer(utilities);
 
-/* 라이트 모드 한 벌만 정의한다 — 다크 테마는 비목표 (docs/design/07). */
+/* 라이트 모드 한 벌만 정의한다 — 다크 테마는 비목표 (docs/architecture.md). */
 @theme {
   --color-ground: #ffffff;
   --color-ground-sub: #f3f6f4;
@@ -22,6 +22,21 @@
   --color-accent-deep: #145c42;
   --color-accent-wash: #e6f2ec;
   --color-link: #1a5fb4;
+  --color-danger-line: #f2d3cd;
+  --color-danger-wash: #fdf1ef;
+  --color-danger-ink: #9c3a2c;
+
+  /* 셸의 글자 크기는 이 다섯 단만 쓴다. 화면마다 임의의 px을 적으면 같은 성격의 글이
+     라우트별로 반 픽셀씩 갈라진다 — 본문(wiki-content)의 크기는 렌더러 소관이라
+     여기에 없다. */
+  --text-label: 10.5px;
+  --text-badge: 11px;
+  --text-fine: 12px;
+  --text-note: 12.5px;
+  --text-ui: 13px;
+  --text-list: 13.5px;
+  --text-brand: 14.5px;
+  --text-title: 27px;
 
   --font-sans:
     "Apple SD Gothic Neo", "Pretendard", "Malgun Gothic", "Noto Sans KR",
@@ -33,7 +48,7 @@
    preflight는 목록의 불릿·제목 크기 같은 브라우저 기본값을 지우는데, 렌더러 CSS는
    그 기본값이 살아 있다는 전제로 쓰여 있다(예: `.wiki-list`는 여백만 정하고
    불릿은 브라우저에 맡긴다). 레이어를 무르면 규칙을 하나씩 되살릴 필요 없이
-   렌더러 CSS만 본문을 말하게 된다 — 파리티가 걸린 경계다 (docs/design/07). */
+   렌더러 CSS만 본문을 말하게 된다 — 파리티가 걸린 경계다 (docs/architecture.md). */
 @layer base {
   .wiki-content * {
     all: revert-layer;

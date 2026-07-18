@@ -14,7 +14,7 @@
     python3 tools/fetch-parity-corpus.py        # 도움말 캐시를 먼저 받는다
     python3 tools/grade-corpus-evidence.py      # 검사 (어긋나면 종료 코드 1)
 
-배경은 fixtures/corpus/README.md와 docs/design/04-namuwiki-parity.md 참고.
+배경은 fixtures/corpus/README.md와 tools/parity/README.md 참고.
 """
 
 import pathlib

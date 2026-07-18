@@ -21,9 +21,6 @@ pub enum ServerError {
     #[error("저장소 오류")]
     Database(#[from] sqlx::Error),
 
-    #[error("템플릿 오류")]
-    Template(#[from] askama::Error),
-
     #[error("업로드를 처리하지 못했다")]
     Upload,
 

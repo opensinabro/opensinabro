@@ -21,3 +21,19 @@ export function formatMoment(value: string) {
     minute: "2-digit",
   });
 }
+
+export function formatDay(value: string) {
+  return new Date(value).toLocaleDateString("ko-KR", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
+}
+
+export function formatBytes(value: number) {
+  return `${value.toLocaleString()} B`;
+}
+
+export function formatCount(value: number) {
+  return value.toLocaleString();
+}

@@ -24,11 +24,16 @@ impl ContentHash {
 
 /// 업로드를 받을 수 있는 형식. 위키가 그리는 것은 이미지뿐이라 그 밖은 받지 않는다
 /// — 받아 둔 파일이 곧 서비스가 내보내는 것이라, 늘리려면 그때 판단해 늘린다.
+pub const SUPPORTED_MEDIA_TYPES: &[&str] = &[
+    "image/png",
+    "image/jpeg",
+    "image/gif",
+    "image/webp",
+    "image/svg+xml",
+];
+
 pub fn is_supported_media_type(media_type: &str) -> bool {
-    matches!(
-        media_type,
-        "image/png" | "image/jpeg" | "image/gif" | "image/webp" | "image/svg+xml"
-    )
+    SUPPORTED_MEDIA_TYPES.contains(&media_type)
 }
 
 /// 바이너리를 저장하고 내용 주소를 낸다. 이미 있는 내용이면 다시 쓰지 않는다.

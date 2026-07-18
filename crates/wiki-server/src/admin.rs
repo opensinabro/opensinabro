@@ -1,86 +1,76 @@
-use askama::Template;
 use axum::extract::{Path, State};
-use axum::http::StatusCode;
-use axum::response::{Html, IntoResponse, Redirect, Response};
+use axum::response::{IntoResponse, Response};
 use axum_extra::extract::CookieJar;
 use chrono::{DateTime, Utc};
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
 use crate::ServerError;
-use crate::handler::{escape, shell};
-use crate::security::{issue_token, verify_token};
+use crate::security::verify_header;
 use crate::session::Requester;
 use crate::state::AppState;
-use crate::template::Shell;
 
-type HandlerResult = Result<Response, ServerError>;
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct GrantOptionsPayload {
+    permissions: Vec<String>,
+}
 
-/// 권한을 주고 거두는 화면. 이 화면 자체가 `grant` 권한을 요구한다.
-pub async fn grant_form(
+/// 줄 수 있는 권한의 목록. 이 화면 자체가 `grant` 권한을 요구한다.
+pub async fn grant_api(
     State(state): State<AppState>,
     requester: Requester,
-    jar: CookieJar,
-) -> HandlerResult {
+) -> Result<Response, ServerError> {
+    if !requester.is_member() {
+        return Ok(crate::api::unauthorized());
+    }
     if !requester.has_permission(&state, "grant").await? {
-        return forbidden(&state, "권한을 부여하려면 grant 권한이 필요합니다.");
+        return Ok(crate::api::forbidden());
     }
 
     let permissions = sqlx::query_as::<_, (String,)>("SELECT name FROM permission ORDER BY name")
         .fetch_all(&state.pool)
         .await?;
 
-    let (jar, csrf_token) = issue_token(jar);
-    let options = permissions
-        .into_iter()
-        .map(|(name,)| format!("<option value=\"{0}\">{0}</option>", escape(&name)))
-        .collect::<String>();
-
-    let body = format!(
-        "<form method=\"post\" action=\"/admin/grant\">\
-         <input type=\"hidden\" name=\"csrf_token\" value=\"{csrf_token}\">\
-         <label>사용자 <input type=\"text\" name=\"user_name\" required></label>\
-         <label>권한 <select name=\"permission\">{options}</select></label>\
-         <label><input type=\"checkbox\" name=\"revoke\" value=\"1\"> 회수</label>\
-         <button type=\"submit\">적용</button>\
-         </form>\
-         <p><a href=\"/block-history\">운영 기록 보기</a></p>",
-        csrf_token = escape(&csrf_token)
-    );
-
-    let page = shell(&state, &requester, "권한 관리", body, &csrf_token)
-        .await?
-        .render()?;
-    Ok((jar, Html(page)).into_response())
+    Ok(axum::Json(GrantOptionsPayload {
+        permissions: permissions.into_iter().map(|(name,)| name).collect(),
+    })
+    .into_response())
 }
 
 #[derive(Deserialize)]
-pub struct GrantSubmission {
-    csrf_token: String,
+#[serde(rename_all = "camelCase")]
+pub struct GrantRequestBody {
     user_name: String,
     permission: String,
-    revoke: Option<String>,
+    revoke: bool,
 }
 
-pub async fn grant_submit(
+pub async fn grant_submit_api(
     State(state): State<AppState>,
     requester: Requester,
     jar: CookieJar,
-    axum::Form(submission): axum::Form<GrantSubmission>,
-) -> HandlerResult {
-    if !verify_token(&jar, &submission.csrf_token) {
-        return Ok((StatusCode::FORBIDDEN, "요청을 확인할 수 없습니다.").into_response());
+    headers: axum::http::HeaderMap,
+    axum::Json(submission): axum::Json<GrantRequestBody>,
+) -> Result<Response, ServerError> {
+    if !verify_header(&jar, &headers) {
+        return Ok(crate::api::forbidden());
+    }
+    if !requester.is_member() {
+        return Ok(crate::api::unauthorized());
     }
     if !requester.has_permission(&state, "grant").await? {
-        return forbidden(&state, "권한을 부여하려면 grant 권한이 필요합니다.");
+        return Ok(crate::api::forbidden());
     }
 
+    // 폼 경로는 없는 사용자에게도 403을 내는데, 이는 권한 부족과 대상 없음을 뒤섞는
+    // 결함이다 — 여기서는 404로 구분해 화면이 오타를 알려 줄 수 있게 한다.
     let Some(target) = wiki_account::find_user_by_name(&state.pool, &submission.user_name).await?
     else {
-        return forbidden(&state, "그런 사용자가 없습니다.");
+        return Ok(crate::api::not_found());
     };
 
     let actor = requester.actor(&state).await?;
-    if submission.revoke.is_some() {
+    if submission.revoke {
         wiki_authorization::revoke_permission(
             &state.pool,
             target.identifier.as_raw(),
@@ -98,18 +88,40 @@ pub async fn grant_submit(
         .await?;
     }
 
-    Ok(Redirect::to("/block-history").into_response())
+    Ok(axum::Json(serde_json::json!({ "ok": true })).into_response())
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct BlockEntry {
+    target: String,
+    group: String,
+    reason: String,
+    created_at: String,
+    removed_at: Option<String>,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PermissionEntry {
+    user_name: String,
+    permission: String,
+    granted_at: String,
+    revoked_at: Option<String>,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct BlockHistoryPayload {
+    blocks: Vec<BlockEntry>,
+    permissions: Vec<PermissionEntry>,
 }
 
 /// 차단·권한 변경을 시간순으로 보이는 공개 기록.
-///
-/// 별도 로그 테이블 없이 원본 행(removed_at·revoked_at)이 곧 기록이다 (docs/design/08).
-pub async fn block_history(
+pub async fn block_history_api(
     State(state): State<AppState>,
-    requester: Requester,
-    jar: CookieJar,
-) -> HandlerResult {
-    let blocks = sqlx::query_as::<
+) -> Result<Response, ServerError> {
+    let rows = sqlx::query_as::<
         _,
         (
             String,
@@ -133,63 +145,56 @@ pub async fn block_history(
     .fetch_all(&state.pool)
     .await?;
 
-    let mut body = String::from("<h2>차단 기록</h2><ul class=\"wiki-block-history\">");
-    if blocks.is_empty() {
-        body.push_str("<li>없습니다.</li>");
-    }
-    for (group, user, ip, reason, created, removed) in blocks {
-        body.push_str(&format!(
-            "<li>{target} → {group} · {reason} · {created}{removed}</li>",
-            target = escape(&user.or(ip).unwrap_or_default()),
-            group = escape(&group),
-            reason = escape(&reason),
-            created = created.format("%Y-%m-%d %H:%M:%S UTC"),
-            removed = match removed {
-                Some(at) => format!(" · 해제 {}", at.format("%Y-%m-%d %H:%M:%S UTC")),
-                None => String::new(),
-            },
-        ));
-    }
-    body.push_str("</ul>");
+    let blocks = rows
+        .into_iter()
+        .map(|(group, user, ip_address, reason, created, removed)| BlockEntry {
+            target: user.or(ip_address).unwrap_or_default(),
+            group,
+            reason,
+            created_at: created.to_rfc3339(),
+            removed_at: removed.map(|at| at.to_rfc3339()),
+        })
+        .collect();
 
-    body.push_str("<h2>권한 기록</h2><ul class=\"wiki-permission-history\">");
-    let permissions = wiki_authorization::permission_log(&state.pool, 100).await?;
-    if permissions.is_empty() {
-        body.push_str("<li>없습니다.</li>");
-    }
-    for entry in permissions {
-        body.push_str(&format!(
-            "<li>{user} · {permission} · 부여 {granted}{revoked}</li>",
-            user = escape(&entry.user_name),
-            permission = escape(&entry.permission),
-            granted = entry.granted_at.format("%Y-%m-%d %H:%M:%S UTC"),
-            revoked = match entry.revoked_at {
-                Some(at) => format!(" · 회수 {}", at.format("%Y-%m-%d %H:%M:%S UTC")),
-                None => String::new(),
-            },
-        ));
-    }
-    body.push_str("</ul>");
-
-    let (jar, csrf_token) = issue_token(jar);
-    let page = shell(&state, &requester, "운영 기록", body, &csrf_token)
+    let permissions = wiki_authorization::permission_log(&state.pool, 100)
         .await?
-        .render()?;
-    Ok((jar, Html(page)).into_response())
+        .into_iter()
+        .map(|entry| PermissionEntry {
+            user_name: entry.user_name,
+            permission: entry.permission,
+            granted_at: entry.granted_at.to_rfc3339(),
+            revoked_at: entry.revoked_at.map(|at| at.to_rfc3339()),
+        })
+        .collect();
+
+    Ok(axum::Json(BlockHistoryPayload {
+        blocks,
+        permissions,
+    })
+    .into_response())
 }
 
-/// 사용자 문서로 보낸다 — 사용자 정보는 위키 문서로 다룬다.
-pub async fn user_profile(Path(name): Path<String>) -> HandlerResult {
-    Ok(Redirect::to(&format!("/w/사용자:{name}")).into_response())
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct ContributionEntry {
+    title: String,
+    sequence: i64,
+    created_at: String,
+    comment: String,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct ContributionsPayload {
+    name: String,
+    entries: Vec<ContributionEntry>,
 }
 
 /// 이 사용자가 남긴 편집들.
-pub async fn contributions(
+pub async fn contributions_api(
     State(state): State<AppState>,
-    requester: Requester,
-    jar: CookieJar,
     Path(name): Path<String>,
-) -> HandlerResult {
+) -> Result<Response, ServerError> {
     let rows = sqlx::query_as::<_, (String, String, i64, DateTime<Utc>, String)>(
         "SELECT namespace.name, document.title, revision.sequence,
                 revision.created_at, revision.comment
@@ -206,44 +211,21 @@ pub async fn contributions(
     .fetch_all(&state.pool)
     .await?;
 
-    let mut body = String::from("<ul class=\"wiki-contributions\">");
-    if rows.is_empty() {
-        body.push_str("<li>기여가 없습니다.</li>");
-    }
-    for (namespace, title, sequence, created, comment) in rows {
-        let full = if namespace == "문서" {
-            title
-        } else {
-            format!("{namespace}:{title}")
-        };
-        body.push_str(&format!(
-            "<li><a href=\"/w/{full}\">{full}</a> · r{sequence} · {created}{comment}</li>",
-            full = escape(&full),
-            created = created.format("%Y-%m-%d %H:%M:%S UTC"),
-            comment = if comment.is_empty() {
-                String::new()
-            } else {
-                format!(" · {}", escape(&comment))
+    let entries = rows
+        .into_iter()
+        .map(
+            |(namespace, title, sequence, created, comment)| ContributionEntry {
+                title: if namespace == "문서" {
+                    title
+                } else {
+                    format!("{namespace}:{title}")
+                },
+                sequence,
+                created_at: created.to_rfc3339(),
+                comment,
             },
-        ));
-    }
-    body.push_str("</ul>");
+        )
+        .collect();
 
-    let (jar, csrf_token) = issue_token(jar);
-    let page = shell(
-        &state,
-        &requester,
-        format!("{name}의 기여"),
-        body,
-        &csrf_token,
-    )
-    .await?
-    .render()?;
-    Ok((jar, Html(page)).into_response())
-}
-
-fn forbidden(state: &AppState, message: &str) -> HandlerResult {
-    let body = format!("<p>{}</p>", escape(message));
-    let page = Shell::new(&state.settings, "권한 없음", body).render()?;
-    Ok((StatusCode::FORBIDDEN, Html(page)).into_response())
+    Ok(axum::Json(ContributionsPayload { name, entries }).into_response())
 }

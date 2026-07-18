@@ -1,57 +1,17 @@
-use askama::Template;
 use axum::extract::{Multipart, Path, State};
 use axum::http::{StatusCode, header};
-use axum::response::{Html, IntoResponse, Redirect, Response};
+use axum::response::{IntoResponse, Response};
 use axum_extra::extract::CookieJar;
+use serde::Serialize;
 use wiki_authorization::AclAction;
 use wiki_document::{DocumentTitle, Namespace, RevisionKind};
 
 use crate::ServerError;
-use crate::handler::{escape, shell};
-use crate::security::{issue_token, verify_token};
+use crate::security::verify_token;
 use crate::session::Requester;
 use crate::state::AppState;
 
 type HandlerResult = Result<Response, ServerError>;
-
-/// 업로드 폼. 파일명·라이선스·분류가 모두 있어야 올릴 수 있다 (docs/design/06).
-pub async fn upload_form(
-    State(state): State<AppState>,
-    requester: Requester,
-    jar: CookieJar,
-) -> HandlerResult {
-    let licenses = wiki_document::licenses(&state.pool).await?;
-    let options = licenses
-        .into_iter()
-        .map(|(name, display)| {
-            format!(
-                "<option value=\"{}\">{}</option>",
-                escape(&name),
-                escape(&display)
-            )
-        })
-        .collect::<String>();
-
-    let (jar, csrf_token) = issue_token(jar);
-    let body = format!(
-        "<form method=\"post\" action=\"/upload\" enctype=\"multipart/form-data\">\
-         <input type=\"hidden\" name=\"csrf_token\" value=\"{csrf_token}\">\
-         <label>파일 <input type=\"file\" name=\"file\" required></label>\
-         <label>파일명 <input type=\"text\" name=\"name\" required></label>\
-         <label>라이선스 <select name=\"license\" required>{options}</select></label>\
-         <label>분류 <input type=\"text\" name=\"category\" required \
-           placeholder=\"예: 야구 사진\"></label>\
-         <label>설명 <textarea name=\"description\" rows=\"4\"></textarea></label>\
-         <button type=\"submit\">올리기</button>\
-         </form>",
-        csrf_token = escape(&csrf_token)
-    );
-
-    let page = shell(&state, &requester, "파일 올리기", body, &csrf_token)
-        .await?
-        .render()?;
-    Ok((jar, Html(page)).into_response())
-}
 
 #[derive(Default)]
 struct UploadFields {
@@ -64,13 +24,69 @@ struct UploadFields {
     media_type: String,
 }
 
-/// 업로드 처리. 파일도 문서이므로 리비전을 남기고, 바이너리만 따로 저장한다.
-pub async fn upload_submit(
+/// 바이너리 서빙. 문서 보기는 `/w/파일:이름`이고 여기서는 내용만 낸다.
+pub async fn serve_file(State(state): State<AppState>, Path(name): Path<String>) -> HandlerResult {
+    let Some(file) = wiki_document::read_file(&state.pool, &state.file_root, &name).await? else {
+        return Ok((StatusCode::NOT_FOUND, "그런 파일이 없습니다.").into_response());
+    };
+
+    let Ok(bytes) = std::fs::read(&file.path) else {
+        return Ok((StatusCode::NOT_FOUND, "파일 내용을 찾을 수 없습니다.").into_response());
+    };
+
+    Ok((
+        [
+            (header::CONTENT_TYPE, file.media_type),
+            // 내용이 바뀌면 파일명도 바뀌는 구조가 아니라 짧게만 캐시한다.
+            (header::CACHE_CONTROL, "public, max-age=300".to_owned()),
+        ],
+        bytes,
+    )
+        .into_response())
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct LicenseEntry {
+    name: String,
+    display_name: String,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct UploadOptionsPayload {
+    licenses: Vec<LicenseEntry>,
+    media_types: Vec<&'static str>,
+}
+
+/// 업로드 폼이 고를 수 있는 것들.
+pub async fn upload_api(State(state): State<AppState>) -> Result<Response, ServerError> {
+    let licenses = wiki_document::licenses(&state.pool)
+        .await?
+        .into_iter()
+        .map(|(name, display_name)| LicenseEntry { name, display_name })
+        .collect();
+
+    Ok(axum::Json(UploadOptionsPayload {
+        licenses,
+        media_types: wiki_document::SUPPORTED_MEDIA_TYPES.to_vec(),
+    })
+    .into_response())
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct UploadPayload {
+    title: String,
+}
+
+/// 업로드 처리. 본문은 multipart 그대로 받고 결과만 JSON으로 낸다.
+pub async fn upload_submit_api(
     State(state): State<AppState>,
     requester: Requester,
     jar: CookieJar,
     mut multipart: Multipart,
-) -> HandlerResult {
+) -> Result<Response, ServerError> {
     let mut fields = UploadFields::default();
 
     while let Some(field) = multipart
@@ -100,24 +116,22 @@ pub async fn upload_submit(
         }
     }
 
+    // multipart는 헤더에 토큰을 실을 수 없어 폼 경로와 같이 필드로 받는다.
     if !verify_token(&jar, &fields.csrf_token) {
-        return Ok((StatusCode::FORBIDDEN, "요청을 확인할 수 없습니다.").into_response());
+        return Ok(crate::api::forbidden());
     }
 
     let title = DocumentTitle::new(Namespace::new(Namespace::FILE), fields.name.trim());
     if title.name.is_empty() || fields.license.is_empty() || fields.category.trim().is_empty() {
-        return rejected(
-            &state,
-            &requester,
-            "파일명·라이선스·분류는 모두 있어야 합니다.",
-        )
-        .await;
+        return Ok(rejected_api("파일명·라이선스·분류는 모두 있어야 합니다."));
     }
     if !wiki_document::is_supported_media_type(&fields.media_type) {
-        return rejected(&state, &requester, "지원하지 않는 형식입니다.").await;
+        return Ok(rejected_api("지원하지 않는 형식입니다."));
     }
+    // 폼 경로는 권한 거부도 400으로 내는데, 고쳐 다시 낼 수 있는 입력 문제와 섞이는
+    // 결함이다 — 권한은 403으로 낸다.
     if !requester.may(&state, &title, AclAction::Edit).await? {
-        return rejected(&state, &requester, "파일을 올릴 권한이 없습니다.").await;
+        return Ok(crate::api::forbidden());
     }
 
     let hash = wiki_document::store_content(
@@ -150,37 +164,16 @@ pub async fn upload_submit(
     wiki_document::attach_file(&state.pool, revision, &hash, &fields.license).await?;
     crate::edit::apply_side_effects(&state, &title, &source).await?;
 
-    Ok(Redirect::to(&format!("/w/{title}")).into_response())
+    Ok(axum::Json(UploadPayload {
+        title: title.to_string(),
+    })
+    .into_response())
 }
 
-/// 바이너리 서빙. 문서 보기는 `/w/파일:이름`이고 여기서는 내용만 낸다.
-pub async fn serve_file(State(state): State<AppState>, Path(name): Path<String>) -> HandlerResult {
-    let Some(file) = wiki_document::read_file(&state.pool, &state.file_root, &name).await? else {
-        return Ok((StatusCode::NOT_FOUND, "그런 파일이 없습니다.").into_response());
-    };
-
-    let Ok(bytes) = std::fs::read(&file.path) else {
-        return Ok((StatusCode::NOT_FOUND, "파일 내용을 찾을 수 없습니다.").into_response());
-    };
-
-    Ok((
-        [
-            (header::CONTENT_TYPE, file.media_type),
-            // 내용이 바뀌면 파일명도 바뀌는 구조가 아니라 짧게만 캐시한다.
-            (header::CACHE_CONTROL, "public, max-age=300".to_owned()),
-        ],
-        bytes,
+fn rejected_api(message: &str) -> Response {
+    (
+        StatusCode::BAD_REQUEST,
+        axum::Json(serde_json::json!({ "error": message })),
     )
-        .into_response())
-}
-
-async fn rejected(state: &AppState, requester: &Requester, message: &str) -> HandlerResult {
-    let body = format!(
-        "<p>{}</p><p><a href=\"/upload\">다시 시도</a></p>",
-        escape(message)
-    );
-    let page = shell(state, requester, "파일 올리기", body, "")
-        .await?
-        .render()?;
-    Ok((StatusCode::BAD_REQUEST, Html(page)).into_response())
+        .into_response()
 }

@@ -1,4 +1,4 @@
--- 업로드할 때 고를 라이선스 목록. 운영자가 늘리고 줄이는 데이터다(docs/design/08).
+-- 업로드할 때 고를 라이선스 목록. 운영자가 늘리고 줄이는 데이터다(docs/architecture.md).
 
 INSERT INTO license (name, display_name, source_url) VALUES
     ('cc-by-nc-sa-2.0-kr', 'CC BY-NC-SA 2.0 KR',

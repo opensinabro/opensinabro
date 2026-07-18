@@ -1,4 +1,4 @@
--- wiki-authorization: ACL·aclgroup·perm (docs/design/08)
+-- wiki-authorization: ACL·aclgroup·perm (docs/architecture.md)
 -- 상태를 지우지 않고 이력으로 쌓는다 — /block-history가 원본 행에서 나온다.
 
 CREATE TABLE acl_rule (

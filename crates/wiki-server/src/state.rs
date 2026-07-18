@@ -37,7 +37,7 @@ pub struct AppState {
 ///
 /// 검색 색인은 파일이고 쓰기 잠금이 프로세스 하나로 제한되므로, 임포터처럼 서버와
 /// 따로 도는 도구는 색인을 열지 않는다 — 색인은 원본에서 다시 만들 수 있는 파생
-/// 자료라(docs/design/08) 서버가 시작할 때 채우면 된다.
+/// 자료라(docs/architecture.md) 서버가 시작할 때 채우면 된다.
 ///
 /// 컨테이너로 함께 뜰 때 데이터베이스가 아직 받을 준비가 안 됐을 수 있어 잠시 기다린다.
 pub async fn open_database(database_url: &str) -> Result<PgPool, ServerError> {
@@ -102,7 +102,7 @@ const MAIN_DOCUMENT_SEED: &str = "\
 /// 대문이 한 번도 없었으면 심는다.
 ///
 /// 루트 경로가 대문으로 보내므로, 대문이 없는 위키는 첫 화면부터 404다. 기본 ACL을
-/// 마이그레이션이 심는 것과 같은 이유다 (docs/design/07 M2). 다만 **리비전이 하나도
+/// 마이그레이션이 심는 것과 같은 이유다 (docs/architecture.md). 다만 **리비전이 하나도
 /// 없을 때만** 만든다 — 운영자가 지운 대문이 재시작마다 되살아나면 안 된다.
 async fn ensure_main_document(state: &AppState) -> Result<(), ServerError> {
     let namespaces = sqlx::query_as::<_, (String,)>("SELECT name FROM namespace ORDER BY id")

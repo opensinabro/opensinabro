@@ -8,7 +8,7 @@
 //! ```
 //!
 //! 잔여 줄 중에는 원문 자체가 마커를 닫지 않은 오작성도 섞인다. 실제 화면과 대조해
-//! 판별하는 방법은 docs/design/04-namuwiki-parity.md 참고.
+//! 판별하는 방법은 tools/parity/README.md 참고.
 
 use namumark_ast::{Block, Document, Inline};
 use std::collections::BTreeMap;

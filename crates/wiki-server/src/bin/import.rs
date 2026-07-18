@@ -1,7 +1,7 @@
 //! 나무마크 원문 파일을 위키에 적재하는 임포터.
 //!
-//! HTTP를 거치지 않고 쓰기 경로(리비전 채번 → 역링크 → 렌더 캐시)를 그대로 쓴다.
-//! 기여자는 단일 시스템 사용자로 뭉갠다 (docs/design/08).
+//! HTTP를 거치지 않고 쓰기 경로(리비전 채번 → 역링크)를 그대로 쓴다.
+//! 기여자는 단일 시스템 사용자로 뭉갠다 (docs/architecture.md).
 //!
 //! 검색 색인은 열지 않는다 — 색인 파일의 쓰기 잠금은 프로세스 하나만 가질 수 있어,
 //! 서버가 돌고 있으면 열 수 없기 때문이다. 색인은 파생 자료라 서버가 시작할 때
@@ -94,9 +94,6 @@ async fn main() {
         wiki_document::replace_references(&pool, &title, &rendered.references)
             .await
             .expect("역링크 기록");
-        wiki_document::store_render(&pool, &title, &rendered.html)
-            .await
-            .expect("렌더 캐시 저장");
     }
 
     println!("{imported}개 문서를 적재했습니다. 검색 색인은 서버가 시작할 때 만들어집니다.");

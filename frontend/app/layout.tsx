@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
+import { siteName } from "@/lib/site";
 import { Providers } from "./providers";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "오픈시나브로",
+  title: siteName,
   description: "나무위키 엔진의 오픈소스 재구현",
 };
 

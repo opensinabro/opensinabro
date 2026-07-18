@@ -3,7 +3,7 @@
 # 부분 일치하면 알려진 차이로 본다.
 #
 # 새 항목을 넣을 때는 반드시 근거(왜 다른지, 의도된 것인지)를 주석으로 함께 남긴다.
-# 배경은 docs/design/04-namuwiki-parity.md 참고.
+# 배경은 tools/parity/README.md 참고.
 
 
 # 문단 편집 링크. the seed는 헤딩마다 [편집] 링크를 넣는다. 위키 서버 UI이고
@@ -15,7 +15,7 @@ wiki-edit-section
 
 # 문단명 앵커(<span id='개요'>). the seed는 헤딩 제목을 span으로 감싸 `[[#개요]]`용
 # 앵커를 만든다. 우리는 `s-N` 앵커만 방출한다 — 문단명 앵커는 후속 과제다.
-# (docs/design/04-namuwiki-parity.md의 "미수정 차이" 참고)
+# (docs/spec/implementation-status.md 참고)
 <span id=
 
 # 목차 접힘 표시. the seed는 빈 <summary>에 스킨 CSS로 "목차"를 넣고,

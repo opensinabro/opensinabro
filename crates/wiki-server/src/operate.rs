@@ -1,321 +1,310 @@
-use askama::Template;
 use axum::extract::{Path, Query, State};
 use axum::http::StatusCode;
-use axum::response::{Html, IntoResponse, Redirect, Response};
+use axum::response::{IntoResponse, Response};
 use axum_extra::extract::CookieJar;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 use wiki_authorization::AclAction;
 use wiki_document::{DocumentTitle, RevisionKind};
 
 use crate::ServerError;
-use crate::handler::{escape, namespace_names, shell};
-use crate::security::{issue_token, verify_token};
+use crate::handler::namespace_names;
+use crate::security::verify_header;
 use crate::session::Requester;
 use crate::state::AppState;
 
-type HandlerResult = Result<Response, ServerError>;
-
 /// 삭제·이동 사유는 짧게 적어 넘길 수 없게 한다 (the seed도 5자 이상을 요구한다).
 const MINIMUM_REASON_LENGTH: usize = 5;
-
-pub async fn move_form(
-    State(state): State<AppState>,
-    requester: Requester,
-    jar: CookieJar,
-    Path(raw_title): Path<String>,
-) -> HandlerResult {
-    let namespaces = namespace_names(&state).await?;
-    let title = DocumentTitle::parse(&raw_title, &namespaces);
-
-    if !requester.may(&state, &title, AclAction::Move).await? {
-        return denied(&state, &requester, "이 문서를 옮길 권한이 없습니다.").await;
-    }
-
-    let (jar, csrf_token) = issue_token(jar);
-    let body = format!(
-        "<form method=\"post\" action=\"/move/{title}\">\
-         <input type=\"hidden\" name=\"csrf_token\" value=\"{csrf_token}\">\
-         <label>새 제목 <input type=\"text\" name=\"target\" value=\"{title}\" required></label>\
-         <label>사유 <input type=\"text\" name=\"comment\" required minlength=\"5\"></label>\
-         <p>옮길 자리에 역사가 있는 문서가 있으면 서로 맞바꿉니다.</p>\
-         <button type=\"submit\">옮기기</button>\
-         </form>",
-        title = escape(&title.to_string()),
-        csrf_token = escape(&csrf_token),
-    );
-
-    let page = shell(
-        &state,
-        &requester,
-        format!("{title} (이동)"),
-        body,
-        &csrf_token,
-    )
-    .await?
-    .render()?;
-    Ok((jar, Html(page)).into_response())
-}
-
-#[derive(Deserialize)]
-pub struct MoveSubmission {
-    csrf_token: String,
-    target: String,
-    comment: String,
-}
-
-pub async fn move_submit(
-    State(state): State<AppState>,
-    requester: Requester,
-    jar: CookieJar,
-    Path(raw_title): Path<String>,
-    axum::Form(submission): axum::Form<MoveSubmission>,
-) -> HandlerResult {
-    if !verify_token(&jar, &submission.csrf_token) {
-        return Ok((StatusCode::FORBIDDEN, "요청을 확인할 수 없습니다.").into_response());
-    }
-
-    let namespaces = namespace_names(&state).await?;
-    let from = DocumentTitle::parse(&raw_title, &namespaces);
-    let to = DocumentTitle::parse(&submission.target, &namespaces);
-
-    if !requester.may(&state, &from, AclAction::Move).await? {
-        return denied(&state, &requester, "이 문서를 옮길 권한이 없습니다.").await;
-    }
-    if submission.comment.chars().count() < MINIMUM_REASON_LENGTH {
-        return denied(&state, &requester, "사유를 다섯 자 이상 적어 주세요.").await;
-    }
-
-    let actor = requester.actor(&state).await?;
-    wiki_document::move_document(&state.pool, &from, &to, actor, &submission.comment).await?;
-
-    // 제목이 바뀌면 그 문서를 가리키던 링크의 존재 판정이 달라진다.
-    wiki_document::invalidate_referrers(&state.pool, &from).await?;
-    wiki_document::invalidate_referrers(&state.pool, &to).await?;
-    state.search.remove(from.namespace.as_str(), &from.name)?;
-    if let Some(source) = wiki_document::read_source(&state.pool, &to).await? {
-        state.search.put(to.namespace.as_str(), &to.name, &source)?;
-    }
-    state.search.commit()?;
-
-    Ok(Redirect::to(&format!("/w/{to}")).into_response())
-}
-
-pub async fn delete_form(
-    State(state): State<AppState>,
-    requester: Requester,
-    jar: CookieJar,
-    Path(raw_title): Path<String>,
-) -> HandlerResult {
-    let namespaces = namespace_names(&state).await?;
-    let title = DocumentTitle::parse(&raw_title, &namespaces);
-
-    if !requester.may(&state, &title, AclAction::Delete).await? {
-        return denied(&state, &requester, "이 문서를 지울 권한이 없습니다.").await;
-    }
-
-    let (jar, csrf_token) = issue_token(jar);
-    let body = format!(
-        "<form method=\"post\" action=\"/delete/{title}\">\
-         <input type=\"hidden\" name=\"csrf_token\" value=\"{csrf_token}\">\
-         <label>사유 <input type=\"text\" name=\"comment\" required minlength=\"5\"></label>\
-         <p>역사는 남고 문서만 없는 상태가 됩니다. 다시 쓰면 되살아납니다.</p>\
-         <button type=\"submit\">삭제</button>\
-         </form>",
-        title = escape(&title.to_string()),
-        csrf_token = escape(&csrf_token),
-    );
-
-    let page = shell(
-        &state,
-        &requester,
-        format!("{title} (삭제)"),
-        body,
-        &csrf_token,
-    )
-    .await?
-    .render()?;
-    Ok((jar, Html(page)).into_response())
-}
-
-#[derive(Deserialize)]
-pub struct DeleteSubmission {
-    csrf_token: String,
-    comment: String,
-}
-
-pub async fn delete_submit(
-    State(state): State<AppState>,
-    requester: Requester,
-    jar: CookieJar,
-    Path(raw_title): Path<String>,
-    axum::Form(submission): axum::Form<DeleteSubmission>,
-) -> HandlerResult {
-    if !verify_token(&jar, &submission.csrf_token) {
-        return Ok((StatusCode::FORBIDDEN, "요청을 확인할 수 없습니다.").into_response());
-    }
-
-    let namespaces = namespace_names(&state).await?;
-    let title = DocumentTitle::parse(&raw_title, &namespaces);
-
-    if !requester.may(&state, &title, AclAction::Delete).await? {
-        return denied(&state, &requester, "이 문서를 지울 권한이 없습니다.").await;
-    }
-    if submission.comment.chars().count() < MINIMUM_REASON_LENGTH {
-        return denied(&state, &requester, "사유를 다섯 자 이상 적어 주세요.").await;
-    }
-
-    let actor = requester.actor(&state).await?;
-    wiki_document::delete_document(&state.pool, &title, actor, &submission.comment).await?;
-
-    wiki_document::invalidate_referrers(&state.pool, &title).await?;
-    state.search.remove(title.namespace.as_str(), &title.name)?;
-    state.search.commit()?;
-
-    Ok(Redirect::to(&format!("/w/{title}")).into_response())
-}
-
-/// 줄마다 마지막으로 손댄 사람을 보인다.
-pub async fn blame(
-    State(state): State<AppState>,
-    requester: Requester,
-    jar: CookieJar,
-    Path(raw_title): Path<String>,
-) -> HandlerResult {
-    let namespaces = namespace_names(&state).await?;
-    let title = DocumentTitle::parse(&raw_title, &namespaces);
-    let lines = wiki_document::blame(&state.pool, &title).await?;
-
-    let mut body = String::from("<table class=\"wiki-blame\"><tbody>");
-    for line in &lines {
-        body.push_str(&format!(
-            "<tr><td>r{sequence}</td><td>{author}</td><td><code>{text}</code></td></tr>",
-            sequence = line.sequence,
-            author = escape(&line.author),
-            text = escape(&line.text),
-        ));
-    }
-    body.push_str("</tbody></table>");
-
-    let (jar, csrf_token) = issue_token(jar);
-    let page = shell(
-        &state,
-        &requester,
-        format!("{title} (blame)"),
-        body,
-        &csrf_token,
-    )
-    .await?
-    .render()?;
-    Ok((jar, Html(page)).into_response())
-}
-
-#[derive(Deserialize)]
-pub struct HideSubmission {
-    csrf_token: String,
-    uuid: Uuid,
-    #[serde(default)]
-    show: Option<String>,
-}
-
-/// 리비전 숨김·해제. 목록에는 남고 내용만 가린다.
-pub async fn hide_revision(
-    State(state): State<AppState>,
-    requester: Requester,
-    jar: CookieJar,
-    Path(raw_title): Path<String>,
-    axum::Form(submission): axum::Form<HideSubmission>,
-) -> HandlerResult {
-    if !verify_token(&jar, &submission.csrf_token) {
-        return Ok((StatusCode::FORBIDDEN, "요청을 확인할 수 없습니다.").into_response());
-    }
-    if !requester.has_permission(&state, "hide_revision").await? {
-        return denied(&state, &requester, "리비전을 숨길 권한이 없습니다.").await;
-    }
-
-    wiki_document::set_revision_hidden(&state.pool, submission.uuid, submission.show.is_none())
-        .await?;
-
-    let namespaces = namespace_names(&state).await?;
-    let title = DocumentTitle::parse(&raw_title, &namespaces);
-    Ok(Redirect::to(&format!("/history/{title}")).into_response())
-}
 
 #[derive(Deserialize)]
 pub struct BatchRevertQuery {
     author: Option<String>,
 }
 
-/// 한 사람의 최근 편집을 문서마다 그 사람 직전 상태로 되돌린다.
-pub async fn batch_revert_form(
+/// 사유가 짧아 되돌려보낼 때. 권한과 달리 고쳐서 다시 낼 수 있는 입력 문제라
+/// 403이 아니라 400으로 낸다 — 폼 경로는 403을 내는데 이는 결함이다.
+fn bad_request(message: &str) -> Response {
+    (
+        StatusCode::BAD_REQUEST,
+        axum::Json(serde_json::json!({ "error": message })),
+    )
+        .into_response()
+}
+
+const SHORT_REASON_MESSAGE: &str = "사유를 다섯 자 이상 적어 주세요.";
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct OperationPayload {
+    title: String,
+    may: bool,
+}
+
+/// 이 문서를 옮길 수 있는가.
+pub async fn move_api(
     State(state): State<AppState>,
     requester: Requester,
-    jar: CookieJar,
-    Query(parameters): Query<BatchRevertQuery>,
-) -> HandlerResult {
-    if !requester.has_permission(&state, "batch_revert").await? {
-        return denied(&state, &requester, "일괄 되돌리기 권한이 없습니다.").await;
-    }
+    Path(raw_title): Path<String>,
+) -> Result<Response, ServerError> {
+    let namespaces = namespace_names(&state).await?;
+    let title = DocumentTitle::parse(&raw_title, &namespaces);
 
-    let (jar, csrf_token) = issue_token(jar);
-    let author = parameters.author.unwrap_or_default();
-    let mut body = format!(
-        "<form method=\"get\" action=\"/admin/batch-revert\">\
-         <label>대상 <input type=\"text\" name=\"author\" value=\"{author}\" \
-           placeholder=\"사용자 이름 또는 IP\"></label>\
-         <button type=\"submit\">대상 보기</button>\
-         </form>",
-        author = escape(&author)
-    );
-
-    if !author.is_empty() {
-        let targets = wiki_document::documents_last_edited_by(&state.pool, &author, 100).await?;
-        body.push_str(&format!(
-            "<p>{}님이 마지막으로 손댄 문서 {}건입니다.</p><ul>",
-            escape(&author),
-            targets.len()
-        ));
-        for title in &targets {
-            body.push_str(&format!("<li>{}</li>", escape(&title.to_string())));
-        }
-        body.push_str("</ul>");
-
-        if !targets.is_empty() {
-            body.push_str(&format!(
-                "<form method=\"post\" action=\"/admin/batch-revert\">\
-                 <input type=\"hidden\" name=\"csrf_token\" value=\"{csrf_token}\">\
-                 <input type=\"hidden\" name=\"author\" value=\"{author}\">\
-                 <button type=\"submit\">모두 되돌리기</button>\
-                 </form>",
-                csrf_token = escape(&csrf_token),
-                author = escape(&author),
-            ));
-        }
-    }
-
-    let page = shell(&state, &requester, "일괄 되돌리기", body, &csrf_token)
-        .await?
-        .render()?;
-    Ok((jar, Html(page)).into_response())
+    Ok(axum::Json(OperationPayload {
+        may: requester.may(&state, &title, AclAction::Move).await?,
+        title: title.to_string(),
+    })
+    .into_response())
 }
 
 #[derive(Deserialize)]
-pub struct BatchRevertSubmission {
-    csrf_token: String,
-    author: String,
+#[serde(rename_all = "camelCase")]
+pub struct MoveRequestBody {
+    target: String,
+    comment: String,
 }
 
-pub async fn batch_revert_submit(
+pub async fn move_submit_api(
     State(state): State<AppState>,
     requester: Requester,
     jar: CookieJar,
-    axum::Form(submission): axum::Form<BatchRevertSubmission>,
-) -> HandlerResult {
-    if !verify_token(&jar, &submission.csrf_token) {
-        return Ok((StatusCode::FORBIDDEN, "요청을 확인할 수 없습니다.").into_response());
+    headers: axum::http::HeaderMap,
+    Path(raw_title): Path<String>,
+    axum::Json(submission): axum::Json<MoveRequestBody>,
+) -> Result<Response, ServerError> {
+    if !verify_header(&jar, &headers) {
+        return Ok(crate::api::forbidden());
+    }
+
+    let namespaces = namespace_names(&state).await?;
+    let from = DocumentTitle::parse(&raw_title, &namespaces);
+    let to = DocumentTitle::parse(&submission.target, &namespaces);
+
+    // 폼 경로는 출발 제목만 검사하는데, 그러면 권한이 미치지 않는 자리로 문서를 밀어
+    // 넣을 수 있다 — 도착 제목도 함께 판정한다.
+    if !requester.may(&state, &from, AclAction::Move).await?
+        || !requester.may(&state, &to, AclAction::Move).await?
+    {
+        return Ok(crate::api::forbidden());
+    }
+    if submission.comment.chars().count() < MINIMUM_REASON_LENGTH {
+        return Ok(bad_request(SHORT_REASON_MESSAGE));
+    }
+
+    let actor = requester.actor(&state).await?;
+    wiki_document::move_document(&state.pool, &from, &to, actor, &submission.comment).await?;
+
+    state.search.remove(from.namespace.as_str(), &from.name)?;
+    if let Some(source) = wiki_document::read_source(&state.pool, &to).await? {
+        state.search.put(to.namespace.as_str(), &to.name, &source)?;
+    }
+    state.search.commit()?;
+
+    Ok(axum::Json(serde_json::json!({ "title": to.to_string() })).into_response())
+}
+
+/// 이 문서를 지울 수 있는가.
+pub async fn delete_api(
+    State(state): State<AppState>,
+    requester: Requester,
+    Path(raw_title): Path<String>,
+) -> Result<Response, ServerError> {
+    let namespaces = namespace_names(&state).await?;
+    let title = DocumentTitle::parse(&raw_title, &namespaces);
+
+    Ok(axum::Json(OperationPayload {
+        may: requester.may(&state, &title, AclAction::Delete).await?,
+        title: title.to_string(),
+    })
+    .into_response())
+}
+
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct DeleteRequestBody {
+    comment: String,
+}
+
+pub async fn delete_submit_api(
+    State(state): State<AppState>,
+    requester: Requester,
+    jar: CookieJar,
+    headers: axum::http::HeaderMap,
+    Path(raw_title): Path<String>,
+    axum::Json(submission): axum::Json<DeleteRequestBody>,
+) -> Result<Response, ServerError> {
+    if !verify_header(&jar, &headers) {
+        return Ok(crate::api::forbidden());
+    }
+
+    let namespaces = namespace_names(&state).await?;
+    let title = DocumentTitle::parse(&raw_title, &namespaces);
+
+    if !requester.may(&state, &title, AclAction::Delete).await? {
+        return Ok(crate::api::forbidden());
+    }
+    if submission.comment.chars().count() < MINIMUM_REASON_LENGTH {
+        return Ok(bad_request(SHORT_REASON_MESSAGE));
+    }
+
+    let actor = requester.actor(&state).await?;
+    wiki_document::delete_document(&state.pool, &title, actor, &submission.comment).await?;
+
+    state.search.remove(title.namespace.as_str(), &title.name)?;
+    state.search.commit()?;
+
+    Ok(axum::Json(serde_json::json!({ "title": title.to_string() })).into_response())
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct BlameLineEntry {
+    sequence: i64,
+    author: String,
+    text: String,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct BlamePayload {
+    title: String,
+    lines: Vec<BlameLineEntry>,
+}
+
+/// 줄마다 마지막으로 손댄 사람을 보인다.
+pub async fn blame_api(
+    State(state): State<AppState>,
+    requester: Requester,
+    Path(raw_title): Path<String>,
+) -> Result<Response, ServerError> {
+    let namespaces = namespace_names(&state).await?;
+    let title = DocumentTitle::parse(&raw_title, &namespaces);
+
+    // blame은 본문을 줄 단위로 그대로 드러내므로 읽기 권한을 물어야 한다 — 폼 경로는
+    // 묻지 않는데, 그러면 못 읽는 문서의 내용이 blame으로 새어 나간다.
+    if !requester.may(&state, &title, AclAction::Read).await? {
+        return Ok(crate::api::forbidden());
+    }
+
+    let lines = wiki_document::blame(&state.pool, &title).await?;
+
+    Ok(axum::Json(BlamePayload {
+        title: title.to_string(),
+        lines: lines
+            .into_iter()
+            .map(|line| BlameLineEntry {
+                sequence: line.sequence,
+                author: line.author,
+                text: line.text,
+            })
+            .collect(),
+    })
+    .into_response())
+}
+
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct HideRevisionRequestBody {
+    uuid: Uuid,
+    hidden: bool,
+}
+
+/// 리비전 숨김·해제. 목록에는 남고 내용만 가린다.
+pub async fn hide_revision_api(
+    State(state): State<AppState>,
+    requester: Requester,
+    jar: CookieJar,
+    headers: axum::http::HeaderMap,
+    Path(raw_title): Path<String>,
+    axum::Json(submission): axum::Json<HideRevisionRequestBody>,
+) -> Result<Response, ServerError> {
+    if !verify_header(&jar, &headers) {
+        return Ok(crate::api::forbidden());
+    }
+    if !requester.is_member() {
+        return Ok(crate::api::unauthorized());
+    }
+    if !requester.has_permission(&state, "hide_revision").await? {
+        return Ok(crate::api::forbidden());
+    }
+
+    let namespaces = namespace_names(&state).await?;
+    let title = DocumentTitle::parse(&raw_title, &namespaces);
+
+    // 폼 경로는 uuid가 이 문서의 것인지 보지 않는다 — 경로의 제목과 무관하게 아무
+    // 문서의 리비전이나 숨길 수 있어 결함이다.
+    if crate::history::revision_sequence_within(&state, &title, submission.uuid)
+        .await?
+        .is_none()
+    {
+        return Ok(crate::api::not_found());
+    }
+
+    wiki_document::set_revision_hidden(&state.pool, submission.uuid, submission.hidden).await?;
+
+    Ok(axum::Json(serde_json::json!({ "ok": true })).into_response())
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct BatchRevertPayload {
+    author: String,
+    titles: Vec<String>,
+}
+
+/// 한 사람이 마지막으로 손댄 문서들 — 되돌리기 전에 대상을 먼저 보인다.
+pub async fn batch_revert_api(
+    State(state): State<AppState>,
+    requester: Requester,
+    Query(parameters): Query<BatchRevertQuery>,
+) -> Result<Response, ServerError> {
+    if !requester.is_member() {
+        return Ok(crate::api::unauthorized());
     }
     if !requester.has_permission(&state, "batch_revert").await? {
-        return denied(&state, &requester, "일괄 되돌리기 권한이 없습니다.").await;
+        return Ok(crate::api::forbidden());
+    }
+
+    let author = parameters.author.unwrap_or_default();
+    let titles = if author.is_empty() {
+        Vec::new()
+    } else {
+        wiki_document::documents_last_edited_by(&state.pool, &author, 100)
+            .await?
+            .iter()
+            .map(ToString::to_string)
+            .collect()
+    };
+
+    Ok(axum::Json(BatchRevertPayload { author, titles }).into_response())
+}
+
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct BatchRevertRequestBody {
+    author: String,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct BatchRevertResultPayload {
+    reverted: usize,
+}
+
+pub async fn batch_revert_submit_api(
+    State(state): State<AppState>,
+    requester: Requester,
+    jar: CookieJar,
+    headers: axum::http::HeaderMap,
+    axum::Json(submission): axum::Json<BatchRevertRequestBody>,
+) -> Result<Response, ServerError> {
+    if !verify_header(&jar, &headers) {
+        return Ok(crate::api::forbidden());
+    }
+    if !requester.is_member() {
+        return Ok(crate::api::unauthorized());
+    }
+    if !requester.has_permission(&state, "batch_revert").await? {
+        return Ok(crate::api::forbidden());
     }
 
     let targets =
@@ -344,66 +333,60 @@ pub async fn batch_revert_submit(
         reverted += 1;
     }
 
-    let (jar, csrf_token) = issue_token(jar);
-    let body = format!("<p>{reverted}건을 되돌렸습니다.</p>");
-    let page = shell(&state, &requester, "일괄 되돌리기", body, &csrf_token)
-        .await?
-        .render()?;
-    Ok((jar, Html(page)).into_response())
+    Ok(axum::Json(BatchRevertResultPayload { reverted }).into_response())
 }
 
-/// 위키 전역 설정.
-pub async fn config_form(
-    State(state): State<AppState>,
-    requester: Requester,
-    jar: CookieJar,
-) -> HandlerResult {
-    if !requester.has_permission(&state, "config").await? {
-        return denied(&state, &requester, "설정을 바꿀 권한이 없습니다.").await;
-    }
-
-    let (jar, csrf_token) = issue_token(jar);
-    let body = format!(
-        "<form method=\"post\" action=\"/admin/config\">\
-         <input type=\"hidden\" name=\"csrf_token\" value=\"{csrf_token}\">\
-         <label>위키 이름 <input type=\"text\" name=\"wiki_name\" value=\"{wiki_name}\"></label>\
-         <label>대문 문서 <input type=\"text\" name=\"main_document\" value=\"{main}\"></label>\
-         <label>문서 라이선스 <input type=\"text\" name=\"content_license\" \
-           value=\"{license}\"></label>\
-         <button type=\"submit\">저장</button>\
-         </form>\
-         <p>바뀐 설정은 다시 시작한 뒤 화면에 반영됩니다.</p>",
-        csrf_token = escape(&csrf_token),
-        wiki_name = escape(&state.settings.wiki_name),
-        main = escape(&state.settings.main_document),
-        license = escape(&state.settings.content_license),
-    );
-
-    let page = shell(&state, &requester, "위키 설정", body, &csrf_token)
-        .await?
-        .render()?;
-    Ok((jar, Html(page)).into_response())
-}
-
-#[derive(Deserialize)]
-pub struct ConfigSubmission {
-    csrf_token: String,
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct ConfigPayload {
     wiki_name: String,
     main_document: String,
     content_license: String,
 }
 
-pub async fn config_submit(
+/// 위키 전역 설정.
+pub async fn config_api(
+    State(state): State<AppState>,
+    requester: Requester,
+) -> Result<Response, ServerError> {
+    if !requester.is_member() {
+        return Ok(crate::api::unauthorized());
+    }
+    if !requester.has_permission(&state, "config").await? {
+        return Ok(crate::api::forbidden());
+    }
+
+    Ok(axum::Json(ConfigPayload {
+        wiki_name: state.settings.wiki_name.clone(),
+        main_document: state.settings.main_document.clone(),
+        content_license: state.settings.content_license.clone(),
+    })
+    .into_response())
+}
+
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct ConfigRequestBody {
+    wiki_name: String,
+    main_document: String,
+    content_license: String,
+}
+
+pub async fn config_submit_api(
     State(state): State<AppState>,
     requester: Requester,
     jar: CookieJar,
-    axum::Form(submission): axum::Form<ConfigSubmission>,
-) -> HandlerResult {
-    if !verify_token(&jar, &submission.csrf_token) {
-        return Ok((StatusCode::FORBIDDEN, "요청을 확인할 수 없습니다.").into_response());
+    headers: axum::http::HeaderMap,
+    axum::Json(submission): axum::Json<ConfigRequestBody>,
+) -> Result<Response, ServerError> {
+    if !verify_header(&jar, &headers) {
+        return Ok(crate::api::forbidden());
+    }
+    if !requester.is_member() {
+        return Ok(crate::api::unauthorized());
     }
     if !requester.has_permission(&state, "config").await? {
-        return denied(&state, &requester, "설정을 바꿀 권한이 없습니다.").await;
+        return Ok(crate::api::forbidden());
     }
 
     for (name, data) in [
@@ -421,13 +404,10 @@ pub async fn config_submit(
         .await?;
     }
 
-    Ok(Redirect::to("/admin/config").into_response())
-}
-
-async fn denied(state: &AppState, requester: &Requester, message: &str) -> HandlerResult {
-    let body = format!("<p>{}</p>", escape(message));
-    let page = shell(state, requester, "권한 없음", body, "")
-        .await?
-        .render()?;
-    Ok((StatusCode::FORBIDDEN, Html(page)).into_response())
+    Ok(axum::Json(ConfigPayload {
+        wiki_name: submission.wiki_name,
+        main_document: submission.main_document,
+        content_license: submission.content_license,
+    })
+    .into_response())
 }

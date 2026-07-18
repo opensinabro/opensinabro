@@ -10,7 +10,7 @@ use crate::ServerError;
 use crate::state::AppState;
 
 /// 세션에 담는 로그인 표시. 내부 id가 아니라 외부 식별자를 넣는다 —
-/// 쿠키로 나가는 값이 내부 키를 드러내지 않게 한다 (docs/design/08).
+/// 쿠키로 나가는 값이 내부 키를 드러내지 않게 한다 (docs/architecture.md).
 const SESSION_USER: &str = "user";
 
 /// 이번 요청을 누가 보냈는가.

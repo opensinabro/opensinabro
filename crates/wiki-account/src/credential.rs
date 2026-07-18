@@ -8,7 +8,7 @@ use crate::{AccountError, Result, UserIdentifier, WikiUser, find_user_by_name};
 /// 인증 수단의 종류. DB의 `credential_kind` 열거와 짝이다.
 ///
 /// 이메일도 여기 한 종류다 — 가입 검증·복구·수신이 모두 인증 흐름의 역할이라
-/// 별도 테이블을 두지 않는다 (docs/design/08).
+/// 별도 테이블을 두지 않는다 (docs/architecture.md).
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum CredentialKind {
     Password,

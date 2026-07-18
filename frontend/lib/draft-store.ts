@@ -4,7 +4,7 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 // 저장하지 못한 원문을 브라우저에 남겨 둔다. 서버에 없는 상태이므로 Query가 아니라
-// Zustand가 맡는다 (docs/design/07의 상태 계층).
+// Zustand가 맡는다 (docs/architecture.md의 프론트엔드 상태 계층).
 type DraftStore = {
   drafts: Record<string, string>;
   previewOpen: boolean;

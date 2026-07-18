@@ -30,7 +30,7 @@ pub enum SearchError {
 
 /// 한국어는 어절이 조사로 붙어 공백 분리만으로는 부분 일치가 안 된다. 형태소 사전을
 /// 두면 정확도가 오르지만 외부 사전 파일이 생겨 "단일 바이너리로 곧장 실행"이라는
-/// 요구사항(docs/design/06)과 어긋나므로, 사전 없이 동작하는 문자 n-gram을 쓴다.
+/// 요구사항(docs/architecture.md)과 어긋나므로, 사전 없이 동작하는 문자 n-gram을 쓴다.
 const KOREAN_TOKENIZER: &str = "korean_ngram";
 
 pub struct SearchHit {

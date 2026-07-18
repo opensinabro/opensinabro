@@ -1,73 +1,74 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { PageHeader } from "@/components/page-header";
-import { fetchBacklinks } from "@/lib/api";
+import { DocumentActions } from "@/components/document/document-actions";
+import { Notice } from "@/components/layout/notice";
+import { PageHeader } from "@/components/layout/page-header";
+import { WikiPage } from "@/components/layout/wiki-page";
+import { fetchBacklinks } from "@/lib/api/server";
+import { routeTitle, type DocumentRouteProps } from "@/lib/document-route";
+import { pageTitle } from "@/lib/site";
+import { wikiPath } from "@/lib/wiki-path";
 
-type PageProps = {
-  params: Promise<{ title: string[] }>;
-};
-
-function joinTitle(segments: string[]) {
-  return segments.map(decodeURIComponent).join("/");
+export async function generateMetadata({ params }: DocumentRouteProps) {
+  return { title: pageTitle(await routeTitle(params), "역링크") };
 }
 
-export async function generateMetadata({ params }: PageProps) {
-  const { title } = await params;
-  return { title: `${joinTitle(title)} (역링크) - 오픈시나브로` };
-}
-
-export default async function BacklinkPage({ params }: PageProps) {
-  const title = joinTitle((await params).title);
+export default async function BacklinkPage({ params }: DocumentRouteProps) {
+  const title = await routeTitle(params);
   const result = await fetchBacklinks(title);
 
   if (result.kind === "missing") notFound();
+
+  // 역링크는 탭에 없는 도구 화면이라 어느 탭도 현재가 아니다 — 탭 줄은 그대로 걸어
+  // 돌아가는 길이 다른 문서 화면과 같은 자리에 있게 한다.
+  const header = (
+    <PageHeader
+      title={title}
+      note="이 문서를 링크하거나 포함하는 문서"
+      actions={<DocumentActions title={title} />}
+    />
+  );
+
+  if (result.kind === "unauthorized") {
+    return (
+      <WikiPage header={header}>
+        <Notice>로그인해야 볼 수 있습니다.</Notice>
+      </WikiPage>
+    );
+  }
+
   if (result.kind === "forbidden") {
     return (
-      <article className="px-6 py-5">
-        <p className="text-muted">이 문서의 역링크를 볼 권한이 없습니다.</p>
-      </article>
+      <WikiPage header={header}>
+        <Notice>이 문서의 역링크를 볼 권한이 없습니다.</Notice>
+      </WikiPage>
     );
   }
 
   const { entries } = result.data;
 
   return (
-    <article className="min-w-0 pb-7">
-      <PageHeader
-        title={title}
-        note="이 문서를 링크하거나 포함하는 문서"
-        actions={
-          <Link
-            href={`/w/${title}`}
-            className="rounded border border-line px-2.5 py-1 text-[13px] text-body hover:border-accent hover:text-accent-deep"
-          >
-            문서로
-          </Link>
-        }
-      />
-
+    <WikiPage header={header}>
       {entries.length === 0 ? (
-        <p className="px-6 pt-4 text-muted">
-          이 문서를 가리키는 문서가 아직 없습니다.
-        </p>
+        <Notice>이 문서를 가리키는 문서가 아직 없습니다.</Notice>
       ) : (
-        <ul className="m-0 max-w-[900px] list-none px-6 pt-4">
+        <ul className="m-0 list-none p-0">
           {entries.map((entry) => (
             <li
               key={`${entry.kind}:${entry.title}`}
-              className="flex items-baseline gap-2.5 border-b border-line-soft py-2 text-[13.5px]"
+              className="text-list flex items-baseline gap-2.5 border-b border-line-soft py-2"
             >
               <Link
-                href={`/w/${entry.title}`}
+                href={wikiPath.read(entry.title)}
                 className="text-link hover:underline"
               >
                 {entry.title}
               </Link>
-              <span className="text-faint">{entry.kind}</span>
+              <span className="text-faint">{entry.kindLabel}</span>
             </li>
           ))}
         </ul>
       )}
-    </article>
+    </WikiPage>
   );
 }

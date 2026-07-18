@@ -8,7 +8,7 @@
 //!   "the seed엔 있는데 우리가 모르는 문법"을 자동으로 드러낸다.
 //!
 //! 코퍼스는 `tools/fetch-parity-corpus.py`가 `target/parity-corpus/`에 받아 둔다.
-//! 근거와 기법은 docs/design/04-namuwiki-parity.md 참고.
+//! 근거와 기법은 tools/parity/README.md 참고.
 
 mod corpus;
 mod normalize;

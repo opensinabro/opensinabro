@@ -162,7 +162,7 @@ pub async fn render_document(
     }
 }
 
-/// 바이너리 서빙 경로 (docs/design/07 URL 설계).
+/// 바이너리 서빙 경로 (docs/architecture.md의 URL 설계).
 fn file_url_of(file_name: &str) -> String {
     format!("/file/{file_name}")
 }

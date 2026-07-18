@@ -21,7 +21,6 @@ namumark-backend-namuwiki = { workspace = true }
 
 axum = { workspace = true, features = ["multipart"] }
 tokio = { workspace = true }
-askama = { workspace = true }
 sqlx = { workspace = true }
 chrono = { workspace = true }
 thiserror = { workspace = true }

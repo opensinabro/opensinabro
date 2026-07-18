@@ -1,4 +1,4 @@
--- wiki-document: 문서·리비전·역링크·파일·렌더 캐시 (docs/design/08)
+-- wiki-document: 문서·리비전·역링크·파일·렌더 캐시 (docs/architecture.md)
 
 CREATE TABLE document (
     id           BIGSERIAL PRIMARY KEY,

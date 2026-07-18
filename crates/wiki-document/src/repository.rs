@@ -63,6 +63,8 @@ pub struct RevisionRecord {
     pub created_at: DateTime<Utc>,
     /// 사용자 이름, 비로그인이면 IP 주소.
     pub author: String,
+    /// 내용이 가려진 리비전인가. 목록에는 남고 원문만 가린다.
+    pub hidden: bool,
 }
 
 /// 최근 변경 한 줄 — 어떤 문서의 어떤 리비전인가.
@@ -155,7 +157,7 @@ pub async fn read_source(pool: &PgPool, title: &DocumentTitle) -> Result<Option<
     })
 }
 
-/// "존재하는 문서" = 최신 리비전이 삭제가 아닌 문서 (docs/design/08).
+/// "존재하는 문서" = 최신 리비전이 삭제가 아닌 문서 (docs/architecture.md).
 pub async fn document_exists(pool: &PgPool, title: &DocumentTitle) -> Result<bool> {
     Ok(read_source(pool, title).await?.is_some())
 }
@@ -196,11 +198,12 @@ pub async fn revision_history(
             DateTime<Utc>,
             Option<String>,
             Option<String>,
+            bool,
         ),
     >(
         "SELECT revision.external_id, revision.sequence, revision_kind.name,
                 revision.comment, revision.content_bytes, revision.created_at,
-                wiki_user.name, actor.ip_address
+                wiki_user.name, actor.ip_address, revision.hidden
          FROM revision
          JOIN document ON document.id = revision.document_id
          JOIN namespace ON namespace.id = document.namespace_id
@@ -220,7 +223,7 @@ pub async fn revision_history(
     Ok(rows
         .into_iter()
         .map(
-            |(external_id, sequence, kind, comment, content_bytes, created_at, user, ip)| {
+            |(external_id, sequence, kind, comment, content_bytes, created_at, user, ip, hidden)| {
                 RevisionRecord {
                     external_id,
                     sequence,
@@ -229,6 +232,7 @@ pub async fn revision_history(
                     content_bytes,
                     created_at,
                     author: user.or(ip).unwrap_or_default(),
+                    hidden,
                 }
             },
         )
@@ -305,6 +309,9 @@ pub async fn recent_changes(pool: &PgPool, limit: i64) -> Result<Vec<RecentChang
                         content_bytes,
                         created_at,
                         author: user.or(ip).unwrap_or_default(),
+                        // 최근 변경은 가려진 리비전인지 구분하지 않는다 — 목록이
+                        // 드러내는 것은 제목과 편집 사실뿐이고 내용은 싣지 않는다.
+                        hidden: false,
                     },
                 }
             },
@@ -359,7 +366,7 @@ pub async fn record_revision(
 
 /// 문서를 다른 제목으로 옮긴다.
 ///
-/// 문서의 항등은 id라 제목 컬럼만 바꾸면 역사·토론·ACL이 따라온다(docs/design/08).
+/// 문서의 항등은 id라 제목 컬럼만 바꾸면 역사·토론·ACL이 따라온다(docs/architecture.md).
 /// 옮길 자리에 이미 역사가 있는 문서가 있으면 **서로 맞바꾼다** — the seed의 동작이고,
 /// 그래야 잘못 만든 제목과 본래 제목을 뒤집는 일이 역사를 잃지 않고 된다.
 pub async fn move_document(
@@ -614,89 +621,6 @@ pub async fn replace_references(
         .execute(pool)
         .await?;
     }
-
-    Ok(())
-}
-
-/// 현재 리비전에 대한 렌더 결과가 캐시에 있으면 꺼낸다.
-///
-/// 렌더는 문서가 참조하는 다른 문서의 상태에 따라 여러 번 돌 수 있으므로(include가
-/// 끌어온 원문 안의 링크), 보기 요청마다 되풀이하지 않도록 결과를 남긴다.
-pub async fn cached_render(pool: &PgPool, title: &DocumentTitle) -> Result<Option<String>> {
-    let row = sqlx::query_as::<_, (String,)>(
-        "SELECT render_cache.html
-         FROM render_cache
-         JOIN document ON document.id = render_cache.document_id
-         JOIN namespace ON namespace.id = document.namespace_id
-         WHERE namespace.name = $1
-           AND document.title = $2
-           AND render_cache.revision_id = (
-               SELECT id FROM revision
-               WHERE document_id = document.id
-               ORDER BY sequence DESC
-               LIMIT 1
-           )",
-    )
-    .bind(title.namespace.as_str())
-    .bind(&title.name)
-    .fetch_optional(pool)
-    .await?;
-
-    Ok(row.map(|(html,)| html))
-}
-
-/// 현재 리비전의 렌더 결과를 캐시에 둔다.
-pub async fn store_render(pool: &PgPool, title: &DocumentTitle, html: &str) -> Result<()> {
-    let Some(record) = find_document(pool, title).await? else {
-        return Ok(());
-    };
-
-    let Some((revision_id,)) = sqlx::query_as::<_, (i64,)>(
-        "SELECT id FROM revision WHERE document_id = $1 ORDER BY sequence DESC LIMIT 1",
-    )
-    .bind(record.identifier.as_raw())
-    .fetch_optional(pool)
-    .await?
-    else {
-        return Ok(());
-    };
-
-    sqlx::query(
-        "INSERT INTO render_cache (document_id, revision_id, html, rendered_at)
-         VALUES ($1, $2, $3, $4)
-         ON CONFLICT (document_id) DO UPDATE
-           SET revision_id = excluded.revision_id,
-               html = excluded.html,
-               rendered_at = excluded.rendered_at",
-    )
-    .bind(record.identifier.as_raw())
-    .bind(revision_id)
-    .bind(html)
-    .bind(Utc::now())
-    .execute(pool)
-    .await?;
-
-    Ok(())
-}
-
-/// 이 문서를 가리키는 문서들의 렌더 캐시를 버린다.
-///
-/// 문서가 생기거나 사라지면 그것을 링크한 문서의 빨간 링크 표시가 달라지고,
-/// include·리다이렉트 대상이면 내용 자체가 달라지기 때문이다.
-pub async fn invalidate_referrers(pool: &PgPool, title: &DocumentTitle) -> Result<()> {
-    sqlx::query(
-        "DELETE FROM render_cache
-         WHERE document_id IN (
-             SELECT document_reference.source_document_id
-             FROM document_reference
-             JOIN namespace ON namespace.id = document_reference.target_namespace_id
-             WHERE namespace.name = $1 AND document_reference.target_title = $2
-         )",
-    )
-    .bind(title.namespace.as_str())
-    .bind(&title.name)
-    .execute(pool)
-    .await?;
 
     Ok(())
 }

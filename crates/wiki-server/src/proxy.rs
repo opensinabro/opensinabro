@@ -1,7 +1,7 @@
 //! 프론트엔드 프록시.
 //!
 //! 브라우저의 진입점은 언제나 axum이고, API가 아닌 요청은 Next.js가 그린다
-//! (docs/design/07). 오리진이 하나라 세션 쿠키가 그대로 흐르고 CORS가 필요 없다.
+//! (docs/architecture.md). 오리진이 하나라 세션 쿠키가 그대로 흐르고 CORS가 필요 없다.
 
 use axum::body::Body;
 use axum::extract::{ConnectInfo, Request, State};

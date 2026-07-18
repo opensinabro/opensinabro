@@ -1,4 +1,4 @@
--- 닫힌 값 집합은 열거 테이블로 둔다 (docs/design/08). 코드는 name으로 참조하고,
+-- 닫힌 값 집합은 열거 테이블로 둔다 (docs/architecture.md). 코드는 name으로 참조하고,
 -- 값 추가는 DDL이 아니라 이 시드에 행을 더하는 일이 된다.
 
 CREATE TABLE namespace (

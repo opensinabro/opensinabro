@@ -5,7 +5,7 @@ use uuid::Uuid;
 /// CSRF 토큰을 담는 쿠키 이름.
 const CSRF_COOKIE: &str = "csrf_token";
 
-/// 상태를 바꾸는 폼에 쓰는 CSRF 방어 (docs/design/06 보안 표준).
+/// 상태를 바꾸는 폼에 쓰는 CSRF 방어 (docs/architecture.md의 보안 표준).
 ///
 /// 세션 저장소가 아직 없는 단계라 double-submit 쿠키 방식을 쓴다 — 같은 토큰을
 /// 쿠키와 폼 필드에 함께 실어 보내고, 제출 때 둘이 같은지 본다. 다른 출처의 페이지는

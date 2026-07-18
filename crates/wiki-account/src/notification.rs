@@ -38,7 +38,7 @@ pub struct Notification {
 /// 알림을 남긴다.
 ///
 /// payload에는 문서 제목처럼 표시에 쓸 값만 담는다 — 외래키로 문서를 참조하면
-/// account가 document를 향하게 되어 의존 그래프가 순환한다 (docs/design/07).
+/// account가 document를 향하게 되어 의존 그래프가 순환한다 (docs/architecture.md).
 pub async fn notify(
     pool: &PgPool,
     user: UserIdentifier,
