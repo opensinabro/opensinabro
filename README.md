@@ -64,6 +64,8 @@ cargo test
 
 ## 문서
 
+전체 목록과 읽는 순서는 [문서 인덱스](docs/README.md)에 있습니다.
+
 - [나무마크 문법 스펙](docs/spec/namumark.md) — the seed 동작을 대조실험으로 규명한 구현자용 정밀 스펙.
 - [구현 현황 — 누락과 차이](docs/spec/implementation-status.md) — 우리 렌더러가 the seed와 다르거나 아직 구현하지 않은 지점.
 - [설계 문서](docs/design) — 구문 트리·렌더 파이프라인·크레이트 구조·파리티 검증·위키 서버.

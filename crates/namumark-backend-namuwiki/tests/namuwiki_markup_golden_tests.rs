@@ -10,7 +10,7 @@ use std::path::Path;
 #[test]
 fn namuwiki_markup_golden_fixtures() {
     let fixtures_directory = Path::new(env!("CARGO_MANIFEST_DIR"))
-        .join("../../fixtures")
+        .join("../../fixtures/documents")
         .canonicalize()
         .expect("픽스처 디렉토리");
     let golden_directory = Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/golden-namuwiki");

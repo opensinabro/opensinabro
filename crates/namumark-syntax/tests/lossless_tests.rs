@@ -14,7 +14,7 @@ const KITCHEN_SINK: &str = include_str!("../../../fixtures/corpus/termination_co
 
 #[test]
 fn fixtures_roundtrip() {
-    let fixtures_directory = Path::new(env!("CARGO_MANIFEST_DIR")).join("../../fixtures");
+    let fixtures_directory = Path::new(env!("CARGO_MANIFEST_DIR")).join("../../fixtures/documents");
     for entry in fs::read_dir(&fixtures_directory).expect("fixtures 읽기 실패") {
         let path = entry.expect("entry").path();
         if path

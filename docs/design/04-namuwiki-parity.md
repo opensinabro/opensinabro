@@ -145,7 +145,7 @@ cargo run -p namumark-parser --example residue_scan -- <문서디렉토리>/*.na
 
 ### 골든 스냅샷
 
-`fixtures/`의 실제 문서 12건에 대한 AST·마크업 골든이 파리티 게이트다. 구조를 바꿔도
+`fixtures/documents/`의 실제 문서 12건에 대한 AST·마크업 골든이 파리티 게이트다. 구조를 바꿔도
 골든이 무변경으로 통과해야 한다.
 
 여기에 **문법 회귀 코퍼스**(`fixtures/corpus/`, 287건)가 짝으로 붙는다. 실제 문서 골든은

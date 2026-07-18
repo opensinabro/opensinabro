@@ -1,4 +1,4 @@
-//! 실제 나무위키 문서(fixtures/*.namu)를 파싱한 결과를 골든 스냅샷과 비교한다.
+//! 실제 나무위키 문서(fixtures/documents/*.namu)를 파싱한 결과를 골든 스냅샷과 비교한다.
 //!
 //! 갱신: `UPDATE_GOLDEN=1 cargo test --test golden_tests`
 //!
@@ -12,7 +12,7 @@ use std::path::Path;
 
 #[test]
 fn golden_fixtures() {
-    let fixtures_directory = Path::new(env!("CARGO_MANIFEST_DIR")).join("../../fixtures");
+    let fixtures_directory = Path::new(env!("CARGO_MANIFEST_DIR")).join("../../fixtures/documents");
     let golden_directory = Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/golden-ast");
     fs::create_dir_all(&golden_directory).expect("golden 디렉토리 생성 실패");
     let update = std::env::var("UPDATE_GOLDEN").is_ok();

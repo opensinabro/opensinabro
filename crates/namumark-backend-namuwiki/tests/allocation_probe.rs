@@ -43,7 +43,10 @@ fn render_resources_do_not_exceed_baseline() {
     ];
 
     for (name, maximum_allocation_count) in BASELINES {
-        let path = format!("{}/../../fixtures/{name}.namu", env!("CARGO_MANIFEST_DIR"));
+        let path = format!(
+            "{}/../../fixtures/documents/{name}.namu",
+            env!("CARGO_MANIFEST_DIR")
+        );
         let source = std::fs::read_to_string(&path).expect("픽스처");
         let document = namumark_parser::parse(&source);
         let tree = namumark_render::build_render_tree(&document, &EmptyContext);

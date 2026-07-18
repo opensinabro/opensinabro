@@ -20,9 +20,15 @@
   재구성할 수 있고, 순번 노출로 인한 열거·규모 추정을 막는다.
 - **행위 주체는 actor로 통일.** 로그인 사용자와 IP 사용자를 한 타입으로 참조해
   리비전·토론·편집요청·aclgroup이 같은 외래키를 쓴다.
-- **사용자는 항등과 부속을 분리한다.** user는 항등(이름)만 갖고, 인증 수단·이메일·
-  개인 설정은 각자의 테이블로 — 인증 방식 추가(passkey·OAuth)나 이메일 교체가
-  user 행과 그 참조들을 건드리지 않는다.
+- **사용자는 항등과 부속을 분리하고, 부속은 다중을 기본으로 둔다.** `wiki_user`는
+  항등(이름)만 갖고 인증 수단·이메일·개인 설정은 각자의 테이블이다. **인증 수단은
+  여러 개**(보안키 여러 대, 비밀번호 + TOTP + OAuth 병행)이고 **이메일도 여러 개**
+  (하나가 주 주소)일 수 있다 — 단일성이 필요한 것만 부분 유니크 인덱스로 제약한다
+  (비밀번호 1개, 주 이메일 1개). 인증 방식 추가나 이메일 교체가 `wiki_user` 행과 그
+  참조들을 건드리지 않는다.
+- **상태를 지우지 않고 이력으로 쌓는다.** 권한 회수·차단 해제처럼 되돌릴 수 있는
+  상태는 행 삭제가 아니라 revoked_at·removed_at으로 끝을 표시하고, 활성 여부는
+  부분 유니크 인덱스가 보장한다 — 감사 로그가 원본 테이블에서 그대로 나온다.
 - **파생 자료는 원본에서 재구성 가능해야 한다.** 역링크·검색 색인·렌더 캐시는 전부
   리비전에서 다시 만들 수 있다 — 스키마 변경·장애 복구 시 재구축이 탈출구다.
 - **표준 SQL 컨벤션.** 테이블·컬럼은 snake_case 단수형. SQL 예약어는 회피한다
@@ -59,7 +65,7 @@ revision
   external_id   UUID UNIQUE           -- 외부 노출 식별자 (?uuid=)
   document_id   INTEGER → document
   sequence      INTEGER               -- 문서 안 순번 (r1, r2, …)
-  kind          TEXT                  -- create·edit·move·delete·restore·revert
+  kind          TEXT                  -- create·edit·move·delete·restore·revert·import
   actor_id      INTEGER → actor
   content       TEXT NULL             -- 원문 전문. delete면 NULL
   comment       TEXT                  -- 편집·삭제 사유
@@ -91,10 +97,16 @@ document_reference
   INDEX (target_namespace, target_title)
 
 render_cache
-  document_id   INTEGER → document
+  document_id   INTEGER PK → document  -- 문서당 한 행 (현재 리비전의 렌더 결과)
   revision_id   INTEGER → revision
   html          TEXT
   rendered_at   TIMESTAMP
+
+star
+  user_id       INTEGER → wiki_user   -- 구독자
+  document_id   INTEGER → document    -- 구독한 문서
+  created_at    TIMESTAMP
+  PRIMARY KEY (user_id, document_id)
 ```
 
 - 문서 저장 시 resolve 결과에서 재작성한다(그 문서의 행 전체 삭제 후 삽입).
@@ -104,6 +116,9 @@ render_cache
   해당 source들의 render_cache만 무효화한다. include·redirect 대상의 내용 변경도 동일.
 - 검색 색인(tantivy)은 DB 밖 파일이다 — 리비전 저장 시 동기 갱신(M1), 전체 재색인
   명령을 항상 제공.
+- `star`(문서 구독)는 사용자 기능이지만 wiki-document가 소유한다 — wiki-account에 두면
+  account → document 참조가 생겨 document → account(리비전의 actor)와 순환한다.
+  document → account 방향은 이미 성립하므로 여기서는 순환이 없다.
 
 ```sql
 file_content
@@ -112,6 +127,7 @@ file_content
   byte_size     INTEGER
   width         INTEGER NULL
   height        INTEGER NULL
+  created_at    TIMESTAMP
 
 file_revision
   revision_id   INTEGER PK → revision -- 파일 이름공간 문서의 리비전에 1:1
@@ -126,7 +142,7 @@ file_revision
 - `file_content`는 내용 주소(해시)라 external_id가 필요 없다 — 해시 자체가 노출돼도
   열거·규모 추정 정보가 아니다.
 
-## wiki-account — 행위 주체·인증·알림·북마크
+## wiki-account — 행위 주체·인증·알림
 
 ```sql
 actor
@@ -144,16 +160,25 @@ wiki_user
   created_at    TIMESTAMP
 
 user_credential
+  id            INTEGER PK            -- 내부 전용
   user_id       INTEGER → wiki_user
-  kind          TEXT                  -- password·totp (추후 passkey·oauth)
-  secret        TEXT                  -- password: argon2 해시 / totp: 시크릿
-  updated_at    TIMESTAMP
-  PRIMARY KEY (user_id, kind)
+  kind          TEXT                  -- password·totp·passkey·oauth
+  label         TEXT NULL             -- 사용자가 붙인 이름 ("업무용 보안키")
+  identifier    TEXT NULL             -- passkey: credential id / oauth: 제공자+subject
+  secret        TEXT                  -- password: argon2 해시 / totp: 시크릿 / passkey: 공개키
+  created_at    TIMESTAMP
+  last_used_at  TIMESTAMP NULL
+  UNIQUE (kind, identifier)                 -- 같은 보안키·외부 계정이 두 사용자에 붙지 않게
+  UNIQUE (user_id) WHERE kind = 'password'  -- 비밀번호만 사용자당 하나
 
 user_email
+  id            INTEGER PK            -- 내부 전용
   user_id       INTEGER → wiki_user
   email         TEXT UNIQUE
   verified_at   TIMESTAMP NULL        -- 가입·기기 인증 흐름의 상태
+  is_primary    BOOLEAN               -- 알림·계정 복구 수신 주소
+  created_at    TIMESTAMP
+  UNIQUE (user_id) WHERE is_primary   -- 주 주소는 하나
 
 user_preference
   user_id       INTEGER → wiki_user
@@ -165,21 +190,16 @@ notification
   id            INTEGER PK
   user_id       INTEGER → wiki_user
   kind          TEXT
-  payload       JSON
+  payload       JSON                  -- 문서 참조는 FK가 아닌 제목으로 (역방향 의존 회피)
   read_at       TIMESTAMP NULL
   created_at    TIMESTAMP
-
-star
-  user_id       INTEGER → wiki_user
-  document_id   INTEGER → document    -- 구독한 문서
-  created_at    TIMESTAMP
-  PRIMARY KEY (user_id, document_id)
 ```
 
-- **시스템 사용자**: 덤프 임포트·자동 편집의 주체는 `kind=system` user 하나다.
+- **시스템 사용자**: 덤프 임포트·자동 편집의 주체는 `kind=system` wiki_user 하나다.
   credential이 없어 로그인할 수 없고, 그 actor가 임포트 리비전의 actor_id가 된다.
-- `star.document_id`가 wiki-document를 참조하지만 소유는 wiki-account다(구독은 사용자
-  기능) — 참조 방향은 account → document.
+- wiki-account는 **다른 크레이트를 참조하지 않는다** — 의존 그래프의 뿌리다. 문서
+  구독(star)이 여기 있으면 account → document 참조가 생겨 document → account(리비전의
+  actor)와 순환하므로, star는 wiki-document가 소유한다(위).
 
 ## wiki-authorization — ACL·aclgroup·perm
 
@@ -205,6 +225,7 @@ acl_group_member
   group_id      INTEGER → acl_group
   actor_id      INTEGER NULL → actor  -- 사용자 또는 단일 IP
   ip_range      TEXT NULL             -- CIDR
+  CHECK (actor_id와 ip_range 중 정확히 하나)
   reason        TEXT
   expires_at    TIMESTAMP NULL
   added_by      INTEGER → actor
@@ -213,18 +234,22 @@ acl_group_member
   removed_by    INTEGER NULL → actor
 
 user_permission
+  id            INTEGER PK            -- 내부 전용
   user_id       INTEGER → wiki_user
   permission    TEXT                  -- admin·grant·aclgroup·nsacl·… (docs/design/06)
   granted_by    INTEGER → actor
   created_at    TIMESTAMP
-  PRIMARY KEY (user_id, permission)
+  revoked_at    TIMESTAMP NULL        -- 회수도 기록으로 남김
+  revoked_by    INTEGER NULL → actor
+  UNIQUE (user_id, permission) WHERE revoked_at IS NULL  -- 활성 권한은 하나
 ```
 
-- `/block-history`는 acl_group_member의 추가·해제와 user_permission 변경을 시간순으로
-  합친 조회다 — 별도 로그 테이블을 두지 않고 원본 행이 곧 기록이 되게 삭제 대신
-  removed_at을 쓴다. user_permission도 회수 기록이 필요하면 같은 방식(회수 행 추가)으로
-  넓힌다.
-- authorization은 document(scope)·account(actor·user)를 참조한다 — 방향은
+- `/block-history`는 acl_group_member의 추가·해제와 user_permission의 부여·회수를
+  시간순으로 합친 조회다 — 별도 로그 테이블 없이 **원본 행이 곧 감사 기록**이 되도록
+  둘 다 삭제 대신 removed_at·revoked_at을 쓴다. 활성 상태는 부분 유니크 인덱스가
+  보장하므로(같은 권한을 회수 후 재부여해도 이력이 쌓인다) 감사 요구(docs/design/06
+  운영 8)와 정합한다.
+- authorization은 document(scope)·account(actor·wiki_user)를 참조한다 — 방향은
   authorization → document·account. 순환 없음.
 
 ## wiki-discussion — 토론·편집요청
@@ -244,9 +269,11 @@ thread_comment
   sequence      INTEGER               -- #번호
   kind          TEXT                  -- comment·status_change·topic_change·document_move
   actor_id      INTEGER → actor
-  content       TEXT
+  content       TEXT                  -- kind=comment의 본문
+  metadata      JSON NULL             -- 관리 조작의 값: {to: 'close'} / {topic: '…'} / {document: '…'}
   admin_marked  BOOLEAN               -- [ADMIN] 발언
-  hidden_by     INTEGER NULL → actor  -- 블라인드
+  hidden_at     TIMESTAMP NULL        -- 블라인드
+  hidden_by     INTEGER NULL → actor
   created_at    TIMESTAMP
   UNIQUE (thread_id, sequence)
 
@@ -263,8 +290,10 @@ edit_request
   created_at       TIMESTAMP
 ```
 
-상태 변경·주제 변경·스레드 이동을 thread_comment의 kind로 스레드 안에 남기는 것은
-the seed의 표시 방식(스레드 타임라인에 관리 조작이 끼어듦)과 같다.
+- 상태 변경·주제 변경·스레드 이동을 thread_comment의 kind로 스레드 안에 남기는 것은
+  the seed의 표시 방식(스레드 타임라인에 관리 조작이 끼어듦)과 같다. 관리 조작의
+  **바뀐 값은 content 문자열이 아니라 metadata**에 둔다 — content를 파싱해 상태를
+  복원하는 구조를 만들지 않는다. `thread.status`는 그 이력의 현재 값(파생)이다.
 
 ## wiki-server — 전역 설정·세션
 
@@ -275,6 +304,32 @@ site_setting
 ```
 
 세션은 tower-sessions의 저장소(DB 테이블)를 그대로 쓴다 — 스키마는 그 크레이트가 관리.
+
+## 모델링 판단 (정론성 검토)
+
+값 집합·다형 데이터·KV처럼 정론이 갈리는 자리마다 어느 쪽을 왜 택했는지 남긴다.
+
+- **고정 집합 문자열(namespace·kind·status·action·permission)**: 참조 테이블 대신
+  TEXT + 코드 enum. 값이 **코드의 분기와 1:1**이라(이름공간마다 ACL 기본값·렌더 취급이
+  다르다) DB에 행으로 두면 두 곳이 어긋난다. 운영자가 늘릴 수 있어야 하는 것은
+  이름공간뿐인데 그조차 코드 지원이 필요하므로 설정(site_setting) + 코드로 간다.
+  DB 제약은 CHECK로 건다.
+- **다형 데이터(revision.metadata·thread_comment.metadata·notification.payload)**:
+  kind별 별도 테이블 대신 JSON. 조인해서 질의할 일이 없고(표시 시점에 그 행과 함께
+  읽는다) kind가 늘 때 테이블이 늘지 않는다. 대신 **질의·정렬에 쓰는 값은 JSON에 두지
+  않는다** — `content_bytes`·`created_at`처럼 목록 화면이 쓰는 것은 컬럼이다.
+- **KV 테이블(user_preference·site_setting)**: EAV는 일반적으로 안티패턴이지만, 여기
+  값들은 서로 관계가 없고 조인·집계 대상이 아니며 스키마 진화가 잦은 **설정**이다.
+  값이 관계를 갖기 시작하면(예: 스킨별 옵션 묶음) 그때 정규 테이블로 뺀다.
+- **파생값 저장(revision.content_bytes·thread.status)**: 원본에서 계산 가능하지만
+  목록 화면이 매번 전문을 읽거나 이력을 접어야 하므로 저장한다. 원칙의 "파생 자료는
+  재구성 가능"을 만족하므로 불일치 시 원본이 정답이다.
+- **file_revision.license TEXT**: 라이선스 목록은 위키 설정이 정하고(the seed도 업로드
+  시 선택지를 위키가 제공) 저장은 선택된 식별자 문자열이다 — 참조 테이블은 설정과
+  이중 관리가 된다.
+- **acl_rule의 condition_kind/condition_value**: 태그드 유니온을 두 컬럼으로 편 형태.
+  조건 종류마다 컬럼을 나누면(user_name·ip_range·country…) 대부분 NULL인 넓은 테이블이
+  된다. 평가기가 kind로 분기해 value를 해석하는 것이 코드와도 1:1이다.
 
 ## 검토한 대안
 
