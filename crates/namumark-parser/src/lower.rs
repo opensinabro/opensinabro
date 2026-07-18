@@ -256,9 +256,13 @@ fn group_header(node: &SyntaxNode) -> String {
 }
 
 fn first_marker_text(node: &SyntaxNode) -> Option<String> {
+    first_token_text(node, SyntaxKind::Marker)
+}
+
+fn first_token_text(node: &SyntaxNode, kind: SyntaxKind) -> Option<String> {
     node.children_with_tokens()
         .filter_map(NodeOrToken::into_token)
-        .find(|token| token.kind() == SyntaxKind::Marker)
+        .find(|token| token.kind() == kind)
         .map(|token| token.text().to_string())
 }
 
@@ -307,8 +311,8 @@ fn lower_inline(node: &SyntaxNode) -> Option<Inline> {
         SyntaxKind::Literal => Inline::Literal(raw_text_tokens(node)),
         SyntaxKind::InlineHtml => Inline::Html(template_of(&raw_text_tokens(node))),
         SyntaxKind::ColoredText => {
-            let marker = first_marker_text(node)?;
-            let (color, dark_color, _) = text::parse_color_marker(&marker[3..])?;
+            let value = first_token_text(node, SyntaxKind::ColorValue)?;
+            let (color, dark_color) = text::parse_color_specification(&value)?;
             Inline::Colored(ColoredText {
                 color,
                 dark_color,
@@ -316,8 +320,8 @@ fn lower_inline(node: &SyntaxNode) -> Option<Inline> {
             })
         }
         SyntaxKind::SizedText => {
-            let marker = first_marker_text(node)?;
-            let (level, _) = text::parse_size_marker(&marker[3..])?;
+            let value = first_token_text(node, SyntaxKind::SizeLevel)?;
+            let (level, _) = text::parse_size_marker(&value)?;
             Inline::Sized(SizedText {
                 level,
                 content: assemble_inlines(node),

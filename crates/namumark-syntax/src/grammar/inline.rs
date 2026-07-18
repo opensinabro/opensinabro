@@ -78,9 +78,10 @@ fn consume_literal(parser: &mut Parser<'_>, position: usize, end: usize) -> usiz
     let marker = parser.start_node();
     if let Some(html) = content.strip_prefix("#!html ") {
         let html_start = content_range.end - html.len();
-        parser.emit_token(SyntaxKind::Marker, html_start);
+        parser.emit_token(SyntaxKind::DelimiterOpen, content_range.start);
+        parser.emit_token(SyntaxKind::Directive, html_start);
         parser.emit_token(SyntaxKind::Text, content_range.end);
-        parser.emit_token(SyntaxKind::Marker, position + consumed);
+        parser.emit_token(SyntaxKind::DelimiterClose, position + consumed);
         marker.complete(parser, SyntaxKind::InlineHtml);
     } else if let Some(rest) = text::strip_directive(content, "#!wiki") {
         // 링크 표시부처럼 인라인 문맥에서 열린 `#!wiki`. 헤더 잔여와 뒷줄이 모두 내용이라
@@ -97,20 +98,26 @@ fn consume_literal(parser: &mut Parser<'_>, position: usize, end: usize) -> usiz
         marker.complete(parser, SyntaxKind::WikiStyle);
     } else if let Some((_, inner)) = text::parse_size_marker(content) {
         let inner_start = content_range.end - inner.len();
-        parser.emit_token(SyntaxKind::Marker, inner_start);
+        // 크기 단계는 부호+한 자리라 항상 2바이트다.
+        parser.emit_token(SyntaxKind::DelimiterOpen, content_range.start);
+        parser.emit_token(SyntaxKind::SizeLevel, content_range.start + 2);
+        parser.emit_token(SyntaxKind::Separator, inner_start);
         parse_inline_range(parser, inner_start..content_range.end);
-        parser.emit_token(SyntaxKind::Marker, position + consumed);
+        parser.emit_token(SyntaxKind::DelimiterClose, position + consumed);
         marker.complete(parser, SyntaxKind::SizedText);
     } else if let Some((_, _, inner)) = text::parse_color_marker(content) {
         let inner_start = content_range.end - inner.len();
-        parser.emit_token(SyntaxKind::Marker, inner_start);
+        parser.emit_token(SyntaxKind::DelimiterOpen, content_range.start);
+        // 색상 값 뒤에는 내용을 가르는 공백이 반드시 있다(parse_color_marker 계약).
+        parser.emit_token(SyntaxKind::ColorValue, inner_start - 1);
+        parser.emit_token(SyntaxKind::Separator, inner_start);
         parse_inline_range(parser, inner_start..content_range.end);
-        parser.emit_token(SyntaxKind::Marker, position + consumed);
+        parser.emit_token(SyntaxKind::DelimiterClose, position + consumed);
         marker.complete(parser, SyntaxKind::ColoredText);
     } else {
-        parser.emit_token(SyntaxKind::Marker, content_range.start);
+        parser.emit_token(SyntaxKind::DelimiterOpen, content_range.start);
         parser.emit_token(SyntaxKind::Text, content_range.end);
-        parser.emit_token(SyntaxKind::Marker, position + consumed);
+        parser.emit_token(SyntaxKind::DelimiterClose, position + consumed);
         marker.complete(parser, SyntaxKind::Literal);
     }
     consumed
@@ -137,16 +144,17 @@ fn consume_link(parser: &mut Parser<'_>, position: usize, end: usize) -> usize {
 
     parser.emit_token(SyntaxKind::Text, position);
     let marker = parser.start_node();
-    match (kind, display) {
-        (SyntaxKind::Link, Some(display)) => {
-            // `[[대상|` 까지 마커, 표시부는 인라인 자식으로
+    parser.emit_token(SyntaxKind::DelimiterOpen, position + 2);
+    parser.emit_token(SyntaxKind::LinkTarget, position + 2 + target.len());
+    match display {
+        Some(display) => {
             let display_start = position + 2 + target.len() + 1;
-            parser.emit_token(SyntaxKind::Marker, display_start);
+            parser.emit_token(SyntaxKind::Separator, display_start);
             parse_inline_range(parser, display_start..display_start + display.len());
-            parser.emit_token(SyntaxKind::Marker, position + consumed);
+            parser.emit_token(SyntaxKind::DelimiterClose, position + consumed);
         }
-        _ => {
-            parser.emit_token(SyntaxKind::Marker, position + consumed);
+        None => {
+            parser.emit_token(SyntaxKind::DelimiterClose, position + consumed);
         }
     }
     marker.complete(parser, kind);
@@ -163,16 +171,18 @@ fn consume_footnote(parser: &mut Parser<'_>, position: usize, end: usize) -> usi
 
     parser.emit_token(SyntaxKind::Text, position);
     let marker = parser.start_node();
+    parser.emit_token(SyntaxKind::DelimiterOpen, position + 2);
     match body.split_once(' ') {
         Some((name, content)) => {
-            // `[*이름 ` 까지 마커
+            parser.emit_token(SyntaxKind::FootnoteName, position + 2 + name.len());
             let content_start = position + 2 + name.len() + 1;
-            parser.emit_token(SyntaxKind::Marker, content_start);
+            parser.emit_token(SyntaxKind::Separator, content_start);
             parse_inline_range(parser, content_start..content_start + content.len());
-            parser.emit_token(SyntaxKind::Marker, position + consumed);
+            parser.emit_token(SyntaxKind::DelimiterClose, position + consumed);
         }
         None => {
-            parser.emit_token(SyntaxKind::Marker, position + consumed);
+            parser.emit_token(SyntaxKind::FootnoteName, position + 2 + body.len());
+            parser.emit_token(SyntaxKind::DelimiterClose, position + consumed);
         }
     }
     marker.complete(parser, SyntaxKind::Footnote);
@@ -186,7 +196,18 @@ fn consume_variable(parser: &mut Parser<'_>, position: usize, end: usize) -> usi
     };
     parser.emit_token(SyntaxKind::Text, position);
     let node = parser.start_node();
-    parser.emit_token(SyntaxKind::Marker, position + shape.length);
+    parser.emit_token(SyntaxKind::DelimiterOpen, position + 1);
+    parser.emit_token(SyntaxKind::VariableName, position + shape.name.end);
+    match &shape.default {
+        Some(default) => {
+            parser.emit_token(SyntaxKind::Separator, position + default.start);
+            parser.emit_token(SyntaxKind::VariableDefault, position + default.end);
+            parser.emit_token(SyntaxKind::DelimiterClose, position + shape.length);
+        }
+        None => {
+            parser.emit_token(SyntaxKind::DelimiterClose, position + shape.length);
+        }
+    }
     node.complete(parser, SyntaxKind::TemplateVariable);
     shape.length
 }
@@ -212,7 +233,16 @@ fn consume_macro(parser: &mut Parser<'_>, position: usize, end: usize) -> usize 
     let consumed = close + 1;
     parser.emit_token(SyntaxKind::Text, position);
     let marker = parser.start_node();
-    parser.emit_token(SyntaxKind::Marker, position + consumed);
+    parser.emit_token(SyntaxKind::DelimiterOpen, position + 1);
+    parser.emit_token(SyntaxKind::MacroName, position + 1 + name.len());
+    if name.len() < body.len() {
+        // 인자 있음: `(인자)`. 여는·닫는 괄호는 구분자, 사이가 인자다.
+        let paren_open = position + 1 + name.len();
+        parser.emit_token(SyntaxKind::Separator, paren_open + 1);
+        parser.emit_token(SyntaxKind::MacroArgument, position + body.len());
+        parser.emit_token(SyntaxKind::Separator, position + 1 + body.len());
+    }
+    parser.emit_token(SyntaxKind::DelimiterClose, position + consumed);
     marker.complete(parser, SyntaxKind::MacroCall);
     consumed
 }
@@ -235,9 +265,9 @@ fn consume_styled(parser: &mut Parser<'_>, position: usize, end: usize) -> usize
 
         parser.emit_token(SyntaxKind::Text, position);
         let marker = parser.start_node();
-        parser.emit_token(SyntaxKind::Marker, content_start);
+        parser.emit_token(SyntaxKind::DelimiterOpen, content_start);
         parse_inline_range(parser, content_start..content_start + offset);
-        parser.emit_token(SyntaxKind::Marker, position + consumed);
+        parser.emit_token(SyntaxKind::DelimiterClose, position + consumed);
         marker.complete(parser, kind);
         return consumed;
     }

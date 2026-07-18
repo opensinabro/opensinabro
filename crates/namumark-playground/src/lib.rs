@@ -7,6 +7,8 @@
 
 use namumark_ir::RenderTree;
 use namumark_render::{EmptyContext, build_render_tree};
+use namumark_syntax::{NodeOrToken, SyntaxKind};
+use std::fmt::Write as _;
 use wasm_bindgen::prelude::*;
 
 /// 렌더링 백엔드 하나. 백엔드마다 마크업 어휘와 스타일시트가 다르므로
@@ -70,6 +72,65 @@ impl RenderOutput {
     #[wasm_bindgen(getter)]
     pub fn css(&self) -> String {
         self.css.clone()
+    }
+}
+
+/// 무손실 구문 트리의 리프 토큰을 원문 순서대로 훑어
+/// `[{"kind","parent","text","start"}, ...]` JSON으로 돌려준다.
+///
+/// `kind`는 토큰의 역할(Marker·Text·ListMarker …), `parent`는 토큰을 감싼 노드
+/// (Bold·Heading·Link …)다. 둘을 합치면 "이 조각이 무슨 뜻인지"가 된다.
+/// 토큰 `text`를 이으면 원문이 그대로 복원된다(무손실).
+#[wasm_bindgen]
+pub fn inspect(source: &str) -> String {
+    let tree = namumark_syntax::parse(source);
+    let mut json = String::from("[");
+    let mut first = true;
+    for token in tree
+        .root()
+        .descendants_with_tokens()
+        .filter_map(NodeOrToken::into_token)
+    {
+        if !first {
+            json.push(',');
+        }
+        first = false;
+        let parent = token
+            .parent()
+            .map(|node| kind_name(node.kind()))
+            .unwrap_or_else(|| "Document".to_string());
+        json.push_str(r#"{"kind":""#);
+        json.push_str(&kind_name(token.kind()));
+        json.push_str(r#"","parent":""#);
+        json.push_str(&parent);
+        json.push_str(r#"","start":"#);
+        let _ = write!(json, "{}", usize::from(token.text_range().start()));
+        json.push_str(r#","text":""#);
+        escape_json_into(token.text(), &mut json);
+        json.push_str(r#""}"#);
+    }
+    json.push(']');
+    json
+}
+
+/// SyntaxKind의 변형 이름 그대로(Debug 파생). 프런트가 한국어 설명으로 매핑한다.
+fn kind_name(kind: SyntaxKind) -> String {
+    format!("{kind:?}")
+}
+
+fn escape_json_into(text: &str, out: &mut String) {
+    for character in text.chars() {
+        match character {
+            '"' => out.push_str("\\\""),
+            '\\' => out.push_str("\\\\"),
+            '\n' => out.push_str("\\n"),
+            '\r' => out.push_str("\\r"),
+            '\t' => out.push_str("\\t"),
+            control if (control as u32) < 0x20 => {
+                let _ = write!(out, "\\u{:04x}", control as u32);
+            }
+            other => out.push(other),
+        }
     }
 }
 

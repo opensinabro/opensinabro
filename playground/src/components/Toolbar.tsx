@@ -15,6 +15,8 @@ export function Toolbar() {
   const setBackendId = usePlaygroundStore((state) => state.setBackendId)
   const exampleId = usePlaygroundStore((state) => state.exampleId)
   const loadExample = usePlaygroundStore((state) => state.loadExample)
+  const mode = usePlaygroundStore((state) => state.mode)
+  const setMode = usePlaygroundStore((state) => state.setMode)
 
   return (
     <header className="flex items-center justify-between gap-4 border-b bg-secondary px-4 py-2.5">
@@ -49,6 +51,23 @@ export function Toolbar() {
               ))}
             </SelectContent>
           </Select>
+        </div>
+        <div className="flex rounded-md border p-0.5">
+          {(['preview', 'tokens'] as const).map((value) => (
+            <button
+              key={value}
+              type="button"
+              onClick={() => setMode(value)}
+              className={
+                'rounded px-2.5 py-1 text-xs transition-colors ' +
+                (mode === value
+                  ? 'bg-primary text-primary-foreground'
+                  : 'text-muted-foreground hover:text-foreground')
+              }
+            >
+              {value === 'preview' ? '미리보기' : '토큰'}
+            </button>
+          ))}
         </div>
       </div>
     </header>

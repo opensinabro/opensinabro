@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { Toolbar } from '@/components/Toolbar'
 import { Editor } from '@/components/Editor'
 import { Preview } from '@/components/Preview'
+import { TokenInspector } from '@/components/TokenInspector'
 import { usePlaygroundStore } from '@/store'
 
 export function App() {
@@ -10,6 +11,7 @@ export function App() {
   const render = usePlaygroundStore((state) => state.render)
   const source = usePlaygroundStore((state) => state.source)
   const backendId = usePlaygroundStore((state) => state.backendId)
+  const mode = usePlaygroundStore((state) => state.mode)
   const output = usePlaygroundStore((state) => state.output)
   const error = usePlaygroundStore((state) => state.error)
 
@@ -27,11 +29,15 @@ export function App() {
       <Toolbar />
       <main className="grid min-h-0 flex-1 grid-cols-1 md:grid-cols-2">
         <Editor />
-        <section className="overflow-auto px-6 py-4">
+        <section className="min-h-0 overflow-hidden">
           {error ? (
-            <pre className="whitespace-pre-wrap font-mono text-sm text-destructive">{error}</pre>
+            <pre className="overflow-auto p-4 font-mono text-sm text-destructive">{error}</pre>
+          ) : mode === 'tokens' ? (
+            <TokenInspector />
           ) : (
-            <Preview output={output} />
+            <div className="h-full overflow-auto px-6 py-4">
+              <Preview output={output} />
+            </div>
           )}
         </section>
       </main>

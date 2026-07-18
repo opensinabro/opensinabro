@@ -13,5 +13,6 @@ crate-type = ["cdylib", "rlib"]
 namumark-ir = { path = "../namumark-ir" }
 namumark-parser = { path = "../namumark-parser" }
 namumark-render = { path = "../namumark-render" }
+namumark-syntax = { path = "../namumark-syntax" }
 namumark-backend-namuwiki = { path = "../namumark-backend-namuwiki" }
 wasm-bindgen = "=0.2.120"
