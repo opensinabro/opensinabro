@@ -159,7 +159,13 @@ fn consume_link(parser: &mut Parser<'_>, position: usize, end: usize) -> usize {
         Some(display) => {
             let display_start = position + 2 + target.len() + 1;
             parser.emit_token(SyntaxKind::Separator, display_start);
-            parse_inline_range(parser, display_start..display_start + display.len());
+            // 이미지의 표시부는 `width=200&align=center` 같은 옵션 목록이라 옵션 단위로 쪼갠다.
+            // 링크·분류의 표시부는 인라인 내용이므로 그대로 파싱한다.
+            if kind == SyntaxKind::Image {
+                emit_argument_list(parser, display_start, display, '&');
+            } else {
+                parse_inline_range(parser, display_start..display_start + display.len());
+            }
             parser.emit_token(SyntaxKind::DelimiterClose, position + consumed);
         }
         None => {
@@ -168,6 +174,32 @@ fn consume_link(parser: &mut Parser<'_>, position: usize, end: usize) -> usize {
     }
     marker.complete(parser, kind);
     consumed
+}
+
+/// `id,width=480&…` 같은 인자·옵션 목록을 항목 구분자로 쪼갠다.
+/// 각 항목은 `이름=값`이면 이름·`=`·값으로, 아니면 하나의 인자로 방출한다.
+/// `start`는 목록 첫 글자의 원문 오프셋이다.
+fn emit_argument_list(parser: &mut Parser<'_>, start: usize, list: &str, separator: char) {
+    let mut cursor = start;
+    let mut first = true;
+    for item in list.split(separator) {
+        if !first {
+            parser.emit_token(SyntaxKind::Separator, cursor + separator.len_utf8());
+            cursor += separator.len_utf8();
+        }
+        first = false;
+        match item.split_once('=') {
+            Some((name, _)) => {
+                parser.emit_token(SyntaxKind::ArgumentName, cursor + name.len());
+                parser.emit_token(SyntaxKind::Separator, cursor + name.len() + 1);
+                parser.emit_token(SyntaxKind::ArgumentValue, cursor + item.len());
+            }
+            None => {
+                parser.emit_token(SyntaxKind::MacroArgument, cursor + item.len());
+            }
+        }
+        cursor += item.len();
+    }
 }
 
 fn consume_footnote(parser: &mut Parser<'_>, position: usize, end: usize) -> usize {
@@ -245,10 +277,11 @@ fn consume_macro(parser: &mut Parser<'_>, position: usize, end: usize) -> usize 
     parser.emit_token(SyntaxKind::DelimiterOpen, position + 1);
     parser.emit_token(SyntaxKind::MacroName, position + 1 + name.len());
     if name.len() < body.len() {
-        // 인자 있음: `(인자)`. 여는·닫는 괄호는 구분자, 사이가 인자다.
+        // 인자 있음: `(인자)`. 여는·닫는 괄호는 구분자, 사이는 쉼표로 갈린 인자 목록이다.
         let paren_open = position + 1 + name.len();
         parser.emit_token(SyntaxKind::Separator, paren_open + 1);
-        parser.emit_token(SyntaxKind::MacroArgument, position + body.len());
+        let arguments = &body[name.len() + 1..body.len() - 1];
+        emit_argument_list(parser, paren_open + 1, arguments, ',');
         parser.emit_token(SyntaxKind::Separator, position + 1 + body.len());
     }
     parser.emit_token(SyntaxKind::DelimiterClose, position + consumed);

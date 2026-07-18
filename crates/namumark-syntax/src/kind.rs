@@ -50,6 +50,10 @@ pub enum SyntaxKind {
     CellOptionName,
     /// 표 셀 옵션 값 (`<bgcolor=#fff>`의 `#fff`)
     CellOptionValue,
+    /// 인자 이름 (`[youtube(id,width=480)]`의 `width`, 이미지 `width=200`의 `width`)
+    ArgumentName,
+    /// 인자 값 (`width=480`의 `480`)
+    ArgumentValue,
     /// 인용 줄머리의 `>` (+뒤따르는 공백 1개)
     QuoteMarker,
     /// 들여쓰기/리스트 중첩으로 소비된 선행 공백

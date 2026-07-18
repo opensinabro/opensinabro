@@ -24,6 +24,8 @@ const KIND_LABEL: Record<string, string> = {
   CellOption: '셀 옵션',
   CellOptionName: '셀 옵션 이름',
   CellOptionValue: '셀 옵션 값',
+  ArgumentName: '인자 이름',
+  ArgumentValue: '인자 값',
   QuoteMarker: '인용 표식',
   IndentMarker: '들여쓰기',
   ListMarker: '리스트 표식',

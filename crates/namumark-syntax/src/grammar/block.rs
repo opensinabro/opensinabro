@@ -69,18 +69,12 @@ pub(crate) fn parse_region_blocks(
             continue;
         }
         if is_comment(region, index) {
-            emit_single_line_node(parser, region, index, SyntaxKind::Comment, SyntaxKind::Text);
+            emit_comment_line(parser, region, index);
             index += 1;
             continue;
         }
         if text::parse_redirect(line_text).is_some() {
-            emit_single_line_node(
-                parser,
-                region,
-                index,
-                SyntaxKind::Redirect,
-                SyntaxKind::Text,
-            );
+            emit_redirect_line(parser, region, index);
             index += 1;
             continue;
         }
@@ -301,6 +295,33 @@ fn emit_single_line_node(
     emit_line_prefix(parser, region, index);
     parser.emit_token(content_kind, region.lines[index].content.end);
     marker.complete(parser, node_kind);
+    emit_line_newline(parser, region, index);
+}
+
+/// 주석 줄: 줄머리 `##` 표식과 내용을 나눠 방출한다.
+fn emit_comment_line(parser: &mut Parser<'_>, region: &Region, index: usize) {
+    let comment = parser.start_node();
+    emit_line_prefix(parser, region, index);
+    let content = region.lines[index].content.clone();
+    parser.emit_token(SyntaxKind::Marker, content.start + 2);
+    parser.emit_token(SyntaxKind::Text, content.end);
+    comment.complete(parser, SyntaxKind::Comment);
+    emit_line_newline(parser, region, index);
+}
+
+/// 넘겨주기 줄: `#redirect `/`#넘겨주기 ` 지시자와 대상을 나눠 방출한다.
+fn emit_redirect_line(parser: &mut Parser<'_>, region: &Region, index: usize) {
+    let node = parser.start_node();
+    emit_line_prefix(parser, region, index);
+    let content = region.lines[index].content.clone();
+    let directive_length = if region.line_text(index).starts_with("#redirect ") {
+        "#redirect ".len()
+    } else {
+        "#넘겨주기 ".len()
+    };
+    parser.emit_token(SyntaxKind::Directive, content.start + directive_length);
+    parser.emit_token(SyntaxKind::Text, content.end);
+    node.complete(parser, SyntaxKind::Redirect);
     emit_line_newline(parser, region, index);
 }
 
@@ -691,6 +712,7 @@ fn emit_paragraph_segments(parser: &mut Parser<'_>, region: &Region, lines: Rang
         }
         let comment = parser.start_node();
         emit_line_prefix(parser, region, index);
+        parser.emit_token(SyntaxKind::Marker, region.lines[index].content.start + 2);
         parser.emit_token(SyntaxKind::Text, region.lines[index].content.end);
         emit_line_newline(parser, region, index);
         comment.complete(parser, SyntaxKind::Comment);

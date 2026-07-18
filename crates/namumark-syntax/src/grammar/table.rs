@@ -122,6 +122,7 @@ fn emit_row(
     for line in row.leading_comments.clone() {
         let marker = parser.start_node();
         emit_line_prefix(parser, region, line);
+        parser.emit_token(SyntaxKind::Marker, region.lines[line].content.start + 2);
         parser.emit_token(SyntaxKind::Text, region.lines[line].content.end);
         marker.complete(parser, SyntaxKind::Comment);
         emit_line_newline(parser, region, line);

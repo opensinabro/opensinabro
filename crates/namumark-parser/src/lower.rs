@@ -45,8 +45,8 @@ fn lower_block(node: &SyntaxNode) -> Option<Block> {
             Block::Comment(line.strip_prefix("##").unwrap_or(&line).to_string())
         }
         SyntaxKind::Redirect => {
-            let line = raw_text_tokens(node);
-            Block::Redirect(template_of(&text::parse_redirect(&line)?))
+            // 지시자(`#redirect `)는 별도 토큰이라 Text에는 대상만 남는다.
+            Block::Redirect(template_of(raw_text_tokens(node).trim()))
         }
         _ => return None,
     })
