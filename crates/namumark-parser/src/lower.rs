@@ -28,7 +28,7 @@ fn lower_block(node: &SyntaxNode) -> Option<Block> {
     Some(match node.kind() {
         SyntaxKind::Paragraph => Block::Paragraph(assemble_inlines(node)),
         SyntaxKind::Heading => {
-            let marker = first_marker_text(node).unwrap_or_default();
+            let marker = first_token_text(node, SyntaxKind::DelimiterOpen).unwrap_or_default();
             Block::Heading(Heading {
                 level: marker.bytes().filter(|&byte| byte == b'=').count() as u8,
                 folded: marker.contains('#'),
@@ -115,7 +115,7 @@ fn lower_table(node: &SyntaxNode) -> Block {
         for element in row_node.children_with_tokens() {
             match element {
                 NodeOrToken::Token(token) => {
-                    if token.kind() == SyntaxKind::Marker {
+                    if token.kind() == SyntaxKind::Separator {
                         let text = token.text();
                         if !text.is_empty() && text.bytes().all(|byte| byte == b'|') {
                             pending_pairs += text.len() / 2;
@@ -145,26 +145,26 @@ fn lower_table(node: &SyntaxNode) -> Block {
 fn lower_table_cell(node: &SyntaxNode, pending_pairs: usize) -> TableCell {
     // 마커 배치 규칙(문법 계층과의 계약): `<...>` 나열은 옵션, 콘텐츠 앞의 " " 마커는
     // 선행 정렬 공백, 콘텐츠 뒤의 " " 마커는 후행 정렬 공백이다.
+    // 마커 배치 규칙(문법 계층과의 계약): 내용 노드 앞의 옵션 토큰(`<…>`)은 옵션이고,
+    // AlignmentSpace 토큰은 내용 앞뒤의 정렬 결정 공백이다.
     let mut options_text = String::new();
     let mut leading_space = false;
     let mut trailing_space = false;
     let mut seen_content = false;
     for element in node.children_with_tokens() {
         match element {
-            NodeOrToken::Token(token) if token.kind() == SyntaxKind::Marker => {
-                let token_text = token.text();
-                if token_text.starts_with('<') && !seen_content {
-                    options_text.push_str(token_text);
-                } else if !token_text.trim().is_empty() {
-                    continue;
-                } else if seen_content {
-                    trailing_space = true;
-                } else {
-                    leading_space = true;
+            NodeOrToken::Token(token) => match token.kind() {
+                SyntaxKind::AlignmentSpace => {
+                    if seen_content {
+                        trailing_space = true;
+                    } else {
+                        leading_space = true;
+                    }
                 }
-            }
+                _ if !seen_content => options_text.push_str(token.text()),
+                _ => {}
+            },
             NodeOrToken::Node(_) => seen_content = true,
-            _ => {}
         }
     }
 
@@ -197,20 +197,8 @@ fn lower_table_cell(node: &SyntaxNode, pending_pairs: usize) -> TableCell {
 }
 
 fn lower_code_block(node: &SyntaxNode) -> CodeBlock {
-    let language = node
-        .children_with_tokens()
-        .filter_map(NodeOrToken::into_token)
-        .filter(|token| token.kind() == SyntaxKind::Marker)
-        .find_map(|token| {
-            let text = token
-                .text()
-                .trim_start()
-                .trim_start_matches("{{{")
-                .to_string();
-            let rest = text::strip_directive(&text, "#!syntax")?.trim().to_string();
-            Some(rest)
-        })
-        .filter(|language| !language.is_empty());
+    let language =
+        first_token_text(node, SyntaxKind::CodeLanguage).filter(|language| !language.is_empty());
     CodeBlock {
         language,
         source: raw_content_text(node),
@@ -241,22 +229,6 @@ fn raw_text_tokens(node: &SyntaxNode) -> String {
         .filter(|token| token.kind() == SyntaxKind::Text)
         .map(|token| token.text().to_string())
         .collect()
-}
-
-/// 그룹 헤더 마커에서 지시자 부분만 꺼낸다.
-///
-/// 문단 중간에서 열린 그룹은 마커가 앞 개행까지 머금는다(`"\n{{{#!wiki …"`) —
-/// 무손실 트리라 그 바이트도 어딘가에는 있어야 하기 때문이다. 의미를 볼 때는 걷어낸다.
-fn group_header(node: &SyntaxNode) -> String {
-    first_marker_text(node)
-        .unwrap_or_default()
-        .trim_start()
-        .trim_start_matches("{{{")
-        .to_string()
-}
-
-fn first_marker_text(node: &SyntaxNode) -> Option<String> {
-    first_token_text(node, SyntaxKind::Marker)
 }
 
 fn first_token_text(node: &SyntaxNode, kind: SyntaxKind) -> Option<String> {
@@ -369,9 +341,8 @@ fn lower_inline(node: &SyntaxNode) -> Option<Inline> {
             })
         }
         SyntaxKind::WikiStyle => {
-            let header = group_header(node);
-            let rest = text::strip_directive(&header, "#!wiki").unwrap_or_default();
-            let (style, dark_style, _) = text::parse_wiki_style_attributes(rest);
+            let attributes = first_token_text(node, SyntaxKind::WikiAttributes).unwrap_or_default();
+            let (style, dark_style, _) = text::parse_wiki_style_attributes(&attributes);
             Inline::WikiStyle(WikiStyle {
                 style: style.as_deref().map(template_of),
                 dark_style: dark_style.as_deref().map(template_of),
@@ -399,7 +370,8 @@ fn lower_inline(node: &SyntaxNode) -> Option<Inline> {
         SyntaxKind::CodeBlock => Inline::CodeBlock(lower_code_block(node)),
         SyntaxKind::HtmlBlock => Inline::Html(template_of(&raw_content_text(node))),
         SyntaxKind::ColoredBlock => {
-            let (color, dark_color) = text::parse_color_specification(&group_header(node))?;
+            let value = first_token_text(node, SyntaxKind::ColorValue)?;
+            let (color, dark_color) = text::parse_color_specification(&value)?;
             Inline::Colored(ColoredText {
                 color,
                 dark_color,
@@ -407,7 +379,8 @@ fn lower_inline(node: &SyntaxNode) -> Option<Inline> {
             })
         }
         SyntaxKind::SizedBlock => {
-            let (level, _) = text::parse_size_marker(&group_header(node))?;
+            let value = first_token_text(node, SyntaxKind::SizeLevel)?;
+            let (level, _) = text::parse_size_marker(&value)?;
             Inline::Sized(SizedText {
                 level,
                 content: block_children_as_inlines(node),

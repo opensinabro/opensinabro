@@ -88,12 +88,18 @@ pub(crate) fn parse_region_blocks(
             let content = region.lines[index].content.clone();
             let marker = parser.start_node();
             emit_line_prefix(parser, region, index);
-            parser.emit_token(SyntaxKind::Marker, content.start + shape.content_start);
+            // 여는 `==`/`==#` 뒤에 공백 1칸, 내용, 공백 1칸, 닫는 `==`/`#==`.
+            parser.emit_token(
+                SyntaxKind::DelimiterOpen,
+                content.start + shape.content_start - 1,
+            );
+            parser.emit_token(SyntaxKind::Separator, content.start + shape.content_start);
             inline::parse_inline_range(
                 parser,
                 content.start + shape.content_start..content.start + shape.content_end,
             );
-            parser.emit_token(SyntaxKind::Marker, content.end);
+            parser.emit_token(SyntaxKind::Separator, content.start + shape.content_end + 1);
+            parser.emit_token(SyntaxKind::DelimiterClose, content.end);
             marker.complete(parser, SyntaxKind::Heading);
             emit_line_newline(parser, region, index);
             index += 1;
@@ -438,8 +444,46 @@ fn item_content_run_end(region: &Region, start: usize) -> usize {
 
 /// 항목 줄 다음의 속내용(더 들여쓴 줄)과 그 뒤 빈 줄을 방출하고 다음 인덱스를 준다.
 fn emit_item_continuation(parser: &mut Parser<'_>, region: &Region, start: usize) -> usize {
-    let index = emit_item_content(parser, region, start);
+    let index = emit_item_body(parser, region, start);
     emit_item_trailing_blanks(parser, region, index)
+}
+
+/// 항목의 몸통 — 더 들여쓴 속내용(서브리스트 등)과 항목 레벨 연속 문단이 번갈아 올 수 있다.
+fn emit_item_body(parser: &mut Parser<'_>, region: &Region, start: usize) -> usize {
+    let mut index = start;
+    loop {
+        let after_content = emit_item_content(parser, region, index);
+        let advanced = emit_item_base_continuation(parser, region, after_content);
+        if advanced == index {
+            return index;
+        }
+        index = advanced;
+    }
+}
+
+/// 항목 마커와 같은 들여쓰기(영역 기준 안 들여쓴 줄)의 마커 없는 줄은 그 항목의 연속
+/// 문단이다 — `parse_list`는 항상 마커가 줄머리에 오도록 걷힌 영역에서 도므로, 여기서
+/// 안 들여쓴 줄은 원래 항목의 들여쓰기만큼 들여썼던 줄, 즉 항목 레벨의 연속이다(렌더확정:
+/// 엔하계 위키의 ` * 특징적 표현` 서브리스트 뒤 항목 레벨 ` 이에 대한 …`이 the seed에서
+/// 그 `<li>` 안 문단이다). 빈 줄·형제 마커·`{{{` 그룹 경계에서 멈춘다.
+fn emit_item_base_continuation(parser: &mut Parser<'_>, region: &Region, start: usize) -> usize {
+    let mut index = start;
+    let mut depth = 0;
+    while index < region.line_count() {
+        let line = region.line_text(index);
+        if depth == 0
+            && (line.trim().is_empty() || line.starts_with(' ') || text::list_marker(line).is_some())
+        {
+            break;
+        }
+        depth = (depth + text::brace_delta(line)).max(0);
+        index += 1;
+    }
+    if start < index {
+        let sub = region.slice_lines(parser.source(), start..index);
+        parse_region_blocks(parser, &sub, RegionContext::ListItem);
+    }
+    index
 }
 
 /// 항목 줄 다음의 속내용(더 들여쓴 줄).
@@ -548,9 +592,9 @@ fn parse_list(parser: &mut Parser<'_>, region: &Region, start: usize) -> usize {
                 SyntaxKind::ListMarker,
             );
             parse_region_blocks(parser, &sub, RegionContext::ListItem);
-            // 여러 줄 항목 뒤에도 더 들여쓴 속내용이 이어질 수 있다 — 한 줄 항목과 같다.
-            // 빈 줄 흡수는 하지 않는다(그 빈 줄은 이미 `item_content_end`가 갈랐다).
-            index = emit_item_content(parser, region, end);
+            // 여러 줄 항목 뒤에도 더 들여쓴 속내용·항목 레벨 연속이 이어질 수 있다 — 한 줄
+            // 항목과 같다. 빈 줄 흡수는 하지 않는다(그 빈 줄은 이미 `item_content_end`가 갈랐다).
+            index = emit_item_body(parser, region, end);
             item_marker.complete(parser, SyntaxKind::ListItem);
             continue;
         }

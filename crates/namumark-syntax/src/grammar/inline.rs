@@ -90,11 +90,20 @@ fn consume_literal(parser: &mut Parser<'_>, position: usize, end: usize) -> usiz
         // 잔여는 양쪽이 다듬긴 조각이라 길이로 자리를 되짚으면 글자 가운데를 밟는다.
         let content_start =
             content_range.start + (leftover.as_ptr() as usize - content.as_ptr() as usize);
-        parser.emit_token(SyntaxKind::Marker, content_start);
+        let attributes_start =
+            content_range.start + (rest.as_ptr() as usize - content.as_ptr() as usize);
+        parser.emit_token(SyntaxKind::DelimiterOpen, content_range.start);
+        parser.emit_token(SyntaxKind::Directive, content_range.start + "#!wiki".len());
+        if attributes_start > content_range.start + "#!wiki".len() {
+            parser.emit_token(SyntaxKind::Separator, attributes_start);
+        }
+        if content_start > attributes_start {
+            parser.emit_token(SyntaxKind::WikiAttributes, content_start);
+        }
         let paragraph = parser.start_node();
         parse_inline_range(parser, content_start..content_range.end);
         paragraph.complete(parser, SyntaxKind::Paragraph);
-        parser.emit_token(SyntaxKind::Marker, position + consumed);
+        parser.emit_token(SyntaxKind::DelimiterClose, position + consumed);
         marker.complete(parser, SyntaxKind::WikiStyle);
     } else if let Some((_, inner)) = text::parse_size_marker(content) {
         let inner_start = content_range.end - inner.len();

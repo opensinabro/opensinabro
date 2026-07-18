@@ -35,10 +35,13 @@ pub(crate) fn parse_brace_group(
     }
 
     let kind;
-    if text::strip_directive(&header, "#!syntax").is_some() {
+    if let Some(rest) = text::strip_directive(&header, "#!syntax") {
         kind = SyntaxKind::CodeBlock;
-        // 헤더 전체(지시자+언어)가 마커, 내용은 원문 그대로
-        parser.emit_token(SyntaxKind::Marker, header_global(header.len()));
+        let language_offset = subslice_offset_or(&header, rest);
+        emit_directive_head(parser, header_global, "#!syntax".len(), language_offset);
+        if !rest.is_empty() {
+            parser.emit_token(SyntaxKind::CodeLanguage, header_global(header.len()));
+        }
         emit_line_newline(parser, region, header_line);
         let content_start = region.joined_start(header_line + 1);
         emit_joined_range_as(
@@ -50,30 +53,29 @@ pub(crate) fn parse_brace_group(
     } else if let Some(rest) = text::strip_directive(&header, "#!wiki") {
         kind = SyntaxKind::WikiStyle;
         let (_, _, leftover) = text::parse_wiki_style_attributes(rest);
+        let attributes_offset = subslice_offset_or(&header, rest);
         let leftover_offset = if leftover.is_empty() {
             header.len()
         } else {
             subslice_offset(&header, leftover)
         };
-        parse_marked_container(
+        emit_directive_head(parser, header_global, "#!wiki".len(), attributes_offset);
+        if leftover_offset > attributes_offset {
+            parser.emit_token(SyntaxKind::WikiAttributes, header_global(leftover_offset));
+        }
+        emit_container_content(
             parser,
             region,
             header_line,
             leftover.len(),
-            header_global(leftover_offset),
             header_joined(leftover_offset),
             closing_joined,
-            header_global(header.len()),
         );
     } else if let Some(rest) = text::strip_directive(&header, "#!if") {
         // 헤더 나머지가 조건식이다. 해석은 렌더 단계(resolve)가 한다.
         kind = SyntaxKind::Conditional;
-        let expression_offset = if rest.is_empty() {
-            header.len()
-        } else {
-            subslice_offset(&header, rest)
-        };
-        parser.emit_token(SyntaxKind::Marker, header_global(expression_offset));
+        let expression_offset = subslice_offset_or(&header, rest);
+        emit_directive_head(parser, header_global, "#!if".len(), expression_offset);
         if !rest.is_empty() {
             let expression = parser.start_node();
             parser.emit_token(SyntaxKind::Text, header_global(header.len()));
@@ -90,7 +92,7 @@ pub(crate) fn parse_brace_group(
         } else {
             subslice_offset(&header, summary)
         };
-        parser.emit_token(SyntaxKind::Marker, header_global(summary_offset));
+        emit_directive_head(parser, header_global, "#!folding".len(), summary_offset);
         // 접기 문구에는 위키 문법이 적용되지 않는다 — 글자 그대로다(렌더확정: the seed는
         // 문구에 쓴 서식 마커를 풀지 않고 그대로 보여 준다).
         if !summary.is_empty() {
@@ -106,8 +108,9 @@ pub(crate) fn parse_brace_group(
         parse_content_blocks(parser, region, content_start..closing_joined, None);
     } else if let Some(rest) = text::strip_directive(&header, "#!html") {
         kind = SyntaxKind::HtmlBlock;
+        let content_offset = subslice_offset_or(&header, rest);
+        emit_directive_head(parser, header_global, "#!html".len(), content_offset);
         if rest.is_empty() {
-            parser.emit_token(SyntaxKind::Marker, header_global(header.len()));
             emit_line_newline(parser, region, header_line);
             let content_start = region.joined_start(header_line + 1);
             emit_joined_range_as(
@@ -117,47 +120,55 @@ pub(crate) fn parse_brace_group(
                 SyntaxKind::Text,
             );
         } else {
-            let leftover_offset = subslice_offset(&header, rest);
-            parser.emit_token(SyntaxKind::Marker, header_global(leftover_offset));
             emit_joined_range_as(
                 parser,
                 region,
-                header_joined(leftover_offset)..closing_joined,
+                header_joined(content_offset)..closing_joined,
                 SyntaxKind::Text,
             );
         }
     } else if let Some((_, rest)) = text::parse_size_marker(&header) {
         kind = SyntaxKind::SizedBlock;
         let leftover_offset = header.len() - rest.len();
-        parse_marked_container(
+        // 크기 단계는 부호+한 자리라 항상 2바이트다.
+        parser.emit_token(SyntaxKind::DelimiterOpen, header_global(0));
+        parser.emit_token(SyntaxKind::SizeLevel, header_global(2));
+        if leftover_offset > 2 {
+            parser.emit_token(SyntaxKind::Separator, header_global(leftover_offset));
+        }
+        emit_container_content(
             parser,
             region,
             header_line,
             rest.len(),
-            header_global(leftover_offset),
             header_joined(leftover_offset),
             closing_joined,
-            header_global(header.len()),
         );
     } else if text::parse_color_specification(&header).is_some() {
         kind = SyntaxKind::ColoredBlock;
         // 헤더에 공백이 있으면 그 뒤는 내용의 첫 조각이다(`{{{#red 빨강\n…`).
-        let rest = header.split_once(' ').map_or("", |(_, rest)| rest);
-        let leftover_offset = header.len() - rest.len();
-        parse_marked_container(
+        let leftover = header.split_once(' ').map_or("", |(_, rest)| rest);
+        let leftover_offset = header.len() - leftover.len();
+        let specification_end = header
+            .split_once(' ')
+            .map_or(header.len(), |(specification, _)| specification.len());
+        parser.emit_token(SyntaxKind::DelimiterOpen, header_global(0));
+        parser.emit_token(SyntaxKind::ColorValue, header_global(specification_end));
+        if leftover_offset > specification_end {
+            parser.emit_token(SyntaxKind::Separator, header_global(leftover_offset));
+        }
+        emit_container_content(
             parser,
             region,
             header_line,
-            rest.len(),
-            header_global(leftover_offset),
+            leftover.len(),
             header_joined(leftover_offset),
             closing_joined,
-            header_global(header.len()),
         );
     } else {
         // 지시자 없는 여러 줄 리터럴. 헤더 텍스트가 있으면 첫 내용 줄이 된다.
         kind = SyntaxKind::CodeBlock;
-        parser.emit_token(SyntaxKind::Marker, group_global + 3);
+        parser.emit_token(SyntaxKind::DelimiterOpen, group_global + 3);
         emit_joined_range_as(
             parser,
             region,
@@ -169,36 +180,55 @@ pub(crate) fn parse_brace_group(
     // 닫는 `}}}`
     if closed {
         let closing_global = region.to_global(closing_joined);
-        parser.emit_token(SyntaxKind::Marker, closing_global + 3);
+        parser.emit_token(SyntaxKind::DelimiterClose, closing_global + 3);
     }
     node.complete(parser, kind);
 }
 
-/// 헤더가 마커이고 헤더 잔여 텍스트가 첫 내용 줄이 되는 컨테이너(#!wiki, 색상, 크기)의 공통 처리.
-#[allow(clippy::too_many_arguments)]
-fn parse_marked_container(
+/// `{{{` + 지시자 + (있으면) 구분 공백을 방출한다. 방출 뒤 위치는 `rest_offset`이다.
+fn emit_directive_head(
+    parser: &mut Parser<'_>,
+    header_global: impl Fn(usize) -> usize,
+    directive_length: usize,
+    rest_offset: usize,
+) {
+    parser.emit_token(SyntaxKind::DelimiterOpen, header_global(0));
+    parser.emit_token(SyntaxKind::Directive, header_global(directive_length));
+    if rest_offset > directive_length {
+        parser.emit_token(SyntaxKind::Separator, header_global(rest_offset));
+    }
+}
+
+/// 헤더 잔여 텍스트가 첫 내용 줄이 되는 컨테이너(#!wiki, 색상, 크기)의 내용부를 파싱한다.
+/// 헤더 토큰은 호출부가 이미 방출했다.
+fn emit_container_content(
     parser: &mut Parser<'_>,
     region: &Region,
     header_line: usize,
     leftover_length: usize,
-    leftover_global: usize,
     leftover_joined: usize,
     closing_joined: usize,
-    header_end_global: usize,
 ) {
     if leftover_length == 0 {
-        parser.emit_token(SyntaxKind::Marker, header_end_global);
         emit_line_newline(parser, region, header_line);
         let content_start = region.joined_start(header_line + 1);
         parse_content_blocks(parser, region, content_start..closing_joined, None);
     } else {
-        parser.emit_token(SyntaxKind::Marker, leftover_global);
         parse_content_blocks(
             parser,
             region,
             leftover_joined..closing_joined,
             Some(leftover_length),
         );
+    }
+}
+
+/// rest가 header의 부분슬라이스면 그 오프셋, 비었으면 header 끝.
+fn subslice_offset_or(header: &str, rest: &str) -> usize {
+    if rest.is_empty() {
+        header.len()
+    } else {
+        subslice_offset(header, rest)
     }
 }
 

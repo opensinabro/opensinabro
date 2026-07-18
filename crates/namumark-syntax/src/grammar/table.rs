@@ -139,9 +139,9 @@ fn emit_row(
     if let Some(caption) = caption {
         let line_start = region.lines[first_line].content.start;
         let caption_node = parser.start_node();
-        parser.emit_token(SyntaxKind::Marker, line_start + caption.start);
+        parser.emit_token(SyntaxKind::DelimiterOpen, line_start + caption.start);
         inline::parse_inline_range(parser, line_start + caption.start..line_start + caption.end);
-        parser.emit_token(SyntaxKind::Marker, line_start + caption.end + 1);
+        parser.emit_token(SyntaxKind::DelimiterClose, line_start + caption.end + 1);
         caption_node.complete(parser, SyntaxKind::TableCaption);
     }
 
@@ -157,7 +157,7 @@ fn emit_row(
             parser,
             region,
             to_joined(real_run_start)..to_joined(leading_run_end),
-            SyntaxKind::Marker,
+            SyntaxKind::Separator,
         );
     }
 
@@ -174,7 +174,7 @@ fn emit_row(
                 parser,
                 region,
                 to_joined(run_start)..to_joined(run_end),
-                SyntaxKind::Marker,
+                SyntaxKind::Separator,
             );
         }
     }
@@ -193,11 +193,12 @@ fn emit_cell(
 
     let cell_marker = parser.start_node();
     if semantics.options_end > 0 {
-        emit_joined_range_as(
+        emit_cell_options(
             parser,
             region,
-            to_joined(cell_range.start)..to_joined(cell_range.start + semantics.options_end),
-            SyntaxKind::Marker,
+            to_joined,
+            cell_range.start,
+            &cell_text[..semantics.options_end],
         );
     }
     if semantics.content_start > semantics.options_end {
@@ -206,7 +207,7 @@ fn emit_cell(
             region,
             to_joined(cell_range.start + semantics.options_end)
                 ..to_joined(cell_range.start + semantics.content_start),
-            SyntaxKind::Marker,
+            SyntaxKind::AlignmentSpace,
         );
     }
     if semantics.content_end > semantics.content_start {
@@ -221,8 +222,74 @@ fn emit_cell(
             parser,
             region,
             to_joined(cell_range.start + semantics.content_end)..to_joined(cell_range.end),
-            SyntaxKind::Marker,
+            SyntaxKind::AlignmentSpace,
         );
     }
     cell_marker.complete(parser, SyntaxKind::TableCell);
+}
+
+/// 셀 옵션부(`<-2><bgcolor=#fff>` …)를 옵션마다 여는 `<`·이름·`=`·값·닫는 `>`로 쪼갠다.
+/// `options` 는 셀 텍스트의 `[..options_end]` 부분이고, `cell_start` 는 그 시작의 셀 텍스트 오프셋이다.
+fn emit_cell_options(
+    parser: &mut Parser<'_>,
+    region: &Region,
+    to_joined: &dyn Fn(usize) -> usize,
+    cell_start: usize,
+    options: &str,
+) {
+    let mut offset = 0;
+    while offset < options.len() {
+        let rest = &options[offset..];
+        if !rest.starts_with('<') {
+            break;
+        }
+        let Some(close) = rest.find('>') else {
+            break;
+        };
+        let inner = &rest[1..close];
+        let inner_start = cell_start + offset + 1;
+        let emit = |parser: &mut Parser<'_>, from: usize, to: usize, kind| {
+            emit_joined_range_as(parser, region, to_joined(from)..to_joined(to), kind);
+        };
+        emit(
+            parser,
+            cell_start + offset,
+            inner_start,
+            SyntaxKind::DelimiterOpen,
+        );
+        match inner.split_once('=') {
+            Some((name, _)) => {
+                let equals = inner_start + name.len();
+                emit(parser, inner_start, equals, SyntaxKind::CellOptionName);
+                emit(parser, equals, equals + 1, SyntaxKind::Separator);
+                emit(
+                    parser,
+                    equals + 1,
+                    cell_start + offset + close,
+                    SyntaxKind::CellOptionValue,
+                );
+            }
+            None => emit(
+                parser,
+                inner_start,
+                cell_start + offset + close,
+                SyntaxKind::CellOption,
+            ),
+        }
+        emit(
+            parser,
+            cell_start + offset + close,
+            cell_start + offset + close + 1,
+            SyntaxKind::DelimiterClose,
+        );
+        offset += close + 1;
+    }
+    if offset < options.len() {
+        emit_joined_range_as(
+            parser,
+            region,
+            to_joined(cell_start + offset)..to_joined(cell_start + options.len()),
+            SyntaxKind::CellOption,
+        );
+    }
 }

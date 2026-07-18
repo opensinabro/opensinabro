@@ -38,6 +38,18 @@ pub enum SyntaxKind {
     SizeLevel,
     /// 지시자 (`{{{#!html …}}}`의 `#!html`)
     Directive,
+    /// 코드 블록 언어 (`{{{#!syntax rust}}}`의 `rust`)
+    CodeLanguage,
+    /// `#!wiki` 스타일 속성부 (`style="…" dark-style="…"`)
+    WikiAttributes,
+    /// 표 셀 정렬용 공백 (내용 앞뒤의 정렬 결정 공백)
+    AlignmentSpace,
+    /// 표 셀 옵션 값 (`<-2>`의 `-2`, `<:>`의 `:` 등 `=` 없는 것)
+    CellOption,
+    /// 표 셀 옵션 이름 (`<bgcolor=#fff>`의 `bgcolor`)
+    CellOptionName,
+    /// 표 셀 옵션 값 (`<bgcolor=#fff>`의 `#fff`)
+    CellOptionValue,
     /// 인용 줄머리의 `>` (+뒤따르는 공백 1개)
     QuoteMarker,
     /// 들여쓰기/리스트 중첩으로 소비된 선행 공백
