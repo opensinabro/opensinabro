@@ -1,6 +1,6 @@
 //! 나무마크 파서 facade.
 //!
-//! 무손실 구문 트리([`namumark_syntax`])를 파싱해 의미 모델 뷰([`namumark_ast`])로
+//! 무손실 구문 트리(`namumark-syntax`)를 파싱해 의미 모델 뷰([`namumark_ast`])로
 //! 노출한다. 의미값은 뷰 접근자가 토큰에서 계산하므로 이 계층은 얇은 진입점일 뿐이다.
 
 pub use namumark_ast::Document;

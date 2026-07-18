@@ -4,5 +4,3 @@ description = "나무마크 표기의 문자열 수준 판정 유틸리티"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
-
-[dependencies]

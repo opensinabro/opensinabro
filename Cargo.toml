@@ -17,3 +17,16 @@ members = [
 version = "0.1.0"
 edition = "2024"
 license = "MIT"
+
+[workspace.dependencies]
+namumark-analysis = { path = "crates/namumark-analysis" }
+namumark-ast = { path = "crates/namumark-ast" }
+namumark-backend-namuwiki = { path = "crates/namumark-backend-namuwiki" }
+namumark-ir = { path = "crates/namumark-ir" }
+namumark-parser = { path = "crates/namumark-parser" }
+namumark-render = { path = "crates/namumark-render" }
+namumark-syntax = { path = "crates/namumark-syntax" }
+namumark-text = { path = "crates/namumark-text" }
+
+rowan = "0.16.1"
+wasm-bindgen = "=0.2.120"

@@ -6,5 +6,5 @@ edition.workspace = true
 license.workspace = true
 
 [dependencies]
-namumark-analysis = { path = "../namumark-analysis" }
-namumark-ast = { path = "../namumark-ast" }
+namumark-analysis.workspace = true
+namumark-ast.workspace = true

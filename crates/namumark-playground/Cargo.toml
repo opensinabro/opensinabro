@@ -10,10 +10,10 @@ publish = false
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-namumark-analysis = { path = "../namumark-analysis" }
-namumark-ir = { path = "../namumark-ir" }
-namumark-parser = { path = "../namumark-parser" }
-namumark-render = { path = "../namumark-render" }
-namumark-syntax = { path = "../namumark-syntax" }
-namumark-backend-namuwiki = { path = "../namumark-backend-namuwiki" }
-wasm-bindgen = "=0.2.120"
+namumark-analysis.workspace = true
+namumark-backend-namuwiki.workspace = true
+namumark-ir.workspace = true
+namumark-parser.workspace = true
+namumark-render.workspace = true
+namumark-syntax.workspace = true
+wasm-bindgen.workspace = true

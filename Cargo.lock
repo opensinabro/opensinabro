@@ -89,7 +89,6 @@ dependencies = [
  "namumark-ast",
  "namumark-ir",
  "namumark-parser",
- "namumark-text",
 ]
 
 [[package]]
