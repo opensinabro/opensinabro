@@ -10,6 +10,7 @@ import { fetchEditRequest } from "@/lib/api/discussion";
 import { formatMoment } from "@/lib/format";
 import { pageTitle } from "@/lib/site";
 import { wikiPath } from "@/lib/wiki-path";
+import { linkStyle } from "@/components/ui/link";
 
 type EditRequestRouteProps = { params: Promise<{ id: string }> };
 
@@ -48,7 +49,7 @@ export default async function EditRequestPage({
       actions={
         <Link
           href={wikiPath.read(request.title)}
-          className="text-ui text-link hover:underline"
+          className={linkStyle({ size: "ui" })}
         >
           문서 보기
         </Link>

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { AccountMenu } from "@/components/layout/account-menu";
+import { SearchForm } from "@/components/layout/search-form";
 import { Section } from "@/components/ui/section";
 import { wikiPath } from "@/lib/wiki-path";
 import type { SessionView } from "@/lib/api/types";
@@ -33,24 +34,18 @@ function NavigationLink({ item }: { item: NavigationItem }) {
   );
 }
 
-export function NavigationColumn({ session }: { session: SessionView }) {
+// 넓은 화면의 좌측 열과 좁은 화면의 서랍이 같은 내용을 쓴다. 목록을 두 벌로 두면
+// 한쪽에만 항목이 추가되어 화면 폭에 따라 갈 수 있는 곳이 달라진다.
+export function NavigationContent({
+  session,
+  searchId,
+}: {
+  session: SessionView;
+  searchId?: string;
+}) {
   return (
-    <nav className="flex h-full flex-col gap-4 border-r border-line bg-ground-sub px-3 py-3.5">
-      <Link
-        href={wikiPath.read(session.mainDocument)}
-        className="px-1.5 text-brand font-extrabold tracking-tight text-ink"
-      >
-        {session.wikiName}
-      </Link>
-
-      <form action="/search">
-        <input
-          name="q"
-          placeholder="문서 검색"
-          aria-label="문서 검색"
-          className="w-full rounded border border-line bg-ground px-2.5 py-1 text-xs text-body placeholder:text-faint focus:border-accent focus:outline-none"
-        />
-      </form>
+    <>
+      <SearchForm id={searchId} />
 
       <Section label="둘러보기">
         <div className="flex flex-col gap-px">
@@ -83,6 +78,32 @@ export function NavigationColumn({ session }: { session: SessionView }) {
       <div className="mt-auto border-t border-line pt-3">
         <AccountMenu session={session} />
       </div>
+    </>
+  );
+}
+
+export function WikiNameLink({
+  session,
+  className,
+}: {
+  session: SessionView;
+  className?: string;
+}) {
+  return (
+    <Link
+      href={wikiPath.read(session.mainDocument)}
+      className={`text-brand font-extrabold tracking-tight text-ink ${className ?? ""}`}
+    >
+      {session.wikiName}
+    </Link>
+  );
+}
+
+export function NavigationColumn({ session }: { session: SessionView }) {
+  return (
+    <nav className="flex h-full flex-col gap-4 border-r border-line bg-ground-sub px-3 py-3.5">
+      <WikiNameLink session={session} className="px-1.5" />
+      <NavigationContent session={session} searchId="search-column" />
     </nav>
   );
 }

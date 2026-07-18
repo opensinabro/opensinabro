@@ -5,6 +5,8 @@ import { WikiPage } from "@/components/layout/wiki-page";
 import { fetchEditRequests } from "@/lib/api/discussion";
 import { pageTitle } from "@/lib/site";
 import { wikiPath } from "@/lib/wiki-path";
+import { linkStyle } from "@/components/ui/link";
+import { Row, Rows } from "@/components/ui/list";
 
 export const metadata = { title: pageTitle("편집요청") };
 
@@ -19,15 +21,12 @@ export default async function EditRequestsPage() {
       {requests.length === 0 ? (
         <Notice>열린 편집요청이 없습니다.</Notice>
       ) : (
-        <ul className="m-0 list-none p-0">
+        <Rows>
           {requests.map((request) => (
-            <li
-              key={request.id}
-              className="text-list flex flex-wrap items-baseline gap-x-2.5 gap-y-1 border-b border-line-soft py-2.5"
-            >
+            <Row key={request.id}>
               <Link
                 href={wikiPath.editRequest(request.id)}
-                className="text-link hover:underline"
+                className={linkStyle()}
               >
                 {request.title}
               </Link>
@@ -35,9 +34,9 @@ export default async function EditRequestsPage() {
               {request.comment && (
                 <span className="text-body">{request.comment}</span>
               )}
-            </li>
+            </Row>
           ))}
-        </ul>
+        </Rows>
       )}
     </WikiPage>
   );

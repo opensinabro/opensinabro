@@ -9,6 +9,7 @@ import { LinkList, Section } from "@/components/ui/section";
 import { fetchBatchRevertTargets } from "@/lib/api/operate";
 import { pageTitle } from "@/lib/site";
 import { wikiPath } from "@/lib/wiki-path";
+import { linkStyle } from "@/components/ui/link";
 
 type BatchRevertPageProps = {
   searchParams: Promise<{ author?: string }>;
@@ -70,7 +71,7 @@ export default async function BatchRevertPage({
                   <li key={title} className="text-list">
                     <Link
                       href={wikiPath.read(title)}
-                      className="text-link hover:underline"
+                      className={linkStyle()}
                     >
                       {title}
                     </Link>

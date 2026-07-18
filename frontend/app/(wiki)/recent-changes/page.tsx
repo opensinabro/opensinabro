@@ -10,6 +10,7 @@ import { WikiPage } from "@/components/layout/wiki-page";
 import { fetchRecentChanges } from "@/lib/api/server";
 import { pageTitle } from "@/lib/site";
 import { wikiPath } from "@/lib/wiki-path";
+import { linkStyle } from "@/components/ui/link";
 
 export const metadata = { title: pageTitle("최근 변경") };
 
@@ -32,7 +33,7 @@ export default async function RecentChangesPage() {
               lead={
                 <Link
                   href={wikiPath.read(change.title)}
-                  className="font-medium text-link hover:underline"
+                  className={linkStyle({ weight: "medium" })}
                 >
                   {change.title}
                 </Link>

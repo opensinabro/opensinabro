@@ -50,8 +50,12 @@ export function fetchEditable(title: string) {
   return get<EditView>(`/api/edit/${encodeTitle(title)}`);
 }
 
-export function fetchRaw(title: string) {
-  return get<{ title: string; content: string }>(
-    `/api/raw/${encodeTitle(title)}`,
+export function fetchRaw(title: string, revisionId?: string) {
+  const query = revisionId
+    ? `?uuid=${encodeURIComponent(revisionId)}`
+    : "";
+
+  return get<{ title: string; content: string; revision: number | null }>(
+    `/api/raw/${encodeTitle(title)}${query}`,
   );
 }

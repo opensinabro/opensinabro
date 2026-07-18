@@ -6,6 +6,8 @@ import { fetchContributions } from "@/lib/api/account";
 import { formatMoment } from "@/lib/format";
 import { pageTitle } from "@/lib/site";
 import { wikiPath } from "@/lib/wiki-path";
+import { linkStyle } from "@/components/ui/link";
+import { Row, Rows } from "@/components/ui/list";
 
 type PageProps = {
   params: Promise<{ name: string }>;
@@ -30,7 +32,7 @@ export default async function ContributionsPage({ params }: PageProps) {
           actions={
             <Link
               href={wikiPath.read(`사용자:${name}`)}
-              className="text-ui text-link hover:underline"
+              className={linkStyle({ size: "ui" })}
             >
               사용자 문서
             </Link>
@@ -41,15 +43,12 @@ export default async function ContributionsPage({ params }: PageProps) {
       {entries.length === 0 ? (
         <Notice>기여가 없습니다.</Notice>
       ) : (
-        <ul className="m-0 list-none p-0">
+        <Rows>
           {entries.map((entry, index) => (
-            <li
-              key={`${entry.title}:${entry.sequence}:${index}`}
-              className="text-list flex flex-wrap items-baseline gap-x-2.5 gap-y-1 border-b border-line-soft py-2.5"
-            >
+            <Row key={`${entry.title}:${entry.sequence}:${index}`}>
               <Link
                 href={wikiPath.read(entry.title)}
-                className="font-medium text-link hover:underline"
+                className={linkStyle({ weight: "medium" })}
               >
                 {entry.title}
               </Link>
@@ -58,9 +57,9 @@ export default async function ContributionsPage({ params }: PageProps) {
               {entry.comment && (
                 <span className="text-body">{entry.comment}</span>
               )}
-            </li>
+            </Row>
           ))}
-        </ul>
+        </Rows>
       )}
     </WikiPage>
   );

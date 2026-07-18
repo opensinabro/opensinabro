@@ -10,6 +10,7 @@ import { Section } from "@/components/ui/section";
 import { fetchThread } from "@/lib/api/discussion";
 import { pageTitle } from "@/lib/site";
 import { wikiPath } from "@/lib/wiki-path";
+import { linkStyle } from "@/components/ui/link";
 
 type ThreadRouteProps = { params: Promise<{ id: string }> };
 
@@ -43,7 +44,7 @@ export default async function ThreadPage({ params }: ThreadRouteProps) {
       actions={
         <Link
           href={wikiPath.discuss(thread.title)}
-          className="text-ui text-link hover:underline"
+          className={linkStyle({ size: "ui" })}
         >
           문서의 토론 목록
         </Link>
@@ -55,7 +56,7 @@ export default async function ThreadPage({ params }: ThreadRouteProps) {
     <Section label="문서">
       <Link
         href={wikiPath.read(thread.title)}
-        className="text-note text-link hover:underline"
+        className={linkStyle({ size: "note" })}
       >
         {thread.title}
       </Link>

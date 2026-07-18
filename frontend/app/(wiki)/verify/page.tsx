@@ -4,6 +4,7 @@ import { PageHeader } from "@/components/layout/page-header";
 import { WikiPage } from "@/components/layout/wiki-page";
 import { fetchVerification } from "@/lib/api/account";
 import { pageTitle } from "@/lib/site";
+import { linkStyle } from "@/components/ui/link";
 
 export const metadata = { title: pageTitle("이메일 확인") };
 
@@ -30,7 +31,7 @@ export default async function VerifyPage({ searchParams }: PageProps) {
       {verified ? (
         <>
           <Notice>이메일을 확인했습니다. 이제 로그인할 수 있습니다.</Notice>
-          <Link href="/login" className="text-ui text-link hover:underline">
+          <Link href="/login" className={linkStyle({ size: "ui" })}>
             로그인하기
           </Link>
         </>

@@ -7,13 +7,11 @@ use axum::Json;
 use axum::extract::State;
 use axum::http::StatusCode;
 use axum::response::{IntoResponse, Response};
-use axum_extra::extract::CookieJar;
 use serde::Serialize;
 use uuid::Uuid;
 use wiki_document::RevisionRecord;
 
 use crate::ServerError;
-use crate::security::issue_token;
 use crate::session::Requester;
 use crate::state::AppState;
 
@@ -87,10 +85,14 @@ impl From<&RevisionRecord> for RevisionSummary {
     }
 }
 
-/// 셸이 화면마다 필요로 하는 것 — 위키 이름·로그인 상태·알림 수·CSRF 토큰.
+/// 셸이 화면마다 필요로 하는 것 — 위키 이름·로그인 상태·알림 수.
 ///
 /// 화면마다 따로 묻지 않고 한 번에 내주는 이유는 askama 셸에서 겪은 것과 같다:
 /// 일부 화면만 로그인 상태를 싣지 않으면 그 화면의 폼만 조용히 403을 낸다.
+///
+/// CSRF 토큰은 여기 싣지 않는다. 이 응답을 받는 것은 서버 컴포넌트이고, 그쪽은
+/// 응답의 Set-Cookie를 브라우저로 돌려주지 않아 짝이 되는 쿠키가 유실된다 —
+/// 검증할 수 없는 토큰이 된다. 브라우저는 `/api/csrf`로 직접 받는다.
 #[derive(Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct SessionView {
@@ -99,30 +101,23 @@ pub struct SessionView {
     pub content_license: String,
     pub user_name: Option<String>,
     pub unread: i64,
-    pub csrf_token: String,
 }
 
 pub async fn session_api(
     State(state): State<AppState>,
-    jar: CookieJar,
     requester: Requester,
 ) -> Result<Response, ServerError> {
     let unread = match &requester.user {
         Some(user) => wiki_account::unread_count(&state.pool, user.identifier).await?,
         None => 0,
     };
-    let (jar, csrf_token) = issue_token(jar);
 
-    Ok((
-        jar,
-        Json(SessionView {
-            wiki_name: state.settings.wiki_name.clone(),
-            main_document: state.settings.main_document.clone(),
-            content_license: state.settings.content_license.clone(),
-            user_name: requester.user.as_ref().map(|user| user.name.clone()),
-            unread,
-            csrf_token,
-        }),
-    )
-        .into_response())
+    Ok(Json(SessionView {
+        wiki_name: state.settings.wiki_name.clone(),
+        main_document: state.settings.main_document.clone(),
+        content_license: state.settings.content_license.clone(),
+        user_name: requester.user.as_ref().map(|user| user.name.clone()),
+        unread,
+    })
+    .into_response())
 }

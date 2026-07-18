@@ -7,6 +7,8 @@ import { fetchNotifications } from "@/lib/api/special";
 import { formatMoment } from "@/lib/format";
 import { pageTitle } from "@/lib/site";
 import { wikiPath } from "@/lib/wiki-path";
+import { linkStyle } from "@/components/ui/link";
+import { Row, Rows } from "@/components/ui/list";
 
 export const metadata = { title: pageTitle("알림") };
 
@@ -18,7 +20,7 @@ export default async function NotificationsPage() {
       <WikiPage header={<PageHeader title="알림" />}>
         <Notice>
           로그인해야 볼 수 있는 화면입니다.{" "}
-          <Link href="/login" className="text-link hover:underline">
+          <Link href="/login" className={linkStyle()}>
             로그인하기
           </Link>
         </Notice>
@@ -50,14 +52,11 @@ export default async function NotificationsPage() {
       {items.length === 0 ? (
         <Notice>아직 알림이 없습니다.</Notice>
       ) : (
-        <ul className="m-0 list-none p-0">
+        <Rows>
           {items.map((item, index) => (
-            <li
-              key={`${item.createdAt}:${index}`}
-              className="text-list flex flex-wrap items-baseline gap-2.5 border-b border-line-soft py-2.5"
-            >
+            <Row key={`${item.createdAt}:${index}`}>
               {!item.read && (
-                <span aria-label="읽지 않음" className="text-accent">
+                <span role="img" aria-label="읽지 않음" className="text-accent">
                   ●
                 </span>
               )}
@@ -65,7 +64,7 @@ export default async function NotificationsPage() {
               {item.document && (
                 <Link
                   href={wikiPath.read(item.document)}
-                  className="text-link hover:underline"
+                  className={linkStyle()}
                 >
                   {item.document}
                 </Link>
@@ -73,9 +72,9 @@ export default async function NotificationsPage() {
               <span className="ml-auto text-faint">
                 {formatMoment(item.createdAt)}
               </span>
-            </li>
+            </Row>
           ))}
-        </ul>
+        </Rows>
       )}
     </WikiPage>
   );

@@ -4,6 +4,7 @@ import { LinkList, Section } from "@/components/ui/section";
 import { formatBytes, formatCount, formatDay } from "@/lib/format";
 import { wikiPath } from "@/lib/wiki-path";
 import type { DocumentView } from "@/lib/api/types";
+import { linkStyle } from "@/components/ui/link";
 
 function Row({ term, children }: { term: string; children: React.ReactNode }) {
   return (
@@ -49,7 +50,7 @@ export function DocumentInfo({ document }: { document: DocumentView }) {
       <div className="border-t border-line-soft" />
 
       <Section label={`토론 ${threadCount}`}>
-        <Link href={wikiPath.discuss(title)} className="text-link hover:underline">
+        <Link href={wikiPath.discuss(title)} className={linkStyle()}>
           {threadCount > 0 ? "열린 토론 보기" : "토론 열기"}
         </Link>
       </Section>
@@ -62,7 +63,7 @@ export function DocumentInfo({ document }: { document: DocumentView }) {
             <li key={tool.label}>
               <Link
                 href={tool.href(title)}
-                className="text-link hover:underline"
+                className={linkStyle()}
               >
                 {tool.label}
               </Link>

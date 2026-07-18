@@ -17,11 +17,14 @@ export function WikiPage({
   children: React.ReactNode;
 }) {
   const body =
-    variant === "prose" ? "max-w-[900px] px-6 pt-4" : "flex min-h-0 flex-1 flex-col";
+    variant === "prose"
+      ? "max-w-[900px] px-4 pt-4 sm:px-6"
+      : "flex min-h-0 flex-1 flex-col";
 
   return (
     <>
-      <article
+      <main
+        id="content"
         className={`flex min-w-0 flex-col pb-7 ${aside ? "" : "xl:col-span-2"}`}
       >
         {header}
@@ -33,7 +36,7 @@ export function WikiPage({
             </div>
           )}
         </div>
-      </article>
+      </main>
 
       {aside && (
         <aside className="hidden border-l border-line px-4 py-4 xl:block">

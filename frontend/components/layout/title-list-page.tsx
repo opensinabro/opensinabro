@@ -3,6 +3,7 @@ import { TitleList } from "@/components/document/title-list";
 import { Notice } from "@/components/layout/notice";
 import { PageHeader } from "@/components/layout/page-header";
 import { WikiPage } from "@/components/layout/wiki-page";
+import { linkStyle } from "@/components/ui/link";
 import type { Fetched } from "@/lib/api/fetch";
 import type { TitleEntry } from "@/lib/api/types";
 
@@ -28,7 +29,7 @@ export function TitleListPage({
       <WikiPage header={header}>
         <Notice>
           로그인해야 볼 수 있는 화면입니다.{" "}
-          <Link href="/login" className="text-link hover:underline">
+          <Link href="/login" className={linkStyle()}>
             로그인하기
           </Link>
         </Notice>

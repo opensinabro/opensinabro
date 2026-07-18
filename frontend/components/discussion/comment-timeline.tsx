@@ -1,3 +1,4 @@
+import { Row, Rows } from "@/components/ui/list";
 import { formatMoment } from "@/lib/format";
 import type { ThreadComment } from "@/lib/api/discussion";
 
@@ -19,12 +20,12 @@ function sentence(comment: ThreadComment) {
 
 export function CommentTimeline({ comments }: { comments: ThreadComment[] }) {
   return (
-    <ol className="m-0 list-none p-0">
+    <Rows as="ol">
       {comments.map((comment) => (
-        <li
+        <Row
           key={comment.sequence}
           id={String(comment.sequence)}
-          className="border-b border-line-soft py-2.5"
+          shape="block"
         >
           <div className="text-fine flex flex-wrap items-baseline gap-x-2 text-faint">
             <span className="tabular-nums">#{comment.sequence}</span>
@@ -45,8 +46,8 @@ export function CommentTimeline({ comments }: { comments: ThreadComment[] }) {
           >
             {sentence(comment)}
           </p>
-        </li>
+        </Row>
       ))}
-    </ol>
+    </Rows>
   );
 }

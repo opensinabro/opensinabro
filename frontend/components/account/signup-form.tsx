@@ -11,6 +11,7 @@ import {
   inputStyle,
 } from "@/components/ui/field";
 import { signUp } from "@/lib/api/account-client";
+import { linkStyle } from "@/components/ui/link";
 
 export function SignupForm() {
   const [name, setName] = useState("");
@@ -41,7 +42,7 @@ export function SignupForm() {
         <Notice>
           {created} 계정을 만들었습니다. 메일로 보낸 확인 링크를 눌러 주세요.
         </Notice>
-        <Link href="/login" className="text-ui text-link hover:underline">
+        <Link href="/login" className={linkStyle({ size: "ui" })}>
           로그인하기
         </Link>
       </div>
@@ -96,7 +97,7 @@ export function SignupForm() {
           >
             {submitting ? "만드는 중" : "계정 만들기"}
           </button>
-          <Link href="/login" className="text-ui text-link hover:underline">
+          <Link href="/login" className={linkStyle({ size: "ui" })}>
             이미 계정이 있습니다
           </Link>
         </FormActions>

@@ -11,7 +11,7 @@ export function PageHeader({
 }) {
   return (
     <>
-      <header className="flex flex-wrap items-end justify-between gap-x-4 gap-y-2 px-6 pt-4">
+      <header className="flex flex-wrap items-end justify-between gap-x-4 gap-y-2 px-4 pt-4 sm:px-6">
         <div className="min-w-0">
           <h1 className="text-title m-0 font-extrabold tracking-tight text-ink">
             {title}

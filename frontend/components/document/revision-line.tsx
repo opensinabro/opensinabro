@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { linkStyle } from "@/components/ui/link";
+import { Row, Rows } from "@/components/ui/list";
 import { formatBytes, formatMoment, revisionKindLabel } from "@/lib/format";
 import type { RevisionSummary } from "@/lib/api/types";
 
@@ -15,7 +17,7 @@ export function RevisionLine({
   actions?: React.ReactNode;
 }) {
   return (
-    <li className="text-list flex flex-wrap items-baseline gap-x-2.5 gap-y-1 border-b border-line-soft py-2.5">
+    <Row>
       {lead}
       <span className="font-semibold tabular-nums text-ink">
         r{revision.sequence}
@@ -35,7 +37,7 @@ export function RevisionLine({
       )}
       {revision.comment && <span className="text-body">{revision.comment}</span>}
       {actions && <span className="ml-auto flex gap-2.5">{actions}</span>}
-    </li>
+    </Row>
   );
 }
 
@@ -47,12 +49,12 @@ export function RevisionAction({
   children: React.ReactNode;
 }) {
   return (
-    <Link href={href} className="text-link hover:underline">
+    <Link href={href} className={linkStyle()}>
       {children}
     </Link>
   );
 }
 
 export function RevisionList({ children }: { children: React.ReactNode }) {
-  return <ol className="m-0 list-none p-0">{children}</ol>;
+  return <Rows as="ol">{children}</Rows>;
 }

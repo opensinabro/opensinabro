@@ -28,6 +28,9 @@ export const useDraftStore = create<DraftStore>()(
         })),
       togglePreview: () => set((state) => ({ previewOpen: !state.previewOpen })),
     }),
-    { name: "opensinabro-editor" },
+    // 브라우저에만 있는 값이라 서버가 그린 첫 화면과 어긋난다(미리보기를 꺼 둔 사람은
+    // 서버는 켠 상태로, 브라우저는 끈 상태로 그린다). 복원을 마운트 뒤로 미뤄
+    // 하이드레이션이 어긋나지 않게 한다.
+    { name: "opensinabro-editor", skipHydration: true },
   ),
 );

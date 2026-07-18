@@ -123,6 +123,8 @@ pub async fn license_api(State(state): State<AppState>) -> Response {
 pub struct RawPayload {
     title: String,
     content: String,
+    /// 특정 리비전을 요청했을 때 그 순번. 화면이 "지금 원문"과 구분해 알린다.
+    revision: Option<i64>,
 }
 
 /// 원문 보기. HTML 쪽 `raw`와 달리 읽기 권한을 본다 — 권한이 막힌 문서의 전문이
@@ -131,6 +133,7 @@ pub async fn raw_api(
     State(state): State<AppState>,
     requester: Requester,
     Path(raw_title): Path<String>,
+    Query(parameters): Query<crate::history::RevisionQuery>,
 ) -> Result<Response, ServerError> {
     let namespaces = namespace_names(&state).await?;
     let title = DocumentTitle::parse(&raw_title, &namespaces);
@@ -142,10 +145,30 @@ pub async fn raw_api(
         return Ok(forbidden());
     }
 
+    // 리비전 uuid는 문서와 독립된 값이라, 이 문서의 것임을 먼저 확인해야 남의 문서
+    // 원문이 이 제목으로 새어 나가지 않는다.
+    if let Some(uuid) = parameters.uuid {
+        let Some(sequence) = crate::history::revision_sequence_within(&state, &title, uuid).await?
+        else {
+            return Ok(not_found());
+        };
+
+        return match wiki_document::revision_content(&state.pool, uuid).await? {
+            Some(content) => Ok(Json(RawPayload {
+                title: title.to_string(),
+                content: content.unwrap_or_default(),
+                revision: Some(sequence),
+            })
+            .into_response()),
+            None => Ok(not_found()),
+        };
+    }
+
     match wiki_document::read_source(&state.pool, &title).await? {
         Some(content) => Ok(Json(RawPayload {
             title: title.to_string(),
             content,
+            revision: None,
         })
         .into_response()),
         None => Ok(not_found()),

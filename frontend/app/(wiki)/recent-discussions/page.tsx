@@ -5,6 +5,7 @@ import { PageHeader } from "@/components/layout/page-header";
 import { WikiPage } from "@/components/layout/wiki-page";
 import { fetchRecentDiscussions } from "@/lib/api/discussion";
 import { pageTitle } from "@/lib/site";
+import { linkStyle } from "@/components/ui/link";
 
 export const metadata = { title: pageTitle("최근 토론") };
 
@@ -45,7 +46,7 @@ export default async function RecentDiscussionsPage({
             <Link
               key={filter.label}
               href={href}
-              className="text-link hover:underline"
+              className={linkStyle()}
             >
               {filter.label}
             </Link>

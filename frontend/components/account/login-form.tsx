@@ -12,6 +12,7 @@ import {
   inputStyle,
 } from "@/components/ui/field";
 import { logIn } from "@/lib/api/account-client";
+import { linkStyle } from "@/components/ui/link";
 
 export function LoginForm() {
   const router = useRouter();
@@ -72,7 +73,7 @@ export function LoginForm() {
           >
             {submitting ? "확인하는 중" : "로그인"}
           </button>
-          <Link href="/signup" className="text-ui text-link hover:underline">
+          <Link href="/signup" className={linkStyle({ size: "ui" })}>
             계정 만들기
           </Link>
         </FormActions>

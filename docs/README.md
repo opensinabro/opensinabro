@@ -11,11 +11,12 @@ opensinabro의 문서는 성격에 따라 나뉩니다.
 문서주석이, 테이블 정의는 `crates/wiki-server/migrations/`가, API 경로는 `wiki-server`의
 `router()`가 말합니다.
 
-## 스펙 — 나무마크의 사실
+## 스펙 — the seed의 사실
 
 | 문서 | 내용 |
 |---|---|
 | [나무마크 문법 스펙](spec/namumark.md) | 구현자용 정밀 문법 스펙. 규칙마다 근거 등급 표기. **개별 문법 동작은 여기가 정본.** |
+| [the seed 서버 기능 스펙](spec/theseed-server.md) | 엔진이 제공하는 페이지·라우트·권한·ACL·API. **서버 표면의 사실은 여기가 정본.** |
 | [구현 현황 — 누락과 차이](spec/implementation-status.md) | 우리 렌더러가 the seed와 다르거나 아직 구현하지 않은 지점. |
 
 문법 사실의 실행 가능한 짝은 [`fixtures/corpus/`](../fixtures/corpus)의 회귀 케이스입니다.

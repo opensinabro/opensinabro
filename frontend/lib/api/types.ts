@@ -10,7 +10,6 @@ export type SessionView = {
   contentLicense: string;
   userName: string | null;
   unread: number;
-  csrfToken: string;
 };
 
 // 특수 페이지 목록이 공유하는 한 줄. `note`는 화면마다 다른 곁들임(링크된 횟수·

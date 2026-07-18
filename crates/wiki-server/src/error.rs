@@ -1,5 +1,6 @@
+use axum::Json;
 use axum::http::StatusCode;
-use axum::response::{Html, IntoResponse, Response};
+use axum::response::{IntoResponse, Response};
 
 #[derive(Debug, thiserror::Error)]
 pub enum ServerError {
@@ -30,11 +31,12 @@ pub enum ServerError {
 
 impl IntoResponse for ServerError {
     fn into_response(self) -> Response {
-        // 내부 오류 내용은 사용자에게 노출하지 않는다.
+        // 내부 오류 내용은 사용자에게 노출하지 않는다. 이 오류가 나가는 경로는 전부
+        // JSON API이므로 형식도 다른 오류와 같은 {"error": ...}로 맞춘다.
         eprintln!("요청 처리 실패: {self}");
         (
             StatusCode::INTERNAL_SERVER_ERROR,
-            Html("<h1>500</h1><p>요청을 처리하지 못했습니다.</p>"),
+            Json(serde_json::json!({ "error": "internal" })),
         )
             .into_response()
     }

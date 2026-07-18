@@ -16,7 +16,7 @@ const HISTORY_LIMIT: i64 = 100;
 
 #[derive(Deserialize)]
 pub struct RevisionQuery {
-    uuid: Option<Uuid>,
+    pub(crate) uuid: Option<Uuid>,
 }
 
 async fn content_of(state: &AppState, external_id: Uuid) -> Result<String, ServerError> {
@@ -219,6 +219,7 @@ pub async fn revert_submit_api(
 }
 
 #[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
 pub struct HistoryPayload {
     title: String,
     revisions: Vec<crate::api::RevisionSummary>,

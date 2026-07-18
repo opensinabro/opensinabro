@@ -1,9 +1,11 @@
 import Link from "next/link";
+import { linkStyle } from "@/components/ui/link";
+import { Row, Rows } from "@/components/ui/list";
 import { formatMoment } from "@/lib/format";
 import { wikiPath } from "@/lib/wiki-path";
 
 export function ThreadList({ children }: { children: React.ReactNode }) {
-  return <ul className="m-0 list-none p-0">{children}</ul>;
+  return <Rows>{children}</Rows>;
 }
 
 export function ThreadLine({
@@ -21,11 +23,8 @@ export function ThreadLine({
   document?: string;
 }) {
   return (
-    <li className="text-list flex flex-wrap items-baseline gap-x-2.5 gap-y-1 border-b border-line-soft py-2.5">
-      <Link
-        href={wikiPath.discussThread(id)}
-        className="text-link hover:underline"
-      >
+    <Row>
+      <Link href={wikiPath.discussThread(id)} className={linkStyle()}>
         {topic}
       </Link>
       {document && (
@@ -40,6 +39,6 @@ export function ThreadLine({
         {statusLabel}
       </span>
       <span className="text-faint">{formatMoment(createdAt)}</span>
-    </li>
+    </Row>
   );
 }

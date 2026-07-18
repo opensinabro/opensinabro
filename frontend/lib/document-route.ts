@@ -6,6 +6,11 @@ export type DocumentRouteProps = {
   params: Promise<{ title: string[] }>;
 };
 
+// 리비전을 가리키는 라우트(비교·되돌리기·원문)는 같은 제목 위에 ?uuid= 를 얹는다.
+export type RevisionRouteProps = DocumentRouteProps & {
+  searchParams: Promise<{ uuid?: string }>;
+};
+
 export async function routeTitle(params: DocumentRouteProps["params"]) {
   return joinTitle((await params).title);
 }

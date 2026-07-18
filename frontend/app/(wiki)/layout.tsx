@@ -1,10 +1,17 @@
-import { NavigationColumn } from "@/components/layout/navigation-column";
+import { MobileBar } from "@/components/layout/mobile-bar";
+import {
+  NavigationColumn,
+  NavigationContent,
+  WikiNameLink,
+} from "@/components/layout/navigation-column";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { fetchSession } from "@/lib/api/server";
 
 // 확정안 C1의 3열 정주형. 좌측 내비는 이 레이아웃이 그려 라우트 사이에서 재사용되고,
 // 본문과 우측 정보 열은 페이지가 <WikiPage>로 채운다 — 두 열이 같은 그리드의 항목이어야
 // 높이가 맞물리기 때문이다 (docs/architecture.md).
+//
+// lg 미만에서는 좌측 열 대신 상단 바 + 서랍이 같은 내용을 맡는다.
 //
 // 세션은 여기서 한 번만 읽어 내려보낸다. 화면마다 따로 물으면 일부 화면만 로그인
 // 상태를 모르는 채로 그려진다.
@@ -21,6 +28,17 @@ export default async function WikiLayout({
         <NavigationColumn session={session} />
       </div>
       <div className="flex min-w-0 flex-col">
+        <MobileBar brand={<WikiNameLink session={session} />}>
+          <NavigationContent session={session} searchId="search-drawer" />
+        </MobileBar>
+
+        <a
+          href="#content"
+          className="text-ui sr-only rounded border border-line bg-ground px-3 py-1 focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-30"
+        >
+          본문으로 건너뛰기
+        </a>
+
         <div className="grid flex-1 grid-cols-1 xl:grid-cols-[minmax(0,1fr)_232px]">
           {children}
         </div>
