@@ -1,0 +1,22 @@
+[package]
+name = "wiki-document"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+wiki-account = { workspace = true }
+
+namumark-ast = { workspace = true }
+namumark-ir = { workspace = true }
+namumark-parser = { workspace = true }
+namumark-render = { workspace = true }
+namumark-backend-namuwiki = { workspace = true }
+
+sqlx = { workspace = true }
+uuid = { workspace = true }
+chrono = { workspace = true }
+thiserror = { workspace = true }
+diffy = "0.5.0"
+serde_json = "1.0.150"
+sha2 = "0.11.0"

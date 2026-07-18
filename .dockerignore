@@ -1,0 +1,7 @@
+target
+data
+.git
+.claude
+playground/node_modules
+docs
+fixtures/corpus

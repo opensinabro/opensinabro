@@ -10,6 +10,12 @@ members = [
     "crates/namumark-render",
     "crates/namumark-syntax",
     "crates/namumark-text",
+    "crates/wiki-account",
+    "crates/wiki-authorization",
+    "crates/wiki-discussion",
+    "crates/wiki-document",
+    "crates/wiki-search",
+    "crates/wiki-server",
     "tools/parity",
 ]
 
@@ -28,5 +34,29 @@ namumark-render = { path = "crates/namumark-render" }
 namumark-syntax = { path = "crates/namumark-syntax" }
 namumark-text = { path = "crates/namumark-text" }
 
+wiki-account = { path = "crates/wiki-account" }
+wiki-authorization = { path = "crates/wiki-authorization" }
+wiki-discussion = { path = "crates/wiki-discussion" }
+wiki-document = { path = "crates/wiki-document" }
+wiki-search = { path = "crates/wiki-search" }
+
 rowan = "0.16.1"
 wasm-bindgen = "=0.2.120"
+
+sqlx = { version = "0.9.0", default-features = false, features = [
+    "runtime-tokio",
+    "tls-rustls",
+    "postgres",
+    "uuid",
+    "chrono",
+    "migrate",
+    "macros",
+] }
+serde = { version = "1.0.228", features = ["derive"] }
+tantivy = "0.26.1"
+axum = "0.8.9"
+tokio = { version = "1.53.0", features = ["full"] }
+askama = "0.16.0"
+uuid = { version = "1.24.0", features = ["v4"] }
+chrono = "0.4.45"
+thiserror = "2.0.18"

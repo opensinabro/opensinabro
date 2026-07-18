@@ -1,0 +1,38 @@
+services:
+  database:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: opensinabro
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-opensinabro}
+      POSTGRES_DB: opensinabro
+      # 문서 제목·본문이 한국어라 로케일을 맞춰 둔다.
+      LANG: ko_KR.utf8
+    ports:
+      # 로컬에서 카고로 띄운 서버가 붙을 수 있게 내보낸다.
+      - "${OPENSINABRO_DATABASE_PORT:-5432}:5432"
+    volumes:
+      - database:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready --username=opensinabro --dbname=opensinabro"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+  wiki:
+    build: .
+    depends_on:
+      database:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgres://opensinabro:${POSTGRES_PASSWORD:-opensinabro}@database:5432/opensinabro
+    ports:
+      - "${OPENSINABRO_PORT:-3000}:3000"
+    volumes:
+      # 검색 색인은 DB가 아니라 파일이라 따로 남긴다.
+      - search-index:/var/lib/opensinabro
+    restart: unless-stopped
+
+volumes:
+  database:
+  search-index:

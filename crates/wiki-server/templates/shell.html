@@ -1,0 +1,41 @@
+{# 스킨 셸. 본문 HTML은 backend-namuwiki가 방출하므로 여기서는 감싸기만 한다. #}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ heading }} - {{ wiki_name }}</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="wiki-shell-header">
+<a class="wiki-shell-logo" href="/">{{ wiki_name }}</a>
+<form class="wiki-shell-search" action="/search" method="get">
+<input type="search" name="q" placeholder="검색" value="{{ query }}" aria-label="검색">
+<button type="submit">찾기</button>
+</form>
+<nav class="wiki-shell-account">
+{% if let Some(name) = user_name %}
+<a href="/users/{{ name }}">{{ name }}</a>
+<a href="/notifications">알림{% if unread > 0 %} ({{ unread }}){% endif %}</a>
+<a href="/starred">내 문서함</a>
+<form method="post" action="/logout">
+<input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+<button type="submit">로그아웃</button>
+</form>
+{% else %}
+<a href="/login">로그인</a>
+<a href="/signup">계정 만들기</a>
+{% endif %}
+</nav>
+</header>
+<main class="wiki-shell-main">
+<h1 class="wiki-shell-heading">{{ heading }}</h1>
+{{ body|safe }}
+</main>
+<footer class="wiki-shell-footer">
+<p>문서 내용은 {{ content_license }}를 따릅니다.</p>
+<p><a href="/recent-changes">최근 변경</a> · <a href="/recent-discussions">최근 토론</a> · <a href="/edit-requests">편집요청</a> · <a href="/random">임의 문서</a> · <a href="/needed-pages">작성이 필요한 문서</a> · <a href="/upload">파일 올리기</a> · <a href="/orphaned-pages">고립된 문서</a> · <a href="/block-history">운영 기록</a> · <a href="/license">라이선스</a></p>
+</footer>
+</body>
+</html>

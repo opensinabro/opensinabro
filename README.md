@@ -74,10 +74,50 @@ cargo test
 
 1. **나무마크 파서** — 완료 (red-green tree, 골든테스트)
 2. **렌더링 엔진** — HTML 백엔드 1차 완료 (다중 백엔드 구조). [파리티 0](docs/design/04-namuwiki-parity.md) 달성.
-3. **위키 서버** — 설계 완료, 구현 예정
+3. **위키 서버** — M1(읽기 전용)·M2(편집·리비전·ACL)·M3(계정·권한)·M4(토론·편집요청)·
+   M5(파일·운영)·M6(알림·북마크·API·특수 페이지) 완료. 남은 것은 스킨 체계·TOTP
    ([요구사항](docs/design/06-wiki-server-requirements.md),
    [아키텍처·로드맵](docs/design/07-wiki-server-architecture.md),
    [데이터 모델](docs/design/08-wiki-server-data-model.md))
+
+## 실행
+
+작업은 [`justfile`](justfile)에 모아 두었습니다. `just`만 있으면 됩니다.
+
+```sh
+just            # 무엇을 할 수 있는지 봅니다
+```
+
+### 기본: 서버는 로컬, 데이터베이스는 컨테이너
+
+PostgreSQL을 따로 설치할 필요 없이 컴포즈가 띄웁니다.
+
+```sh
+just setup      # 데이터베이스 컨테이너를 띄웁니다 (처음 한 번)
+just import     # fixtures/documents의 문서를 적재합니다
+just run        # http://127.0.0.1:3000
+```
+
+`just start`는 위 셋을 잇고, `run`·`dev`·`import`는 데이터베이스가 꺼져 있으면 알아서
+띄웁니다. 스키마는 서버가 시작하며 스스로 적용합니다. 접속 정보는 `DATABASE_URL`·
+`OPENSINABRO_DATABASE_PORT`·`OPENSINABRO_ADDRESS`로 덮어쓸 수 있습니다.
+
+### 서버까지 컨테이너로
+
+```sh
+just docker-up
+just docker-import
+```
+
+### 그 밖
+
+```sh
+just dev              # 디버그 빌드로 띄웁니다 (빌드가 빠릅니다)
+just database-shell   # psql
+just database-reset   # 데이터베이스·검색 색인·올린 파일을 비웁니다
+just down             # 컨테이너를 내립니다 (데이터는 남습니다)
+just check            # 커밋 전에: 서식·클리피·테스트
+```
 
 ## 라이선스
 
