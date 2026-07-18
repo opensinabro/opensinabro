@@ -2,6 +2,7 @@ import init, {
   render as wasmRender,
   backends,
   inspect as wasmInspect,
+  diagnose as wasmDiagnose,
 } from '../../wasm/namumark_playground.js'
 
 export interface BackendInfo {
@@ -43,6 +44,28 @@ export interface Token {
 /** 무손실 구문 트리의 리프 토큰을 원문 순서대로 돌려준다. */
 export function inspectTokens(source: string): Token[] {
   return JSON.parse(wasmInspect(source)) as Token[]
+}
+
+export type DiagnosticSeverity = 'warning' | 'suggestion' | 'info'
+
+export interface Diagnostic {
+  /** 안정적 식별자: redirect-trailing-content·unsupported-macro … */
+  code: string
+  severity: DiagnosticSeverity
+  /** correctness·deprecation·style·unsupported */
+  category: string
+  message: string
+  /** 원문 바이트 오프셋 [start, end). */
+  start: number
+  end: number
+}
+
+/**
+ * 원문을 검사해 진단을 원문 위치 순으로 돌려준다. 문맥 자유 검사(리다이렉트 후행
+ * 내용 등)와 resolve의 문맥 의존 검사(미지원 매크로)를 합친 결과다.
+ */
+export function diagnose(source: string): Diagnostic[] {
+  return JSON.parse(wasmDiagnose(source)) as Diagnostic[]
 }
 
 /** 나무마크 원문을 렌더해 `{ html, css }`를 돌려준다. */

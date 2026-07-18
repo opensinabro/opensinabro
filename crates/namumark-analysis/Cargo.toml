@@ -1,0 +1,10 @@
+[package]
+name = "namumark-analysis"
+description = "나무마크 의미 모델 진단: 문맥 자유 경고·향상 제안 리포트"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+namumark-ast = { path = "../namumark-ast" }
+namumark-syntax = { path = "../namumark-syntax" }

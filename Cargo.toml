@@ -1,6 +1,7 @@
 [workspace]
 resolver = "2"
 members = [
+    "crates/namumark-analysis",
     "crates/namumark-ast",
     "crates/namumark-backend-namuwiki",
     "crates/namumark-ir",

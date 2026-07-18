@@ -10,6 +10,7 @@ publish = false
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
+namumark-analysis = { path = "../namumark-analysis" }
 namumark-ir = { path = "../namumark-ir" }
 namumark-parser = { path = "../namumark-parser" }
 namumark-render = { path = "../namumark-render" }

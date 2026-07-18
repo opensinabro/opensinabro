@@ -1,10 +1,14 @@
 use namumark_ir::{DocumentLinkKind, RenderBlock, RenderInline, RenderTree, TextStyle};
-use namumark_render::{Date, DateTime, EmptyContext, Time, WikiContext, build_render_tree};
+use namumark_render::{
+    Date, DateTime, EmptyContext, Time, WikiContext, build_render_tree,
+    build_render_tree_with_diagnostics,
+};
 use std::collections::HashMap;
 
 struct TestContext {
     documents: HashMap<String, String>,
     now: Option<DateTime>,
+    title: Option<String>,
 }
 
 impl TestContext {
@@ -12,6 +16,7 @@ impl TestContext {
         Self {
             documents: HashMap::new(),
             now: None,
+            title: None,
         }
     }
 }
@@ -19,6 +24,10 @@ impl TestContext {
 impl WikiContext for TestContext {
     fn document_exists(&self, title: &str) -> bool {
         self.documents.contains_key(title)
+    }
+
+    fn current_title(&self) -> Option<String> {
+        self.title.clone()
     }
 
     fn include_source(&self, title: &str) -> Option<String> {
@@ -32,6 +41,107 @@ impl WikiContext for TestContext {
 
 fn tree(source: &str) -> RenderTree {
     build_render_tree(&namumark_parser::parse(source), &EmptyContext)
+}
+
+fn diagnostic_codes(source: &str) -> Vec<String> {
+    let (_, diagnostics) =
+        build_render_tree_with_diagnostics(&namumark_parser::parse(source), &EmptyContext);
+    diagnostics
+        .iter()
+        .map(|diagnostic| diagnostic.code.to_string())
+        .collect()
+}
+
+#[test]
+fn unknown_macro_is_reported() {
+    assert_eq!(
+        diagnostic_codes("[아무개매크로]"),
+        vec!["unsupported-macro"]
+    );
+}
+
+#[test]
+fn known_macro_is_not_reported() {
+    assert!(diagnostic_codes("[목차]").is_empty());
+}
+
+#[test]
+fn known_macro_without_required_argument_is_reported() {
+    assert_eq!(diagnostic_codes("[anchor]"), vec!["invalid-macro-argument"]);
+    assert_eq!(diagnostic_codes("[math]"), vec!["invalid-macro-argument"]);
+    assert_eq!(
+        diagnostic_codes("[youtube()]"),
+        vec!["invalid-macro-argument"]
+    );
+}
+
+#[test]
+fn bad_date_argument_is_reported() {
+    assert_eq!(
+        diagnostic_codes("[age(날짜아님)]"),
+        vec!["invalid-macro-argument"]
+    );
+}
+
+/// now()가 없어 원문 표기로 남는 것은 렌더 결정성 정책이지 저자 잘못이 아니다.
+#[test]
+fn date_macro_without_context_now_is_not_reported() {
+    assert!(diagnostic_codes("[date]").is_empty());
+    assert!(diagnostic_codes("[age(1990-01-01)]").is_empty());
+}
+
+#[test]
+fn missing_include_target_is_reported() {
+    assert_eq!(
+        diagnostic_codes("[include(틀:없음)]"),
+        vec!["include-target-missing"]
+    );
+}
+
+#[test]
+fn existing_include_target_is_not_reported() {
+    let mut context = TestContext::new();
+    context
+        .documents
+        .insert("틀:있음".to_string(), "내용".to_string());
+    let (_, diagnostics) =
+        build_render_tree_with_diagnostics(&namumark_parser::parse("[include(틀:있음)]"), &context);
+    assert!(diagnostics.is_empty());
+}
+
+#[test]
+fn redirect_to_self_is_reported() {
+    let mut context = TestContext::new();
+    context.title = Some("대문".to_string());
+    let (_, diagnostics) =
+        build_render_tree_with_diagnostics(&namumark_parser::parse("#redirect 대문"), &context);
+    assert_eq!(
+        diagnostics
+            .iter()
+            .map(|diagnostic| diagnostic.code.to_string())
+            .collect::<Vec<_>>(),
+        vec!["self-redirect"]
+    );
+}
+
+#[test]
+fn redirect_to_other_document_is_not_reported() {
+    let mut context = TestContext::new();
+    context.title = Some("다른 문서".to_string());
+    let (_, diagnostics) =
+        build_render_tree_with_diagnostics(&namumark_parser::parse("#redirect 대문"), &context);
+    assert!(diagnostics.is_empty());
+}
+
+#[test]
+fn macro_inside_included_template_is_not_reported() {
+    let mut context = TestContext::new();
+    context
+        .documents
+        .insert("틀:샘플".to_string(), "[안에서쓴미지원매크로]".to_string());
+    let (_, diagnostics) =
+        build_render_tree_with_diagnostics(&namumark_parser::parse("[include(틀:샘플)]"), &context);
+    assert!(diagnostics.is_empty());
 }
 
 #[test]

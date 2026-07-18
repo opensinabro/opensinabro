@@ -5,8 +5,9 @@
 //! 외부 세계가 없는 [`EmptyContext`]를 쓰므로 모든 링크는 빨간 링크이고
 //! include는 확장되지 않는다 — 플레이그라운드는 단일 문서만 다룬다.
 
+use namumark_analysis::DiagnosticCode;
 use namumark_ir::RenderTree;
-use namumark_render::{EmptyContext, build_render_tree};
+use namumark_render::{EmptyContext, build_render_tree, build_render_tree_with_diagnostics};
 use namumark_syntax::{NodeOrToken, SyntaxKind};
 use std::fmt::Write as _;
 use wasm_bindgen::prelude::*;
@@ -107,6 +108,47 @@ pub fn inspect(source: &str) -> String {
         let _ = write!(json, "{}", usize::from(token.text_range().start()));
         json.push_str(r#","text":""#);
         escape_json_into(token.text(), &mut json);
+        json.push_str(r#""}"#);
+    }
+    json.push(']');
+    json
+}
+
+/// 나무마크 원문을 검사해 진단을 `[{"code","severity","category","message","start","end"}, ...]`
+/// JSON으로 돌려준다. `start`·`end`는 원문 바이트 오프셋이다.
+///
+/// 문맥 자유 진단([`namumark_analysis::analyze`])과 resolve의 문맥 의존 진단(미지원
+/// 매크로 등)을 합쳐 원문 위치 순으로 낸다.
+///
+/// 플레이그라운드는 [`EmptyContext`]라 어떤 문서도 존재하지 않는다 — 그 상태에서
+/// `include-target-missing`은 모든 include에 붙어 뜻이 없으므로 걸러낸다. 존재 판정은
+/// 실제 위키 문맥이 있을 때만 의미가 있다.
+#[wasm_bindgen]
+pub fn diagnose(source: &str) -> String {
+    let document = namumark_parser::parse(source);
+    let mut diagnostics = namumark_analysis::analyze(&document);
+    let (_, render_diagnostics) = build_render_tree_with_diagnostics(&document, &EmptyContext);
+    diagnostics.extend(render_diagnostics);
+    diagnostics.retain(|diagnostic| diagnostic.code != DiagnosticCode::IncludeTargetMissing);
+    diagnostics.sort_by_key(|diagnostic| diagnostic.range.start());
+
+    let mut json = String::from("[");
+    for (index, diagnostic) in diagnostics.iter().enumerate() {
+        if index > 0 {
+            json.push(',');
+        }
+        json.push_str(r#"{"code":""#);
+        json.push_str(diagnostic.code.as_str());
+        json.push_str(r#"","severity":""#);
+        json.push_str(diagnostic.severity().as_str());
+        json.push_str(r#"","category":""#);
+        json.push_str(diagnostic.category().as_str());
+        json.push_str(r#"","start":"#);
+        let _ = write!(json, "{}", usize::from(diagnostic.range.start()));
+        json.push_str(r#","end":"#);
+        let _ = write!(json, "{}", usize::from(diagnostic.range.end()));
+        json.push_str(r#","message":""#);
+        escape_json_into(&diagnostic.message, &mut json);
         json.push_str(r#""}"#);
     }
     json.push(']');

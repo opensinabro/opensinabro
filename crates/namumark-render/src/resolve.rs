@@ -6,7 +6,10 @@
 
 use crate::condition;
 use crate::context::WikiContext;
-use namumark_ast::{Block, Conditional, Document, Fragment, HorizontalAlignment, Inline, Template};
+use namumark_analysis::{Diagnostic, DiagnosticCode, TextRange};
+use namumark_ast::{
+    AstNode, Block, Conditional, Document, Fragment, HorizontalAlignment, Inline, Template,
+};
 use namumark_ir::{
     Color, ColorValue, Dimension, DocumentLinkKind, ImageAlignment, ImageLayout, ImageTheme,
     RenderBlock, RenderInline, RenderListItem, RenderTable, RenderTableAttribute, RenderTableCell,
@@ -31,6 +34,7 @@ pub(crate) struct Resolved {
     pub redirect: Option<String>,
     pub blocks: Vec<RenderBlock>,
     pub categories: Vec<String>,
+    pub diagnostics: Vec<Diagnostic>,
 }
 
 pub(crate) fn resolve(document: &Document, context: &dyn WikiContext) -> Resolved {
@@ -42,12 +46,14 @@ pub(crate) fn resolve(document: &Document, context: &dyn WikiContext) -> Resolve
         expanded_includes: 0,
         scope: HashMap::new(),
         in_cell: false,
+        diagnostics: Vec::new(),
     };
     let blocks = resolver.resolve_blocks(&document.blocks());
     Resolved {
         redirect: resolver.redirect,
         blocks,
         categories: resolver.categories,
+        diagnostics: resolver.diagnostics,
     }
 }
 
@@ -65,6 +71,9 @@ struct Resolver<'context> {
     /// 지금 표 셀 안을 해석 중인가. 셀 안에서는 뒤가 invisible(분류·include)이어도
     /// 콘텐츠 뒤 개행이 `<br>`로 남는다(렌더확정: 표 셀 안 `[include(틀:글무리)]`).
     in_cell: bool,
+    /// resolve 중 모인 진단(문맥 의존). 편집 중인 문서 자신의 지점만 담도록,
+    /// include로 확장한 틀 내부(`include_instance.is_some()`)에서는 방출하지 않는다.
+    diagnostics: Vec<Diagnostic>,
 }
 
 impl Resolver<'_> {
@@ -182,7 +191,16 @@ impl Resolver<'_> {
                 Block::Comment(_) => {}
                 Block::Redirect(redirect) => {
                     if self.redirect.is_none() && self.include_instance.is_none() {
-                        self.redirect = Some(self.fill(&redirect.target()));
+                        let target = self.fill(&redirect.target());
+                        if self.context.current_title().as_deref() == Some(target.as_str()) {
+                            self.diagnostics.push(Diagnostic {
+                                code: DiagnosticCode::SelfRedirect,
+                                range: redirect.syntax().text_range(),
+                                message: "리다이렉트 대상이 이 문서 자신이라 순환합니다.".into(),
+                                suggestion: None,
+                            });
+                        }
+                        self.redirect = Some(target);
                     }
                 }
             }
@@ -229,7 +247,8 @@ impl Resolver<'_> {
                     && macro_call.name().eq_ignore_ascii_case("include")
                 {
                     let argument = self.fill_option(&macro_call.argument());
-                    let expanded = self.expand_include(argument.as_deref());
+                    let expanded =
+                        self.expand_include(argument.as_deref(), macro_call.syntax().text_range());
                     // 줄에 앞선 내용이 있으면(각주 뒤 `[각주][include(틀:문서 가져옴)]`) 그 문단에
                     // 블록째 중첩된다(렌더확정: the seed의 바깥 wiki-paragraph 하나가 각주 섹션과
                     // 문서 가져옴을 함께 감싼다). include가 줄 첫머리인데 뒤에 보이는 내용이 있으면
@@ -515,7 +534,8 @@ impl Resolver<'_> {
             },
             Inline::Macro(macro_call) => {
                 let argument = self.fill_option(&macro_call.argument());
-                self.resolve_macro(&macro_call.name(), argument.as_deref())
+                let range = macro_call.syntax().text_range();
+                self.resolve_macro(&macro_call.name(), argument.as_deref(), range)
             }
         })
     }
@@ -527,7 +547,26 @@ impl Resolver<'_> {
         }
     }
 
-    fn resolve_macro(&mut self, name: &str, argument: Option<&str>) -> RenderInline {
+    /// 인식하는 매크로인데 인자가 없거나 잘못돼 특화하지 못했음을 알린다.
+    /// 편집 중 문서 자신의 지점만 담도록 include 내부에서는 방출하지 않는다.
+    fn report_invalid_argument(&mut self, name: &str, range: TextRange) {
+        if self.include_instance.is_some() {
+            return;
+        }
+        self.diagnostics.push(Diagnostic {
+            code: DiagnosticCode::InvalidMacroArgument,
+            range,
+            message: format!("매크로 `{name}`의 인자가 없거나 잘못되어 표기 그대로 남습니다."),
+            suggestion: None,
+        });
+    }
+
+    fn resolve_macro(
+        &mut self,
+        name: &str,
+        argument: Option<&str>,
+        range: TextRange,
+    ) -> RenderInline {
         let unresolved = || RenderInline::Unresolved {
             name: name.to_string(),
             argument: argument.map(str::to_string),
@@ -543,49 +582,88 @@ impl Resolver<'_> {
                 Some(anchor_name) => RenderInline::Anchor {
                     name: anchor_name.to_string(),
                 },
-                None => unresolved(),
+                None => {
+                    self.report_invalid_argument(name, range);
+                    unresolved()
+                }
             },
             "math" => match argument {
                 Some(formula) => RenderInline::Math {
                     formula: formula.to_string(),
                 },
-                None => unresolved(),
+                None => {
+                    self.report_invalid_argument(name, range);
+                    unresolved()
+                }
             },
+            // now()가 없어 원문 표기로 남는 것은 렌더 결정성 정책이지 저자 잘못이
+            // 아니다 — 아래 date·age·dday는 인자 자체가 잘못일 때만 진단한다.
             "date" | "datetime" => match self.context.now() {
                 Some(now) => RenderInline::Text(now.to_string()),
                 None => unresolved(),
             },
-            "age" => match (argument.and_then(parse_date), self.context.now()) {
-                (Some(birth), Some(now)) => {
-                    let today = now.date;
-                    let mut age = today.year - birth.year;
-                    if (today.month, today.day) < (birth.month, birth.day) {
-                        age -= 1;
+            "age" => {
+                let birth = argument.and_then(parse_date);
+                if birth.is_none() {
+                    self.report_invalid_argument(name, range);
+                }
+                match (birth, self.context.now()) {
+                    (Some(birth), Some(now)) => {
+                        let today = now.date;
+                        let mut age = today.year - birth.year;
+                        if (today.month, today.day) < (birth.month, birth.day) {
+                            age -= 1;
+                        }
+                        RenderInline::Text(age.to_string())
                     }
-                    RenderInline::Text(age.to_string())
+                    _ => unresolved(),
                 }
-                _ => unresolved(),
-            },
-            "dday" => match (argument.and_then(parse_date), self.context.now()) {
-                (Some(target), Some(now)) => {
-                    let difference = now.date.julian_day_number() - target.julian_day_number();
-                    let text = match difference {
-                        0 => "D-Day".to_string(),
-                        positive if positive > 0 => format!("D+{positive}"),
-                        negative => format!("D{negative}"),
-                    };
-                    RenderInline::Text(text)
+            }
+            "dday" => {
+                let target = argument.and_then(parse_date);
+                if target.is_none() {
+                    self.report_invalid_argument(name, range);
                 }
-                _ => unresolved(),
-            },
-            "youtube" => self.resolve_video(VideoProvider::Youtube, argument, unresolved),
-            "kakaotv" => self.resolve_video(VideoProvider::KakaoTv, argument, unresolved),
-            "nicovideo" => self.resolve_video(VideoProvider::NicoVideo, argument, unresolved),
+                match (target, self.context.now()) {
+                    (Some(target), Some(now)) => {
+                        let difference = now.date.julian_day_number() - target.julian_day_number();
+                        let text = match difference {
+                            0 => "D-Day".to_string(),
+                            positive if positive > 0 => format!("D+{positive}"),
+                            negative => format!("D{negative}"),
+                        };
+                        RenderInline::Text(text)
+                    }
+                    _ => unresolved(),
+                }
+            }
+            "youtube" => {
+                self.resolve_video(VideoProvider::Youtube, argument, name, range, unresolved)
+            }
+            "kakaotv" => {
+                self.resolve_video(VideoProvider::KakaoTv, argument, name, range, unresolved)
+            }
+            "nicovideo" => {
+                self.resolve_video(VideoProvider::NicoVideo, argument, name, range, unresolved)
+            }
             "ruby" => match argument.and_then(parse_ruby) {
                 Some(ruby) => ruby,
-                None => unresolved(),
+                None => {
+                    self.report_invalid_argument(name, range);
+                    unresolved()
+                }
             },
-            _ => unresolved(),
+            _ => {
+                if self.include_instance.is_none() {
+                    self.diagnostics.push(Diagnostic {
+                        code: DiagnosticCode::UnsupportedMacro,
+                        range,
+                        message: format!("매크로 `{name}`을(를) 인식하지 못했습니다."),
+                        suggestion: None,
+                    });
+                }
+                unresolved()
+            }
         }
     }
 
@@ -593,14 +671,18 @@ impl Resolver<'_> {
         &mut self,
         provider: VideoProvider,
         argument: Option<&str>,
+        name: &str,
+        range: TextRange,
         unresolved: impl Fn() -> RenderInline,
     ) -> RenderInline {
         let Some(argument) = argument else {
+            self.report_invalid_argument(name, range);
             return unresolved();
         };
         let mut parts = argument.split(',');
         let identifier = parts.next().unwrap_or_default().trim().to_string();
         if identifier.is_empty() {
+            self.report_invalid_argument(name, range);
             return unresolved();
         }
         let mut width = None;
@@ -622,7 +704,7 @@ impl Resolver<'_> {
         }
     }
 
-    fn expand_include(&mut self, argument: Option<&str>) -> Vec<RenderBlock> {
+    fn expand_include(&mut self, argument: Option<&str>, range: TextRange) -> Vec<RenderBlock> {
         let unresolved = |argument: Option<&str>| {
             vec![RenderBlock::Paragraph(vec![RenderInline::Unresolved {
                 name: "include".to_string(),
@@ -635,15 +717,25 @@ impl Resolver<'_> {
         if self.include_instance.is_some() {
             return Vec::new();
         }
+        // 여기 이르렀다면 중첩 include가 아니므로(위에서 걸러짐) 최상위 문서다 —
+        // 진단 범위가 편집 중 문서 안이라 그대로 방출해도 된다.
         let Some(argument) = argument else {
+            self.report_invalid_argument("include", range);
             return unresolved(argument);
         };
         let mut parts = argument.split(',');
         let title = parts.next().unwrap_or_default().trim().to_string();
         if title.is_empty() {
+            self.report_invalid_argument("include", range);
             return unresolved(Some(argument));
         }
         let Some(source) = self.context.include_source(&title) else {
+            self.diagnostics.push(Diagnostic {
+                code: DiagnosticCode::IncludeTargetMissing,
+                range,
+                message: format!("include 대상 문서 `{title}`이(가) 존재하지 않습니다."),
+                suggestion: None,
+            });
             return unresolved(Some(argument));
         };
 

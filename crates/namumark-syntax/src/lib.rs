@@ -9,7 +9,7 @@ mod parser;
 mod sink;
 
 pub use kind::{SyntaxElement, SyntaxKind, SyntaxNode, SyntaxToken};
-pub use rowan::NodeOrToken;
+pub use rowan::{NodeOrToken, TextRange, TextSize};
 
 /// 원문을 완전무손실 구문 트리로 파싱한다. `tree.text() == source`가 항상 성립한다.
 #[derive(Debug, Clone)]

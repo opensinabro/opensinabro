@@ -3,7 +3,7 @@ import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react'
 import { nodeLabel, scopeClass } from '@/lib/scopes'
 import { themeCss } from '@/lib/themes'
 import { cn } from '@/lib/utils'
-import { inspectTokens, type Token } from '@/lib/wasm'
+import { diagnose, inspectTokens, type Diagnostic, type DiagnosticSeverity, type Token } from '@/lib/wasm'
 import { usePlaygroundStore } from '@/store'
 
 /** 라인넘버 거터 너비(px)와 거터~본문 사이 여백(px). */
@@ -62,6 +62,56 @@ function useThemeStyles() {
     element.textContent = themeCss()
     document.head.appendChild(element)
   }, [])
+}
+
+/** 진단 밑줄 스타일을 문서에 한 번만 주입한다(라이트 모드 전용). */
+function useDiagnosticStyles() {
+  useEffect(() => {
+    const id = 'nm-diag-style'
+    if (document.getElementById(id)) return
+    const element = document.createElement('style')
+    element.id = id
+    element.textContent = [
+      '.nm-diag { text-decoration-line: underline; text-decoration-skip-ink: none; text-underline-offset: 3px; }',
+      '.nm-diag-warning { text-decoration-style: wavy; text-decoration-color: #e5484d; }',
+      '.nm-diag-suggestion { text-decoration-style: wavy; text-decoration-color: #f5a623; }',
+      '.nm-diag-info { text-decoration-style: dotted; text-decoration-color: #3b82f6; }',
+    ].join('\n')
+    document.head.appendChild(element)
+  }, [])
+}
+
+const SEVERITY_RANK: Record<DiagnosticSeverity, number> = { warning: 3, suggestion: 2, info: 1 }
+const SEVERITY_COLOR: Record<DiagnosticSeverity, string> = {
+  warning: '#e5484d',
+  suggestion: '#f5a623',
+  info: '#3b82f6',
+}
+
+/**
+ * 각 토큰이 걸치는 진단 중 가장 무거운 것을 골라 토큰 인덱스별로 담는다. 리프
+ * 토큰은 원문을 빈틈없이 덮으므로 토큰 i의 바이트 범위는 [start, 다음 토큰 start)다.
+ */
+function diagnosticsByToken(
+  tokens: Token[],
+  diagnostics: Diagnostic[],
+  sourceByteLength: number,
+): (Diagnostic | undefined)[] {
+  const result = new Array<Diagnostic | undefined>(tokens.length)
+  for (let index = 0; index < tokens.length; index += 1) {
+    const start = tokens[index].start
+    const end = index + 1 < tokens.length ? tokens[index + 1].start : sourceByteLength
+    let chosen: Diagnostic | undefined
+    for (const diagnostic of diagnostics) {
+      if (start < diagnostic.end && diagnostic.start < end) {
+        if (!chosen || SEVERITY_RANK[diagnostic.severity] > SEVERITY_RANK[chosen.severity]) {
+          chosen = diagnostic
+        }
+      }
+    }
+    result[index] = chosen
+  }
+  return result
 }
 
 /** 토큰 시작 오프셋(UTF-16 코드유닛) 누적. */
@@ -130,8 +180,12 @@ function caretOffsetAt(x: number, y: number): number | null {
 interface HoverState {
   /** 강조할 토큰 범위 [시작, 끝]. */
   range: [number, number]
-  /** 노드 의미(한국어). */
+  /** 노드 의미(한국어) 또는 진단 메시지. */
   label: string
+  /** 노드 hover면 'node', 진단 위면 'diagnostic'. */
+  variant: 'node' | 'diagnostic'
+  /** variant가 'diagnostic'일 때 밑줄·툴팁 색을 정하는 심각도. */
+  severity?: DiagnosticSeverity
   /** 툴팁 고정 좌표(뷰포트 기준). */
   top: number
   left: number
@@ -146,6 +200,7 @@ interface HoverState {
  */
 export function HighlightedEditor() {
   useThemeStyles()
+  useDiagnosticStyles()
 
   const source = usePlaygroundStore((state) => state.source)
   const setSource = usePlaygroundStore((state) => state.setSource)
@@ -170,6 +225,22 @@ export function HighlightedEditor() {
 
   const offsets = useMemo(() => (tokens ? cumulativeOffsets(tokens) : []), [tokens])
   const lines = useMemo(() => buildLines(tokens, source), [tokens, source])
+
+  // 진단도 원문과 항상 일치해야 하므로 백드롭과 같은 타이밍에 계산한다.
+  const diagnostics = useMemo(() => {
+    if (!ready) return []
+    try {
+      return diagnose(source)
+    } catch {
+      return []
+    }
+  }, [ready, source])
+
+  const tokenDiagnostics = useMemo(() => {
+    if (!tokens || diagnostics.length === 0) return []
+    const sourceByteLength = new TextEncoder().encode(source).length
+    return diagnosticsByToken(tokens, diagnostics, sourceByteLength)
+  }, [tokens, diagnostics, source])
 
   const clearHover = () => {
     if (hoverRef.current) {
@@ -203,11 +274,36 @@ export function HighlightedEditor() {
       if (offset === null) return clearHover()
       const index = tokenIndexAt(offsets, offset)
       const token = tokens[index]
-      if (!token || token.kind === 'Newline' || token.parent === 'Document') return clearHover()
+      if (!token) return clearHover()
+
+      // 진단이 걸린 토큰이면 노드 의미보다 진단 메시지를 우선해 띄운다.
+      const diagnostic = tokenDiagnostics[index]
+      if (diagnostic) {
+        const current = hoverRef.current
+        if (current && current.variant === 'diagnostic' && current.range[0] === index) return
+        const anchor = backdropRef.current?.querySelector(`[data-token="${index}"]`) as HTMLElement | null
+        if (!anchor) return clearHover()
+        const rect = anchor.getBoundingClientRect()
+        const below = rect.top < 44
+        const next: HoverState = {
+          range: [index, index],
+          label: diagnostic.message,
+          variant: 'diagnostic',
+          severity: diagnostic.severity,
+          top: below ? rect.bottom + 6 : rect.top - 6,
+          left: rect.left,
+          below,
+        }
+        hoverRef.current = next
+        setHover(next)
+        return
+      }
+
+      if (token.kind === 'Newline' || token.parent === 'Document') return clearHover()
       const [low, high] = nodeRange(tokens, index)
       const current = hoverRef.current
       // 같은 노드 위에서는 위치를 유지한다 — 커서를 따라다니지 않게.
-      if (current && current.range[0] === low && current.range[1] === high) return
+      if (current && current.variant === 'node' && current.range[0] === low && current.range[1] === high) return
       const anchor = backdropRef.current?.querySelector(`[data-token="${low}"]`) as HTMLElement | null
       if (!anchor) return clearHover()
       const rect = anchor.getBoundingClientRect()
@@ -215,6 +311,7 @@ export function HighlightedEditor() {
       const next: HoverState = {
         range: [low, high],
         label: nodeLabel(token),
+        variant: 'node',
         top: below ? rect.bottom + 6 : rect.top - 6,
         left: rect.left,
         below,
@@ -256,21 +353,25 @@ export function HighlightedEditor() {
             >
               {lineNumber + 1}
             </span>
-            {segments.map((segment, index) => (
-              <span
-                key={index}
-                data-token={segment.tokenIndex}
-                className={cn(
-                  segment.className,
-                  hover &&
-                    segment.tokenIndex >= hover.range[0] &&
-                    segment.tokenIndex <= hover.range[1] &&
-                    'nm-tok-hover',
-                )}
-              >
-                {segment.text}
-              </span>
-            ))}
+            {segments.map((segment, index) => {
+              const diagnostic = tokenDiagnostics[segment.tokenIndex]
+              return (
+                <span
+                  key={index}
+                  data-token={segment.tokenIndex}
+                  className={cn(
+                    segment.className,
+                    diagnostic && `nm-diag nm-diag-${diagnostic.severity}`,
+                    hover &&
+                      segment.tokenIndex >= hover.range[0] &&
+                      segment.tokenIndex <= hover.range[1] &&
+                      'nm-tok-hover',
+                  )}
+                >
+                  {segment.text}
+                </span>
+              )
+            })}
           </div>
         ))}
       </pre>
@@ -298,13 +399,25 @@ export function HighlightedEditor() {
       />
       {hover ? (
         <div
-          className="pointer-events-none fixed z-50 rounded-md border bg-popover px-2.5 py-1 text-xs font-medium text-foreground shadow-md"
+          className="pointer-events-none fixed z-50 flex items-center gap-1.5 rounded-md border bg-popover px-2.5 py-1 text-xs font-medium text-foreground shadow-md"
           style={{
             top: hover.top,
             left: hover.left,
+            maxWidth: 320,
             transform: hover.below ? undefined : 'translateY(-100%)',
           }}
         >
+          {hover.variant === 'diagnostic' && hover.severity ? (
+            <span
+              style={{
+                width: 8,
+                height: 8,
+                borderRadius: 9999,
+                flexShrink: 0,
+                background: SEVERITY_COLOR[hover.severity],
+              }}
+            />
+          ) : null}
           {hover.label}
         </div>
       ) : null}

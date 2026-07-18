@@ -27,6 +27,14 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e5274423e17b7c9fc20b6e7e208532f9b19825d82dfd615708b70edd83df41f1"
 
 [[package]]
+name = "namumark-analysis"
+version = "0.1.0"
+dependencies = [
+ "namumark-ast",
+ "namumark-syntax",
+]
+
+[[package]]
 name = "namumark-ast"
 version = "0.1.0"
 dependencies = [
@@ -56,6 +64,7 @@ dependencies = [
 name = "namumark-parser"
 version = "0.1.0"
 dependencies = [
+ "namumark-analysis",
  "namumark-ast",
 ]
 
@@ -63,6 +72,7 @@ dependencies = [
 name = "namumark-playground"
 version = "0.1.0"
 dependencies = [
+ "namumark-analysis",
  "namumark-backend-namuwiki",
  "namumark-ir",
  "namumark-parser",
@@ -75,6 +85,7 @@ dependencies = [
 name = "namumark-render"
 version = "0.1.0"
 dependencies = [
+ "namumark-analysis",
  "namumark-ast",
  "namumark-ir",
  "namumark-parser",
