@@ -6,6 +6,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { EXAMPLES } from '@/examples'
+import { THEMES } from '@/lib/themes'
 import { usePlaygroundStore } from '@/store'
 
 export function Toolbar() {
@@ -15,8 +16,8 @@ export function Toolbar() {
   const setBackendId = usePlaygroundStore((state) => state.setBackendId)
   const exampleId = usePlaygroundStore((state) => state.exampleId)
   const loadExample = usePlaygroundStore((state) => state.loadExample)
-  const mode = usePlaygroundStore((state) => state.mode)
-  const setMode = usePlaygroundStore((state) => state.setMode)
+  const highlightThemeId = usePlaygroundStore((state) => state.highlightThemeId)
+  const setHighlightTheme = usePlaygroundStore((state) => state.setHighlightTheme)
 
   return (
     <header className="flex items-center justify-between gap-4 border-b bg-background px-5 py-3">
@@ -52,22 +53,20 @@ export function Toolbar() {
             </SelectContent>
           </Select>
         </div>
-        <div className="flex rounded-lg bg-muted p-0.5">
-          {(['preview', 'tokens'] as const).map((value) => (
-            <button
-              key={value}
-              type="button"
-              onClick={() => setMode(value)}
-              className={
-                'rounded-md px-3 py-1 text-xs transition-colors ' +
-                (mode === value
-                  ? 'bg-background font-medium text-foreground shadow-sm'
-                  : 'text-muted-foreground hover:text-foreground')
-              }
-            >
-              {value === 'preview' ? '미리보기' : '토큰'}
-            </button>
-          ))}
+        <div className="flex items-center gap-2">
+          <span className="text-xs text-muted-foreground">테마</span>
+          <Select value={highlightThemeId} onValueChange={setHighlightTheme}>
+            <SelectTrigger className="h-8 w-28 text-sm">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {THEMES.map((theme) => (
+                <SelectItem key={theme.id} value={theme.id}>
+                  {theme.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
       </div>
     </header>
