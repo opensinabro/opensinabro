@@ -396,6 +396,42 @@ fn unclosed_group_does_not_swallow_cell_separator() {
     );
 }
 
+// 바깥 표의 캡션은 자기 첫 행 것만이다 — 셀 안 중첩 표의 캡션을 끌어오면 안 된다.
+#[test]
+fn nested_table_caption_does_not_leak_to_outer() {
+    let document = parse("||<:>바깥\n{{{#!folding 보기\n|안캡션| X ||\n}}}\n끝 ||");
+    let blocks = model::of(&document);
+    let [Block::Table(outer)] = blocks.as_slice() else {
+        panic!("바깥 표 하나여야 한다: {blocks:?}");
+    };
+    assert_eq!(outer.caption, None, "바깥 표는 캡션이 없다");
+    // 안쪽 표(셀 → folding 안)는 자기 캡션을 그대로 가진다.
+    let inner_captions: Vec<_> = outer.rows[0].cells[0]
+        .blocks
+        .iter()
+        .flat_map(collect_table_captions)
+        .collect();
+    assert_eq!(inner_captions, vec![vec![text("안캡션")]]);
+}
+
+fn collect_table_captions(block: &Block) -> Vec<Vec<Inline>> {
+    let mut captions = Vec::new();
+    if let Block::Paragraph(inlines) = block {
+        for inline in inlines {
+            if let Inline::Folding(folding) = inline {
+                for inner in &folding.blocks {
+                    if let Block::Table(table) = inner
+                        && let Some(caption) = &table.caption
+                    {
+                        captions.push(caption.clone());
+                    }
+                }
+            }
+        }
+    }
+    captions
+}
+
 // 항목 줄 다음, 마커도 들여쓰기도 없는 줄은 그 항목의 문단이 이어지는 것이다.
 // 렌더확정: the seed는 ` * {{{…}}}\n #설명`을
 // `<li><div class='wiki-paragraph'><code>…</code><br>#설명</div></li>`로 낸다.

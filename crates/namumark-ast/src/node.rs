@@ -218,8 +218,11 @@ pub struct TableCell {
 
 impl Table {
     pub fn caption(&self) -> Option<Vec<Inline>> {
+        // 캡션은 첫 행의 직접 자식이다. descendants로 넓히면 셀 안 중첩 표의 캡션까지 집는다.
         self.syntax
-            .descendants()
+            .children()
+            .filter(|row| row.kind() == SyntaxKind::TableRow)
+            .flat_map(|row| row.children())
             .find(|node| node.kind() == SyntaxKind::TableCaption)
             .map(|caption| inlines(&caption))
     }
@@ -495,8 +498,7 @@ impl Image {
         let mut tokens = self
             .syntax
             .children_with_tokens()
-            .filter_map(NodeOrToken::into_token)
-            .peekable();
+            .filter_map(NodeOrToken::into_token);
         while let Some(token) = tokens.next() {
             match token.kind() {
                 SyntaxKind::ArgumentName => {
@@ -624,8 +626,7 @@ impl WikiStyle {
         let mut tokens = self
             .syntax
             .children_with_tokens()
-            .filter_map(NodeOrToken::into_token)
-            .peekable();
+            .filter_map(NodeOrToken::into_token);
         while let Some(token) = tokens.next() {
             if token.kind() == SyntaxKind::AttributeName && token.text() == name {
                 tokens.next(); // `=` Separator
