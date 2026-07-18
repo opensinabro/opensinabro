@@ -25,7 +25,7 @@ jobs:
       run:
         working-directory: playground
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Rust 툴체인 (wasm32)
         uses: dtolnay/rust-toolchain@stable
@@ -36,12 +36,14 @@ jobs:
         uses: Swatinem/rust-cache@v2
 
       - name: wasm-pack 설치
-        uses: jetli/wasm-pack-action@v0.4.0
+        uses: taiki-e/install-action@v2
+        with:
+          tool: wasm-pack
 
       - name: Node 설정
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
-          node-version: 24
+          node-version: lts/*
           cache: npm
           cache-dependency-path: playground/package-lock.json
 
@@ -54,7 +56,7 @@ jobs:
         run: npm run build
 
       - name: Pages 아티팩트 업로드
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: playground/dist
 
@@ -67,4 +69,4 @@ jobs:
     steps:
       - name: Pages 배포
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
