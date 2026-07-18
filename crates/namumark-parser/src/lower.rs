@@ -81,12 +81,22 @@ fn lower_list(node: &SyntaxNode) -> Block {
     {
         // 여러 줄 항목은 마커를 하위 영역의 줄머리로 옮기므로 자손까지 본다.
         // 문서 순서상 처음 나오는 것이 이 항목의 마커다(중첩 리스트의 것보다 앞선다).
-        let marker_text = item
+        // 종류(`1.`) 바로 뒤에 시작번호(`#42`)가 오면 이어 붙여 `1.#42`로 되짚는다.
+        let mut tokens = item
             .descendants_with_tokens()
-            .filter_map(NodeOrToken::into_token)
-            .find(|token| token.kind() == SyntaxKind::ListMarker)
-            .map(|token| token.text().to_string())
-            .unwrap_or_default();
+            .filter_map(NodeOrToken::into_token);
+        let marker_text = match tokens.find(|token| token.kind() == SyntaxKind::ListMarker) {
+            Some(bullet) => {
+                let mut text = bullet.text().to_string();
+                if let Some(number) = tokens.next()
+                    && number.kind() == SyntaxKind::ListStartNumber
+                {
+                    text.push_str(number.text());
+                }
+                text
+            }
+            None => String::new(),
+        };
         let (item_kind, start_number) = match text::list_marker(&marker_text) {
             Some(marker) => (semantics::list_kind(marker.kind), marker.start_number),
             None => (ListKind::Unordered, None),

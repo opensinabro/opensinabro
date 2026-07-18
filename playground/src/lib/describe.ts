@@ -32,6 +32,7 @@ const KIND_LABEL: Record<string, string> = {
   QuoteMarker: '인용 표식',
   IndentMarker: '들여쓰기',
   ListMarker: '리스트 표식',
+  ListStartNumber: '시작 번호',
 }
 
 /** 부모 노드(SyntaxKind) → 문맥 한국어. */

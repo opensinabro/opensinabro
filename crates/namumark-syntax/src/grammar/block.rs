@@ -574,6 +574,59 @@ fn is_bare_blank(line: &str) -> bool {
     line.trim().is_empty() && !line.starts_with(' ')
 }
 
+/// 리스트 마커 텍스트를 (종류 길이, 시작번호 길이, 공백 길이)로 가른다.
+/// 종류는 `*`(1바이트) 또는 `1.`·`a.` 등(2바이트), 시작번호는 `#42`, 공백은 뒤따르는 1칸이다.
+fn list_marker_spans(marker: &str) -> (usize, usize, usize) {
+    let bullet = if marker.starts_with('*') { 1 } else { 2 };
+    let after_bullet = &marker[bullet..];
+    let start_number = if after_bullet.starts_with('#') {
+        1 + after_bullet[1..].bytes().take_while(u8::is_ascii_digit).count()
+    } else {
+        0
+    };
+    let space = marker.len() - bullet - start_number;
+    (bullet, start_number, space)
+}
+
+/// 리스트 마커를 종류·시작번호·공백 토큰으로 방출한다. `start`는 마커 첫 글자의 오프셋이다.
+fn emit_list_marker(parser: &mut Parser<'_>, start: usize, marker: &str) {
+    let (bullet, number, space) = list_marker_spans(marker);
+    parser.emit_token(SyntaxKind::ListMarker, start + bullet);
+    if number > 0 {
+        parser.emit_token(SyntaxKind::ListStartNumber, start + bullet + number);
+    }
+    if space > 0 {
+        parser.emit_token(SyntaxKind::Separator, start + bullet + number + space);
+    }
+}
+
+/// 하위 영역 첫 줄의 ListMarker prefix를 종류·시작번호·공백 prefix로 쪼갠다.
+/// 여러 줄 항목에서 마커는 줄머리 prefix로 옮겨지므로 방출 시점이 아니라 여기서 가른다.
+fn split_list_marker_prefix(sub: &mut Region, source: &str) {
+    let Some(line) = sub.lines.first_mut() else {
+        return;
+    };
+    let Some((SyntaxKind::ListMarker, range)) = line.prefix.last().cloned() else {
+        return;
+    };
+    let (bullet, number, space) = list_marker_spans(&source[range.clone()]);
+    let base = range.start;
+    line.prefix.pop();
+    line.prefix.push((SyntaxKind::ListMarker, base..base + bullet));
+    if number > 0 {
+        line.prefix.push((
+            SyntaxKind::ListStartNumber,
+            base + bullet..base + bullet + number,
+        ));
+    }
+    if space > 0 {
+        line.prefix.push((
+            SyntaxKind::Separator,
+            base + bullet + number..base + bullet + number + space,
+        ));
+    }
+}
+
 fn parse_list(parser: &mut Parser<'_>, region: &Region, start: usize) -> usize {
     let Some(first_marker) = text::list_marker(region.line_text(start)) else {
         return 1;
@@ -606,12 +659,14 @@ fn parse_list(parser: &mut Parser<'_>, region: &Region, start: usize) -> usize {
         if end > index + 1 {
             let mut consumed = vec![0; end - index];
             consumed[0] = marker_length;
-            let sub = region.sub_region(
+            let mut sub = region.sub_region(
                 parser.source(),
                 index..end,
                 &consumed,
                 SyntaxKind::ListMarker,
             );
+            // 줄머리 마커 prefix를 종류·시작번호·공백으로 쪼갠다.
+            split_list_marker_prefix(&mut sub, parser.source());
             parse_region_blocks(parser, &sub, RegionContext::ListItem);
             // 여러 줄 항목 뒤에도 더 들여쓴 속내용·항목 레벨 연속이 이어질 수 있다 — 한 줄
             // 항목과 같다. 빈 줄 흡수는 하지 않는다(그 빈 줄은 이미 `item_content_end`가 갈랐다).
@@ -623,7 +678,7 @@ fn parse_list(parser: &mut Parser<'_>, region: &Region, start: usize) -> usize {
         emit_line_prefix(parser, region, index);
         let content_range = region.lines[index].content.clone();
         let marker_end = content_range.start + marker_length;
-        parser.emit_token(SyntaxKind::ListMarker, marker_end);
+        emit_list_marker(parser, content_range.start, &line_text[..marker_length]);
         if !content.is_empty() {
             let paragraph = parser.start_node();
             inline::parse_inline_range(parser, marker_end..content_range.end);

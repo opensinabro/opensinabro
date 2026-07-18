@@ -64,8 +64,10 @@ pub enum SyntaxKind {
     QuoteMarker,
     /// 들여쓰기/리스트 중첩으로 소비된 선행 공백
     IndentMarker,
-    /// 리스트 항목 마커 (`* `, `1.#42 ` 등)
+    /// 리스트 항목 마커 종류 (`*`·`1.`·`a.` 등)
     ListMarker,
+    /// 리스트 시작 번호 재지정 (`1.#42`의 `#42`)
+    ListStartNumber,
 
     // ---- 블록 노드 ----
     Document,
