@@ -57,6 +57,13 @@
   #root {
     height: 100%;
   }
+  /* 모바일 브라우저의 접히는 주소창까지 감안한 실제 보이는 높이. */
+  #root {
+    height: 100dvh;
+  }
+  body {
+    overscroll-behavior: none;
+  }
   body {
     background-color: var(--background);
     color: var(--foreground);

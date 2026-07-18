@@ -7,7 +7,12 @@ import type { RenderResult } from '@/lib/wasm'
  * 맡아 프리뷰 뿌리에 기본색을 준다 — 백엔드 CSS는 컴포넌트만 칠한다.
  */
 const BASE_STYLE = `
-.wiki { color: #1c1e21; font-family: system-ui, "Apple SD Gothic Neo", sans-serif; line-height: 1.7; }
+.wiki { color: #1c1e21; font-family: system-ui, "Apple SD Gothic Neo", sans-serif; line-height: 1.7; overflow-wrap: break-word; }
+.wiki img { max-width: 100%; height: auto; }
+/* 좁은 화면에서 넓은 표가 페이지 전체를 밀지 않도록 표만 따로 가로 스크롤한다. */
+@media (max-width: 767px) {
+  .wiki table { display: block; width: max-content; max-width: 100%; overflow-x: auto; }
+}
 .wiki-list-alpha { list-style-type: lower-alpha; }
 .wiki-list-upper-alpha { list-style-type: upper-alpha; }
 .wiki-list-roman { list-style-type: lower-roman; }

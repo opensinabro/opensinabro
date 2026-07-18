@@ -1,28 +1,38 @@
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react'
 
 import { nodeLabel, scopeClass } from '@/lib/scopes'
+import { useIsMobile } from '@/lib/useIsMobile'
 import { themeCss } from '@/lib/themes'
 import { cn } from '@/lib/utils'
 import { diagnose, inspectTokens, type Diagnostic, type DiagnosticSeverity, type Token } from '@/lib/wasm'
 import { usePlaygroundStore } from '@/store'
 
-/** 라인넘버 거터 너비(px)와 거터~본문 사이 여백(px). */
-const GUTTER_WIDTH = 44
-const GUTTER_GAP = 12
+/**
+ * 라인넘버 거터 너비(px)와 거터~본문 사이 여백(px). 모바일은 가로가 귀해 거터를 줄인다.
+ */
+function gutterMetrics(isMobile: boolean): { width: number; gap: number } {
+  return isMobile ? { width: 30, gap: 8 } : { width: 44, gap: 12 }
+}
 
-/** 두 레이어(백드롭·textarea)가 정확히 겹치도록 공유하는 메트릭. */
-const LAYER: CSSProperties = {
-  margin: 0,
-  padding: `12px 16px 12px ${GUTTER_WIDTH + GUTTER_GAP}px`,
-  border: 0,
-  fontFamily: 'ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace',
-  fontSize: '14px',
-  lineHeight: 1.6,
-  letterSpacing: 'normal',
-  tabSize: 2,
-  whiteSpace: 'pre-wrap',
-  wordBreak: 'break-word',
-  overflowWrap: 'break-word',
+/**
+ * 두 레이어(백드롭·textarea)가 정확히 겹치도록 공유하는 메트릭. 모바일 글자 크기가
+ * 16px인 건 취향이 아니라 iOS Safari가 그보다 작은 입력에 포커스하면 화면을 확대하기 때문이다.
+ */
+function layerStyle(isMobile: boolean): CSSProperties {
+  const { width, gap } = gutterMetrics(isMobile)
+  return {
+    margin: 0,
+    padding: `12px ${isMobile ? 10 : 16}px 12px ${width + gap}px`,
+    border: 0,
+    fontFamily: 'ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace',
+    fontSize: isMobile ? '16px' : '14px',
+    lineHeight: 1.6,
+    letterSpacing: 'normal',
+    tabSize: 2,
+    whiteSpace: 'pre-wrap',
+    wordBreak: 'break-word',
+    overflowWrap: 'break-word',
+  }
 }
 
 interface Segment {
@@ -202,6 +212,10 @@ export function HighlightedEditor() {
   useThemeStyles()
   useDiagnosticStyles()
 
+  const isMobile = useIsMobile()
+  const { width: gutterWidth, gap: gutterGap } = gutterMetrics(isMobile)
+  const layer = layerStyle(isMobile)
+
   const source = usePlaygroundStore((state) => state.source)
   const setSource = usePlaygroundStore((state) => state.setSource)
   const ready = usePlaygroundStore((state) => state.ready)
@@ -263,8 +277,9 @@ export function HighlightedEditor() {
     clearHover()
   }
 
+  // 터치 기기에서는 탭이 마우스 이벤트로도 오는데, 손가락에 가린 툴팁은 방해만 된다.
   const handleMove = (event: React.MouseEvent) => {
-    if (!tokens) return
+    if (!tokens || isMobile) return
     const x = event.clientX
     const y = event.clientY
     if (frameRef.current !== null) return
@@ -322,7 +337,10 @@ export function HighlightedEditor() {
   }
 
   return (
-    <div className="nm-hl relative h-full w-full overflow-hidden border-r bg-background" data-hltheme={themeId}>
+    <div
+      className="nm-hl relative h-full w-full overflow-hidden bg-background md:border-r"
+      data-hltheme={themeId}
+    >
       <div
         aria-hidden
         style={{
@@ -330,21 +348,21 @@ export function HighlightedEditor() {
           top: 0,
           bottom: 0,
           left: 0,
-          width: GUTTER_WIDTH,
+          width: gutterWidth,
           borderRight: '1px solid var(--border)',
           background: '#fbfbfa',
           pointerEvents: 'none',
         }}
       />
-      <pre ref={backdropRef} aria-hidden style={{ ...LAYER, position: 'absolute', inset: 0, overflow: 'hidden', color: '#1b1c1e', pointerEvents: 'none' }}>
+      <pre ref={backdropRef} aria-hidden style={{ ...layer, position: 'absolute', inset: 0, overflow: 'hidden', color: '#1b1c1e', pointerEvents: 'none' }}>
         {lines.map((segments, lineNumber) => (
           <div key={lineNumber} style={{ position: 'relative', minHeight: '1.6em' }}>
             <span
               style={{
                 position: 'absolute',
-                left: -(GUTTER_WIDTH + GUTTER_GAP),
-                width: GUTTER_WIDTH,
-                paddingRight: 8,
+                left: -(gutterWidth + gutterGap),
+                width: gutterWidth,
+                paddingRight: isMobile ? 6 : 8,
                 textAlign: 'right',
                 color: '#b6b8be',
                 userSelect: 'none',
@@ -383,8 +401,10 @@ export function HighlightedEditor() {
         onMouseMove={handleMove}
         onMouseLeave={clearHover}
         spellCheck={false}
+        autoCapitalize="off"
+        autoCorrect="off"
         style={{
-          ...LAYER,
+          ...layer,
           position: 'absolute',
           inset: 0,
           width: '100%',

@@ -21,6 +21,9 @@ function initialThemeId(): string {
   return THEMES[0].id
 }
 
+/** 모바일에서는 편집기와 미리보기를 나란히 둘 폭이 없어 한 번에 하나만 보인다. */
+export type MobilePane = 'editor' | 'preview'
+
 interface PlaygroundState {
   ready: boolean
   backends: BackendInfo[]
@@ -28,12 +31,14 @@ interface PlaygroundState {
   exampleId: string
   source: string
   highlightThemeId: string
+  mobilePane: MobilePane
   output: RenderResult
   error: string | null
   init: () => Promise<void>
   setSource: (source: string) => void
   setBackendId: (backendId: string) => void
   setHighlightTheme: (themeId: string) => void
+  setMobilePane: (pane: MobilePane) => void
   loadExample: (exampleId: string) => void
   render: () => void
 }
@@ -45,6 +50,7 @@ export const usePlaygroundStore = create<PlaygroundState>((set, get) => ({
   exampleId: EXAMPLES[0].id,
   source: EXAMPLES[0].source,
   highlightThemeId: initialThemeId(),
+  mobilePane: 'editor',
   output: { html: '', css: '' },
   error: null,
 
@@ -64,6 +70,7 @@ export const usePlaygroundStore = create<PlaygroundState>((set, get) => ({
       /* 지속 실패는 무시 — 세션 내에서는 반영됨 */
     }
   },
+  setMobilePane: (pane) => set({ mobilePane: pane }),
   loadExample: (exampleId) => {
     const example = EXAMPLES.find((item) => item.id === exampleId)
     if (example) set({ exampleId, source: example.source })
