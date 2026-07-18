@@ -8,6 +8,10 @@ import type { RenderResult } from '@/lib/wasm'
  */
 const BASE_STYLE = `
 .wiki { color: #1c1e21; font-family: system-ui, "Apple SD Gothic Neo", sans-serif; line-height: 1.7; }
+.wiki-list-alpha { list-style-type: lower-alpha; }
+.wiki-list-upper-alpha { list-style-type: upper-alpha; }
+.wiki-list-roman { list-style-type: lower-roman; }
+.wiki-list-upper-roman { list-style-type: upper-roman; }
 `
 
 /**

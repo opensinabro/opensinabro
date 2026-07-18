@@ -65,6 +65,7 @@ dependencies = [
  "namumark-ir",
  "namumark-parser",
  "namumark-render",
+ "namumark-syntax",
  "wasm-bindgen",
 ]
 
