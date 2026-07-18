@@ -9,9 +9,16 @@
       "cwd": "playground"
     },
     {
+      "name": "frontend",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--", "--port", "3001"],
+      "port": 3001,
+      "cwd": "frontend"
+    },
+    {
       "name": "wiki",
-      "runtimeExecutable": "cargo",
-      "runtimeArgs": ["run", "-p", "wiki-server", "--bin", "opensinabro"],
+      "runtimeExecutable": "just",
+      "runtimeArgs": ["back"],
       "port": 3000
     }
   ]

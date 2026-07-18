@@ -493,7 +493,9 @@ fn emit_item_base_continuation(parser: &mut Parser<'_>, region: &Region, start: 
     while index < region.line_count() {
         let line = region.line_text(index);
         if depth == 0
-            && (line.trim().is_empty() || line.starts_with(' ') || text::list_marker(line).is_some())
+            && (line.trim().is_empty()
+                || line.starts_with(' ')
+                || text::list_marker(line).is_some())
         {
             break;
         }
@@ -580,7 +582,10 @@ fn list_marker_spans(marker: &str) -> (usize, usize, usize) {
     let bullet = if marker.starts_with('*') { 1 } else { 2 };
     let after_bullet = &marker[bullet..];
     let start_number = if after_bullet.starts_with('#') {
-        1 + after_bullet[1..].bytes().take_while(u8::is_ascii_digit).count()
+        1 + after_bullet[1..]
+            .bytes()
+            .take_while(u8::is_ascii_digit)
+            .count()
     } else {
         0
     };
@@ -612,7 +617,8 @@ fn split_list_marker_prefix(sub: &mut Region, source: &str) {
     let (bullet, number, space) = list_marker_spans(&source[range.clone()]);
     let base = range.start;
     line.prefix.pop();
-    line.prefix.push((SyntaxKind::ListMarker, base..base + bullet));
+    line.prefix
+        .push((SyntaxKind::ListMarker, base..base + bullet));
     if number > 0 {
         line.prefix.push((
             SyntaxKind::ListStartNumber,

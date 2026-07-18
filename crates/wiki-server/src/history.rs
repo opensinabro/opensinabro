@@ -1,10 +1,11 @@
 use askama::Template;
+use axum::Json;
 use axum::extract::{Path, Query, State};
 use axum::http::StatusCode;
 use axum::response::{Html, IntoResponse, Redirect, Response};
 use axum_extra::extract::CookieJar;
 use chrono::{DateTime, Utc};
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 use wiki_document::{DiffLineKind, DocumentTitle, RevisionKind};
 
@@ -16,6 +17,8 @@ use crate::state::AppState;
 
 type HandlerResult = Result<Response, ServerError>;
 
+const HISTORY_LIMIT: i64 = 100;
+
 /// 문서 역사.
 pub async fn history(
     State(state): State<AppState>,
@@ -26,7 +29,7 @@ pub async fn history(
     let (jar, csrf_token) = issue_token(jar);
     let namespaces = namespace_names(&state).await?;
     let title = DocumentTitle::parse(&raw_title, &namespaces);
-    let revisions = wiki_document::revision_history(&state.pool, &title, 100).await?;
+    let revisions = wiki_document::revision_history(&state.pool, &title, HISTORY_LIMIT).await?;
 
     if revisions.is_empty() {
         let body = format!(
@@ -235,7 +238,7 @@ pub async fn recent_changes(
     requester: Requester,
     jar: CookieJar,
 ) -> HandlerResult {
-    let changes = wiki_document::recent_changes(&state.pool, 100).await?;
+    let changes = wiki_document::recent_changes(&state.pool, HISTORY_LIMIT).await?;
 
     let mut body = String::from("<ul class=\"wiki-recent-changes\">");
     for change in &changes {
@@ -286,4 +289,62 @@ async fn content_of(state: &AppState, external_id: Uuid) -> Result<String, Serve
 /// 화면에 보일 시각 표기. 저장은 UTC이고 표시는 초 단위까지만 보인다.
 fn format_time(value: DateTime<Utc>) -> String {
     value.format("%Y-%m-%d %H:%M:%S UTC").to_string()
+}
+
+#[derive(Serialize)]
+pub struct HistoryPayload {
+    title: String,
+    revisions: Vec<crate::api::RevisionSummary>,
+}
+
+/// 문서 역사.
+pub async fn history_api(
+    State(state): State<AppState>,
+    requester: Requester,
+    Path(raw_title): Path<String>,
+) -> Result<Response, ServerError> {
+    let namespaces = namespace_names(&state).await?;
+    let title = DocumentTitle::parse(&raw_title, &namespaces);
+
+    if !requester
+        .may(&state, &title, wiki_authorization::AclAction::Read)
+        .await?
+    {
+        return Ok(crate::api::forbidden());
+    }
+
+    let revisions = wiki_document::revision_history(&state.pool, &title, HISTORY_LIMIT).await?;
+    if revisions.is_empty() {
+        return Ok(crate::api::not_found());
+    }
+
+    Ok(Json(HistoryPayload {
+        title: title.to_string(),
+        revisions: revisions.iter().map(Into::into).collect(),
+    })
+    .into_response())
+}
+
+#[derive(Serialize)]
+pub struct RecentChangeEntry {
+    title: String,
+    revision: crate::api::RevisionSummary,
+}
+
+/// 최근 변경. 문서마다 권한을 묻지 않으므로 제목만 드러난다 — 목록의 성격이
+/// 그러하고, 본문은 어차피 문서 보기가 다시 판정한다.
+pub async fn recent_changes_api(
+    State(state): State<AppState>,
+) -> Result<Json<Vec<RecentChangeEntry>>, ServerError> {
+    let changes = wiki_document::recent_changes(&state.pool, HISTORY_LIMIT).await?;
+
+    Ok(Json(
+        changes
+            .iter()
+            .map(|change| RecentChangeEntry {
+                title: change.title.to_string(),
+                revision: (&change.revision).into(),
+            })
+            .collect(),
+    ))
 }

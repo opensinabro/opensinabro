@@ -45,8 +45,7 @@ impl Document {
 
 /// 나무마크 원문을 문서 뷰로 파싱한다.
 pub fn parse(source: &str) -> Document {
-    Document::cast(namumark_syntax::parse(source).root())
-        .expect("루트는 언제나 Document 노드다")
+    Document::cast(namumark_syntax::parse(source).root()).expect("루트는 언제나 Document 노드다")
 }
 
 // ---- 블록 ----
@@ -137,10 +136,7 @@ impl List {
     }
 
     pub fn items(&self) -> Vec<ListItem> {
-        self.syntax
-            .children()
-            .filter_map(ListItem::cast)
-            .collect()
+        self.syntax.children().filter_map(ListItem::cast).collect()
     }
 }
 
@@ -697,9 +693,7 @@ fn cast_inline(node: SyntaxNode) -> Option<Inline> {
         SyntaxKind::ColoredText | SyntaxKind::ColoredBlock => {
             Inline::Colored(ColoredText { syntax: node })
         }
-        SyntaxKind::SizedText | SyntaxKind::SizedBlock => {
-            Inline::Sized(SizedText { syntax: node })
-        }
+        SyntaxKind::SizedText | SyntaxKind::SizedBlock => Inline::Sized(SizedText { syntax: node }),
         SyntaxKind::WikiStyle => Inline::WikiStyle(WikiStyle { syntax: node }),
         SyntaxKind::Folding => Inline::Folding(Folding { syntax: node }),
         SyntaxKind::Conditional => Inline::Conditional(Conditional { syntax: node }),

@@ -255,6 +255,7 @@ pub async fn recent_changes(pool: &PgPool, limit: i64) -> Result<Vec<RecentChang
             String,
             String,
             Uuid,
+            i64,
             String,
             String,
             i64,
@@ -263,8 +264,8 @@ pub async fn recent_changes(pool: &PgPool, limit: i64) -> Result<Vec<RecentChang
             Option<String>,
         ),
     >(
-        "SELECT namespace.name, document.title, revision.external_id, revision_kind.name,
-                revision.comment, revision.content_bytes, revision.created_at,
+        "SELECT namespace.name, document.title, revision.external_id, revision.sequence,
+                revision_kind.name, revision.comment, revision.content_bytes, revision.created_at,
                 wiki_user.name, actor.ip_address
          FROM revision
          JOIN document ON document.id = revision.document_id
@@ -282,12 +283,23 @@ pub async fn recent_changes(pool: &PgPool, limit: i64) -> Result<Vec<RecentChang
     Ok(rows
         .into_iter()
         .map(
-            |(namespace, name, external_id, kind, comment, content_bytes, created_at, user, ip)| {
+            |(
+                namespace,
+                name,
+                external_id,
+                sequence,
+                kind,
+                comment,
+                content_bytes,
+                created_at,
+                user,
+                ip,
+            )| {
                 RecentChange {
                     title: DocumentTitle::new(Namespace::new(namespace), name),
                     revision: RevisionRecord {
                         external_id,
-                        sequence: 0,
+                        sequence,
                         kind: parse_revision_kind(&kind),
                         comment,
                         content_bytes,

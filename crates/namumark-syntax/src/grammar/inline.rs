@@ -98,8 +98,8 @@ fn consume_literal(parser: &mut Parser<'_>, position: usize, end: usize) -> usiz
             parser.emit_token(SyntaxKind::Separator, attributes_start);
         }
         if content_start > attributes_start {
-            let attributes = &content[attributes_start - content_range.start
-                ..content_start - content_range.start];
+            let attributes = &content
+                [attributes_start - content_range.start..content_start - content_range.start];
             emit_wiki_attributes(parser, attributes_start, attributes);
         }
         let paragraph = parser.start_node();

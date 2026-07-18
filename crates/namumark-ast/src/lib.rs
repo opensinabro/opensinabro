@@ -9,10 +9,10 @@ mod node;
 mod value;
 
 pub use node::{
-    AstNode, Block, Bold, Category, CodeBlock, ColoredText, Comment, Conditional, Document, Folding,
-    Footnote, Heading, Image, Indent, Inline, Italic, Link, List, ListItem, Macro, Paragraph,
-    Quote, Redirect, SizedText, Strikethrough, Subscript, Superscript, Table, TableCell, TableRow,
-    Underline, WikiStyle, parse, template_of,
+    AstNode, Block, Bold, Category, CodeBlock, ColoredText, Comment, Conditional, Document,
+    Folding, Footnote, Heading, Image, Indent, Inline, Italic, Link, List, ListItem, Macro,
+    Paragraph, Quote, Redirect, SizedText, Strikethrough, Subscript, Superscript, Table, TableCell,
+    TableRow, Underline, WikiStyle, parse, template_of,
 };
 pub use value::{
     Fragment, HorizontalAlignment, ImageOption, ListKind, TableAttribute, TableAttributeScope,

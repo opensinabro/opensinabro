@@ -5,6 +5,7 @@
 
 mod account;
 mod admin;
+mod api;
 mod browse;
 mod discussion;
 mod edit;
@@ -13,6 +14,7 @@ mod file;
 mod handler;
 mod history;
 mod operate;
+mod proxy;
 mod security;
 mod session;
 mod session_store;
@@ -38,6 +40,16 @@ pub fn router(state: AppState) -> Router {
         .with_same_site(tower_sessions::cookie::SameSite::Lax)
         .with_expiry(Expiry::OnInactivity(time::Duration::days(30)));
 
+    // 프론트엔드가 이미 그리는 화면은 프록시로 넘긴다. M7이 끝나면 이 분기가 사라지고
+    // API가 아닌 모든 경로가 프론트엔드로 간다 (docs/design/07).
+    let migrated = |server: axum::routing::MethodRouter<AppState>| {
+        if state.frontend_origin.is_some() {
+            get(proxy::forward)
+        } else {
+            server
+        }
+    };
+
     Router::new()
         .route("/", get(handler::index))
         .route(
@@ -50,19 +62,20 @@ pub fn router(state: AppState) -> Router {
             get(account::signup_form).post(account::signup_submit),
         )
         .route("/verify", get(account::verify))
-        .route("/w/{*title}", get(handler::view))
+        .route("/w/{*title}", migrated(get(handler::view)))
+        .route("/_next/{*asset}", get(proxy::forward))
         .route("/raw/{*title}", get(handler::raw))
         .route(
             "/edit/{*title}",
-            get(edit::edit_form).post(edit::edit_submit),
+            migrated(get(edit::edit_form)).post(edit::edit_submit),
         )
-        .route("/history/{*title}", get(history::history))
+        .route("/history/{*title}", migrated(get(history::history)))
         .route("/diff/{*title}", get(history::diff))
         .route(
             "/revert/{*title}",
             get(history::revert_form).post(history::revert_submit),
         )
-        .route("/recent-changes", get(history::recent_changes))
+        .route("/recent-changes", migrated(get(history::recent_changes)))
         .route(
             "/discuss/{*title}",
             get(discussion::document_threads).post(discussion::create_thread),
@@ -93,12 +106,21 @@ pub fn router(state: AppState) -> Router {
         .route("/old-pages", get(browse::old_pages))
         .route("/shortest-pages", get(browse::pages_by_length))
         .route("/longest-pages", get(browse::pages_by_length))
-        .route("/backlink/{*title}", get(browse::backlinks))
+        .route("/backlink/{*title}", migrated(get(browse::backlinks)))
         .route("/starred", get(browse::starred_documents))
         .route("/star/{*title}", post(browse::toggle_star))
         .route("/notifications", get(browse::notifications))
         .route("/api/suggest", get(browse::suggest_titles))
         .route("/api/w/{*title}", get(browse::document_api))
+        .route("/api/history/{*title}", get(history::history_api))
+        .route("/api/backlink/{*title}", get(browse::backlink_api))
+        .route("/api/recent-changes", get(history::recent_changes_api))
+        .route("/api/csrf", get(edit::csrf_api))
+        .route("/api/preview", post(edit::preview_api))
+        .route(
+            "/api/edit/{*title}",
+            get(edit::edit_api).post(edit::edit_submit_api),
+        )
         .route(
             "/move/{*title}",
             get(operate::move_form).post(operate::move_submit),

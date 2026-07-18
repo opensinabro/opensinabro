@@ -80,9 +80,7 @@ fn collect_macro_names(document: &Document, totals: &mut BTreeMap<String, usize>
     fn walk_inlines(inlines: &[Inline], totals: &mut BTreeMap<String, usize>) {
         for inline in inlines {
             match inline {
-                Inline::Macro(macro_call) => {
-                    *totals.entry(macro_call.name()).or_default() += 1
-                }
+                Inline::Macro(macro_call) => *totals.entry(macro_call.name()).or_default() += 1,
                 Inline::Bold(styled) => walk_inlines(&styled.content(), totals),
                 Inline::Italic(styled) => walk_inlines(&styled.content(), totals),
                 Inline::Strikethrough(styled) => walk_inlines(&styled.content(), totals),

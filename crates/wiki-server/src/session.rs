@@ -1,6 +1,7 @@
 use axum::extract::{ConnectInfo, FromRequestParts};
+use axum::http::HeaderValue;
 use axum::http::request::Parts;
-use std::net::SocketAddr;
+use std::net::{IpAddr, SocketAddr};
 use tower_sessions::Session;
 use uuid::Uuid;
 use wiki_account::WikiUser;
@@ -88,6 +89,31 @@ impl Requester {
     }
 }
 
+/// 프록시를 거친 요청에서 원래 클라이언트 주소를 고른다.
+///
+/// 비로그인 편집자는 IP가 곧 신원이라(actor), 프론트엔드가 대신 부른 요청도 원래
+/// 주소로 판정돼야 한다. 다만 `X-Forwarded-For`는 누구나 붙일 수 있으므로 **연결 상대가
+/// 우리 프록시(루프백)일 때만** 믿는다 — 그러지 않으면 헤더 한 줄로 차단을 벗어난다.
+fn client_address(peer: Option<IpAddr>, forwarded: Option<&HeaderValue>) -> String {
+    let Some(peer) = peer else {
+        return "unknown".to_owned();
+    };
+
+    if peer.is_loopback() {
+        let original = forwarded
+            .and_then(|value| value.to_str().ok())
+            .and_then(|chain| chain.split(',').next())
+            .map(str::trim)
+            .filter(|candidate| !candidate.is_empty());
+
+        if let Some(original) = original {
+            return original.to_owned();
+        }
+    }
+
+    peer.to_string()
+}
+
 impl FromRequestParts<AppState> for Requester {
     type Rejection = ServerError;
 
@@ -95,10 +121,12 @@ impl FromRequestParts<AppState> for Requester {
         parts: &mut Parts,
         state: &AppState,
     ) -> Result<Self, Self::Rejection> {
-        let ip_address = ConnectInfo::<SocketAddr>::from_request_parts(parts, state)
+        let peer = ConnectInfo::<SocketAddr>::from_request_parts(parts, state)
             .await
-            .map(|ConnectInfo(address)| address.ip().to_string())
-            .unwrap_or_else(|_| "unknown".to_owned());
+            .map(|ConnectInfo(address)| address.ip())
+            .ok();
+
+        let ip_address = client_address(peer, parts.headers.get("x-forwarded-for"));
 
         let user = match Session::from_request_parts(parts, state).await {
             Ok(session) => current_user(&session, state).await?,
@@ -135,4 +163,35 @@ pub async fn log_in(session: &Session, user: &WikiUser) -> Result<(), ServerErro
 
 pub async fn log_out(session: &Session) -> Result<(), ServerError> {
     session.flush().await.map_err(|_| ServerError::Session)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::client_address;
+    use axum::http::HeaderValue;
+    use std::net::IpAddr;
+
+    fn address(text: &str) -> IpAddr {
+        text.parse().expect("주소를 읽을 수 있어야 한다")
+    }
+
+    #[test]
+    fn 프록시가_전한_주소를_쓴다() {
+        let forwarded = HeaderValue::from_static("203.0.113.42");
+        let resolved = client_address(Some(address("127.0.0.1")), Some(&forwarded));
+        assert_eq!(resolved, "203.0.113.42");
+    }
+
+    #[test]
+    fn 바깥에서_붙인_헤더는_믿지_않는다() {
+        let forged = HeaderValue::from_static("10.0.0.1");
+        let resolved = client_address(Some(address("203.0.113.42")), Some(&forged));
+        assert_eq!(resolved, "203.0.113.42");
+    }
+
+    #[test]
+    fn 헤더가_없으면_연결_상대를_쓴다() {
+        let resolved = client_address(Some(address("203.0.113.42")), None);
+        assert_eq!(resolved, "203.0.113.42");
+    }
 }

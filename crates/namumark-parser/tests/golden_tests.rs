@@ -191,7 +191,12 @@ fn render_block(block: &Block, depth: usize, output: &mut String) {
             .unwrap();
         }
         Block::Paragraph(paragraph) => {
-            writeln!(output, "Paragraph: {}", render_inlines(&paragraph.inlines())).unwrap();
+            writeln!(
+                output,
+                "Paragraph: {}",
+                render_inlines(&paragraph.inlines())
+            )
+            .unwrap();
         }
         Block::HorizontalRule => {
             output.push_str("HorizontalRule\n");

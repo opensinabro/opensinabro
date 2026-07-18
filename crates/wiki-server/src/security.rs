@@ -31,6 +31,21 @@ pub fn verify_token(jar: &CookieJar, submitted: &str) -> bool {
         .is_some_and(|cookie| constant_time_equals(cookie.value(), submitted))
 }
 
+/// JSON API가 쓰는 헤더 이름. 폼 필드에 담을 수 없어 헤더로 싣는다.
+pub const CSRF_HEADER: &str = "x-csrf-token";
+
+/// API 요청의 토큰이 쿠키의 것과 같은가.
+///
+/// 다른 출처의 페이지는 이 헤더를 붙일 수 없다 — 붙이려면 사전 요청(preflight)이
+/// 필요하고 우리는 교차 출처를 허용하지 않는다. 쿠키가 `HttpOnly`라 스크립트가 읽지
+/// 못하므로, 토큰은 `/api/csrf`가 본문으로 따로 내준다.
+pub fn verify_header(jar: &CookieJar, headers: &axum::http::HeaderMap) -> bool {
+    headers
+        .get(CSRF_HEADER)
+        .and_then(|value| value.to_str().ok())
+        .is_some_and(|submitted| verify_token(jar, submitted))
+}
+
 /// 토큰 비교는 길이·내용이 일찍 드러나지 않도록 상수 시간에 가깝게 한다.
 fn constant_time_equals(left: &str, right: &str) -> bool {
     if left.len() != right.len() {

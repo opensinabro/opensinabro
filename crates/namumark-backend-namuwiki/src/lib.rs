@@ -455,7 +455,11 @@ fn write_cell_style(formatter: &mut Formatter<'_>, property: &TableStyleProperty
         TableStyleProperty::Width(width) => write!(formatter, " width: {width};"),
         TableStyleProperty::Height(height) => write!(formatter, " height: {height};"),
         TableStyleProperty::TextAlign(alignment) => {
-            write!(formatter, " text-align: {};", horizontal_alignment_name(*alignment))
+            write!(
+                formatter,
+                " text-align: {};",
+                horizontal_alignment_name(*alignment)
+            )
         }
         _ => Ok(()),
     }
@@ -536,7 +540,11 @@ impl Display for TableStyle<'_> {
                 }
                 TableStyleProperty::Height(height) => write!(formatter, " height: {height};")?,
                 TableStyleProperty::TextAlign(alignment) => {
-                    write!(formatter, " text-align: {};", horizontal_alignment_name(*alignment))?;
+                    write!(
+                        formatter,
+                        " text-align: {};",
+                        horizontal_alignment_name(*alignment)
+                    )?;
                 }
                 TableStyleProperty::Align(_) | TableStyleProperty::NoPadding => {}
             }

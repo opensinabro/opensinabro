@@ -7,6 +7,7 @@ use serde::{Deserialize, Serialize};
 use wiki_document::{DocumentTitle, Namespace};
 
 use crate::ServerError;
+use crate::api::{RevisionSummary, forbidden, not_found};
 use crate::handler::{escape, namespace_names, shell};
 use crate::security::{issue_token, verify_token};
 use crate::session::Requester;
@@ -245,43 +246,111 @@ pub async fn suggest_titles(
 }
 
 #[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
 pub struct DocumentPayload {
     title: String,
     namespace: String,
     source: String,
     html: String,
+    revision: Option<RevisionSummary>,
+    backlink_count: usize,
+    thread_count: usize,
+    /// 리다이렉트 문서면 대상 제목. 이동은 화면을 그리는 쪽이 한다.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    redirect: Option<String>,
 }
 
 /// 읽기 API. the seed에는 공개 API가 없지만 우리는 열어 둔다 (docs/design/06).
+///
+/// 프론트엔드의 문서 보기가 이 응답 하나로 화면을 그리므로, 본문과 함께 셸이 쓰는
+/// 정보(리비전·역링크·토론 수)까지 싣는다 (docs/design/07 M7).
 pub async fn document_api(
     State(state): State<AppState>,
+    requester: Requester,
     Path(raw_title): Path<String>,
 ) -> Result<Response, ServerError> {
     let namespaces = namespace_names(&state).await?;
     let title = DocumentTitle::parse(&raw_title, &namespaces);
 
+    if !requester
+        .may(&state, &title, wiki_authorization::AclAction::Read)
+        .await?
+    {
+        return Ok(forbidden());
+    }
+
     let Some(source) = wiki_document::read_source(&state.pool, &title).await? else {
-        return Ok((
-            StatusCode::NOT_FOUND,
-            Json(serde_json::json!({ "error": "not_found" })),
-        )
-            .into_response());
+        return Ok(not_found());
     };
 
-    let html = match wiki_document::cached_render(&state.pool, &title).await? {
-        Some(cached) => cached,
+    let (html, redirect) = match wiki_document::cached_render(&state.pool, &title).await? {
+        Some(cached) => (cached, None),
         None => {
-            wiki_document::render_document(&state.pool, &title, &source)
-                .await?
-                .html
+            let rendered = wiki_document::render_document(&state.pool, &title, &source).await?;
+            (rendered.html, rendered.redirect.map(|to| to.to_string()))
         }
     };
 
+    let revision = wiki_document::latest_revision(&state.pool, &title)
+        .await?
+        .as_ref()
+        .map(RevisionSummary::from);
+
     Ok(Json(DocumentPayload {
-        title: title.name.clone(),
+        title: title.to_string(),
         namespace: title.namespace.to_string(),
         source,
         html,
+        revision,
+        backlink_count: wiki_document::backlinks(&state.pool, &title).await?.len(),
+        thread_count: wiki_discussion::threads_of(&state.pool, &title)
+            .await?
+            .len(),
+        redirect,
+    })
+    .into_response())
+}
+
+#[derive(Serialize)]
+pub struct BacklinkEntry {
+    title: String,
+    kind: String,
+}
+
+#[derive(Serialize)]
+pub struct BacklinkPayload {
+    title: String,
+    entries: Vec<BacklinkEntry>,
+}
+
+/// 이 문서를 가리키는 문서 목록.
+pub async fn backlink_api(
+    State(state): State<AppState>,
+    requester: Requester,
+    Path(raw_title): Path<String>,
+) -> Result<Response, ServerError> {
+    let namespaces = namespace_names(&state).await?;
+    let title = DocumentTitle::parse(&raw_title, &namespaces);
+
+    if !requester
+        .may(&state, &title, wiki_authorization::AclAction::Read)
+        .await?
+    {
+        return Ok(forbidden());
+    }
+
+    let entries = wiki_document::backlinks(&state.pool, &title)
+        .await?
+        .into_iter()
+        .map(|(source, kind)| BacklinkEntry {
+            title: source.to_string(),
+            kind: kind_label(&kind).to_owned(),
+        })
+        .collect();
+
+    Ok(Json(BacklinkPayload {
+        title: title.to_string(),
+        entries,
     })
     .into_response())
 }

@@ -48,7 +48,10 @@ fn folded_heading() {
 #[test]
 fn invalid_heading_is_paragraph() {
     let document = parse("=공백없음=");
-    assert_eq!(model::of(&document), vec![paragraph(vec![text("=공백없음=")])]);
+    assert_eq!(
+        model::of(&document),
+        vec![paragraph(vec![text("=공백없음=")])]
+    );
 }
 
 #[test]
@@ -370,7 +373,9 @@ fn unclosed_markup_is_plain_text() {
     );
 }
 
-use model::{Category, ColoredText, Folding, Image, SizedText, Table, TableCell, TableRow, WikiStyle};
+use model::{
+    Category, ColoredText, Folding, Image, SizedText, Table, TableCell, TableRow, WikiStyle,
+};
 use namumark_ast::{
     HorizontalAlignment, ImageOption, TableAttribute, TableAttributeScope, VerticalAlignment,
 };

@@ -1,6 +1,9 @@
 use std::path::{Path, PathBuf};
 use std::sync::Arc;
 
+use hyper_util::client::legacy::Client;
+use hyper_util::client::legacy::connect::HttpConnector;
+use hyper_util::rt::TokioExecutor;
 use sqlx::PgPool;
 use sqlx::postgres::PgPoolOptions;
 use wiki_search::SearchIndex;
@@ -15,6 +18,9 @@ pub struct SiteSettings {
     pub content_license: String,
 }
 
+/// 프론트엔드로 요청을 넘기는 클라이언트. 응답 본문을 그대로 흘려보낸다.
+pub type HttpClient = Client<HttpConnector, axum::body::Body>;
+
 #[derive(Clone)]
 pub struct AppState {
     pub pool: PgPool,
@@ -22,6 +28,9 @@ pub struct AppState {
     pub settings: SiteSettings,
     /// 업로드한 바이너리를 담는 디렉터리. DB에는 해시만 두고 내용은 여기 있다.
     pub file_root: PathBuf,
+    /// Next.js가 듣는 주소. 없으면 모든 화면을 서버가 직접 그린다.
+    pub frontend_origin: Option<String>,
+    pub http: HttpClient,
 }
 
 /// 데이터베이스만 열고 마이그레이션을 적용한다.
@@ -59,12 +68,73 @@ pub async fn open_state(
         rebuild_index(&pool, &search).await?;
     }
 
-    Ok(AppState {
+    let state = AppState {
         pool,
         search: Arc::new(search),
         settings,
         file_root: file_root.to_owned(),
-    })
+        frontend_origin: std::env::var("OPENSINABRO_FRONTEND").ok(),
+        http: Client::builder(TokioExecutor::new()).build_http(),
+    };
+
+    ensure_main_document(&state).await?;
+
+    Ok(state)
+}
+
+/// 갓 만든 위키의 대문.
+const MAIN_DOCUMENT_SEED: &str = "\
+[목차]
+
+== 오픈시나브로 ==
+'''오픈시나브로'''는 나무위키 엔진의 오픈소스 재구현입니다. 이 문서는 위키의 대문이고,
+다른 문서와 마찬가지로 누구나 고칠 수 있습니다.
+
+== 시작하기 ==
+ * 아무 문서나 열어 '''편집'''을 누르면 바로 고칠 수 있습니다.
+ * 왼쪽 '''최근 변경'''에서 방금 바뀐 문서를 볼 수 있습니다.
+ * 아직 없는 문서로 가는 링크는 [[없는 문서|붉게]] 보입니다. 눌러서 새로 쓰세요.
+
+== 이 문서 고치기 ==
+위의 '''편집'''을 눌러 이 안내를 지우고 위키를 소개하는 글로 채우세요.
+";
+
+/// 대문이 한 번도 없었으면 심는다.
+///
+/// 루트 경로가 대문으로 보내므로, 대문이 없는 위키는 첫 화면부터 404다. 기본 ACL을
+/// 마이그레이션이 심는 것과 같은 이유다 (docs/design/07 M2). 다만 **리비전이 하나도
+/// 없을 때만** 만든다 — 운영자가 지운 대문이 재시작마다 되살아나면 안 된다.
+async fn ensure_main_document(state: &AppState) -> Result<(), ServerError> {
+    let namespaces = sqlx::query_as::<_, (String,)>("SELECT name FROM namespace ORDER BY id")
+        .fetch_all(&state.pool)
+        .await?
+        .into_iter()
+        .map(|(name,)| name)
+        .collect::<Vec<_>>();
+
+    let title = wiki_document::DocumentTitle::parse(&state.settings.main_document, &namespaces);
+    if !wiki_document::revision_history(&state.pool, &title, 1)
+        .await?
+        .is_empty()
+    {
+        return Ok(());
+    }
+
+    let user = wiki_account::ensure_system_user(&state.pool, "시스템").await?;
+    let actor = wiki_account::ensure_user_actor(&state.pool, user.identifier).await?;
+
+    wiki_document::record_revision(
+        &state.pool,
+        &title,
+        actor,
+        wiki_document::RevisionKind::Create,
+        Some(MAIN_DOCUMENT_SEED),
+        "대문 만들기",
+        None,
+    )
+    .await?;
+
+    crate::edit::apply_side_effects(state, &title, MAIN_DOCUMENT_SEED).await
 }
 
 /// 저장된 문서 전체로 검색 색인을 다시 만든다.
