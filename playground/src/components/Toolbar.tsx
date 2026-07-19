@@ -121,7 +121,22 @@ export function Toolbar() {
 
   return (
     <header className="flex shrink-0 items-center justify-between gap-4 border-b bg-background px-4 py-2.5 md:px-5 md:py-3">
-      <h1 className="text-sm font-semibold tracking-tight">나무마크 플레이그라운드</h1>
+      <div className="flex shrink-0 items-center gap-2">
+        <svg
+          viewBox="0 0 64 64"
+          aria-hidden="true"
+          fill="none"
+          stroke="#1d7a58"
+          strokeWidth={3.5}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="size-5"
+        >
+          <path d="M22 11h-8v42h8M42 11h8v42h-8" />
+          <path d="M32 47c-7-6-7-18 0-27 7 9 7 21 0 27z" fill="#1d7a58" stroke="none" />
+        </svg>
+        <h1 className="text-sm font-semibold tracking-tight">나무마크 플레이그라운드</h1>
+      </div>
 
       <div className="hidden items-center gap-4 md:flex">
         {fields.map((field) => (
