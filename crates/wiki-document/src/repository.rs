@@ -1,5 +1,6 @@
 use chrono::{DateTime, Utc};
 use sqlx::PgPool;
+use std::collections::{HashMap, HashSet};
 use uuid::Uuid;
 use wiki_account::ActorIdentifier;
 
@@ -136,30 +137,92 @@ async fn ensure_document(pool: &PgPool, title: &DocumentTitle) -> Result<Documen
 
 /// 문서의 현재 원문. 삭제된 문서와 없는 문서는 모두 None이다.
 pub async fn read_source(pool: &PgPool, title: &DocumentTitle) -> Result<Option<String>> {
-    let row = sqlx::query_as::<_, (Option<String>, String)>(
-        "SELECT revision.content, revision_kind.name
-         FROM revision
-         JOIN document ON document.id = revision.document_id
-         JOIN namespace ON namespace.id = document.namespace_id
-         JOIN revision_kind ON revision_kind.id = revision.kind_id
-         WHERE namespace.name = $1 AND document.title = $2
-         ORDER BY revision.sequence DESC
-         LIMIT 1",
-    )
-    .bind(title.namespace.as_str())
-    .bind(&title.name)
-    .fetch_optional(pool)
-    .await?;
-
-    Ok(match row {
-        Some((content, kind)) if kind != RevisionKind::Delete.as_str() => content,
-        _ => None,
-    })
+    Ok(read_sources(pool, std::slice::from_ref(title))
+        .await?
+        .remove(title))
 }
 
-/// "존재하는 문서" = 최신 리비전이 삭제가 아닌 문서 (docs/architecture.md).
-pub async fn document_exists(pool: &PgPool, title: &DocumentTitle) -> Result<bool> {
-    Ok(read_source(pool, title).await?.is_some())
+/// `$1`·`$2`로 받은 (이름공간, 제목) 묶음의 **살아 있는 최신 리비전**을 고르는 뼈대.
+///
+/// "존재하는 문서 = 최신 리비전이 삭제가 아닌 문서"(docs/architecture.md)라는 규칙이
+/// 여기 한 번만 적히도록 매크로로 둔다 — 존재 판정과 원문 조회가 이 규칙에서 갈라지면
+/// 링크는 살아 있다는데 원문은 못 읽는 식으로 어긋난다. `$3`은 삭제 리비전 이름이다.
+macro_rules! latest_revision_of {
+    ($columns:literal) => {
+        concat!(
+            "SELECT ",
+            $columns,
+            " FROM unnest($1::text[], $2::text[]) AS wanted(namespace_name, document_title)
+             JOIN namespace ON namespace.name = wanted.namespace_name
+             JOIN document
+               ON document.namespace_id = namespace.id AND document.title = wanted.document_title
+             JOIN LATERAL (
+                 SELECT revision.content, revision.kind_id
+                 FROM revision
+                 WHERE revision.document_id = document.id
+                 ORDER BY revision.sequence DESC
+                 LIMIT 1
+             ) AS latest ON TRUE
+             JOIN revision_kind ON revision_kind.id = latest.kind_id
+             WHERE revision_kind.name <> $3"
+        )
+    };
+}
+
+/// 여러 제목의 현재 원문을 한 번에 읽는다. 없거나 삭제된 문서는 결과에서 빠진다.
+///
+/// 렌더는 문서 하나를 그리려고 링크·틀 수십 개를 묻는다. 하나씩 왕복하면 그 수만큼
+/// 왕복이 생기므로, 렌더 경로는 이 배치 조회를 쓴다.
+pub async fn read_sources(
+    pool: &PgPool,
+    titles: &[DocumentTitle],
+) -> Result<HashMap<DocumentTitle, String>> {
+    let (namespaces, names) = split_titles(titles);
+    let rows = sqlx::query_as::<_, (String, String, Option<String>)>(latest_revision_of!(
+        "namespace.name, document.title, latest.content"
+    ))
+    .bind(&namespaces)
+    .bind(&names)
+    .bind(RevisionKind::Delete.as_str())
+    .fetch_all(pool)
+    .await?;
+
+    Ok(rows
+        .into_iter()
+        .filter_map(|(namespace, name, content)| {
+            content.map(|content| (DocumentTitle::new(Namespace::new(namespace), name), content))
+        })
+        .collect())
+}
+
+/// 여러 제목 중 실제로 존재하는 것만 골라낸다 — "존재하는 문서" = 최신 리비전이
+/// 삭제가 아닌 문서(docs/architecture.md). 원문을 끌어오지 않는다: 링크의 빨간줄
+/// 판정은 존재 여부만 알면 되고, 본문은 그보다 훨씬 크다.
+pub async fn documents_that_exist(
+    pool: &PgPool,
+    titles: &[DocumentTitle],
+) -> Result<HashSet<DocumentTitle>> {
+    let (namespaces, names) = split_titles(titles);
+    let rows = sqlx::query_as::<_, (String, String)>(latest_revision_of!(
+        "namespace.name, document.title"
+    ))
+    .bind(&namespaces)
+    .bind(&names)
+    .bind(RevisionKind::Delete.as_str())
+    .fetch_all(pool)
+    .await?;
+
+    Ok(rows
+        .into_iter()
+        .map(|(namespace, name)| DocumentTitle::new(Namespace::new(namespace), name))
+        .collect())
+}
+
+fn split_titles(titles: &[DocumentTitle]) -> (Vec<String>, Vec<String>) {
+    titles
+        .iter()
+        .map(|title| (title.namespace.as_str().to_owned(), title.name.clone()))
+        .unzip()
 }
 
 pub async fn latest_revision(
@@ -223,7 +286,17 @@ pub async fn revision_history(
     Ok(rows
         .into_iter()
         .map(
-            |(external_id, sequence, kind, comment, content_bytes, created_at, user, ip, hidden)| {
+            |(
+                external_id,
+                sequence,
+                kind,
+                comment,
+                content_bytes,
+                created_at,
+                user,
+                ip,
+                hidden,
+            )| {
                 RevisionRecord {
                     external_id,
                     sequence,

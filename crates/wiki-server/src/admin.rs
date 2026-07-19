@@ -118,9 +118,7 @@ pub struct BlockHistoryPayload {
 }
 
 /// 차단·권한 변경을 시간순으로 보이는 공개 기록.
-pub async fn block_history_api(
-    State(state): State<AppState>,
-) -> Result<Response, ServerError> {
+pub async fn block_history_api(State(state): State<AppState>) -> Result<Response, ServerError> {
     let rows = sqlx::query_as::<
         _,
         (
@@ -147,13 +145,15 @@ pub async fn block_history_api(
 
     let blocks = rows
         .into_iter()
-        .map(|(group, user, ip_address, reason, created, removed)| BlockEntry {
-            target: user.or(ip_address).unwrap_or_default(),
-            group,
-            reason,
-            created_at: created.to_rfc3339(),
-            removed_at: removed.map(|at| at.to_rfc3339()),
-        })
+        .map(
+            |(group, user, ip_address, reason, created, removed)| BlockEntry {
+                target: user.or(ip_address).unwrap_or_default(),
+                group,
+                reason,
+                created_at: created.to_rfc3339(),
+                removed_at: removed.map(|at| at.to_rfc3339()),
+            },
+        )
         .collect();
 
     let permissions = wiki_authorization::permission_log(&state.pool, 100)

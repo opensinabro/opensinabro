@@ -9,6 +9,7 @@ mod reference;
 mod render;
 mod repository;
 mod revise;
+mod scan;
 mod title;
 
 pub use error::{DocumentError, Result};

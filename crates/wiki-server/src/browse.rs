@@ -1,6 +1,7 @@
 use axum::extract::{Path, Query, State};
 use axum::response::{IntoResponse, Json, Response};
 use axum_extra::extract::CookieJar;
+use namumark_ir::RenderTree;
 use serde::{Deserialize, Serialize};
 use wiki_document::{DocumentTitle, Namespace};
 
@@ -63,7 +64,8 @@ pub struct DocumentPayload {
     title: String,
     namespace: String,
     source: String,
-    html: String,
+    /// 렌더 트리. 프론트엔드가 이걸로 본문을 그린다.
+    tree: RenderTree,
     revision: Option<RevisionSummary>,
     backlink_count: usize,
     thread_count: usize,
@@ -99,6 +101,8 @@ pub async fn document_api(
 
     let rendered = wiki_document::render_document(&state.pool, &title, &source).await?;
 
+    let redirect = rendered.redirect().map(str::to_string);
+
     let revision = wiki_document::latest_revision(&state.pool, &title)
         .await?
         .as_ref()
@@ -108,7 +112,8 @@ pub async fn document_api(
         title: title.to_string(),
         namespace: title.namespace.to_string(),
         source,
-        html: rendered.html,
+        redirect,
+        tree: rendered.tree,
         revision,
         backlink_count: wiki_document::backlinks(&state.pool, &title).await?.len(),
         thread_count: wiki_discussion::threads_of(&state.pool, &title)
@@ -120,7 +125,6 @@ pub async fn document_api(
             }
             None => false,
         },
-        redirect: rendered.redirect.map(|to| to.to_string()),
     })
     .into_response())
 }

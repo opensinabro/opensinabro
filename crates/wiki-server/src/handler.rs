@@ -1,5 +1,4 @@
 use axum::extract::{Path, Query, State};
-use axum::http::header;
 use axum::response::{IntoResponse, Json, Response};
 use serde::{Deserialize, Serialize};
 use wiki_document::{DocumentTitle, Namespace};
@@ -173,14 +172,6 @@ pub async fn raw_api(
         .into_response()),
         None => Ok(not_found()),
     }
-}
-
-/// 렌더러가 동봉한 본문 스타일시트.
-pub async fn stylesheet() -> impl IntoResponse {
-    (
-        [(header::CONTENT_TYPE, "text/css; charset=utf-8")],
-        namumark_backend_namuwiki::stylesheet(),
-    )
 }
 
 pub(crate) async fn namespace_names(state: &AppState) -> Result<Vec<String>, ServerError> {

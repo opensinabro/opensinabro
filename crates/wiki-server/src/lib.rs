@@ -76,8 +76,14 @@ pub fn router(state: AppState) -> Router {
             get(discussion::document_threads_api).post(discussion::create_thread_api),
         )
         .route("/api/thread/{id}", get(discussion::view_thread_api))
-        .route("/api/thread/{id}/comment", post(discussion::add_comment_api))
-        .route("/api/thread/{id}/status", post(discussion::change_status_api))
+        .route(
+            "/api/thread/{id}/comment",
+            post(discussion::add_comment_api),
+        )
+        .route(
+            "/api/thread/{id}/status",
+            post(discussion::change_status_api),
+        )
         .route(
             "/api/recent-discussions",
             get(discussion::recent_discussions_api),
@@ -155,7 +161,6 @@ pub fn router(state: AppState) -> Router {
         )
         // ── axum이 직접 내주는 것 ───────────────────────────────────────
         .route("/file/{*name}", get(file::serve_file))
-        .route("/style.css", get(handler::stylesheet))
         // 화면은 전부 프론트엔드가 그린다. 화이트리스트가 아니라 fallback이므로
         // 새 화면이 생겨도 이 파일을 고치지 않는다.
         .fallback(proxy::forward)

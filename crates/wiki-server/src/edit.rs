@@ -207,7 +207,7 @@ pub async fn preview_api(
     let title = DocumentTitle::parse(&body.title, &namespaces);
     let rendered = wiki_document::render_document(&state.pool, &title, &body.content).await?;
 
-    Ok(Json(serde_json::json!({ "html": rendered.html })).into_response())
+    Ok(Json(serde_json::json!({ "tree": rendered.tree })).into_response())
 }
 
 /// 상태를 바꾸는 API를 부르기 전에 화면이 받아 가는 토큰.
