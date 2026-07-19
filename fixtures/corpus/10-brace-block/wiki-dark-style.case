@@ -1,4 +1,4 @@
-근거: 도움말서술 | 원문: 3줄 | 의미론: 18줄 | 렌더링: 1줄 | #!wiki dark-style
+근거: 도움말서술 | 원문: 3줄 | 의미론: 18줄 | IR: 39줄 | 렌더링: 1줄 | #!wiki dark-style
 {{{#!wiki style="background-color:#fff" dark-style="background-color: #2d2f34;"
 내용
 }}}
@@ -20,4 +20,43 @@ Document@0..91
         Text@80..86 "내용"
       DelimiterClose@86..90 "\n}}}"
   Newline@90..91 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "wikiStyle",
+          "style": [
+            {
+              "property": "background-color",
+              "value": "#fff"
+            }
+          ],
+          "darkStyle": [
+            {
+              "property": "background-color",
+              "value": "#2d2f34"
+            }
+          ],
+          "blocks": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "내용"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><div style="background-color: #fff" data-dark-style="background-color: #2d2f34">내용</div></div>

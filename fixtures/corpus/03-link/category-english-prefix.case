@@ -1,4 +1,4 @@
-근거: 미확인 | 원문: 1줄 | 의미론: 8줄 | 렌더링: 1줄 | 영문 category: 접두사
+근거: 미확인 | 원문: 1줄 | 의미론: 8줄 | IR: 9줄 | 렌더링: 1줄 | 영문 category: 접두사
 [[category:알파위키]]
 Document@0..26
   Paragraph@0..25
@@ -8,4 +8,13 @@ Document@0..26
       LinkTarget@11..23 "알파위키"
       DelimiterClose@23..25 "]]"
   Newline@25..26 "\n"
+{
+  "redirect": null,
+  "blocks": [],
+  "categories": [
+    "알파위키"
+  ],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-categories">분류: <a href="/w/%EB%B6%84%EB%A5%98%3A%EC%95%8C%ED%8C%8C%EC%9C%84%ED%82%A4">알파위키</a></div>

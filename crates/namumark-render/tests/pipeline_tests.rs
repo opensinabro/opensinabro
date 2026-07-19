@@ -158,20 +158,47 @@ fn heading_numbers_are_hierarchical() {
     assert_eq!(numbers, vec!["1", "1.1", "2"]);
 }
 
+/// 목차는 트리 밖 최상위 목록이 소유하므로 `[목차]`가 어디에 놓이든 같은 것을 그린다.
+///
+/// 예전에는 layout이 트리를 다시 훑어 `[목차]` 자리를 채웠는데, 그 순회가 본 순회의
+/// 축소 복제본이라 서식·표 캡션 안으로 내려가지 않아 그 자리의 목차가 빈 채로 남았다.
+#[test]
+fn table_of_contents_is_document_wide_wherever_it_sits() {
+    let tree = tree("'''[목차]'''\n||[목차]||\n== 하나 ==\n=== 하나둘 ===");
+
+    let numbers: Vec<&str> = tree
+        .table_of_contents
+        .iter()
+        .map(|entry| entry.number.as_str())
+        .collect();
+    assert_eq!(numbers, vec!["1", "1.1"]);
+
+    // 자리표시는 서식 안에도, 표 셀 안에도 그대로 있다.
+    let mut placeholders = 0;
+    walk_tree(&tree, &mut |inline| {
+        if matches!(inline, RenderInline::TableOfContents) {
+            placeholders += 1;
+        }
+    });
+    assert_eq!(placeholders, 2, "서식·표 안의 [목차] 자리가 사라졌다");
+}
+
 #[test]
 fn footnotes_are_numbered_and_merged() {
     let tree = tree("본문[* 첫째][*A 이름 각주][*A] 끝");
     // 문서 끝에 잔여 각주 섹션이 자동 방출된다. `[각주]`는 매크로라 문단 안에 놓인다.
-    let Some(RenderBlock::Paragraph(inlines)) = tree.blocks.last() else {
+    let Some(RenderBlock::Paragraph { content: inlines }) = tree.blocks.last() else {
         panic!("문서 끝 각주 문단이 있어야 한다");
     };
     let Some(RenderInline::FootnoteSection { notes }) = inlines.first() else {
         panic!("각주 섹션이 있어야 한다: {inlines:?}");
     };
-    assert_eq!(notes.len(), 2);
-    assert_eq!(notes[0].label, "1");
-    assert_eq!(notes[1].label, "A");
-    assert_eq!(notes[1].reference_numbers.len(), 2);
+    // 섹션은 인덱스만 들고, 내용은 트리 최상위 각주 목록이 소유한다.
+    assert_eq!(notes, &[0, 1]);
+    assert_eq!(tree.footnotes.len(), 2);
+    assert_eq!(tree.footnotes[0].label, "1");
+    assert_eq!(tree.footnotes[1].label, "A");
+    assert_eq!(tree.footnotes[1].reference_numbers.len(), 2);
 }
 
 #[test]
@@ -181,19 +208,48 @@ fn footnote_macro_flushes_pending_notes() {
         .blocks
         .iter()
         .flat_map(|block| match block {
-            RenderBlock::Paragraph(inlines) => inlines.as_slice(),
+            RenderBlock::Paragraph { content: inlines } => inlines.as_slice(),
             _ => &[],
         })
         .filter_map(|inline| match inline {
-            RenderInline::FootnoteSection { notes } => {
-                Some(notes.iter().map(|note| note.label.clone()).collect())
-            }
+            RenderInline::FootnoteSection { notes } => Some(
+                notes
+                    .iter()
+                    .map(|index| tree.footnotes[*index as usize].label.clone())
+                    .collect(),
+            ),
             _ => None,
         })
         .collect();
     assert_eq!(
         section_labels,
         vec![vec!["1".to_string()], vec!["2".to_string()]]
+    );
+}
+
+/// 같은 이름 각주라도 `[각주]`로 끊기면 **다른 각주**다 — 병합은 미방출 구간 안에서만
+/// 일어나기 때문이다. 그래서 라벨은 문서 전체에서 유일하지 않고, 각주를 가리키는 키로
+/// 쓸 수 있는 것은 참조 번호뿐이다(프론트엔드의 미리보기 사전과 복귀 앵커가 이걸 딛는다).
+#[test]
+fn same_name_across_sections_makes_separate_footnotes() {
+    let tree = tree("본문[*A 첫째]\n[각주]\n다음[*A 둘째]\n[각주]");
+
+    let labels: Vec<&str> = tree
+        .footnotes
+        .iter()
+        .map(|footnote| footnote.label.as_str())
+        .collect();
+    assert_eq!(labels, vec!["A", "A"], "라벨은 겹친다");
+
+    let references: Vec<&[u32]> = tree
+        .footnotes
+        .iter()
+        .map(|footnote| footnote.reference_numbers.as_slice())
+        .collect();
+    assert_eq!(
+        references,
+        vec![&[1u32][..], &[2u32][..]],
+        "번호는 안 겹친다"
     );
 }
 
@@ -206,14 +262,16 @@ fn include_is_expanded_with_arguments() {
     );
     let document = namumark_parser::parse("[include(틀:인사, 이름=단풍)]");
     let tree = build_render_tree(&document, &context);
-    let RenderBlock::Paragraph(inlines) = &tree.blocks[0] else {
+    let RenderBlock::Paragraph { content: inlines } = &tree.blocks[0] else {
         panic!("문단이어야 한다");
     };
     assert_eq!(
         inlines[0],
         RenderInline::Styled {
             style: TextStyle::Bold,
-            content: vec![RenderInline::Text("단풍".to_string())],
+            content: vec![RenderInline::Text {
+                text: "단풍".to_string()
+            }],
         }
     );
 }
@@ -230,7 +288,7 @@ fn category_and_include_lines_leave_no_line_break() {
     let document =
         namumark_parser::parse("[[분류:도움말]]\n[include(틀:안내)]\n[목차]\n[clearfix]");
     let tree = build_render_tree(&document, &context);
-    let RenderBlock::Paragraph(inlines) = tree.blocks.last().unwrap() else {
+    let RenderBlock::Paragraph { content: inlines } = tree.blocks.last().unwrap() else {
         panic!("문단이어야 한다: {:?}", tree.blocks);
     };
     assert!(
@@ -277,7 +335,7 @@ fn link_existence_is_resolved() {
     context.documents.insert("존재".to_string(), String::new());
     let document = namumark_parser::parse("[[존재]] [[없음]]");
     let tree = build_render_tree(&document, &context);
-    let RenderBlock::Paragraph(inlines) = &tree.blocks[0] else {
+    let RenderBlock::Paragraph { content: inlines } = &tree.blocks[0] else {
         panic!("문단이어야 한다");
     };
     assert!(matches!(
@@ -313,10 +371,15 @@ fn age_uses_context_today() {
     });
     let document = namumark_parser::parse("[age(2000-01-01)]");
     let tree = build_render_tree(&document, &context);
-    let RenderBlock::Paragraph(inlines) = &tree.blocks[0] else {
+    let RenderBlock::Paragraph { content: inlines } = &tree.blocks[0] else {
         panic!("문단이어야 한다");
     };
-    assert_eq!(inlines[0], RenderInline::Text("26".to_string()));
+    assert_eq!(
+        inlines[0],
+        RenderInline::Text {
+            text: "26".to_string()
+        }
+    );
 }
 
 #[test]
@@ -415,7 +478,8 @@ impl WikiContext for SubDocumentContext {
 
 fn link_of(source: &str, context: &dyn WikiContext) -> RenderInline {
     let tree = build_render_tree(&namumark_parser::parse(source), context);
-    let RenderBlock::Paragraph(inlines) = tree.blocks.into_iter().next().unwrap() else {
+    let RenderBlock::Paragraph { content: inlines } = tree.blocks.into_iter().next().unwrap()
+    else {
         panic!("문단이어야 한다");
     };
     inlines.into_iter().next().unwrap()
@@ -442,7 +506,7 @@ fn relative_link_shows_what_was_written() {
     assert!(matches!(
         link_of("[[/TeX]]", &SubDocumentContext),
         RenderInline::DocumentLink { display, .. }
-            if display == vec![RenderInline::Text("/TeX".to_string())]
+            if display == vec![RenderInline::Text { text: "/TeX".to_string() }]
     ));
 }
 
@@ -471,4 +535,99 @@ fn link_to_current_document_is_a_self_link() {
             ..
         }
     ));
+}
+
+/// layout이 끝난 트리에는 resolve 중간 상태인 [`RenderInline::Footnote`]가 남지 않는다.
+///
+/// 이 변형은 IR 계약에서 빠져 있어(직렬화하면 오류) 하나라도 새면 프론트엔드로 가는
+/// 응답이 통째로 실패한다. 각주 문법 전반을 한 문서에 몰아 넣고 확인한다.
+#[test]
+fn layout_leaves_no_pending_footnotes() {
+    let source = "\
+본문[* 무명 각주]과 이름 각주[*A 이름 붙은 것]와 재참조[*A].
+[각주]
+== 문단 ==
+문단 뒤 각주[* 뒤쪽]와 중첩[* 안에 [[링크]]와 [* 더 깊은 것]].
+";
+    let tree = build_render_tree(&namumark_parser::parse(source), &EmptyContext);
+
+    let mut pending = 0;
+    walk_tree(&tree, &mut |inline| {
+        if matches!(inline, RenderInline::Footnote { .. }) {
+            pending += 1;
+        }
+    });
+    assert_eq!(pending, 0, "layout이 각주 {pending}개를 치환하지 못했다");
+
+    // 각주가 실제로 있었는지도 본다 — 없으면 위 단언이 공허하다.
+    let mut references = 0;
+    walk_tree(&tree, &mut |inline| {
+        if matches!(inline, RenderInline::FootnoteReference { .. }) {
+            references += 1;
+        }
+    });
+    assert!(references > 0, "각주 참조가 하나도 만들어지지 않았다");
+}
+
+fn walk_inlines(blocks: &[RenderBlock], visit: &mut impl FnMut(&RenderInline)) {
+    for block in blocks {
+        match block {
+            RenderBlock::Heading { content, .. } | RenderBlock::Paragraph { content } => {
+                walk_inline_slice(content, visit);
+            }
+            RenderBlock::Quote { blocks } | RenderBlock::Indent { blocks } => {
+                walk_inlines(blocks, visit);
+            }
+            RenderBlock::List { items, .. } => {
+                for item in items {
+                    walk_inlines(&item.blocks, visit);
+                }
+            }
+            RenderBlock::Table { table } => {
+                if let Some(caption) = &table.caption {
+                    walk_inline_slice(caption, visit);
+                }
+                for row in &table.rows {
+                    for cell in &row.cells {
+                        walk_inlines(&cell.blocks, visit);
+                    }
+                }
+            }
+            RenderBlock::HorizontalRule => {}
+        }
+    }
+}
+
+fn walk_inline_slice(inlines: &[RenderInline], visit: &mut impl FnMut(&RenderInline)) {
+    for inline in inlines {
+        visit(inline);
+        match inline {
+            RenderInline::Styled { content, .. }
+            | RenderInline::Colored { content, .. }
+            | RenderInline::Sized { content, .. }
+            | RenderInline::DocumentLink {
+                display: content, ..
+            }
+            | RenderInline::Footnote { content, .. } => walk_inline_slice(content, visit),
+            RenderInline::ExternalLink {
+                display: Some(display),
+                ..
+            } => walk_inline_slice(display, visit),
+            RenderInline::Blocks { blocks }
+            | RenderInline::WikiStyle { blocks, .. }
+            | RenderInline::Folding { blocks, .. } => walk_inlines(blocks, visit),
+            _ => {}
+        }
+    }
+}
+
+/// 트리 전체 — 블록뿐 아니라 트리 밖에 있는 목차 제목과 각주 내용까지 훑는다.
+fn walk_tree(tree: &RenderTree, visit: &mut impl FnMut(&RenderInline)) {
+    walk_inlines(&tree.blocks, visit);
+    for entry in &tree.table_of_contents {
+        walk_inline_slice(&entry.title, visit);
+    }
+    for footnote in &tree.footnotes {
+        walk_inline_slice(&footnote.content, visit);
+    }
 }

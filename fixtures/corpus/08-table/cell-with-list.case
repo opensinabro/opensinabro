@@ -1,4 +1,4 @@
-근거: 미확인 | 원문: 3줄 | 의미론: 19줄 | 렌더링: 4줄 | 셀 안 리스트
+근거: 미확인 | 원문: 3줄 | 의미론: 19줄 | IR: 53줄 | 렌더링: 4줄 | 셀 안 리스트
 ||<-1>
  * 리스트
 ||
@@ -21,6 +21,59 @@ Document@0..23
               Text@10..19 "리스트"
       Separator@19..22 "\n||"
   Newline@22..23 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "table",
+      "table": {
+        "caption": null,
+        "rows": [
+          {
+            "cells": [
+              {
+                "columnSpan": 1,
+                "rowSpan": null,
+                "horizontalAlignment": null,
+                "verticalAlignment": null,
+                "attributes": [],
+                "blocks": [
+                  {
+                    "type": "paragraph",
+                    "content": []
+                  },
+                  {
+                    "type": "list",
+                    "kind": "unordered",
+                    "items": [
+                      {
+                        "startNumber": null,
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "content": [
+                              {
+                                "type": "text",
+                                "text": "리스트"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-table-wrap"><table class="wiki-table"><tbody><tr class="wiki-table-tr"><td colspan="1" style=""><div class="wiki-paragraph"></div>
 <ul class="wiki-list"><li><div class="wiki-paragraph">리스트</div>
 </li></ul>

@@ -1,4 +1,4 @@
-근거: 도움말서술 | 원문: 1줄 | 의미론: 16줄 | 렌더링: 2줄 | CSS 색상명은 # 없이
+근거: 도움말서술 | 원문: 1줄 | 의미론: 16줄 | IR: 48줄 | 렌더링: 2줄 | CSS 색상명은 # 없이
 ||<bgcolor=white,white> 흰색 ||
 Document@0..34
   Table@0..33
@@ -16,5 +16,53 @@ Document@0..34
         AlignmentSpace@30..31 " "
       Separator@31..33 "||"
   Newline@33..34 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "table",
+      "table": {
+        "caption": null,
+        "rows": [
+          {
+            "cells": [
+              {
+                "columnSpan": null,
+                "rowSpan": null,
+                "horizontalAlignment": "center",
+                "verticalAlignment": null,
+                "attributes": [
+                  {
+                    "scope": {
+                      "type": "cell"
+                    },
+                    "property": {
+                      "type": "backgroundColor",
+                      "color": "white"
+                    }
+                  }
+                ],
+                "blocks": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "흰색"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-table-wrap"><table class="wiki-table"><tbody><tr class="wiki-table-tr"><td style="text-align: center; background-color: white;"><div class="wiki-paragraph">흰색</div>
 </td></tr></tbody></table></div>

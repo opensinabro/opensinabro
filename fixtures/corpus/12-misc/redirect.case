@@ -1,7 +1,14 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 5줄 | 렌더링: 0줄 | 리다이렉트
+근거: 도움말예제 | 원문: 1줄 | 의미론: 5줄 | IR: 7줄 | 렌더링: 0줄 | 리다이렉트
 #redirect 목적지 문서
 Document@0..27
   Redirect@0..26
     Directive@0..10 "#redirect "
     Text@10..26 "목적지 문서"
   Newline@26..27 "\n"
+{
+  "redirect": "목적지 문서",
+  "blocks": [],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}

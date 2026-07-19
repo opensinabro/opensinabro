@@ -1,4 +1,4 @@
-근거: 미확인 | 원문: 2줄 | 의미론: 10줄 | 렌더링: 2줄 | 분류만 있는 줄은 개행까지 소멸하는지
+근거: 미확인 | 원문: 2줄 | 의미론: 10줄 | IR: 19줄 | 렌더링: 2줄 | 분류만 있는 줄은 개행까지 소멸하는지
 [[분류:알파위키]]
 본문
 Document@0..31
@@ -11,5 +11,24 @@ Document@0..31
     Newline@23..24 "\n"
     Text@24..30 "본문"
   Newline@30..31 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "본문"
+        }
+      ]
+    }
+  ],
+  "categories": [
+    "알파위키"
+  ],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph">본문</div>
 <div class="wiki-categories">분류: <a href="/w/%EB%B6%84%EB%A5%98%3A%EC%95%8C%ED%8C%8C%EC%9C%84%ED%82%A4">알파위키</a></div>

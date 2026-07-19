@@ -1,4 +1,4 @@
-근거: 미확인 | 원문: 5줄 | 의미론: 24줄 | 렌더링: 1줄 | #!wiki 중첩
+근거: 미확인 | 원문: 5줄 | 의미론: 24줄 | IR: 51줄 | 렌더링: 1줄 | #!wiki 중첩
 {{{#!wiki style="margin: 4px"
 {{{#!wiki style="color: red"
 안쪽
@@ -28,4 +28,55 @@ Document@0..74
           DelimiterClose@65..69 "\n}}}"
       DelimiterClose@69..73 "\n}}}"
   Newline@73..74 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "wikiStyle",
+          "style": [
+            {
+              "property": "margin",
+              "value": "4px"
+            }
+          ],
+          "darkStyle": [],
+          "blocks": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "wikiStyle",
+                  "style": [
+                    {
+                      "property": "color",
+                      "value": "red"
+                    }
+                  ],
+                  "darkStyle": [],
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "안쪽"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><div style="margin: 4px"><div style="color: red">안쪽</div></div></div>

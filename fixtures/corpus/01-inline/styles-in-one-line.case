@@ -1,4 +1,4 @@
-근거: 미확인 | 원문: 1줄 | 의미론: 32줄 | 렌더링: 1줄 | 한 줄에 모든 서식 — 서로 간섭하지 않는지
+근거: 미확인 | 원문: 1줄 | 의미론: 32줄 | IR: 93줄 | 렌더링: 1줄 | 한 줄에 모든 서식 — 서로 간섭하지 않는지
 '''굵게''' ''기울임'' ~~취소~~ __밑줄__ ^^위^^ ,,아래,,
 Document@0..68
   Paragraph@0..67
@@ -32,4 +32,97 @@ Document@0..68
       Text@59..65 "아래"
       DelimiterClose@65..67 ",,"
   Newline@67..68 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "styled",
+          "style": "bold",
+          "content": [
+            {
+              "type": "text",
+              "text": "굵게"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "text": " "
+        },
+        {
+          "type": "styled",
+          "style": "italic",
+          "content": [
+            {
+              "type": "text",
+              "text": "기울임"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "text": " "
+        },
+        {
+          "type": "styled",
+          "style": "strikethrough",
+          "content": [
+            {
+              "type": "text",
+              "text": "취소"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "text": " "
+        },
+        {
+          "type": "styled",
+          "style": "underline",
+          "content": [
+            {
+              "type": "text",
+              "text": "밑줄"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "text": " "
+        },
+        {
+          "type": "styled",
+          "style": "superscript",
+          "content": [
+            {
+              "type": "text",
+              "text": "위"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "text": " "
+        },
+        {
+          "type": "styled",
+          "style": "subscript",
+          "content": [
+            {
+              "type": "text",
+              "text": "아래"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><strong>굵게</strong> <em>기울임</em> <del>취소</del> <u>밑줄</u> <sup>위</sup> <sub>아래</sub></div>

@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 2줄 | 의미론: 16줄 | 렌더링: 3줄 | 번호 리스트
+근거: 도움말예제 | 원문: 2줄 | 의미론: 16줄 | IR: 42줄 | 렌더링: 3줄 | 번호 리스트
  1. 리스트 1
  1. 리스트 2
 Document@0..32
@@ -17,6 +17,48 @@ Document@0..32
       Paragraph@20..31
         Text@20..31 "리스트 2"
       Newline@31..32 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "list",
+      "kind": "decimal",
+      "items": [
+        {
+          "startNumber": null,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "리스트 1"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "startNumber": null,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "리스트 2"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <ol class="wiki-list wiki-list" start="1"><li><div class="wiki-paragraph">리스트 1</div>
 </li><li><div class="wiki-paragraph">리스트 2</div>
 </li></ol>

@@ -2,6 +2,11 @@
 //!
 //! 이 타입들은 구문 트리를 가리키지 않는 순수 값이다 — 렌더 IR·layout·backend가
 //! 공유하므로 뷰로 두지 않는다. 뷰([`crate::node`])는 토큰을 읽어 이 값들을 만든다.
+//!
+//! 언어 어휘 enum은 IR을 타고 프론트엔드까지 나가므로 직렬화 표현을 함께 정의한다.
+
+use serde::Serialize;
+use ts_rs::TS;
 
 /// 틀 인자(`@이름@`)가 낄 수 있는 문자열.
 ///
@@ -51,14 +56,18 @@ pub struct Variable {
     pub default: Option<String>,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, TS)]
+#[serde(rename_all = "camelCase")]
+#[ts(export)]
 pub enum HorizontalAlignment {
     Left,
     Center,
     Right,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, TS)]
+#[serde(rename_all = "camelCase")]
+#[ts(export)]
 pub enum VerticalAlignment {
     Top,
     Bottom,
@@ -71,7 +80,13 @@ pub struct TableAttribute {
     pub value: Option<Template>,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, TS)]
+#[serde(
+    tag = "type",
+    rename_all = "camelCase",
+    rename_all_fields = "camelCase"
+)]
+#[ts(export)]
 pub enum TableAttributeScope {
     Cell,
     /// 열 지정. `columns`는 이 옵션을 적은 자리까지 아는 칸 수다 — 나무위키는 셀 옵션을
@@ -84,7 +99,9 @@ pub enum TableAttributeScope {
     Table,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, TS)]
+#[serde(rename_all = "camelCase")]
+#[ts(export)]
 pub enum ListKind {
     Unordered,
     Decimal,

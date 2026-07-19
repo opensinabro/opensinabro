@@ -1,4 +1,4 @@
-근거: 미확인 | 원문: 3줄 | 의미론: 14줄 | 렌더링: 1줄 | 홑따옴표 속성
+근거: 미확인 | 원문: 3줄 | 의미론: 14줄 | IR: 34줄 | 렌더링: 1줄 | 홑따옴표 속성
 {{{#!wiki style='color: red'
 내용
 }}}
@@ -16,4 +16,38 @@ Document@0..40
         Text@29..35 "내용"
       DelimiterClose@35..39 "\n}}}"
   Newline@39..40 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "wikiStyle",
+          "style": [
+            {
+              "property": "color",
+              "value": "red"
+            }
+          ],
+          "darkStyle": [],
+          "blocks": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "내용"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><div style="color: red">내용</div></div>

@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 7줄 | 렌더링: 1줄 | 상위 문서 링크
+근거: 도움말예제 | 원문: 1줄 | 의미론: 7줄 | IR: 25줄 | 렌더링: 1줄 | 상위 문서 링크
 [[../]]
 Document@0..8
   Paragraph@0..7
@@ -7,4 +7,29 @@ Document@0..8
       LinkTarget@2..5 "../"
       DelimiterClose@5..7 "]]"
   Newline@7..8 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "documentLink",
+          "title": "시험 문서",
+          "anchor": null,
+          "kind": "existing",
+          "display": [
+            {
+              "type": "text",
+              "text": "../"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><a class="wiki-link-internal" href="/w/%EC%8B%9C%ED%97%98%20%EB%AC%B8%EC%84%9C" title="시험 문서">../</a></div>

@@ -1,4 +1,4 @@
-근거: 미확인 | 원문: 1줄 | 의미론: 14줄 | 렌더링: 1줄 | 중첩 include는 확장하지 않고 조용히 버림
+근거: 미확인 | 원문: 1줄 | 의미론: 14줄 | IR: 21줄 | 렌더링: 1줄 | 중첩 include는 확장하지 않고 조용히 버림
 [include(틀:바깥, 인자=[include(틀:안쪽)])]
 Document@0..52
   Paragraph@0..51
@@ -14,4 +14,25 @@ Document@0..52
       Separator@49..50 ")"
       DelimiterClose@50..51 "]"
   Newline@51..52 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "바깥"
+        },
+        {
+          "type": "blocks",
+          "blocks": []
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph">바깥</div>

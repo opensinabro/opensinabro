@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 14줄 | 렌더링: 2줄 | rowspan 옵션
+근거: 도움말예제 | 원문: 1줄 | 의미론: 14줄 | IR: 38줄 | 렌더링: 2줄 | rowspan 옵션
 ||<|2> 두줄 ||
 Document@0..17
   Table@0..16
@@ -14,5 +14,43 @@ Document@0..17
         AlignmentSpace@13..14 " "
       Separator@14..16 "||"
   Newline@16..17 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "table",
+      "table": {
+        "caption": null,
+        "rows": [
+          {
+            "cells": [
+              {
+                "columnSpan": null,
+                "rowSpan": 2,
+                "horizontalAlignment": "center",
+                "verticalAlignment": null,
+                "attributes": [],
+                "blocks": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "두줄"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-table-wrap"><table class="wiki-table"><tbody><tr class="wiki-table-tr"><td rowspan="2" style="text-align: center;"><div class="wiki-paragraph">두줄</div>
 </td></tr></tbody></table></div>

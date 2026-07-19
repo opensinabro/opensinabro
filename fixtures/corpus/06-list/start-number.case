@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 10줄 | 렌더링: 2줄 | 시작 번호 지정
+근거: 도움말예제 | 원문: 1줄 | 의미론: 10줄 | IR: 28줄 | 렌더링: 2줄 | 시작 번호 지정
  I.#11 이 리스트는 11(XI)부터 시작
 Document@0..44
   List@0..44
@@ -10,5 +10,33 @@ Document@0..44
       Paragraph@7..43
         Text@7..43 "이 리스트는 11(X ..."
       Newline@43..44 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "list",
+      "kind": "upperRoman",
+      "items": [
+        {
+          "startNumber": 11,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "이 리스트는 11(XI)부터 시작"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <ol class="wiki-list wiki-list-upper-roman" start="11"><li><div class="wiki-paragraph">이 리스트는 11(XI)부터 시작</div>
 </li></ol>

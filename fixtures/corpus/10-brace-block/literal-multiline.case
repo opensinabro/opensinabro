@@ -1,4 +1,4 @@
-근거: 도움말서술 | 원문: 1줄 | 의미론: 7줄 | 렌더링: 1줄 | 도움말: {{{ }}} 사이에 { 또는 }를 3개 이상 연속으로 쓸 수 없음
+근거: 도움말서술 | 원문: 1줄 | 의미론: 7줄 | IR: 17줄 | 렌더링: 1줄 | 도움말: {{{ }}} 사이에 { 또는 }를 3개 이상 연속으로 쓸 수 없음
 {{{{{{}}}}}}
 Document@0..13
   Paragraph@0..12
@@ -7,4 +7,21 @@ Document@0..13
       Text@3..9 "{{{}}}"
       DelimiterClose@9..12 "}}}"
   Newline@12..13 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "literal",
+          "text": "{{{}}}"
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><code>{{{}}}</code></div>

@@ -1,0 +1,5 @@
+# IR의 TypeScript 타입이 나갈 곳. `cargo test -p namumark-ir`가 이 디렉터리를 다시 쓴다.
+# 프론트엔드는 이 파일들을 손으로 고치지 않는다 — IR이 바뀌면 여기가 먼저 바뀌고,
+# 어긋난 채로 커밋되지 않도록 CI가 `git diff --exit-code`로 막는다.
+[env]
+TS_RS_EXPORT_DIR = { value = "frontend/lib/namumark", relative = true }

@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 2줄 | 의미론: 17줄 | 렌더링: 4줄 | 도움말: 접힌 목차. 우리는 인자를 무시함
+근거: 도움말예제 | 원문: 2줄 | 의미론: 17줄 | IR: 40줄 | 렌더링: 4줄 | 도움말: 접힌 목차. 우리는 인자를 무시함
 [목차(hide)]
 == 문단 ==
 Document@0..28
@@ -18,6 +18,46 @@ Document@0..28
     Separator@24..25 " "
     DelimiterClose@25..27 "=="
   Newline@27..28 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "tableOfContents"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "folded": false,
+      "number": "1",
+      "anchor": "문단",
+      "content": [
+        {
+          "type": "text",
+          "text": "문단"
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [
+    {
+      "number": "1",
+      "depth": 1,
+      "title": [
+        {
+          "type": "text",
+          "text": "문단"
+        }
+      ]
+    }
+  ],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><div class="wiki-macro-toc" id="toc"><details open><summary></summary><div class="toc-indent"><span class="toc-item"><a href="#s-1">1</a>. 문단</span></div></details></div>
 </div>
 <h2 class="wiki-heading"><a id="s-1" href="#toc">1.</a> <span id="문단">문단</span></h2>

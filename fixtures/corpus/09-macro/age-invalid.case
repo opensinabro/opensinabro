@@ -1,4 +1,4 @@
-근거: 도움말서술 | 원문: 1줄 | 의미론: 10줄 | 렌더링: 1줄 | 도움말: 유효하지 않은 날짜는 invalid date
+근거: 도움말서술 | 원문: 1줄 | 의미론: 10줄 | IR: 18줄 | 렌더링: 1줄 | 도움말: 유효하지 않은 날짜는 invalid date
 [age(2000-13-01)]
 Document@0..18
   Paragraph@0..17
@@ -10,4 +10,22 @@ Document@0..18
       Separator@15..16 ")"
       DelimiterClose@16..17 "]"
   Newline@17..18 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "unresolved",
+          "name": "age",
+          "argument": "2000-13-01"
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph">[age(2000-13-01)]</div>

@@ -1,4 +1,4 @@
-근거: 도움말서술 | 원문: 1줄 | 의미론: 14줄 | 렌더링: 1줄 | 도움말: end 지원. 우리는 폐기함
+근거: 도움말서술 | 원문: 1줄 | 의미론: 14줄 | IR: 20줄 | 렌더링: 1줄 | 도움말: end 지원. 우리는 폐기함
 [youtube(jNQXAC9IVRw,end=10)]
 Document@0..30
   Paragraph@0..29
@@ -14,4 +14,24 @@ Document@0..30
       Separator@27..28 ")"
       DelimiterClose@28..29 "]"
   Newline@29..30 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "video",
+          "provider": "youtube",
+          "identifier": "jNQXAC9IVRw",
+          "width": null,
+          "height": null
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><iframe class="wiki-media" src="//www.youtube.com/embed/jNQXAC9IVRw" width="640" height="360" frameborder="0" allowfullscreen loading="lazy"></iframe></div>

@@ -1,4 +1,4 @@
-근거: 미확인 | 원문: 1줄 | 의미론: 7줄 | 렌더링: 1줄 | ftp 외부 링크
+근거: 미확인 | 원문: 1줄 | 의미론: 7줄 | IR: 18줄 | 렌더링: 1줄 | ftp 외부 링크
 [[ftp://example.com/]]
 Document@0..23
   Paragraph@0..22
@@ -7,4 +7,22 @@ Document@0..23
       LinkTarget@2..20 "ftp://example.com/"
       DelimiterClose@20..22 "]]"
   Newline@22..23 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "externalLink",
+          "url": "ftp://example.com/",
+          "display": null
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><a class="wiki-link-external" href="ftp://example.com/" target="_blank" rel="nofollow noopener ugc" title="ftp://example.com/">ftp://example.com/</a></div>

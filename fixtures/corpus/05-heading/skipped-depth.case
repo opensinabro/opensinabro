@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 2줄 | 의미론: 15줄 | 렌더링: 4줄 | 도움말: 깊이를 두 단계 건너뜀
+근거: 도움말예제 | 원문: 2줄 | 의미론: 15줄 | IR: 55줄 | 렌더링: 4줄 | 도움말: 깊이를 두 단계 건너뜀
 == 문단 2 ==
 ==== 문단 4 ====
 Document@0..34
@@ -16,6 +16,61 @@ Document@0..34
     Separator@28..29 " "
     DelimiterClose@29..33 "===="
   Newline@33..34 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "heading",
+      "level": 2,
+      "folded": false,
+      "number": "1",
+      "anchor": "문단 2",
+      "content": [
+        {
+          "type": "text",
+          "text": "문단 2"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 4,
+      "folded": false,
+      "number": "1.1",
+      "anchor": "문단 4",
+      "content": [
+        {
+          "type": "text",
+          "text": "문단 4"
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [
+    {
+      "number": "1",
+      "depth": 1,
+      "title": [
+        {
+          "type": "text",
+          "text": "문단 2"
+        }
+      ]
+    },
+    {
+      "number": "1.1",
+      "depth": 2,
+      "title": [
+        {
+          "type": "text",
+          "text": "문단 4"
+        }
+      ]
+    }
+  ],
+  "footnotes": []
+}
 <h2 class="wiki-heading"><a id="s-1" href="#toc">1.</a> <span id="문단 2">문단 2</span></h2>
 <div class="wiki-heading-content"></div>
 <h4 class="wiki-heading"><a id="s-1.1" href="#toc">1.1.</a> <span id="문단 4">문단 4</span></h4>

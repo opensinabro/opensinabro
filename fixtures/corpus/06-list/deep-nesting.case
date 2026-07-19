@@ -1,4 +1,4 @@
-근거: 미확인 | 원문: 4줄 | 의미론: 39줄 | 렌더링: 8줄 | 깊은 중첩
+근거: 미확인 | 원문: 4줄 | 의미론: 39줄 | IR: 88줄 | 렌더링: 8줄 | 깊은 중첩
  * 1
   * 2
    * 3
@@ -42,6 +42,94 @@ Document@0..26
                   Paragraph@24..25
                     Text@24..25 "4"
                   Newline@25..26 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "list",
+      "kind": "unordered",
+      "items": [
+        {
+          "startNumber": null,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "1"
+                }
+              ]
+            },
+            {
+              "type": "list",
+              "kind": "unordered",
+              "items": [
+                {
+                  "startNumber": null,
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "2"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "list",
+                      "kind": "unordered",
+                      "items": [
+                        {
+                          "startNumber": null,
+                          "blocks": [
+                            {
+                              "type": "paragraph",
+                              "content": [
+                                {
+                                  "type": "text",
+                                  "text": "3"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "list",
+                              "kind": "unordered",
+                              "items": [
+                                {
+                                  "startNumber": null,
+                                  "blocks": [
+                                    {
+                                      "type": "paragraph",
+                                      "content": [
+                                        {
+                                          "type": "text",
+                                          "text": "4"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <ul class="wiki-list"><li><div class="wiki-paragraph">1</div>
 <ul class="wiki-list"><li><div class="wiki-paragraph">2</div>
 <ul class="wiki-list"><li><div class="wiki-paragraph">3</div>

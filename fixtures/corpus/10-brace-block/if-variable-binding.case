@@ -1,4 +1,4 @@
-근거: 미확인 | 원문: 1줄 | 의미론: 14줄 | 렌더링: 1줄 | 조건식이 만든 변수를 내용의 @top@이 참조
+근거: 미확인 | 원문: 1줄 | 의미론: 14줄 | IR: 29줄 | 렌더링: 1줄 | 조건식이 만든 변수를 내용의 @top@이 참조
 [include(틀:상위 문서, 문서명1=문서)]
 Document@0..48
   Paragraph@0..47
@@ -14,4 +14,33 @@ Document@0..48
       Separator@45..46 ")"
       DelimiterClose@46..47 "]"
   Newline@47..48 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "상위 문서: "
+        },
+        {
+          "type": "documentLink",
+          "title": "문서",
+          "anchor": null,
+          "kind": "existing",
+          "display": [
+            {
+              "type": "text",
+              "text": "문서"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph">상위 문서: <a class="wiki-link-internal" href="/w/%EB%AC%B8%EC%84%9C" title="문서">문서</a></div>

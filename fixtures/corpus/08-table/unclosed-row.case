@@ -1,7 +1,24 @@
-근거: 미확인 | 원문: 1줄 | 의미론: 4줄 | 렌더링: 1줄 | 닫히지 않은 행
+근거: 미확인 | 원문: 1줄 | 의미론: 4줄 | IR: 17줄 | 렌더링: 1줄 | 닫히지 않은 행
 || 안 닫음
 Document@0..14
   Paragraph@0..13
     Text@0..13 "|| 안 닫음"
   Newline@13..14 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "|| 안 닫음"
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph">|| 안 닫음</div>

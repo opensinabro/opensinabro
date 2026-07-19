@@ -1,4 +1,4 @@
-근거: 미확인 | 원문: 1줄 | 의미론: 10줄 | 렌더링: 1줄 | 모르는 매크로는 원문 표기로 방출
+근거: 미확인 | 원문: 1줄 | 의미론: 10줄 | IR: 18줄 | 렌더링: 1줄 | 모르는 매크로는 원문 표기로 방출
 [우주(1)]
 Document@0..12
   Paragraph@0..11
@@ -10,4 +10,22 @@ Document@0..12
       Separator@9..10 ")"
       DelimiterClose@10..11 "]"
   Newline@11..12 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "unresolved",
+          "name": "우주",
+          "argument": "1"
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph">[우주(1)]</div>

@@ -1,4 +1,4 @@
-근거: 도움말서술 | 원문: 1줄 | 의미론: 9줄 | 렌더링: 1줄 | 틀 매개변수 기본값
+근거: 도움말서술 | 원문: 1줄 | 의미론: 9줄 | IR: 17줄 | 렌더링: 1줄 | 틀 매개변수 기본값
 @매개변수=디폴트값@
 Document@0..28
   Paragraph@0..27
@@ -9,4 +9,21 @@ Document@0..28
       VariableDefault@14..26 "디폴트값"
       DelimiterClose@26..27 "@"
   Newline@27..28 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "디폴트값"
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph">디폴트값</div>

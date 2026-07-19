@@ -1,4 +1,4 @@
-근거: 미확인 | 원문: 8줄 | 의미론: 74줄 | 렌더링: 11줄 | 복합 — 여러 문법이 한 문서에
+근거: 미확인 | 원문: 8줄 | 의미론: 74줄 | IR: 189줄 | 렌더링: 11줄 | 복합 — 여러 문법이 한 문서에
 [목차]
 == 개요 ==
 '''굵게''' [[링크]] [* 각주]
@@ -81,6 +81,195 @@ Document@0..156
       MacroName@148..154 "각주"
       DelimiterClose@154..155 "]"
   Newline@155..156 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "tableOfContents"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "folded": false,
+      "number": "1",
+      "anchor": "개요",
+      "content": [
+        {
+          "type": "text",
+          "text": "개요"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "styled",
+          "style": "bold",
+          "content": [
+            {
+              "type": "text",
+              "text": "굵게"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "text": " "
+        },
+        {
+          "type": "documentLink",
+          "title": "링크",
+          "anchor": null,
+          "kind": "existing",
+          "display": [
+            {
+              "type": "text",
+              "text": "링크"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "text": " "
+        },
+        {
+          "type": "footnoteReference",
+          "label": "1",
+          "number": 1,
+          "tooltip": "각주"
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "table": {
+        "caption": null,
+        "rows": [
+          {
+            "cells": [
+              {
+                "columnSpan": null,
+                "rowSpan": null,
+                "horizontalAlignment": "center",
+                "verticalAlignment": null,
+                "attributes": [
+                  {
+                    "scope": {
+                      "type": "table"
+                    },
+                    "property": {
+                      "type": "align",
+                      "alignment": "center"
+                    }
+                  },
+                  {
+                    "scope": {
+                      "type": "cell"
+                    },
+                    "property": {
+                      "type": "backgroundColor",
+                      "color": "#eeeeee"
+                    }
+                  }
+                ],
+                "blocks": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "표"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "wikiStyle",
+          "style": [
+            {
+              "property": "margin",
+              "value": "4px"
+            }
+          ],
+          "darkStyle": [],
+          "blocks": [
+            {
+              "type": "list",
+              "kind": "unordered",
+              "items": [
+                {
+                  "startNumber": null,
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "리스트"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "lineBreak"
+        },
+        {
+          "type": "footnoteSection",
+          "notes": [
+            0
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [
+    {
+      "number": "1",
+      "depth": 1,
+      "title": [
+        {
+          "type": "text",
+          "text": "개요"
+        }
+      ]
+    }
+  ],
+  "footnotes": [
+    {
+      "label": "1",
+      "referenceNumbers": [
+        1
+      ],
+      "content": [
+        {
+          "type": "text",
+          "text": "각주"
+        }
+      ]
+    }
+  ]
+}
 <div class="wiki-paragraph"><div class="wiki-macro-toc" id="toc"><details open><summary></summary><div class="toc-indent"><span class="toc-item"><a href="#s-1">1</a>. 개요</span></div></details></div>
 </div>
 <h2 class="wiki-heading"><a id="s-1" href="#toc">1.</a> <span id="개요">개요</span></h2>

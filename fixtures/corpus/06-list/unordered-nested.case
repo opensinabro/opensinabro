@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 2줄 | 의미론: 18줄 | 렌더링: 4줄 | 중첩 불릿
+근거: 도움말예제 | 원문: 2줄 | 의미론: 18줄 | IR: 48줄 | 렌더링: 4줄 | 중첩 불릿
  * 리스트 1
   * 리스트 1.1
 Document@0..33
@@ -19,6 +19,54 @@ Document@0..33
           Paragraph@19..32
             Text@19..32 "리스트 1.1"
           Newline@32..33 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "list",
+      "kind": "unordered",
+      "items": [
+        {
+          "startNumber": null,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "리스트 1"
+                }
+              ]
+            },
+            {
+              "type": "list",
+              "kind": "unordered",
+              "items": [
+                {
+                  "startNumber": null,
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "리스트 1.1"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <ul class="wiki-list"><li><div class="wiki-paragraph">리스트 1</div>
 <ul class="wiki-list"><li><div class="wiki-paragraph">리스트 1.1</div>
 </li></ul>

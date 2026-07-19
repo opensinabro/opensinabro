@@ -12,3 +12,4 @@ namumark-ir.workspace = true
 [dev-dependencies]
 namumark-parser.workspace = true
 namumark-render.workspace = true
+serde_json.workspace = true

@@ -1,4 +1,4 @@
-근거: 도움말서술 | 원문: 3줄 | 의미론: 12줄 | 렌더링: 1줄 | 문법 강조 python
+근거: 도움말서술 | 원문: 3줄 | 의미론: 12줄 | IR: 18줄 | 렌더링: 1줄 | 문법 강조 python
 {{{#!syntax python
 print(1)
 }}}
@@ -14,4 +14,22 @@ Document@0..32
       Newline@27..28 "\n"
       DelimiterClose@28..31 "}}}"
   Newline@31..32 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "codeBlock",
+          "language": "python",
+          "source": "print(1)"
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><pre><code class="hljs" data-language="python">print(1)</code></pre></div>

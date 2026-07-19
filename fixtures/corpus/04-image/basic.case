@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 8줄 | 렌더링: 1줄 | 이미지 삽입
+근거: 도움말예제 | 원문: 1줄 | 의미론: 8줄 | IR: 25줄 | 렌더링: 1줄 | 이미지 삽입
 [[파일:example.png]]
 Document@0..23
   Paragraph@0..22
@@ -8,4 +8,29 @@ Document@0..23
       LinkTarget@9..20 "example.png"
       DelimiterClose@20..22 "]]"
   Newline@22..23 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "image",
+          "fileName": "example.png",
+          "url": "/file/example.png",
+          "layout": {
+            "width": null,
+            "height": null,
+            "align": null,
+            "backgroundColor": null,
+            "theme": null
+          }
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><span class="wiki-image-align-normal" style=""><span class="wiki-image-wrapper"><img src="/file/example.png" alt="파일:example.png"></span></span></div>

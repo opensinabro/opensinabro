@@ -1,7 +1,24 @@
-근거: 미확인 | 원문: 1줄 | 의미론: 4줄 | 렌더링: 1줄 | 닫히지 않은 굵게
+근거: 미확인 | 원문: 1줄 | 의미론: 4줄 | IR: 17줄 | 렌더링: 1줄 | 닫히지 않은 굵게
 '''닫히지 않은 굵게
 Document@0..27
   Paragraph@0..26
     Text@0..26 "'''닫히지 않은 굵 ..."
   Newline@26..27 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "'''닫히지 않은 굵게"
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph">'''닫히지 않은 굵게</div>

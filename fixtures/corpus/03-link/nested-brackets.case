@@ -1,4 +1,4 @@
-근거: 미확인 | 원문: 1줄 | 의미론: 12줄 | 렌더링: 1줄 | 링크 안의 링크 표기
+근거: 미확인 | 원문: 1줄 | 의미론: 12줄 | IR: 33줄 | 렌더링: 1줄 | 링크 안의 링크 표기
 [[문서|[[안쪽]]]]
 Document@0..22
   Paragraph@0..21
@@ -12,4 +12,37 @@ Document@0..22
         DelimiterClose@17..19 "]]"
       DelimiterClose@19..21 "]]"
   Newline@21..22 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "documentLink",
+          "title": "문서",
+          "anchor": null,
+          "kind": "existing",
+          "display": [
+            {
+              "type": "documentLink",
+              "title": "안쪽",
+              "anchor": null,
+              "kind": "missing",
+              "display": [
+                {
+                  "type": "text",
+                  "text": "안쪽"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><a class="wiki-link-internal" href="/w/%EB%AC%B8%EC%84%9C" title="문서"><a class="wiki-link-internal not-exist" href="/w/%EC%95%88%EC%AA%BD" rel="nofollow" title="안쪽">안쪽</a></a></div>

@@ -1,9 +1,26 @@
-근거: 미확인 | 원문: 1줄 | 의미론: 5줄 | 렌더링: 2줄 | 내용 없는 인용문
+근거: 미확인 | 원문: 1줄 | 의미론: 5줄 | IR: 17줄 | 렌더링: 2줄 | 내용 없는 인용문
 >
 Document@0..2
   Quote@0..2
     Paragraph@0..1
       QuoteMarker@0..1 ">"
     Newline@1..2 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "quote",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": []
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <blockquote class="wiki-quote"><div class="wiki-paragraph"></div>
 </blockquote>

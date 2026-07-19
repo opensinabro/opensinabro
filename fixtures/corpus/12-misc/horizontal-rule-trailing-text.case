@@ -1,7 +1,24 @@
-근거: 도움말서술 | 원문: 1줄 | 의미론: 4줄 | 렌더링: 1줄 | 도움말: 뒤에 아무것도 없어야 함
+근거: 도움말서술 | 원문: 1줄 | 의미론: 4줄 | IR: 17줄 | 렌더링: 1줄 | 도움말: 뒤에 아무것도 없어야 함
 ---- 뒤
 Document@0..9
   Paragraph@0..8
     Text@0..8 "---- 뒤"
   Newline@8..9 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "---- 뒤"
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph">---- 뒤</div>

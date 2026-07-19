@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 8줄 | 렌더링: 1줄 | 현재 문서 문단명 링크
+근거: 도움말예제 | 원문: 1줄 | 의미론: 8줄 | IR: 25줄 | 렌더링: 1줄 | 현재 문서 문단명 링크
 [[#개요]]
 Document@0..12
   Paragraph@0..11
@@ -8,4 +8,29 @@ Document@0..12
       LinkAnchor@3..9 "개요"
       DelimiterClose@9..11 "]]"
   Newline@11..12 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "documentLink",
+          "title": "",
+          "anchor": "개요",
+          "kind": "existing",
+          "display": [
+            {
+              "type": "text",
+              "text": "#개요"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><a class="wiki-link-internal" href="#%EA%B0%9C%EC%9A%94" title="">#개요</a></div>

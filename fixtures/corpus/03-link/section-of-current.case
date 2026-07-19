@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 10줄 | 렌더링: 1줄 | 현재 문서 문단 번호 링크
+근거: 도움말예제 | 원문: 1줄 | 의미론: 10줄 | IR: 25줄 | 렌더링: 1줄 | 현재 문서 문단 번호 링크
 [[#s-1|1문단으로]]
 Document@0..23
   Paragraph@0..22
@@ -10,4 +10,29 @@ Document@0..23
       Text@7..20 "1문단으로"
       DelimiterClose@20..22 "]]"
   Newline@22..23 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "documentLink",
+          "title": "",
+          "anchor": "s-1",
+          "kind": "existing",
+          "display": [
+            {
+              "type": "text",
+              "text": "1문단으로"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><a class="wiki-link-internal" href="#s-1" title="">1문단으로</a></div>

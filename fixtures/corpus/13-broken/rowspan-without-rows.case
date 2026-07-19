@@ -1,4 +1,4 @@
-근거: 도움말서술 | 원문: 2줄 | 의미론: 29줄 | 렌더링: 4줄 | 도움말: 필요한 줄을 정확히 입력하지 않으면 제대로 표시되지 않음
+근거: 도움말서술 | 원문: 2줄 | 의미론: 29줄 | IR: 78줄 | 렌더링: 4줄 | 도움말: 필요한 줄을 정확히 입력하지 않으면 제대로 표시되지 않음
 ||<|3> 세줄 || 하나 ||
 || 둘 ||
 Document@0..37
@@ -30,6 +30,84 @@ Document@0..37
         AlignmentSpace@33..34 " "
       Separator@34..36 "||"
   Newline@36..37 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "table",
+      "table": {
+        "caption": null,
+        "rows": [
+          {
+            "cells": [
+              {
+                "columnSpan": null,
+                "rowSpan": 3,
+                "horizontalAlignment": "center",
+                "verticalAlignment": null,
+                "attributes": [],
+                "blocks": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "세줄"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "columnSpan": null,
+                "rowSpan": null,
+                "horizontalAlignment": "center",
+                "verticalAlignment": null,
+                "attributes": [],
+                "blocks": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "하나"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "cells": [
+              {
+                "columnSpan": null,
+                "rowSpan": null,
+                "horizontalAlignment": "center",
+                "verticalAlignment": null,
+                "attributes": [],
+                "blocks": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "둘"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-table-wrap"><table class="wiki-table"><tbody><tr class="wiki-table-tr"><td rowspan="3" style="text-align: center;"><div class="wiki-paragraph">세줄</div>
 </td><td style="text-align: center;"><div class="wiki-paragraph">하나</div>
 </td></tr><tr class="wiki-table-tr"><td style="text-align: center;"><div class="wiki-paragraph">둘</div>

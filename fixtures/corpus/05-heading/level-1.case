@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 8줄 | 렌더링: 2줄 | 도움말: 1단계는 일반적으로 금지
+근거: 도움말예제 | 원문: 1줄 | 의미론: 8줄 | IR: 32줄 | 렌더링: 2줄 | 도움말: 1단계는 일반적으로 금지
 = 문단 1 =
 Document@0..13
   Heading@0..12
@@ -8,5 +8,37 @@ Document@0..13
     Separator@10..11 " "
     DelimiterClose@11..12 "="
   Newline@12..13 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "heading",
+      "level": 1,
+      "folded": false,
+      "number": "1",
+      "anchor": "문단 1",
+      "content": [
+        {
+          "type": "text",
+          "text": "문단 1"
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [
+    {
+      "number": "1",
+      "depth": 1,
+      "title": [
+        {
+          "type": "text",
+          "text": "문단 1"
+        }
+      ]
+    }
+  ],
+  "footnotes": []
+}
 <h1 class="wiki-heading"><a id="s-1" href="#toc">1.</a> <span id="문단 1">문단 1</span></h1>
 <div class="wiki-heading-content"></div>

@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 12줄 | 렌더링: 1줄 | 밑줄 안의 색상 — 밑줄에 색 미적용
+근거: 도움말예제 | 원문: 1줄 | 의미론: 12줄 | IR: 32줄 | 렌더링: 1줄 | 밑줄 안의 색상 — 밑줄에 색 미적용
 __{{{#red 밑줄 제외}}}__
 Document@0..29
   Paragraph@0..28
@@ -12,4 +12,36 @@ Document@0..29
         DelimiterClose@23..26 "}}}"
       DelimiterClose@26..28 "__"
   Newline@28..29 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "styled",
+          "style": "underline",
+          "content": [
+            {
+              "type": "colored",
+              "color": {
+                "light": "red",
+                "dark": null
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "밑줄 제외"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><u><span style="color:red" data-dark-style="color:red;">밑줄 제외</span></u></div>

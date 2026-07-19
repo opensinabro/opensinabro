@@ -1,4 +1,4 @@
-근거: 미확인 | 원문: 1줄 | 의미론: 8줄 | 렌더링: 2줄 | 마커와 내용이 붙음
+근거: 미확인 | 원문: 1줄 | 의미론: 8줄 | IR: 28줄 | 렌더링: 2줄 | 마커와 내용이 붙음
  *붙은 내용
 Document@0..16
   List@0..16
@@ -8,5 +8,33 @@ Document@0..16
       Paragraph@2..15
         Text@2..15 "붙은 내용"
       Newline@15..16 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "list",
+      "kind": "unordered",
+      "items": [
+        {
+          "startNumber": null,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "붙은 내용"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <ul class="wiki-list"><li><div class="wiki-paragraph">붙은 내용</div>
 </li></ul>

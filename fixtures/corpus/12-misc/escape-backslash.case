@@ -1,7 +1,24 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 4줄 | 렌더링: 1줄 | 역슬래시 자체 무효화
+근거: 도움말예제 | 원문: 1줄 | 의미론: 4줄 | IR: 17줄 | 렌더링: 1줄 | 역슬래시 자체 무효화
 \\
 Document@0..3
   Paragraph@0..2
     Escaped@0..2 "\\\\"
   Newline@2..3 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "\\"
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph">\</div>

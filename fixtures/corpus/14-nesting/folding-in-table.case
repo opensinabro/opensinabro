@@ -1,4 +1,4 @@
-근거: 미확인 | 원문: 5줄 | 의미론: 39줄 | 렌더링: 5줄 | 표 셀 안의 접기
+근거: 미확인 | 원문: 5줄 | 의미론: 39줄 | IR: 102줄 | 렌더링: 5줄 | 표 셀 안의 접기
 ||<:>셀
 {{{#!folding 접기
 || 안쪽 || 표 ||
@@ -43,6 +43,108 @@ Document@0..60
         AlignmentSpace@56..57 " "
       Separator@57..59 "||"
   Newline@59..60 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "table",
+      "table": {
+        "caption": null,
+        "rows": [
+          {
+            "cells": [
+              {
+                "columnSpan": null,
+                "rowSpan": null,
+                "horizontalAlignment": "center",
+                "verticalAlignment": null,
+                "attributes": [],
+                "blocks": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "셀"
+                      },
+                      {
+                        "type": "lineBreak"
+                      },
+                      {
+                        "type": "folding",
+                        "summary": "접기",
+                        "blocks": [
+                          {
+                            "type": "table",
+                            "table": {
+                              "caption": null,
+                              "rows": [
+                                {
+                                  "cells": [
+                                    {
+                                      "columnSpan": null,
+                                      "rowSpan": null,
+                                      "horizontalAlignment": "center",
+                                      "verticalAlignment": null,
+                                      "attributes": [],
+                                      "blocks": [
+                                        {
+                                          "type": "paragraph",
+                                          "content": [
+                                            {
+                                              "type": "text",
+                                              "text": "안쪽"
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "columnSpan": null,
+                                      "rowSpan": null,
+                                      "horizontalAlignment": "center",
+                                      "verticalAlignment": null,
+                                      "attributes": [],
+                                      "blocks": [
+                                        {
+                                          "type": "paragraph",
+                                          "content": [
+                                            {
+                                              "type": "text",
+                                              "text": "표"
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "type": "lineBreak"
+                      },
+                      {
+                        "type": "text",
+                        "text": "끝"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-table-wrap"><table class="wiki-table"><tbody><tr class="wiki-table-tr"><td style="text-align: center;"><div class="wiki-paragraph">셀<br><details class="wiki-folding"><summary>접기</summary><div><div class="wiki-table-wrap"><table class="wiki-table"><tbody><tr class="wiki-table-tr"><td style="text-align: center;"><div class="wiki-paragraph">안쪽</div>
 </td><td style="text-align: center;"><div class="wiki-paragraph">표</div>
 </td></tr></tbody></table></div>

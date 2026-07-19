@@ -1,4 +1,4 @@
-근거: 미확인 | 원문: 3줄 | 의미론: 12줄 | 렌더링: 1줄 | 목록에 없는 언어
+근거: 미확인 | 원문: 3줄 | 의미론: 12줄 | IR: 18줄 | 렌더링: 1줄 | 목록에 없는 언어
 {{{#!syntax 우주어
 코드
 }}}
@@ -14,4 +14,22 @@ Document@0..33
       Newline@28..29 "\n"
       DelimiterClose@29..32 "}}}"
   Newline@32..33 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "codeBlock",
+          "language": "우주어",
+          "source": "코드"
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><pre><code class="hljs" data-language="우주어">코드</code></pre></div>

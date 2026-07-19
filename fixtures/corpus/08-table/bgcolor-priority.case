@@ -1,4 +1,4 @@
-근거: 도움말서술 | 원문: 1줄 | 의미론: 31줄 | 렌더링: 2줄 | 도움말: bgcolor > colbgcolor > rowbgcolor > tablebgcolor 우선순위
+근거: 도움말서술 | 원문: 1줄 | 의미론: 31줄 | IR: 76줄 | 렌더링: 2줄 | 도움말: bgcolor > colbgcolor > rowbgcolor > tablebgcolor 우선순위
 ||<tablebgcolor=#111111><rowbgcolor=#222222><colbgcolor=#333333><bgcolor=#444444> 우선순위 ||
 Document@0..98
   Table@0..97
@@ -31,5 +31,81 @@ Document@0..98
         AlignmentSpace@94..95 " "
       Separator@95..97 "||"
   Newline@97..98 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "table",
+      "table": {
+        "caption": null,
+        "rows": [
+          {
+            "cells": [
+              {
+                "columnSpan": null,
+                "rowSpan": null,
+                "horizontalAlignment": "center",
+                "verticalAlignment": null,
+                "attributes": [
+                  {
+                    "scope": {
+                      "type": "table"
+                    },
+                    "property": {
+                      "type": "backgroundColor",
+                      "color": "#111111"
+                    }
+                  },
+                  {
+                    "scope": {
+                      "type": "row"
+                    },
+                    "property": {
+                      "type": "backgroundColor",
+                      "color": "#222222"
+                    }
+                  },
+                  {
+                    "scope": {
+                      "type": "column",
+                      "columns": 1
+                    },
+                    "property": {
+                      "type": "backgroundColor",
+                      "color": "#333333"
+                    }
+                  },
+                  {
+                    "scope": {
+                      "type": "cell"
+                    },
+                    "property": {
+                      "type": "backgroundColor",
+                      "color": "#444444"
+                    }
+                  }
+                ],
+                "blocks": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "우선순위"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-table-wrap"><table class="wiki-table" style=" background-color: #111111;"><tbody><tr class="wiki-table-tr" style=" background-color: #222222;"><td style="text-align: center; background-color: #444444;"><div class="wiki-paragraph">우선순위</div>
 </td></tr></tbody></table></div>

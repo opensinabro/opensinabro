@@ -1,7 +1,24 @@
-근거: 미확인 | 원문: 1줄 | 의미론: 4줄 | 렌더링: 1줄 | 인자 괄호가 닫히지 않음
+근거: 미확인 | 원문: 1줄 | 의미론: 4줄 | IR: 17줄 | 렌더링: 1줄 | 인자 괄호가 닫히지 않음
 [age(2000-01-01
 Document@0..16
   Paragraph@0..15
     Text@0..15 "[age(2000-01-01"
   Newline@15..16 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "[age(2000-01-01"
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph">[age(2000-01-01</div>

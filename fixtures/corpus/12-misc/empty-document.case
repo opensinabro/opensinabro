@@ -1,2 +1,9 @@
-근거: 미확인 | 원문: 0줄 | 의미론: 1줄 | 렌더링: 0줄 | 빈 문서
+근거: 미확인 | 원문: 0줄 | 의미론: 1줄 | IR: 7줄 | 렌더링: 0줄 | 빈 문서
 Document@0..0
+{
+  "redirect": null,
+  "blocks": [],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}

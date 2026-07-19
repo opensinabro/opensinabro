@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 17줄 | 렌더링: 2줄 | 가로세로 동시 합치기
+근거: 도움말예제 | 원문: 1줄 | 의미론: 17줄 | IR: 38줄 | 렌더링: 2줄 | 가로세로 동시 합치기
 ||<-3><|2> 3 곱하기 2 ||
 Document@0..28
   Table@0..27
@@ -17,5 +17,43 @@ Document@0..28
         AlignmentSpace@24..25 " "
       Separator@25..27 "||"
   Newline@27..28 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "table",
+      "table": {
+        "caption": null,
+        "rows": [
+          {
+            "cells": [
+              {
+                "columnSpan": 3,
+                "rowSpan": 2,
+                "horizontalAlignment": "center",
+                "verticalAlignment": null,
+                "attributes": [],
+                "blocks": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "3 곱하기 2"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-table-wrap"><table class="wiki-table"><tbody><tr class="wiki-table-tr"><td colspan="3" rowspan="2" style="text-align: center;"><div class="wiki-paragraph">3 곱하기 2</div>
 </td></tr></tbody></table></div>

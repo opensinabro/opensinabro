@@ -1,4 +1,4 @@
-근거: 도움말서술 | 원문: 1줄 | 의미론: 12줄 | 렌더링: 1줄 | 가운데 정렬
+근거: 도움말서술 | 원문: 1줄 | 의미론: 12줄 | IR: 25줄 | 렌더링: 1줄 | 가운데 정렬
 [[파일:example.png|align=center]]
 Document@0..36
   Paragraph@0..35
@@ -12,4 +12,29 @@ Document@0..36
       ArgumentValue@27..33 "center"
       DelimiterClose@33..35 "]]"
   Newline@35..36 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "image",
+          "fileName": "example.png",
+          "url": "/file/example.png",
+          "layout": {
+            "width": null,
+            "height": null,
+            "align": "center",
+            "backgroundColor": null,
+            "theme": null
+          }
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><span class="wiki-image-align-center" style=""><span class="wiki-image-wrapper"><img src="/file/example.png" alt="파일:example.png"></span></span></div>

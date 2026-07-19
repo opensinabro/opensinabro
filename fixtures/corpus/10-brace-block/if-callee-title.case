@@ -1,4 +1,4 @@
-근거: 미확인 | 원문: 1줄 | 의미론: 10줄 | 렌더링: 1줄 | 인자가 없으면 호출자 문서명(calleeTitle)으로 떨어짐
+근거: 미확인 | 원문: 1줄 | 의미론: 10줄 | IR: 29줄 | 렌더링: 1줄 | 인자가 없으면 호출자 문서명(calleeTitle)으로 떨어짐
 [include(틀:상위 문서)]
 Document@0..29
   Paragraph@0..28
@@ -10,4 +10,33 @@ Document@0..29
       Separator@26..27 ")"
       DelimiterClose@27..28 "]"
   Newline@28..29 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "상위 문서: "
+        },
+        {
+          "type": "documentLink",
+          "title": "시험 문서/하위",
+          "anchor": null,
+          "kind": "current",
+          "display": [
+            {
+              "type": "text",
+              "text": "시험 문서/하위"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph">상위 문서: <a class="wiki-self-link" href="/w/%EC%8B%9C%ED%97%98%20%EB%AC%B8%EC%84%9C/%ED%95%98%EC%9C%84" title="시험 문서/하위">시험 문서/하위</a></div>

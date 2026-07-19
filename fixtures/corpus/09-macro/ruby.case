@@ -1,4 +1,4 @@
-근거: 도움말서술 | 원문: 1줄 | 의미론: 14줄 | 렌더링: 1줄 | 루비 문자
+근거: 도움말서술 | 원문: 1줄 | 의미론: 14줄 | IR: 19줄 | 렌더링: 1줄 | 루비 문자
 [ruby(글자,ruby=루비)]
 Document@0..27
   Paragraph@0..26
@@ -14,4 +14,23 @@ Document@0..27
       Separator@24..25 ")"
       DelimiterClose@25..26 "]"
   Newline@26..27 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "ruby",
+          "content": "글자",
+          "ruby": "루비",
+          "color": null
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><ruby>글자<rp>(</rp><rt>루비</rt><rp>)</rp></ruby></div>

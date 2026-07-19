@@ -1,4 +1,4 @@
-근거: 미확인 | 원문: 2줄 | 의미론: 33줄 | 렌더링: 2줄 | 이름 각주가 번호를 차지한 뒤의 무명 각주 번호
+근거: 미확인 | 원문: 2줄 | 의미론: 33줄 | IR: 110줄 | 렌더링: 2줄 | 이름 각주가 번호를 차지한 뒤의 무명 각주 번호
 [*A 가] [* 나] [*B 다] [* 라]
 [각주]
 Document@0..43
@@ -34,5 +34,115 @@ Document@0..43
       MacroName@35..41 "각주"
       DelimiterClose@41..42 "]"
   Newline@42..43 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "footnoteReference",
+          "label": "A",
+          "number": 1,
+          "tooltip": "가"
+        },
+        {
+          "type": "text",
+          "text": " "
+        },
+        {
+          "type": "footnoteReference",
+          "label": "2",
+          "number": 2,
+          "tooltip": "나"
+        },
+        {
+          "type": "text",
+          "text": " "
+        },
+        {
+          "type": "footnoteReference",
+          "label": "B",
+          "number": 3,
+          "tooltip": "다"
+        },
+        {
+          "type": "text",
+          "text": " "
+        },
+        {
+          "type": "footnoteReference",
+          "label": "4",
+          "number": 4,
+          "tooltip": "라"
+        },
+        {
+          "type": "lineBreak"
+        },
+        {
+          "type": "footnoteSection",
+          "notes": [
+            0,
+            1,
+            2,
+            3
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": [
+    {
+      "label": "A",
+      "referenceNumbers": [
+        1
+      ],
+      "content": [
+        {
+          "type": "text",
+          "text": "가"
+        }
+      ]
+    },
+    {
+      "label": "2",
+      "referenceNumbers": [
+        2
+      ],
+      "content": [
+        {
+          "type": "text",
+          "text": "나"
+        }
+      ]
+    },
+    {
+      "label": "B",
+      "referenceNumbers": [
+        3
+      ],
+      "content": [
+        {
+          "type": "text",
+          "text": "다"
+        }
+      ]
+    },
+    {
+      "label": "4",
+      "referenceNumbers": [
+        4
+      ],
+      "content": [
+        {
+          "type": "text",
+          "text": "라"
+        }
+      ]
+    }
+  ]
+}
 <div class="wiki-paragraph"><a class="wiki-fn-content" title="가" href="#fn-A"><span id="rfn-1"></span>[A]</a> <a class="wiki-fn-content" title="나" href="#fn-2"><span id="rfn-2"></span>[2]</a> <a class="wiki-fn-content" title="다" href="#fn-B"><span id="rfn-3"></span>[B]</a> <a class="wiki-fn-content" title="라" href="#fn-4"><span id="rfn-4"></span>[4]</a><br><div class="wiki-macro-footnote"><span class="footnote-list"><span id="fn-A"></span><a href="#rfn-1">[A]</a> 가</span><span class="footnote-list"><span id="fn-2"></span><a href="#rfn-2">[2]</a> 나</span><span class="footnote-list"><span id="fn-B"></span><a href="#rfn-3">[B]</a> 다</span><span class="footnote-list"><span id="fn-4"></span><a href="#rfn-4">[4]</a> 라</span></div>
 </div>

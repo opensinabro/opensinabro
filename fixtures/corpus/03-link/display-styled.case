@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 14줄 | 렌더링: 1줄 | 표시명에 색상 문법
+근거: 도움말예제 | 원문: 1줄 | 의미론: 14줄 | IR: 34줄 | 렌더링: 1줄 | 표시명에 색상 문법
 [[문서|{{{#ff85b1 문서}}}]]
 Document@0..32
   Paragraph@0..31
@@ -14,4 +14,38 @@ Document@0..32
         DelimiterClose@26..29 "}}}"
       DelimiterClose@29..31 "]]"
   Newline@31..32 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "documentLink",
+          "title": "문서",
+          "anchor": null,
+          "kind": "existing",
+          "display": [
+            {
+              "type": "colored",
+              "color": {
+                "light": "#ff85b1",
+                "dark": null
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "문서"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><a class="wiki-link-internal" href="/w/%EB%AC%B8%EC%84%9C" title="문서"><span style="color:#ff85b1" data-dark-style="color:#ff85b1;">문서</span></a></div>

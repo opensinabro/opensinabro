@@ -1,4 +1,4 @@
-근거: 미확인 | 원문: 1줄 | 의미론: 12줄 | 렌더링: 1줄 | 매크로처럼 보이는 평범한 대괄호 텍스트
+근거: 미확인 | 원문: 1줄 | 의미론: 12줄 | IR: 27줄 | 렌더링: 1줄 | 매크로처럼 보이는 평범한 대괄호 텍스트
 [V] [Chorus]
 Document@0..13
   Paragraph@0..12
@@ -12,4 +12,31 @@ Document@0..13
       MacroName@5..11 "Chorus"
       DelimiterClose@11..12 "]"
   Newline@12..13 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "unresolved",
+          "name": "V",
+          "argument": null
+        },
+        {
+          "type": "text",
+          "text": " "
+        },
+        {
+          "type": "unresolved",
+          "name": "Chorus",
+          "argument": null
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph">[V] [Chorus]</div>

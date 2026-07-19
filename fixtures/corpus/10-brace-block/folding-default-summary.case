@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 3줄 | 의미론: 10줄 | 렌더링: 1줄 | 도움말: 안내 문구가 없으면 More
+근거: 도움말예제 | 원문: 3줄 | 의미론: 10줄 | IR: 28줄 | 렌더링: 1줄 | 도움말: 안내 문구가 없으면 More
 {{{#!folding
 내용
 }}}
@@ -12,4 +12,32 @@ Document@0..24
         Text@13..19 "내용"
       DelimiterClose@19..23 "\n}}}"
   Newline@23..24 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "folding",
+          "summary": "",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "내용"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><details class="wiki-folding"><summary>More</summary><div>내용</div></details></div>

@@ -1,4 +1,4 @@
-근거: 미확인 | 원문: 2줄 | 의미론: 17줄 | 렌더링: 2줄 | 각주 안의 링크
+근거: 미확인 | 원문: 2줄 | 의미론: 17줄 | IR: 53줄 | 렌더링: 2줄 | 각주 안의 링크
 [* 각주 속 [[링크]]]
 [각주]
 Document@0..35
@@ -18,5 +18,58 @@ Document@0..35
       MacroName@27..33 "각주"
       DelimiterClose@33..34 "]"
   Newline@34..35 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "footnoteReference",
+          "label": "1",
+          "number": 1,
+          "tooltip": "각주 속 링크"
+        },
+        {
+          "type": "lineBreak"
+        },
+        {
+          "type": "footnoteSection",
+          "notes": [
+            0
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": [
+    {
+      "label": "1",
+      "referenceNumbers": [
+        1
+      ],
+      "content": [
+        {
+          "type": "text",
+          "text": "각주 속 "
+        },
+        {
+          "type": "documentLink",
+          "title": "링크",
+          "anchor": null,
+          "kind": "existing",
+          "display": [
+            {
+              "type": "text",
+              "text": "링크"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
 <div class="wiki-paragraph"><a class="wiki-fn-content" title="각주 속 링크" href="#fn-1"><span id="rfn-1"></span>[1]</a><br><div class="wiki-macro-footnote"><span class="footnote-list"><span id="fn-1"></span><a href="#rfn-1">[1]</a> 각주 속 <a class="wiki-link-internal" href="/w/%EB%A7%81%ED%81%AC" title="링크">링크</a></span></div>
 </div>

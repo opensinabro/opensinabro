@@ -1,4 +1,4 @@
-근거: 미확인 | 원문: 1줄 | 의미론: 15줄 | 렌더링: 2줄 | 표 안의 문단 문법
+근거: 미확인 | 원문: 1줄 | 의미론: 15줄 | IR: 53줄 | 렌더링: 2줄 | 표 안의 문단 문법
 || == 문단 == ||
 Document@0..19
   Table@0..18
@@ -15,5 +15,58 @@ Document@0..19
         AlignmentSpace@15..16 " "
       Separator@16..18 "||"
   Newline@18..19 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "table",
+      "table": {
+        "caption": null,
+        "rows": [
+          {
+            "cells": [
+              {
+                "columnSpan": null,
+                "rowSpan": null,
+                "horizontalAlignment": "center",
+                "verticalAlignment": null,
+                "attributes": [],
+                "blocks": [
+                  {
+                    "type": "heading",
+                    "level": 2,
+                    "folded": false,
+                    "number": "1",
+                    "anchor": "문단",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "문단"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [
+    {
+      "number": "1",
+      "depth": 1,
+      "title": [
+        {
+          "type": "text",
+          "text": "문단"
+        }
+      ]
+    }
+  ],
+  "footnotes": []
+}
 <div class="wiki-table-wrap"><table class="wiki-table"><tbody><tr class="wiki-table-tr"><td style="text-align: center;"><h2 class="wiki-heading"><a id="s-1" href="#toc">1.</a> <span id="문단">문단</span></h2>
 </td></tr></tbody></table></div>

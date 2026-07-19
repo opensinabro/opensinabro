@@ -1,4 +1,4 @@
-근거: 미확인 | 원문: 2줄 | 의미론: 13줄 | 렌더링: 1줄 | 조건이 참이면 내용이 보임
+근거: 미확인 | 원문: 2줄 | 의미론: 13줄 | IR: 17줄 | 렌더링: 1줄 | 조건이 참이면 내용이 보임
 {{{#!if 1
 보임}}}
 Document@0..20
@@ -14,4 +14,21 @@ Document@0..20
         Text@10..16 "보임"
       DelimiterClose@16..19 "}}}"
   Newline@19..20 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "보임"
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph">보임</div>

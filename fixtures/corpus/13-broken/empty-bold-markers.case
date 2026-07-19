@@ -1,7 +1,24 @@
-근거: 미확인 | 원문: 1줄 | 의미론: 4줄 | 렌더링: 1줄 | 내용 없는 굵게 마커
+근거: 미확인 | 원문: 1줄 | 의미론: 4줄 | IR: 17줄 | 렌더링: 1줄 | 내용 없는 굵게 마커
 ''''''
 Document@0..7
   Paragraph@0..6
     Text@0..6 "''''''"
   Newline@6..7 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "''''''"
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph">''''''</div>

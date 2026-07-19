@@ -1,4 +1,4 @@
-근거: 도움말서술 | 원문: 1줄 | 의미론: 17줄 | 렌더링: 1줄 | 매크로 이름 대소문자 무관
+근거: 도움말서술 | 원문: 1줄 | 의미론: 17줄 | IR: 33줄 | 렌더링: 1줄 | 매크로 이름 대소문자 무관
 [date] [Date] [DATE]
 Document@0..21
   Paragraph@0..20
@@ -17,4 +17,37 @@ Document@0..21
       MacroName@15..19 "DATE"
       DelimiterClose@19..20 "]"
   Newline@20..21 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "2026-07-17 12:00:00"
+        },
+        {
+          "type": "text",
+          "text": " "
+        },
+        {
+          "type": "text",
+          "text": "2026-07-17 12:00:00"
+        },
+        {
+          "type": "text",
+          "text": " "
+        },
+        {
+          "type": "text",
+          "text": "2026-07-17 12:00:00"
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph">2026-07-17 12:00:00 2026-07-17 12:00:00 2026-07-17 12:00:00</div>

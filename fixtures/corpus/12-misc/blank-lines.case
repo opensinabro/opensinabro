@@ -1,4 +1,4 @@
-근거: 미확인 | 원문: 3줄 | 의미론: 7줄 | 렌더링: 1줄 | 빈 줄은 문단 경계가 아니라 줄바꿈 둘
+근거: 미확인 | 원문: 3줄 | 의미론: 7줄 | IR: 27줄 | 렌더링: 1줄 | 빈 줄은 문단 경계가 아니라 줄바꿈 둘
 앞
 
 뒤
@@ -9,4 +9,31 @@ Document@0..9
     Newline@4..5 "\n"
     Text@5..8 "뒤"
   Newline@8..9 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "앞"
+        },
+        {
+          "type": "lineBreak"
+        },
+        {
+          "type": "lineBreak"
+        },
+        {
+          "type": "text",
+          "text": "뒤"
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph">앞<br><br>뒤</div>

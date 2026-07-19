@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 2줄 | 의미론: 13줄 | 렌더링: 2줄 | 무명 각주
+근거: 도움말예제 | 원문: 2줄 | 의미론: 13줄 | IR: 41줄 | 렌더링: 2줄 | 무명 각주
 [* 텍스트 1]
 [각주]
 Document@0..25
@@ -14,5 +14,46 @@ Document@0..25
       MacroName@17..23 "각주"
       DelimiterClose@23..24 "]"
   Newline@24..25 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "footnoteReference",
+          "label": "1",
+          "number": 1,
+          "tooltip": "텍스트 1"
+        },
+        {
+          "type": "lineBreak"
+        },
+        {
+          "type": "footnoteSection",
+          "notes": [
+            0
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": [
+    {
+      "label": "1",
+      "referenceNumbers": [
+        1
+      ],
+      "content": [
+        {
+          "type": "text",
+          "text": "텍스트 1"
+        }
+      ]
+    }
+  ]
+}
 <div class="wiki-paragraph"><a class="wiki-fn-content" title="텍스트 1" href="#fn-1"><span id="rfn-1"></span>[1]</a><br><div class="wiki-macro-footnote"><span class="footnote-list"><span id="fn-1"></span><a href="#rfn-1">[1]</a> 텍스트 1</span></div>
 </div>

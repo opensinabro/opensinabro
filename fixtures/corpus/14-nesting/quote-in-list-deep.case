@@ -1,4 +1,4 @@
-근거: 미확인 | 원문: 4줄 | 의미론: 39줄 | 렌더링: 12줄 | 리스트-인용 깊은 교차
+근거: 미확인 | 원문: 4줄 | 의미론: 39줄 | IR: 96줄 | 렌더링: 12줄 | 리스트-인용 깊은 교차
  * 하나
   > 인용
   * 둘
@@ -42,6 +42,102 @@ Document@0..42
                     IndentMarker@33..34 " "
                     Text@34..41 "인용2"
                   Newline@41..42 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "list",
+      "kind": "unordered",
+      "items": [
+        {
+          "startNumber": null,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "하나"
+                }
+              ]
+            },
+            {
+              "type": "indent",
+              "blocks": [
+                {
+                  "type": "quote",
+                  "blocks": [
+                    {
+                      "type": "indent",
+                      "blocks": [
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "인용"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "list",
+                  "kind": "unordered",
+                  "items": [
+                    {
+                      "startNumber": null,
+                      "blocks": [
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "둘"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "indent",
+                          "blocks": [
+                            {
+                              "type": "quote",
+                              "blocks": [
+                                {
+                                  "type": "indent",
+                                  "blocks": [
+                                    {
+                                      "type": "paragraph",
+                                      "content": [
+                                        {
+                                          "type": "text",
+                                          "text": "인용2"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <ul class="wiki-list"><li><div class="wiki-paragraph">하나</div>
 <div class="wiki-indent"><blockquote class="wiki-quote"><div class="wiki-indent"><div class="wiki-paragraph">인용</div>
 </div>

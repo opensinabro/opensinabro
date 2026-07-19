@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 5줄 | 의미론: 23줄 | 렌더링: 1줄 | 여백 제거 관용구 — #!wiki 안의 접기
+근거: 도움말예제 | 원문: 5줄 | 의미론: 23줄 | IR: 45줄 | 렌더링: 1줄 | 여백 제거 관용구 — #!wiki 안의 접기
 {{{#!wiki style="margin:0 -10px -5px"
 {{{#!folding [ 펼치기 · 접기 ]
 내용
@@ -27,4 +27,49 @@ Document@0..90
           DelimiterClose@81..85 "\n}}}"
       DelimiterClose@85..89 "\n}}}"
   Newline@89..90 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "wikiStyle",
+          "style": [
+            {
+              "property": "margin",
+              "value": "0 -10px -5px"
+            }
+          ],
+          "darkStyle": [],
+          "blocks": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "folding",
+                  "summary": "[ 펼치기 · 접기 ]",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "내용"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><div style="margin: 0 -10px -5px"><details class="wiki-folding"><summary>[ 펼치기 · 접기 ]</summary><div>내용</div></details></div></div>

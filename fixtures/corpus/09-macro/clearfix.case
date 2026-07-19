@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 7줄 | 렌더링: 1줄 | float 초기화
+근거: 도움말예제 | 원문: 1줄 | 의미론: 7줄 | IR: 16줄 | 렌더링: 1줄 | float 초기화
 [clearfix]
 Document@0..11
   Paragraph@0..10
@@ -7,4 +7,20 @@ Document@0..11
       MacroName@1..9 "clearfix"
       DelimiterClose@9..10 "]"
   Newline@10..11 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "clearFix"
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><div class="wiki-clearfix"></div></div>

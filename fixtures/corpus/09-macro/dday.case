@@ -1,4 +1,4 @@
-근거: 도움말서술 | 원문: 1줄 | 의미론: 10줄 | 렌더링: 1줄 | 디데이
+근거: 도움말서술 | 원문: 1줄 | 의미론: 10줄 | IR: 17줄 | 렌더링: 1줄 | 디데이
 [dday(2000-01-01)]
 Document@0..19
   Paragraph@0..18
@@ -10,4 +10,21 @@ Document@0..19
       Separator@16..17 ")"
       DelimiterClose@17..18 "]"
   Newline@18..19 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "D+9694"
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph">D+9694</div>

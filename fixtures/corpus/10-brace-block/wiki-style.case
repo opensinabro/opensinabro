@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 3줄 | 의미론: 14줄 | 렌더링: 1줄 | #!wiki style
+근거: 도움말예제 | 원문: 3줄 | 의미론: 14줄 | IR: 34줄 | 렌더링: 1줄 | #!wiki style
 {{{#!wiki style="text-align:center"
 가운데
 }}}
@@ -16,4 +16,38 @@ Document@0..50
         Text@36..45 "가운데"
       DelimiterClose@45..49 "\n}}}"
   Newline@49..50 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "wikiStyle",
+          "style": [
+            {
+              "property": "text-align",
+              "value": "center"
+            }
+          ],
+          "darkStyle": [],
+          "blocks": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "가운데"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><div style="text-align: center">가운데</div></div>

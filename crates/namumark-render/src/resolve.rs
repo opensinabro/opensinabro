@@ -2,7 +2,8 @@
 //!
 //! 외부 세계(WikiContext)를 보는 유일한 pass다. 매크로를 의미 노드로 특화하고,
 //! 링크 존재 여부를 해석하고, include를 확장하고, 분류를 수집한다.
-//! 블록 성격의 매크로([목차], [각주], [include])는 문단을 분할해 블록으로 승격한다.
+//! [include]는 블록을 내놓으므로 문단을 분할해 블록으로 승격한다 — [목차]와 [각주]는
+//! 나무위키에서도 문단 안에 놓이므로 인라인으로 남는다.
 
 use crate::condition;
 use crate::context::WikiContext;
@@ -11,9 +12,10 @@ use namumark_ast::{
     AstNode, Block, Conditional, Document, Fragment, HorizontalAlignment, Inline, Template,
 };
 use namumark_ir::{
-    Color, ColorValue, Dimension, DocumentLinkKind, ImageAlignment, ImageLayout, ImageTheme,
-    RenderBlock, RenderInline, RenderListItem, RenderTable, RenderTableAttribute, RenderTableCell,
-    RenderTableRow, StyleDeclaration, TableStyleProperty, TextStyle, VideoProvider,
+    Color, ColorValue, Dimension, DocumentLinkKind, HtmlNode, ImageAlignment, ImageLayout,
+    ImageTheme, RenderBlock, RenderInline, RenderListItem, RenderTable, RenderTableAttribute,
+    RenderTableCell, RenderTableRow, StyleDeclaration, TableStyleProperty, TextStyle,
+    VideoProvider,
 };
 use std::collections::HashMap;
 
@@ -136,7 +138,9 @@ impl Resolver<'_> {
                 }
                 Block::HorizontalRule => resolved.push(RenderBlock::HorizontalRule),
                 Block::Quote(quote) => {
-                    resolved.push(RenderBlock::Quote(self.resolve_blocks(&quote.blocks())));
+                    resolved.push(RenderBlock::Quote {
+                        blocks: self.resolve_blocks(&quote.blocks()),
+                    });
                 }
                 Block::List(list) => resolved.push(RenderBlock::List {
                     kind: list.kind(),
@@ -150,44 +154,48 @@ impl Resolver<'_> {
                         .collect(),
                 }),
                 Block::Indent(indent) => {
-                    resolved.push(RenderBlock::Indent(self.resolve_blocks(&indent.blocks())));
+                    resolved.push(RenderBlock::Indent {
+                        blocks: self.resolve_blocks(&indent.blocks()),
+                    });
                 }
-                Block::Table(table) => resolved.push(RenderBlock::Table(RenderTable {
-                    caption: table
-                        .caption()
-                        .as_ref()
-                        .map(|caption| self.resolve_inlines(caption)),
-                    rows: table
-                        .rows()
-                        .iter()
-                        .map(|row| RenderTableRow {
-                            cells: row
-                                .cells
-                                .iter()
-                                .map(|cell| RenderTableCell {
-                                    column_span: cell.column_span,
-                                    row_span: cell.row_span,
-                                    horizontal_alignment: cell.horizontal_alignment,
-                                    vertical_alignment: cell.vertical_alignment,
-                                    attributes: cell
-                                        .attributes
-                                        .iter()
-                                        .filter_map(|attribute| {
-                                            self.resolve_table_attribute(attribute)
-                                        })
-                                        .collect(),
-                                    blocks: {
-                                        let previous = self.in_cell;
-                                        self.in_cell = true;
-                                        let resolved = self.resolve_blocks(&cell.blocks);
-                                        self.in_cell = previous;
-                                        resolved
-                                    },
-                                })
-                                .collect(),
-                        })
-                        .collect(),
-                })),
+                Block::Table(table) => resolved.push(RenderBlock::Table {
+                    table: RenderTable {
+                        caption: table
+                            .caption()
+                            .as_ref()
+                            .map(|caption| self.resolve_inlines(caption)),
+                        rows: table
+                            .rows()
+                            .iter()
+                            .map(|row| RenderTableRow {
+                                cells: row
+                                    .cells
+                                    .iter()
+                                    .map(|cell| RenderTableCell {
+                                        column_span: cell.column_span,
+                                        row_span: cell.row_span,
+                                        horizontal_alignment: cell.horizontal_alignment,
+                                        vertical_alignment: cell.vertical_alignment,
+                                        attributes: cell
+                                            .attributes
+                                            .iter()
+                                            .filter_map(|attribute| {
+                                                self.resolve_table_attribute(attribute)
+                                            })
+                                            .collect(),
+                                        blocks: {
+                                            let previous = self.in_cell;
+                                            self.in_cell = true;
+                                            let resolved = self.resolve_blocks(&cell.blocks);
+                                            self.in_cell = previous;
+                                            resolved
+                                        },
+                                    })
+                                    .collect(),
+                            })
+                            .collect(),
+                    },
+                }),
                 Block::Comment(_) => {}
                 Block::Redirect(redirect) => {
                     if self.redirect.is_none() && self.include_instance.is_none() {
@@ -208,19 +216,23 @@ impl Resolver<'_> {
         resolved
     }
 
-    // 문단 안의 블록 성격 매크로([목차]·[각주]·[include])를 만나면 문단을 분할한다.
+    // 문단 안에서 [include]를 만나면 그 자리에서 문단을 분할한다 — 틀이 블록을 내놓기 때문이다.
     fn resolve_paragraph(&mut self, inlines: &[Inline]) -> Vec<RenderBlock> {
         // 원문에 있던 빈 문단은 화면에도 빈 문단으로 남는다(렌더확정: 리스트 항목의
         // 속내용 뒤 빈 줄이 the seed에서 `<div class='wiki-paragraph'></div>`가 된다).
         if inlines.is_empty() {
-            return vec![RenderBlock::Paragraph(Vec::new())];
+            return vec![RenderBlock::Paragraph {
+                content: Vec::new(),
+            }];
         }
         let mut blocks = Vec::new();
         let mut current: Vec<RenderInline> = Vec::new();
         // 문단 가장자리의 줄바꿈도 화면에 남는다 — 나무위키는 빈 줄을 그대로 보여준다.
         let flush = |current: &mut Vec<RenderInline>, blocks: &mut Vec<RenderBlock>| {
             if !current.is_empty() {
-                blocks.push(RenderBlock::Paragraph(std::mem::take(current)));
+                blocks.push(RenderBlock::Paragraph {
+                    content: std::mem::take(current),
+                });
             } else {
                 current.clear();
             }
@@ -256,7 +268,7 @@ impl Resolver<'_> {
                     // (렌더확정: the seed는 정보상자 셀에서 국기와 각주를 wrapper 없이 한 문단에
                     // 나란히 둔다), 줄이 분류·include뿐이면 제 문단을 이룬다.
                     if current.len() > line_start {
-                        current.push(RenderInline::Blocks(expanded));
+                        current.push(RenderInline::Blocks { blocks: expanded });
                     } else if !is_invisible_line(line) {
                         current.extend(flatten_render_blocks(expanded));
                     } else {
@@ -275,7 +287,9 @@ impl Resolver<'_> {
             // `<div class='wiki-paragraph'></div>`를 둔다). 앞에 보이는 내용이 있으면 그 br로
             // 붙으므로(current 비지 않음) 여기 걸리지 않는다.
             if line.is_empty() && promoted_include && current.is_empty() {
-                blocks.push(RenderBlock::Paragraph(Vec::new()));
+                blocks.push(RenderBlock::Paragraph {
+                    content: Vec::new(),
+                });
             }
             // 줄 사이 개행은 화면에 br로 남는다. 단 뒤가 전부 invisible(분류·include)이면
             // 그 앞 개행까지 사라진다 — 표 셀 안에서는 남는다(규칙 (3)·셀 문맥).
@@ -387,9 +401,9 @@ impl Resolver<'_> {
                     inlines.extend(self.resolve_inlines(&paragraph.inlines()));
                 }
                 // 표·리스트는 인라인으로 펼 수 없다. 감싸는 요소 없이 담아 둔다.
-                other => inlines.push(RenderInline::Blocks(
-                    self.resolve_blocks(std::slice::from_ref(other)),
-                )),
+                other => inlines.push(RenderInline::Blocks {
+                    blocks: self.resolve_blocks(std::slice::from_ref(other)),
+                }),
             }
         }
         inlines
@@ -397,7 +411,7 @@ impl Resolver<'_> {
 
     fn resolve_inline(&mut self, inline: &Inline) -> Option<RenderInline> {
         Some(match inline {
-            Inline::Text(text) => RenderInline::Text(text.clone()),
+            Inline::Text(text) => RenderInline::Text { text: text.clone() },
             Inline::LineBreak => RenderInline::LineBreak,
             Inline::Bold(bold) => self.resolve_styled(TextStyle::Bold, &bold.content()),
             Inline::Italic(italic) => self.resolve_styled(TextStyle::Italic, &italic.content()),
@@ -413,7 +427,7 @@ impl Resolver<'_> {
             Inline::Subscript(subscript) => {
                 self.resolve_styled(TextStyle::Subscript, &subscript.content())
             }
-            Inline::Literal(text) => RenderInline::Literal(text.clone()),
+            Inline::Literal(text) => RenderInline::Literal { text: text.clone() },
             // 문법이 색상 그룹으로 인정한 표기라 색 판정은 이미 끝나 있다.
             Inline::Colored(colored) => RenderInline::Colored {
                 color: Color {
@@ -449,7 +463,9 @@ impl Resolver<'_> {
                         // 표시부가 없으면 적힌 그대로가 글자다 — 해석한 문서명이 아니다
                         // (렌더확정: `[[/심화]]` → `/심화`, `[[#개요]]` → `#개요`).
                         display: display.unwrap_or_else(|| {
-                            vec![RenderInline::Text(written_link(&written, &anchor))]
+                            vec![RenderInline::Text {
+                                text: written_link(&written, &anchor),
+                            }]
                         }),
                         title,
                         anchor,
@@ -512,15 +528,19 @@ impl Resolver<'_> {
                 language: code_block.language.clone(),
                 source: code_block.source.clone(),
             },
-            Inline::Html(html) => RenderInline::Html(self.fill(html)),
+            // 틀 인자가 `#!html` 안으로 흘러들 수 있으므로, 값을 채운 **뒤에** 걸러 낸다.
+            Inline::Html(html) => RenderInline::Html {
+                nodes: HtmlNode::parse(&self.fill(html)),
+            },
             // 텍스트 문맥의 `@이름@`. 값이 없으면 아무것도 남기지 않는다.
-            Inline::Variable(variable) => RenderInline::Text(
-                self.scope
+            Inline::Variable(variable) => RenderInline::Text {
+                text: self
+                    .scope
                     .get(&variable.name)
                     .cloned()
                     .or_else(|| variable.default.clone())
                     .unwrap_or_default(),
-            ),
+            },
             Inline::Category(category) => {
                 let name = category.name();
                 if !self.categories.contains(&name) {
@@ -572,9 +592,7 @@ impl Resolver<'_> {
             argument: argument.map(str::to_string),
         };
         match name.to_ascii_lowercase().as_str() {
-            "목차" | "tableofcontents" => RenderInline::TableOfContents {
-                entries: Vec::new(),
-            },
+            "목차" | "tableofcontents" => RenderInline::TableOfContents,
             "각주" | "footnote" => RenderInline::FootnoteSection { notes: Vec::new() },
             "br" => RenderInline::LineBreak,
             "clearfix" => RenderInline::ClearFix,
@@ -599,7 +617,9 @@ impl Resolver<'_> {
             // now()가 없어 원문 표기로 남는 것은 렌더 결정성 정책이지 저자 잘못이
             // 아니다 — 아래 date·age·dday는 인자 자체가 잘못일 때만 진단한다.
             "date" | "datetime" => match self.context.now() {
-                Some(now) => RenderInline::Text(now.to_string()),
+                Some(now) => RenderInline::Text {
+                    text: now.to_string(),
+                },
                 None => unresolved(),
             },
             "age" => {
@@ -614,7 +634,9 @@ impl Resolver<'_> {
                         if (today.month, today.day) < (birth.month, birth.day) {
                             age -= 1;
                         }
-                        RenderInline::Text(age.to_string())
+                        RenderInline::Text {
+                            text: age.to_string(),
+                        }
                     }
                     _ => unresolved(),
                 }
@@ -632,7 +654,7 @@ impl Resolver<'_> {
                             positive if positive > 0 => format!("D+{positive}"),
                             negative => format!("D{negative}"),
                         };
-                        RenderInline::Text(text)
+                        RenderInline::Text { text }
                     }
                     _ => unresolved(),
                 }
@@ -706,10 +728,12 @@ impl Resolver<'_> {
 
     fn expand_include(&mut self, argument: Option<&str>, range: TextRange) -> Vec<RenderBlock> {
         let unresolved = |argument: Option<&str>| {
-            vec![RenderBlock::Paragraph(vec![RenderInline::Unresolved {
-                name: "include".to_string(),
-                argument: argument.map(str::to_string),
-            }])]
+            vec![RenderBlock::Paragraph {
+                content: vec![RenderInline::Unresolved {
+                    name: "include".to_string(),
+                    argument: argument.map(str::to_string),
+                }],
+            }]
         };
         // 나무위키는 틀 속의 틀(중첩 include)을 확장하지 않는다. 원문을 노출하지도 않고
         // 조용히 버린다 — 틀 문서 끝의 `[include(틀:X/설명 문서)]`가 그 틀을 쓴 문서에
@@ -774,27 +798,41 @@ fn table_style_property(name: &str, value: Option<&str>) -> Option<TableStylePro
         ColorValue::parse(value.split(',').next().unwrap_or(value))
     };
     match name {
-        "bgcolor" => Some(TableStyleProperty::BackgroundColor(color(value)?)),
-        "color" => Some(TableStyleProperty::Color(color(value)?)),
-        "bordercolor" => Some(TableStyleProperty::BorderColor(color(value)?)),
-        "width" => Some(TableStyleProperty::Width(Dimension::parse(value?))),
-        "height" => Some(TableStyleProperty::Height(Dimension::parse(value?))),
+        "bgcolor" => Some(TableStyleProperty::BackgroundColor {
+            color: color(value)?,
+        }),
+        "color" => Some(TableStyleProperty::Color {
+            color: color(value)?,
+        }),
+        "bordercolor" => Some(TableStyleProperty::BorderColor {
+            color: color(value)?,
+        }),
+        "width" => Some(TableStyleProperty::Width {
+            width: Dimension::parse(value?),
+        }),
+        "height" => Some(TableStyleProperty::Height {
+            height: Dimension::parse(value?),
+        }),
         // 나무위키는 left·center·right만 받는다. 그 외 값은 색처럼 선언을 통째로 버린다.
-        "textalign" => Some(TableStyleProperty::TextAlign(match value? {
-            "left" => HorizontalAlignment::Left,
-            "center" => HorizontalAlignment::Center,
-            "right" => HorizontalAlignment::Right,
-            _ => return None,
-        })),
+        "textalign" => Some(TableStyleProperty::TextAlign {
+            alignment: match value? {
+                "left" => HorizontalAlignment::Left,
+                "center" => HorizontalAlignment::Center,
+                "right" => HorizontalAlignment::Right,
+                _ => return None,
+            },
+        }),
         // 명시한 left·center·right는 각각 정렬 클래스를 만든다(렌더확정: `<tablealign=left>`가
         // the seed에서 `table-left`다). 인식 못한 값은 색처럼 선언을 통째로 버린다 — 정렬을
         // 아예 지정하지 않은 기본과 같아진다.
-        "align" => Some(TableStyleProperty::Align(match value? {
-            "left" => HorizontalAlignment::Left,
-            "center" => HorizontalAlignment::Center,
-            "right" => HorizontalAlignment::Right,
-            _ => return None,
-        })),
+        "align" => Some(TableStyleProperty::Align {
+            alignment: match value? {
+                "left" => HorizontalAlignment::Left,
+                "center" => HorizontalAlignment::Center,
+                "right" => HorizontalAlignment::Right,
+                _ => return None,
+            },
+        }),
         "nopad" => Some(TableStyleProperty::NoPadding),
         _ => None,
     }
@@ -853,13 +891,15 @@ fn flatten_render_blocks(blocks: Vec<RenderBlock>) -> Vec<RenderInline> {
     let mut inlines = Vec::new();
     for block in blocks {
         match block {
-            RenderBlock::Paragraph(content) => {
+            RenderBlock::Paragraph { content } => {
                 if !inlines.is_empty() {
                     inlines.push(RenderInline::LineBreak);
                 }
                 inlines.extend(content);
             }
-            other => inlines.push(RenderInline::Blocks(vec![other])),
+            other => inlines.push(RenderInline::Blocks {
+                blocks: vec![other],
+            }),
         }
     }
     inlines

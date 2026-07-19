@@ -1,4 +1,4 @@
-근거: 미확인 | 원문: 3줄 | 의미론: 18줄 | 렌더링: 3줄 | 접기 안의 리스트
+근거: 미확인 | 원문: 3줄 | 의미론: 18줄 | IR: 39줄 | 렌더링: 3줄 | 접기 안의 리스트
 {{{#!folding 요약
  * 접힌 리스트
 }}}
@@ -20,6 +20,45 @@ Document@0..44
             Text@23..39 "접힌 리스트"
       DelimiterClose@39..43 "\n}}}"
   Newline@43..44 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "folding",
+          "summary": "요약",
+          "blocks": [
+            {
+              "type": "list",
+              "kind": "unordered",
+              "items": [
+                {
+                  "startNumber": null,
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "접힌 리스트"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><details class="wiki-folding"><summary>요약</summary><div><ul class="wiki-list"><li><div class="wiki-paragraph">접힌 리스트</div>
 </li></ul>
 </div></details></div>

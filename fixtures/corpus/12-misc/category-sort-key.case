@@ -1,4 +1,4 @@
-근거: 도움말서술 | 원문: 1줄 | 의미론: 10줄 | 렌더링: 1줄 | 도움말: 색인 정렬키. 우리는 폐기함
+근거: 도움말서술 | 원문: 1줄 | 의미론: 10줄 | IR: 9줄 | 렌더링: 1줄 | 도움말: 색인 정렬키. 우리는 폐기함
 [[분류:알파위키|정렬키]]
 Document@0..34
   Paragraph@0..33
@@ -10,4 +10,13 @@ Document@0..34
       Text@22..31 "정렬키"
       DelimiterClose@31..33 "]]"
   Newline@33..34 "\n"
+{
+  "redirect": null,
+  "blocks": [],
+  "categories": [
+    "알파위키"
+  ],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-categories">분류: <a href="/w/%EB%B6%84%EB%A5%98%3A%EC%95%8C%ED%8C%8C%EC%9C%84%ED%82%A4">알파위키</a></div>

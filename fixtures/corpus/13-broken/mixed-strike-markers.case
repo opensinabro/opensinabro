@@ -1,7 +1,24 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 4줄 | 렌더링: 1줄 | 도움말: ~~취소선-- 혼용은 위키 시스템 상 불가능
+근거: 도움말예제 | 원문: 1줄 | 의미론: 4줄 | IR: 17줄 | 렌더링: 1줄 | 도움말: ~~취소선-- 혼용은 위키 시스템 상 불가능
 ~~취소선--
 Document@0..14
   Paragraph@0..13
     Text@0..13 "~~취소선--"
   Newline@13..14 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "~~취소선--"
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph">~~취소선--</div>

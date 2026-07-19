@@ -1,4 +1,4 @@
-근거: 미확인 | 원문: 1줄 | 의미론: 14줄 | 렌더링: 2줄 | <-1>도 colspan=1로 방출
+근거: 미확인 | 원문: 1줄 | 의미론: 14줄 | IR: 38줄 | 렌더링: 2줄 | <-1>도 colspan=1로 방출
 ||<-1> 한칸 ||
 Document@0..17
   Table@0..16
@@ -14,5 +14,43 @@ Document@0..17
         AlignmentSpace@13..14 " "
       Separator@14..16 "||"
   Newline@16..17 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "table",
+      "table": {
+        "caption": null,
+        "rows": [
+          {
+            "cells": [
+              {
+                "columnSpan": 1,
+                "rowSpan": null,
+                "horizontalAlignment": "center",
+                "verticalAlignment": null,
+                "attributes": [],
+                "blocks": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "한칸"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-table-wrap"><table class="wiki-table"><tbody><tr class="wiki-table-tr"><td colspan="1" style="text-align: center;"><div class="wiki-paragraph">한칸</div>
 </td></tr></tbody></table></div>

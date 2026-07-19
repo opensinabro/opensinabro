@@ -1,4 +1,4 @@
-근거: 도움말서술 | 원문: 2줄 | 의미론: 21줄 | 렌더링: 2줄 | 도움말: 이름이 같으면 맨 위 각주의 내용으로 통일
+근거: 도움말서술 | 원문: 2줄 | 의미론: 21줄 | IR: 52줄 | 렌더링: 2줄 | 도움말: 이름이 같으면 맨 위 각주의 내용으로 통일
 [*A 첫째] [*A 둘째]
 [각주]
 Document@0..33
@@ -22,5 +22,57 @@ Document@0..33
       MacroName@25..31 "각주"
       DelimiterClose@31..32 "]"
   Newline@32..33 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "footnoteReference",
+          "label": "A",
+          "number": 1,
+          "tooltip": "첫째"
+        },
+        {
+          "type": "text",
+          "text": " "
+        },
+        {
+          "type": "footnoteReference",
+          "label": "A",
+          "number": 2,
+          "tooltip": "첫째"
+        },
+        {
+          "type": "lineBreak"
+        },
+        {
+          "type": "footnoteSection",
+          "notes": [
+            0
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": [
+    {
+      "label": "A",
+      "referenceNumbers": [
+        1,
+        2
+      ],
+      "content": [
+        {
+          "type": "text",
+          "text": "첫째"
+        }
+      ]
+    }
+  ]
+}
 <div class="wiki-paragraph"><a class="wiki-fn-content" title="첫째" href="#fn-A"><span id="rfn-1"></span>[A]</a> <a class="wiki-fn-content" title="첫째" href="#fn-A"><span id="rfn-2"></span>[A]</a><br><div class="wiki-macro-footnote"><span class="footnote-list"><span id="fn-A"></span>[A] <a href="#rfn-1"><sup>1.1</sup></a> <a href="#rfn-2"><sup>1.2</sup></a> 첫째</span></div>
 </div>

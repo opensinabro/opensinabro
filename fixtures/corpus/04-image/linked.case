@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 13줄 | 렌더링: 1줄 | 이미지에 링크 걸기
+근거: 도움말예제 | 원문: 1줄 | 의미론: 13줄 | IR: 33줄 | 렌더링: 1줄 | 이미지에 링크 걸기
 [[알파위키|[[파일:알파위키 로고.svg]]]]
 Document@0..52
   Paragraph@0..51
@@ -13,4 +13,37 @@ Document@0..52
         DelimiterClose@47..49 "]]"
       DelimiterClose@49..51 "]]"
   Newline@51..52 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "documentLink",
+          "title": "알파위키",
+          "anchor": null,
+          "kind": "existing",
+          "display": [
+            {
+              "type": "image",
+              "fileName": "알파위키 로고.svg",
+              "url": "/file/알파위키 로고.svg",
+              "layout": {
+                "width": null,
+                "height": null,
+                "align": null,
+                "backgroundColor": null,
+                "theme": null
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><a class="wiki-link-internal" href="/w/%EC%95%8C%ED%8C%8C%EC%9C%84%ED%82%A4" title="알파위키"><span class="wiki-image-align-normal" style=""><span class="wiki-image-wrapper"><img src="/file/알파위키 로고.svg" alt="파일:알파위키 로고.svg"></span></span></a></div>

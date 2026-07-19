@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 7줄 | 렌더링: 1줄 | 콜론 접두사로 분류를 링크화
+근거: 도움말예제 | 원문: 1줄 | 의미론: 7줄 | IR: 25줄 | 렌더링: 1줄 | 콜론 접두사로 분류를 링크화
 [[:분류:분류]]
 Document@0..19
   Paragraph@0..18
@@ -7,4 +7,29 @@ Document@0..19
       LinkTarget@2..16 ":분류:분류"
       DelimiterClose@16..18 "]]"
   Newline@18..19 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "documentLink",
+          "title": "분류:분류",
+          "anchor": null,
+          "kind": "missing",
+          "display": [
+            {
+              "type": "text",
+              "text": "분류:분류"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><a class="wiki-link-internal not-exist" href="/w/%EB%B6%84%EB%A5%98:%EB%B6%84%EB%A5%98" rel="nofollow" title="분류:분류">분류:분류</a></div>

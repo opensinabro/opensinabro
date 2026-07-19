@@ -1,4 +1,4 @@
-근거: 도움말서술 | 원문: 1줄 | 의미론: 14줄 | 렌더링: 2줄 | 세로 아래 정렬
+근거: 도움말서술 | 원문: 1줄 | 의미론: 14줄 | IR: 38줄 | 렌더링: 2줄 | 세로 아래 정렬
 ||<v|1> 아래 ||
 Document@0..18
   Table@0..17
@@ -14,5 +14,43 @@ Document@0..18
         AlignmentSpace@14..15 " "
       Separator@15..17 "||"
   Newline@17..18 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "table",
+      "table": {
+        "caption": null,
+        "rows": [
+          {
+            "cells": [
+              {
+                "columnSpan": null,
+                "rowSpan": 1,
+                "horizontalAlignment": "center",
+                "verticalAlignment": "bottom",
+                "attributes": [],
+                "blocks": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "아래"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-table-wrap"><table class="wiki-table"><tbody><tr class="wiki-table-tr"><td rowspan="1" style="text-align: center; vertical-align: bottom;"><div class="wiki-paragraph">아래</div>
 </td></tr></tbody></table></div>

@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 14줄 | 렌더링: 1줄 | 크기 중첩 시 누적
+근거: 도움말예제 | 원문: 1줄 | 의미론: 14줄 | IR: 29줄 | 렌더링: 1줄 | 크기 중첩 시 누적
 {{{+5 {{{+5 +10단계}}}}}}
 Document@0..28
   Paragraph@0..27
@@ -14,4 +14,33 @@ Document@0..28
         DelimiterClose@21..24 "}}}"
       DelimiterClose@24..27 "}}}"
   Newline@27..28 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "sized",
+          "level": 5,
+          "content": [
+            {
+              "type": "sized",
+              "level": 5,
+              "content": [
+                {
+                  "type": "text",
+                  "text": "+10단계"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><span class="wiki-size-up-5"><span class="wiki-size-up-5">+10단계</span></span></div>

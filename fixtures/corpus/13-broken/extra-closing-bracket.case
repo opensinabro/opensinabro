@@ -1,7 +1,24 @@
-근거: 미확인 | 원문: 1줄 | 의미론: 4줄 | 렌더링: 1줄 | 짝 없는 닫는 대괄호
+근거: 미확인 | 원문: 1줄 | 의미론: 4줄 | IR: 17줄 | 렌더링: 1줄 | 짝 없는 닫는 대괄호
 본문 ]]
 Document@0..10
   Paragraph@0..9
     Text@0..9 "본문 ]]"
   Newline@9..10 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "본문 ]]"
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph">본문 ]]</div>

@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 10줄 | 렌더링: 1줄 | 유튜브
+근거: 도움말예제 | 원문: 1줄 | 의미론: 10줄 | IR: 20줄 | 렌더링: 1줄 | 유튜브
 [youtube(jNQXAC9IVRw)]
 Document@0..23
   Paragraph@0..22
@@ -10,4 +10,24 @@ Document@0..23
       Separator@20..21 ")"
       DelimiterClose@21..22 "]"
   Newline@22..23 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "video",
+          "provider": "youtube",
+          "identifier": "jNQXAC9IVRw",
+          "width": null,
+          "height": null
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><iframe class="wiki-media" src="//www.youtube.com/embed/jNQXAC9IVRw" width="640" height="360" frameborder="0" allowfullscreen loading="lazy"></iframe></div>

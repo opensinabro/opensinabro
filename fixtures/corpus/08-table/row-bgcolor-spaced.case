@@ -1,4 +1,4 @@
-근거: 도움말서술 | 원문: 1줄 | 의미론: 16줄 | 렌더링: 2줄 | 도움말: <row bgcolor=>는 미지원. 우리는 받아들임(더 관대)
+근거: 도움말서술 | 원문: 1줄 | 의미론: 16줄 | IR: 48줄 | 렌더링: 2줄 | 도움말: <row bgcolor=>는 미지원. 우리는 받아들임(더 관대)
 ||<row bgcolor=#ff0000> 행 ||
 Document@0..31
   Table@0..30
@@ -16,5 +16,53 @@ Document@0..31
         AlignmentSpace@27..28 " "
       Separator@28..30 "||"
   Newline@30..31 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "table",
+      "table": {
+        "caption": null,
+        "rows": [
+          {
+            "cells": [
+              {
+                "columnSpan": null,
+                "rowSpan": null,
+                "horizontalAlignment": "center",
+                "verticalAlignment": null,
+                "attributes": [
+                  {
+                    "scope": {
+                      "type": "row"
+                    },
+                    "property": {
+                      "type": "backgroundColor",
+                      "color": "#ff0000"
+                    }
+                  }
+                ],
+                "blocks": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "행"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-table-wrap"><table class="wiki-table"><tbody><tr class="wiki-table-tr" style=" background-color: #ff0000;"><td style="text-align: center;"><div class="wiki-paragraph">행</div>
 </td></tr></tbody></table></div>

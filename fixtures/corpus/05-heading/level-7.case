@@ -1,7 +1,24 @@
-근거: 미확인 | 원문: 1줄 | 의미론: 4줄 | 렌더링: 1줄 | 7단계 — 존재하지 않는 단계
+근거: 미확인 | 원문: 1줄 | 의미론: 4줄 | IR: 17줄 | 렌더링: 1줄 | 7단계 — 존재하지 않는 단계
 ======= 문단 7 =======
 Document@0..25
   Paragraph@0..24
     Text@0..24 "======= 문단 7 ======="
   Newline@24..25 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "======= 문단 7 ======="
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph">======= 문단 7 =======</div>

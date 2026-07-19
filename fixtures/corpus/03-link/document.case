@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 7줄 | 렌더링: 1줄 | 문서 링크
+근거: 도움말예제 | 원문: 1줄 | 의미론: 7줄 | IR: 25줄 | 렌더링: 1줄 | 문서 링크
 [[문서]]
 Document@0..11
   Paragraph@0..10
@@ -7,4 +7,29 @@ Document@0..11
       LinkTarget@2..8 "문서"
       DelimiterClose@8..10 "]]"
   Newline@10..11 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "documentLink",
+          "title": "문서",
+          "anchor": null,
+          "kind": "existing",
+          "display": [
+            {
+              "type": "text",
+              "text": "문서"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><a class="wiki-link-internal" href="/w/%EB%AC%B8%EC%84%9C" title="문서">문서</a></div>

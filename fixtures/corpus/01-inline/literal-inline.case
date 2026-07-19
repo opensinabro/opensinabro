@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 7줄 | 렌더링: 1줄 | 한 줄 리터럴 — 안쪽 문법 미적용
+근거: 도움말예제 | 원문: 1줄 | 의미론: 7줄 | IR: 17줄 | 렌더링: 1줄 | 한 줄 리터럴 — 안쪽 문법 미적용
 {{{[[리터럴]]}}}
 Document@0..20
   Paragraph@0..19
@@ -7,4 +7,21 @@ Document@0..20
       Text@3..16 "[[리터럴]]"
       DelimiterClose@16..19 "}}}"
   Newline@19..20 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "literal",
+          "text": "[[리터럴]]"
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><code>[[리터럴]]</code></div>

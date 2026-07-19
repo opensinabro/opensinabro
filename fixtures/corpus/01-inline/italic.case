@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 7줄 | 렌더링: 1줄 | 기울임
+근거: 도움말예제 | 원문: 1줄 | 의미론: 7줄 | IR: 23줄 | 렌더링: 1줄 | 기울임
 ''기울임''
 Document@0..14
   Paragraph@0..13
@@ -7,4 +7,27 @@ Document@0..14
       Text@2..11 "기울임"
       DelimiterClose@11..13 "''"
   Newline@13..14 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "styled",
+          "style": "italic",
+          "content": [
+            {
+              "type": "text",
+              "text": "기울임"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><em>기울임</em></div>

@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 18줄 | 렌더링: 1줄 | 도움말: color는 윗첨자에만 적용
+근거: 도움말예제 | 원문: 1줄 | 의미론: 18줄 | IR: 19줄 | 렌더링: 1줄 | 도움말: color는 윗첨자에만 적용
 [ruby(글자,ruby=루비,color=red)]
 Document@0..37
   Paragraph@0..36
@@ -18,4 +18,23 @@ Document@0..37
       Separator@34..35 ")"
       DelimiterClose@35..36 "]"
   Newline@36..37 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "ruby",
+          "content": "글자",
+          "ruby": "루비",
+          "color": "red"
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><ruby>글자<rp>(</rp><rt><span style="color:red">루비</span></rt><rp>)</rp></ruby></div>

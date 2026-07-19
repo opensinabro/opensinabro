@@ -1,4 +1,4 @@
-근거: 도움말서술 | 원문: 2줄 | 의미론: 12줄 | 렌더링: 4줄 | 도움말: 단계가 다르면 서로 다른 문단
+근거: 도움말서술 | 원문: 2줄 | 의미론: 12줄 | IR: 36줄 | 렌더링: 4줄 | 도움말: 단계가 다르면 서로 다른 문단
  한 단계
   두 단계
 Document@0..25
@@ -13,6 +13,42 @@ Document@0..25
         IndentMarker@13..14 " "
         Text@14..24 "두 단계"
       Newline@24..25 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "indent",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "한 단계"
+            }
+          ]
+        },
+        {
+          "type": "indent",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "두 단계"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-indent"><div class="wiki-paragraph">한 단계</div>
 <div class="wiki-indent"><div class="wiki-paragraph">두 단계</div>
 </div>

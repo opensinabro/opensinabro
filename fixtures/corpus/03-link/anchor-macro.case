@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 10줄 | 렌더링: 1줄 | 앵커 삽입
+근거: 도움말예제 | 원문: 1줄 | 의미론: 10줄 | IR: 17줄 | 렌더링: 1줄 | 앵커 삽입
 [anchor(아무개)]
 Document@0..20
   Paragraph@0..19
@@ -10,4 +10,21 @@ Document@0..20
       Separator@17..18 ")"
       DelimiterClose@18..19 "]"
   Newline@19..20 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "anchor",
+          "name": "아무개"
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><a id="아무개"></a></div>

@@ -1,4 +1,4 @@
-근거: 도움말서술 | 원문: 1줄 | 의미론: 16줄 | 렌더링: 1줄 | 너비+높이 동시 지정
+근거: 도움말서술 | 원문: 1줄 | 의미론: 16줄 | IR: 25줄 | 렌더링: 1줄 | 너비+높이 동시 지정
 [[파일:example.png|width=100&height=50]]
 Document@0..43
   Paragraph@0..42
@@ -16,4 +16,29 @@ Document@0..43
       ArgumentValue@38..40 "50"
       DelimiterClose@40..42 "]]"
   Newline@42..43 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "image",
+          "fileName": "example.png",
+          "url": "/file/example.png",
+          "layout": {
+            "width": "100px",
+            "height": "50px",
+            "align": null,
+            "backgroundColor": null,
+            "theme": null
+          }
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><span class="wiki-image-align-normal" style="width: 100px;height: 50px;"><span class="wiki-image-wrapper" style="height: 100%; width: 100%;"><img height="100%" width="100%" src="/file/example.png" alt="파일:example.png"></span></span></div>

@@ -1,4 +1,4 @@
-근거: 미확인 | 원문: 1줄 | 의미론: 12줄 | 렌더링: 1줄 | 기울임 안의 굵게
+근거: 미확인 | 원문: 1줄 | 의미론: 12줄 | IR: 37줄 | 렌더링: 1줄 | 기울임 안의 굵게
 ''기울임 '''굵게''' 기울임''
 Document@0..37
   Paragraph@0..36
@@ -12,4 +12,41 @@ Document@0..37
       Text@23..34 "' 기울임"
       DelimiterClose@34..36 "''"
   Newline@36..37 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "styled",
+          "style": "italic",
+          "content": [
+            {
+              "type": "text",
+              "text": "기울임 "
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "text": "'굵게"
+        },
+        {
+          "type": "styled",
+          "style": "italic",
+          "content": [
+            {
+              "type": "text",
+              "text": "' 기울임"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><em>기울임 </em>'굵게<em>' 기울임</em></div>

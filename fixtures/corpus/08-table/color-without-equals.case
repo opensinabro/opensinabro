@@ -1,4 +1,4 @@
-근거: 도움말서술 | 원문: 1줄 | 의미론: 10줄 | 렌더링: 2줄 | 도움말: <color#RRGGBB> 지원. 우리는 옵션 파싱 중단
+근거: 도움말서술 | 원문: 1줄 | 의미론: 10줄 | IR: 38줄 | 렌더링: 2줄 | 도움말: <color#RRGGBB> 지원. 우리는 옵션 파싱 중단
 ||<color#ff0000> 글자 ||
 Document@0..27
   Table@0..26
@@ -10,5 +10,43 @@ Document@0..27
         AlignmentSpace@23..24 " "
       Separator@24..26 "||"
   Newline@26..27 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "table",
+      "table": {
+        "caption": null,
+        "rows": [
+          {
+            "cells": [
+              {
+                "columnSpan": null,
+                "rowSpan": null,
+                "horizontalAlignment": "left",
+                "verticalAlignment": null,
+                "attributes": [],
+                "blocks": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "<color#ff0000> 글자"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-table-wrap"><table class="wiki-table"><tbody><tr class="wiki-table-tr"><td style="text-align: left;"><div class="wiki-paragraph">&lt;color#ff0000&gt; 글자</div>
 </td></tr></tbody></table></div>

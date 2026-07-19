@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 11줄 | 렌더링: 3줄 | 인용문 안 리스트
+근거: 도움말예제 | 원문: 1줄 | 의미론: 11줄 | IR: 33줄 | 렌더링: 3줄 | 인용문 안 리스트
 > * 목록이 담긴 인용문
 Document@0..31
   Quote@0..31
@@ -11,6 +11,39 @@ Document@0..31
         Paragraph@4..30
           Text@4..30 "목록이 담긴 인용 ..."
         Newline@30..31 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "quote",
+      "blocks": [
+        {
+          "type": "list",
+          "kind": "unordered",
+          "items": [
+            {
+              "startNumber": null,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "목록이 담긴 인용문"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <blockquote class="wiki-quote"><ul class="wiki-list"><li><div class="wiki-paragraph">목록이 담긴 인용문</div>
 </li></ul>
 </blockquote>

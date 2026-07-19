@@ -1,7 +1,24 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 4줄 | 렌더링: 1줄 | 도움말: 10개는 수평줄이 아님
+근거: 도움말예제 | 원문: 1줄 | 의미론: 4줄 | IR: 17줄 | 렌더링: 1줄 | 도움말: 10개는 수평줄이 아님
 ----------
 Document@0..11
   Paragraph@0..10
     Text@0..10 "----------"
   Newline@10..11 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "----------"
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph">----------</div>

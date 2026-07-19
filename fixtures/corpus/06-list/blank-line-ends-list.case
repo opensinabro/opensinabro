@@ -1,4 +1,4 @@
-근거: 도움말서술 | 원문: 3줄 | 의미론: 19줄 | 렌더링: 5줄 | 도움말: 빈 줄이 리스트를 끊음
+근거: 도움말서술 | 원문: 3줄 | 의미론: 19줄 | IR: 52줄 | 렌더링: 5줄 | 도움말: 빈 줄이 리스트를 끊음
  * 리스트 1
 
  * 새 리스트
@@ -21,6 +21,58 @@ Document@0..33
       Paragraph@19..32
         Text@19..32 "새 리스트"
       Newline@32..33 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "list",
+      "kind": "unordered",
+      "items": [
+        {
+          "startNumber": null,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "리스트 1"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": []
+    },
+    {
+      "type": "list",
+      "kind": "unordered",
+      "items": [
+        {
+          "startNumber": null,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "새 리스트"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <ul class="wiki-list"><li><div class="wiki-paragraph">리스트 1</div>
 </li></ul>
 <div class="wiki-paragraph"></div>

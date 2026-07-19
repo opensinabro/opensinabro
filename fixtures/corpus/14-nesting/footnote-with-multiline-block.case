@@ -1,4 +1,4 @@
-근거: 미확인 | 원문: 4줄 | 의미론: 25줄 | 렌더링: 2줄 | 각주 안의 여러 줄 블록
+근거: 미확인 | 원문: 4줄 | 의미론: 25줄 | IR: 65줄 | 렌더링: 2줄 | 각주 안의 여러 줄 블록
 [* 각주 {{{#!wiki style="color:red"
 안쪽
 }}}]
@@ -28,5 +28,70 @@ Document@0..59
       MacroName@51..57 "각주"
       DelimiterClose@57..58 "]"
   Newline@58..59 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "footnoteReference",
+          "label": "1",
+          "number": 1,
+          "tooltip": "각주 "
+        },
+        {
+          "type": "lineBreak"
+        },
+        {
+          "type": "footnoteSection",
+          "notes": [
+            0
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": [
+    {
+      "label": "1",
+      "referenceNumbers": [
+        1
+      ],
+      "content": [
+        {
+          "type": "text",
+          "text": "각주 "
+        },
+        {
+          "type": "wikiStyle",
+          "style": [
+            {
+              "property": "color",
+              "value": "red"
+            }
+          ],
+          "darkStyle": [],
+          "blocks": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "안쪽"
+                },
+                {
+                  "type": "lineBreak"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
 <div class="wiki-paragraph"><a class="wiki-fn-content" title="각주 " href="#fn-1"><span id="rfn-1"></span>[1]</a><br><div class="wiki-macro-footnote"><span class="footnote-list"><span id="fn-1"></span><a href="#rfn-1">[1]</a> 각주 <div style="color: red">안쪽<br></div></span></div>
 </div>

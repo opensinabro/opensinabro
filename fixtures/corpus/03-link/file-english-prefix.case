@@ -1,4 +1,4 @@
-근거: 미확인 | 원문: 1줄 | 의미론: 8줄 | 렌더링: 1줄 | 영문 file: 접두사
+근거: 미확인 | 원문: 1줄 | 의미론: 8줄 | IR: 25줄 | 렌더링: 1줄 | 영문 file: 접두사
 [[file:example.png]]
 Document@0..21
   Paragraph@0..20
@@ -8,4 +8,29 @@ Document@0..21
       LinkTarget@7..18 "example.png"
       DelimiterClose@18..20 "]]"
   Newline@20..21 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "image",
+          "fileName": "example.png",
+          "url": "/file/example.png",
+          "layout": {
+            "width": null,
+            "height": null,
+            "align": null,
+            "backgroundColor": null,
+            "theme": null
+          }
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><span class="wiki-image-align-normal" style=""><span class="wiki-image-wrapper"><img src="/file/example.png" alt="파일:example.png"></span></span></div>

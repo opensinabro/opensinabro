@@ -1,4 +1,4 @@
-근거: 미확인 | 원문: 3줄 | 의미론: 17줄 | 렌더링: 1줄 | 색상 그룹 안의 표 — 인라인으로 펼 수 없어 버려짐
+근거: 미확인 | 원문: 3줄 | 의미론: 17줄 | IR: 21줄 | 렌더링: 1줄 | 색상 그룹 안의 표 — 인라인으로 펼 수 없어 버려짐
 {{{#red
 || 표 ||
 }}}
@@ -19,4 +19,25 @@ Document@0..22
           Separator@15..17 "||"
       DelimiterClose@17..21 "\n}}}"
   Newline@21..22 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "colored",
+          "color": {
+            "light": "red",
+            "dark": null
+          },
+          "content": []
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><span style="color:red" data-dark-style="color:red;"></span></div>

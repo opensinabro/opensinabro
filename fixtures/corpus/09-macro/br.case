@@ -1,4 +1,4 @@
-근거: 도움말서술 | 원문: 1줄 | 의미론: 9줄 | 렌더링: 1줄 | 줄바꿈 매크로
+근거: 도움말서술 | 원문: 1줄 | 의미론: 9줄 | IR: 24줄 | 렌더링: 1줄 | 줄바꿈 매크로
 앞[br]뒤
 Document@0..11
   Paragraph@0..10
@@ -9,4 +9,28 @@ Document@0..11
       DelimiterClose@6..7 "]"
     Text@7..10 "뒤"
   Newline@10..11 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "앞"
+        },
+        {
+          "type": "lineBreak"
+        },
+        {
+          "type": "text",
+          "text": "뒤"
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph">앞<br>뒤</div>

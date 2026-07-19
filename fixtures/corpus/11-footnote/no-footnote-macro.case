@@ -1,4 +1,4 @@
-근거: 미확인 | 원문: 1줄 | 의미론: 8줄 | 렌더링: 2줄 | [각주] 없이 각주만
+근거: 미확인 | 원문: 1줄 | 의미론: 8줄 | IR: 43줄 | 렌더링: 2줄 | [각주] 없이 각주만
 [* 각주]
 Document@0..11
   Paragraph@0..10
@@ -8,5 +8,48 @@ Document@0..11
       Text@3..9 "각주"
       DelimiterClose@9..10 "]"
   Newline@10..11 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "footnoteReference",
+          "label": "1",
+          "number": 1,
+          "tooltip": "각주"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "footnoteSection",
+          "notes": [
+            0
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": [
+    {
+      "label": "1",
+      "referenceNumbers": [
+        1
+      ],
+      "content": [
+        {
+          "type": "text",
+          "text": "각주"
+        }
+      ]
+    }
+  ]
+}
 <div class="wiki-paragraph"><a class="wiki-fn-content" title="각주" href="#fn-1"><span id="rfn-1"></span>[1]</a></div>
 <div class="wiki-macro-footnote"><span class="footnote-list"><span id="fn-1"></span><a href="#rfn-1">[1]</a> 각주</span></div>

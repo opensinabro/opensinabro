@@ -1,4 +1,4 @@
-근거: 미확인 | 원문: 3줄 | 의미론: 20줄 | 렌더링: 3줄 | #!if 안의 표 — 이쪽은 Blocks로 보존됨(색상 그룹과 동작이 다름)
+근거: 미확인 | 원문: 3줄 | 의미론: 20줄 | IR: 48줄 | 렌더링: 3줄 | #!if 안의 표 — 이쪽은 Blocks로 보존됨(색상 그룹과 동작이 다름)
 {{{#!if 1
 || 표 ||
 }}}
@@ -22,6 +22,54 @@ Document@0..24
           Separator@17..19 "||"
       DelimiterClose@19..23 "\n}}}"
   Newline@23..24 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "blocks",
+          "blocks": [
+            {
+              "type": "table",
+              "table": {
+                "caption": null,
+                "rows": [
+                  {
+                    "cells": [
+                      {
+                        "columnSpan": null,
+                        "rowSpan": null,
+                        "horizontalAlignment": "center",
+                        "verticalAlignment": null,
+                        "attributes": [],
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "content": [
+                              {
+                                "type": "text",
+                                "text": "표"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><div class="wiki-table-wrap"><table class="wiki-table"><tbody><tr class="wiki-table-tr"><td style="text-align: center;"><div class="wiki-paragraph">표</div>
 </td></tr></tbody></table></div>
 </div>

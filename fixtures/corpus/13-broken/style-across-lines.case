@@ -1,4 +1,4 @@
-근거: 미확인 | 원문: 2줄 | 의미론: 9줄 | 렌더링: 1줄 | 서식은 줄 단위 — 여러 줄에 걸친 마커는 잔여 텍스트
+근거: 미확인 | 원문: 2줄 | 의미론: 9줄 | IR: 30줄 | 렌더링: 1줄 | 서식은 줄 단위 — 여러 줄에 걸친 마커는 잔여 텍스트
 '''여러
 줄 굵게'''
 Document@0..24
@@ -10,4 +10,34 @@ Document@0..24
       Text@10..20 "줄 굵게"
       DelimiterClose@20..23 "'''"
   Newline@23..24 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "styled",
+          "style": "bold",
+          "content": [
+            {
+              "type": "text",
+              "text": "여러"
+            },
+            {
+              "type": "lineBreak"
+            },
+            {
+              "type": "text",
+              "text": "줄 굵게"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><strong>여러<br>줄 굵게</strong></div>

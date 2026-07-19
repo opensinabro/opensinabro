@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 7줄 | 렌더링: 1줄 | 굵게
+근거: 도움말예제 | 원문: 1줄 | 의미론: 7줄 | IR: 23줄 | 렌더링: 1줄 | 굵게
 '''굵게'''
 Document@0..13
   Paragraph@0..12
@@ -7,4 +7,27 @@ Document@0..13
       Text@3..9 "굵게"
       DelimiterClose@9..12 "'''"
   Newline@12..13 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "styled",
+          "style": "bold",
+          "content": [
+            {
+              "type": "text",
+              "text": "굵게"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><strong>굵게</strong></div>

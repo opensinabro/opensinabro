@@ -1,4 +1,4 @@
-근거: 미확인 | 원문: 1줄 | 의미론: 7줄 | 렌더링: 1줄 | 색상 뒤 공백 없음 — 색상이 아니라 리터럴
+근거: 미확인 | 원문: 1줄 | 의미론: 7줄 | IR: 17줄 | 렌더링: 1줄 | 색상 뒤 공백 없음 — 색상이 아니라 리터럴
 {{{#212529}}}
 Document@0..14
   Paragraph@0..13
@@ -7,4 +7,21 @@ Document@0..14
       Text@3..10 "#212529"
       DelimiterClose@10..13 "}}}"
   Newline@13..14 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "literal",
+          "text": "#212529"
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><code>#212529</code></div>

@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 8줄 | 렌더링: 2줄 | 접힌 문단
+근거: 도움말예제 | 원문: 1줄 | 의미론: 8줄 | IR: 32줄 | 렌더링: 2줄 | 접힌 문단
 ==# 문단 2 #==
 Document@0..17
   Heading@0..16
@@ -8,5 +8,37 @@ Document@0..17
     Separator@12..13 " "
     DelimiterClose@13..16 "#=="
   Newline@16..17 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "heading",
+      "level": 2,
+      "folded": true,
+      "number": "1",
+      "anchor": "문단 2",
+      "content": [
+        {
+          "type": "text",
+          "text": "문단 2"
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [
+    {
+      "number": "1",
+      "depth": 1,
+      "title": [
+        {
+          "type": "text",
+          "text": "문단 2"
+        }
+      ]
+    }
+  ],
+  "footnotes": []
+}
 <h2 class="wiki-heading wiki-heading-folded"><a id="s-1" href="#toc">1.</a> <span id="문단 2">문단 2</span></h2>
 <div class="wiki-heading-content"></div>

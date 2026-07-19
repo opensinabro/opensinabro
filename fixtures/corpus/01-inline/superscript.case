@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 7줄 | 렌더링: 1줄 | 위첨자
+근거: 도움말예제 | 원문: 1줄 | 의미론: 7줄 | IR: 23줄 | 렌더링: 1줄 | 위첨자
 ^^위첨자^^
 Document@0..14
   Paragraph@0..13
@@ -7,4 +7,27 @@ Document@0..14
       Text@2..11 "위첨자"
       DelimiterClose@11..13 "^^"
   Newline@13..14 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "styled",
+          "style": "superscript",
+          "content": [
+            {
+              "type": "text",
+              "text": "위첨자"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><sup>위첨자</sup></div>

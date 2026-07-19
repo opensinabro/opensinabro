@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 11줄 | 렌더링: 1줄 | 타 문서 문단 링크
+근거: 도움말예제 | 원문: 1줄 | 의미론: 11줄 | IR: 25줄 | 렌더링: 1줄 | 타 문서 문단 링크
 [[알파위키#s-6|해당 문단 참고]]
 Document@0..42
   Paragraph@0..41
@@ -11,4 +11,29 @@ Document@0..42
       Text@19..39 "해당 문단 참고"
       DelimiterClose@39..41 "]]"
   Newline@41..42 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "documentLink",
+          "title": "알파위키",
+          "anchor": "s-6",
+          "kind": "existing",
+          "display": [
+            {
+              "type": "text",
+              "text": "해당 문단 참고"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><a class="wiki-link-internal" href="/w/%EC%95%8C%ED%8C%8C%EC%9C%84%ED%82%A4#s-6" title="알파위키">해당 문단 참고</a></div>

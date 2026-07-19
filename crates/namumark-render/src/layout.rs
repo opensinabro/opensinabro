@@ -1,8 +1,12 @@
 //! layout pass: 문서 전역 맥락 확정 (순수 함수).
 //!
-//! - 헤딩에 계층 번호("1.2")를 부여하고 목차를 수집해 `[목차]` 자리에 채운다.
+//! - 헤딩에 계층 번호("1.2")를 부여하고 목차를 수집한다.
 //! - 각주에 번호를 부여하고(이름 각주는 미방출 구간 내 병합) 인라인을 참조로 치환한다.
-//! - `[각주]` 자리에 그 시점까지 쌓인 각주를 채우고, 잔여 각주는 문서 끝에 방출한다.
+//! - `[각주]` 자리에 그 시점까지 쌓인 각주를 방출하고, 잔여 각주는 문서 끝에 방출한다.
+//!
+//! 목차와 각주 내용은 트리가 아니라 [`RenderTree`]의 최상위 목록이 소유한다 — 목차는
+//! 문서 끝까지 헤딩을 봐야 완성되므로, 트리 안에 두면 다 본 뒤 자리를 찾아 채우는 순회가
+//! 한 번 더 필요해지기 때문이다. 그래서 이 pass의 순회는 `walk_blocks` 하나뿐이다.
 
 use crate::resolve::Resolved;
 use namumark_ast::TableAttributeScope;
@@ -16,6 +20,7 @@ pub(crate) fn layout(resolved: Resolved) -> RenderTree {
     let mut state = Layout {
         heading_stack: Vec::new(),
         table_of_contents: Vec::new(),
+        footnotes: Vec::new(),
         pending_footnotes: Vec::new(),
         reference_count: 0,
     };
@@ -23,18 +28,18 @@ pub(crate) fn layout(resolved: Resolved) -> RenderTree {
     state.walk_blocks(&mut blocks);
     // 문서 끝까지 방출되지 않은 각주는 마지막에 제 문단으로 나온다.
     if !state.pending_footnotes.is_empty() {
-        blocks.push(RenderBlock::Paragraph(vec![
-            RenderInline::FootnoteSection {
-                notes: std::mem::take(&mut state.pending_footnotes),
-            },
-        ]));
+        blocks.push(RenderBlock::Paragraph {
+            content: vec![RenderInline::FootnoteSection {
+                notes: state.flush_pending_footnotes(),
+            }],
+        });
     }
-    // 목차는 문서 전체 헤딩이 확정된 뒤에야 완성되므로 별도 패스로 채운다.
-    fill_table_of_contents(&mut blocks, &state.table_of_contents);
     RenderTree {
         redirect: resolved.redirect,
         blocks,
         categories: resolved.categories,
+        table_of_contents: state.table_of_contents,
+        footnotes: state.footnotes,
     }
 }
 
@@ -42,7 +47,10 @@ struct Layout {
     /// (헤딩 수준, 그 수준의 현재 번호)
     heading_stack: Vec<(u8, u32)>,
     table_of_contents: Vec<TableOfContentsEntry>,
-    /// 아직 `[각주]`로 방출되지 않은 각주
+    /// 이미 방출된 각주. 그대로 [`RenderTree::footnotes`]가 된다.
+    footnotes: Vec<RenderedFootnote>,
+    /// 아직 `[각주]`로 방출되지 않은 각주. 이름 각주 병합이 이 구간 안에서만 일어나므로
+    /// 방출 전까지는 내용이 더 채워질 수 있어 `footnotes`로 옮기지 않고 들고 있는다.
     pending_footnotes: Vec<RenderedFootnote>,
     /// 지금까지 나온 각주 참조 수. 다음 참조의 번호가 되고, 무명 각주의 라벨이 된다.
     reference_count: u32,
@@ -68,8 +76,8 @@ impl Layout {
                         title: table_of_contents_title(content),
                     });
                 }
-                RenderBlock::Paragraph(inlines) => self.walk_inlines(inlines),
-                RenderBlock::Quote(blocks) | RenderBlock::Indent(blocks) => {
+                RenderBlock::Paragraph { content: inlines } => self.walk_inlines(inlines),
+                RenderBlock::Quote { blocks } | RenderBlock::Indent { blocks } => {
                     self.walk_blocks(blocks)
                 }
                 RenderBlock::List { items, .. } => {
@@ -77,7 +85,7 @@ impl Layout {
                         self.walk_blocks(&mut item.blocks);
                     }
                 }
-                RenderBlock::Table(table) => {
+                RenderBlock::Table { table } => {
                     propagate_column_attributes(table);
                     if let Some(caption) = &mut table.caption {
                         self.walk_inlines(caption);
@@ -129,11 +137,11 @@ impl Layout {
                 RenderInline::Styled { content, .. }
                 | RenderInline::Colored { content, .. }
                 | RenderInline::Sized { content, .. } => self.walk_inlines(content),
-                RenderInline::WikiStyle { blocks, .. } | RenderInline::Blocks(blocks) => {
+                RenderInline::WikiStyle { blocks, .. } | RenderInline::Blocks { blocks } => {
                     self.walk_blocks(blocks)
                 }
                 RenderInline::FootnoteSection { notes } => {
-                    *notes = std::mem::take(&mut self.pending_footnotes);
+                    *notes = self.flush_pending_footnotes();
                 }
                 // 접기 문구는 글자라 각주도 목차도 들어 있지 않다.
                 RenderInline::Folding { blocks, .. } => self.walk_blocks(blocks),
@@ -145,6 +153,13 @@ impl Layout {
                 _ => {}
             }
         }
+    }
+
+    /// 미방출 각주를 문서 전역 목록으로 옮기고 그 자리들의 인덱스를 돌려준다.
+    fn flush_pending_footnotes(&mut self) -> Vec<u32> {
+        let first = self.footnotes.len() as u32;
+        self.footnotes.append(&mut self.pending_footnotes);
+        (first..self.footnotes.len() as u32).collect()
     }
 
     // 이름 각주는 미방출 구간 안에서 병합한다. 내용이 있는 첫 정의가 내용을 제공한다.
@@ -202,48 +217,6 @@ fn table_of_contents_title(content: &[RenderInline]) -> Vec<RenderInline> {
     title
 }
 
-fn fill_table_of_contents(blocks: &mut Vec<RenderBlock>, entries: &[TableOfContentsEntry]) {
-    for block in blocks {
-        match block {
-            RenderBlock::Paragraph(inlines) => fill_table_of_contents_inlines(inlines, entries),
-            RenderBlock::Heading { content, .. } => {
-                fill_table_of_contents_inlines(content, entries)
-            }
-            RenderBlock::Quote(blocks) | RenderBlock::Indent(blocks) => {
-                fill_table_of_contents(blocks, entries)
-            }
-            RenderBlock::List { items, .. } => {
-                for item in items {
-                    fill_table_of_contents(&mut item.blocks, entries);
-                }
-            }
-            RenderBlock::Table(table) => {
-                for row in &mut table.rows {
-                    for cell in &mut row.cells {
-                        fill_table_of_contents(&mut cell.blocks, entries);
-                    }
-                }
-            }
-            _ => {}
-        }
-    }
-}
-
-fn fill_table_of_contents_inlines(inlines: &mut [RenderInline], entries: &[TableOfContentsEntry]) {
-    for inline in inlines {
-        match inline {
-            RenderInline::TableOfContents {
-                entries: inline_entries,
-            } => *inline_entries = entries.to_vec(),
-            RenderInline::WikiStyle { blocks, .. } | RenderInline::Blocks(blocks) => {
-                fill_table_of_contents(blocks, entries)
-            }
-            RenderInline::Folding { blocks, .. } => fill_table_of_contents(blocks, entries),
-            _ => {}
-        }
-    }
-}
-
 /// 인라인에서 글자만 뽑는다. 나무위키 목차가 제목의 서식·링크·앵커를 버리고
 /// 글자만 싣기 때문에 필요하다(`== [[/TeX|수식]] ==` → `수식`).
 fn plain_text_of(inlines: &[RenderInline]) -> String {
@@ -255,7 +228,7 @@ fn plain_text_of(inlines: &[RenderInline]) -> String {
 fn write_plain_text(inlines: &[RenderInline], output: &mut String) {
     for inline in inlines {
         match inline {
-            RenderInline::Text(value) => output.push_str(value),
+            RenderInline::Text { text: value } => output.push_str(value),
             RenderInline::Ruby { content, .. } => output.push_str(content),
             RenderInline::Styled { content, .. }
             | RenderInline::Colored { content, .. }
@@ -268,7 +241,7 @@ fn write_plain_text(inlines: &[RenderInline], output: &mut String) {
             // 줄바꿈은 글자가 아니다. 리터럴도 각주 툴팁에는 실리지 않는다
             // (렌더확정: `[* 앞 {{{[[ 파일:example.png]]}}}, … 형식]`의 툴팁이
             // the seed에서 `앞 ,  형식`이다 — 리터럴 자리가 통째로 빈다).
-            RenderInline::LineBreak | RenderInline::Literal(_) => {}
+            RenderInline::LineBreak | RenderInline::Literal { text: _ } => {}
             _ => {}
         }
     }
@@ -309,10 +282,9 @@ fn propagate_column_attributes(table: &mut RenderTable) {
             // 도 col 0에만 세로 전파되지만, 문법 도움말 「기본 헥스 코드」표의 폭 지정 없는
             // `<-3><colbgcolor=#f5f5f5>`는 걸친 세 열 모두에 전파된다).
             let start_column_only = single_cell_row
-                || cell
-                    .attributes
-                    .iter()
-                    .any(|attribute| matches!(attribute.property, TableStyleProperty::Width(_)));
+                || cell.attributes.iter().any(|attribute| {
+                    matches!(attribute.property, TableStyleProperty::Width { width: _ })
+                });
             // 열 속성은 축(배경색·글자색·…)별로 독립 전파된다. 셀이 어떤 축을 스스로 지정해도
             // 지정하지 않은 축은 위 행에서 상속한다(렌더확정: `<colcolor=#fff>`가 걸린 열의
             // `<colbgcolor=#00a495>` 셀이 the seed에서 `color:#fff`도 함께 갖는다).

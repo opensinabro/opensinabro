@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 9줄 | 렌더링: 1줄 | 크기 +1단계
+근거: 도움말예제 | 원문: 1줄 | 의미론: 9줄 | IR: 23줄 | 렌더링: 1줄 | 크기 +1단계
 {{{+1 +1단계}}}
 Document@0..18
   Paragraph@0..17
@@ -9,4 +9,27 @@ Document@0..18
       Text@6..14 "+1단계"
       DelimiterClose@14..17 "}}}"
   Newline@17..18 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "sized",
+          "level": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "+1단계"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><span class="wiki-size-up-1">+1단계</span></div>

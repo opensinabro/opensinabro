@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 12줄 | 렌더링: 1줄 | 비율 너비
+근거: 도움말예제 | 원문: 1줄 | 의미론: 12줄 | IR: 25줄 | 렌더링: 1줄 | 비율 너비
 [[파일:example.png|width=100%]]
 Document@0..34
   Paragraph@0..33
@@ -12,4 +12,29 @@ Document@0..34
       ArgumentValue@27..31 "100%"
       DelimiterClose@31..33 "]]"
   Newline@33..34 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "image",
+          "fileName": "example.png",
+          "url": "/file/example.png",
+          "layout": {
+            "width": "100%",
+            "height": null,
+            "align": null,
+            "backgroundColor": null,
+            "theme": null
+          }
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><span class="wiki-image-align-normal" style="width: 100%;"><span class="wiki-image-wrapper" style="width: 100%;"><img width="100%" src="/file/example.png" alt="파일:example.png"></span></span></div>

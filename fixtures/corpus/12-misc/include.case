@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 14줄 | 렌더링: 1줄 | 틀 호출
+근거: 도움말예제 | 원문: 1줄 | 의미론: 14줄 | IR: 21줄 | 렌더링: 1줄 | 틀 호출
 [include(틀:다른 뜻 설명, 설명=이것은 설명입니다.)]
 Document@0..68
   Paragraph@0..67
@@ -14,4 +14,25 @@ Document@0..68
       Separator@65..66 ")"
       DelimiterClose@66..67 "]"
   Newline@67..68 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "다른 뜻: "
+        },
+        {
+          "type": "text",
+          "text": "이것은 설명입니다."
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph">다른 뜻: 이것은 설명입니다.</div>

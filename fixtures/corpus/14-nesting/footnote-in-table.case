@@ -1,4 +1,4 @@
-근거: 미확인 | 원문: 2줄 | 의미론: 22줄 | 렌더링: 3줄 | 표 셀 안의 각주
+근거: 미확인 | 원문: 2줄 | 의미론: 22줄 | IR: 68줄 | 렌더링: 3줄 | 표 셀 안의 각주
 || 셀[* 각주] ||
 [각주]
 Document@0..29
@@ -23,6 +23,74 @@ Document@0..29
       MacroName@21..27 "각주"
       DelimiterClose@27..28 "]"
   Newline@28..29 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "table",
+      "table": {
+        "caption": null,
+        "rows": [
+          {
+            "cells": [
+              {
+                "columnSpan": null,
+                "rowSpan": null,
+                "horizontalAlignment": "center",
+                "verticalAlignment": null,
+                "attributes": [],
+                "blocks": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "셀"
+                      },
+                      {
+                        "type": "footnoteReference",
+                        "label": "1",
+                        "number": 1,
+                        "tooltip": "각주"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "footnoteSection",
+          "notes": [
+            0
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": [
+    {
+      "label": "1",
+      "referenceNumbers": [
+        1
+      ],
+      "content": [
+        {
+          "type": "text",
+          "text": "각주"
+        }
+      ]
+    }
+  ]
+}
 <div class="wiki-table-wrap"><table class="wiki-table"><tbody><tr class="wiki-table-tr"><td style="text-align: center;"><div class="wiki-paragraph">셀<a class="wiki-fn-content" title="각주" href="#fn-1"><span id="rfn-1"></span>[1]</a></div>
 </td></tr></tbody></table></div>
 <div class="wiki-macro-footnote"><span class="footnote-list"><span id="fn-1"></span><a href="#rfn-1">[1]</a> 각주</span></div>

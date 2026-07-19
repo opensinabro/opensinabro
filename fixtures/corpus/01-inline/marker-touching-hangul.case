@@ -1,4 +1,4 @@
-근거: 미확인 | 원문: 1줄 | 의미론: 9줄 | 렌더링: 1줄 | 마커가 한글에 바로 붙음
+근거: 미확인 | 원문: 1줄 | 의미론: 9줄 | IR: 31줄 | 렌더링: 1줄 | 마커가 한글에 바로 붙음
 앞'''굵게'''뒤
 Document@0..19
   Paragraph@0..18
@@ -9,4 +9,35 @@ Document@0..19
       DelimiterClose@12..15 "'''"
     Text@15..18 "뒤"
   Newline@18..19 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "앞"
+        },
+        {
+          "type": "styled",
+          "style": "bold",
+          "content": [
+            {
+              "type": "text",
+              "text": "굵게"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "text": "뒤"
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph">앞<strong>굵게</strong>뒤</div>

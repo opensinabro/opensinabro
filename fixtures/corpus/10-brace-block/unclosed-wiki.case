@@ -1,4 +1,4 @@
-근거: 미확인 | 원문: 2줄 | 의미론: 6줄 | 렌더링: 1줄 | 닫히지 않은 #!wiki
+근거: 미확인 | 원문: 2줄 | 의미론: 6줄 | IR: 24줄 | 렌더링: 1줄 | 닫히지 않은 #!wiki
 {{{#!wiki style="color:red"
 내용
 Document@0..35
@@ -7,4 +7,28 @@ Document@0..35
     Newline@27..28 "\n"
     Text@28..34 "내용"
   Newline@34..35 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "{{{#!wiki style=\"color:red\""
+        },
+        {
+          "type": "lineBreak"
+        },
+        {
+          "type": "text",
+          "text": "내용"
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph">{{{#!wiki style="color:red"<br>내용</div>

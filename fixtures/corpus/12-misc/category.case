@@ -1,4 +1,4 @@
-근거: 도움말서술 | 원문: 1줄 | 의미론: 8줄 | 렌더링: 1줄 | 분류
+근거: 도움말서술 | 원문: 1줄 | 의미론: 8줄 | IR: 9줄 | 렌더링: 1줄 | 분류
 [[분류:알파위키]]
 Document@0..24
   Paragraph@0..23
@@ -8,4 +8,13 @@ Document@0..24
       LinkTarget@9..21 "알파위키"
       DelimiterClose@21..23 "]]"
   Newline@23..24 "\n"
+{
+  "redirect": null,
+  "blocks": [],
+  "categories": [
+    "알파위키"
+  ],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-categories">분류: <a href="/w/%EB%B6%84%EB%A5%98%3A%EC%95%8C%ED%8C%8C%EC%9C%84%ED%82%A4">알파위키</a></div>

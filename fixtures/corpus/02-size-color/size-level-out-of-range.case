@@ -1,4 +1,4 @@
-근거: 미확인 | 원문: 1줄 | 의미론: 7줄 | 렌더링: 1줄 | 크기 단계가 범위(±5) 밖
+근거: 미확인 | 원문: 1줄 | 의미론: 7줄 | IR: 17줄 | 렌더링: 1줄 | 크기 단계가 범위(±5) 밖
 {{{+6 범위밖}}}
 Document@0..19
   Paragraph@0..18
@@ -7,4 +7,21 @@ Document@0..19
       Text@3..15 "+6 범위밖"
       DelimiterClose@15..18 "}}}"
   Newline@18..19 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "literal",
+          "text": "+6 범위밖"
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><code>+6 범위밖</code></div>

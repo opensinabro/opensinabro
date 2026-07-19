@@ -1,4 +1,4 @@
-근거: 미확인 | 원문: 1줄 | 의미론: 8줄 | 렌더링: 1줄 | sanitizer — 미닫힘 태그를 닫음
+근거: 미확인 | 원문: 1줄 | 의미론: 8줄 | IR: 37줄 | 렌더링: 1줄 | sanitizer — 미닫힘 태그를 닫음
 {{{#!html <b>안 닫음}}}
 Document@0..27
   Paragraph@0..26
@@ -8,4 +8,41 @@ Document@0..27
       Text@10..23 "<b>안 닫음"
       DelimiterClose@23..26 "}}}"
   Newline@26..27 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "html",
+          "nodes": [
+            {
+              "type": "element",
+              "tag": "bold",
+              "attributes": {
+                "class": null,
+                "href": null,
+                "style": [],
+                "source": null,
+                "width": null,
+                "height": null,
+                "controls": false
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "text": "안 닫음"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><b>안 닫음</b></div>

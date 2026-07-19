@@ -9,12 +9,14 @@
 //! 자동 적용되고 여닫이 짝이 구조적으로 보장되며, 힙 할당 없이 임의의 Formatter로
 //! 스트리밍된다.
 //!
-//! 안전: 모든 텍스트·속성은 이스케이프한다. `#!html` 원문만 예외인데, 화이트리스트
-//! sanitizer(`sanitize`)를 거쳐 아는 태그·속성만 통과시킨다.
+//! 안전: 모든 텍스트·속성은 이스케이프한다. `#!html`도 예외가 아니다 — IR이 이미
+//! 화이트리스트를 통과한 노드만 담고 있고([`namumark_ir::HtmlNode`]), 그 노드를
+//! 방출하는 것도 같은 태그 라이터다.
 
-mod sanitize;
+mod html;
 mod tag;
 
+use crate::html::HtmlMarkup;
 use crate::tag::{escape_text, percent_encode, percent_encode_anchor, tag};
 use namumark_ast::{HorizontalAlignment, ListKind, TableAttributeScope, VerticalAlignment};
 use namumark_ir::{
@@ -46,6 +48,20 @@ pub fn stylesheet() -> &'static str {
     include_str!("../assets/namumark.css")
 }
 
+/// 문서 전역 목록. `[목차]`·`[각주]` 자리는 제 내용을 들고 있지 않고 이것을 봐야 하므로,
+/// 트리를 타고 내려가는 모든 방출기가 함께 나른다.
+#[derive(Clone, Copy)]
+struct Global<'tree> {
+    table_of_contents: &'tree [TableOfContentsEntry],
+    footnotes: &'tree [RenderedFootnote],
+}
+
+impl<'tree> Global<'tree> {
+    fn footnote(&self, index: u32) -> Option<&'tree RenderedFootnote> {
+        self.footnotes.get(index as usize)
+    }
+}
+
 /// 문서 전체. 헤딩 콘텐츠 래퍼(`wiki-heading-content`)의 개폐는
 /// 형제 블록 순서에 걸친 상태이므로 태그 라이터의 예외로서 문서 래퍼가 수동 관리한다.
 ///
@@ -55,26 +71,30 @@ struct TreeMarkup<'tree>(&'tree RenderTree);
 
 impl Display for TreeMarkup<'_> {
     fn fmt(&self, formatter: &mut Formatter<'_>) -> fmt::Result {
+        let global = Global {
+            table_of_contents: &self.0.table_of_contents,
+            footnotes: &self.0.footnotes,
+        };
         let mut heading_content_open = false;
         for block in &self.0.blocks {
             if let RenderBlock::Heading { .. } = block {
                 if heading_content_open {
                     formatter.write_str("</div>\n")?;
                 }
-                write!(formatter, "{}", BlockMarkup(block))?;
+                write!(formatter, "{}", BlockMarkup(block, global))?;
                 formatter.write_str("<div class=\"wiki-heading-content\">")?;
                 heading_content_open = true;
             } else {
                 // 문서 끝 각주 섹션은 마지막 문단 구역 바깥, 문서 레벨에 온다(렌더확정: the seed는
                 // 각주 앞에서 `wiki-heading-content`를 닫는다).
                 if heading_content_open
-                    && matches!(block, RenderBlock::Paragraph(inlines)
+                    && matches!(block, RenderBlock::Paragraph { content: inlines }
                         if matches!(inlines.as_slice(), [RenderInline::FootnoteSection { .. }]))
                 {
                     formatter.write_str("</div>\n")?;
                     heading_content_open = false;
                 }
-                write!(formatter, "{}", BlockMarkup(block))?;
+                write!(formatter, "{}", BlockMarkup(block, global))?;
             }
         }
         if heading_content_open {
@@ -101,7 +121,7 @@ fn heading_tag_name(level: u8) -> &'static str {
 /// `#!wiki` div 자체. 나무위키에서 이 div는 **언제나 문단 안에** 있다.
 /// 표 셀처럼 이미 문단 래퍼가 있는 자리에서는 이것만 쓰고, 그렇지 않은 자리는
 /// [`BlockMarkup`]이 문단으로 감싼다.
-struct WikiStyleMarkup<'inline>(&'inline RenderInline);
+struct WikiStyleMarkup<'inline>(&'inline RenderInline, Global<'inline>);
 
 impl Display for WikiStyleMarkup<'_> {
     fn fmt(&self, formatter: &mut Formatter<'_>) -> fmt::Result {
@@ -122,7 +142,7 @@ impl Display for WikiStyleMarkup<'_> {
                 "data-dark-style",
                 &StyleDeclarations(dark_style),
             )?
-            .content(|formatter| write_wiki_style_content(formatter, blocks))
+            .content(|formatter| write_wiki_style_content(formatter, blocks, self.1))
     }
 }
 
@@ -131,25 +151,30 @@ impl Display for WikiStyleMarkup<'_> {
 ///
 /// 렌더확정: 리스트 뒤 빈 줄 다음 문단이 `</ul><br><br>문서 내에…`(문단 앞 `<br>` 하나 +
 /// 빈 줄이 문단에 남긴 줄바꿈 하나)인 반면, 문단 뒤에 바로 붙는 표 앞에는 `<br>`이 없다.
-fn write_wiki_style_content(formatter: &mut Formatter<'_>, blocks: &[RenderBlock]) -> fmt::Result {
+fn write_wiki_style_content(
+    formatter: &mut Formatter<'_>,
+    blocks: &[RenderBlock],
+    global: Global<'_>,
+) -> fmt::Result {
     for (index, block) in blocks.iter().enumerate() {
         match block {
-            RenderBlock::Paragraph(inlines) => {
+            RenderBlock::Paragraph { content: inlines } => {
                 if index > 0 {
                     formatter.write_str("<br>")?;
                 }
-                write!(formatter, "{}", InlinesMarkup(inlines))?;
+                write!(formatter, "{}", InlinesMarkup(inlines, global))?;
             }
-            block => write!(formatter, "{}", BlockMarkup(block))?,
+            block => write!(formatter, "{}", BlockMarkup(block, global))?,
         }
     }
     Ok(())
 }
 
-struct BlockMarkup<'block>(&'block RenderBlock);
+struct BlockMarkup<'block>(&'block RenderBlock, Global<'block>);
 
 impl Display for BlockMarkup<'_> {
     fn fmt(&self, formatter: &mut Formatter<'_>) -> fmt::Result {
+        let global = self.1;
         match self.0 {
             RenderBlock::Heading {
                 level,
@@ -170,25 +195,27 @@ impl Display for BlockMarkup<'_> {
                         // 제목 글자로 건 문단명 앵커. `[[#개요]]`가 이걸 가리킨다.
                         tag(formatter, "span")?
                             .attribute("id", &anchor)?
-                            .content(|formatter| write!(formatter, "{}", InlinesMarkup(content)))
+                            .content(|formatter| {
+                                write!(formatter, "{}", InlinesMarkup(content, global))
+                            })
                     })
             }
             // 각주 섹션은 문단으로 감싸지 않고 맨 블록으로 낸다(렌더확정: the seed는 문서 끝
             // 각주를 `</ul></div> <div class='wiki-macro-footnote'>`처럼 wiki-paragraph 없이 붙인다.
             // `[목차]`는 반대로 wiki-paragraph로 감싼다).
-            RenderBlock::Paragraph(inlines)
+            RenderBlock::Paragraph { content: inlines }
                 if matches!(inlines.as_slice(), [RenderInline::FootnoteSection { .. }]) =>
             {
-                write!(formatter, "{}", InlinesMarkup(inlines))
+                write!(formatter, "{}", InlinesMarkup(inlines, global))
             }
-            RenderBlock::Paragraph(inlines) => tag(formatter, "div")?
+            RenderBlock::Paragraph { content: inlines } => tag(formatter, "div")?
                 .attribute("class", &"wiki-paragraph")?
-                .content_line(|formatter| write!(formatter, "{}", InlinesMarkup(inlines))),
+                .content_line(|formatter| write!(formatter, "{}", InlinesMarkup(inlines, global))),
             // 나무위키의 `<hr>`은 맨 태그다.
             RenderBlock::HorizontalRule => tag(formatter, "hr")?.void_line(),
-            RenderBlock::Quote(blocks) => tag(formatter, "blockquote")?
+            RenderBlock::Quote { blocks } => tag(formatter, "blockquote")?
                 .attribute("class", &"wiki-quote")?
-                .content_line(|formatter| write!(formatter, "{}", BlocksMarkup(blocks))),
+                .content_line(|formatter| write!(formatter, "{}", BlocksMarkup(blocks, global))),
             // 나무위키는 순서 리스트의 모양을 클래스로 주고 시작 번호를 `start`로 준다
             // (렌더확정: `<ol class='wiki-list wiki-list-upper-roman' start=11>`, `<li>`는
             // 속성이 없다). 첫 항목의 재지정 번호가 곧 리스트의 시작 번호다.
@@ -204,35 +231,37 @@ impl Display for BlockMarkup<'_> {
                     .content_line(|formatter| {
                         for item in items {
                             tag(formatter, "li")?.content(|formatter| {
-                                write!(formatter, "{}", BlocksMarkup(&item.blocks))
+                                write!(formatter, "{}", BlocksMarkup(&item.blocks, global))
                             })?;
                         }
                         Ok(())
                     })
             }
-            RenderBlock::Indent(blocks) => tag(formatter, "div")?
+            RenderBlock::Indent { blocks } => tag(formatter, "div")?
                 .attribute("class", &"wiki-indent")?
-                .content_line(|formatter| write!(formatter, "{}", BlocksMarkup(blocks))),
-            RenderBlock::Table(table) => write!(formatter, "{}", TableMarkup(table)),
+                .content_line(|formatter| write!(formatter, "{}", BlocksMarkup(blocks, global))),
+            RenderBlock::Table { table } => write!(formatter, "{}", TableMarkup(table, global)),
         }
     }
 }
 
-struct BlocksMarkup<'blocks>(&'blocks [RenderBlock]);
+struct BlocksMarkup<'blocks>(&'blocks [RenderBlock], Global<'blocks>);
 
 impl Display for BlocksMarkup<'_> {
     fn fmt(&self, formatter: &mut Formatter<'_>) -> fmt::Result {
+        let global = self.1;
         for block in self.0 {
-            write!(formatter, "{}", BlockMarkup(block))?;
+            write!(formatter, "{}", BlockMarkup(block, global))?;
         }
         Ok(())
     }
 }
 
-struct TableOfContentsMarkup<'entries>(&'entries [TableOfContentsEntry]);
+struct TableOfContentsMarkup<'tree>(Global<'tree>);
 
 impl Display for TableOfContentsMarkup<'_> {
     fn fmt(&self, formatter: &mut Formatter<'_>) -> fmt::Result {
+        let entries = self.0.table_of_contents;
         tag(formatter, "div")?
             .attribute("class", &"wiki-macro-toc")?
             .attribute("id", &"toc")?
@@ -242,8 +271,8 @@ impl Display for TableOfContentsMarkup<'_> {
                     .flag("open")?
                     .content(|formatter| {
                         tag(formatter, "summary")?.content(|_| Ok(()))?;
-                        if let Some(first) = self.0.first() {
-                            write_table_of_contents_level(formatter, self.0, first.depth)?;
+                        if let Some(first) = entries.first() {
+                            write_table_of_contents_level(formatter, entries, first.depth, self.0)?;
                         }
                         Ok(())
                     })
@@ -259,6 +288,7 @@ fn write_table_of_contents_level(
     formatter: &mut Formatter<'_>,
     entries: &[TableOfContentsEntry],
     depth: u8,
+    global: Global<'_>,
 ) -> fmt::Result {
     tag(formatter, "div")?
         .attribute("class", &"toc-indent")?
@@ -272,7 +302,7 @@ fn write_table_of_contents_level(
                         tag(formatter, "a")?
                             .attribute("href", &format_args!("#s-{}", entry.number))?
                             .content(|formatter| formatter.write_str(&entry.number))?;
-                        write!(formatter, ". {}", InlinesMarkup(&entry.title))
+                        write!(formatter, ". {}", InlinesMarkup(&entry.title, global))
                     })?;
                 index += 1;
 
@@ -285,6 +315,7 @@ fn write_table_of_contents_level(
                         formatter,
                         &entries[children_start..index],
                         depth + 1,
+                        global,
                     )?;
                 }
             }
@@ -292,28 +323,35 @@ fn write_table_of_contents_level(
         })
 }
 
-struct FootnoteSectionMarkup<'notes>(&'notes [RenderedFootnote]);
+/// `[각주]` 자리. 인덱스만 들고 있으므로 내용은 [`Global::footnotes`]에서 찾는다.
+struct FootnoteSectionMarkup<'tree>(&'tree [u32], Global<'tree>);
 
 impl Display for FootnoteSectionMarkup<'_> {
     fn fmt(&self, formatter: &mut Formatter<'_>) -> fmt::Result {
-        if self.0.is_empty() {
+        let global = self.1;
+        // 가리키는 각주가 하나도 없으면 껍데기도 내지 않는다. 인덱스 개수가 아니라 실제로
+        // 풀린 개수로 재야 프론트엔드와 같은 자리에서 같은 판단을 한다.
+        let mut notes = self.0.iter().filter_map(|index| global.footnote(*index));
+        let Some(first) = notes.next() else {
             return Ok(());
-        }
+        };
         tag(formatter, "div")?
             .attribute("class", &"wiki-macro-footnote")?
             .content_line(|formatter| {
-                for footnote in self.0 {
-                    write!(formatter, "{}", FootnoteMarkup(footnote))?;
+                write!(formatter, "{}", FootnoteMarkup(first, global))?;
+                for footnote in notes {
+                    write!(formatter, "{}", FootnoteMarkup(footnote, global))?;
                 }
                 Ok(())
             })
     }
 }
 
-struct FootnoteMarkup<'footnote>(&'footnote RenderedFootnote);
+struct FootnoteMarkup<'footnote>(&'footnote RenderedFootnote, Global<'footnote>);
 
 impl Display for FootnoteMarkup<'_> {
     fn fmt(&self, formatter: &mut Formatter<'_>) -> fmt::Result {
+        let global = self.1;
         let footnote = self.0;
         let label = footnote.label.as_str();
         tag(formatter, "span")?
@@ -348,21 +386,24 @@ impl Display for FootnoteMarkup<'_> {
                     }
                 }
                 formatter.write_char(' ')?;
-                write!(formatter, "{}", InlinesMarkup(&footnote.content))
+                write!(formatter, "{}", InlinesMarkup(&footnote.content, global))
             })
     }
 }
 
 /// 빈 셀이 갖는 문단.
-const EMPTY_PARAGRAPH: RenderBlock = RenderBlock::Paragraph(Vec::new());
+const EMPTY_PARAGRAPH: RenderBlock = RenderBlock::Paragraph {
+    content: Vec::new(),
+};
 
-struct TableMarkup<'table>(&'table RenderTable);
+struct TableMarkup<'table>(&'table RenderTable, Global<'table>);
 
 impl Display for TableMarkup<'_> {
     fn fmt(&self, formatter: &mut Formatter<'_>) -> fmt::Result {
+        let global = self.1;
         let table = self.0;
         let has_width = table_attributes(table)
-            .any(|attribute| matches!(attribute.property, TableStyleProperty::Width(_)));
+            .any(|attribute| matches!(attribute.property, TableStyleProperty::Width { width: _ }));
         let has_table_style =
             table_attributes(table).any(|attribute| attribute.property.emits_table_style());
         tag(formatter, "div")?
@@ -376,12 +417,12 @@ impl Display for TableMarkup<'_> {
                         // 캡션은 `<tbody>` 앞이다 — HTML이 그렇게 정해 두었고 the seed도 그렇다.
                         if let Some(caption) = &self.0.caption {
                             tag(formatter, "caption")?.content(|formatter| {
-                                write!(formatter, "{}", InlinesMarkup(caption))
+                                write!(formatter, "{}", InlinesMarkup(caption, global))
                             })?;
                         }
                         tag(formatter, "tbody")?.content(|formatter| {
                             for row in &self.0.rows {
-                                write!(formatter, "{}", TableRowMarkup(row))?;
+                                write!(formatter, "{}", TableRowMarkup(row, global))?;
                             }
                             Ok(())
                         })
@@ -390,10 +431,11 @@ impl Display for TableMarkup<'_> {
     }
 }
 
-struct TableRowMarkup<'row>(&'row RenderTableRow);
+struct TableRowMarkup<'row>(&'row RenderTableRow, Global<'row>);
 
 impl Display for TableRowMarkup<'_> {
     fn fmt(&self, formatter: &mut Formatter<'_>) -> fmt::Result {
+        let global = self.1;
         let has_row_style = self.0.cells.iter().any(|cell| {
             cell.attributes.iter().any(|attribute| {
                 attribute.scope == TableAttributeScope::Row && attribute.property.emits_cell_style()
@@ -404,17 +446,18 @@ impl Display for TableRowMarkup<'_> {
             .attribute_when(has_row_style, "style", &RowStyle(self.0))?
             .content(|formatter| {
                 for cell in &self.0.cells {
-                    write!(formatter, "{}", TableCellMarkup(cell))?;
+                    write!(formatter, "{}", TableCellMarkup(cell, global))?;
                 }
                 Ok(())
             })
     }
 }
 
-struct TableCellMarkup<'cell>(&'cell RenderTableCell);
+struct TableCellMarkup<'cell>(&'cell RenderTableCell, Global<'cell>);
 
 impl Display for TableCellMarkup<'_> {
     fn fmt(&self, formatter: &mut Formatter<'_>) -> fmt::Result {
+        let global = self.1;
         let cell = self.0;
         // `<nopad>`는 style이 아니라 클래스로 나간다.
         let nopadding = cell.attributes.iter().any(|attribute| {
@@ -437,8 +480,8 @@ impl Display for TableCellMarkup<'_> {
             // 문단과 리스트가 같이 있으면 the seed도 둘을 나란히 놓는다.
             // 빈 셀도 빈 문단 하나는 갖는다.
             .content(|formatter| match cell.blocks.as_slice() {
-                [] => write!(formatter, "{}", BlockMarkup(&EMPTY_PARAGRAPH)),
-                blocks => write!(formatter, "{}", BlocksMarkup(blocks)),
+                [] => write!(formatter, "{}", BlockMarkup(&EMPTY_PARAGRAPH, global)),
+                blocks => write!(formatter, "{}", BlocksMarkup(blocks, global)),
             })
     }
 }
@@ -448,13 +491,13 @@ impl Display for TableCellMarkup<'_> {
 /// 행·열·셀의 `style`로 나가는 속성 값을 방출한다. 그 외 속성(정렬·패딩)은 아무것도 쓰지 않는다.
 fn write_cell_style(formatter: &mut Formatter<'_>, property: &TableStyleProperty) -> fmt::Result {
     match property {
-        TableStyleProperty::BackgroundColor(color) => {
+        TableStyleProperty::BackgroundColor { color } => {
             write!(formatter, " background-color: {color};")
         }
-        TableStyleProperty::Color(color) => write!(formatter, " color: {color};"),
-        TableStyleProperty::Width(width) => write!(formatter, " width: {width};"),
-        TableStyleProperty::Height(height) => write!(formatter, " height: {height};"),
-        TableStyleProperty::TextAlign(alignment) => {
+        TableStyleProperty::Color { color } => write!(formatter, " color: {color};"),
+        TableStyleProperty::Width { width } => write!(formatter, " width: {width};"),
+        TableStyleProperty::Height { height } => write!(formatter, " height: {height};"),
+        TableStyleProperty::TextAlign { alignment } => {
             write!(
                 formatter,
                 " text-align: {};",
@@ -496,7 +539,7 @@ impl Display for TableWrapClass<'_> {
         // 같은 속성이 여러 번 지정되면 마지막 것이 이긴다.
         let alignment = table_attributes(self.0)
             .filter_map(|attribute| match attribute.property {
-                TableStyleProperty::Align(alignment) => Some(alignment),
+                TableStyleProperty::Align { alignment } => Some(alignment),
                 _ => None,
             })
             .last();
@@ -515,7 +558,7 @@ struct TableWrapStyle<'table>(&'table RenderTable);
 impl Display for TableWrapStyle<'_> {
     fn fmt(&self, formatter: &mut Formatter<'_>) -> fmt::Result {
         for attribute in table_attributes(self.0) {
-            if let TableStyleProperty::Width(width) = &attribute.property {
+            if let TableStyleProperty::Width { width } = &attribute.property {
                 write!(formatter, "width: {width};")?;
             }
         }
@@ -530,23 +573,23 @@ impl Display for TableStyle<'_> {
         for attribute in table_attributes(self.0) {
             match &attribute.property {
                 // 너비가 지정되면 감싸는 div가 그 폭을 갖고 표는 그 안을 채운다.
-                TableStyleProperty::Width(_) => write!(formatter, " width: 100%;")?,
-                TableStyleProperty::BackgroundColor(color) => {
+                TableStyleProperty::Width { width: _ } => write!(formatter, " width: 100%;")?,
+                TableStyleProperty::BackgroundColor { color } => {
                     write!(formatter, " background-color: {color};")?;
                 }
-                TableStyleProperty::Color(color) => write!(formatter, " color: {color};")?,
-                TableStyleProperty::BorderColor(color) => {
+                TableStyleProperty::Color { color } => write!(formatter, " color: {color};")?,
+                TableStyleProperty::BorderColor { color } => {
                     write!(formatter, " border: 2px solid {color};")?;
                 }
-                TableStyleProperty::Height(height) => write!(formatter, " height: {height};")?,
-                TableStyleProperty::TextAlign(alignment) => {
+                TableStyleProperty::Height { height } => write!(formatter, " height: {height};")?,
+                TableStyleProperty::TextAlign { alignment } => {
                     write!(
                         formatter,
                         " text-align: {};",
                         horizontal_alignment_name(*alignment)
                     )?;
                 }
-                TableStyleProperty::Align(_) | TableStyleProperty::NoPadding => {}
+                TableStyleProperty::Align { alignment: _ } | TableStyleProperty::NoPadding => {}
             }
         }
         Ok(())
@@ -612,23 +655,25 @@ impl Display for CellStyle<'_> {
     }
 }
 
-struct InlinesMarkup<'inlines>(&'inlines [RenderInline]);
+struct InlinesMarkup<'inlines>(&'inlines [RenderInline], Global<'inlines>);
 
 impl Display for InlinesMarkup<'_> {
     fn fmt(&self, formatter: &mut Formatter<'_>) -> fmt::Result {
+        let global = self.1;
         for inline in self.0 {
-            write!(formatter, "{}", InlineMarkup(inline))?;
+            write!(formatter, "{}", InlineMarkup(inline, global))?;
         }
         Ok(())
     }
 }
 
-struct InlineMarkup<'inline>(&'inline RenderInline);
+struct InlineMarkup<'inline>(&'inline RenderInline, Global<'inline>);
 
 impl Display for InlineMarkup<'_> {
     fn fmt(&self, formatter: &mut Formatter<'_>) -> fmt::Result {
+        let global = self.1;
         match self.0 {
-            RenderInline::Text(text) => write!(formatter, "{}", escape_text(text)),
+            RenderInline::Text { text } => write!(formatter, "{}", escape_text(text)),
             RenderInline::LineBreak => tag(formatter, "br")?.void(),
             RenderInline::Styled { style, content } => {
                 let tag_name = match style {
@@ -640,25 +685,24 @@ impl Display for InlineMarkup<'_> {
                     TextStyle::Subscript => "sub",
                 };
                 tag(formatter, tag_name)?
-                    .content(|formatter| write!(formatter, "{}", InlinesMarkup(content)))
+                    .content(|formatter| write!(formatter, "{}", InlinesMarkup(content, global)))
             }
             // 여러 줄 리터럴은 `<pre><code>`다(렌더확정: 각주 안 `{{{|| … ⏎ … ||}}}`이
             // the seed에서 `<pre><code>…</code></pre>`). 한 줄 리터럴은 인라인 `<code>`뿐이다.
-            RenderInline::Literal(text) if text.contains('\n') => {
-                tag(formatter, "pre")?.content(|formatter| {
+            RenderInline::Literal { text } if text.contains('\n') => tag(formatter, "pre")?
+                .content(|formatter| {
                     tag(formatter, "code")?
                         .content(|formatter| write!(formatter, "{}", escape_text(text)))
-                })
-            }
-            RenderInline::Literal(text) => tag(formatter, "code")?
+                }),
+            RenderInline::Literal { text } => tag(formatter, "code")?
                 .content(|formatter| write!(formatter, "{}", escape_text(text))),
             RenderInline::Colored { color, content } => tag(formatter, "span")?
                 .attribute("style", &ColorStyle(color))?
                 .attribute("data-dark-style", &DarkColorStyle(color))?
-                .content(|formatter| write!(formatter, "{}", InlinesMarkup(content))),
+                .content(|formatter| write!(formatter, "{}", InlinesMarkup(content, global))),
             RenderInline::Sized { level, content } => tag(formatter, "span")?
                 .attribute("class", &SizeClass(*level))?
-                .content(|formatter| write!(formatter, "{}", InlinesMarkup(content))),
+                .content(|formatter| write!(formatter, "{}", InlinesMarkup(content, global))),
             RenderInline::DocumentLink {
                 title,
                 anchor,
@@ -677,7 +721,7 @@ impl Display for InlineMarkup<'_> {
                     // 없는 문서로 가는 링크는 검색 엔진이 따라가지 않게 한다.
                     .attribute_when(*kind == DocumentLinkKind::Missing, "rel", &"nofollow")?
                     .attribute("title", &title)?
-                    .content(|formatter| write!(formatter, "{}", InlinesMarkup(display)))
+                    .content(|formatter| write!(formatter, "{}", InlinesMarkup(display, global)))
             }
             RenderInline::ExternalLink { url, display } => {
                 let trimmed = url.trim_start();
@@ -703,7 +747,7 @@ impl Display for InlineMarkup<'_> {
                             .map_or(url.as_str(), |(address, _)| address),
                     )?
                     .content(|formatter| match display {
-                        Some(display) => write!(formatter, "{}", InlinesMarkup(display)),
+                        Some(display) => write!(formatter, "{}", InlinesMarkup(display, global)),
                         None => write!(formatter, "{}", escape_text(url)),
                     })
             }
@@ -821,13 +865,17 @@ impl Display for InlineMarkup<'_> {
             RenderInline::Anchor { name } => tag(formatter, "a")?
                 .attribute("id", &name)?
                 .content(|_| Ok(())),
-            RenderInline::WikiStyle { .. } => write!(formatter, "{}", WikiStyleMarkup(self.0)),
-            RenderInline::Blocks(blocks) => write!(formatter, "{}", BlocksMarkup(blocks)),
-            RenderInline::TableOfContents { entries } => {
-                write!(formatter, "{}", TableOfContentsMarkup(entries))
+            RenderInline::WikiStyle { .. } => {
+                write!(formatter, "{}", WikiStyleMarkup(self.0, global))
+            }
+            RenderInline::Blocks { blocks } => {
+                write!(formatter, "{}", BlocksMarkup(blocks, global))
+            }
+            RenderInline::TableOfContents => {
+                write!(formatter, "{}", TableOfContentsMarkup(global))
             }
             RenderInline::FootnoteSection { notes } => {
-                write!(formatter, "{}", FootnoteSectionMarkup(notes))
+                write!(formatter, "{}", FootnoteSectionMarkup(notes, global))
             }
             RenderInline::Folding { summary, blocks } => tag(formatter, "details")?
                 .attribute("class", &"wiki-folding")?
@@ -842,7 +890,7 @@ impl Display for InlineMarkup<'_> {
                     // 접힌 내용도 `#!wiki`처럼 문단 래퍼를 두지 않는 컨테이너다
                     // (렌더확정: `<details class='wiki-folding'>…<div><div style='margin:…'>`).
                     tag(formatter, "div")?
-                        .content(|formatter| write_wiki_style_content(formatter, blocks))
+                        .content(|formatter| write_wiki_style_content(formatter, blocks, global))
                 }),
             // `<pre>`는 맨 태그다. `#!syntax`로 언어를 준 코드만 강조기 표식을 단다.
             RenderInline::CodeBlock { language, source } => {
@@ -856,8 +904,7 @@ impl Display for InlineMarkup<'_> {
                         .content(|formatter| write!(formatter, "{}", escape_text(source)))
                 })
             }
-            // 원시 HTML은 sanitizer를 거친 뒤 그대로 나간다.
-            RenderInline::Html(html) => formatter.write_str(&sanitize::sanitize(html)),
+            RenderInline::Html { nodes } => write!(formatter, "{}", HtmlMarkup(nodes)),
             RenderInline::ClearFix => tag(formatter, "div")?
                 .attribute("class", &"wiki-clearfix")?
                 .content(|_| Ok(())),
@@ -981,7 +1028,7 @@ impl Display for CategoriesMarkup<'_> {
 /// 라이트 색상은 `style`로, 다크 색상은 `data-dark-style`로 나간다 — 나무위키 표기다.
 /// 다크를 따로 주지 않은 색도 나무위키는 같은 값으로 채운다.
 /// 걸러진 CSS 선언들을 `속성: 값; 속성: 값` 꼴로 잇는다.
-struct StyleDeclarations<'declarations>(&'declarations [StyleDeclaration]);
+pub(crate) struct StyleDeclarations<'declarations>(pub(crate) &'declarations [StyleDeclaration]);
 
 impl Display for StyleDeclarations<'_> {
     fn fmt(&self, formatter: &mut Formatter<'_>) -> fmt::Result {

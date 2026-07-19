@@ -1,4 +1,4 @@
-근거: 도움말서술 | 원문: 1줄 | 의미론: 7줄 | 렌더링: 1줄 | 도움말: #transparent 미지원. 우리는 이름 색상으로 통과시킴(더 관대)
+근거: 도움말서술 | 원문: 1줄 | 의미론: 7줄 | IR: 17줄 | 렌더링: 1줄 | 도움말: #transparent 미지원. 우리는 이름 색상으로 통과시킴(더 관대)
 {{{#transparent 투명}}}
 Document@0..26
   Paragraph@0..25
@@ -7,4 +7,21 @@ Document@0..26
       Text@3..22 "#transparent 투명"
       DelimiterClose@22..25 "}}}"
   Newline@25..26 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "literal",
+          "text": "#transparent 투명"
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><code>#transparent 투명</code></div>

@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 7줄 | 렌더링: 1줄 | 현재 날짜
+근거: 도움말예제 | 원문: 1줄 | 의미론: 7줄 | IR: 17줄 | 렌더링: 1줄 | 현재 날짜
 [date]
 Document@0..7
   Paragraph@0..6
@@ -7,4 +7,21 @@ Document@0..7
       MacroName@1..5 "date"
       DelimiterClose@5..6 "]"
   Newline@6..7 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "2026-07-17 12:00:00"
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph">2026-07-17 12:00:00</div>

@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 17줄 | 렌더링: 3줄 | 표 기본
+근거: 도움말예제 | 원문: 1줄 | 의미론: 17줄 | IR: 56줄 | 렌더링: 3줄 | 표 기본
 || 테이블 || 테이블 ||
 Document@0..29
   Table@0..28
@@ -17,6 +17,62 @@ Document@0..29
         AlignmentSpace@25..26 " "
       Separator@26..28 "||"
   Newline@28..29 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "table",
+      "table": {
+        "caption": null,
+        "rows": [
+          {
+            "cells": [
+              {
+                "columnSpan": null,
+                "rowSpan": null,
+                "horizontalAlignment": "center",
+                "verticalAlignment": null,
+                "attributes": [],
+                "blocks": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "테이블"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "columnSpan": null,
+                "rowSpan": null,
+                "horizontalAlignment": "center",
+                "verticalAlignment": null,
+                "attributes": [],
+                "blocks": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "테이블"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-table-wrap"><table class="wiki-table"><tbody><tr class="wiki-table-tr"><td style="text-align: center;"><div class="wiki-paragraph">테이블</div>
 </td><td style="text-align: center;"><div class="wiki-paragraph">테이블</div>
 </td></tr></tbody></table></div>

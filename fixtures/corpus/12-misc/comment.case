@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 2줄 | 의미론: 8줄 | 렌더링: 1줄 | 주석
+근거: 도움말예제 | 원문: 2줄 | 의미론: 8줄 | IR: 17줄 | 렌더링: 1줄 | 주석
 ## 주석
 본문
 Document@0..17
@@ -9,4 +9,21 @@ Document@0..17
   Paragraph@10..16
     Text@10..16 "본문"
   Newline@16..17 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "본문"
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph">본문</div>

@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 11줄 | 렌더링: 2줄 | 인용문 안 개행
+근거: 도움말예제 | 원문: 1줄 | 의미론: 11줄 | IR: 29줄 | 렌더링: 2줄 | 인용문 안 개행
 >문장1[br]문장2
 Document@0..20
   Quote@0..20
@@ -11,5 +11,34 @@ Document@0..20
         DelimiterClose@11..12 "]"
       Text@12..19 "문장2"
     Newline@19..20 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "quote",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "문장1"
+            },
+            {
+              "type": "lineBreak"
+            },
+            {
+              "type": "text",
+              "text": "문장2"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <blockquote class="wiki-quote"><div class="wiki-paragraph">문장1<br>문장2</div>
 </blockquote>

@@ -1,4 +1,4 @@
-근거: 미확인 | 원문: 3줄 | 의미론: 21줄 | 렌더링: 6줄 | 접힌 문단이 목차에 오르는지
+근거: 미확인 | 원문: 3줄 | 의미론: 21줄 | IR: 63줄 | 렌더링: 6줄 | 접힌 문단이 목차에 오르는지
 [목차]
 ==# 접힌 문단 #==
 === 하위 ===
@@ -23,6 +23,69 @@ Document@0..46
     Separator@41..42 " "
     DelimiterClose@42..45 "==="
   Newline@45..46 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "tableOfContents"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "folded": true,
+      "number": "1",
+      "anchor": "접힌 문단",
+      "content": [
+        {
+          "type": "text",
+          "text": "접힌 문단"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "folded": false,
+      "number": "1.1",
+      "anchor": "하위",
+      "content": [
+        {
+          "type": "text",
+          "text": "하위"
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [
+    {
+      "number": "1",
+      "depth": 1,
+      "title": [
+        {
+          "type": "text",
+          "text": "접힌 문단"
+        }
+      ]
+    },
+    {
+      "number": "1.1",
+      "depth": 2,
+      "title": [
+        {
+          "type": "text",
+          "text": "하위"
+        }
+      ]
+    }
+  ],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><div class="wiki-macro-toc" id="toc"><details open><summary></summary><div class="toc-indent"><span class="toc-item"><a href="#s-1">1</a>. 접힌 문단</span><div class="toc-indent"><span class="toc-item"><a href="#s-1.1">1.1</a>. 하위</span></div></div></details></div>
 </div>
 <h2 class="wiki-heading wiki-heading-folded"><a id="s-1" href="#toc">1.</a> <span id="접힌 문단">접힌 문단</span></h2>

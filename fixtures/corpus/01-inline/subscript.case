@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 7줄 | 렌더링: 1줄 | 아래첨자
+근거: 도움말예제 | 원문: 1줄 | 의미론: 7줄 | IR: 23줄 | 렌더링: 1줄 | 아래첨자
 ,,아래첨자,,
 Document@0..17
   Paragraph@0..16
@@ -7,4 +7,27 @@ Document@0..17
       Text@2..14 "아래첨자"
       DelimiterClose@14..16 ",,"
   Newline@16..17 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "styled",
+          "style": "subscript",
+          "content": [
+            {
+              "type": "text",
+              "text": "아래첨자"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><sub>아래첨자</sub></div>

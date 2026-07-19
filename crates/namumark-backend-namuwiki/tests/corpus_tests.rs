@@ -2,9 +2,12 @@
 //!
 //! 갱신: `UPDATE_GOLDEN=1 cargo test -p namumark-backend-namuwiki --test corpus_tests`
 //!
-//! 한 파일이 근거 등급·원문·의미론·렌더링을 모두 담는다. 파일 하나만 열면 "이 마크업이
-//! 무슨 근거로 이렇게 해석되고 이렇게 그려진다"가 전부 보이고, 문법 하나가 깨지면
-//! 파일명이 곧장 그 문법을 가리킨다.
+//! 한 파일이 근거 등급·원문·의미론·IR·렌더링을 모두 담는다. 파일 하나만 열면 "이 마크업이
+//! 무슨 근거로 이렇게 해석되고, 어떤 값으로 확정되어, 이렇게 그려진다"가 전부 보이고,
+//! 문법 하나가 깨지면 파일명이 곧장 그 문법을 가리킨다.
+//!
+//! IR 구획은 프론트엔드가 실제로 받는 JSON이다. 렌더링 구획만 있으면 나무위키 백엔드를
+//! 지나며 뭉개진 것까지만 붙들 수 있어, 다른 백엔드가 볼 값이 조용히 바뀌어도 알 수 없다.
 //!
 //! 구획은 첫 줄이 밝힌 **줄 수**로 가른다. 구분자를 본문에 끼워 넣는 방식은 코퍼스에
 //! 맞지 않는다 — 여기 원문은 온갖 마크업이라 어떤 구분자든 원문에 나타날 수 있고, 그러면
@@ -28,7 +31,8 @@ use std::path::{Path, PathBuf};
 /// 근거 등급. 뜻과 도출법은 fixtures/corpus/README.md 참고.
 const EVIDENCE_GRADES: [&str; 3] = ["도움말예제", "도움말서술", "미확인"];
 
-const HEADER_FORM: &str = "근거: <등급> | 원문: <N>줄 | 의미론: <N>줄 | 렌더링: <N>줄 | <설명>";
+const HEADER_FORM: &str =
+    "근거: <등급> | 원문: <N>줄 | 의미론: <N>줄 | IR: <N>줄 | 렌더링: <N>줄 | <설명>";
 
 /// 케이스 첫 줄. 이것만으로 나머지 내용이 어떻게 나뉘는지가 정해진다.
 struct Header<'a> {
@@ -36,6 +40,7 @@ struct Header<'a> {
     description: &'a str,
     source_lines: usize,
     semantics_lines: usize,
+    ir_lines: usize,
     markup_lines: usize,
 }
 
@@ -81,16 +86,17 @@ fn regenerate(text: &str) -> Result<String, String> {
     // 덮어쓰면 선언 범위 밖의 원문이 **소리 없이 사라진다** — 원문을 고치고 `원문:`을
     // 고치는 걸 잊는 것은 흔한 일이고, 그때 잃는 것은 되살릴 수 없다. 그래서 다시 짓기
     // 전에 파일이 제 선언과 맞는지 먼저 본다.
-    let declared = header.semantics_lines + header.markup_lines;
+    let declared = header.semantics_lines + header.ir_lines + header.markup_lines;
     if line_count(rest) != declared {
         return Err(format!(
             "첫 줄 선언이 파일 내용과 맞지 않습니다 (원문 {}줄 뒤로 {}줄이 남았는데 \
-             의미론 {}줄 + 렌더링 {}줄 = {declared}줄이라 선언했습니다).\n  \
+             의미론 {}줄 + IR {}줄 + 렌더링 {}줄 = {declared}줄이라 선언했습니다).\n  \
              원문을 고쳤다면 첫 줄의 `원문:`도 함께 고치십시오 — 갱신은 선언한 줄 수까지만 \
              원문으로 보고 나머지를 버립니다.",
             header.source_lines,
             line_count(rest),
             header.semantics_lines,
+            header.ir_lines,
             header.markup_lines,
         ));
     }
@@ -99,13 +105,17 @@ fn regenerate(text: &str) -> Result<String, String> {
     let tree = namumark_render::build_render_tree(&document, &CorpusContext);
     // 의미론 섹션은 무손실 구문 트리를 보인다 — 세분화된 토큰·스팬까지 그대로 드러난다.
     let semantics = terminate(&format!("{:#?}", document.syntax()));
+    // IR 섹션은 프론트엔드가 받는 JSON 그대로다.
+    let ir = terminate(&serde_json::to_string_pretty(&tree).expect("IR은 항상 직렬화된다"));
     let markup = terminate(&NamuwikiMarkup.render(&tree));
 
     Ok(format!(
-        "근거: {} | 원문: {}줄 | 의미론: {}줄 | 렌더링: {}줄 | {}\n{source}{semantics}{markup}",
+        "근거: {} | 원문: {}줄 | 의미론: {}줄 | IR: {}줄 | 렌더링: {}줄 | {}\n\
+         {source}{semantics}{ir}{markup}",
         header.grade,
         line_count(source),
         line_count(&semantics),
+        line_count(&ir),
         line_count(&markup),
         header.description,
     ))
@@ -117,11 +127,12 @@ fn split_header(text: &str) -> Result<(Header<'_>, &str), String> {
     let (line, body) = text
         .split_once('\n')
         .ok_or("첫 줄에 메타데이터가 없습니다")?;
-    let fields: Vec<&str> = line.splitn(5, " | ").collect();
+    let fields: Vec<&str> = line.splitn(6, " | ").collect();
     let [
         grade_field,
         source_field,
         semantics_field,
+        ir_field,
         markup_field,
         description,
     ] = fields[..]
@@ -145,6 +156,7 @@ fn split_header(text: &str) -> Result<(Header<'_>, &str), String> {
             description,
             source_lines: line_count_field(source_field, "원문")?,
             semantics_lines: line_count_field(semantics_field, "의미론")?,
+            ir_lines: line_count_field(ir_field, "IR")?,
             markup_lines: line_count_field(markup_field, "렌더링")?,
         },
         body,
@@ -244,7 +256,8 @@ fn first_difference(expected: &str, actual: &str) -> String {
 mod harness {
     use super::*;
 
-    const BOLD: &str = "근거: 미확인 | 원문: 1줄 | 의미론: 15줄 | 렌더링: 1줄 | 굵게\n'''굵게'''\n";
+    const BOLD: &str =
+        "근거: 미확인 | 원문: 1줄 | 의미론: 15줄 | IR: 12줄 | 렌더링: 1줄 | 굵게\n'''굵게'''\n";
 
     fn case(header: &str, body: &str) -> String {
         format!("{header}\n{body}")
@@ -253,7 +266,7 @@ mod harness {
     #[test]
     fn regenerated_case_is_stable() {
         let once = regenerate(&case(
-            "근거: 미확인 | 원문: 1줄 | 의미론: 0줄 | 렌더링: 0줄 | 굵게",
+            "근거: 미확인 | 원문: 1줄 | 의미론: 0줄 | IR: 0줄 | 렌더링: 0줄 | 굵게",
             "'''굵게'''\n",
         ))
         .expect("다시 짓기");
@@ -268,7 +281,7 @@ mod harness {
     #[test]
     fn stale_source_line_count_is_refused_before_overwriting() {
         let reason = regenerate(&case(
-            "근거: 미확인 | 원문: 1줄 | 의미론: 15줄 | 렌더링: 1줄 | 굵게",
+            "근거: 미확인 | 원문: 1줄 | 의미론: 15줄 | IR: 0줄 | 렌더링: 1줄 | 굵게",
             "'''굵게'''\n''기울임''\n",
         ))
         .expect_err("선언과 어긋난 파일은 거부해야 한다");
@@ -278,7 +291,7 @@ mod harness {
     #[test]
     fn source_shorter_than_declared_is_refused() {
         let reason = regenerate(&case(
-            "근거: 미확인 | 원문: 9줄 | 의미론: 0줄 | 렌더링: 0줄 | 짧음",
+            "근거: 미확인 | 원문: 9줄 | 의미론: 0줄 | IR: 0줄 | 렌더링: 0줄 | 짧음",
             "한 줄\n",
         ))
         .expect_err("원문이 모자라면 거부해야 한다");
@@ -302,7 +315,7 @@ mod harness {
     #[test]
     fn description_may_contain_the_field_separator() {
         let text = case(
-            "근거: 미확인 | 원문: 1줄 | 의미론: 0줄 | 렌더링: 0줄 | 표시명 [[문서 | 출력]] 설명",
+            "근거: 미확인 | 원문: 1줄 | 의미론: 0줄 | IR: 0줄 | 렌더링: 0줄 | 표시명 [[문서 | 출력]] 설명",
             "'''굵게'''\n",
         );
         let (header, _) = split_header(&text).expect("첫 줄 읽기");
@@ -312,7 +325,7 @@ mod harness {
     #[test]
     fn empty_source_round_trips() {
         let text = regenerate(&case(
-            "근거: 미확인 | 원문: 0줄 | 의미론: 0줄 | 렌더링: 0줄 | 빈 문서",
+            "근거: 미확인 | 원문: 0줄 | 의미론: 0줄 | IR: 0줄 | 렌더링: 0줄 | 빈 문서",
             "",
         ))
         .expect("빈 원문");

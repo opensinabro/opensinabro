@@ -8,3 +8,8 @@ license.workspace = true
 [dependencies]
 namumark-ast.workspace = true
 namumark-text.workspace = true
+serde.workspace = true
+ts-rs.workspace = true
+
+[dev-dependencies]
+serde_json.workspace = true

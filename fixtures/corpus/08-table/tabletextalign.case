@@ -1,4 +1,4 @@
-근거: 도움말서술 | 원문: 1줄 | 의미론: 16줄 | 렌더링: 2줄 | 표 정렬 — 도움말에 없는 옵션
+근거: 도움말서술 | 원문: 1줄 | 의미론: 16줄 | IR: 48줄 | 렌더링: 2줄 | 표 정렬 — 도움말에 없는 옵션
 ||<tabletextalign=center> 표 ||
 Document@0..33
   Table@0..32
@@ -16,5 +16,53 @@ Document@0..33
         AlignmentSpace@29..30 " "
       Separator@30..32 "||"
   Newline@32..33 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "table",
+      "table": {
+        "caption": null,
+        "rows": [
+          {
+            "cells": [
+              {
+                "columnSpan": null,
+                "rowSpan": null,
+                "horizontalAlignment": "center",
+                "verticalAlignment": null,
+                "attributes": [
+                  {
+                    "scope": {
+                      "type": "table"
+                    },
+                    "property": {
+                      "type": "textAlign",
+                      "alignment": "center"
+                    }
+                  }
+                ],
+                "blocks": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "표"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-table-wrap"><table class="wiki-table" style=" text-align: center;"><tbody><tr class="wiki-table-tr"><td style="text-align: center;"><div class="wiki-paragraph">표</div>
 </td></tr></tbody></table></div>

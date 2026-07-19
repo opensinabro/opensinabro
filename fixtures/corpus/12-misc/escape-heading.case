@@ -1,8 +1,25 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 5줄 | 렌더링: 1줄 | 문법 무효화 — 문단
+근거: 도움말예제 | 원문: 1줄 | 의미론: 5줄 | IR: 17줄 | 렌더링: 1줄 | 문법 무효화 — 문단
 \== 문단 문법 무효 ==
 Document@0..28
   Paragraph@0..27
     Escaped@0..2 "\\="
     Text@2..27 "= 문단 문법 무효 ..."
   Newline@27..28 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "== 문단 문법 무효 =="
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph">== 문단 문법 무효 ==</div>

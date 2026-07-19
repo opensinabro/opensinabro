@@ -1,4 +1,4 @@
-근거: 미확인 | 원문: 1줄 | 의미론: 8줄 | 렌더링: 1줄 | sanitizer — 미허용 태그는 껍데기만 벗김
+근거: 미확인 | 원문: 1줄 | 의미론: 8줄 | IR: 22줄 | 렌더링: 1줄 | sanitizer — 미허용 태그는 껍데기만 벗김
 {{{#!html <marquee>글자</marquee>}}}
 Document@0..39
   Paragraph@0..38
@@ -8,4 +8,26 @@ Document@0..39
       Text@10..35 "<marquee>글자</marq ..."
       DelimiterClose@35..38 "}}}"
   Newline@38..39 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "html",
+          "nodes": [
+            {
+              "type": "text",
+              "text": "글자"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph">글자</div>

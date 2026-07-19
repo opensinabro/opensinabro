@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 10줄 | 렌더링: 1줄 | 도움말: 지원. 우리는 미해결 매크로로 원문 노출
+근거: 도움말예제 | 원문: 1줄 | 의미론: 10줄 | IR: 18줄 | 렌더링: 1줄 | 도움말: 지원. 우리는 미해결 매크로로 원문 노출
 [vimeo(584524359)]
 Document@0..19
   Paragraph@0..18
@@ -10,4 +10,22 @@ Document@0..19
       Separator@16..17 ")"
       DelimiterClose@17..18 "]"
   Newline@18..19 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "unresolved",
+          "name": "vimeo",
+          "argument": "584524359"
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph">[vimeo(584524359)]</div>

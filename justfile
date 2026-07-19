@@ -132,9 +132,34 @@ lint:
 format:
     cargo fmt --all
 
+# IR에서 프론트엔드가 쓸 TypeScript 타입을 다시 만든다.
+#
+# frontend/lib/namumark 아래는 전부 여기서 나온 것이다 — 손으로 고치지 않는다.
+[group('점검')]
+bindings:
+    cargo test --package namumark-ir --package namumark-ast
+
+# TypeScript 타입이 IR과 어긋난 채로 커밋되지 않게 막는다.
+#
+# IR은 프론트엔드와의 계약이고, 그 계약이 어긋났다는 것은 타입 오류로 즉시 드러나야
+# 한다. 이 검사가 없으면 생성 파일이 뒤처진 줄 모르고 지나간다.
+[group('점검')]
+bindings-check: bindings
+    #!/usr/bin/env bash
+    set -euo pipefail
+    # `git diff`는 새로 생긴 파일을 보지 못하므로 status로 본다 — 타입이 하나 늘어난
+    # 경우를 놓치면 검사가 있으나 마나다.
+    changed=$(git status --porcelain -- frontend/lib/namumark)
+    if [ -z "$changed" ]; then
+        exit 0
+    fi
+    echo "IR의 TypeScript 타입이 최신이 아닙니다. 다시 만든 결과를 커밋하세요:" >&2
+    echo "$changed" >&2
+    exit 1
+
 # 커밋 전에 한 번 돌리는 것들.
 [group('점검')]
-check: format lint test
+check: format bindings-check lint test
 
 # ── 여기부터는 다른 명령이 알아서 부르는 것들 ────────────────────────────────
 

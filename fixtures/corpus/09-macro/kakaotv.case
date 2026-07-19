@@ -1,4 +1,4 @@
-근거: 도움말서술 | 원문: 1줄 | 의미론: 10줄 | 렌더링: 1줄 | 카카오TV
+근거: 도움말서술 | 원문: 1줄 | 의미론: 10줄 | IR: 20줄 | 렌더링: 1줄 | 카카오TV
 [kakaotv(301157150)]
 Document@0..21
   Paragraph@0..20
@@ -10,4 +10,24 @@ Document@0..21
       Separator@18..19 ")"
       DelimiterClose@19..20 "]"
   Newline@20..21 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "video",
+          "provider": "kakaoTv",
+          "identifier": "301157150",
+          "width": null,
+          "height": null
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><iframe class="wiki-media" src="//tv.kakao.com/embed/player/cliplink/301157150" width="640" height="360" frameborder="0" allowfullscreen loading="lazy"></iframe></div>

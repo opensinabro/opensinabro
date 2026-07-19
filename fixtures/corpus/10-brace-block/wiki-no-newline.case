@@ -1,4 +1,4 @@
-근거: 도움말서술 | 원문: 1줄 | 의미론: 14줄 | 렌더링: 1줄 | 도움말: style= 뒤 줄바꿈을 생략하면 정상 출력되지 않음
+근거: 도움말서술 | 원문: 1줄 | 의미론: 14줄 | IR: 34줄 | 렌더링: 1줄 | 도움말: style= 뒤 줄바꿈을 생략하면 정상 출력되지 않음
 {{{#!wiki style="color:red" 내용}}}
 Document@0..38
   Paragraph@0..37
@@ -14,4 +14,38 @@ Document@0..38
         Text@28..34 "내용"
       DelimiterClose@34..37 "}}}"
   Newline@37..38 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "wikiStyle",
+          "style": [
+            {
+              "property": "color",
+              "value": "red"
+            }
+          ],
+          "darkStyle": [],
+          "blocks": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "내용"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><div style="color: red">내용</div></div>

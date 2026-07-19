@@ -7,6 +7,12 @@
 //! 표 속성·정렬·리스트 종류는 언어 어휘이므로 의미 모델(namumark-ast)의 타입을 재사용한다.
 
 use namumark_ast::{HorizontalAlignment, ListKind, TableAttributeScope, VerticalAlignment};
+use serde::Serialize;
+use ts_rs::TS;
+
+mod html;
+
+pub use html::{HtmlAttributes, HtmlNode, HtmlTag};
 
 /// 백엔드 계약: layout이 끝난 [`RenderTree`]를 순회해 출력물을 만든다.
 pub trait RenderBackend {
@@ -17,16 +23,27 @@ pub trait RenderBackend {
 
 /// layout까지 끝난 최종 렌더링 입력.
 ///
-/// 모든 노드는 자기완결적이다 — 각주 목록·목차는 해당 블록이 내용을 소유하므로
-/// 백엔드는 트리 조회 없이 노드 단위로 방출할 수 있다.
-#[derive(Debug, Clone, PartialEq, Eq)]
+/// 문서 전역 정보(목차·각주)는 트리 밖 최상위 목록이 소유하고 트리 안에는 자리표시만
+/// 남는다. 그래야 layout이 헤딩을 다 본 뒤 목차를 채우려고 트리를 다시 훑지 않아도 되고,
+/// 여러 번 참조된 각주의 내용이 참조 수만큼 실려 나가지도 않는다. 대신 `[목차]`·`[각주]`를
+/// 그리는 쪽은 노드만으로는 부족하고 이 목록을 함께 봐야 한다.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, TS)]
+#[serde(rename_all = "camelCase")]
+#[ts(export)]
 pub struct RenderTree {
     pub redirect: Option<String>,
     pub blocks: Vec<RenderBlock>,
     pub categories: Vec<String>,
+    /// 문서 전체 목차. `[목차]` 자리마다 이 목록을 그대로 그린다.
+    pub table_of_contents: Vec<TableOfContentsEntry>,
+    /// 문서의 모든 각주를 방출 순서대로 담는다. 각주 내용의 유일한 소유자이며,
+    /// [`RenderInline::FootnoteSection`]은 이 목록의 인덱스만 가리킨다.
+    pub footnotes: Vec<RenderedFootnote>,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, TS)]
+#[serde(rename_all = "camelCase")]
+#[ts(export)]
 pub struct TableOfContentsEntry {
     /// "1.2.3" — 앵커는 `s-{number}`
     pub number: String,
@@ -36,7 +53,9 @@ pub struct TableOfContentsEntry {
     pub title: Vec<RenderInline>,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, TS)]
+#[serde(rename_all = "camelCase")]
+#[ts(export)]
 pub struct RenderedFootnote {
     /// 화면 표기 이름. 무명 각주는 참조 번호("16"), 이름 각주는 그 이름("A").
     pub label: String,
@@ -45,7 +64,13 @@ pub struct RenderedFootnote {
     pub content: Vec<RenderInline>,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, TS)]
+#[serde(
+    tag = "type",
+    rename_all = "camelCase",
+    rename_all_fields = "camelCase"
+)]
+#[ts(export)]
 pub enum RenderBlock {
     Heading {
         level: u8,
@@ -56,24 +81,36 @@ pub enum RenderBlock {
         anchor: String,
         content: Vec<RenderInline>,
     },
-    Paragraph(Vec<RenderInline>),
+    Paragraph {
+        content: Vec<RenderInline>,
+    },
     HorizontalRule,
-    Quote(Vec<RenderBlock>),
+    Quote {
+        blocks: Vec<RenderBlock>,
+    },
     List {
         kind: ListKind,
         items: Vec<RenderListItem>,
     },
-    Indent(Vec<RenderBlock>),
-    Table(RenderTable),
+    Indent {
+        blocks: Vec<RenderBlock>,
+    },
+    Table {
+        table: RenderTable,
+    },
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, TS)]
+#[serde(rename_all = "camelCase")]
+#[ts(export)]
 pub struct RenderListItem {
     pub start_number: Option<u32>,
     pub blocks: Vec<RenderBlock>,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, TS)]
+#[serde(rename_all = "camelCase")]
+#[ts(export)]
 pub struct RenderTable {
     pub caption: Option<Vec<RenderInline>>,
     pub rows: Vec<RenderTableRow>,
@@ -81,7 +118,9 @@ pub struct RenderTable {
 
 /// 표 스타일 속성. 색·크기 표기 해석과 방출 여부 판정을 resolve가 끝냈으므로,
 /// 백엔드는 문자열 이름 대조나 값 파싱 없이 확정된 값을 방출만 한다.
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, TS)]
+#[serde(rename_all = "camelCase")]
+#[ts(export)]
 pub struct RenderTableAttribute {
     pub scope: TableAttributeScope,
     pub property: TableStyleProperty,
@@ -91,18 +130,39 @@ pub struct RenderTableAttribute {
 ///
 /// 색은 듀얼 표기(`#fff,#000`)의 라이트 값만 담는다 — 표 색의 다크 모드는 후속 과제다.
 /// 색 표기가 아닌 값이 들어온 선언은 resolve가 통째로 버리므로 여기 나타나지 않는다.
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, TS)]
+#[serde(
+    tag = "type",
+    rename_all = "camelCase",
+    rename_all_fields = "camelCase"
+)]
+#[ts(export)]
 pub enum TableStyleProperty {
-    BackgroundColor(ColorValue),
-    Color(ColorValue),
-    BorderColor(ColorValue),
-    Width(Dimension),
-    Height(Dimension),
+    BackgroundColor {
+        #[ts(type = "string")]
+        color: ColorValue,
+    },
+    Color {
+        #[ts(type = "string")]
+        color: ColorValue,
+    },
+    BorderColor {
+        #[ts(type = "string")]
+        color: ColorValue,
+    },
+    Width {
+        #[ts(type = "string")]
+        width: Dimension,
+    },
+    Height {
+        #[ts(type = "string")]
+        height: Dimension,
+    },
     /// `text-align`. 나무위키는 left·center·right만 받고 그 외 값은 선언을 통째로 버린다.
-    TextAlign(HorizontalAlignment),
+    TextAlign { alignment: HorizontalAlignment },
     /// 표 정렬(`<tablealign=…>`). 감싸는 div의 클래스가 된다 — center·right만 클래스를
     /// 만들고, left(기본)·인식 못한 값은 클래스가 없다.
-    Align(HorizontalAlignment),
+    Align { alignment: HorizontalAlignment },
     /// `<nopad>` — 셀 패딩 제거.
     NoPadding,
 }
@@ -112,7 +172,7 @@ impl TableStyleProperty {
     pub fn emits_table_style(&self) -> bool {
         !matches!(
             self,
-            TableStyleProperty::Align(_) | TableStyleProperty::NoPadding
+            TableStyleProperty::Align { .. } | TableStyleProperty::NoPadding
         )
     }
 
@@ -120,21 +180,25 @@ impl TableStyleProperty {
     pub fn emits_cell_style(&self) -> bool {
         matches!(
             self,
-            TableStyleProperty::BackgroundColor(_)
-                | TableStyleProperty::Color(_)
-                | TableStyleProperty::Width(_)
-                | TableStyleProperty::Height(_)
-                | TableStyleProperty::TextAlign(_)
+            TableStyleProperty::BackgroundColor { .. }
+                | TableStyleProperty::Color { .. }
+                | TableStyleProperty::Width { .. }
+                | TableStyleProperty::Height { .. }
+                | TableStyleProperty::TextAlign { .. }
         )
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, TS)]
+#[serde(rename_all = "camelCase")]
+#[ts(export)]
 pub struct RenderTableRow {
     pub cells: Vec<RenderTableCell>,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, TS)]
+#[serde(rename_all = "camelCase")]
+#[ts(export)]
 pub struct RenderTableCell {
     /// 지정하지 않았으면 None (기본 1, `colspan`·`rowspan` 미방출).
     pub column_span: Option<u32>,
@@ -147,9 +211,13 @@ pub struct RenderTableCell {
 }
 
 /// 라이트/다크 듀얼 색상.
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, TS)]
+#[serde(rename_all = "camelCase")]
+#[ts(export)]
 pub struct Color {
+    #[ts(type = "string")]
     pub light: ColorValue,
+    #[ts(type = "string | null")]
     pub dark: Option<ColorValue>,
 }
 
@@ -213,6 +281,21 @@ impl std::fmt::Display for ColorValue {
                 write!(formatter, "#{red:02x}{green:02x}{blue:02x}")
             }
         }
+    }
+}
+
+/// 값 타입은 이미 정본 CSS 표기를 내는 `Display`가 있고, 어떤 백엔드도 성분을 따로
+/// 쓰지 않는다. 그래서 와이어에는 그 표기 그대로 문자열로 나간다 — 받는 쪽이
+/// 성분을 다시 조립할 일이 없다.
+impl Serialize for ColorValue {
+    fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
+        serializer.collect_str(self)
+    }
+}
+
+impl Serialize for Dimension {
+    fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
+        serializer.collect_str(self)
     }
 }
 
@@ -285,7 +368,9 @@ impl std::fmt::Display for Dimension {
 ///
 /// 위키 입력이 CSS로 나가는 통로라 색·크기와 같은 값 해석 부류다 — 나무위키는 여기를
 /// 그냥 흘려보내지 않고 무효·미지원 선언을 버린다([`StyleDeclaration::parse`] 참고).
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, TS)]
+#[serde(rename_all = "camelCase")]
+#[ts(export)]
 pub struct StyleDeclaration {
     pub property: String,
     pub value: String,
@@ -316,6 +401,57 @@ impl StyleDeclaration {
             })
             .collect()
     }
+
+    /// `#!html`의 `style` 속성을 해석한다. 코드를 부를 수 있는 표현이 하나라도 있으면
+    /// 속성 전체를 버린다(`None`) — 부분만 지우면 남은 값이 무엇이 될지 장담할 수 없다.
+    ///
+    /// `#!wiki`의 [`StyleDeclaration::parse`]와 정책이 다르다. `#!wiki`는 `url(`을 받고
+    /// (실제 문서가 배경 이미지를 그렇게 쓴다) `image-rendering`·무효한 `display`를 버리는데,
+    /// `#!html`은 반대다. 위키 문법이 실어 온 CSS와 사용자가 직접 쓴 HTML은 신뢰 수준이
+    /// 달라서 한 함수로 합칠 수 없다 — 합치면 한쪽 렌더가 반드시 어긋난다.
+    pub fn parse_html_attribute(source: &str) -> Option<Vec<StyleDeclaration>> {
+        // CSS 주석은 위험한 표현을 감출 수 있으므로(`ur/**/l(`) 판정 전에 걷어 낸다.
+        // 걷어 낸 값은 판정에만 쓰고, 통과한 선언은 원문 표기 그대로 담는다.
+        if calls_code(&strip_comments(source)) {
+            return None;
+        }
+        Some(
+            source
+                .split(';')
+                .filter_map(|declaration| {
+                    let (property, value) = declaration.split_once(':')?;
+                    let (property, value) = (property.trim(), value.trim());
+                    (!property.is_empty() && !value.is_empty()).then(|| StyleDeclaration {
+                        property: property.to_string(),
+                        value: value.to_string(),
+                    })
+                })
+                .collect(),
+        )
+    }
+}
+
+/// `url(...)`은 외부 요청과 `javascript:`를, `expression(...)`은 옛 IE의 스크립트를 부른다.
+fn calls_code(value: &str) -> bool {
+    let lowered = value.to_ascii_lowercase();
+    ["url(", "expression(", "javascript:", "@import", "behavior:"]
+        .iter()
+        .any(|pattern| lowered.contains(pattern))
+}
+
+fn strip_comments(source: &str) -> String {
+    let mut stripped = String::with_capacity(source.len());
+    let mut rest = source;
+    while let Some(start) = rest.find("/*") {
+        stripped.push_str(&rest[..start]);
+        match rest[start..].find("*/") {
+            Some(end) => rest = &rest[start + end + 2..],
+            // 닫히지 않은 주석 뒤는 전부 주석이다.
+            None => return stripped,
+        }
+    }
+    stripped.push_str(rest);
+    stripped
 }
 
 impl std::fmt::Display for StyleDeclaration {
@@ -387,7 +523,9 @@ fn is_display_keyword(value: &str) -> bool {
     )
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, TS)]
+#[serde(rename_all = "camelCase")]
+#[ts(export)]
 pub enum TextStyle {
     Bold,
     Italic,
@@ -397,37 +535,50 @@ pub enum TextStyle {
     Subscript,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, TS)]
+#[serde(rename_all = "camelCase")]
+#[ts(export)]
 pub enum VideoProvider {
     Youtube,
     KakaoTv,
     NicoVideo,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, TS)]
+#[serde(rename_all = "camelCase")]
+#[ts(export)]
 pub enum ImageAlignment {
     Left,
     Center,
     Right,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, TS)]
+#[serde(rename_all = "camelCase")]
+#[ts(export)]
 pub enum ImageTheme {
     Light,
     Dark,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Default, Serialize, TS)]
+#[serde(rename_all = "camelCase")]
+#[ts(export)]
 pub struct ImageLayout {
+    #[ts(type = "string | null")]
     pub width: Option<Dimension>,
+    #[ts(type = "string | null")]
     pub height: Option<Dimension>,
     pub align: Option<ImageAlignment>,
+    #[ts(type = "string | null")]
     pub background_color: Option<ColorValue>,
     pub theme: Option<ImageTheme>,
 }
 
 /// 문서 링크가 가리키는 곳의 성격. 나무위키는 셋을 다르게 꾸민다.
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, TS)]
+#[serde(rename_all = "camelCase")]
+#[ts(export)]
 pub enum DocumentLinkKind {
     Existing,
     /// 아직 없는 문서. 검색 엔진이 따라가지 않게 한다.
@@ -436,15 +587,25 @@ pub enum DocumentLinkKind {
     Current,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, TS)]
+#[serde(
+    tag = "type",
+    rename_all = "camelCase",
+    rename_all_fields = "camelCase"
+)]
+#[ts(export)]
 pub enum RenderInline {
-    Text(String),
+    Text {
+        text: String,
+    },
     LineBreak,
     Styled {
         style: TextStyle,
         content: Vec<RenderInline>,
     },
-    Literal(String),
+    Literal {
+        text: String,
+    },
     Colored {
         color: Color,
         content: Vec<RenderInline>,
@@ -471,6 +632,11 @@ pub enum RenderInline {
     },
     /// resolve 출력 상태의 각주. layout pass가 [`RenderInline::FootnoteReference`]로 치환하므로
     /// 백엔드에는 나타나지 않는다.
+    ///
+    /// 계약에서 빠져 있다 — 생성된 TypeScript 타입에 이 변형이 없고, 직렬화하려 하면
+    /// 조용히 나가는 대신 오류가 난다. layout이 하나라도 남기면 그 자리에서 드러난다.
+    #[serde(skip)]
+    #[ts(skip)]
     Footnote {
         name: Option<String>,
         content: Vec<RenderInline>,
@@ -495,6 +661,7 @@ pub enum RenderInline {
         content: String,
         ruby: String,
         /// `color=`로 준 루비 글자색. 나무위키는 `<rt>` 안을 span으로 감싼다.
+        #[ts(type = "string | null")]
         color: Option<ColorValue>,
     },
     Math {
@@ -504,17 +671,18 @@ pub enum RenderInline {
         name: String,
     },
     ClearFix,
-    /// `[목차]` 자리. layout pass가 문서 전체 목차를 채운다.
-    TableOfContents {
-        entries: Vec<TableOfContentsEntry>,
-    },
-    /// `[각주]` 자리와 문서 끝 잔여 각주. layout pass가 그 시점까지의 각주를 채운다.
+    /// `[목차]` 자리. 내용은 [`RenderTree::table_of_contents`]가 소유한다.
+    TableOfContents,
+    /// `[각주]` 자리와 문서 끝 잔여 각주. 그 시점까지 쌓인 각주를 가리키는
+    /// [`RenderTree::footnotes`]의 인덱스다.
     FootnoteSection {
-        notes: Vec<RenderedFootnote>,
+        notes: Vec<u32>,
     },
     /// 감싸는 요소 없이 문단 안에 놓이는 블록들. `#!if`가 표·리스트를 품을 때 쓴다 —
     /// 조건은 내용을 가릴 뿐 자기 요소를 만들지 않는다.
-    Blocks(Vec<RenderBlock>),
+    Blocks {
+        blocks: Vec<RenderBlock>,
+    },
     /// `{{{#!wiki}}}` — 나무위키에서 인라인이지만 안에 블록을 품는다.
     /// style은 이미 걸러진 선언 목록이다. 비어 있으면 백엔드가 style 속성을 두지 않는다.
     WikiStyle {
@@ -531,10 +699,51 @@ pub enum RenderInline {
         language: Option<String>,
         source: String,
     },
-    Html(String),
+    /// `{{{#!html}}}` — 화이트리스트를 통과한 것만 담긴다([`HtmlNode`] 참고).
+    Html {
+        nodes: Vec<HtmlNode>,
+    },
     /// 해석하지 못한 매크로. 화면 일치를 위해 원문 표기로 방출한다.
     Unresolved {
         name: String,
         argument: Option<String>,
     },
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    /// `#!wiki`와 `#!html`의 style 정책이 갈리는 것은 의도다. 한쪽으로 합치면 반드시
+    /// 어느 한쪽 렌더가 어긋나므로, 그 갈림을 여기 고정해 둔다.
+    #[test]
+    fn wiki_and_html_style_policies_diverge() {
+        let background = "background: url(/image.png)";
+        // 실제 문서가 `#!wiki`로 배경 이미지를 쓴다 — 받아야 한다.
+        assert_eq!(StyleDeclaration::parse(background).len(), 1);
+        // 같은 값을 사용자가 직접 쓴 HTML로 넣으면 받지 않는다.
+        assert_eq!(StyleDeclaration::parse_html_attribute(background), None);
+
+        let rendering = "image-rendering: pixelated";
+        // the seed는 `#!wiki`의 `image-rendering`을 속성째 버린다.
+        assert!(StyleDeclaration::parse(rendering).is_empty());
+        // `#!html`에는 그런 근거가 없으므로 통과시킨다.
+        assert_eq!(
+            StyleDeclaration::parse_html_attribute(rendering),
+            Some(vec![StyleDeclaration {
+                property: "image-rendering".to_string(),
+                value: "pixelated".to_string(),
+            }])
+        );
+    }
+
+    /// 위험한 선언 하나가 style 속성 전체를 버리게 한다 — 부분만 지우면 남은 값이
+    /// 무엇이 될지 장담할 수 없다.
+    #[test]
+    fn one_dangerous_declaration_drops_the_whole_attribute() {
+        assert_eq!(
+            StyleDeclaration::parse_html_attribute("color: red; background: url(//evil)"),
+            None
+        );
+    }
 }

@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 7줄 | 렌더링: 1줄 | 문법 무효화 — 표
+근거: 도움말예제 | 원문: 1줄 | 의미론: 7줄 | IR: 17줄 | 렌더링: 1줄 | 문법 무효화 — 표
 \|| 표 문법 무효 \||
 Document@0..26
   Paragraph@0..25
@@ -7,4 +7,21 @@ Document@0..26
     Escaped@22..24 "\\|"
     Text@24..25 "|"
   Newline@25..26 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "|| 표 문법 무효 ||"
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph">|| 표 문법 무효 ||</div>

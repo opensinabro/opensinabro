@@ -1,4 +1,4 @@
-근거: 미확인 | 원문: 1줄 | 의미론: 8줄 | 렌더링: 1줄 | 앵커 구분자만 있고 뒤가 빔
+근거: 미확인 | 원문: 1줄 | 의미론: 8줄 | IR: 25줄 | 렌더링: 1줄 | 앵커 구분자만 있고 뒤가 빔
 [[##]]
 Document@0..7
   Paragraph@0..6
@@ -8,4 +8,29 @@ Document@0..7
       Separator@3..4 "#"
       DelimiterClose@4..6 "]]"
   Newline@6..7 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "documentLink",
+          "title": "#",
+          "anchor": null,
+          "kind": "missing",
+          "display": [
+            {
+              "type": "text",
+              "text": "#"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><a class="wiki-link-internal not-exist" href="/w/%23" rel="nofollow" title="#">#</a></div>

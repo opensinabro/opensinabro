@@ -1,4 +1,4 @@
-근거: 도움말서술 | 원문: 3줄 | 의미론: 23줄 | 렌더링: 5줄 | 도움말: 표 사이에 빈 줄이 있어야 별개 표
+근거: 도움말서술 | 원문: 3줄 | 의미론: 23줄 | IR: 72줄 | 렌더링: 5줄 | 도움말: 표 사이에 빈 줄이 있어야 별개 표
 || 1 ||
 
 || 2 ||
@@ -25,6 +25,78 @@ Document@0..17
         AlignmentSpace@13..14 " "
       Separator@14..16 "||"
   Newline@16..17 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "table",
+      "table": {
+        "caption": null,
+        "rows": [
+          {
+            "cells": [
+              {
+                "columnSpan": null,
+                "rowSpan": null,
+                "horizontalAlignment": "center",
+                "verticalAlignment": null,
+                "attributes": [],
+                "blocks": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "1"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "type": "paragraph",
+      "content": []
+    },
+    {
+      "type": "table",
+      "table": {
+        "caption": null,
+        "rows": [
+          {
+            "cells": [
+              {
+                "columnSpan": null,
+                "rowSpan": null,
+                "horizontalAlignment": "center",
+                "verticalAlignment": null,
+                "attributes": [],
+                "blocks": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "2"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-table-wrap"><table class="wiki-table"><tbody><tr class="wiki-table-tr"><td style="text-align: center;"><div class="wiki-paragraph">1</div>
 </td></tr></tbody></table></div>
 <div class="wiki-paragraph"></div>

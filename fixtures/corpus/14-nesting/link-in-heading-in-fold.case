@@ -1,4 +1,4 @@
-근거: 미확인 | 원문: 3줄 | 의미론: 21줄 | 렌더링: 2줄 | 접기 안 문단 안 링크
+근거: 미확인 | 원문: 3줄 | 의미론: 21줄 | IR: 67줄 | 렌더링: 2줄 | 접기 안 문단 안 링크
 {{{#!folding 접기
 == [[링크]] 문단 ==
 }}}
@@ -23,5 +23,72 @@ Document@0..48
         DelimiterClose@41..43 "=="
       DelimiterClose@43..47 "\n}}}"
   Newline@47..48 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "folding",
+          "summary": "접기",
+          "blocks": [
+            {
+              "type": "heading",
+              "level": 2,
+              "folded": false,
+              "number": "1",
+              "anchor": "링크 문단",
+              "content": [
+                {
+                  "type": "documentLink",
+                  "title": "링크",
+                  "anchor": null,
+                  "kind": "existing",
+                  "display": [
+                    {
+                      "type": "text",
+                      "text": "링크"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": " 문단"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [
+    {
+      "number": "1",
+      "depth": 1,
+      "title": [
+        {
+          "type": "documentLink",
+          "title": "링크",
+          "anchor": null,
+          "kind": "existing",
+          "display": [
+            {
+              "type": "text",
+              "text": "링크"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "text": " 문단"
+        }
+      ]
+    }
+  ],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><details class="wiki-folding"><summary>접기</summary><div><h2 class="wiki-heading"><a id="s-1" href="#toc">1.</a> <span id="링크 문단"><a class="wiki-link-internal" href="/w/%EB%A7%81%ED%81%AC" title="링크">링크</a> 문단</span></h2>
 </div></details></div>

@@ -1,4 +1,4 @@
-근거: 미확인 | 원문: 1줄 | 의미론: 8줄 | 렌더링: 1줄 | sanitizer — script는 내용까지 폐기
+근거: 미확인 | 원문: 1줄 | 의미론: 8줄 | IR: 17줄 | 렌더링: 1줄 | sanitizer — script는 내용까지 폐기
 {{{#!html <script>alert(1)</script>}}}
 Document@0..39
   Paragraph@0..38
@@ -8,4 +8,21 @@ Document@0..39
       Text@10..35 "<script>alert(1)</scr ..."
       DelimiterClose@35..38 "}}}"
   Newline@38..39 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "html",
+          "nodes": []
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"></div>

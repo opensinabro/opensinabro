@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 9줄 | 렌더링: 1줄 | 외부 링크 표시명
+근거: 도움말예제 | 원문: 1줄 | 의미론: 9줄 | IR: 23줄 | 렌더링: 1줄 | 외부 링크 표시명
 [[https://www.google.com/|구글]]
 Document@0..35
   Paragraph@0..34
@@ -9,4 +9,27 @@ Document@0..35
       Text@26..32 "구글"
       DelimiterClose@32..34 "]]"
   Newline@34..35 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "externalLink",
+          "url": "https://www.google.com/",
+          "display": [
+            {
+              "type": "text",
+              "text": "구글"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><a class="wiki-link-external" href="https://www.google.com/" target="_blank" rel="nofollow noopener ugc" title="https://www.google.com/">구글</a></div>

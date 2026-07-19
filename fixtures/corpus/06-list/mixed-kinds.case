@@ -1,4 +1,4 @@
-근거: 미확인 | 원문: 3줄 | 의미론: 28줄 | 렌더링: 6줄 | 종류가 섞인 중첩
+근거: 미확인 | 원문: 3줄 | 의미론: 28줄 | IR: 68줄 | 렌더링: 6줄 | 종류가 섞인 중첩
  * 불릿
   1. 번호
    a. 알파벳
@@ -30,6 +30,74 @@ Document@0..38
               Paragraph@28..37
                 Text@28..37 "알파벳"
               Newline@37..38 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "list",
+      "kind": "unordered",
+      "items": [
+        {
+          "startNumber": null,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "불릿"
+                }
+              ]
+            },
+            {
+              "type": "list",
+              "kind": "decimal",
+              "items": [
+                {
+                  "startNumber": null,
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "번호"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "list",
+                      "kind": "lowerAlphabet",
+                      "items": [
+                        {
+                          "startNumber": null,
+                          "blocks": [
+                            {
+                              "type": "paragraph",
+                              "content": [
+                                {
+                                  "type": "text",
+                                  "text": "알파벳"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <ul class="wiki-list"><li><div class="wiki-paragraph">불릿</div>
 <ol class="wiki-list wiki-list" start="1"><li><div class="wiki-paragraph">번호</div>
 <ol class="wiki-list wiki-list-alpha" start="1"><li><div class="wiki-paragraph">알파벳</div>

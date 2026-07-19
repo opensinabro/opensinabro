@@ -1,4 +1,4 @@
-근거: 도움말서술 | 원문: 1줄 | 의미론: 7줄 | 렌더링: 1줄 | 틀 매개변수
+근거: 도움말서술 | 원문: 1줄 | 의미론: 7줄 | IR: 17줄 | 렌더링: 1줄 | 틀 매개변수
 @매개변수@
 Document@0..15
   Paragraph@0..14
@@ -7,4 +7,21 @@ Document@0..15
       VariableName@1..13 "매개변수"
       DelimiterClose@13..14 "@"
   Newline@14..15 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": ""
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"></div>

@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 14줄 | 렌더링: 1줄 | 크기 안의 색상 — 순서 무관
+근거: 도움말예제 | 원문: 1줄 | 의미론: 14줄 | IR: 32줄 | 렌더링: 1줄 | 크기 안의 색상 — 순서 무관
 {{{+1 {{{#blue 큰글자파랑}}}}}}
 Document@0..37
   Paragraph@0..36
@@ -14,4 +14,36 @@ Document@0..37
         DelimiterClose@30..33 "}}}"
       DelimiterClose@33..36 "}}}"
   Newline@36..37 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "sized",
+          "level": 1,
+          "content": [
+            {
+              "type": "colored",
+              "color": {
+                "light": "blue",
+                "dark": null
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "큰글자파랑"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><span class="wiki-size-up-1"><span style="color:blue" data-dark-style="color:blue;">큰글자파랑</span></span></div>

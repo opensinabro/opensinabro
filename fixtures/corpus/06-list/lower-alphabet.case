@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 9줄 | 렌더링: 2줄 | 소문자 알파벳
+근거: 도움말예제 | 원문: 1줄 | 의미론: 9줄 | IR: 28줄 | 렌더링: 2줄 | 소문자 알파벳
  a. 리스트 1
 Document@0..16
   List@0..16
@@ -9,5 +9,33 @@ Document@0..16
       Paragraph@4..15
         Text@4..15 "리스트 1"
       Newline@15..16 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "list",
+      "kind": "lowerAlphabet",
+      "items": [
+        {
+          "startNumber": null,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "리스트 1"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <ol class="wiki-list wiki-list-alpha" start="1"><li><div class="wiki-paragraph">리스트 1</div>
 </li></ol>

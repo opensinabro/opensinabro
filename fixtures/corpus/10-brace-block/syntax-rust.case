@@ -1,4 +1,4 @@
-근거: 도움말서술 | 원문: 3줄 | 의미론: 12줄 | 렌더링: 1줄 | 문법 강조 rust
+근거: 도움말서술 | 원문: 3줄 | 의미론: 12줄 | IR: 18줄 | 렌더링: 1줄 | 문법 강조 rust
 {{{#!syntax rust
 fn main() {}
 }}}
@@ -14,4 +14,22 @@ Document@0..34
       Newline@29..30 "\n"
       DelimiterClose@30..33 "}}}"
   Newline@33..34 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "codeBlock",
+          "language": "rust",
+          "source": "fn main() {}"
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><pre><code class="hljs" data-language="rust">fn main() {}</code></pre></div>

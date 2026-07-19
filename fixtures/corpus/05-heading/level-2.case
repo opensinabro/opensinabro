@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 8줄 | 렌더링: 2줄 | 2단계 문단
+근거: 도움말예제 | 원문: 1줄 | 의미론: 8줄 | IR: 32줄 | 렌더링: 2줄 | 2단계 문단
 == 문단 2 ==
 Document@0..15
   Heading@0..14
@@ -8,5 +8,37 @@ Document@0..15
     Separator@11..12 " "
     DelimiterClose@12..14 "=="
   Newline@14..15 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "heading",
+      "level": 2,
+      "folded": false,
+      "number": "1",
+      "anchor": "문단 2",
+      "content": [
+        {
+          "type": "text",
+          "text": "문단 2"
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [
+    {
+      "number": "1",
+      "depth": 1,
+      "title": [
+        {
+          "type": "text",
+          "text": "문단 2"
+        }
+      ]
+    }
+  ],
+  "footnotes": []
+}
 <h2 class="wiki-heading"><a id="s-1" href="#toc">1.</a> <span id="문단 2">문단 2</span></h2>
 <div class="wiki-heading-content"></div>

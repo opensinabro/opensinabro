@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 2줄 | 의미론: 8줄 | 렌더링: 1줄 | 도움말: 리다이렉트는 그것만 적어야 함
+근거: 도움말예제 | 원문: 2줄 | 의미론: 8줄 | IR: 17줄 | 렌더링: 1줄 | 도움말: 리다이렉트는 그것만 적어야 함
 본문
 #redirect 목적지
 Document@0..27
@@ -9,4 +9,21 @@ Document@0..27
     Directive@7..17 "#redirect "
     Text@17..26 "목적지"
   Newline@26..27 "\n"
+{
+  "redirect": "목적지",
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "본문"
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph">본문</div>

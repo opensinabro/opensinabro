@@ -1,4 +1,4 @@
-근거: 미확인 | 원문: 1줄 | 의미론: 10줄 | 렌더링: 1줄 | 수식 — 도움말은 하위 문서로 위임
+근거: 미확인 | 원문: 1줄 | 의미론: 10줄 | IR: 17줄 | 렌더링: 1줄 | 수식 — 도움말은 하위 문서로 위임
 [math(x^2)]
 Document@0..12
   Paragraph@0..11
@@ -10,4 +10,21 @@ Document@0..12
       Separator@9..10 ")"
       DelimiterClose@10..11 "]"
   Newline@11..12 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "math",
+          "formula": "x^2"
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><span class="wiki-math" data-formula="x^2">\(x^2\)</span></div>

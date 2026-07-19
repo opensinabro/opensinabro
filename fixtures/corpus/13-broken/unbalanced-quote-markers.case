@@ -1,4 +1,4 @@
-근거: 미확인 | 원문: 1줄 | 의미론: 9줄 | 렌더링: 4줄 | 인용 마커만
+근거: 미확인 | 원문: 1줄 | 의미론: 9줄 | IR: 27줄 | 렌더링: 4줄 | 인용 마커만
 >>>
 Document@0..4
   Quote@0..4
@@ -9,6 +9,33 @@ Document@0..4
           QuoteMarker@1..2 ">"
           QuoteMarker@2..3 ">"
         Newline@3..4 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "quote",
+      "blocks": [
+        {
+          "type": "quote",
+          "blocks": [
+            {
+              "type": "quote",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "content": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <blockquote class="wiki-quote"><blockquote class="wiki-quote"><blockquote class="wiki-quote"><div class="wiki-paragraph"></div>
 </blockquote>
 </blockquote>

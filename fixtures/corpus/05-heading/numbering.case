@@ -1,4 +1,4 @@
-근거: 미확인 | 원문: 3줄 | 의미론: 22줄 | 렌더링: 6줄 | 문단 번호 매김(s-1, s-1.1)
+근거: 미확인 | 원문: 3줄 | 의미론: 22줄 | IR: 78줄 | 렌더링: 6줄 | 문단 번호 매김(s-1, s-1.1)
 == 하나 ==
 === 하나의 하나 ===
 == 둘 ==
@@ -24,6 +24,84 @@ Document@0..48
     Separator@44..45 " "
     DelimiterClose@45..47 "=="
   Newline@47..48 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "heading",
+      "level": 2,
+      "folded": false,
+      "number": "1",
+      "anchor": "하나",
+      "content": [
+        {
+          "type": "text",
+          "text": "하나"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "folded": false,
+      "number": "1.1",
+      "anchor": "하나의 하나",
+      "content": [
+        {
+          "type": "text",
+          "text": "하나의 하나"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "folded": false,
+      "number": "2",
+      "anchor": "둘",
+      "content": [
+        {
+          "type": "text",
+          "text": "둘"
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [
+    {
+      "number": "1",
+      "depth": 1,
+      "title": [
+        {
+          "type": "text",
+          "text": "하나"
+        }
+      ]
+    },
+    {
+      "number": "1.1",
+      "depth": 2,
+      "title": [
+        {
+          "type": "text",
+          "text": "하나의 하나"
+        }
+      ]
+    },
+    {
+      "number": "2",
+      "depth": 1,
+      "title": [
+        {
+          "type": "text",
+          "text": "둘"
+        }
+      ]
+    }
+  ],
+  "footnotes": []
+}
 <h2 class="wiki-heading"><a id="s-1" href="#toc">1.</a> <span id="하나">하나</span></h2>
 <div class="wiki-heading-content"></div>
 <h3 class="wiki-heading"><a id="s-1.1" href="#toc">1.1.</a> <span id="하나의 하나">하나의 하나</span></h3>

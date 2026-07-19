@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 20줄 | 렌더링: 3줄 | 표 캡션
+근거: 도움말예제 | 원문: 1줄 | 의미론: 20줄 | IR: 61줄 | 렌더링: 3줄 | 표 캡션
 |캡션| 테이블 || 내용 ||
 Document@0..32
   Table@0..31
@@ -20,6 +20,67 @@ Document@0..32
         AlignmentSpace@28..29 " "
       Separator@29..31 "||"
   Newline@31..32 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "table",
+      "table": {
+        "caption": [
+          {
+            "type": "text",
+            "text": "캡션"
+          }
+        ],
+        "rows": [
+          {
+            "cells": [
+              {
+                "columnSpan": null,
+                "rowSpan": null,
+                "horizontalAlignment": "center",
+                "verticalAlignment": null,
+                "attributes": [],
+                "blocks": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "테이블"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "columnSpan": null,
+                "rowSpan": null,
+                "horizontalAlignment": "center",
+                "verticalAlignment": null,
+                "attributes": [],
+                "blocks": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "내용"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-table-wrap"><table class="wiki-table"><caption>캡션</caption><tbody><tr class="wiki-table-tr"><td style="text-align: center;"><div class="wiki-paragraph">테이블</div>
 </td><td style="text-align: center;"><div class="wiki-paragraph">내용</div>
 </td></tr></tbody></table></div>

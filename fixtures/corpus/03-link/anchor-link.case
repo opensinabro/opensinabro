@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 8줄 | 렌더링: 1줄 | 삽입한 앵커로 링크
+근거: 도움말예제 | 원문: 1줄 | 의미론: 8줄 | IR: 25줄 | 렌더링: 1줄 | 삽입한 앵커로 링크
 [[#아무개]]
 Document@0..15
   Paragraph@0..14
@@ -8,4 +8,29 @@ Document@0..15
       LinkAnchor@3..12 "아무개"
       DelimiterClose@12..14 "]]"
   Newline@14..15 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "documentLink",
+          "title": "",
+          "anchor": "아무개",
+          "kind": "existing",
+          "display": [
+            {
+              "type": "text",
+              "text": "#아무개"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><a class="wiki-link-internal" href="#%EC%95%84%EB%AC%B4%EA%B0%9C" title="">#아무개</a></div>

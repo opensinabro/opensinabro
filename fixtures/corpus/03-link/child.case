@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 7줄 | 렌더링: 1줄 | 하위 문서 링크
+근거: 도움말예제 | 원문: 1줄 | 의미론: 7줄 | IR: 25줄 | 렌더링: 1줄 | 하위 문서 링크
 [[/심화]]
 Document@0..12
   Paragraph@0..11
@@ -7,4 +7,29 @@ Document@0..12
       LinkTarget@2..9 "/심화"
       DelimiterClose@9..11 "]]"
   Newline@11..12 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "documentLink",
+          "title": "시험 문서/하위/심화",
+          "anchor": null,
+          "kind": "missing",
+          "display": [
+            {
+              "type": "text",
+              "text": "/심화"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><a class="wiki-link-internal not-exist" href="/w/%EC%8B%9C%ED%97%98%20%EB%AC%B8%EC%84%9C/%ED%95%98%EC%9C%84/%EC%8B%AC%ED%99%94" rel="nofollow" title="시험 문서/하위/심화">/심화</a></div>

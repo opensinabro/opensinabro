@@ -1,4 +1,4 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 8줄 | 렌더링: 3줄 | 부등호 뒤 공백
+근거: 도움말예제 | 원문: 1줄 | 의미론: 8줄 | IR: 27줄 | 렌더링: 3줄 | 부등호 뒤 공백
 > 인용문
 Document@0..12
   Quote@0..12
@@ -8,6 +8,33 @@ Document@0..12
         IndentMarker@1..2 " "
         Text@2..11 "인용문"
       Newline@11..12 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "quote",
+      "blocks": [
+        {
+          "type": "indent",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "인용문"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <blockquote class="wiki-quote"><div class="wiki-indent"><div class="wiki-paragraph">인용문</div>
 </div>
 </blockquote>

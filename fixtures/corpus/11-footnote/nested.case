@@ -1,4 +1,4 @@
-근거: 도움말서술 | 원문: 2줄 | 의미론: 18줄 | 렌더링: 2줄 | 도움말: 각주 안의 각주는 금지 — 정상 표시되지 않음
+근거: 도움말서술 | 원문: 2줄 | 의미론: 18줄 | IR: 60줄 | 렌더링: 2줄 | 도움말: 각주 안의 각주는 금지 — 정상 표시되지 않음
 [* 바깥 [* 안쪽]]
 [각주]
 Document@0..31
@@ -19,5 +19,65 @@ Document@0..31
       MacroName@23..29 "각주"
       DelimiterClose@29..30 "]"
   Newline@30..31 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "footnoteReference",
+          "label": "2",
+          "number": 2,
+          "tooltip": "바깥 "
+        },
+        {
+          "type": "lineBreak"
+        },
+        {
+          "type": "footnoteSection",
+          "notes": [
+            0,
+            1
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": [
+    {
+      "label": "1",
+      "referenceNumbers": [
+        1
+      ],
+      "content": [
+        {
+          "type": "text",
+          "text": "안쪽"
+        }
+      ]
+    },
+    {
+      "label": "2",
+      "referenceNumbers": [
+        2
+      ],
+      "content": [
+        {
+          "type": "text",
+          "text": "바깥 "
+        },
+        {
+          "type": "footnoteReference",
+          "label": "1",
+          "number": 1,
+          "tooltip": "안쪽"
+        }
+      ]
+    }
+  ]
+}
 <div class="wiki-paragraph"><a class="wiki-fn-content" title="바깥 " href="#fn-2"><span id="rfn-2"></span>[2]</a><br><div class="wiki-macro-footnote"><span class="footnote-list"><span id="fn-1"></span><a href="#rfn-1">[1]</a> 안쪽</span><span class="footnote-list"><span id="fn-2"></span><a href="#rfn-2">[2]</a> 바깥 <a class="wiki-fn-content" title="안쪽" href="#fn-1"><span id="rfn-1"></span>[1]</a></span></div>
 </div>

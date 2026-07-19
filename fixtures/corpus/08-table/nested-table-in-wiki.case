@@ -1,4 +1,4 @@
-근거: 도움말서술 | 원문: 2줄 | 의미론: 38줄 | 렌더링: 5줄 | 표 안의 표
+근거: 도움말서술 | 원문: 2줄 | 의미론: 38줄 | IR: 99줄 | 렌더링: 5줄 | 표 안의 표
 ||<-4> {{{#!wiki
 ||<tablewidth=100%> 3 || 셋 ||}}} ||
 Document@0..55
@@ -39,6 +39,105 @@ Document@0..55
         AlignmentSpace@51..52 " "
       Separator@52..54 "||"
   Newline@54..55 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "table",
+      "table": {
+        "caption": null,
+        "rows": [
+          {
+            "cells": [
+              {
+                "columnSpan": 4,
+                "rowSpan": null,
+                "horizontalAlignment": "center",
+                "verticalAlignment": null,
+                "attributes": [],
+                "blocks": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "wikiStyle",
+                        "style": [],
+                        "darkStyle": [],
+                        "blocks": [
+                          {
+                            "type": "table",
+                            "table": {
+                              "caption": null,
+                              "rows": [
+                                {
+                                  "cells": [
+                                    {
+                                      "columnSpan": null,
+                                      "rowSpan": null,
+                                      "horizontalAlignment": "center",
+                                      "verticalAlignment": null,
+                                      "attributes": [
+                                        {
+                                          "scope": {
+                                            "type": "table"
+                                          },
+                                          "property": {
+                                            "type": "width",
+                                            "width": "100%"
+                                          }
+                                        }
+                                      ],
+                                      "blocks": [
+                                        {
+                                          "type": "paragraph",
+                                          "content": [
+                                            {
+                                              "type": "text",
+                                              "text": "3"
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "columnSpan": null,
+                                      "rowSpan": null,
+                                      "horizontalAlignment": "center",
+                                      "verticalAlignment": null,
+                                      "attributes": [],
+                                      "blocks": [
+                                        {
+                                          "type": "paragraph",
+                                          "content": [
+                                            {
+                                              "type": "text",
+                                              "text": "셋"
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-table-wrap"><table class="wiki-table"><tbody><tr class="wiki-table-tr"><td colspan="4" style="text-align: center;"><div class="wiki-paragraph"><div><div class="wiki-table-wrap" style="width: 100%;"><table class="wiki-table" style=" width: 100%;"><tbody><tr class="wiki-table-tr"><td style="text-align: center;"><div class="wiki-paragraph">3</div>
 </td><td style="text-align: center;"><div class="wiki-paragraph">셋</div>
 </td></tr></tbody></table></div>

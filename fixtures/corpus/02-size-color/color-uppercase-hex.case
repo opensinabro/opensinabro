@@ -1,4 +1,4 @@
-근거: 도움말서술 | 원문: 1줄 | 의미론: 9줄 | 렌더링: 1줄 | 도움말: 색상 코드 대소문자 무관
+근거: 도움말서술 | 원문: 1줄 | 의미론: 9줄 | IR: 26줄 | 렌더링: 1줄 | 도움말: 색상 코드 대소문자 무관
 {{{#FF0000 대문자}}}
 Document@0..24
   Paragraph@0..23
@@ -9,4 +9,30 @@ Document@0..24
       Text@11..20 "대문자"
       DelimiterClose@20..23 "}}}"
   Newline@23..24 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "colored",
+          "color": {
+            "light": "#ff0000",
+            "dark": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "대문자"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><span style="color:#ff0000" data-dark-style="color:#ff0000;">대문자</span></div>

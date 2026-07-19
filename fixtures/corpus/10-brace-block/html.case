@@ -1,4 +1,4 @@
-근거: 도움말서술 | 원문: 1줄 | 의미론: 8줄 | 렌더링: 1줄 | #!html
+근거: 도움말서술 | 원문: 1줄 | 의미론: 8줄 | IR: 42줄 | 렌더링: 1줄 | #!html
 {{{#!html <span style="background-color: #999">서술할 내용</span>}}}
 Document@0..74
   Paragraph@0..73
@@ -8,4 +8,46 @@ Document@0..74
       Text@10..70 "<span style=\"backgrou ..."
       DelimiterClose@70..73 "}}}"
   Newline@73..74 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "html",
+          "nodes": [
+            {
+              "type": "element",
+              "tag": "span",
+              "attributes": {
+                "class": null,
+                "href": null,
+                "style": [
+                  {
+                    "property": "background-color",
+                    "value": "#999"
+                  }
+                ],
+                "source": null,
+                "width": null,
+                "height": null,
+                "controls": false
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "text": "서술할 내용"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <div class="wiki-paragraph"><span style="background-color: #999">서술할 내용</span></div>

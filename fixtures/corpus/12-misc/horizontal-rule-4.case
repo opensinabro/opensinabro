@@ -1,7 +1,18 @@
-근거: 도움말예제 | 원문: 1줄 | 의미론: 4줄 | 렌더링: 1줄 | 수평줄 최소 개수
+근거: 도움말예제 | 원문: 1줄 | 의미론: 4줄 | IR: 11줄 | 렌더링: 1줄 | 수평줄 최소 개수
 ----
 Document@0..5
   HorizontalRule@0..4
     Marker@0..4 "----"
   Newline@4..5 "\n"
+{
+  "redirect": null,
+  "blocks": [
+    {
+      "type": "horizontalRule"
+    }
+  ],
+  "categories": [],
+  "tableOfContents": [],
+  "footnotes": []
+}
 <hr>
