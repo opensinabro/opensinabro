@@ -1,4 +1,5 @@
 import { headers } from "next/headers";
+import { humanMessage } from "@/lib/api/messages";
 
 // 서버 컴포넌트는 프록시를 거치지 않고 axum을 직접 부른다 — 브라우저 → axum →
 // Next → axum 왕복을 한 번 줄인다 (docs/architecture.md).
@@ -37,8 +38,16 @@ export async function get<T>(path: string): Promise<Fetched<T>> {
   if (response.status === 404) return { kind: "missing" };
   if (response.status === 403) return { kind: "forbidden" };
   if (response.status === 401) return { kind: "unauthorized" };
+  // 남은 것은 오류 경계가 받을 실패다. 서버가 어느 계층에서 넘어졌는지 토큰으로
+  // 알려 오므로 그 문장을 그대로 올린다 — 상태 코드만 올리면 화면에 숫자만 남는다.
   if (!response.ok) {
-    throw new Error(`불러오지 못했습니다 (${response.status})`);
+    const body = (await response.json().catch(() => null)) as {
+      error?: string;
+    } | null;
+
+    throw new Error(
+      humanMessage(body?.error, `불러오지 못했습니다 (${response.status})`),
+    );
   }
 
   return { kind: "found", data: (await response.json()) as T };
