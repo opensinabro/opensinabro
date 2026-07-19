@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/components/layout/link";
 import { notFound } from "next/navigation";
 import { CommentForm } from "@/components/discussion/comment-form";
 import { CommentTimeline } from "@/components/discussion/comment-timeline";
@@ -6,7 +6,6 @@ import { ThreadStatusForm } from "@/components/discussion/thread-status-form";
 import { Notice } from "@/components/layout/notice";
 import { PageHeader } from "@/components/layout/page-header";
 import { WikiPage } from "@/components/layout/wiki-page";
-import { Section } from "@/components/ui/section";
 import { fetchThread } from "@/lib/api/discussion";
 import { pageTitle } from "@/lib/site";
 import { wikiPath } from "@/lib/wiki-path";
@@ -49,22 +48,19 @@ export default async function ThreadPage({ params }: ThreadRouteProps) {
           문서의 토론 목록
         </Link>
       }
+      toolbar={
+        <Link
+          href={wikiPath.read(thread.title)}
+          className={linkStyle({ size: "ui" })}
+        >
+          {thread.title} 문서로
+        </Link>
+      }
     />
   );
 
-  const aside = (
-    <Section label="문서">
-      <Link
-        href={wikiPath.read(thread.title)}
-        className={linkStyle({ size: "note" })}
-      >
-        {thread.title}
-      </Link>
-    </Section>
-  );
-
   return (
-    <WikiPage header={header} aside={aside}>
+    <WikiPage header={header}>
       {thread.comments.length === 0 ? (
         <Notice>아직 발언이 없습니다.</Notice>
       ) : (

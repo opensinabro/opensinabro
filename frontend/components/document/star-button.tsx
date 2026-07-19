@@ -11,9 +11,12 @@ import { encodeTitle } from "@/lib/wiki-path";
 export function StarButton({
   title,
   starred,
+  className,
 }: {
   title: string;
   starred: boolean;
+  /** 단추 줄이 아니라 메뉴 안에 설 때처럼, 주변에 맞춰 모양을 바꿔야 할 때. */
+  className?: string;
 }) {
   const router = useRouter();
   const [working, setWorking] = useState(false);
@@ -50,7 +53,9 @@ export function StarButton({
             }
           })();
         }}
-        className={buttonStyle({ tone: starred ? "primary" : "quiet" })}
+        className={
+          className ?? buttonStyle({ tone: starred ? "primary" : "quiet" })
+        }
       >
         {starred ? "구독 중" : "구독"}
       </button>

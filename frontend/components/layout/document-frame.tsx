@@ -1,9 +1,10 @@
-import Link from "next/link";
+import { Link } from "@/components/layout/link";
 import { notFound } from "next/navigation";
 import {
   DocumentActions,
   type DocumentTab,
 } from "@/components/document/document-actions";
+import type { TableOfContentsRailEntry } from "@/components/layout/toc-rail";
 import { Notice } from "@/components/layout/notice";
 import { PageHeader } from "@/components/layout/page-header";
 import { WikiPage } from "@/components/layout/wiki-page";
@@ -51,7 +52,8 @@ export async function DocumentFrame<T>({
   denied,
   allowed,
   variant,
-  aside,
+  toolbarFor,
+  tocFor,
   children,
 }: {
   title: string;
@@ -66,14 +68,18 @@ export async function DocumentFrame<T>({
   /** 조회는 됐지만 본문이 "할 수 있는가"를 따로 싣는 화면(이동·삭제)용. */
   allowed?: (data: T) => boolean;
   variant?: "prose" | "full";
-  aside?: (data: T) => React.ReactNode;
+  /** 제목 아래 도구 줄. 조회에 성공한 화면만 낸다. */
+  toolbarFor?: (data: T) => React.ReactNode;
+  /** 우측 축에 세울 문단 목록. 본문이 있는 화면만 낸다. */
+  tocFor?: (data: T) => TableOfContentsRailEntry[];
   children: (data: T) => React.ReactNode | Promise<React.ReactNode>;
 }) {
-  const headerWith = (resolved?: string) => (
+  const headerWith = (resolved?: string, toolbar?: React.ReactNode) => (
     <PageHeader
       title={title}
       note={resolved ?? note}
       actions={<DocumentActions title={title} current={tab} />}
+      toolbar={toolbar}
     />
   );
   const header = headerWith();
@@ -103,9 +109,9 @@ export async function DocumentFrame<T>({
 
   return (
     <WikiPage
-      header={headerWith(noteFor?.(result.data))}
+      header={headerWith(noteFor?.(result.data), toolbarFor?.(result.data))}
       variant={variant}
-      aside={aside?.(result.data)}
+      toc={tocFor?.(result.data)}
     >
       {await children(result.data)}
     </WikiPage>

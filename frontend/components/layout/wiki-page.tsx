@@ -1,48 +1,58 @@
-// 3열 정주형에서 페이지가 채우는 두 칸(본문·정보)을 이 컴포넌트가 소유한다.
-// 라우트가 그리드 항목을 직접 내놓으면 "형제 둘을 돌려준다"는 규칙이 암묵적이 되어,
-// 정보 열이 없는 화면마다 col-span을 손으로 붙이거나 빠뜨리게 된다 (docs/architecture.md).
+import { Suspense } from "react";
+import { Hold } from "@/components/layout/hold";
+import {
+  TableOfContentsRail,
+  type TableOfContentsRailEntry,
+} from "@/components/layout/toc-rail";
+import { WikiColumn } from "@/components/layout/wiki-column";
+
+// 가운데 정주형에서 한 화면이 차지하는 자리를 이 컴포넌트가 통째로 소유한다 —
+// 본문과 우측 위키 열, 그리고 화면 오른쪽 끝 스크롤바 옆에 서는 목차 축까지.
 //
-// 정보 열은 좁은 화면에서 걷히고 본문 하단으로 내려간다 — 같은 노드를 두 자리에
-// 그리므로 두 배치가 어긋날 수 없다.
+// 우측 열은 페이지가 넘기는 것이 아니라 여기가 직접 그린다. 화면마다 넘기게 하면
+// 넘기는 것을 잊은 화면에서 열이 사라져, 라우트를 옮길 때마다 본문 폭이 흔들린다.
+//
+// 목차는 문서 화면만 넘긴다. 목록·양식 화면은 문단이 없어 축이 설 이유가 없다.
 export function WikiPage({
   header,
-  aside,
+  toc,
   variant = "prose",
   children,
 }: {
   header: React.ReactNode;
-  aside?: React.ReactNode;
-  /** `full`은 편집기처럼 화면 폭을 다 쓰는 화면 — 본문 열의 읽기 폭 제한을 걷는다. */
+  /** 문서의 문단 목록. 없거나 비면 우측 축을 그리지 않는다. */
+  toc?: TableOfContentsRailEntry[];
+  /** `full`은 편집기처럼 폭을 다 쓰는 화면 — 우측 열도 축도 걷는다. */
   variant?: "prose" | "full";
   children: React.ReactNode;
 }) {
-  const body =
-    variant === "prose"
-      ? "max-w-[900px] px-4 pt-4 sm:px-6"
-      : "flex min-h-0 flex-1 flex-col";
+  if (variant === "full") {
+    return (
+      <Hold className="flex min-h-0 flex-1 flex-col pt-5 pb-7">
+        <main id="content" className="flex min-w-0 flex-1 flex-col">
+          {header}
+          <div className="flex min-h-0 flex-1 flex-col pt-4">{children}</div>
+        </main>
+      </Hold>
+    );
+  }
 
   return (
-    <>
-      <main
-        id="content"
-        className={`flex min-w-0 flex-col pb-7 ${aside ? "" : "xl:col-span-2"}`}
-      >
-        {header}
-        <div className={body}>
-          {children}
-          {aside && (
-            <div className="mt-8 border-t border-line pt-4 xl:hidden">
-              {aside}
-            </div>
-          )}
-        </div>
-      </main>
+    <div className="relative flex-1">
+      {toc && toc.length > 0 && <TableOfContentsRail entries={toc} />}
 
-      {aside && (
-        <aside className="hidden border-l border-line px-4 py-4 xl:block">
-          <div className="sticky top-4">{aside}</div>
-        </aside>
-      )}
-    </>
+      <Hold className="grid grid-cols-1 gap-x-7 pt-5 pb-7 column:grid-cols-[minmax(0,1fr)_260px]">
+        <main id="content" className="flex min-w-0 flex-col">
+          {header}
+          <div className="pt-5">{children}</div>
+        </main>
+
+        {/* 위키 열은 문서 조회와 별개로 받는다. 기다리게 두면 문서가 늦어지므로
+            본문보다 늦게 도착하도록 떼어 둔다. */}
+        <Suspense fallback={null}>
+          <WikiColumn />
+        </Suspense>
+      </Hold>
+    </div>
   );
 }

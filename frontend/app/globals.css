@@ -1,23 +1,39 @@
-/* Tailwind을 레이어로 나눠 들인다. preflight를 layer(base)에 가두면, 레이어 없이 실린
-   본문 스타일시트(/style.css — backend-namuwiki 소유)가 로드 순서와 무관하게 언제나
-   이긴다. 셸이 본문 어휘를 덮지 않게 하는 경계가 여기다 (docs/architecture.md). */
+/* Tailwind을 레이어로 나눠 들인다. 본문 스타일시트(namumark.css)는 레이어 없이 실려
+   preflight보다 뒤에, 유틸리티보다 앞에 선다 — 본문 어휘가 preflight에 지워지지 않으면서
+   셸이 유틸리티로 덮을 여지는 남는다 (docs/architecture.md). */
 @layer theme, base, components, utilities;
 
 @import "tailwindcss/theme.css" layer(theme);
 @import "tailwindcss/preflight.css" layer(base);
 @import "tailwindcss/utilities.css" layer(utilities);
+@import "./namumark.css";
 
 /* 라이트 모드 한 벌만 정의한다 — 다크 테마는 비목표 (docs/architecture.md). */
 @theme {
   --color-ground: #ffffff;
   --color-ground-sub: #f3f6f4;
   --color-ground-deep: #e8eeea;
-  --color-ink: #14201d;
-  --color-body: #2f3d39;
-  --color-muted: #6d7d78;
-  --color-faint: #97a5a0;
-  --color-line: #dde5e1;
-  --color-line-soft: #ebf0ed;
+  /* 글자색은 회색조를 쓰지 않는다. 네 단 모두 검정에 가깝고, 흰 바탕 대비 21 : 17.5 :
+     13.6 : 10.5로 AAA(7.0)를 크게 넘는다 — 연한 단을 두어 심미를 지키는 것보다 확실히
+     읽히는 쪽을 택한다.
+
+     따라서 위계는 밝기가 아니라 크기와 굵기가 나른다. 앞으로 어떤 글을 "덜 중요하게"
+     보이고 싶을 때 색을 연하게 하지 말고 단을 내리거나 굵기를 낮춰야 한다. 색을 연하게
+     하는 순간 이 원칙이 무너진다. */
+  --color-ink: #000000;
+  --color-body: #121a18;
+  --color-muted: #24302d;
+  --color-faint: #36423f;
+
+  /* 빈 입력 칸의 안내 글자만 예외로 연하다. 여기서는 밝기가 장식이 아니라 "아직 아무것도
+     입력되지 않았다"는 뜻을 나르므로, 채운 글자와 같은 검정이면 칸이 이미 채워진 것처럼
+     보인다. */
+  --color-placeholder: #6b7975;
+
+  /* 선도 함께 올린다. 글자만 검어지고 구획선이 그대로면 선이 사라진 것처럼 보여
+     표와 목록의 경계가 읽히지 않는다. */
+  --color-line: #c4d0cb;
+  --color-line-soft: #dae2de;
   --color-accent: #1d7a58;
   --color-accent-deep: #145c42;
   --color-accent-wash: #e6f2ec;
@@ -26,17 +42,50 @@
   --color-danger-wash: #fdf1ef;
   --color-danger-ink: #9c3a2c;
 
-  /* 셸의 글자 크기는 이 다섯 단만 쓴다. 화면마다 임의의 px을 적으면 같은 성격의 글이
+  /* 셸의 모든 줄이 이 폭 안에 선다 (Hold). 배경 띠만 화면 끝까지 가고 내용은 여기에
+     맞춰 정렬한다 — 띠마다 폭을 따로 적으면 헤더와 본문의 왼쪽 끝이 어긋난다. */
+  --container-hold: 1280px;
+
+  /* 목차 축이 설 자리가 나오는 폭. 점만 놓으면 20이면 되지만, 점에 손을 올렸을 때
+     뜨는 라벨이 본문을 덮지 않아야 한다 — 라벨 128에 점과의 사이 16, 축 오른쪽
+     여백 12를 더한 156이 컨테이너 1280 양옆에 필요하다. 이보다 좁으면 축은 사라지고,
+     본문 안 `[목차]`만 남는다 — 그쪽은 폭과 무관하게 늘 서 있다
+     (TableOfContentsRail). */
+  --breakpoint-rail: 1600px;
+
+  /* 우측 위키 열이 본문 옆에 설 수 있는 폭. 열 260에 본문과의 사이 28, Hold의 좌우
+     패딩 48을 빼면 본문에 남는 폭이 여기서 650이 된다 — 이 아래로는 표와 틀이 있는
+     문서가 가로로 넘치기 시작한다. 더 좁아지면 열을 옆에서 걷어 본문 아래(각주 뒤)로
+     내린다. 본문을 좁히면서까지 옆에 세울 만한 내용이 아니다 (WikiColumn). */
+  --breakpoint-column: 990px;
+
+  /* 셸의 글자 크기는 이 여덟 단만 쓴다. 화면마다 임의의 px을 적으면 같은 성격의 글이
      라우트별로 반 픽셀씩 갈라진다 — 본문(wiki-content)의 크기는 렌더러 소관이라
-     여기에 없다. */
-  --text-label: 10.5px;
-  --text-badge: 11px;
-  --text-fine: 12px;
-  --text-note: 12.5px;
-  --text-ui: 13px;
-  --text-list: 13.5px;
-  --text-brand: 14.5px;
-  --text-title: 27px;
+     여기에 없다.
+
+     아래 단은 한글 기준으로 정한다. 라틴 글자라면 13px도 읽히지만 한글은 같은 크기에서
+     획이 뭉개진다. 그래서 셸이 실제로 읽히기를 기대하는 글(note·ui·list)은 15px 언저리에
+     두어 브라우저 기본값(16px)에서 크게 내려가지 않게 하고, 가장 작은 단(label)도 12px
+     아래로는 내리지 않는다.
+
+     줄 높이를 크기마다 함께 못박는다. 지정하지 않으면 normal이 상속되어, 글자만 키웠을
+     때 줄이 서로 붙어 오히려 답답해진다. */
+  --text-label: 12px;
+  --text-label--line-height: 1.4;
+  --text-badge: 12.5px;
+  --text-badge--line-height: 1.4;
+  --text-fine: 13.5px;
+  --text-fine--line-height: 1.55;
+  --text-note: 14.5px;
+  --text-note--line-height: 1.6;
+  --text-ui: 15px;
+  --text-ui--line-height: 1.5;
+  --text-list: 15.5px;
+  --text-list--line-height: 1.55;
+  --text-brand: 17px;
+  --text-brand--line-height: 1.3;
+  --text-title: 30px;
+  --text-title--line-height: 1.2;
 
   --font-sans:
     "Apple SD Gothic Neo", "Pretendard", "Malgun Gothic", "Noto Sans KR",
@@ -44,19 +93,56 @@
   --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
 }
 
-/* 본문 안에서는 셸이 깐 레이어 스타일을 전부 무른다.
-   preflight는 목록의 불릿·제목 크기 같은 브라우저 기본값을 지우는데, 렌더러 CSS는
-   그 기본값이 살아 있다는 전제로 쓰여 있다(예: `.wiki-list`는 여백만 정하고
-   불릿은 브라우저에 맡긴다). 레이어를 무르면 규칙을 하나씩 되살릴 필요 없이
-   렌더러 CSS만 본문을 말하게 된다 — 파리티가 걸린 경계다 (docs/architecture.md). */
-@layer base {
-  .wiki-content * {
-    all: revert-layer;
+html {
+  color-scheme: light;
+}
+
+/* 누를 수 있다는 신호는 링크마다 다르지 않다 — 색이든 바탕이든 저마다 달라도, 손을
+   올렸을 때 밑줄이 서는 것 하나는 셸과 본문 어디서나 같다. 레이어 밖에 두어
+   namumark.css의 `text-decoration: none`까지 덮는다. */
+a:hover {
+  text-decoration-line: underline;
+  text-underline-offset: 0.2em;
+}
+
+/* 이동 중 표시. 둘 다 200ms를 기다렸다가 뜬다 — 문서 한 장은 그보다 빨리 오는 일이
+   대부분이고, 그때 표시가 스쳤다 사라지면 화면이 한 번 깜빡인 것으로 읽힌다. 늦게
+   뜨는 표시는 늦은 응답에만 붙어, 빠른 이동은 아무 일도 없었던 것처럼 끝난다. */
+.nav-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 40;
+  height: 2px;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left;
+  background: var(--color-accent);
+}
+
+.nav-progress[data-navigating] {
+  /* 끝에 닿지 않는다. 응답이 언제 오는지 모르는 채로 100%를 그리면 다 됐다고
+     알린 뒤 멈춰 있는 꼴이 된다 — 처음엔 빠르게, 뒤로 갈수록 느리게 기어간다. */
+  animation: nav-progress-creep 20s cubic-bezier(0, 0.6, 0.15, 1) 200ms forwards;
+}
+
+@keyframes nav-progress-creep {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(0.92);
   }
 }
 
-html {
-  color-scheme: light;
+a:has(> [data-navigating]) {
+  animation: nav-link-dim 0s linear 200ms forwards;
+}
+
+@keyframes nav-link-dim {
+  to {
+    opacity: 0.55;
+  }
 }
 
 body {
@@ -65,3 +151,4 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
 }
+
