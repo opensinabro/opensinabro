@@ -5,7 +5,7 @@
 
 use axum::body::Body;
 use axum::extract::{ConnectInfo, Request, State};
-use axum::http::{HeaderName, HeaderValue, StatusCode, Uri};
+use axum::http::{HeaderName, HeaderValue, StatusCode, Uri, header};
 use axum::response::{IntoResponse, Response};
 use hyper_util::rt::TokioIo;
 use std::net::SocketAddr;
@@ -21,17 +21,44 @@ fn forwarded_for(peer: SocketAddr) -> Option<HeaderValue> {
     HeaderValue::from_str(&peer.ip().to_string()).ok()
 }
 
+/// 프론트엔드가 그리지 못하는 상태에서 브라우저가 화면 요청으로 들어왔을 때.
+///
+/// 오류 화면은 원래 프론트엔드의 몫이지만 그쪽에 닿지 못해 난 오류다 — 여기서 JSON을
+/// 내면 주소창에 중괄호가 뜨고, 평문을 내면 브라우저 기본 서식으로 선다. axum이 직접
+/// 그려야 하는 유일한 화면이므로 셸 없이 홀로 서는 한 장을 여기 갖춘다.
+fn outage(status: StatusCode, title: &str, description: &str) -> Response {
+    let body = format!(
+        "<!doctype html><html lang=\"ko\"><head><meta charset=\"utf-8\">\
+         <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\
+         <title>{title}</title></head>\
+         <body style=\"margin:0;min-height:100dvh;display:flex;flex-direction:column;\
+         justify-content:center;gap:12px;padding:0 24px;\
+         font-family:system-ui,sans-serif;color:#121a18\">\
+         <h1 style=\"margin:0;font-size:30px;font-weight:800;letter-spacing:-0.02em;\
+         color:#000\">{title}</h1>\
+         <p style=\"margin:0;font-size:14.5px;color:#24302d\">{description}</p>\
+         </body></html>"
+    );
+
+    (
+        status,
+        [(header::CONTENT_TYPE, "text/html; charset=utf-8")],
+        body,
+    )
+        .into_response()
+}
+
 pub async fn forward(
     State(state): State<AppState>,
     ConnectInfo(peer): ConnectInfo<SocketAddr>,
     request: Request,
 ) -> Response {
     let Some(frontend) = state.frontend_origin.as_deref() else {
-        return (
+        return outage(
             StatusCode::NOT_FOUND,
+            "위키를 열지 못했습니다",
             "프론트엔드 주소(OPENSINABRO_FRONTEND)가 설정되지 않았습니다.",
-        )
-            .into_response();
+        );
     };
 
     let path_and_query = request
@@ -41,7 +68,11 @@ pub async fn forward(
         .unwrap_or("/");
 
     let Ok(target) = format!("{frontend}{path_and_query}").parse::<Uri>() else {
-        return StatusCode::BAD_GATEWAY.into_response();
+        return outage(
+            StatusCode::BAD_GATEWAY,
+            "위키를 열지 못했습니다",
+            "요청한 주소를 프론트엔드로 넘기지 못했습니다.",
+        );
     };
 
     let mut outgoing = request;
@@ -64,7 +95,11 @@ pub async fn forward(
     let mut response = match state.http.request(outgoing).await {
         Ok(response) => response,
         Err(_) => {
-            return (StatusCode::BAD_GATEWAY, "프론트엔드에 연결할 수 없습니다.").into_response();
+            return outage(
+                StatusCode::BAD_GATEWAY,
+                "위키를 열지 못했습니다",
+                "프론트엔드에 연결하지 못했습니다. 잠시 뒤 다시 시도해 주세요.",
+            );
         }
     };
 

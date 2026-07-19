@@ -27,11 +27,11 @@ struct UploadFields {
 /// 바이너리 서빙. 문서 보기는 `/w/파일:이름`이고 여기서는 내용만 낸다.
 pub async fn serve_file(State(state): State<AppState>, Path(name): Path<String>) -> HandlerResult {
     let Some(file) = wiki_document::read_file(&state.pool, &state.file_root, &name).await? else {
-        return Ok((StatusCode::NOT_FOUND, "그런 파일이 없습니다.").into_response());
+        return Ok(crate::api::not_found());
     };
 
     let Ok(bytes) = std::fs::read(&file.path) else {
-        return Ok((StatusCode::NOT_FOUND, "파일 내용을 찾을 수 없습니다.").into_response());
+        return Ok(crate::api::not_found());
     };
 
     Ok((
