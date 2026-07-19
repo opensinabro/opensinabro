@@ -209,9 +209,17 @@ details[open] > .wiki-macro-toc-summary > .wiki-chevron {
 /* ── 목차 ─────────────────────────────────────────────────────────────── */
 
 .wiki-macro-toc {
-  margin: 30px 0;
+  margin: 30px 0 0;
   font-size: 16px;
   line-height: 30px;
+}
+/* 목차는 블록이라 뒤따르는 줄바꿈이 빈 줄로 남는다 — 목차와 첫 절 사이가
+ * 문서를 한 번 끊어 읽을 만큼 벌어지므로 그 줄과 절 앞 여백을 함께 줄인다. */
+.wiki-macro-toc + br {
+  display: none;
+}
+.wiki-paragraph:has(> .wiki-macro-toc) + .wiki-section {
+  margin-top: 24px;
 }
 .wiki-content .wiki-macro-toc-summary {
   display: inline-flex;

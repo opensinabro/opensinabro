@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { siteName } from "@/lib/site";
 import { Providers } from "./providers";
 import "./globals.css";
@@ -6,6 +6,12 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: siteName,
   description: "나무위키 엔진의 오픈소스 재구현",
+};
+
+// 자판이 올라올 때 화면을 밀어 올리지 않고 뷰포트 자체를 줄인다. 편집기의 문법 줄이
+// `h-dvh` 안의 맨 아래 칸이라, 이 설정이 없으면 자판 뒤로 숨는다.
+export const viewport: Viewport = {
+  interactiveWidget: "resizes-content",
 };
 
 export default function RootLayout({

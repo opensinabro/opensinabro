@@ -22,7 +22,7 @@ export function WikiPage({
   header: React.ReactNode;
   /** 문서의 문단 목록. 없거나 비면 우측 축을 그리지 않는다. */
   toc?: TableOfContentsRailEntry[];
-  /** `full`은 편집기처럼 폭을 다 쓰는 화면 — 우측 열도 축도 걷는다. */
+  /** `full`은 작성자 보기처럼 폭을 다 쓰는 화면 — 우측 열도 축도 걷는다. */
   variant?: "prose" | "full";
   children: React.ReactNode;
 }) {
