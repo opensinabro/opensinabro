@@ -3,7 +3,7 @@
 # 로컬에서 위키를 띄우는 명령은 하나다:
 #   just dev
 #
-# 데이터베이스 준비·의존성 설치·포트 정리·예시 문서 적재까지 알아서 하므로,
+# 데이터베이스 준비·의존성 설치·포트 정리까지 알아서 하므로,
 # 처음 받은 사람도 이것만 치면 된다. Ctrl+C 한 번으로 전부 멈춘다.
 #
 # 브라우저는 언제나 백엔드 주소 하나(http://127.0.0.1:3000)로 들어간다. 프론트엔드는
@@ -163,9 +163,9 @@ check: format bindings-check lint test
 
 # ── 여기부터는 다른 명령이 알아서 부르는 것들 ────────────────────────────────
 
-# 띄울 준비 — 데이터베이스·의존성·첫 문서.
+# 띄울 준비 — 데이터베이스·의존성.
 [private]
-_ready: _database _dependencies _seed
+_ready: _database _dependencies
 
 # 데이터베이스 컨테이너를 띄우고 접속을 받을 때까지 기다린다.
 # 스키마는 서버와 임포터가 시작할 때 만든다.
@@ -181,23 +181,6 @@ _dependencies:
     if [ ! -d frontend/node_modules ]; then
         echo "프론트엔드 의존성을 설치합니다..."
         cd frontend && npm install
-    fi
-
-# 위키가 비어 있을 때만 예시 문서를 넣는다.
-#
-# 문서가 이미 있으면 건드리지 않는다 — 띄울 때마다 적재하면 같은 원문이 리비전으로
-# 쌓여 역사가 거짓이 된다.
-[private]
-_seed: _database
-    #!/usr/bin/env bash
-    set -euo pipefail
-    documents=$(docker compose exec -T database \
-        psql --username=opensinabro --dbname={{ database_name }} \
-        --tuples-only --no-align --command "SELECT count(*) FROM document" 2> /dev/null || echo 0)
-
-    if [ "${documents//[!0-9]/}" = "0" ]; then
-        echo "위키가 비어 있어 예시 문서를 적재합니다..."
-        just import
     fi
 
 # 이 포트를 물고 있는 프로세스를 정리한다.
