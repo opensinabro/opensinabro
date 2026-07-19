@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/components/layout/link";
 import { linkStyle } from "@/components/ui/link";
 import { Row, Rows } from "@/components/ui/list";
 import { formatMoment } from "@/lib/format";

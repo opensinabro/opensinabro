@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/components/layout/link";
 import { TitleList } from "@/components/document/title-list";
 import { Notice } from "@/components/layout/notice";
 import { PageHeader } from "@/components/layout/page-header";

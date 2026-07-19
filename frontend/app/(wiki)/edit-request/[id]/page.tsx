@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/components/layout/link";
 import { notFound } from "next/navigation";
 import { EditRequestReview } from "@/components/discussion/edit-request-review";
 import { DiffView } from "@/components/document/diff-view";

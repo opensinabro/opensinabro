@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/components/layout/link";
 import { DocumentEditor } from "@/components/document/document-editor";
 import { DocumentFrame } from "@/components/layout/document-frame";
 import { Notice } from "@/components/layout/notice";

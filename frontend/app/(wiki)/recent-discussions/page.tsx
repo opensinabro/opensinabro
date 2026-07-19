@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/components/layout/link";
 import { ThreadLine, ThreadList } from "@/components/discussion/thread-list";
 import { Notice } from "@/components/layout/notice";
 import { PageHeader } from "@/components/layout/page-header";

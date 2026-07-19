@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/components/layout/link";
 import { useState } from "react";
 import { Alert, Notice } from "@/components/layout/notice";
 import { buttonStyle } from "@/components/ui/button";
