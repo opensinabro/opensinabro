@@ -87,16 +87,22 @@ const MAIN_DOCUMENT_SEED: &str = "\
 [목차]
 
 == 오픈시나브로 ==
-'''오픈시나브로'''는 나무위키 엔진의 오픈소스 재구현입니다. 이 문서는 위키의 대문이고,
-다른 문서와 마찬가지로 누구나 고칠 수 있습니다.
+'''오픈시나브로'''는 '''나무마크'''로 글을 쓰는 위키 엔진 오픈소스 프로젝트입니다.
+나무마크 문법을 그대로 해석해 문서를 보여 주고, 편집·역사·토론·검색까지 위키를
+운영하는 데 필요한 기능을 갖추고 있습니다.
+
+== 나무마크 ==
+나무마크는 나무위키에서 쓰는 문법입니다. '''굵게''', ''기울임'', __밑줄__,
+--취소선--, 문단, 표, 각주, 틀 같은 요소를 문법 그대로 지원합니다.
 
 == 시작하기 ==
  * 아무 문서나 열어 '''편집'''을 누르면 바로 고칠 수 있습니다.
- * 왼쪽 '''최근 변경'''에서 방금 바뀐 문서를 볼 수 있습니다.
+ * '''최근 변경'''에서 방금 바뀐 문서를 볼 수 있습니다.
  * 아직 없는 문서로 가는 링크는 [[없는 문서|붉게]] 보입니다. 눌러서 새로 쓰세요.
 
 == 이 문서 고치기 ==
-위의 '''편집'''을 눌러 이 안내를 지우고 위키를 소개하는 글로 채우세요.
+이 문서도 다른 문서와 마찬가지로 누구나 고칠 수 있습니다. 위의 '''편집'''을 눌러
+이 위키를 소개하는 글로 채우세요.
 ";
 
 /// 대문이 한 번도 없었으면 심는다.
@@ -155,7 +161,7 @@ pub async fn rebuild_index(pool: &PgPool, search: &SearchIndex) -> Result<usize,
 
 async fn load_settings(pool: &PgPool) -> Result<SiteSettings, ServerError> {
     Ok(SiteSettings {
-        wiki_name: setting(pool, "wiki_name", "opensinabro").await?,
+        wiki_name: setting(pool, "wiki_name", "오픈시나브로").await?,
         main_document: setting(pool, "main_document", "대문").await?,
         content_license: setting(pool, "content_license", "CC BY-NC-SA 2.0 KR").await?,
     })
