@@ -1,3 +1,5 @@
+import type { RenderTree } from "@/lib/namumark/RenderTree";
+
 // 서버 컴포넌트와 클라이언트 컴포넌트가 함께 읽는 응답 타입. 부르는 쪽(server.ts는
 // next/headers에 기대고 client.ts는 브라우저에 기댄다)과 갈라 두어야 편집기 같은
 // 클라이언트 컴포넌트가 서버 전용 모듈을 타고 들어오지 않는다.
@@ -35,7 +37,8 @@ export type DocumentView = {
   title: string;
   namespace: string;
   source: string;
-  html: string;
+  // 본문은 이 렌더 트리로 그린다. 화면 표현은 프론트엔드가 정한다.
+  tree: RenderTree;
   revision: RevisionSummary | null;
   backlinkCount: number;
   threadCount: number;

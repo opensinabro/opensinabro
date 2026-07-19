@@ -1,5 +1,7 @@
 "use client";
 
+import type { RenderTree } from "@/lib/namumark/RenderTree";
+
 import { encodeTitle } from "@/lib/wiki-path";
 import { postJson } from "./csrf";
 
@@ -12,8 +14,8 @@ export async function renderPreview(title: string, content: string) {
   const response = await postJson("/api/preview", { title, content });
   if (!response.ok) throw new Error("미리보기를 그리지 못했습니다.");
 
-  const body = (await response.json()) as { html: string };
-  return body.html;
+  const body = (await response.json()) as { tree: RenderTree };
+  return body.tree;
 }
 
 export type SaveResult =

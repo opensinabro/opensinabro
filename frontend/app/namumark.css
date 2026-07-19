@@ -1,0 +1,615 @@
+/* 본문 스타일. 프론트엔드가 소유한다.
+ *
+ * 본문은 이제 렌더 트리에서 React가 그리므로, 어떻게 보일지는 전부 여기서 정한다.
+ * 예전에는 이 파일이 백엔드 크레이트 안에 있었고 브라우저 기본값이 살아 있다는 전제로
+ * 쓰여 있어서, 셸이 `all: revert-layer`로 Tailwind preflight를 통째로 무르는 수밖에
+ * 없었다. 지금은 preflight가 지우는 것을 여기서 도로 세우므로 그 장치가 필요 없다.
+ *
+ * 레이어에 넣지 않는다 — base(preflight)보다 뒤에 오고 utilities보다는 앞에 서서,
+ * 셸이 유틸리티 클래스로 본문을 덮을 여지는 남긴다.
+ *
+ * 조판은 하나의 리듬 위에 선다: 본문 18px에 행간 30px, 그리고 문단·절·표 사이의
+ * 모든 수직 여백이 30px의 배수다. 그래서 문서를 아래로 훑어도 줄이 어긋나지 않는다.
+ * 위계는 글자 크기가 아니라 무게와 여백이 만들고, 크기는 네 단(15·18·21·30px)만 쓴다.
+ * 누를 수 있는 것만 이 절제에서 빠져 색과 밑줄을 함께 갖는다. */
+
+/* ── preflight가 지운 것 되세우기 ─────────────────────────────────────── */
+
+.wiki-content h1,
+.wiki-content h2,
+.wiki-content h3,
+.wiki-content h4,
+.wiki-content h5,
+.wiki-content h6 {
+  font-weight: 700;
+}
+
+/* 리스트 꼬리표는 클래스가 정한다 — `wiki-list`는 여백만 맡는다. */
+.wiki-content ul.wiki-list {
+  list-style: disc;
+}
+.wiki-content ol.wiki-list {
+  list-style: decimal;
+}
+.wiki-content ol.wiki-list-alpha {
+  list-style: lower-alpha;
+}
+.wiki-content ol.wiki-list-upper-alpha {
+  list-style: upper-alpha;
+}
+.wiki-content ol.wiki-list-roman {
+  list-style: lower-roman;
+}
+.wiki-content ol.wiki-list-upper-roman {
+  list-style: upper-roman;
+}
+
+.wiki-content hr {
+  margin: 30px 0 0;
+  border-top: 1px solid var(--color-line);
+}
+
+/* 굵기만 준다. 색까지 못 박으면 `{{{#CFA547 '''출생'''}}}`처럼 문법이 정한 글자색이
+ * 덮여, 짙은 바탕에 얹은 밝은 라벨이 읽히지 않는다. */
+.wiki-content b,
+.wiki-content strong {
+  font-weight: 700;
+}
+
+.wiki-content pre,
+.wiki-content code {
+  font-family: var(--font-mono);
+}
+
+/* preflight는 이미지를 블록으로 만든다. 본문 이미지는 글 안에 놓이는 것이다. */
+.wiki-content img {
+  display: inline-block;
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+.wiki-content details,
+.wiki-content summary {
+  display: revert;
+}
+
+/* ── 본문 어휘 ────────────────────────────────────────────────────────── */
+
+.wiki-content {
+  /* 읽기 폭은 여기서 정하지 않는다 — 본문이 설 칸의 폭은 레이아웃(WikiPage)이
+     이미 정했고, 여기서 한 번 더 상한을 걸면 둘 중 좁은 쪽이 이겨 칸 오른쪽에
+     아무것도 없는 띠가 남는다. */
+  color: var(--color-body);
+  font-size: 18px;
+  line-height: 30px;
+  letter-spacing: 0.002em;
+}
+
+.wiki-paragraph {
+  margin: 30px 0 0;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+/* ── 절 ───────────────────────────────────────────────────────────────
+ *
+ * 절은 여닫이다. 제목 줄에는 여닫이 셰브런과 절 번호와 제목, 그리고 오른쪽
+ * 끝의 편집이 선다 — 절의 주소는 번호가 겸하므로 앵커라는 표시를 따로 두지
+ * 않는다. 접힌 절은 글자를 덧붙이는 대신 흐려진다. */
+
+.wiki-section {
+  margin-top: 36px;
+}
+/* 접힌 절끼리는 바짝 붙는다 — 내용이 없는 제목 줄 사이에 절 하나만큼의 여백이
+ * 남으면, 접었는데도 문서가 성긴 채로 길어진다. */
+.wiki-section:not([open]) + .wiki-section {
+  margin-top: 12px;
+}
+
+/* `.wiki-content summary`가 앞에서 display를 되돌리므로, 여닫이 제목 줄은 그보다
+ * 무거운 선택자로 잡는다 — 안 그러면 제목이 flex가 되지 못해 편집이 아래로 밀린다. */
+.wiki-content .wiki-heading {
+  display: flex;
+  /* 가운데 정렬이라야 셰브런이 제목 글자의 한가운데 선다 — 기준선으로 맞추면
+   * 편집 글자의 크기에 따라 줄의 높이가 달라져 셰브런이 위아래로 흔들린다. */
+  align-items: center;
+  gap: 0.45em;
+  margin: 0;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--color-line-soft);
+  list-style: none;
+  cursor: pointer;
+  transition: opacity 0.14s ease;
+}
+.wiki-heading::-webkit-details-marker {
+  display: none;
+}
+
+.wiki-heading-title {
+  font-size: 21px;
+  line-height: 30px;
+  color: var(--color-ink);
+  letter-spacing: -0.006em;
+}
+/* 수준은 크기를 크게 벌리지 않는다 — 한 문서 안에서 절과 하위 절이 서로
+ * 다른 문서처럼 보이지 않게 한다. 모든 단이 30px 리듬 위에 앉는다. */
+h1.wiki-heading-title {
+  font-size: 24px;
+}
+h3.wiki-heading-title {
+  font-size: 19px;
+}
+h4.wiki-heading-title,
+h5.wiki-heading-title,
+h6.wiki-heading-title {
+  font-size: 18px;
+}
+
+/* 절 번호가 곧 그 절의 앵커다. */
+.wiki-heading-number {
+  color: var(--color-muted);
+  font-weight: 700;
+  text-decoration: none;
+}
+.wiki-heading-number:hover {
+  color: var(--color-link);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+/* 제목 글자 바로 오른쪽에 붙는다 — 줄 끝으로 밀어 두면 긴 제목과 짧은 제목에서
+ * 편집이 저마다 다른 거리에 서서, 누를 것을 매번 눈으로 찾아야 한다. */
+.wiki-heading-edit {
+  padding-left: 0.4em;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 30px;
+  color: var(--color-muted);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.wiki-heading-edit:hover {
+  color: var(--color-link);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+/* 여닫이 표시는 셰브런 하나로 통일한다 — 목차와 절이 같은 몸짓을 쓴다. */
+.wiki-chevron {
+  width: 0.42em;
+  height: 0.42em;
+  flex: none;
+  align-self: center;
+  border-right: 1.5px solid var(--color-faint);
+  border-bottom: 1.5px solid var(--color-faint);
+  /* 두 변으로 그린 꺾쇠는 획이 상자의 한쪽 구석에 몰려 있어, 상자를 가운데 두면
+   * 획이 가운데에서 벗어난다. 돌린 방향으로 획이 쏠린 만큼(상자의 약 0.35배)
+   * 되밀어 획 자체를 글자 한가운데 세운다. */
+  transform: translateX(-0.15em) rotate(-45deg);
+  transition: transform 0.14s ease;
+}
+details[open] > .wiki-heading > .wiki-chevron,
+details[open] > .wiki-macro-toc-summary > .wiki-chevron {
+  transform: translateY(-0.15em) rotate(45deg);
+}
+
+/* 접힌 절은 글자를 덧붙이지 않고 상태만 보인다. */
+.wiki-section:not([open]) > .wiki-heading {
+  opacity: 0.45;
+}
+.wiki-section:not([open]) > .wiki-heading:hover {
+  opacity: 0.75;
+}
+
+/* 여닫이를 쓰지 못하는 자리(표 칸 안 등)의 헤딩. 접기 표시가 없다. */
+.wiki-heading-folded + .wiki-heading-content {
+  display: none;
+}
+
+/* ── 목차 ─────────────────────────────────────────────────────────────── */
+
+.wiki-macro-toc {
+  margin: 30px 0;
+  font-size: 16px;
+  line-height: 30px;
+}
+.wiki-content .wiki-macro-toc-summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-muted);
+  letter-spacing: 0.03em;
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+}
+.wiki-macro-toc-summary::-webkit-details-marker {
+  display: none;
+}
+.wiki-macro-toc-summary:hover {
+  color: var(--color-body);
+}
+.wiki-macro-toc-summary:hover .wiki-chevron {
+  border-color: var(--color-body);
+}
+.wiki-macro-toc .toc-item {
+  display: block;
+}
+.wiki-macro-toc .toc-item a {
+  color: var(--color-link);
+  text-decoration: none;
+}
+.wiki-macro-toc .toc-item a:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+/* 깊이는 toc-indent 중첩으로 나타난다. 최상위만 들여쓰지 않는다. */
+.wiki-macro-toc .toc-indent .toc-indent {
+  margin-left: 1.1em;
+}
+
+/* ── 링크 ─────────────────────────────────────────────────────────────
+ *
+ * 색과 밑줄을 함께 쓴다 — 색만으로는 본문 먹과 구분이 약하고, 밑줄만으로는
+ * 훑을 때 지나친다. */
+
+.wiki-link-internal {
+  color: var(--color-link);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--color-link) 35%, transparent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+.wiki-link-internal:hover {
+  text-decoration-color: var(--color-link);
+}
+.wiki-link-internal.not-exist {
+  color: var(--color-danger-ink);
+  text-decoration-color: color-mix(
+    in srgb,
+    var(--color-danger-ink) 35%,
+    transparent
+  );
+}
+.wiki-link-internal.not-exist:hover {
+  text-decoration-color: var(--color-danger-ink);
+}
+.wiki-self-link {
+  color: inherit;
+  font-weight: 700;
+  text-decoration: none;
+}
+.wiki-link-external,
+.wiki-link-external-image {
+  color: var(--color-accent-deep);
+  text-decoration: underline;
+  text-decoration-color: color-mix(
+    in srgb,
+    var(--color-accent-deep) 35%,
+    transparent
+  );
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+.wiki-link-external:hover,
+.wiki-link-external-image:hover {
+  text-decoration-color: var(--color-accent-deep);
+}
+/* 위키 밖으로 나가는 링크는 그렇다고 알린다 — 색만으로는 눌러 보기 전에 알 수
+ * 없다. 그림을 눌러 나가는 링크에는 붙이지 않는다: 그림 옆의 화살표는 그림의
+ * 일부로 읽힌다. */
+.wiki-link-external::after {
+  content: "↗";
+  display: inline-block;
+  margin-left: 0.15em;
+  font-size: 0.75em;
+  vertical-align: 0.15em;
+  text-decoration: none;
+  color: var(--color-faint);
+}
+
+/* ── 인용 ─────────────────────────────────────────────────────────────
+ *
+ * 들여쓰기만으로는 인용으로 읽히지 않는다. 왼쪽 기둥으로 경계를 세우고 글자를
+ * 한 단 낮춰, 본문이 잠깐 남의 말로 바뀐 것을 보인다. 바탕색은 쓰지 않는다 —
+ * 면이 생기면 읽는 흐름이 끊긴다. */
+
+.wiki-quote {
+  margin: 30px 0 0;
+  padding: 0 0 0 1.2em;
+  border-left: 3px solid var(--color-line);
+  color: var(--color-muted);
+  font-size: 17px;
+  line-height: 30px;
+}
+.wiki-quote .wiki-paragraph:first-child {
+  margin-top: 0;
+}
+
+.wiki-indent {
+  margin-left: 1.5em;
+}
+
+/* ── 표 ───────────────────────────────────────────────────────────────
+ *
+ * 세로선을 지우고 가로선만 남긴다. 칸을 나누는 것은 선이 아니라 정렬이다. */
+
+.wiki-table-wrap {
+  overflow-x: auto;
+  margin: 30px 0 0;
+}
+.wiki-table-wrap.table-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+.wiki-table-wrap.table-right {
+  float: right;
+  margin-left: 1em;
+}
+.wiki-table-wrap.table-left {
+  float: left;
+  margin-right: 1em;
+}
+.wiki-table {
+  border-collapse: collapse;
+  font-size: 17px;
+}
+/* 칸 여백은 5px 10px여야 한다 — 정보상자 틀이 `margin:-5px -10px`로 배경을 칸
+ * 끝까지 흘려 놓기 때문에, 이 값이 어긋나면 색 띠 둘레에 흰 테가 남는다. */
+.wiki-table td {
+  border-bottom: 1px solid var(--color-line-soft);
+  padding: 5px 10px;
+  line-height: 1.5;
+  vertical-align: middle;
+}
+.wiki-table td.wiki-table-nopadding {
+  padding: 0;
+}
+/* 칸 안은 본문의 30px 리듬을 따르지 않는다 — 칸은 줄글이 아니라 자료이고, 한 칸에
+ * 두어 줄이 들어가는 틀(출생·재임기간 등)에서 줄 사이가 문단만큼 벌어지면 표가
+ * 세로로 터진다. */
+.wiki-table .wiki-paragraph,
+.wiki-table .wiki-list,
+.wiki-table .wiki-quote,
+.wiki-table .wiki-table-wrap,
+.wiki-table .wiki-media,
+.wiki-table .wiki-section {
+  margin-top: 0;
+}
+.wiki-table .wiki-paragraph + .wiki-paragraph {
+  margin-top: 0.35em;
+}
+
+.wiki-list {
+  margin: 30px 0 0 1.6em;
+}
+/* 항목 안의 문단은 제 여백을 갖지 않는다 — 항목 자체가 이미 한 줄이다. */
+.wiki-list .wiki-paragraph {
+  margin: 0;
+}
+.wiki-list .wiki-list {
+  margin-top: 0;
+}
+
+.wiki-content pre {
+  background: var(--color-ground-sub);
+  border: 1px solid var(--color-line-soft);
+  border-radius: 4px;
+  padding: 15px 1em;
+  overflow-x: auto;
+  margin: 30px 0 0;
+  font-size: 16px;
+  line-height: 30px;
+}
+.wiki-content pre code {
+  background: none;
+  border: 0;
+  padding: 0;
+}
+.wiki-content code {
+  background: var(--color-ground-sub);
+  border-radius: 3px;
+  padding: 0.1em 0.3em;
+  font-size: 0.94em;
+}
+
+.wiki-folding > summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--color-ink);
+  border-bottom: 1px solid var(--color-line-soft);
+  display: inline-block;
+}
+/* 펼친 속을 들여쓰지 않는다 — 정보상자는 접기 안에 표를 통째로 넣는데, 들여쓰면
+ * 그 표만 왼쪽에 흰 골이 생겨 상자 테두리와 어긋난다. */
+.wiki-folding > div {
+  margin: 0;
+}
+
+.wiki-size-up-1 { font-size: 1.2em; }
+.wiki-size-up-2 { font-size: 1.4em; }
+.wiki-size-up-3 { font-size: 1.6em; }
+.wiki-size-up-4 { font-size: 1.8em; }
+.wiki-size-up-5 { font-size: 2em; }
+.wiki-size-down-1 { font-size: 0.9em; }
+.wiki-size-down-2 { font-size: 0.8em; }
+.wiki-size-down-3 { font-size: 0.7em; }
+.wiki-size-down-4 { font-size: 0.6em; }
+.wiki-size-down-5 { font-size: 0.5em; }
+
+/* ── 각주 ─────────────────────────────────────────────────────────────
+ *
+ * 표기에서 아래로 내려왔으면 되돌아갈 길이 있어야 한다. 각주 줄 맨 앞의 ↑가
+ * 읽던 자리로 돌아가고, 라벨은 그 각주 자체의 주소다.
+ *
+ * 표기 위의 미리보기는 전부 CSS다 — 본문에 클라이언트 컴포넌트를 끼우지 않으려는
+ * 것이고, 그래야 문서 보기(서버)와 편집 미리보기(브라우저)가 같은 마크업으로 돈다. */
+
+.wiki-fn {
+  position: relative;
+  white-space: nowrap;
+}
+.wiki-fn-content {
+  text-decoration: none;
+  font-size: 0.78em;
+  font-weight: 600;
+  vertical-align: super;
+  color: var(--color-link);
+  /* 짚을 자리를 글자보다 넓게 잡는다 — 표기는 본문 글자의 0.78배라, 획에 정확히
+   * 올려야만 열리면 여는 것 자체가 겨냥하는 일이 된다. 세로 여백은 인라인이라 줄
+   * 높이를 밀지 않고, 가로는 늘린 만큼 되당겨 앞뒤 글자와의 사이가 벌어지지 않는다. */
+  padding: 0.7em 0.4em;
+  margin: 0 -0.3em;
+}
+
+/* 표기에서 상자로 손을 옮기는 사이의 빈 곳. 여기가 비어 있으면 상자에 닿기 전에
+ * 닫혀, 상자 안의 링크를 누를 수 없다. 상자는 위로도 아래로도 설 수 있으므로
+ * 위아래 양쪽에 둔다. 상자 뒤로 깔아 안쪽 링크를 가리지 않는다. */
+.wiki-fn-preview::before {
+  content: "";
+  position: absolute;
+  inset: -1em 0;
+  z-index: -1;
+}
+.wiki-fn-content:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.wiki-fn-preview {
+  position: absolute;
+  bottom: 1.6em;
+  left: 0;
+  z-index: 20;
+  display: none;
+  width: max-content;
+  max-width: min(28rem, 80vw);
+  white-space: normal;
+  padding: 0.75em 1em;
+  background: var(--color-ground);
+  border-radius: 12px;
+  box-shadow:
+    0 8px 24px rgb(20 32 29 / 0.16),
+    0 2px 6px rgb(20 32 29 / 0.08);
+  font-size: 16px;
+  line-height: 26px;
+  color: var(--color-body);
+}
+/* 여기까지는 스크립트가 닿기 전의 자리다. 표기 위에 세워 두면 대개는 맞고, 화면
+ * 가장자리에서만 어긋난다 — 그 어긋남은 자리잡기 스크립트가 열릴 때 바로잡는다
+ * (components/namumark/footnote-preview-position.tsx).
+ *
+ * 표 안의 미리보기는 그때까지도 잘린다 — 가로로 흐르는 표를 담는 상자가 넘치는
+ * 것을 감추기 때문이다. 그 안에서만 화면에 고정해 상자 밖으로 나오게 한다: 고정
+ * 요소는 조상의 넘침 감추기에 잘리지 않는다. 가로는 표기를 따라가지 않고 화면
+ * 가운데에 둔다 — 표는 화면 폭을 다 쓰므로 오른쪽 칸의 각주에서는 표기 옆에 상자가
+ * 설 자리가 없다. */
+.wiki-table-wrap .wiki-fn-preview {
+  position: fixed;
+  top: auto;
+  bottom: auto;
+  left: 1rem;
+  right: 1rem;
+  width: max-content;
+  max-width: min(28rem, calc(100vw - 2rem));
+  margin-inline: auto;
+  transform: translateY(calc(-100% - 1.8em));
+}
+
+/* 표기에 올렸을 때와, 키보드로 표기에 닿았을 때 모두 연다. */
+.wiki-fn:hover .wiki-fn-preview,
+.wiki-fn:focus-within .wiki-fn-preview {
+  display: block;
+}
+/* 미리보기 안의 문단은 제 여백을 갖지 않는다 — 상자가 이미 여백을 준다. */
+.wiki-fn-preview .wiki-paragraph {
+  margin: 0;
+}
+/* 손가락으로 여는 수단이 없는 화면에서는 미리보기를 두지 않는다. */
+@media (hover: none) {
+  .wiki-fn-preview {
+    display: none !important;
+  }
+}
+
+.wiki-macro-footnote {
+  margin-top: 60px;
+  border-top: 1px solid var(--color-line-soft);
+  padding-top: 29px;
+  font-size: 16px;
+  line-height: 30px;
+}
+/* ↑를 왼쪽에 매달아, 내용이 여러 줄이어도 글의 왼쪽 끝이 맞는다. */
+.wiki-macro-footnote .footnote-list {
+  display: grid;
+  grid-template-columns: 1.15rem 1fr;
+  scroll-margin-top: 2rem;
+}
+.wiki-macro-footnote .footnote-back {
+  color: var(--color-faint);
+  text-decoration: none;
+}
+.wiki-macro-footnote .footnote-back:hover {
+  color: var(--color-link);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+.wiki-macro-footnote a {
+  color: var(--color-link);
+  text-decoration: none;
+}
+.wiki-macro-footnote a:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+.wiki-macro-footnote .footnote-list:target {
+  background: var(--color-accent-wash);
+  border-radius: 2px;
+}
+
+.wiki-image-align-center {
+  display: block;
+  text-align: center;
+}
+.wiki-image-align-right {
+  float: right;
+  margin-left: 1em;
+}
+.wiki-image-align-left {
+  float: left;
+  margin-right: 1em;
+}
+
+.wiki-clearfix {
+  clear: both;
+}
+
+.wiki-media {
+  max-width: 100%;
+  margin: 30px 0 0;
+}
+
+/* 분류는 이 문서가 어디에 속하는지를 먼저 알리는 것이므로 본문 맨 위, 수정 시각
+ * 바로 아래에 선다. */
+.wiki-categories {
+  font-size: 15px;
+  line-height: 24px;
+  color: var(--color-muted);
+}
+.wiki-categories a {
+  color: var(--color-link);
+  font-weight: 500;
+  text-decoration: none;
+}
+.wiki-categories a:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+/* 본문의 첫 덩어리는 위 여백을 갖지 않는다 — 여백은 앞 덩어리가 주는 것이다. */
+.wiki-content > .wiki-categories + * ,
+.wiki-content > :first-child {
+  margin-top: 0;
+}

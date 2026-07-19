@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Alert } from "@/components/layout/notice";
+import { RenderTree } from "@/components/namumark/render-tree";
 import { buttonStyle } from "@/components/ui/button";
 import { renderPreview, saveEdit } from "@/lib/api/client";
 import { useDraftStore } from "@/lib/draft-store";
@@ -161,10 +162,9 @@ export function DocumentEditor({ document }: { document: EditView }) {
                 미리보기를 그리지 못했습니다.
               </p>
             ) : (
-              <div
-                className="wiki-content px-4 pb-5 sm:px-6"
-                dangerouslySetInnerHTML={{ __html: preview.data ?? "" }}
-              />
+              <div className="px-4 pb-5 sm:px-6">
+                {preview.data && <RenderTree tree={preview.data} />}
+              </div>
             )}
           </div>
         )}
