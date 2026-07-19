@@ -1,3 +1,5 @@
+<img src="docs/assets/logo.svg" alt="" width="64" height="64">
+
 # opensinabro
 
 **나무위키 엔진의 오픈소스 재구현.** 나무마크(namumark)를 무손실로 파싱하고, the seed와 대조해 규명한 정밀 스펙대로 렌더합니다.
@@ -40,7 +42,7 @@
 just dev
 ```
 
-데이터베이스 준비, 의존성 설치, 포트 정리, 첫 실행이면 예시 문서 적재까지 알아서 합니다.
+데이터베이스 준비, 의존성 설치, 포트 정리까지 알아서 합니다.
 이미 떠 있던 서버가 있으면 정리하고 새로 띄우므로, 몇 번을 쳐도 같은 결과가 됩니다.
 Ctrl+C 한 번으로 전부 멈춥니다.
 
@@ -132,11 +134,13 @@ PostgreSQL을 따로 설치할 필요 없이 컴포즈가 띄웁니다.
 
 ```sh
 just setup      # 데이터베이스 컨테이너를 띄웁니다 (처음 한 번)
-just import     # fixtures/documents의 문서를 적재합니다
 just run        # http://127.0.0.1:3000
 ```
 
-`just start`는 위 셋을 잇고, `run`·`dev`·`import`는 데이터베이스가 꺼져 있으면 알아서
+갓 만든 위키에는 대문 하나만 있습니다. 예시 문서가 필요하면 `just import`로
+`fixtures/documents`의 나무마크 원문을 넣을 수 있습니다.
+
+`run`·`dev`·`import`는 데이터베이스가 꺼져 있으면 알아서
 띄웁니다. 스키마는 서버가 시작하며 스스로 적용합니다. 접속 정보는 `DATABASE_URL`·
 `OPENSINABRO_DATABASE_PORT`·`OPENSINABRO_ADDRESS`로 덮어쓸 수 있습니다.
 
